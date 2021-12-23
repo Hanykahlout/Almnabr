@@ -295,8 +295,22 @@ class TransactionFormDetailsVC: UIViewController {
         let index = i1 ?? 10
         page_scroll(SelectedIndex: index + 1 )
         
-        self.btnLastValStepOpened.setTitleColor(.red, for: .normal)
-        self.btnLastValStepOpened.setTitle("(Rejected)".localized(), for: .normal)
+        let status = StatusObject?.to_array[SelectedIndex-1]
+        let title = (status ?? false) ? "Accepted" : "Rejected"
+       // self.btnLastValStepOpened.setTitle(title, for: .normal)
+        
+        if status == true {
+            
+            self.btnLastValStepOpened.setTitleColor("#3ea832".getUIColor(), for: .normal)
+            self.btnLastValStepOpened.setTitle("(Accepted)".localized(), for: .normal)
+            
+        }else{
+            
+            self.btnLastValStepOpened.setTitleColor(.red, for: .normal)
+            self.btnLastValStepOpened.setTitle("(Rejected)".localized(), for: .normal)
+            
+        }
+        
         
         self.btnNotes.setTitleColor(HelperClassSwift.acolor.getUIColor(), for: .normal)
         self.btnPersonDetails.setTitleColor(HelperClassSwift.acolor.getUIColor(), for: .normal)

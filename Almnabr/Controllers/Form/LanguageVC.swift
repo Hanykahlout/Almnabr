@@ -29,6 +29,9 @@ class LanguageVC: UIViewController {
     
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var icon_noPermission: UIImageView!
+    @IBOutlet weak var view_noPermission: UIView!
+    @IBOutlet weak var lbl_noPermission: UILabel!
     
     
     
@@ -44,7 +47,7 @@ class LanguageVC: UIViewController {
     let dropUpmage =  UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
     
     let dropDownmage =  UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
-    
+    var isFromTransaction:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +55,28 @@ class LanguageVC: UIViewController {
         configGUI()
         get_Lang()
         print(ProjectObj?.group1name)
+        update_observer()
+   
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide the Navigation Bar
+        if StatusObject?.Configurations == false {
+            view_noPermission.isHidden = false
+            self.btnNext.isHidden = true
+           
+        }
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Show the Navigation Bar
+//        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     
 
     
@@ -60,9 +84,9 @@ class LanguageVC: UIViewController {
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
+     
+        self.view.backgroundColor = .white//F0F4F8
         
-        
-    
         lblLanguage.textColor =  HelperClassSwift.acolor.getUIColor()
         lblLanguage.font = .kufiBoldFont(ofSize: 15)
         lblLanguage.text = "txt_Language"
@@ -93,7 +117,31 @@ class LanguageVC: UIViewController {
         let Stepimage =  UIImage.fontAwesomeIcon(name: .building, style: .solid, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
         self.imgStep.image = Stepimage
         
-        //self.mainView.setBorderGray()
+        icon_noPermission.loadGif(name: "no-permission")
+        
+        self.lbl_noPermission.text =  "You not have permission to access this step".localized()
+        self.lbl_noPermission.font = .kufiRegularFont(ofSize: 15)
+        self.lbl_noPermission.textColor =  "#333".getUIColor()
+         
+      
+        if isFromTransaction == false{
+            
+            if StatusObject?.Configurations == false {
+                view_noPermission.isHidden = false
+                self.btnNext.isHidden = true
+               
+            }
+        }else{
+            view_noPermission.isHidden = true
+        }
+        
+        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnNext.setTitleColor(.white, for: .normal)
+        self.btnNext.setRounded(10)
+//        self.ProjectObj?.projects_work_area_id = "1"
+//        self.ProjectObj?.template_id = "1"
+//        self.ProjectObj?.template_platform_code_system = "2.WIR.1.1"
         
     }
     
@@ -125,6 +173,20 @@ class LanguageVC: UIViewController {
     }
     
     
+    
+    private func update_observer(){
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("update_langVC"), object: nil, queue: .main) { notifi in
+                 // guard let index = notifi.object as? Int else { return }
+            if StatusObject?.Configurations == false {
+                self.view_noPermission.isHidden = false
+                self.btnNext.isHidden = true
+                self.mainView.isHidden = true
+               
+            }
+        }
+    }
+    
+    
     @IBAction func btnLanguage_Click(_ sender: Any) {
         
         let dropDown = DropDown()
@@ -150,56 +212,6 @@ class LanguageVC: UIViewController {
         dropDown.width = btnLanguageSelect.bounds.width
         dropDown.show()
         
-//        let dropDown = DropDown()
-//        dropDown.anchorView = view
-//        dropDown.backgroundColor = .white
-//        dropDown.cornerRadius = 2.0
-//
-//        dropDown.dataSource = self.arr_lang
-//        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//
-////            if self.arr_LanguageLabel.count == 0 {
-////                dropDown.dataSource = self.arr_NoData
-////                dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-////                    self.imgDropLanguageSelect.image = dropDownmage
-////                }
-////                dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-////            }else{
-//                dropDown.dataSource = self.arr_lang
-//                dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//
-//                    if item == self.arr_lang[0] {
-//                        self.StrLanguage = item
-//                        self.lblLanguageSelect.text = item
-//                    }else{
-//                        self.StrLanguage = self.arr_lang[1]
-//                        self.lblLanguageSelect.text =  self.arr_lang[1]
-//                    }
-//
-//
-//                    self.imgDropLanguageSelect.image = dropDownmage
-////                    if item == self.arr_LanguageLabel[index] {
-////
-////                        self.lblLanguageSelect.text =  item
-////                        let i =  self.arr_Language[index]
-////                        self.imgDropLanguageSelect.image = dropDownmage
-////                       // self.btnLanguageSelect.isHidden = false
-////                        self.lblLanguageSelect.text = i.label
-////
-////                        let lang = i.value
-////                        self.StrLanguage = lang
-////
-////                   }
-//
-//                }
-//
-//           // }
-//        }
-//        dropDown.direction = .bottom
-//        dropDown.anchorView = btnLanguageSelect
-//        dropDown.bottomOffset = CGPoint(x: 0, y: btnLanguageSelect.bounds.height)
-//        dropDown.width = btnLanguageSelect.bounds.width
-//        dropDown.show()
     }
     
   
@@ -208,8 +220,11 @@ class LanguageVC: UIViewController {
         let vc:SiteLevelVC = AppDelegate.mainSB.instanceVC()
         vc.StrLanguage = self.StrLanguage
         vc.ProjectObj = self.ProjectObj
+     
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    
     
     
 }

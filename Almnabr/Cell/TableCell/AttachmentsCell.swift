@@ -13,12 +13,15 @@ class AttachmentsCell: UITableViewCell {
     @IBOutlet weak var btn_Select: UIButton!
     @IBOutlet weak var btn_delete: UIButton!
     @IBOutlet weak var tfTitle: UITextField!
+    
     @IBOutlet weak var lblNo: UILabel!
     @IBOutlet weak var viewBack: UIView!
     
     
     var btnDeleteAction : (()->())?
     var btnUploadAction : (()->())?
+    
+    var btnEndEditingAction : (()->())?
     
     
     @IBAction func didReCancelButtonPressd(_ sender: Any) {
@@ -29,8 +32,13 @@ class AttachmentsCell: UITableViewCell {
         btnUploadAction!()
     }
     
+    @IBAction func didEndEditingButtonPressd(_ sender: Any) {
+        btnEndEditingAction?()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectionStyle = .none
         // Initialization code
     }
 

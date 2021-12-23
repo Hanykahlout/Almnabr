@@ -109,6 +109,17 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
     func configGUI() {
         
         
+        self.btnSubmit.setTitle("Submit".localized(), for: .normal)
+        self.btnSubmit.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnSubmit.setTitleColor(.white, for: .normal)
+        self.btnSubmit.setRounded(10)
+        
+        
+        self.btnCancel.setTitle("Cancel".localized(), for: .normal)
+        self.btnCancel.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnCancel.setTitleColor(.white, for: .normal)
+        self.btnCancel.setRounded(10)
+        
         lblByPhase.textColor =  HelperClassSwift.acolor.getUIColor()
         lblByPhase.font = .kufiBoldFont(ofSize: 15)
         lblByPhase.text = "txt_ByPhase".localized()
@@ -620,14 +631,18 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
     
     @IBAction func btnSubmit_Click(_ sender: Any) {
         
-        
-        let obj = ByPhaseObj(number: 1, zones: StrZone, Blocks: StrBlocks, Clusters: StrCluster, units: StrUnit, Worklevels: StrWorkLevel)
-        var arr:[ByPhaseObj] = []
-        arr.append(obj)
-        Phasesdelegate.passByPhasesArr(data: arr)
+        if (StrWorkLevel == "" ){
+            self.showAMessage(withTitle: "Error", message: "missed data")
+        }else{
+            let obj = ByPhaseObj(number: 1, zones: StrZone, Blocks: StrBlocks, Clusters: StrCluster, units: StrUnit, Worklevels: StrWorkLevel)
+            var arr:[ByPhaseObj] = []
+            arr.append(obj)
+            Phasesdelegate.passByPhasesArr(data: arr)
 
-        
-        self.dismiss(animated: true, completion: nil)
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+       
     }
 }
 

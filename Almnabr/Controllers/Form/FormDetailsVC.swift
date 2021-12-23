@@ -47,6 +47,10 @@ class FormDetailsVC: UIViewController {
     @IBOutlet weak var mainView: UIView!
     
     @IBOutlet weak var ConfigView: UIView!
+    
+    @IBOutlet weak var header: HeaderView!
+
+    
     var ProjectObj:templateObj?
     var StrTitle:String = ""
     var StrSubMenue:String = ""
@@ -61,6 +65,8 @@ class FormDetailsVC: UIViewController {
         super.viewDidLoad()
 
         configGUI()
+        header.btnAction = menu_select
+
         // Do any additional setup after loading the view.
     }
     
@@ -75,9 +81,19 @@ class FormDetailsVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    func menu_select(){
+        let language = dp_get_current_language()
+        if language == "ar"{
+            panel?.openRight(animated: true)
+        }else{
+            panel?.openLeft(animated: true)
+        }
+        
+    }
+
     // MARK: - Config Navigation
     func configNavigation() {
         _ = self.navigationController?.preferredStatusBarStyle
@@ -223,6 +239,7 @@ class FormDetailsVC: UIViewController {
             
             let destination = segue.destination as! UINavigationController
             let vc = destination.topViewController as! LanguageVC
+            vc.isFromTransaction = true
             
            // let vc: LanguageVC = segue.destination as! LanguageVC
             vc.ProjectObj = ProjectObj

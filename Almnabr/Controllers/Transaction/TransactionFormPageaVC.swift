@@ -20,30 +20,24 @@ class TransactionFormPageaVC: UIPageViewController {
         super.viewDidLoad()
         
         dataSource = self
+      
+        let vc: LanguageVC = AppDelegate.mainSB.instanceVC()
+        vc.ProjectObj?.projects_work_area_id = "1"
+        vc.ProjectObj?.template_id = "1"
+        vc.ProjectObj?.template_platform_code_system = "2.WIR.1.1"
+        let page1 = UINavigationController.init(rootViewController: vc)
         
-//    Authorized_Positions_Approval: false
-//    Configurations: true
-//    Contractor_Manager_Approval: false
-//    Contractor_Team_Approval: false
-//    Evaluation_Result: false
-//    Final_Result: false
-//    Manager_Approval: false
-//    Owners_Representative: false
-//    Recipient_Verification: false
-//    Special_Approval: false
-//    Techinical_Assistant: false
-        
-        let page1: LanguageVC = AppDelegate.mainSB.instanceVC()
-        let page2: ContractorManagerApprovalVC = AppDelegate.TransactionSB.instanceVC()
-        let page3: ContractorTeamApprovalVC = AppDelegate.TransactionSB.instanceVC()
-        let page4: EvaluationResultVC = AppDelegate.TransactionSB.instanceVC()
-        let page5: FinalResultVC = AppDelegate.TransactionSB.instanceVC()
-        let page6: ManagerApprovalVC = AppDelegate.TransactionSB.instanceVC()
-        let page7: OwnersRepresentativeVC = AppDelegate.TransactionSB.instanceVC()
-        let page8: RecipientVerificationVC = AppDelegate.TransactionSB.instanceVC()
-        let page9: SpecialApprovalVC = AppDelegate.TransactionSB.instanceVC()
-        let page10: TechinicalAssistantVC = AppDelegate.TransactionSB.instanceVC()
-       // let page11: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+        let page2: ContractorTeamApprovalVC = AppDelegate.TransactionSB.instanceVC()
+        let page3: ContractorManagerApprovalVC = AppDelegate.TransactionSB.instanceVC()
+        let page4: RecipientVerificationVC = AppDelegate.TransactionSB.instanceVC()
+        let page5: TechinicalAssistantVC = AppDelegate.TransactionSB.instanceVC()
+        let page6: SpecialApprovalVC = AppDelegate.TransactionSB.instanceVC()
+        let page7: EvaluationResultVC = AppDelegate.TransactionSB.instanceVC()
+        let page8: AuthorizedPositionsApprovalVC = AppDelegate.TransactionSB.instanceVC()
+        let page9: ManagerApprovalVC = AppDelegate.TransactionSB.instanceVC()
+        let page10: OwnersRepresentativeVC = AppDelegate.TransactionSB.instanceVC()
+        let page11: FinalResultVC = AppDelegate.TransactionSB.instanceVC()
+
         
         pages.append(page1)
         pages.append(page2)
@@ -55,6 +49,7 @@ class TransactionFormPageaVC: UIPageViewController {
         pages.append(page8)
         pages.append(page9)
         pages.append(page10)
+        pages.append(page11)
         
         setViewControllers([page1], direction: .forward, animated: false, completion: nil)
         
@@ -78,16 +73,19 @@ class TransactionFormPageaVC: UIPageViewController {
     }
     
     func displayPageForIndex(index: Int, animated: Bool = true) {
-        assert(index >= 0 && index < self.pages.count, "Error: Attempting to display a page for an out of bounds index")
         
+//        guard index < self.pages.count else { return }
         
-        // nop if index == self.currentPageIndex
+        assert((index >= 0 && index <= self.pages.count), "Error: Attempting to display a page for an out of bounds index")
+        
         if self.currentPageIndex == index { return }
-        
-        if index < self.currentPageIndex {
-            self.setViewControllers([self.pages[index]], direction: .reverse, animated: true, completion: nil)
-        } else if index > self.currentPageIndex {
-            self.setViewControllers([self.pages[index]], direction: .forward, animated: true, completion: nil)
+        if index == 0 { return}
+        print("index\( index)")
+        print("currentPageIndex\( currentPageIndex)")
+        if index  < self.currentPageIndex {
+            self.setViewControllers([self.pages[index - 1]], direction: .reverse, animated: true, completion: nil)
+        } else if index > self.currentPageIndex   {
+            self.setViewControllers([self.pages[index - 1]], direction: .forward, animated: true, completion: nil)
         }
         
         self.currentPageIndex = index
@@ -121,7 +119,7 @@ extension TransactionFormPageaVC: UIPageViewControllerDataSource {
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return 10
+        return pages.count
     }
     
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {

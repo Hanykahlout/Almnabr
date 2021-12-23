@@ -156,6 +156,7 @@ class themeObj {
 
 class ModuleObj {
     
+    var user_type_id     :String = ""
     var value            :String = ""
     var label            :String = ""
     var code             :String = ""
@@ -170,6 +171,7 @@ class ModuleObj {
         self.code         = Obj["code"] as? String ?? ""
         self.fulltext     = Obj["fulltext"] as? String ?? ""
         self.sid          = Obj["sid"] as? String ?? ""
+        self.user_type_id = Obj["user_type_id"] as? String ?? ""
         
         
     }}
@@ -690,4 +692,426 @@ class ContractorObj {
         
       
     }}
+
+
+class StepStatusObj {
+    
+    var Authorized_Positions_Approval :Bool = false
+    var Configurations :Bool = false
+    var Contractor_Manager_Approval :Bool = false
+    var Contractor_Team_Approval :Bool = false
+    var Evaluation_Result :Bool = false
+    var Final_Result :Bool = false
+    var Manager_Approval :Bool = false
+    var Owners_Representative :Bool = false
+    var Recipient_Verification :Bool = false
+    var Special_Approval :Bool = false
+    var Techinical_Assistant :Bool = false
+
+    init(_ Obj : [String:Any]) {
+        
+        self.Authorized_Positions_Approval  = Obj["Authorized_Positions_Approval"] as? Bool ?? false
+        self.Configurations  = Obj["Configurations"] as? Bool ?? false
+        self.Contractor_Manager_Approval  = Obj["Contractor_Manager_Approval"] as? Bool ?? false
+        self.Contractor_Team_Approval  = Obj["Contractor_Team_Approval"] as? Bool ?? false
+        self.Evaluation_Result  = Obj["Evaluation_Result"] as? Bool ?? false
+        self.Final_Result  = Obj["Final_Result"] as? Bool ?? false
+        self.Manager_Approval  = Obj["Manager_Approval"] as? Bool ?? false
+        self.Owners_Representative  = Obj["Owners_Representative"] as? Bool ?? false
+        self.Recipient_Verification  = Obj["Recipient_Verification"] as? Bool ?? false
+        self.Special_Approval  = Obj["Special_Approval"] as? Bool ?? false
+        self.Techinical_Assistant  = Obj["Techinical_Assistant"] as? Bool ?? false
+      
+    }
+    
+    var to_array : [Bool] {
+        return [self.Authorized_Positions_Approval,
+                self.Configurations,
+                self.Contractor_Manager_Approval,
+                self.Contractor_Team_Approval,
+                self.Evaluation_Result,
+                self.Final_Result,
+                self.Manager_Approval,
+                self.Owners_Representative,
+                self.Recipient_Verification,
+                self.Special_Approval,
+                self.Techinical_Assistant
+        ]
+    }
+    
+}
+
+
+
+
+class WorkAreaInfoObj {
+    
+    var projects_work_area_id                                : String = ""
+    var branch_id                                            : String = ""
+    var supervision_settings_drawing_submittal_alert_expire  : String = ""
+    var projects_supervision_id                              : String = ""
+    var projects_profile_id                                  : String = ""
+    var drawing_file                                         : String = ""
+    var projects_profile_name                                : String = ""
+    var customer_name                                        : String = ""
+    var contractor_name                                      : String = ""
+    var projects_services_name                               : String = ""
+    var branch_name                                          : String = ""
+
+    init(_ Obj : [String:Any]) {
+        
+        
+        
+        self.projects_work_area_id                                = Obj["projects_work_area_id"] as? String ?? ""
+        self.branch_id                                            = Obj["branch_id"] as? String ?? ""
+        self.supervision_settings_drawing_submittal_alert_expire  = Obj["supervision_settings_drawing_submittal_alert_expire"] as? String ?? ""
+        self.projects_supervision_id                              = Obj["projects_supervision_id"] as? String ?? ""
+        self.projects_profile_id                                  = Obj["projects_profile_id"] as? String ?? ""
+        self.drawing_file                                         = Obj["drawing_file"] as? String ?? ""
+        self.projects_profile_name                                = Obj["projects_profile_name"] as? String ?? ""
+        self.customer_name                                        = Obj["customer_name"] as? String ?? ""
+        self.contractor_name                                      = Obj["contractor_name"] as? String ?? ""
+        self.projects_services_name                               = Obj["projects_services_name"] as? String ?? ""
+        self.branch_name                                          = Obj["branch_name"] as? String ?? ""
+
+        
+        
+        
+        
+    }
+    
+}
+
+
+
+class form_wir_dataObj {
+    
+
+    var auto_id : String = ""
+    var transaction_key : String = ""
+    var transaction_request_id : String = ""
+    var projects_work_area_id : String = ""
+    var template_id : String = ""
+    var platform_code_system : String = ""
+    var evaluation_result : String = ""
+    var owner_decision_form : String = ""
+    var contractor_team_users : String = ""
+    var contractor_manager_step_require : String = ""
+    var contractor_manager_default_users : String = ""
+    var template_type : String = ""
+    var typename : String = ""
+    var group1name : String = ""
+    var group2name : String = ""
+    var platformname : String = ""
+    var templatename : String = ""
+    var specification : String = "---"
+    var platform_group_type_code_system : String = ""
+    
+    
+    init(_ Obj : [String:Any]) {
+        
+        
+        self.auto_id   =  Obj["auto_id"] as? String ?? ""
+        self.transaction_key   =  Obj["transaction_key"] as? String ?? ""
+        self.transaction_request_id   =  Obj["transaction_request_id"] as? String ?? ""
+        self.projects_work_area_id   =  Obj["projects_work_area_id"] as? String ?? ""
+        self.template_id   =  Obj["template_id"] as? String ?? ""
+        self.platform_code_system   =  Obj["platform_code_system"] as? String ?? ""
+        self.evaluation_result   =  Obj["evaluation_result"] as? String ?? ""
+        self.owner_decision_form   =  Obj["owner_decision_form"] as? String ?? ""
+        self.contractor_team_users   =  Obj["contractor_team_users"] as? String ?? ""
+        self.contractor_manager_step_require   =  Obj["contractor_manager_step_require"] as? String ?? ""
+        self.contractor_manager_default_users   =  Obj["contractor_manager_default_users"] as? String ?? ""
+        self.template_type   =  Obj["template_type"] as? String ?? ""
+        self.typename   =  Obj["typename"] as? String ?? ""
+        self.group1name   =  Obj["group1name"] as? String ?? ""
+        self.group2name   =  Obj["group2name"] as? String ?? ""
+        self.platformname   =  Obj["platformname"] as? String ?? ""
+        self.templatename   =  Obj["templatename"] as? String ?? ""
+        self.specification   =  Obj["specification"] as? String ?? "---"
+        self.platform_group_type_code_system   =  Obj["platform_group_type_code_system"] as? String ?? ""
+        
+        
+    }
+    
+    
+}
+
+
+
+class transactions_notesObj {
+
+    var transactions_notes_id : String = ""
+    var transaction_request_id : String = ""
+    var transactions_notes_user_id : String = ""
+    var transactions_notes_text : String = ""
+    var transactions_notes_datetime : String = ""
+    var transactions_notes_user_name : String = ""
+    
+    
+    
+    
+    init(_ Obj : [String:Any]) {
+        
+        
+        self.transactions_notes_id = Obj["transactions_notes_id"] as? String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as? String ?? ""
+        self.transactions_notes_user_id = Obj["transactions_notes_user_id"] as? String ?? ""
+        self.transactions_notes_text = Obj["transactions_notes_text"] as? String ?? ""
+        self.transactions_notes_datetime = Obj["transactions_notes_datetime"] as? String ?? ""
+        self.transactions_notes_user_name = Obj["transactions_notes_user_name"] as? String ?? ""
+        
+        
+    }
+    
+    
+}
+
+
+
+
+class transactions_personsObj {
+
+    var signature :String = ""
+    var mark :String = ""
+    var transactions_persons_id :String = ""
+    var transaction_request_id :String = ""
+    var user_id :String = ""
+    var user_type_id :String = ""
+    var transaction_persons_type :String = ""
+    var transactions_persons_key1 :String = ""
+    var transactions_persons_val1 :String = ""
+    var transactions_persons_key2 :String = ""
+    var transactions_persons_val2 :String = ""
+    var transactions_persons_key3 :String = ""
+    var transactions_persons_val3 :String = ""
+    var transactions_persons_key4 :String = ""
+    var transactions_persons_val4 :String = ""
+    var transactions_persons_view :String = ""
+    var transactions_persons_view_datetime :String = ""
+    var transactions_persons_view_datetime_lastupdate :String = ""
+    var transactions_persons_send_code_method :String = ""
+    var transactions_persons_send_code_datetime :String = ""
+    var transactions_persons_action_datetime :String = ""
+    var transactions_persons_action_status :String = ""
+    var transactions_persons_last_step :String = ""
+    var first_name :String = ""
+    var last_name :String = ""
+    
+    
+    init(_ Obj : [String:Any]) {
+        
+        self.signature = Obj["signature"] as? String ?? ""
+        self.mark = Obj["mark"] as? String ?? ""
+        self.transactions_persons_id = Obj["transactions_persons_id"] as? String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as? String ?? ""
+        self.user_id = Obj["user_id"] as? String ?? ""
+        self.user_type_id = Obj["user_type_id"] as? String ?? ""
+        self.transaction_persons_type = Obj["transaction_persons_type"] as? String ?? ""
+        self.transactions_persons_key1 = Obj["transactions_persons_key1"] as? String ?? ""
+        self.transactions_persons_val1 = Obj["transactions_persons_val1"] as? String ?? ""
+        self.transactions_persons_key2 = Obj["transactions_persons_key2"] as? String ?? ""
+        self.transactions_persons_val2 = Obj["transactions_persons_val2"] as? String ?? ""
+        self.transactions_persons_key3 = Obj["transactions_persons_key3"] as? String ?? ""
+        self.transactions_persons_val3 = Obj["transactions_persons_val3"] as? String ?? ""
+        self.transactions_persons_key4 = Obj["transactions_persons_key4"] as? String ?? ""
+        self.transactions_persons_val4 = Obj["transactions_persons_val4"] as? String ?? ""
+        self.transactions_persons_view = Obj["transactions_persons_view"] as? String ?? ""
+        self.transactions_persons_view_datetime = Obj["transactions_persons_view_datetime"] as? String ?? ""
+        self.transactions_persons_view_datetime_lastupdate = Obj["transactions_persons_view_datetime_lastupdate"] as? String ?? ""
+        self.transactions_persons_send_code_method = Obj["transactions_persons_send_code_method"] as? String ?? ""
+        self.transactions_persons_send_code_datetime = Obj["transactions_persons_send_code_datetime"] as? String ?? ""
+        self.transactions_persons_action_datetime = Obj["transactions_persons_action_datetime"] as? String ?? ""
+        self.transactions_persons_action_status = Obj["transactions_persons_action_status"] as? String ?? ""
+        self.transactions_persons_last_step = Obj["transactions_persons_last_step"] as? String ?? ""
+        self.first_name = Obj["first_name"] as? String ?? ""
+        self.last_name = Obj["last_name"] as? String ?? ""
+        
+    }
+    
+    
+}
+
+
+
+
+
+
+
+class transactions_recordsObj {
+
+    
+    var transactions_records_id : String = ""
+    var transaction_request_id : String = ""
+    var transactions_records_user_id : String = ""
+    var transactions_records_note : String = ""
+    var transactions_records_datetime : String = ""
+    var transactions_records_user_name : String = ""
+
+    
+    init(_ Obj : [String:Any]) {
+      
+        
+        self.transactions_records_id = Obj["transactions_records_id"] as? String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as? String ?? ""
+        self.transactions_records_user_id = Obj["transactions_records_user_id"] as? String ?? ""
+        self.transactions_records_note = Obj["transactions_records_note"] as? String ?? ""
+        self.transactions_records_datetime = Obj["transactions_records_datetime"] as? String ?? ""
+        self.transactions_records_user_name = Obj["transactions_records_user_name"] as? String ?? ""
+        
+       
+        
+    }
+    
+    
+}
+
+
+class Configurations_AttachmentsObj {
+
+    var project_supervision_form_files_id :String = ""
+    var transaction_key :String = ""
+    var transaction_request_id :String = ""
+    var project_supervision_form_file_path :String = ""
+    var project_supervision_form_file_size :String = ""
+    var project_supervision_form_file_extension :String = ""
+    var project_supervision_form_file_attach_title :String = ""
+    var project_supervision_form_file_attach_type :String = ""
+    var project_supervision_form_file_foreign_key :String = ""
+    var project_supervision_form_file_required :String = ""
+    var project_supervision_phase_file :String = ""
+    var created_datetime :String = ""
+    var writer :String = ""
+    var project_supervision_form_file_attach_type_label :String = ""
+    var form_dwsr_file_attach_method :String = ""
+    var writer_name :String = ""
+    
+    
+    
+    
+    init(_ Obj : [String:Any]) {
+      
+
+        self.project_supervision_form_files_id = Obj["project_supervision_form_files_id"] as? String ?? ""
+        self.transaction_key = Obj["transaction_key"] as? String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as? String ?? ""
+        self.project_supervision_form_file_path = Obj["project_supervision_form_file_path"] as? String ?? ""
+        self.project_supervision_form_file_size = Obj["project_supervision_form_file_size"] as? String ?? ""
+        self.project_supervision_form_file_extension = Obj["project_supervision_form_file_extension"] as? String ?? ""
+        self.project_supervision_form_file_attach_title = Obj["project_supervision_form_file_attach_title"] as? String ?? ""
+        self.project_supervision_form_file_attach_type = Obj["project_supervision_form_file_attach_type"] as? String ?? ""
+        self.project_supervision_form_file_foreign_key = Obj["project_supervision_form_file_foreign_key"] as? String ?? ""
+        self.project_supervision_form_file_required = Obj["project_supervision_form_file_required"] as? String ?? ""
+        self.project_supervision_phase_file = Obj["project_supervision_phase_file"] as? String ?? ""
+        self.created_datetime = Obj["created_datetime"] as? String ?? ""
+        self.writer = Obj["writer"] as? String ?? ""
+        self.project_supervision_form_file_attach_type_label = Obj["project_supervision_form_file_attach_type_label"] as? String ?? ""
+        self.form_dwsr_file_attach_method = Obj["form_dwsr_file_attach_method"] as? String ?? ""
+        self.writer_name = Obj["writer_name"] as? String ?? ""
+        
+        
+        
+        
+        
+    }
+    
+    
+}
+
+
+
+
+
+class project_supervision_form_unit_levelObj {
+    
+    var work_level_label :String = ""
+    var unit_id :String = ""
+    
+    init(_ Obj : [String:Any]) {
+        
+        self.work_level_label = Obj["work_level_label"] as? String ?? ""
+        self.unit_id = Obj["unit_id"] as? String ?? ""
+        
+        
+    }
+    
+}
+
+
+
+
+class NotesObj {
+     
+    var created_datetime:String = ""
+    var extra1_custom_key:String = ""
+    var extra1_custom_val:String = ""
+    var extra1_id:String = ""
+    var extra1_result:String = ""
+    var extra1_status:String = ""
+    var extra1_title:String = ""
+    var extra1_type:String = ""
+    var projects_work_area_id:String = ""
+    var transaction_request_id:String = ""
+    
+    
+    init(_ Obj : [String:Any]) {
+        
+      
+        self.created_datetime = Obj["created_datetime"] as?String ?? ""
+        self.extra1_custom_key = Obj["extra1_custom_key"] as?String ?? ""
+        self.extra1_custom_val = Obj["extra1_custom_val"] as?String ?? ""
+        self.extra1_id = Obj["extra1_id"] as?String ?? ""
+        self.extra1_result = Obj["extra1_result"] as?String ?? ""
+        self.extra1_status = Obj["extra1_status"] as?String ?? ""
+        self.extra1_title = Obj["extra1_title"] as?String ?? ""
+        self.extra1_type = Obj["extra1_type"] as?String ?? ""
+        self.projects_work_area_id = Obj["projects_work_area_id"] as?String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as?String ?? ""
+        
+    }
+    
+}
+
+
+
+
+
+class Technical_Assistants_EvaluationObj {
+ 
+    
+    var extra1_id :String = ""
+    var transaction_request_id :String = ""
+    var projects_work_area_id :String = ""
+    var extra1_custom_key :String = ""
+    var extra1_custom_val :String = ""
+    var extra1_title :String = ""
+    var extra1_type :String = ""
+    var extra1_status :String = ""
+    var extra1_result :String = ""
+    var created_datetime :String = ""
+    var NewAdded :Bool = false
+    var no_code_result :String = ""
+    var yes_code_result :String = ""
+   // var IsNew:Bool = false
+    
+    init(_ Obj : [String:Any]) {
+      
+        self.extra1_id = Obj["extra1_id"] as? String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as? String ?? ""
+        self.projects_work_area_id = Obj["projects_work_area_id"] as? String ?? ""
+        self.extra1_custom_key = Obj["extra1_custom_key"] as? String ?? ""
+        self.extra1_custom_val = Obj["extra1_custom_val"] as? String ?? ""
+        self.extra1_title = Obj["extra1_title"] as? String ?? ""
+        self.extra1_type = Obj["extra1_type"] as? String ?? ""
+        self.extra1_status = Obj["extra1_status"] as? String ?? ""
+        self.extra1_result = Obj["extra1_result"] as? String ?? ""
+        self.created_datetime = Obj["created_datetime"] as? String ?? ""
+        self.no_code_result = Obj["no_code_result"] as? String ?? ""
+        self.yes_code_result = Obj["yes_code_result"] as? String ?? ""
+        self.NewAdded = Obj["NewAdded"] as? Bool ?? false
+        //self.IsNew = Obj["NewAdded"] as? Bool ?? false
+    }
+    
+    
+}
 

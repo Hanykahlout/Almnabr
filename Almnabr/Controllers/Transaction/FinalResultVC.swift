@@ -11,25 +11,60 @@ import UIKit
 class FinalResultVC: UIViewController {
 
     @IBOutlet weak var icon_noPermission: UIImageView!
+    @IBOutlet weak var view_noPermission: UIView!
+    @IBOutlet weak var lbl_noPermission: UILabel!
+    
+    @IBOutlet weak var lbl_Title: UILabel!
+    @IBOutlet weak var lbl_Thanks: UILabel!
+    
+    @IBOutlet weak var view_main: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configGUI()
+    }
+    
+    
+    //MARK: - Config GUI
+    //------------------------------------------------------
+    func configGUI() {
+         
+        
+        self.lbl_Title.text =  "Final Result ".localized()
+        self.lbl_Title.font = .kufiBoldFont(ofSize: 15)
+        self.lbl_Title.textColor =  HelperClassSwift.acolor.getUIColor()
+        
+        
+        self.lbl_Thanks.text =  "Thank you, we will review your request. wait the result soon.".localized()
+        self.lbl_Thanks.font = .kufiBoldFont(ofSize: 16)
+        self.lbl_Thanks.textColor =  "#555".getUIColor()
+        
+        
+        
         icon_noPermission.loadGif(name: "no-permission")
         
+        self.lbl_noPermission.text =  "You not have permission to access this step".localized()
+        self.lbl_noPermission.font = .kufiRegularFont(ofSize: 15)
+        self.lbl_noPermission.textColor =  "#333".getUIColor()
         
+        let step = obj_transaction?.transaction_request_last_step ?? "last"
+        if step == "last" || step == "completed" {
+            view_noPermission.isHidden = true
+            self.view_main.isHidden = false
+        }else{
+            if StatusObject?.Final_Result == false {
+                view_noPermission.isHidden = false
+                self.view_main.isHidden = true
+
+            }else{
+                view_noPermission.isHidden = true
+                self.view_main.isHidden = false
+            }
+        }
+      
     }
+
+
     
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

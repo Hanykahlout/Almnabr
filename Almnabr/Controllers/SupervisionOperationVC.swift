@@ -44,11 +44,13 @@ class SupervisionOperationVC: UIViewController {
     
     var parentPageViewController: MyPageViewController!
     
-    var StrTitle:String = ""
-    var StrSubMenue:String = ""
+    var StrTitle:String = "Projects".localized()
+    var StrSubMenue:String = "All Projects".localized()
     var StrMenue:String = ""
     var SelectedIndex:Int = 0
     var MenuObj:MenuObj?
+    
+    
     
     var index = 0
     var identifiers: NSArray = ["FromTransactionVC", "TeamUserVC","ContactsVC","DocumentsVC"]
@@ -68,7 +70,6 @@ class SupervisionOperationVC: UIViewController {
         header.btnAction = menu_select
         
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

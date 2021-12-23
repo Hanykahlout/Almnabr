@@ -43,8 +43,9 @@ class AllPrpjectsVC: UIViewController {
     
     var SearchKey:String = ""
     var StrTitle:String = ""
-    var StrSubMenue:String = ""
-    var StrMenue:String = ""
+    var StrSubMenue:String = "All Projects".localized()
+    var StrMenue:String = "Projects".localized()
+    
     var StrsearchByServices:String = ""
     var StrsearchByBranch:String = ""
     var searchByTypeOfApproval:String = ""
@@ -141,9 +142,9 @@ class AllPrpjectsVC: UIViewController {
         searchBar.delegate = self
         
         self.mainView.setBorderGray()
-        
-        self.StrMenue =  MenuObj!.menu_name
-        self.lblMenuName.text = MenuObj?.menu_name
+
+        self.StrMenue =  MenuObj?.menu_name ?? "Projects".localized()
+        self.lblMenuName.text = MenuObj?.menu_name ?? "All Projects".localized()
         self.lblSubMenuName.text =  StrSubMenue
         self.lblTitle.text =  StrSubMenue
         

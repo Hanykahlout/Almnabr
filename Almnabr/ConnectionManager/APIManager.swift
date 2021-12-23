@@ -543,6 +543,84 @@ class APIManager: NSObject {
         let auth = [ "authorization":
                         "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
+        let strURL = "\(serverURL )/\(queryString)"
+        
+       // let strURL = "https://nahidh.sa/backend/form/FORM_WIR/cr/2/0"
+        let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let getApi = URL(string: urlStr)!
+        
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+                let myId = Date().millisecondsSince1970
+            
+
+            
+            for (key, value) in param {
+                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+            
+            for i in arr_attach {
+                
+                switch i.type {
+                case "img":
+                    
+                    let data = i.img!.jpegData(compressionQuality: 0.4)
+                    if let imageData = data{
+                        multipartFormData.append(imageData,
+                                                 withName: "attachments[\(i.index)][file]",
+                                                 fileName: "\(myId).jpg",
+                                                 mimeType: "image/jpeg")
+                        
+                    }
+                    
+                case "file":
+                    if i.IsNew == false && i.url != nil{
+                        do {
+                            let file = try Data(contentsOf: i.url!)
+                            
+                            multipartFormData.append( file as Data, withName: "attachments[0][file]", fileName: "\(myId)", mimeType: "text/plain")
+                        } catch {
+                            debugPrint("Couldn't get Data from URL: \(i.url): \(error)")
+                        }
+                    }
+                    
+                    
+                    
+                default:
+                    print("no data")
+                    
+                    
+                }
+            }
+           
+
+     
+            }, usingThreshold: UInt64.init(), to: getApi, method: .post, headers: auth) { (result) in
+                switch result{
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        print("Succesfully uploaded")
+                        if let result = response.result.value as? NSDictionary {
+                             //let data = result.value(forKey: "data") as? NSDictionary
+                            completion(result as! [String : Any])
+                        }else {
+                            print(result)
+                           // completion(result as! [String : Any])
+                           
+                        }
+                    }
+                case .failure(_):
+                   completion(result as! [String : Any])
+                }
+            }
+        }
+
+    static func func_UploadNotes(queryString:String , _ arr_attach: [attachment] , param:[String:String],completion: @escaping (_ response : [String : Any])->Void)
+    {
+        
+        let auth = [ "authorization":
+                        "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
         let strURL = "https://nahidh.sa/backend/form/FORM_WIR/cr/2/0"
         let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let getApi = URL(string: urlStr)!
@@ -589,6 +667,84 @@ class APIManager: NSObject {
              
              
                      }
+            }
+           
+
+     
+            }, usingThreshold: UInt64.init(), to: getApi, method: .post, headers: auth) { (result) in
+                switch result{
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        print("Succesfully uploaded")
+                        if let result = response.result.value as? NSDictionary {
+                             //let data = result.value(forKey: "data") as? NSDictionary
+                            completion(result as! [String : Any])
+                        }else {
+                            print(result)
+                           // completion(result as! [String : Any])
+                           
+                        }
+                    }
+                case .failure(_):
+                   completion(result as! [String : Any])
+                }
+            }
+        }
+
+
+    static func func_UploadTechnical(queryString:String , _ arr_attach: [Technical_Assistants] , param:[String:String],completion: @escaping (_ response : [String : Any])->Void)
+    {
+        
+        let auth = [ "authorization":
+                        "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let strURL = "\(serverURL )/\(queryString)"
+        
+       // let strURL = "https://nahidh.sa/backend/form/FORM_WIR/cr/2/0"
+        let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let getApi = URL(string: urlStr)!
+        
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+                let myId = Date().millisecondsSince1970
+            
+
+            
+            for (key, value) in param {
+                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+            
+            for i in arr_attach {
+                
+                switch i.type {
+                case "img":
+                    let data = i.img!.jpegData(compressionQuality: 0.4)
+                    if let imageData = data{
+                        multipartFormData.append(imageData,
+                                                 withName: "Technical_Assistants_Evaluation[\(i.index)][attachments][0][file]",
+                                                 fileName: "\(myId).jpg",
+                                                 mimeType: "image/jpeg")
+                        
+                    }
+                    
+                case "file":
+                    if i.IsNew == false && i.url != nil{
+                        do {
+                            let file = try Data(contentsOf: i.url!)
+                            
+                            multipartFormData.append( file as Data, withName: "Technical_Assistants_Evaluation[\(i.index)][attachments][0][file]", fileName: "\(myId)", mimeType: "text/plain")
+                        } catch {
+                            debugPrint("Couldn't get Data from URL: \(i.url): \(error)")
+                        }
+                    }
+                    
+                    
+                    
+                default:
+                    print("no data")
+                    
+                    
+                }
             }
            
 

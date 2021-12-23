@@ -96,6 +96,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         let elapsed = Calendar.current.dateComponents([.minute], from: lastOpened, to: Date())
         print(elapsed)
+
         if elapsed.minute! > 30 {
             
             let context = LAContext()

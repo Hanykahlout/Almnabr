@@ -107,6 +107,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="btnDelete" destination="8wo-hC-lK7" id="cFf-8a-m4A"/>
                 <outlet property="lblNo" destination="R9W-BP-gyp" id="3Ot-J6-5DE"/>
                 <outlet property="lblUnit" destination="ZHl-lT-9ni" id="8k1-da-ijY"/>
                 <outlet property="lblWorklevels" destination="Tk3-SV-7YU" id="As2-Ug-iHJ"/>

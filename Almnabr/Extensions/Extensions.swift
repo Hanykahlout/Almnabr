@@ -1396,171 +1396,171 @@ extension UIImage {
 
 
 import Foundation
-import Kingfisher
 
-extension UIImageView {
-    func downloadUserProfileImage(urlString: String?) {
-        self.kf.indicatorType = .activity
-        if  urlString != nil {
-            let url = URL(string: urlString!)!
-            let placeHolderImage = UIImage(named: "icon_user_default")
-            let processor = RoundCornerImageProcessor(cornerRadius: self.frame.size.width / 2)
 
-            //let processor = BlurImageProcessor(blurRadius: 4) >> RoundCornerImageProcessor(cornerRadius: 20)
-            //[.processor(processor)]
-            
-            let resource = ImageResource(downloadURL: url, cacheKey: urlString!)
-            
-            self.kf.setImage(with: resource, placeholder: placeHolderImage, options: [.processor(processor)], progressBlock: { receivedSize, totalSize in
-               
-                
-            })
-//            { (image, error, cacheType, imageUrl) in
+//extension UIImageView {
+//    func downloadUserProfileImage(urlString: String?) {
+//        self.kf.indicatorType = .activity
+//        if  urlString != nil {
+//            let url = URL(string: urlString!)!
+//            let placeHolderImage = UIImage(named: "icon_user_default")
+//            let processor = RoundCornerImageProcessor(cornerRadius: self.frame.size.width / 2)
 //
+//            //let processor = BlurImageProcessor(blurRadius: 4) >> RoundCornerImageProcessor(cornerRadius: 20)
+//            //[.processor(processor)]
+//            
+//            let resource = ImageResource(downloadURL: url, cacheKey: urlString!)
+//            
+//            self.kf.setImage(with: resource, placeholder: placeHolderImage, options: [.processor(processor)], progressBlock: { receivedSize, totalSize in
+//               
+//                
+//            })
+////            { (image, error, cacheType, imageUrl) in
+////
+////            }
+//        } else {
+//            
+//            let placeHolderImage = UIImage(named: "icon_user_default")
+//            self.image = placeHolderImage!
+//        }
+//    }
+//    
+//    
+//    func downloadImageWithoutPlaceHolder(urlString: String?, withColor: UIColor?) {
+//        
+//        self.kf.indicatorType = .activity
+//        if  urlString != nil && urlString!.count > 0 {
+//            let urlS = urlString?.replacingOccurrences(of: "thumbnail/", with: "")
+//            var urlStr : String = urlS!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+//            
+//            
+//            if urlStr.contains("http://") || urlStr.contains("https://") {
+//                
+//            } else {
+//                urlStr = "\(APIManager.serverURL)/storage/\(urlStr)"
 //            }
-        } else {
-            
-            let placeHolderImage = UIImage(named: "icon_user_default")
-            self.image = placeHolderImage!
-        }
-    }
-    
-    
-    func downloadImageWithoutPlaceHolder(urlString: String?, withColor: UIColor?) {
-        
-        self.kf.indicatorType = .activity
-        if  urlString != nil && urlString!.count > 0 {
-            let urlS = urlString?.replacingOccurrences(of: "thumbnail/", with: "")
-            var urlStr : String = urlS!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-            
-            
-            if urlStr.contains("http://") || urlStr.contains("https://") {
-                
-            } else {
-                urlStr = "\(APIManager.serverURL)/storage/\(urlStr)"
-            }
-            
-            
-            let url = URL(string: urlStr)!
-
-            
-            //let url = URL(string: urlString!)!
-            
-            if withColor != nil {
-                //let processor = TintImageProcessor(tint: withColor!)
-                //let processor = BlurImageProcessor(blurRadius: 4) >> RoundCornerImageProcessor(cornerRadius: 20)
-                //[.processor(processor)]
-                self.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: { receivedSize, totalSize in
-                    //let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
-                    
-                })
-//                { (image, error, cacheType, imageUrl) in
-//                    self.image = image?.maskWithColor(color: withColor!)
-//                }
-                
-                
-            } else {
-
-                self.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: { receivedSize, totalSize in
-                    //let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
-                    
-                })
-//                { (image, error, cacheType, imageUrl) in
+//            
+//            
+//            let url = URL(string: urlStr)!
 //
-//                }
-            }
-           
-        } else {
-            self.backgroundColor = .white
-        }
-    }
-    
-    
-    func downloadSaloonImage(urlString: String?) {
-        self.kf.indicatorType = .activity
-        if  urlString != nil {
-            let url = URL(string: urlString!)!
-            let placeHolderImage = UIImage(named: "icon_registration")
-            self.kf.setImage(with: url, placeholder: placeHolderImage, options: nil, progressBlock: { receivedSize, totalSize in
-                let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
-                print("downloading progress: \(percentage)%")
-            })
-//            { (image, error, cacheType, imageUrl) in
+//            
+//            //let url = URL(string: urlString!)!
+//            
+//            if withColor != nil {
+//                //let processor = TintImageProcessor(tint: withColor!)
+//                //let processor = BlurImageProcessor(blurRadius: 4) >> RoundCornerImageProcessor(cornerRadius: 20)
+//                //[.processor(processor)]
+//                self.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: { receivedSize, totalSize in
+//                    //let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
+//                    
+//                })
+////                { (image, error, cacheType, imageUrl) in
+////                    self.image = image?.maskWithColor(color: withColor!)
+////                }
+//                
+//                
+//            } else {
 //
+//                self.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: { receivedSize, totalSize in
+//                    //let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
+//                    
+//                })
+////                { (image, error, cacheType, imageUrl) in
+////
+////                }
 //            }
-        } else {
-            let placeHolderImage = UIImage(named: "icon_registration")
-            self.image = placeHolderImage!
-        }
-    }
-    
-    
-    func downloadSaloonImageWithColor(urlString: String?, tintColor: String) {
-        self.kf.indicatorType = .activity
-        if  urlString != nil {
-            let url = URL(string: urlString!)!
-            let placeHolderImage = UIImage(named: "icon_registration")
-            let processor = OverlayImageProcessor(overlay: tintColor.getUIColor(), fraction: 0.0)
-            self.kf.setImage(with: url, placeholder: placeHolderImage, options:[.processor(processor)], progressBlock: { receivedSize, totalSize in
-                let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
-                print("downloading progress: \(percentage)%")
-            })
-//            { (image, error, cacheType, imageUrl) in
+//           
+//        } else {
+//            self.backgroundColor = .white
+//        }
+//    }
+//    
+//    
+//    func downloadSaloonImage(urlString: String?) {
+//        self.kf.indicatorType = .activity
+//        if  urlString != nil {
+//            let url = URL(string: urlString!)!
+//            let placeHolderImage = UIImage(named: "icon_registration")
+//            self.kf.setImage(with: url, placeholder: placeHolderImage, options: nil, progressBlock: { receivedSize, totalSize in
+//                let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
+//                print("downloading progress: \(percentage)%")
+//            })
+////            { (image, error, cacheType, imageUrl) in
+////
+////            }
+//        } else {
+//            let placeHolderImage = UIImage(named: "icon_registration")
+//            self.image = placeHolderImage!
+//        }
+//    }
+//    
+//    
+//    func downloadSaloonImageWithColor(urlString: String?, tintColor: String) {
+//        self.kf.indicatorType = .activity
+//        if  urlString != nil {
+//            let url = URL(string: urlString!)!
+//            let placeHolderImage = UIImage(named: "icon_registration")
+//            let processor = OverlayImageProcessor(overlay: tintColor.getUIColor(), fraction: 0.0)
+//            self.kf.setImage(with: url, placeholder: placeHolderImage, options:[.processor(processor)], progressBlock: { receivedSize, totalSize in
+//                let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
+//                print("downloading progress: \(percentage)%")
+//            })
+////            { (image, error, cacheType, imageUrl) in
+////
+////            }
+//        } else {
+//            let placeHolderImage = UIImage(named: "icon_registration")
+//            self.image = placeHolderImage!
+//        }
+//    }
+//    
+//    func downloadUserProfileImage(urlString: String?, placeHolderImageString: String) {
+//        self.kf.indicatorType = .activity
+//        if  urlString != nil {
+//            let url = URL(string: urlString!)!
+//            let placeHolderImage = UIImage(named: placeHolderImageString)
+//            
+//            self.kf.setImage(with: url, placeholder: placeHolderImage, options: nil, progressBlock: { receivedSize, totalSize in
+//                let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
+//                print("downloading progress: \(percentage)%")
+//            })
+////            { (image, error, cacheType, imageUrl) in
+////
+////            }
+//        } else {
+//            let placeHolderImage = UIImage(named: placeHolderImageString)
+//            self.image = placeHolderImage!
+//        }
+//    }
+//    
+//    
+//    
+//    func downloadSaloonImageWithColorPlaceHolder(urlString: String?, placeHolderColor: String) {
+//        self.kf.indicatorType = .activity
+//        let placeHolderImage = UIImage.init(color: placeHolderColor.getUIColor())
 //
-//            }
-        } else {
-            let placeHolderImage = UIImage(named: "icon_registration")
-            self.image = placeHolderImage!
-        }
-    }
-    
-    func downloadUserProfileImage(urlString: String?, placeHolderImageString: String) {
-        self.kf.indicatorType = .activity
-        if  urlString != nil {
-            let url = URL(string: urlString!)!
-            let placeHolderImage = UIImage(named: placeHolderImageString)
-            
-            self.kf.setImage(with: url, placeholder: placeHolderImage, options: nil, progressBlock: { receivedSize, totalSize in
-                let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
-                print("downloading progress: \(percentage)%")
-            })
-//            { (image, error, cacheType, imageUrl) in
-//
-//            }
-        } else {
-            let placeHolderImage = UIImage(named: placeHolderImageString)
-            self.image = placeHolderImage!
-        }
-    }
-    
-    
-    
-    func downloadSaloonImageWithColorPlaceHolder(urlString: String?, placeHolderColor: String) {
-        self.kf.indicatorType = .activity
-        let placeHolderImage = UIImage.init(color: placeHolderColor.getUIColor())
-
-        if  urlString != nil {
-            let url = URL(string: urlString!)!
-            self.kf.setImage(with: url, placeholder: placeHolderImage, options: nil, progressBlock: { receivedSize, totalSize in
-                let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
-                print("downloading progress: \(percentage)%")
-            })
-//            { (image, error, cacheType, imageUrl) in
-//
-//            }
-        } else {
-            self.image = placeHolderImage!
-        }
-    }
-    
-    
-    func roundCorners(_ corners:UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        self.layer.mask = mask
-    }
-}
+//        if  urlString != nil {
+//            let url = URL(string: urlString!)!
+//            self.kf.setImage(with: url, placeholder: placeHolderImage, options: nil, progressBlock: { receivedSize, totalSize in
+//                let percentage = (Float(receivedSize) / Float(totalSize)) * 100.0
+//                print("downloading progress: \(percentage)%")
+//            })
+////            { (image, error, cacheType, imageUrl) in
+////
+////            }
+//        } else {
+//            self.image = placeHolderImage!
+//        }
+//    }
+//    
+//    
+//    func roundCorners(_ corners:UIRectCorner, radius: CGFloat) {
+//        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+//        let mask = CAShapeLayer()
+//        mask.path = path.cgPath
+//        self.layer.mask = mask
+//    }
+//}
 
 
 

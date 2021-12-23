@@ -261,7 +261,6 @@ class TransactionsVC: UIViewController {
                          self.arr_module.append(obj)
                             self.arr_moduleLabel.append(obj.label)
                       
-                         
                      }
                      self.hideLoadingActivity()
                  }

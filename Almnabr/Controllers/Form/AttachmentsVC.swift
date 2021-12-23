@@ -21,6 +21,30 @@ struct attachment {
     var IsNew:Bool = false
 }
 
+struct SaudiBuillding {
+    
+    var Status:String?
+    var Title:String?
+    var index:Int = 0
+}
+
+
+struct Technical_Assistants {
+    
+    var title:String?
+    var status:String?
+    var projects_from_consultant_id:String?
+    var result:String?
+    var img:UIImage?
+    var url:URL?
+    var type:String?
+    var index:Int = 0
+    var IsNew:Bool = false
+    var yes_code_result:String?
+    var no_code_result:String?
+    var Required:String?
+}
+
 class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
 
     
@@ -88,7 +112,6 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     let dropDownmage =  UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,6 +120,20 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         get_ContractorTeamUsers()
     }
     
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Show the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     
     
     //MARK: - Config GUI
@@ -182,6 +219,16 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
             Stack_contractor.isHidden = true
         }
        
+        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnNext.setTitleColor(.white, for: .normal)
+        self.btnNext.setRounded(10)
+        
+        
+        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
+        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnPrevious.setTitleColor(.white, for: .normal)
+        self.btnPrevious.setRounded(10)
         
     }
     
@@ -322,19 +369,14 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
             
             let status = respnse["status"] as? Bool
             let errors = respnse["error"] as? String
-//            let data = respnse["data"] as? [String:Any]
-//
+
             
             if status == true{
                 
                 let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
-//                vc.MenuObj = MenuObj
-//                vc.StrSubMenue =  "All Projects".localized()
-//                vc.StrMenue = "Projects".localized()
-//                vc.MenuObj = self.MenuObj
-                _ =  self.panel?.center(vc)
-                
-   print("success")
+                let page = UINavigationController.init(rootViewController: vc)
+                _ =  self.panel?.center(page)
+       
             }else{
                 
                 self.hideLoadingActivity()
@@ -559,12 +601,7 @@ extension AttachmentsVC: UITableViewDelegate , UITableViewDataSource{
             
         }
         
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .white
-        cell.selectedBackgroundView = backgroundView
-        
-        return cell
+                return cell
         
         
   

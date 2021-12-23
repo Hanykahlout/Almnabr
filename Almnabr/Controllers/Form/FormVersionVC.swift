@@ -65,6 +65,20 @@ class FormVersionVC: UIViewController {
     
     
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Show the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
@@ -87,14 +101,25 @@ class FormVersionVC: UIViewController {
         let Stepimage =  UIImage.fontAwesomeIcon(name: .building, style: .solid, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
         self.imgStep.image = Stepimage
         
-        self.btnNext.backgroundColor = HelperClassSwift.acolor.getUIColor()
-        self.btnPrevious.backgroundColor = HelperClassSwift.acolor.getUIColor()
+//        self.btnNext.backgroundColor = HelperClassSwift.acolor.getUIColor()
+//        self.btnPrevious.backgroundColor = HelperClassSwift.acolor.getUIColor()
         
         table.dataSource = self
         table.delegate = self
         let nib = UINib(nibName: "FormVersionCell", bundle: nil)
         table.register(nib, forCellReuseIdentifier: "FormVersionCell")
        
+        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnNext.setTitleColor(.white, for: .normal)
+        self.btnNext.setRounded(10)
+        
+        
+        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
+        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnPrevious.setTitleColor(.white, for: .normal)
+        self.btnPrevious.setRounded(10)
+        
         
     }
     

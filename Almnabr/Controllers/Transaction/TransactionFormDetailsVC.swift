@@ -10,6 +10,13 @@ import UIKit
 import DPLocalization
 import FontAwesome_swift
 
+import AMPopTip
+
+var StatusObject:StepStatusObj?
+var obj_transaction:Tcore?
+var obj_FormWir:WorkAreaInfoObj?
+var arr_Technical_Assistants_Evaluation:[Technical_Assistants_EvaluationObj] = []
+
 class TransactionFormDetailsVC: UIViewController {
     
     
@@ -71,27 +78,62 @@ class TransactionFormDetailsVC: UIViewController {
     var projectId:String = ""
     var CustomerName:String = ""
     
-    var SelectedIndex:Int = 0
+    var SelectedIndex:Int = 1
     
     var Object:Tcore?
+    var transactions_request:Tcore?
+    var WorkAreaObj:WorkAreaInfoObj?
+    var FormWirObj:form_wir_dataObj?
+    var arr_transactionsNotes:[transactions_notesObj] = []
+    var arr_transactions_persons:[transactions_personsObj] = []
+    var arr_transactions_records:[transactions_recordsObj] = []
+    var arr_Configurations_Attachments:[Configurations_AttachmentsObj] = []
+    var arr_project_supervision_form_unit_level:[project_supervision_form_unit_levelObj] = []
     
-    var cellWidths: [CGFloat] = [900]
     
-    let fontStyle: FontAwesomeStyle = .solid
     
+    let arr_step:[String] = [ "Configurations",
+                              "Contractor Team Approval",
+                              "Contractor Manager Approval",
+                              "Recipient Verification",
+                              "Techinical Assistant",
+                              "Special Approval",
+                              "Evaluation Result",
+                              "Authorized Positions Approval",
+                              "Manager Approval",
+                              "Owners Representative",
+                              "Final Result"]
+    
+    let arr_Valstep:[String] = [ "Configurations",
+                              "Contractor_Team_Approval",
+                              "Contractor_Manager_Approval",
+                              "Recipient_Verification",
+                              "Techinical_Assistant",
+                              "Special_Approval",
+                              "Evaluation_Result",
+                              "Authorized_Positions Approval",
+                              "Manager_Approval",
+                              "Owners_Representative",
+                              "last"]
+    
+    var arr_waitingFor:[String] = []
     var parentPageVC: TransactionFormPageaVC!
 
+    private let page_count = 11
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.mainView.isHidden = true
+        get_Request()
         configNavigation()
-        configGUI()
+        
+        update_Config()
     }
 
     
 
-    
+   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
@@ -135,12 +177,17 @@ class TransactionFormDetailsVC: UIViewController {
     //------------------------------------------------------
     func configGUI() {
         
+        
+        
+        self.slider.progressTintColor = HelperClassSwift.acolor.getUIColor()
+        self.slider.progress = 0.1
+       
         self.title = "Form Details".localized()
         
-//        self.title.textColor =  HelperClassSwift.acolor.getUIColor()
-//        self.title.font = .kufiBoldFont(ofSize: 15)
-       // self.lblTitle.text =  "Form Details".localized()
-    
+        self.lblStep.font = .kufiRegularFont(ofSize: 15)
+        self.lblStep.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lblStep.text =  "step 1 of \(page_count)"
+        
         self.lblRequestNumber.text =  "Request Number".localized() + " :"
         self.lblRequestNumber.font = .kufiRegularFont(ofSize: 15)
         self.lblRequestNumber.textColor =  HelperClassSwift.bcolor.getUIColor()
@@ -195,25 +242,25 @@ class TransactionFormDetailsVC: UIViewController {
         self.lblValRequestNumber.text =  Object?.transaction_request_id
         self.lblValRequestNumber.font = .kufiBoldFont(ofSize: 14)
         
-        self.lblValProjectTitle.text =  "First Project in ERP"
+        self.lblValProjectTitle.text =  WorkAreaObj?.projects_profile_name
         self.lblValProjectTitle.font = .kufiBoldFont(ofSize: 14)
         
-        self.lblValServiceName.text =  Object?.transaction_request_description
+        self.lblValServiceName.text =  WorkAreaObj?.projects_services_name
         self.lblValServiceName.font = .kufiBoldFont(ofSize: 14)
         
-        self.lblValFormCode.text =  "2.WIR.1.1"
+        self.lblValFormCode.text = FormWirObj?.platform_code_system
         self.lblValFormCode.font = .kufiBoldFont(ofSize: 14)
         
-        self.lblValDivision.text =  "DIVISION 02 : SITE CONSTRUCTION"
+        self.lblValDivision.text =  FormWirObj?.group1name
         self.lblValDivision.font = .kufiBoldFont(ofSize: 14)
         
-       self.lblValChapter.text =  "Site Work"
+        self.lblValChapter.text =  FormWirObj?.group2name
         self.lblValChapter.font = .kufiBoldFont(ofSize: 14)
         
-        self.lblValItemName.text =  "natural ground Level"
+        self.lblValItemName.text =  FormWirObj?.platformname
         self.lblValItemName.font = .kufiBoldFont(ofSize: 14)
         
-        self.lblValFormSpecifications.text =  "----"
+        self.lblValFormSpecifications.text =  FormWirObj?.specification ?? "---"
         self.lblValFormSpecifications.font = .kufiBoldFont(ofSize: 14)
         
        self.lblValLang_drawing_file.text =  "----"
@@ -232,13 +279,24 @@ class TransactionFormDetailsVC: UIViewController {
         self.lblLastStepOpened.font = .kufiRegularFont(ofSize: 15)
         self.lblLastStepOpened.textColor =  HelperClassSwift.bcolor.getUIColor()
         
-        self.lblLastValStepOpened.text =  "Configurations"
+        let last_step = transactions_request?.transaction_request_last_step
+        
+        
+        if last_step == "last" {
+            self.lblLastValStepOpened.text = "Processing"
+        }else{
+            self.lblLastValStepOpened.text = last_step
+        }
         self.lblLastValStepOpened.font = .kufiBoldFont(ofSize: 15)
-        self.lblLastValStepOpened.textColor =  .green
+        self.lblLastValStepOpened.textColor =  "#61b045".getUIColor()
+        
+        let i1 = arr_Valstep.firstIndex(where: {$0 == last_step})
+        print(i1 ?? 10)
+        let index = i1 ?? 10
+        page_scroll(SelectedIndex: index + 1 )
         
         self.btnLastValStepOpened.setTitleColor(.red, for: .normal)
         self.btnLastValStepOpened.setTitle("(Rejected)".localized(), for: .normal)
-       // self.btnLastValStepOpened.font = .kufiBoldFont(ofSize: 15)
         
         self.btnNotes.setTitleColor(HelperClassSwift.acolor.getUIColor(), for: .normal)
         self.btnPersonDetails.setTitleColor(HelperClassSwift.acolor.getUIColor(), for: .normal)
@@ -262,44 +320,338 @@ class TransactionFormDetailsVC: UIViewController {
         self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
         self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
        
+        
+        self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
+        
+        
+
+//
+//        let status = StatusObject?.to_array[SelectedIndex-1]
+//        let title = (status ?? false) ? "Accepted" : "Rejected"
+//        self.btnLastValStepOpened.setTitle(title, for: .normal)
+    }
+    
+    func page_scroll(SelectedIndex:Int){
+        
+        self.SelectedIndex = SelectedIndex
+        change_page(SelectedIndex: SelectedIndex)
+        self.slider.progress = Float(SelectedIndex)/Float(page_count)
+        self.lblStep.text =  "step \(SelectedIndex) of \(page_count)"
+        self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
+    }
+    
+    
+    func get_Request(){
+        
+        self.showLoadingActivity()
+        APIManager.sendRequestGetAuth(urlString: "/form/FORM_WIR/vr/\(Object?.transaction_request_id ?? "0")" ) { (response) in
+             
+             
+             let status = response["status"] as? Bool
+             if status == true{
+                 if  let step_status = response["step_status"] as? [String:Any]{
+
+                     //let view = step_status["view"] as! [String:Any]
+                     let edit = step_status["edit"] as! [String:Any]
+                     let obj = StepStatusObj(edit)
+                     StatusObject = obj
+                     self.update_langVC()
+                 }
+                 
+                 if  let view_request = response["view_request"] as? [String:Any]{
+
+                     if let transactions_request = view_request["transactions_request"] as? [String:Any]{
+                         let transactions_status = transactions_request["status"] as? Bool
+                         if transactions_status == true{
+                             let records = transactions_request["records"] as! [String:Any]
+                             let recordsObj = Tcore(records)
+                             self.transactions_request = recordsObj
+                             obj_transaction = recordsObj
+                         }
+                     }
+                    
+                     if let work_area_info = view_request["work_area_info"] as? [String:Any]{
+                         let transactions_status = work_area_info["status"] as? Bool
+                         if transactions_status == true{
+                             let records = work_area_info["records"] as! [String:Any]
+                             let recordsObj = WorkAreaInfoObj(records)
+                             self.WorkAreaObj = recordsObj
+                             obj_FormWir = recordsObj
+                         }
+                     }
+
+                     if let form_wir_data = view_request["form_wir_data"] as? [String:Any]{
+                         let form_wir_data_status = form_wir_data["status"] as? Bool
+                         if form_wir_data_status == true{
+                             let records = form_wir_data["records"] as! NSArray
+                             
+                             let recordsObj = form_wir_dataObj(records.firstObject as! [String : Any])
+                             self.FormWirObj = recordsObj
+                         }
+                     }
+                     
+                     if let transactions_notes = view_request["transactions_notes"] as? [String:Any]{
+                         let transactions_notes_status = transactions_notes["status"] as? Bool
+                         if transactions_notes_status == true{
+                            
+                             if  let records = transactions_notes["records"] as? NSArray{
+                                 for i in records {
+                                     let dict = i as? [String:Any]
+                                     let obj = transactions_notesObj.init(dict!)
+                                     self.arr_transactionsNotes.append(obj)
+                                   
+                                 }
+                             }
+
+                         }
+                     }
+                     
+                     if let transactions_persons = view_request["transactions_persons"] as? [String:Any]{
+                         let transactions_persons_status = transactions_persons["status"] as? Bool
+                         if transactions_persons_status == true{
+                            
+                             if  let records = transactions_persons["records"] as? NSArray{
+                                 for i in records {
+                                     let dict = i as? [String:Any]
+                                     let obj = transactions_personsObj.init(dict!)
+                                     self.arr_transactions_persons.append(obj)
+                                     if obj.transactions_persons_action_status == "0" {
+                                         let name = obj.first_name + " " + obj.last_name
+                                         self.arr_waitingFor.append(name)
+                                     }
+                                 }
+                             }
+
+                         }
+                     }
+
+                     if let transactions_records = view_request["transactions_records"] as? [String:Any]{
+                         let transactions_records_status = transactions_records["status"] as? Bool
+                         if transactions_records_status == true {
+                            
+                             if  let records = transactions_records["records"] as? NSArray{
+                                 for i in records {
+                                     let dict = i as? [String:Any]
+                                     let obj = transactions_recordsObj.init(dict!)
+                                     self.arr_transactions_records.append(obj)
+                                   
+                                 }
+                             }
+
+                         }
+                     }
+
+                     
+                     if let Configurations_Attachments = view_request["Configurations_Attachments"] as? [String:Any]{
+                         let Configurations_Attachments_status = Configurations_Attachments["status"] as? Bool
+                         if Configurations_Attachments_status == true{
+                            
+                             if  let records = Configurations_Attachments["records"] as? NSArray{
+                                 for i in records {
+                                     let dict = i as? [String:Any]
+                                     let obj = Configurations_AttachmentsObj.init(dict!)
+                                     self.arr_Configurations_Attachments.append(obj)
+                                   
+                                 }
+                             }
+
+                         }
+                     }
+                     
+                     
+                     if let project_supervision_form_unit_level = view_request["project_supervision_form_unit_level"] as? [String:Any]{
+                         let project_status = project_supervision_form_unit_level["status"] as? Bool
+                         if project_status == true{
+                            
+                             if  let records = project_supervision_form_unit_level["records"] as? NSArray{
+                                 for i in records {
+                                     let dict = i as? [String:Any]
+                                     let obj = project_supervision_form_unit_levelObj.init(dict!)
+                                     self.arr_project_supervision_form_unit_level.append(obj)
+                                   
+                                 }
+                             }
+
+                         }
+                     }
+
+                     
+                     if let Technical_Assistants_Evaluation = view_request["Technical_Assistants_Evaluation"] as? [String:Any]{
+                         let Technical_Assistants_Evaluation_status = Technical_Assistants_Evaluation["status"] as? Bool
+                         if Technical_Assistants_Evaluation_status == true{
+                             arr_Technical_Assistants_Evaluation = []
+                             if  let records = Technical_Assistants_Evaluation["records"] as? NSArray{
+                                 for i in records {
+                                     let dict = i as? [String:Any]
+                                     let obj = Technical_Assistants_EvaluationObj.init(dict!)
+                                    arr_Technical_Assistants_Evaluation.append(obj)
+                                   
+                                 }
+                             }
+
+                         }
+                     }
+                     
+                 }
+
+                 self.mainView.isHidden = false
+                 self.hideLoadingActivity()
+                 self.configGUI()
+             }
+             
+             
+         }
+     }
+    
+    
+    
+    
+    
+    @IBAction func btnWaitingFor_Click(_ sender: Any) {
+        var name = "Waiting for : "
+        for i in arr_waitingFor{
+            name = name + i
+        } 
+            let popTip = PopTip()
+        popTip.bubbleColor = HelperClassSwift.acolor.getUIColor()
+        popTip.backgroundColor = HelperClassSwift.acolor.getUIColor()
+        popTip.show(text: name, direction: .up, maxWidth: 200, in: view, from:  CGRect(x: btnWaitingFor.center.x + 400, y: btnWaitingFor.center.y + 400, width: 150, height: 40))
+    
+        //self.scrollView.convert(self.lblLastStepOpened.frame, to: nil)
     }
     
     
     @IBAction func btnNotes_Click(_ sender: Any) {
         
+        let vc:NotesVC = AppDelegate.TransactionSB.instanceVC()
+        vc.arr_data = self.arr_transactionsNotes
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @IBAction func btnFormVersions_Click(_ sender: Any) {
+        
+        let VC:FormVersionVC = AppDelegate.mainSB.instanceVC()
+        //vc.arr_data = self.arr_transactionsNotes
+        
+        self.navigationController?.pushViewController(VC, animated: true)
+    }
+    
+    
     @IBAction func btnPersonDetails_Click(_ sender: Any) {
         
-    }
-    @IBAction func btnAttachments_Click(_ sender: Any) {
+        let vc:PersonDetailsVC = AppDelegate.TransactionSB.instanceVC()
+        vc.arr_data = self.arr_transactions_persons
+        
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
+    
+    @IBAction func btnAttachments_Click(_ sender: Any) {
+       
+        let vc:FormsAttachmentsVC = AppDelegate.TransactionSB.instanceVC()
+        vc.arr_data = self.arr_Configurations_Attachments
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    
     @IBAction func btnHistory_Click(_ sender: Any) {
+        
+        let vc:HistoryVC = AppDelegate.TransactionSB.instanceVC()
+        vc.arr_data = self.arr_transactions_records
+        
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     @IBAction func btnSupervisionOperations_Click(_ sender: Any) {
         
+        
+        let vc:SupervisionOperationVC = AppDelegate.mainSB.instanceVC()
+        _ =  panel?.center(vc)
+        
     }
+    
     @IBAction func btnAllProject_Click(_ sender: Any) {
+        
+        let vc:AllPrpjectsVC = AppDelegate.mainSB.instanceVC()
+        _ =  panel?.center(vc)
         
     }
     
     @IBAction func btnNext_Click(_ sender: Any) {
-        change_page()
-        SelectedIndex = SelectedIndex + 1
+        
+        print(SelectedIndex)
+        if SelectedIndex < page_count {
+            SelectedIndex = SelectedIndex + 1
+            print(SelectedIndex)
+            change_page(SelectedIndex: SelectedIndex)
+            self.slider.progress = Float(SelectedIndex)/Float(page_count)
+            self.lblStep.text =  "step \(SelectedIndex) of \(page_count)"
+            self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
+            
+            
+            let status = StatusObject?.to_array[SelectedIndex-1]
+            let title = (status ?? false) ? "Accepted" : "Rejected"
+            self.btnLastValStepOpened.setTitle(title, for: .normal)
+        }
+        
+        
+        
     }
     
     @IBAction func btnPrevious_Click(_ sender: Any) {
+        print(SelectedIndex)
         if SelectedIndex > 0 {
-            change_page()
+            
             SelectedIndex = SelectedIndex - 1
+            print(SelectedIndex)
+            change_page(SelectedIndex: SelectedIndex)
+            self.slider.progress = Float(SelectedIndex)/Float(page_count)
+            self.lblStep.text =  "step \(SelectedIndex) of \(page_count)"
+            self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
+            
+            let status = StatusObject?.to_array[SelectedIndex-1]
+            let title = (status ?? false) ? "Accepted" : "Rejected"
+            self.btnLastValStepOpened.setTitle(title, for: .normal)
         }
        
     }
     
     
-    private func change_page() {
-        NotificationCenter.default.post(name: NSNotification.Name("Change_Form_Step"), object: SelectedIndex)
+    @IBAction func location_Click(_ sender: Any) {
+        
+        let vc:SelectesUnits_levelsVC = AppDelegate.TransactionSB.instanceVC()
+        vc.arr_data = self.arr_project_supervision_form_unit_level
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    
+    private func change_page(SelectedIndex:Int) {
+        NotificationCenter.default.post(name: NSNotification.Name("Change_Form_Step"),
+                                        object: SelectedIndex)
+    }
+    
+    private func update_langVC() {
+        NotificationCenter.default.post(name: NSNotification.Name("update_langVC"),
+                                        object: nil)
+    }
+    
+//    private func update_Config() {
+//        NotificationCenter.default.post(name: NSNotification.Name("update_Congig"),
+//                                        object: nil)
+//    }
+    
+    private func update_Config(){
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("update_Config"), object: nil, queue: .main) { notifi in
+            //guard let index = notifi.object as? Int else { return }
+            //self.configGUI()
+            self.get_Request()
+          
+        }
     }
     
 }

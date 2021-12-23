@@ -8,7 +8,7 @@ target 'Almnabr' do
   # Pods for Almnabr
   
   
-    pod 'Kingfisher'
+ 
     pod 'ZVProgressHUD'
     pod 'DPLocalization'
     pod 'SwiftKeychainWrapper'
@@ -24,6 +24,7 @@ target 'Almnabr' do
     pod 'Firebase'
     pod 'FirebaseMessaging'
     
+    pod 'AMPopTip'
 
   target 'AlmnabrTests' do
     inherit! :search_paths

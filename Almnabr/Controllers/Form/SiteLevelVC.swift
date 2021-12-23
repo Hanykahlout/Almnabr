@@ -125,6 +125,19 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
 
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Show the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     
     //MARK: - Config GUI
     //------------------------------------------------------
@@ -170,7 +183,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         lblWorkLevel.font = .kufiRegularFont(ofSize: 15)
         lblWorkLevel.text = "txt_FillWorkLevel".localized()
         
-        
+        self.btnWorkLevel.isHidden = true
         lblSelectWorkLevel.textColor = .gray
         lblSelectWorkLevel.font = .kufiRegularFont(ofSize: 15)
         lblSelectWorkLevel.text = "txt_FillWorkLevel".localized()
@@ -188,14 +201,25 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         self.lblStep.font = .kufiBoldFont(ofSize: 15)
         self.lblStep.textColor = HelperClassSwift.acolor.getUIColor()
         
-        self.btnNext.backgroundColor = HelperClassSwift.acolor.getUIColor()
-        self.btnPrevious.backgroundColor = HelperClassSwift.acolor.getUIColor()
+//        self.btnNext.backgroundColor = HelperClassSwift.acolor.getUIColor()
+//        self.btnPrevious.backgroundColor = HelperClassSwift.acolor.getUIColor()
+        //self.btnWorkLevel.isHidden = false
         
         self.viewStep.setBorderGrayWidth(3)
         let Stepimage =  UIImage.fontAwesomeIcon(name: .building, style: .solid, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
         self.imgStep.image = Stepimage
         
        
+        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnNext.setTitleColor(.white, for: .normal)
+        self.btnNext.setRounded(10)
+        
+        
+        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
+        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnPrevious.setTitleColor(.white, for: .normal)
+        self.btnPrevious.setRounded(10)
         
         //self.mainView.setBorderGray()
         
@@ -366,7 +390,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
             }
             VC.units_and_level = units
         }
-       
+        
         VC.arr_unit = arr_unit
         VC.ProjectObj = self.ProjectObj
         VC.StrLanguage = self.StrLanguage
@@ -374,15 +398,8 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         VC.work_site = self.work_site
         VC.units = self.units
         VC.level_Unit = self.level_Unit
-       // if arr_unit.count != 0  {
-            
-            VC.params = self.params
-            self.navigationController?.pushViewController(VC, animated: true)
-            
-//        }else{
-//            self.showAMessage(withTitle: "error".localized(),message: "all_fields_are_required")
-//            
-//        }
+        VC.params = self.params
+        self.navigationController?.pushViewController(VC, animated: true)
         
     }
     
@@ -428,7 +445,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     
     
     @IBAction func btnWorkLevelDelete_Click(_ sender: Any) {
-        self.lblSelectWorkLevel.text = "txt_Groupe2".localized()
+        self.lblSelectWorkLevel.text = "txt_FillWorkLevel".localized()
         self.btnWorkLevel.isHidden = true
     }
     

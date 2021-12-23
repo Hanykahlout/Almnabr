@@ -35,6 +35,8 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
     @IBOutlet weak var lblSearchGeneralNumbers: UILabel!
     @IBOutlet weak var lblFillWorkLevels: UILabel!
     
+    @IBOutlet weak var stkFillWorkLevels: UIStackView!
+    
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var btnCancel: UIButton!
     
@@ -104,9 +106,20 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
         self.imgDropUnit.image = dropDownmage
         self.imgDropWorkLevel.image = dropDownmage
         
+        self.btnSubmit.setTitle("Submit".localized(), for: .normal)
+        self.btnSubmit.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnSubmit.setTitleColor(.white, for: .normal)
+        self.btnSubmit.setRounded(10)
         
-        self.btnCancel.backgroundColor = HelperClassSwift.acolor.getUIColor()
-        self.btnSubmit.backgroundColor = HelperClassSwift.acolor.getUIColor()
+        
+        self.btnCancel.setTitle("Cancel".localized(), for: .normal)
+        self.btnCancel.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnCancel.setTitleColor(.white, for: .normal)
+        self.btnCancel.setRounded(10)
+        
+        
+//        self.btnCancel.backgroundColor = HelperClassSwift.acolor.getUIColor()
+//        self.btnSubmit.backgroundColor = HelperClassSwift.acolor.getUIColor()
     }
     
     
@@ -164,6 +177,7 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
                         self.arr_Unit.append(obj)
                         // for echitem in obj{
                         self.arr_UnitlLabel.append(obj.label)
+                        self.stkFillWorkLevels.isHidden = false
                         // }
                         
                     }
@@ -281,12 +295,18 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
     
     @IBAction func btnSubmit_Click(_ sender: Any) {
         self.dropDown.removeFromSuperview()
-        let obj = GeneralObj(number: 1, units: StrUnit, Worklevels: StrWorkLevel)
-        var arr:[GeneralObj] = []
-        arr.append(obj)
-        delegate.pass(data: arr, unit_arr: arr_unit)
-        self.hideLoadingActivity()
-        self.dismiss(animated: true, completion: nil)
+       
+        if (StrUnit == "" || StrWorkLevel == "" ){
+            self.showAMessage(withTitle: "Error", message: "missed data")
+        }else{
+            let obj = GeneralObj(number: 1, units: StrUnit, Worklevels: StrWorkLevel)
+            var arr:[GeneralObj] = []
+            arr.append(obj)
+            delegate.pass(data: arr, unit_arr: arr_unit)
+            self.hideLoadingActivity()
+            self.dismiss(animated: true, completion: nil)
+        }
+      
     }
     
 }

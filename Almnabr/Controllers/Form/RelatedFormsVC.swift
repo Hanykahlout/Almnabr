@@ -50,6 +50,20 @@ class RelatedFormsVC: UIViewController {
     
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Show the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
@@ -78,8 +92,8 @@ class RelatedFormsVC: UIViewController {
         self.lblRelatedFormValue.textColor = .red
         
         
-        self.btnNext.backgroundColor = HelperClassSwift.acolor.getUIColor()
-        self.btnPrevious.backgroundColor = HelperClassSwift.acolor.getUIColor()
+//        self.btnNext.backgroundColor = HelperClassSwift.acolor.getUIColor()
+//        self.btnPrevious.backgroundColor = HelperClassSwift.acolor.getUIColor()
         
         
         self.viewStep.setBorderGrayWidth(3)
@@ -92,6 +106,17 @@ class RelatedFormsVC: UIViewController {
         let nib = UINib(nibName: "FormVersionCell", bundle: nil)
         table.register(nib, forCellReuseIdentifier: "FormVersionCell")
        
+        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnNext.setTitleColor(.white, for: .normal)
+        self.btnNext.setRounded(10)
+        
+        
+        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
+        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnPrevious.setTitleColor(.white, for: .normal)
+        self.btnPrevious.setRounded(10)
+        
         
     }
     
@@ -285,9 +310,6 @@ extension RelatedFormsVC: UITableViewDelegate , UITableViewDataSource{
         
         cell.viewBack.setcorner()
         
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .white
-        cell.selectedBackgroundView = backgroundView
         
         return cell
         

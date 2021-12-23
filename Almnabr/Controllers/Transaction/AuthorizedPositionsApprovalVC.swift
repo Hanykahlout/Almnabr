@@ -1,26 +1,27 @@
 //
-//  RecipientVerificationVC.swift
+//  AuthorizedPositionsApprovalVC.swift
 //  Almnabr
 //
-//  Created by MacBook on 07/12/2021.
+//  Created by MacBook on 09/12/2021.
 //  Copyright © 2021 Samar Akkila. All rights reserved.
 //
 
 import UIKit
 
-class RecipientVerificationVC: UIViewController {
+class AuthorizedPositionsApprovalVC: UIViewController {
 
+ 
     @IBOutlet weak var icon_noPermission: UIImageView!
     @IBOutlet weak var view_noPermission: UIView!
     @IBOutlet weak var lbl_noPermission: UILabel!
-    
+    @IBOutlet weak var txt_notes: UITextView!
+
     @IBOutlet weak var lbl_Title: UILabel!
     @IBOutlet weak var lbl_ReserveRequestQ: UILabel!
     @IBOutlet weak var lbl_ReserveRequest: UILabel!
     @IBOutlet weak var lbl_Reject: UILabel!
     @IBOutlet weak var lbl_notes: UILabel!
     
-    @IBOutlet weak var txt_notes: UITextView!
     @IBOutlet weak var btn_checkReject: UIButton!
     @IBOutlet weak var btn_checkReserve: UIButton!
     @IBOutlet weak var btn_submit: UIButton!
@@ -30,8 +31,7 @@ class RecipientVerificationVC: UIViewController {
     @IBOutlet weak var view_txtView: UIView!
     
     
-    var ReserveRequest:String = ""
-    
+    var authorized_positions_approval_status:String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,26 +50,27 @@ class RecipientVerificationVC: UIViewController {
         self.lbl_noPermission.textColor =  "#333".getUIColor()
         
         
-        if StatusObject?.Recipient_Verification == false {
+        if StatusObject?.Authorized_Positions_Approval == false {
             view_noPermission.isHidden = false
-            self.view_main.isHidden = true
-
+            view_main.isHidden = true
+           
         }else{
             view_noPermission.isHidden = true
-            self.view_main.isHidden = false
+            view_main.isHidden = false
         }
-
+        
+        
         
         self.txt_notes.text = ""
         self.btn_checkReserve.setImage(UIImage(named: "uncheck"), for: .normal)
         self.btn_checkReject.setImage(UIImage(named: "uncheck"), for: .normal)
         
-        self.lbl_Title.text =  "Recipient Verification ".localized()
+        self.lbl_Title.text =  "Authorized Positions Approval".localized()
         self.lbl_Title.font = .kufiBoldFont(ofSize: 15)
         self.lbl_Title.textColor =  HelperClassSwift.acolor.getUIColor()
         
         
-        self.lbl_ReserveRequestQ.text =  "Reserve Request".localized() + "  ?!"
+        self.lbl_ReserveRequestQ.text =  "Authorized Positions Approval".localized() + "  ?!"
         self.lbl_ReserveRequestQ.font = .kufiRegularFont(ofSize: 15)
         self.lbl_ReserveRequestQ.textColor =  HelperClassSwift.bcolor.getUIColor()
         
@@ -101,19 +102,16 @@ class RecipientVerificationVC: UIViewController {
     }
 
     
-    
     func submit_Request(){
-        
-        
-        if  self.ReserveRequest != "" {
-            
+         
             self.showLoadingActivity()
             
-            let params = ["transaction_request_id" : obj_transaction?.transaction_request_id ?? "0",
-                          "teserve_transaction":self.ReserveRequest ,
-                          "rollback_to_configuration":"0",
-                          "notes":self.txt_notes.text ?? ""]
-            APIManager.sendRequestPostAuth(urlString: "form/FORM_WIR/Recipient_Verification/0", parameters: params ) { (response) in
+        let params = ["transaction_request_id" : obj_transaction?.transaction_request_id ?? "0",
+                      "authorized_positions_approval_status":self.authorized_positions_approval_status ,
+                     
+                      "rejected_notes":self.txt_notes.text ?? ""]
+        
+            APIManager.sendRequestPostAuth(urlString: "form/FORM_WIR/Authorized_Positions_Approval/0", parameters: params ) { (response) in
                 self.hideLoadingActivity()
                
                 
@@ -127,7 +125,7 @@ class RecipientVerificationVC: UIViewController {
 
                         self.update_Config()
 //                        self.configGUI()
-//                        self.change_page(SelectedIndex:5)
+//                        self.change_page(SelectedIndex:8)
                     })
                     
                 }else{
@@ -138,13 +136,12 @@ class RecipientVerificationVC: UIViewController {
                 }
             
             
-        }else {
-            
-            self.showAMessage(withTitle: "Error".lowercased(), message: "Some thing went wrong")
-            return
         }
    
-
+ 
+    @IBAction func btnSubmit_Click(_ sender: Any) {
+        
+        submit_Request()
     }
     
     
@@ -158,7 +155,7 @@ class RecipientVerificationVC: UIViewController {
           self.lbl_notes.isHidden = true
           self.view_txtView.isHidden = true
         
-        self.ReserveRequest = "1"
+        self.authorized_positions_approval_status = "Approve"
         
     }
     
@@ -171,16 +168,9 @@ class RecipientVerificationVC: UIViewController {
           self.lbl_notes.isHidden = false
           self.view_txtView.isHidden = false
         
-        self.ReserveRequest = "0"
+        self.authorized_positions_approval_status = "Return"
         
     }
-    
-    
-    @IBAction func btnSubmit_Click(_ sender: Any) {
-        
-        submit_Request()
-    }
-    
     
     
     private func change_page(SelectedIndex:Int) {
@@ -192,5 +182,4 @@ class RecipientVerificationVC: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name("update_Config"),
                                         object: nil)
     }
-    
 }

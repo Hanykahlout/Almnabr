@@ -5,34 +5,30 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
-            uuid = "8766C5E1-AAF5-4B9C-B4B8-08D97DAA6840"
+            uuid = "7A841DED-1A68-467E-B5E9-A368D9CA3D3F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Almnabr/Controllers/FromTransactionVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "672"
-            endingLineNumber = "672"
-            landmarkName = "tableView(_:willDisplay:forRowAt:)"
-            landmarkType = "7">
+            breakpointStackSelectionBehavior = "1"
+            scope = "1"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9F162372-B022-4644-8E53-58BDC640EEA8"
+            uuid = "F586C31C-C777-4361-AB7C-9835C0F564DB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Almnabr/Controllers/FromTransactionVC.swift"
+            filePath = "Almnabr/Controllers/Form/SiteLevelVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "620"
-            endingLineNumber = "620"
-            landmarkName = "tableView(_:didSelectRowAt:)"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
+            landmarkName = "Configuration_step1()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

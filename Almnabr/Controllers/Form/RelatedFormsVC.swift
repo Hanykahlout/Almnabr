@@ -19,9 +19,13 @@ class RelatedFormsVC: UIViewController {
     @IBOutlet weak var viewStep: UIView!
     @IBOutlet weak var lblStep: UILabel!
     @IBOutlet weak var lblnodata: UILabel!
-    @IBOutlet weak var lblRelatedFormKey: UILabel!
+//    @IBOutlet weak var lblRelatedFormKey: UILabel!
     @IBOutlet weak var lblRelatedFormValue: UILabel!
+    
+    @IBOutlet weak var stackRelatedForm: UIStackView!
+    
     @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var img_nodata: UIImageView!
     
     @IBOutlet weak var btnPrevious: UIButton!
     
@@ -40,8 +44,47 @@ class RelatedFormsVC: UIViewController {
     var params = [:] as [String : String]
     var level_Unit = ""
     
+    var transaction_id:String = "0"
+    
+    var Skipnext :Bool = false
+    
+    var projects_work_area_id:String = ""
+    var template_platform_code_system:String = ""
+    var template_id:String = ""
+    var template_platform_group_type_code_system:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.Skipnext == true {
+            
+            switch ProjectObj?.templatename {
+            case "MSR":
+                let vc:RequirementsVC = AppDelegate.mainSB.instanceVC()
+                self.navigationController?.pushViewController(vc, animated: true)
+            case "WIR":
+                let VC:AttachmentsVC = AppDelegate.mainSB.instanceVC()
+                VC.ProjectObj = self.ProjectObj
+                VC.StrLanguage = self.StrLanguage
+                VC.units_and_level = self.units_and_level
+                VC.transaction_separation = transaction_separation
+                VC.arr_unit = self.arr_unit
+                VC.parm = self.params
+                VC.work_site = self.work_site
+                VC.units = self.units
+                VC.level_Unit = self.level_Unit
+                VC.transaction_id = self.transaction_id
+                VC.template_id = self.template_id
+                VC.projects_work_area_id = self.projects_work_area_id
+                VC.template_platform_code_system = self.template_platform_code_system
+                VC.template_platform_group_type_code_system = self.template_platform_group_type_code_system
+                self.navigationController?.pushViewController(VC, animated: true)
+            default:
+              print("nil")
+            }
+            
+         
+        }
         configGUI()
         get_Form(showLoading: true, loadOnly: true)
         
@@ -68,33 +111,27 @@ class RelatedFormsVC: UIViewController {
     //------------------------------------------------------
     func configGUI() {
  
-        self.lblnodata.text =  "txt_NoData".localized()
-        self.lblnodata.font = .kufiRegularFont(ofSize: 15)
-        self.lblnodata.isHidden = true
       
-        self.lblnodata.isHidden = false
-       
+        //self.lblnodata.isHidden = true
+        self.img_nodata.isHidden = true
         
-        self.mainView.setBorderGray()
+        //self.mainView.setBorderGray()
         
         self.viewStep.backgroundColor = HelperClassSwift.acolor.getUIColor()
         self.lblStep.text = "txt_Relatedforms".localized()
-        self.lblStep.font = .kufiBoldFont(ofSize: 15)
-        self.lblStep.textColor = HelperClassSwift.acolor.getUIColor()
+        self.lblStep.font = .kufiRegularFont(ofSize: 15)
+        self.lblStep.textColor = "#616263".getUIColor()
+        //HelperClassSwift.acolor.getUIColor()
         
         
-        self.lblRelatedFormKey.text = "Related Forms : ".localized()
-        self.lblRelatedFormKey.font = .kufiRegularFont(ofSize: 15)
-        self.lblRelatedFormKey.textColor = .gray
+//        self.lblRelatedFormKey.text = "Related Forms : ".localized()
+//        self.lblRelatedFormKey.font = .kufiRegularFont(ofSize: 15)
+//        self.lblRelatedFormKey.textColor = .gray
         
         
-        self.lblRelatedFormValue.font = .kufiRegularFont(ofSize: 15)
-        self.lblRelatedFormValue.textColor = .red
-        
-        
-//        self.btnNext.backgroundColor = HelperClassSwift.acolor.getUIColor()
-//        self.btnPrevious.backgroundColor = HelperClassSwift.acolor.getUIColor()
-        
+        self.lblRelatedFormValue.font = .kufiRegularFont(ofSize: 13)
+//        self.lblRelatedFormValue.textColor = .red
+ 
         
         self.viewStep.setBorderGrayWidth(3)
         let Stepimage =  UIImage.fontAwesomeIcon(name: .building, style: .solid, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
@@ -103,19 +140,19 @@ class RelatedFormsVC: UIViewController {
         
         table.dataSource = self
         table.delegate = self
-        let nib = UINib(nibName: "FormVersionCell", bundle: nil)
-        table.register(nib, forCellReuseIdentifier: "FormVersionCell")
+        let nib = UINib(nibName: "RelatedFormTVCell", bundle: nil)
+        table.register(nib, forCellReuseIdentifier: "RelatedFormTVCell")
        
-        self.btnNext.setTitle("Next".localized(), for: .normal)
-        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
-        self.btnNext.setTitleColor(.white, for: .normal)
-        self.btnNext.setRounded(10)
+//        self.btnNext.setTitle("Next".localized(), for: .normal)
+//        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+//        self.btnNext.setTitleColor(.white, for: .normal)
+//        self.btnNext.setRounded(10)
         
         
-        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
-        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
-        self.btnPrevious.setTitleColor(.white, for: .normal)
-        self.btnPrevious.setRounded(10)
+//        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
+//        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+//        self.btnPrevious.setTitleColor(.white, for: .normal)
+//        self.btnPrevious.setRounded(10)
         
         
     }
@@ -127,26 +164,8 @@ class RelatedFormsVC: UIViewController {
             self.showLoadingActivity()
         }
         
-        var language = ""
         
-        if let Language = dp_get_current_language() {
-            language = Language
-        }
-        guard ProjectObj != nil else{
-            return
-        }
-        
-//        let params = ["projects_work_area_id" : ProjectObj.projects_work_area_id,
-//                      "platform_code_system" : ProjectObj.template_platform_code_system,
-//                      "lang_key": StrLanguage,
-//                      "transaction_separation":transaction_separation,
-//                      "page_no":"1",
-//                      "page_size":"10",
-//                      "work_site":"ALL",
-//                      "units_and_level[level_all_building]":units_and_level,
-//                      "template_id":ProjectObj.template_id] as [String : Any]
-        
-        APIManager.sendRequestPostAuth(urlString: "form/FORM_WIR/cr/1/0", parameters: self.params ) { (response) in
+        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/1/\(transaction_id)", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
            
             
@@ -165,7 +184,7 @@ class RelatedFormsVC: UIViewController {
             let SkipPage = response["SkipPage"] as? Bool
             let Rule = response["Rule"] as? [String:Any]
             
-            
+            self.Skipnext = SkipPage ?? false
             if status == true{
                 
                 let page = response["page"] as? [String:Any]
@@ -176,33 +195,44 @@ class RelatedFormsVC: UIViewController {
                         let obj = RelatedFormObj.init(dict!)
                         self.arr_data.append(obj)
                         self.table.reloadData()
-                        
                     }
-                    
-                    
-                    let RuleObj = RuleObj(Rule!)
-                    
-                    self.lblRelatedFormValue.text = "all related forms must be approved then you can open again :".localized() + " \(RuleObj.all_platforms_required)"
-
-
-
-                    if NextButton == false {
-                        self.btnNext.isHidden = true
-                    }
-                    let pageObj = PageObj(page!)
-                  
-                    if pageObj.total_pages > self.pageNumber {
-                        self.allItemDownloaded = false
-                    }else{
-                        self.allItemDownloaded = true
-                    }
-                    if list.count == 0 {
-                        self.lblnodata.isHidden = false
-                    }else{
-                        self.lblnodata.isHidden = true
-                    }
-                    self.hideLoadingActivity()
+                }else{
+                   // self.lblRelatedFormValue.isHidden = true
+                    self.img_nodata.isHidden = false
                 }
+                
+                let RuleObj = RuleObj(Rule!)
+                let related = "RelatedForms: "
+                let text = "all related forms must be approved then you can open again :".localized() + " \(RuleObj.all_platforms_required)"
+
+                let all = related + text
+
+                let maincolor = "#c22c21".getUIColor()
+               
+                let attribute: NSAttributedString = all.attributedStringWithColor([text], color: maincolor)
+                self.lblRelatedFormValue.attributedText = attribute
+                
+                if NextButton == false {
+                    self.btnNext.isHidden = true
+                }
+                let pageObj = PageObj(page!)
+              
+                if pageObj.total_pages > self.pageNumber {
+                    self.allItemDownloaded = false
+                }else{
+                    self.allItemDownloaded = true
+                }
+                
+                if RuleObj.all_platforms_required == "0" {
+                    self.lblRelatedFormValue.isHidden = true
+                }else{
+                    self.lblRelatedFormValue.isHidden = false
+                }
+                
+                
+                self.hideLoadingActivity()
+                
+
             }
 
             
@@ -214,17 +244,63 @@ class RelatedFormsVC: UIViewController {
     
     @IBAction func btnNext_Click(_ sender: Any) {
         
-        let VC:AttachmentsVC = AppDelegate.mainSB.instanceVC()
-        VC.ProjectObj = self.ProjectObj
-        VC.StrLanguage = self.StrLanguage
-        VC.units_and_level = self.units_and_level
-        VC.transaction_separation = transaction_separation
-        VC.arr_unit = self.arr_unit
-        VC.parm = self.params
-        VC.work_site = self.work_site
-        VC.units = self.units
-        VC.level_Unit = self.level_Unit
-        self.navigationController?.pushViewController(VC, animated: true)
+        //        let VC:AttachmentsVC = AppDelegate.mainSB.instanceVC()
+        //
+        //        VC.transaction_id = self.transaction_id
+        //
+        //        VC.ProjectObj = self.ProjectObj
+        //        VC.StrLanguage = self.StrLanguage
+        //        VC.units_and_level = self.units_and_level
+        //        VC.transaction_separation = transaction_separation
+        //        VC.arr_unit = self.arr_unit
+        //        VC.parm = self.params
+        //        VC.work_site = self.work_site
+        //        VC.units = self.units
+        //        VC.level_Unit = self.level_Unit
+        //        VC.template_platform_group_type_code_system = self.template_platform_group_type_code_system
+        //        VC.template_id = self.template_id
+        //        VC.projects_work_area_id = self.projects_work_area_id
+        //        VC.template_platform_code_system = self.template_platform_code_system
+        //
+        //        self.navigationController?.pushViewController(VC, animated: true)
+        
+        switch ProjectObj?.template_platform_group_type_code_system {
+        case "MSR":
+            let vc:RequirementsVC = AppDelegate.mainSB.instanceVC()
+            vc.params = self.params
+            vc.ProjectObj = self.ProjectObj 
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "SQR":
+            let vc:RequirementsVC = AppDelegate.mainSB.instanceVC()
+            vc.params = self.params
+            vc.ProjectObj = self.ProjectObj
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "MIR":
+            let vc:RequirementsVC = AppDelegate.mainSB.instanceVC()
+            vc.params = self.params
+            vc.ProjectObj = self.ProjectObj
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "WIR":
+            let VC:AttachmentsVC = AppDelegate.mainSB.instanceVC()
+            VC.ProjectObj = self.ProjectObj
+            VC.StrLanguage = self.StrLanguage
+            VC.units_and_level = self.units_and_level
+            VC.transaction_separation = transaction_separation
+            VC.arr_unit = self.arr_unit
+            VC.parm = self.params
+            VC.work_site = self.work_site
+            VC.units = self.units
+            VC.level_Unit = self.level_Unit
+            VC.transaction_id = self.transaction_id
+            VC.template_id = self.template_id
+            VC.projects_work_area_id = self.projects_work_area_id
+            VC.template_platform_code_system = self.template_platform_code_system
+            VC.template_platform_group_type_code_system = self.template_platform_group_type_code_system
+            self.navigationController?.pushViewController(VC, animated: true)
+        default:
+          print("nil")
+        }
+        
         
     }
     
@@ -250,65 +326,52 @@ extension RelatedFormsVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FormVersionCell", for: indexPath) as! FormVersionCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "RelatedFormTVCell", for: indexPath) as! RelatedFormTVCell
             
             let obj = arr_data[indexPath.item]
          
       
         let Number = "#" + "  \(indexPath.item + 1)"
-        let Unit = "Unit".localized() + "   \(obj.unit)"
-        let WorkLevel = "Work Level".localized() + "   \(obj.work_level_label)"
-        let Result = "Evaluation Result".localized() + "   \(obj.result_code)"
-        let RelatedForms = "Related Forms".localized() + "   \(obj.platform_label)"
+        let Unit = "Unit".localized() + " \n \(obj.unit)"
+        let WorkLevel = "Work Level".localized() + " \n \(obj.work_level_label)"
+        let Result = "Evaluation Result".localized() + " \n \(obj.result_code)"
+        let RelatedForms = "Related Forms".localized() + ":   \(obj.platform_label)"
+        
+        let maincolor = "#1A3665".getUIColor()
+        
       
+        cell.lblNumber.text = Number
         
-        cell.lblNo.text = Number
-        cell.lblUnit.text = Unit
-        cell.lblWorklevel.text = WorkLevel
-        cell.lblEvaluationResult.text = Result
-        cell.lblDate.text = RelatedForms
+       
+        let Unitattribute: NSAttributedString = Unit.attributedStringWithColor(["Unit"], color: maincolor)
+        cell.lblunit.attributedText = Unitattribute
         
-        cell.lblBarcode.isHidden = true
-        cell.lblTransactionNo.isHidden = true
+        let WorkLevelattribute: NSAttributedString = WorkLevel.attributedStringWithColor(["Work Level"], color: maincolor)
+        cell.lblWorkLevel.attributedText = WorkLevelattribute
         
+        let Resultattribute: NSAttributedString = Result.attributedStringWithColor(["Evaluation Result"], color: maincolor)
+        cell.lblEvalution.attributedText = Resultattribute
+        
+        let RelatedFormsattribute: NSAttributedString = RelatedForms.attributedStringWithColor(["Related Forms"], color: maincolor)
+        cell.lblRelatedForms.attributedText = RelatedFormsattribute
+     
+       
         if obj.file_path != "" {
-            cell.btnAction.isHidden = false
+            cell.btnFile.isHidden = false
         }else{
-            cell.btnAction.isHidden = true
+            cell.btnFile.isHidden = true
         }
        
-            let Numberattributed: NSAttributedString = Number.attributedStringWithColor(["#".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblNo.attributedText = Numberattributed
             
-         
-            
-            let Unitattributed: NSAttributedString = Unit.attributedStringWithColor(["Unit".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblUnit.attributedText = Unitattributed
-            
-            
-            
-            let WorkLevelattributed: NSAttributedString = WorkLevel.attributedStringWithColor(["Work Level".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblWorklevel.attributedText = WorkLevelattributed
-            
-            
-            let Resultattributed: NSAttributedString = Result.attributedStringWithColor(["Evaluation Result".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblEvaluationResult.attributedText = Resultattributed
-            
-            
-        
-        let Dateattributed: NSAttributedString = RelatedForms.attributedStringWithColor(["Related Forms".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblDate.attributedText = Dateattributed
         
         switch obj.color {
         case "RED":
-            cell.viewColor.backgroundColor = .red
+            cell.viewStatus.backgroundColor = "#c22c21".getUIColor()
         case "ORANGE":
-            cell.viewColor.backgroundColor = .orange
+            cell.viewStatus.backgroundColor = "#fcc868".getUIColor()
         default:
-            cell.viewColor.backgroundColor = .lightGray
+            cell.viewStatus.backgroundColor = .lightGray
         }
-        
-        cell.viewBack.setcorner()
         
         
         return cell

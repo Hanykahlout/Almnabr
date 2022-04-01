@@ -51,27 +51,28 @@ class MenuVC: UIViewController {
         
         
         imgUserProfile.setRounded()
-        imgUserProfile.layer.borderColor = HelperClassSwift.bcolor.getUIColor().cgColor
+        //imgUserProfile.layer.borderColor = .white
         imgUserProfile.layer.borderWidth = 1
-        imgUserProfile.layer.cornerRadius = 40.0
+        imgUserProfile.layer.cornerRadius = 12.5
         
         self.lblUserName.font = .kufiRegularFont(ofSize: 15)
         self.btnEmail.titleLabel?.font = .kufiRegularFont(ofSize: 15)
         self.btnMobile.titleLabel?.font = .kufiRegularFont(ofSize: 15)
-        
+        self.btnProfile.titleLabel?.font = .kufiRegularFont(ofSize: 15)
         
         let obj = userObj
         self.lblUserName.text = obj?.user_username
         self.btnEmail.setTitle(obj?.user_email, for: .normal)
         self.btnMobile.setTitle(obj?.user_phone, for: .normal)
+        self.btnProfile.setTitle("Profile", for: .normal)
         
         
-        let image =  UIImage.fontAwesomeIcon(name: .cog, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
+        let image =  UIImage.fontAwesomeIcon(name: .cog, style: self.fontStyle, textColor: .white, size: CGSize(width: 40, height: 40))
         self.btnSetting.setImage(image, for: .normal)
         
         
-        let userimage =  UIImage.fontAwesomeIcon(name: .userCircle, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
-        self.btnProfile.setImage(userimage, for: .normal)
+//        let userimage =  UIImage.fontAwesomeIcon(name: .userCircle, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
+//        self.btnProfile.setImage(userimage, for: .normal)
         
         let logoutimage =  UIImage.fontAwesomeIcon(name: .signOutAlt, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
         self.btnLogout.setImage(logoutimage, for: .normal)
@@ -94,6 +95,7 @@ class MenuVC: UIViewController {
                     for i in records {
                         let dict = i as? [String:Any]
                         let obj = UserObj.init(dict!)
+                        userObj = obj
                         self.lblUserName.text = obj.user_username
                         self.btnEmail.setTitle(obj.user_email, for: .normal)
                         self.btnMobile.setTitle(obj.user_phone, for: .normal)
@@ -144,6 +146,7 @@ class MenuVC: UIViewController {
             
             print("Handle yes Logic here")
             self.showLoadingActivity()
+            isFirstLunch = true
             self.makeUserLogout()
             HelperClassSwift.IsLoggedOut = true
            
@@ -156,6 +159,14 @@ class MenuVC: UIViewController {
     }
     
     
+    
+    @IBAction func didTapProfile(_ sender: AnyObject) {
+     
+        let vc:ProfileVC = AppDelegate.mainSB.instanceVC()
+        let nav = UINavigationController.init(rootViewController: vc)
+        _ =  panel?.center(nav)
+        //self.navigationController?.pushViewController(nav, animated: true)
+    }
     
     @IBAction func didTapSignOut(_ sender: AnyObject) {
      
@@ -182,32 +193,34 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MenuCell
         let obj = arr_data[indexPath.section]
+        let color = "E3E3E3".getUIColor()
         if indexPath.row == 0 {
             
             cell.icon_dropdown.isHidden = true
             cell.lbl_title.text = obj.menu_name
-            cell.lbl_title.textColor = "#8B9194".getUIColor()
-            cell.lbl_title.font = .kufiBoldFont(ofSize: 15)
+            cell.lbl_title.textColor = color
+            cell.lbl_title.font = .kufiRegularFont(ofSize: 13)
+                //.kufiBoldFont(ofSize: 15)
             if  obj.icon == "fa fa-product-hunt"{
                 print("no icon")
                 cell.icon.image = UIImage(named: "product-hunt-brands")
-                cell.icon.tintColor = .gray
+                cell.icon.tintColor = color
             } else if  obj.icon == "fa fa-delicious"{
                 print("no icon")
                 cell.icon.image = UIImage(named: "delicious-brands")
-                cell.icon.tintColor = .gray
+                cell.icon.tintColor = color
             }else{
                 let str = obj.icon.dropFirst(3)
-                cell.icon.image = UIImage.fontAwesomeIcon(code: String(str), style: self.fontStyle, textColor: .gray, size: CGSize(width: 40, height: 40))
+                cell.icon.image = UIImage.fontAwesomeIcon(code: String(str), style: self.fontStyle, textColor: color, size: CGSize(width: 40, height: 40))
              
             }
             if obj.menu.count > 0{
                 cell.icon_dropdown.isHidden = false
                 if obj.IsOpened {
-                    cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
-                    cell.icon_dropdown.image = UIImage.fontAwesomeIcon(name: .chevronUp , style: self.fontStyle, textColor:  .gray, size: CGSize(width: 40, height: 40))
+                    cell.lbl_title.textColor = color
+                    cell.icon_dropdown.image = UIImage.fontAwesomeIcon(name: .chevronUp , style: self.fontStyle, textColor:  color, size: CGSize(width: 40, height: 40))
                 }else{
-                    cell.icon_dropdown.image = UIImage.fontAwesomeIcon(name: .chevronDown , style: self.fontStyle, textColor:  .gray, size: CGSize(width: 40, height: 40))
+                    cell.icon_dropdown.image = UIImage.fontAwesomeIcon(name: .chevronDown , style: self.fontStyle, textColor:  color, size: CGSize(width: 40, height: 40))
                 }}
 //            else{
 //                cell.icon_dropdown.isHidden = true
@@ -218,19 +231,15 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
         }else{
             let objj = arr_data[indexPath.section].menu[indexPath.row - 1]
             cell.lbl_title.text = arr_data[indexPath.section].menu[indexPath.row - 1].menu_name
-            cell.lbl_title.textColor = "#8B9194".getUIColor()
+            cell.lbl_title.textColor = color
 
             cell.lbl_title.font = .kufiRegularFont(ofSize: 15)
             let str = objj.icon.dropFirst(3)
-            cell.icon.image = UIImage.fontAwesomeIcon(code: String(str), style: self.fontStyle, textColor: .gray, size: CGSize(width: 40, height: 40))
+            cell.icon.image = UIImage.fontAwesomeIcon(code: String(str), style: self.fontStyle, textColor: color, size: CGSize(width: 40, height: 40))
            
            // cell.icon_dropdown.isHidden = true
 
         }
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .white
-        cell.selectedBackgroundView = backgroundView
         
         return cell
     }
@@ -249,9 +258,17 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
         obj.IsOpened = !obj.IsOpened
         
         if indexPath.row == 0 {
-          // cell.icon_dropdown.image = UIImage.fontAwesomeIcon(name: .chevronUp , style: self.fontStyle, textColor:  .gray, size: CGSize(width: 40, height: 40))
-            cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
-            tableview.reloadSections([indexPath.section], with: UITableView.RowAnimation.automatic)
+             
+//            if arr_data[indexPath.row].menu_id == "1" {
+//
+//                let vc:HomeVC = AppDelegate.mainSB.instanceVC()
+//                let nav = UINavigationController.init(rootViewController: vc)
+//                _ =  panel?.center(nav)
+//
+//            }else{
+                cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
+                tableview.reloadSections([indexPath.section], with: UITableView.RowAnimation.automatic)
+         //   }
         }else{
             tableview.reloadSections([indexPath.section], with: UITableView.RowAnimation.automatic)
            
@@ -263,7 +280,7 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     let nav = UINavigationController.init(rootViewController: vc)
                     vc.title =  obj.menu_name
                     vc.MenuObj = obj
-                    vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
+                    vc.StrSubMenue = obj.menu[indexPath.row - 1].menu_name
                     _ =  panel?.center(nav)
                     
                 case "69":
@@ -285,16 +302,19 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     case "73":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
                     let vc:AllPrpjectsVC = AppDelegate.mainSB.instanceVC()
+                    let nav = UINavigationController.init(rootViewController: vc)
                     vc.title =  obj.menu_name
                     vc.MenuObj = obj
                     vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
-                    _ =  panel?.center(vc)
+                    _ =  panel?.center(nav)
                     
                     
                 default:
                     print(" no menu id ")
                 }
               
+            }else{
+                print("dashboard")
             }
 
         }

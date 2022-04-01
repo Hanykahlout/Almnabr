@@ -44,6 +44,7 @@ struct GeneralObj {
     var number:Int?
     var units:String?
     var Worklevels:String?
+    var label:String?
 }
 
 struct ByPhaseObj {
@@ -53,6 +54,7 @@ struct ByPhaseObj {
     var Clusters:String?
     var units:String?
     var Worklevels:String?
+    var lblWorklevels:String?
 }
 
 struct AttachmentsObj {
@@ -64,24 +66,24 @@ struct AttachmentsObj {
 class MenuObj {
     
     var menu_id            :String = ""
-    var menu_parent          :String = ""
-    var menu_name         :String = ""
-    var icon          :String = ""
-    var type          :String = ""
-    var IsOpened          :Bool = false
-    var menu          : [SubMenuObj] = []
+    var menu_parent        :String = ""
+    var menu_name          :String = ""
+    var icon               :String = ""
+    var type               :String = ""
+    var IsOpened           :Bool = false
+    var menu               : [SubMenuObj] = []
     
     init(_ Obj : [String:Any]) {
         
         
-        self.menu_id        = Obj["menu_id"] as? String ?? ""
+        self.menu_id           = Obj["menu_id"] as? String ?? ""
         self.menu_parent       = Obj["menu_parent"] as? String ?? ""
-        self.menu_name        = Obj["menu_name"] as? String ?? ""
-        self.icon       = Obj["icon"] as? String ?? ""
-        self.type        = Obj["type"] as? String ?? ""
-        self.IsOpened        = Obj["IsOpened"] as? Bool ?? false
-        let data_Array           = Obj["menu"] as? [[String:Any]] ?? []
-        self.menu                = data_Array.map{SubMenuObj.init($0)}
+        self.menu_name         = Obj["menu_name"] as? String ?? ""
+        self.icon              = Obj["icon"] as? String ?? ""
+        self.type              = Obj["type"] as? String ?? ""
+        self.IsOpened          = Obj["IsOpened"] as? Bool ?? false
+        let data_Array         = Obj["menu"] as? [[String:Any]] ?? []
+        self.menu              = data_Array.map{SubMenuObj.init($0)}
     }}
 
 class SubMenuObj {
@@ -109,26 +111,27 @@ class SubMenuObj {
 
 class UserObj {
     
+    var is_admin           :String = ""
     var user_id            :String = ""
-    var user_username          :String = ""
+    var user_username      :String = ""
     var user_email         :String = ""
-    var user_phone          :String = ""
-    var user_status          :String = ""
-    var user_type_id          :String = ""
+    var user_phone         :String = ""
+    var user_status        :String = ""
+    var user_type_id       :String = ""
     var user_type_name_ar          :String = ""
     var user_type_name_en          :String = ""
     
     init(_ Obj : [String:Any]) {
         
-        
-        self.user_id        = Obj["user_id"] as? String ?? ""
+        self.is_admin            = Obj["is_admin"] as? String ?? ""
+        self.user_id             = Obj["user_id"] as? String ?? ""
         self.user_username       = Obj["user_username"] as? String ?? ""
-        self.user_email        = Obj["user_email"] as? String ?? ""
-        self.user_phone       = Obj["user_phone"] as? String ?? ""
-        self.user_status        = Obj["user_status"] as? String ?? ""
-        self.user_type_id       = Obj["user_type_id"] as? String ?? ""
-        self.user_type_name_ar        = Obj["user_type_name_ar"] as? String ?? ""
-        self.user_type_name_en       = Obj["user_type_name_en"] as? String ?? ""
+        self.user_email          = Obj["user_email"] as? String ?? ""
+        self.user_phone          = Obj["user_phone"] as? String ?? ""
+        self.user_status         = Obj["user_status"] as? String ?? ""
+        self.user_type_id        = Obj["user_type_id"] as? String ?? ""
+        self.user_type_name_ar   = Obj["user_type_name_ar"] as? String ?? ""
+        self.user_type_name_en   = Obj["user_type_name_en"] as? String ?? ""
         
         
     }}
@@ -162,7 +165,9 @@ class ModuleObj {
     var code             :String = ""
     var fulltext         :String = ""
     var sid              :String = ""
-   
+    var id               :String = ""
+    var is_select        :Bool = false
+    
     init(_ Obj : [String:Any]) {
         
         
@@ -171,6 +176,7 @@ class ModuleObj {
         self.code         = Obj["code"] as? String ?? ""
         self.fulltext     = Obj["fulltext"] as? String ?? ""
         self.sid          = Obj["sid"] as? String ?? ""
+        self.id           = Obj["id"] as? String ?? ""
         self.user_type_id = Obj["user_type_id"] as? String ?? ""
         
         
@@ -512,6 +518,7 @@ class DocumentObj {
 
 class templateObj {
     
+    var template_platform_group_type_code_system : String = ""
     var template_platform_group2_code_system :String = ""
     var template_platform_code_system  :String = ""
     var projects_work_area_id :String = ""
@@ -525,6 +532,7 @@ class templateObj {
    
     init(_ Obj : [String:Any]) {
         
+        self.template_platform_group_type_code_system  = Obj["template_platform_group_type_code_system"] as? String ?? ""
         self.template_id  = Obj["template_id"] as? String ?? ""
         self.template_platform_group2_code_system  = Obj["template_platform_group2_code_system"] as? String ?? ""
         self.platformname  = Obj["platformname"] as? String ?? ""
@@ -576,13 +584,13 @@ class RelatedFormObj {
     var file_path :String = ""
     
     var level :String = ""
-    var platform_label :String = ""
+    var platform_label :String = "---"
     var required_platform :String = ""
     var result_code :String = "---"
     var template_id :String = ""
-    var unit :String = ""
+    var unit :String = "---"
     var work_area_id :String = ""
-    var work_level_label :String = ""
+    var work_level_label :String = "---"
     
   
     init(_ Obj : [String:Any]) {
@@ -593,13 +601,13 @@ class RelatedFormObj {
         self.file_extension  = Obj["file_extension"] as? String ?? ""
         self.level  = Obj["level"] as? String ?? ""
         self.platform_label   = Obj["platform_label"] as? String ?? ""
-        self.required_platform   = Obj["required_platform"] as? String ?? ""
+        self.required_platform   = Obj["required_platform"] as? String ?? "---"
         self.result_code   = Obj["result_code"] as? String ?? "---"
         self.file_path   = Obj["file_path"] as? String ?? ""
         self.template_id  = Obj["template_id"] as? String ?? ""
-        self.unit   = Obj["unit"] as? String ?? ""
+        self.unit   = Obj["unit"] as? String ?? "---"
         self.work_area_id   = Obj["work_area_id"] as? String ?? ""
-        self.work_level_label   = Obj["work_level_label"] as? String ?? ""
+        self.work_level_label   = Obj["work_level_label"] as? String ?? "---"
       
     }}
 
@@ -631,7 +639,7 @@ class NotificationObj {
     var noty_messages_image :String = ""
     var noty_messages_timestamp :String = ""
     var noty_messages_title :String = ""
-    
+    var extra_data :[String:Any] = [:]
   
     init(_ Obj : [String:Any]) {
         
@@ -642,6 +650,7 @@ class NotificationObj {
         self.noty_messages_image  = Obj["noty_messages_image"] as? String ?? ""
         self.noty_messages_timestamp  = Obj["noty_messages_timestamp"] as? String ?? ""
         self.noty_messages_title  = Obj["noty_messages_title"] as? String ?? ""
+        self.extra_data  = Obj["extra_data"] as? [String:Any] ?? [:]
       
     }}
 
@@ -806,11 +815,13 @@ class form_wir_dataObj {
     var templatename : String = ""
     var specification : String = "---"
     var platform_group_type_code_system : String = ""
+    var template_platform_group_type_code_system : String = ""
     
     
+
     init(_ Obj : [String:Any]) {
         
-        
+      
         self.auto_id   =  Obj["auto_id"] as? String ?? ""
         self.transaction_key   =  Obj["transaction_key"] as? String ?? ""
         self.transaction_request_id   =  Obj["transaction_request_id"] as? String ?? ""
@@ -830,7 +841,7 @@ class form_wir_dataObj {
         self.templatename   =  Obj["templatename"] as? String ?? ""
         self.specification   =  Obj["specification"] as? String ?? "---"
         self.platform_group_type_code_system   =  Obj["platform_group_type_code_system"] as? String ?? ""
-        
+        self.template_platform_group_type_code_system   =  Obj["template_platform_group_type_code_system"] as? String ?? ""
         
     }
     
@@ -1024,13 +1035,32 @@ class Configurations_AttachmentsObj {
 
 class project_supervision_form_unit_levelObj {
     
-    var work_level_label :String = ""
+    var auto_id :String = ""
+    var platform_code_system :String = ""
+    var projects_work_area_id :String = ""
+    var short_code :String = ""
+    var template_id :String = ""
+    var transaction_key :String = ""
+    var transaction_request_id :String = ""
     var unit_id :String = ""
+    var work_level_key :String = ""
+    var work_level_label :String = ""
+    
     
     init(_ Obj : [String:Any]) {
         
-        self.work_level_label = Obj["work_level_label"] as? String ?? ""
+        self.auto_id = Obj["auto_id"] as? String ?? ""
+        self.platform_code_system = Obj["platform_code_system"] as? String ?? ""
+        self.projects_work_area_id = Obj["projects_work_area_id"] as? String ?? ""
+        self.short_code = Obj["short_code"] as? String ?? ""
+        self.template_id = Obj["template_id"] as? String ?? ""
+        self.transaction_key = Obj["transaction_key"] as? String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as? String ?? ""
         self.unit_id = Obj["unit_id"] as? String ?? ""
+        self.work_level_key = Obj["work_level_key"] as? String ?? ""
+        self.work_level_label = Obj["work_level_label"] as? String ?? ""
+        
+        
         
         
     }
@@ -1052,7 +1082,7 @@ class NotesObj {
     var extra1_type:String = ""
     var projects_work_area_id:String = ""
     var transaction_request_id:String = ""
-    
+    var projects_consultant_recommendations_id:String = ""
     
     init(_ Obj : [String:Any]) {
         
@@ -1067,6 +1097,7 @@ class NotesObj {
         self.extra1_type = Obj["extra1_type"] as?String ?? ""
         self.projects_work_area_id = Obj["projects_work_area_id"] as?String ?? ""
         self.transaction_request_id = Obj["transaction_request_id"] as?String ?? ""
+        self.projects_consultant_recommendations_id = Obj["projects_consultant_recommendations_id"] as?String ?? ""
         
     }
     
@@ -1114,4 +1145,458 @@ class Technical_Assistants_EvaluationObj {
     
     
 }
+
+
+
+class ProjectRequestObj {
+
+    
+    var barcode :String = ""
+    var color :String = ""
+    var file_extension :String = ""
+    var file_path :String = ""
+    var group1_id :String = ""
+    var group1_name :String = ""
+    var group2_id :String = ""
+    var group2_name :String = ""
+    var group_type_id :String = ""
+    var group_type_name :String = ""
+    var level_key :String = ""
+    var level_name :String = ""
+    var phase_short_code :String = ""
+    var phase_zone_block_cluster_no :String = ""
+    var phase_zone_block_no :String = ""
+    var phase_zone_no :String = ""
+    var platform_code_system :String = ""
+    var platform_name :String = ""
+    var projects_profile_id :String = ""
+    var projects_supervision_id :String = ""
+    var projects_work_area_id :String = ""
+    var result_code :String = ""
+    var template_id :String = ""
+    var template_name :String = ""
+    var transaction_key :String = ""
+    var transaction_request_id :String = ""
+    var transaction_request_last_step :String = ""
+    var transactions_date_h :String = ""
+    var transactions_date_m :String = ""
+    var unit_id :String = ""
+    
+    
+  
+    init(_ Obj : [String:Any]) {
+        
+       
+        self.barcode = Obj["barcode"] as? String ?? ""
+        self.color = Obj["color"] as? String ?? ""
+        self.file_extension = Obj["file_extension"] as? String ?? ""
+        self.file_path = Obj["file_path"] as? String ?? ""
+        self.group1_id = Obj["group1_id"] as? String ?? ""
+        self.group1_name = Obj["group1_name"] as? String ?? ""
+        self.group2_id = Obj["group2_id"] as? String ?? ""
+        self.group2_name = Obj["group2_name"] as? String ?? ""
+        self.group_type_id = Obj["group_type_id"] as? String ?? ""
+        self.group_type_name = Obj["group_type_name"] as? String ?? ""
+        self.level_key = Obj["level_key"] as? String ?? ""
+        self.level_name = Obj["level_name"] as? String ?? ""
+        self.phase_short_code = Obj["phase_short_code"] as? String ?? ""
+        self.phase_zone_block_cluster_no = Obj["phase_zone_block_cluster_no"] as? String ?? ""
+        self.phase_zone_block_no = Obj["phase_zone_block_no"] as? String ?? ""
+        self.phase_zone_no = Obj["phase_zone_no"] as? String ?? ""
+        self.platform_code_system = Obj["platform_code_system"] as? String ?? ""
+        self.platform_name = Obj["platform_name"] as? String ?? ""
+        self.projects_profile_id = Obj["projects_profile_id"] as? String ?? ""
+        self.projects_supervision_id = Obj["projects_supervision_id"] as? String ?? ""
+        self.projects_work_area_id = Obj["projects_work_area_id"] as? String ?? ""
+        self.result_code = Obj["result_code"] as? String ?? ""
+        self.template_id = Obj["template_id"] as? String ?? ""
+        self.template_name = Obj["template_name"] as? String ?? ""
+        self.transaction_key = Obj["transaction_key"] as? String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as? String ?? ""
+        self.transaction_request_last_step = Obj["transaction_request_last_step"] as? String ?? ""
+        self.transactions_date_h = Obj["transactions_date_h"] as? String ?? ""
+        self.transactions_date_m = Obj["transactions_date_m"] as? String ?? ""
+        self.unit_id = Obj["unit_id"] as? String ?? ""
+
+    }
+}
+
+
+class FilterObj {
+
+    var filter_column1_key :String = ""
+    var filter_column1_val :String = ""
+    var filter_column2_key :String = ""
+    var filter_column2_val :String = ""
+    var filter_id :String = ""
+    var filter_key :String = ""
+    var filter_name :String = ""
+    var fliter_selected :String = ""
+    var filter_by :[String:Any] = [:]
+    var sort_by :[String:Any] = [:]
+    
+    
+  
+    init(_ Obj : [String:Any]) {
+        
+        self.filter_column1_key = Obj["filter_column1_key"] as? String ?? ""
+        self.filter_column1_val = Obj["filter_column1_val"] as? String ?? ""
+        self.filter_column2_key = Obj["filter_column2_key"] as? String ?? ""
+        self.filter_column2_val = Obj["filter_column2_val"] as? String ?? ""
+        self.filter_id = Obj["filter_id"] as? String ?? ""
+        self.filter_key = Obj["filter_key"] as? String ?? ""
+        self.filter_name = Obj["filter_name"] as? String ?? ""
+        self.fliter_selected = Obj["fliter_selected"] as? String ?? ""
+        self.filter_by = Obj["filter_by"] as? [String:Any] ?? [:]
+        self.sort_by = Obj["sort_by"] as? [String:Any] ?? [:]
+        
+     
+    }
+}
+
+
+
+class filter_byObj {
+    
+    
+    var group1 :[labelObj] = []
+    var group2 :[labelObj] = []
+    var template :[labelObj] = []
+    var group_type :[labelObj] = []
+    var block :[labelObj] = []
+    var cluster :[labelObj] = []
+    var zone :[labelObj] = []
+    
+    var barcode :String = ""
+    var unit_id :String = ""
+    var version :String = ""
+    var level_key :String = ""
+    var result_code :String = ""
+    var phase_short_code :String = ""
+    var platform_code_system :String = ""
+    var transaction_end_date :String = ""
+    var transaction_request_id :String = ""
+    var transaction_start_date :String = ""
+    
+    
+  
+    init(_ Obj : [String:Any]) {
+        
+        
+        let group1_Array = Obj["group1"] as? [[String:Any]] ?? []
+        self.group1      = group1_Array.map{labelObj.init($0)}
+        
+        let group2_Array = Obj["group2"] as? [[String:Any]] ?? []
+        self.group2      = group2_Array.map{labelObj.init($0)}
+        
+        let template_Array  = Obj["template"] as? [[String:Any]] ?? []
+        self.template       = template_Array.map{labelObj.init($0)}
+        
+        let group_type_Array = Obj["group_type"] as? [[String:Any]] ?? []
+        self.group_type   = group_type_Array.map{labelObj.init($0)}
+        
+        let block_Array = Obj["block"] as? [[String:Any]] ?? []
+        self.block  = block_Array.map{labelObj.init($0)}
+        
+        let cluster_Array = Obj["cluster"] as? [[String:Any]] ?? []
+        self.cluster  = cluster_Array.map{labelObj.init($0)}
+        
+        let zone_Array = Obj["zone"] as? [[String:Any]] ?? []
+        self.zone  = zone_Array.map{labelObj.init($0)}
+        
+        
+        self.barcode = Obj["barcode"] as? String ?? ""
+        self.unit_id = Obj["unit_id"] as? String ?? ""
+        self.version = Obj["version"] as? String ?? ""
+        self.level_key = Obj["level_key"] as? String ?? ""
+        self.result_code = Obj["result_code"] as? String ?? ""
+        self.phase_short_code = Obj["phase_short_code"] as? String ?? ""
+        self.platform_code_system = Obj["platform_code_system"] as? String ?? ""
+        self.transaction_end_date = Obj["transaction_end_date"] as? String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as? String ?? ""
+        self.transaction_start_date = Obj["transaction_start_date"] as? String ?? ""
+        
+      
+     
+    }
+}
+
+
+struct labelObj {
+    
+    var id : String = ""
+    var label : String = ""
+    
+    init(_ Obj : [String:Any]) {
+    self.id = Obj["id"] as? String ?? ""
+    self.label = Obj["label"] as? String ?? ""
+    }
+}
+
+
+class sort_byObj {
+    
+    
+    var zone :String = ""
+    var block :String = ""
+    var barcode :String = ""
+    var cluster :String = ""
+    var template_id :String = ""
+    var platform_code_system :String = ""
+    var transaction_request_id :String = ""
+    
+    init(_ Obj : [String:Any]) {
+        
+        self.zone = Obj["zone"] as? String ?? ""
+        self.block = Obj["block"] as? String ?? ""
+        self.barcode = Obj["barcode"] as? String ?? ""
+        self.cluster = Obj["cluster"] as? String ?? ""
+        self.template_id = Obj["template_id"] as? String ?? ""
+        self.platform_code_system = Obj["platform_code_system"] as? String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as? String ?? ""
+        
+    }
+}
+
+class PhaseObj {
+    
+    var hasChildren :String = ""
+    var id :String = ""
+    var label :String = ""
+    var name :String = ""
+    var phase_created_datetime :String = ""
+    var phase_id :String = ""
+    var phase_parent_id :String = ""
+    var phase_short_code :String = ""
+    var phase_title_ar :String = ""
+    var phase_title_en :String = ""
+    var phase_type :String = ""
+    var phase_updated_datetime :String = ""
+    var phase_writer :String = ""
+    var phase_zone_block_cluster_g_no :String = ""
+    var phase_zone_block_cluster_no :String = ""
+    var phase_zone_block_cluster_unit_no :String = ""
+    var phase_zone_block_no :String = ""
+    var phase_zone_custom_title :String = ""
+    var phase_zone_no :String = ""
+    var projects_profile_id :String = ""
+    var projects_supervision_id :String = ""
+    var transaction_request_id :String = ""
+    var unit_opening_balance :String = ""
+    var v_start :String = ""
+    var value :String = ""
+    var writer :String = ""
+    
+    
+   
+    init(_ Obj : [String:Any]) {
+        
+        self.hasChildren  = Obj["hasChildren"] as? String ?? ""
+        self.id  = Obj["id"] as? String ?? ""
+        self.label  = Obj["label"] as? String ?? ""
+        self.name  = Obj["name"] as? String ?? ""
+        self.phase_created_datetime  = Obj["phase_created_datetime"] as? String ?? ""
+        self.phase_id  = Obj["phase_id"] as? String ?? ""
+        self.phase_parent_id  = Obj["phase_parent_id"] as? String ?? ""
+        self.phase_short_code  = Obj["phase_short_code"] as? String ?? ""
+        self.phase_title_ar  = Obj["phase_title_ar"] as? String ?? ""
+        self.phase_title_en  = Obj["phase_title_en"] as? String ?? ""
+        self.phase_type  = Obj["phase_type"] as? String ?? ""
+        self.phase_updated_datetime  = Obj["phase_updated_datetime"] as? String ?? ""
+        self.phase_writer  = Obj["phase_writer"] as? String ?? ""
+        self.phase_zone_block_cluster_g_no  = Obj["phase_zone_block_cluster_g_no"] as? String ?? ""
+        self.phase_zone_block_cluster_no  = Obj["phase_zone_block_cluster_no"] as? String ?? ""
+        self.phase_zone_block_cluster_unit_no  = Obj["phase_zone_block_cluster_unit_no"] as? String ?? ""
+        self.phase_zone_block_no  = Obj["phase_zone_block_no"] as? String ?? ""
+        self.phase_zone_custom_title  = Obj["phase_zone_custom_title"] as? String ?? ""
+        self.phase_zone_no  = Obj["phase_zone_no"] as? String ?? ""
+        self.projects_profile_id  = Obj["projects_profile_id"] as? String ?? ""
+        self.projects_supervision_id  = Obj["projects_supervision_id"] as? String ?? ""
+        self.transaction_request_id  = Obj["transaction_request_id"] as? String ?? ""
+        self.unit_opening_balance  = Obj["unit_opening_balance"] as? String ?? ""
+        self.v_start  = Obj["v_start"] as? String ?? ""
+        self.value  = Obj["value"] as? String ?? ""
+        self.writer  = Obj["writer"] as? String ?? ""
+        
+       
+        
+    }}
+
+
+class SupplierObj {
+    
+    var label                  :String = ""
+    var result                 :String = ""
+    var transaction_request_id :String = ""
+    var value                  :String = ""
+    
+    init(_ Obj : [String:Any]) {
+        
+        
+        self.label                   = Obj["label"] as? String ?? ""
+        self.result                  = Obj["result"] as? String ?? ""
+        self.transaction_request_id  = Obj["transaction_request_id"] as? String ?? ""
+        self.value                   = Obj["value"] as? String ?? ""
+        
+        
+    }}
+
+
+
+
+class ProfileObj {
+    
+    
+    var account_number  :String = ""
+    var age_in_years  :String = ""
+    var bank_short_code  :String = ""
+    var bankname  :String = ""
+    var birth_date_arabic  :String = ""
+    var birth_date_english  :String = ""
+    var branch_id  :String = ""
+    var branch_name  :String = ""
+    var copy_number  :String = ""
+    var countryname  :String = ""
+    var created_datetime  :String = ""
+    var e_reference_no  :String = ""
+    var employee_id_number  :String = ""
+    var employee_number  :String = ""
+    var employee_status  :String = ""
+    var employee_title  :String = ""
+    var employee_title_name  :String = ""
+    var employee_writer  :String = ""
+    var firstname_arabic  :String = ""
+    var firstname_english  :String = ""
+    var gender  :String = ""
+    var insurance_date  :String = ""
+    var insurance_number  :String = ""
+    var insurance_type_class  :String = ""
+    var interview_date_ar  :String = ""
+    var interview_date_en  :String = ""
+    var iqama_expiry_date_arabic  :String = ""
+    var iqama_expiry_date_english  :String = ""
+    var job_descriptions  :String = ""
+    var job_title_id  :String = ""
+    var job_title_iqama  :String = ""
+    var jobname  :String = ""
+    var lastname_arabic  :String = ""
+    var lastname_english  :String = ""
+    var marital_status  :String = ""
+    var mark  :String = ""
+    var membership_expiry_date_arabic  :String = ""
+    var membership_expiry_date_english  :String = ""
+    var membership_number  :String = ""
+    var nationality  :String = ""
+    var passport_expiry_date_arabic  :String = ""
+    var passport_expiry_date_english  :String = ""
+    var passport_issue_date_arabic  :String = ""
+    var passport_issue_date_english  :String = ""
+    var passport_issue_place  :String = ""
+    var passport_number  :String = ""
+    var primary_address  :String = ""
+    var primary_education_level  :String = ""
+    var primary_email  :String = ""
+    var primary_graduation_year  :String = ""
+    var primary_mobile  :String = ""
+    var profile_image  :String = ""
+    var rating_degree  :String = ""
+    var religion  :String = ""
+    var secondname_arabic  :String = ""
+    var secondname_english  :String = ""
+    var settings_name_arabic  :String = ""
+    var settings_name_english  :String = ""
+    var signature  :String = ""
+    var terms_conditions  :String = ""
+    var thirdname_arabic  :String = ""
+    var thirdname_english  :String = ""
+    var typename  :String = ""
+    var updated_datetime  :String = ""
+    var user_email  :String = ""
+    var user_id  :String = ""
+    var user_phone  :String = ""
+    var user_type_id  :String = ""
+    var username  :String = ""
+    var work_domain  :String = ""
+    var work_location  :String = ""
+    var work_type  :String = ""
+    
+    
+    
+    init(_ Obj : [String:Any]) {
+        
+        self.account_number  = Obj["account_number"] as? String ?? ""
+        self.age_in_years  = Obj["age_in_years"] as? String ?? ""
+        self.bank_short_code  = Obj["bank_short_code"] as? String ?? ""
+        self.bankname  = Obj["bankname"] as? String ?? ""
+        self.birth_date_arabic  = Obj["birth_date_arabic"] as? String ?? ""
+        self.birth_date_english  = Obj["birth_date_english"] as? String ?? ""
+        self.branch_id  = Obj["branch_id"] as? String ?? ""
+        self.branch_name  = Obj["branch_name"] as? String ?? ""
+        self.copy_number  = Obj["copy_number"] as? String ?? ""
+        self.countryname  = Obj["countryname"] as? String ?? ""
+        self.created_datetime  = Obj["created_datetime"] as? String ?? ""
+        self.e_reference_no  = Obj["e_reference_no"] as? String ?? ""
+        self.employee_id_number  = Obj["employee_id_number"] as? String ?? ""
+        self.employee_number  = Obj["employee_number"] as? String ?? ""
+        self.employee_status  = Obj["employee_status"] as? String ?? ""
+        self.employee_title  = Obj["employee_title"] as? String ?? ""
+        self.employee_title_name  = Obj["employee_title_name"] as? String ?? ""
+        self.employee_writer  = Obj["employee_writer"] as? String ?? ""
+        self.firstname_arabic  = Obj["firstname_arabic"] as? String ?? ""
+        self.firstname_english  = Obj["firstname_english"] as? String ?? ""
+        self.gender  = Obj["gender"] as? String ?? ""
+        self.insurance_date  = Obj["insurance_date"] as? String ?? ""
+        self.insurance_number  = Obj["insurance_number"] as? String ?? ""
+        self.insurance_type_class  = Obj["insurance_type_class"] as? String ?? ""
+        self.interview_date_ar  = Obj["interview_date_ar"] as? String ?? ""
+        self.interview_date_en  = Obj["interview_date_en"] as? String ?? ""
+        self.iqama_expiry_date_arabic  = Obj["iqama_expiry_date_arabic"] as? String ?? ""
+        self.iqama_expiry_date_english  = Obj["iqama_expiry_date_english"] as? String ?? ""
+        self.job_descriptions  = Obj["job_descriptions"] as? String ?? ""
+        self.job_title_id  = Obj["job_title_id"] as? String ?? ""
+        self.job_title_iqama  = Obj["job_title_iqama"] as? String ?? ""
+        self.jobname  = Obj["jobname"] as? String ?? ""
+        self.lastname_arabic  = Obj["lastname_arabic"] as? String ?? ""
+        self.lastname_english  = Obj["lastname_english"] as? String ?? ""
+        self.marital_status  = Obj["marital_status"] as? String ?? ""
+        self.mark  = Obj["mark"] as? String ?? ""
+        self.membership_expiry_date_arabic  = Obj["membership_expiry_date_arabic"] as? String ?? ""
+        self.membership_expiry_date_english  = Obj["membership_expiry_date_english"] as? String ?? ""
+        self.membership_number  = Obj["membership_number"] as? String ?? ""
+        self.nationality  = Obj["nationality"] as? String ?? ""
+        self.passport_expiry_date_arabic  = Obj["passport_expiry_date_arabic"] as? String ?? ""
+        self.passport_expiry_date_english  = Obj["passport_expiry_date_english"] as? String ?? ""
+        self.passport_issue_date_arabic  = Obj["passport_issue_date_arabic"] as? String ?? ""
+        self.passport_issue_date_english  = Obj["passport_issue_date_english"] as? String ?? ""
+        self.passport_issue_place  = Obj["passport_issue_place"] as? String ?? ""
+        self.passport_number  = Obj["passport_number"] as? String ?? ""
+        self.primary_address  = Obj["primary_address"] as? String ?? ""
+        self.primary_education_level  = Obj["primary_education_level"] as? String ?? ""
+        self.primary_email  = Obj["primary_email"] as? String ?? ""
+        self.primary_graduation_year  = Obj["primary_graduation_year"] as? String ?? ""
+        self.primary_mobile  = Obj["primary_mobile"] as? String ?? ""
+        self.profile_image  = Obj["profile_image"] as? String ?? ""
+        self.rating_degree  = Obj["rating_degree"] as? String ?? ""
+        self.religion  = Obj["religion"] as? String ?? ""
+        self.secondname_arabic  = Obj["secondname_arabic"] as? String ?? ""
+        self.secondname_english  = Obj["secondname_english"] as? String ?? ""
+        self.settings_name_arabic  = Obj["settings_name_arabic"] as? String ?? ""
+        self.settings_name_english  = Obj["settings_name_english"] as? String ?? ""
+        self.signature  = Obj["signature"] as? String ?? ""
+        self.terms_conditions  = Obj["terms_conditions"] as? String ?? ""
+        self.thirdname_arabic  = Obj["thirdname_arabic"] as? String ?? ""
+        self.thirdname_english  = Obj["thirdname_english"] as? String ?? ""
+        self.typename  = Obj["typename"] as? String ?? ""
+        self.updated_datetime  = Obj["updated_datetime"] as? String ?? ""
+        self.user_email  = Obj["user_email"] as? String ?? ""
+        self.user_id  = Obj["user_id"] as? String ?? ""
+        self.user_phone  = Obj["user_phone"] as? String ?? ""
+        self.user_type_id  = Obj["user_type_id"] as? String ?? ""
+        self.username  = Obj["username"] as? String ?? ""
+        self.work_domain  = Obj["work_domain"] as? String ?? ""
+        self.work_location  = Obj["work_location"] as? String ?? ""
+        self.work_type  = Obj["work_type"] as? String ?? ""
+        
+        
+    }}
 

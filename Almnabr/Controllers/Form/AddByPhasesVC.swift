@@ -78,6 +78,14 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
     
     var ProjectObj:templateObj!
     
+    
+    var projects_work_area_id:String = ""
+    var template_platform_code_system:String = ""
+    var template_id:String = ""
+    var phase_zone_block_cluster_g_nos:String = ""
+    
+    
+    
     let dropUpmage =  UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
     
     let dropDownmage =  UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
@@ -90,8 +98,11 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
     var StrWorkLevel:String = ""
     var transaction_separation:String = ""
     var StrLanguage:String = "en"
+    var StrWL_label:String = ""
     
     var Phasesdelegate: ByPhasesDelegate!
+    
+    let maincolor = "#1A3665".getUIColor()
     
     
     override func viewDidLoad() {
@@ -110,50 +121,50 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
         
         
         self.btnSubmit.setTitle("Submit".localized(), for: .normal)
-        self.btnSubmit.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnSubmit.backgroundColor =  maincolor
         self.btnSubmit.setTitleColor(.white, for: .normal)
         self.btnSubmit.setRounded(10)
         
         
         self.btnCancel.setTitle("Cancel".localized(), for: .normal)
-        self.btnCancel.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnCancel.backgroundColor =  maincolor
         self.btnCancel.setTitleColor(.white, for: .normal)
         self.btnCancel.setRounded(10)
         
-        lblByPhase.textColor =  HelperClassSwift.acolor.getUIColor()
+        lblByPhase.textColor =  maincolor
         lblByPhase.font = .kufiBoldFont(ofSize: 15)
         lblByPhase.text = "txt_ByPhase".localized()
       
-        self.lblZoneTitle.textColor =  HelperClassSwift.acolor.getUIColor()
+        self.lblZoneTitle.textColor =  maincolor
         self.lblZoneTitle.text =  "txt_Zone".localized()
         self.lblZoneTitle.font = .kufiRegularFont(ofSize: 15)
         
         
-        self.lblBlocksTitle.textColor =  HelperClassSwift.acolor.getUIColor()
+        self.lblBlocksTitle.textColor =  maincolor
         self.lblBlocksTitle.text =  "txt_Blocks".localized()
         self.lblBlocksTitle.font = .kufiRegularFont(ofSize: 15)
         
         
         
-        self.lblClustreTitle.textColor =  HelperClassSwift.acolor.getUIColor()
+        self.lblClustreTitle.textColor =  maincolor
         self.lblClustreTitle.text =  "txt_Clustre".localized()
         self.lblClustreTitle.font = .kufiRegularFont(ofSize: 15)
         
-        self.lblUnitTitle.textColor =  HelperClassSwift.acolor.getUIColor()
+        self.lblUnitTitle.textColor =  maincolor
         self.lblUnitTitle.text =  "txt_Unit".localized()
         self.lblUnitTitle.font = .kufiRegularFont(ofSize: 15)
         
-        self.lblWorkLevelTitle.textColor =  HelperClassSwift.acolor.getUIColor()
+        self.lblWorkLevelTitle.textColor =  maincolor
         self.lblWorkLevelTitle.text =  "txt_SearchGeneralNumbers".localized()
         self.lblWorkLevelTitle.font = .kufiRegularFont(ofSize: 15)
         
         
       
-        self.viewZone.setBorderGray()
-        self.viewBlocks.setBorderGray()
-        self.viewUnit.setBorderGray()
-        self.viewClustre.setBorderGray()
-        self.viewWorkLevel.setBorderGray()
+        self.viewZone.setBorderGrayWidthCorner(1, 20)
+        self.viewBlocks.setBorderGrayWidthCorner(1, 20)
+        self.viewUnit.setBorderGrayWidthCorner(1, 20)
+        self.viewClustre.setBorderGrayWidthCorner(1, 20)
+        self.viewWorkLevel.setBorderGrayWidthCorner(1, 20)
         
         
         self.StackZone.isHidden = false
@@ -198,12 +209,12 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
     
     func get_Zone(){
         
-        guard ProjectObj != nil else{
-            return
-        }
+//        guard ProjectObj != nil else{
+//            return
+//        }
+        
         self.showLoadingActivity()
-        //let language = dp_get_current_language()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=\(ProjectObj.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(ProjectObj.template_id)&work_site_type=Z&work_site_zones=&work_site_blocks=&work_site_clusters=&search_key=" ) { (response) in
+        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=Z&work_site_zones=&work_site_blocks=&work_site_clusters=&search_key=" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -229,13 +240,12 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
     
     func get_Blocks(zone:String){
         
-        guard ProjectObj != nil else{
-            return
-        }
+//        guard ProjectObj != nil else{
+//            return
+//        }
         
         self.showLoadingActivity()
-        let language = dp_get_current_language()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=\(ProjectObj.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(ProjectObj.template_id)&work_site_type=B&work_site_zones=\(zone)&work_site_blocks=&work_site_clusters=&search_key=" ) { (response) in
+        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=B&work_site_zones=\(zone)&work_site_blocks=&work_site_clusters=&search_key=" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -261,13 +271,13 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
     
     func get_Clusters(zone:String,Blocks:String){
         
-        guard ProjectObj != nil else{
-            return
-        }
+//        guard ProjectObj != nil else{
+//            return
+//        }
+        
         
         self.showLoadingActivity()
-        let language = dp_get_current_language()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=\(ProjectObj.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(ProjectObj.template_id)&work_site_type=C&work_site_zones=\(zone)&work_site_blocks=\(Blocks)&work_site_clusters=&search_key=" ) { (response) in
+        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=C&work_site_zones=\(zone)&work_site_blocks=\(Blocks)&work_site_clusters=&search_key=" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -300,8 +310,7 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
     func get_Unit(zone:String,Blocks:String,cluster:String){
         
         self.showLoadingActivity()
-       // let language = dp_get_current_language()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=\(ProjectObj.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(ProjectObj.template_id)&work_site_type=U&work_site_zones=\(zone)&work_site_blocks=\(Blocks)&work_site_clusters=\(cluster)&search_key="  ) { (response) in
+        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=U&work_site_zones=\(zone)&work_site_blocks=\(Blocks)&work_site_clusters=\(cluster)&search_key="  ) { (response) in
            
             let status = response["status"] as? Bool
             if status == true{
@@ -325,13 +334,12 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
     
     func get_WorkLevel(){
         
-        guard ProjectObj != nil else{
-            return
-        }
+//        guard ProjectObj != nil else{
+//            return
+//        }
         
         self.showLoadingActivity()
-        let language = dp_get_current_language()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/get_work_levels_for_transaction?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=\(ProjectObj.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(ProjectObj.template_id)&work_site_nos=324" ) { (response) in
+        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/get_work_levels_for_transaction?lang_key=en&projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_nos=324" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -546,6 +554,10 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
                     //self.StrUnit = i.value
                     self.imgDropWorkLevel.image = dropDownmage
                     self.StrWorkLevel = i.value
+                    self.StrWL_label = i.label
+//                    let Str_unit = uintObj(unit: StrUnit, value: i.value , label: i.label)
+                    //self.arr_unit.append(Str_unit)
+                    
                     self.viewWorkLevel.isHidden = false
                     self.btnWorkLevel.isHidden = false
                   
@@ -634,7 +646,7 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
         if (StrWorkLevel == "" ){
             self.showAMessage(withTitle: "Error", message: "missed data")
         }else{
-            let obj = ByPhaseObj(number: 1, zones: StrZone, Blocks: StrBlocks, Clusters: StrCluster, units: StrUnit, Worklevels: StrWorkLevel)
+            let obj = ByPhaseObj(number: 1, zones: StrZone, Blocks: StrBlocks, Clusters: StrCluster, units: StrUnit, Worklevels: StrWorkLevel,lblWorklevels:self.StrWL_label)
             var arr:[ByPhaseObj] = []
             arr.append(obj)
             Phasesdelegate.passByPhasesArr(data: arr)

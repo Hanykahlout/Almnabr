@@ -15,61 +15,93 @@ import UserNotifications
 import FirebaseCore
 import Firebase
 import UserNotifications
+import AVFAudio
+import MOLH
 
+var AppInstance: AppDelegate!
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenterDelegate {
-
+    
     var window: UIWindow?
-
+    
     static let mainSB = UIStoryboard(name: "Main", bundle: nil)
     static let TransactionSB = UIStoryboard(name: "Transaction", bundle: nil)
+    static let HRSB = UIStoryboard(name: "HR", bundle: nil)
     let gcmMessageIDKey = "gcm.message_id"
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
+        UIApplication.shared.statusBarStyle = .darkContent
+        
+        AppInstance = self
         IQKeyboardManager.shared.enable = true
+        
         FirebaseApp.configure()
         get_theme()
+        
+        //UIApplication.shared.applicationIconBadgeNumber = 0
+       //hideLoader()
+        
         //Here we will hide back button title and change arrow to white color
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .highlighted)
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000.0, vertical: 0.0), for: .default)
-       
+        
         UINavigationBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().tintColor = .white
         
-     
-        
-        if let lang = HelperClassSwift.getUserInformation(key: Constants.kAppLanguageSelect) {
-            if lang == "ar" {
-                dp_set_current_language("ar")
-
-                UIView.appearance().semanticContentAttribute = .forceRightToLeft
-                UISlider.appearance().semanticContentAttribute = .forceLeftToRight
-                changeLanguage(lang: "ar")
-            } else {
-                dp_set_current_language("en")
-
-                UIView.appearance().semanticContentAttribute = .forceLeftToRight
-                UISlider.appearance().semanticContentAttribute = .forceLeftToRight
-                changeLanguage(lang: "en")
-            }
-        } else {
-            dp_set_current_language("ar")
+        //MOLH.setLanguageTo("ar")
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
+            
             UIView.appearance().semanticContentAttribute = .forceRightToLeft
             UISlider.appearance().semanticContentAttribute = .forceLeftToRight
-            changeLanguage(lang: "ar")
+            
+            
+        } else {
+            
+            UIView.appearance().semanticContentAttribute = .forceLeftToRight
+            UISlider.appearance().semanticContentAttribute = .forceLeftToRight
         }
-
         
+       // let notificationContent = UNMutableNotificationContent()
+       // notificationContent.sound = UNNotificationSound(named: "notification3.wav")
+        //notificationContent.sound = .default
+        //UNNotificationSound(named: "notification3.wav")
+      //  notification.sound = UNNotificationSound(named: "notification3.wav")
+        application.registerForRemoteNotifications()
+       
+
+        Messaging.messaging().delegate = self
+        
+        let token = Messaging.messaging().fcmToken
+        print("FCM token: \(token ?? "")")
+        
+        setupFirebaseMessaging(application)
+        
+        //registerForPushNotifications()
+        
+        
+        return true
+    }
+    
+    
+//    func showLoader()
+//    {
+//        CustomLoader.sharedInstance.startAnimation()
+//    }
+//    func hideLoader()
+//    {
+//        CustomLoader.sharedInstance.stopAnimation()
+//    }
+    
+    func setupFirebaseMessaging(_ application: UIApplication) {
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
-
+            
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
@@ -79,29 +111,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                 UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
-
+        
         application.registerForRemoteNotifications()
-
-        Messaging.messaging().delegate = self
-
-        let token = Messaging.messaging().fcmToken
-        print("FCM token: \(token ?? "")")
-
-        
-        
-        //Added Code to display notification when app is in Foreground
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-        } else {
-            // Fallback on earlier versions
+    }
+    
+//    func registerForPushNotifications() {
+//
+//        UNUserNotificationCenter.current().delegate = self
+//
+//
+//        UNUserNotificationCenter.current()
+//            .requestAuthorization(
+//                options: [.alert, .sound, .badge]) { [weak self] granted, _ in
+//                    print("Permission granted: \(granted)")
+//                    guard granted else { return }
+//                    self?.getNotificationSettings()
+//                }
+//        let content = UNMutableNotificationContent() // notification content object
+//        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "notification3.wav"))
+//
+//
+//        if #available(iOS 10.0, *) {
+//            // For iOS 10 display notification (sent via APNS)
+//            UNUserNotificationCenter.current().delegate = self
+//
+//            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+//            UNUserNotificationCenter.current().requestAuthorization(
+//                options: authOptions,
+//                completionHandler: {_, _ in })
+//        } else {
+//            let settings: UIUserNotificationSettings =
+//            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+//            application.registerUserNotificationSettings(settings)
+//        }
+//
+//    }
+    
+    
+    
+    
+    func getNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            print("Notification settings: \(settings)")
         }
         
-
-
-        return true
+        // guard settings.authorizationStatus == .authorized else { return }
+        DispatchQueue.main.async {
+            UIApplication.shared.registerForRemoteNotifications()
+        }
+        
+        
     }
-
-
+    
+    
     func changeLanguage(lang: String) {
         UserDefaults.standard.set([lang], forKey: "AppleLanguages")
         //UserDefaults.standard.synchronize()
@@ -112,11 +174,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     func get_theme(){
         
         APIManager.sendRequestGetAuthTheme(urlString: "gettheme" ) { (response) in
-           
+            
             let status = response["status"] as? Bool
             if status == true{
                 if  let data = response["data"] as? [String:Any]{
-                  let obj = themeObj(data)
+                    let obj = themeObj(data)
                     HelperClassSwift.acolor = obj.acolor
                     HelperClassSwift.bcolor = obj.bcolor
                 }
@@ -130,79 +192,100 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     }
     
     // MARK: UISceneSession Lifecycle
-
+    
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
-       
+        
         
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-
+        
     }
     
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-
-      if let messageID = userInfo[gcmMessageIDKey] {
-        print("Message ID: \(messageID)")
-      }
-
-      // Print full message.
-      print(userInfo)
-
-      completionHandler(UIBackgroundFetchResult.newData)
+        
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        completionHandler(UIBackgroundFetchResult.newData)
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                       willPresent notification: UNNotification,
-             withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-             let userInfo = notification.request.content.userInfo
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message.
+        print(userInfo)
+        
+        // Change this to your preferred presentation option
+        completionHandler([.alert , .sound , .badge])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        // Print message ID.
+        
+        // Print full message.
+        print(userInfo)
 
-             // Print message ID.
-             if let messageID = userInfo[gcmMessageIDKey] {
-               print("Message ID: \(messageID)")
-             }
-
-             // Print full message.
-             print(userInfo)
-
-             // Change this to your preferred presentation option
-             completionHandler([.alert , .sound , .badge])
-           }
-
-           func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                       didReceive response: UNNotificationResponse,
-                                       withCompletionHandler completionHandler: @escaping () -> Void) {
-             let userInfo = response.notification.request.content.userInfo
-             // Print message ID.
-             if let messageID = userInfo[gcmMessageIDKey] {
-               print("Message ID: \(messageID)")
-             }
-
-             // Print full message.
-             print(userInfo)
-
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        if let ios = userInfo["ios"] as? String {
+            let splitString = ios.components(separatedBy: "ios/transactions")
+            let url = "\(splitString[1])"
+            obj_TempNotifi = .init(url: url)
             
-             completionHandler()
-           }
+            NotifiRoute.shared.check_notifi()
+            
+            
+            
+//            let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+//            vc.str_url = "\(splitString[1])"
+//
+//            let page = UINavigationController.init(rootViewController: vc)
+//            //_ =  self.panel?.center(page)
+//            vc.switchRootViewController(rootViewController: page, animated: true, completion: nil)
+        }
+        
+        
+        
+        
+        completionHandler()
+    }
     func application(_ application: UIApplication,
-                        didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-           
-           // Messaging.messaging().setAPNSToken(deviceToken, type: .sandbox)//.prod)
-           Messaging.messaging().apnsToken = deviceToken
-           if Messaging.messaging().fcmToken != nil {
-           }
-       }
+                     didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        // Messaging.messaging().setAPNSToken(deviceToken, type: .sandbox)//.prod)
+        Messaging.messaging().apnsToken = deviceToken
+        if Messaging.messaging().fcmToken != nil {
+        }
+    }
     
     func applicationWillResignActive(_ application: UIApplication) {
-    
+        
         application.applicationIconBadgeNumber = 0
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-
+        
         application.applicationIconBadgeNumber = 0
     }
     
@@ -212,6 +295,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
+       
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -219,21 +303,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     }
     
     
-
-
+    
+    
 }
 
 
 
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-   print("Firebase registration token: \(fcmToken)")
-
-      
-  // let dataDict:[String: String] = ["token": fcmToken]
+        print("Firebase registration token: \(fcmToken)")
+        
+        
+        // let dataDict:[String: String] = ["token": fcmToken]
         Auth_User.FCMtoken = fcmToken!
-   
-   // TODO: If necessary send token to application server.
-   // Note: This callback is fired at each app startup and whenever a new token is generated.
+        
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
     }}
 

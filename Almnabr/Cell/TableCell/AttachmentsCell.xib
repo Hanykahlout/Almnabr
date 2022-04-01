@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
+        <array key="DroidKufi-Regular.ttf">
+            <string>DroidArabicKufi</string>
         </array>
     </customFonts>
     <objects>
@@ -26,25 +26,22 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lY-Xx-P0u">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Asw-ux-aSD">
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Asw-ux-aSD">
                                 <rect key="frame" x="10" y="10" width="300" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n57-iX-x9f">
-                                        <rect key="frame" x="0.0" y="10.5" width="40" height="19"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="zRI-Fh-WoT"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                        <color key="textColor" red="0.34509803919999998" green="0.34509803919999998" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <rect key="frame" x="0.0" y="8.5" width="7" height="23"/>
+                                        <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="12"/>
+                                        <color key="textColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5R-cT-Ptc">
-                                        <rect key="frame" x="60" y="0.0" width="145" height="40"/>
+                                        <rect key="frame" x="17" y="0.0" width="213" height="40"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SBF-BK-HOI">
-                                                <rect key="frame" x="10" y="5" width="125" height="30"/>
-                                                <color key="textColor" red="0.34509803919999998" green="0.34509803919999998" blue="0.34509803919999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="18"/>
+                                                <rect key="frame" x="10" y="5" width="193" height="30"/>
+                                                <color key="textColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
                                                     <action selector="didEndEditingButtonPressd:" destination="KGk-i7-Jjw" eventType="editingDidEnd" id="vNS-Ig-Rhz"/>
@@ -65,15 +62,15 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wlO-ed-63w">
-                                        <rect key="frame" x="225" y="5" width="30" height="30"/>
+                                        <rect key="frame" x="250" y="10" width="20" height="20"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="EiJ-bS-wvB"/>
-                                            <constraint firstAttribute="width" constant="30" id="qr0-Dn-wPW"/>
+                                            <constraint firstAttribute="height" constant="20" id="EiJ-bS-wvB"/>
+                                            <constraint firstAttribute="width" constant="20" id="qr0-Dn-wPW"/>
                                         </constraints>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" red="0.32460446710000002" green="0.68544830489999997" blue="0.3648103962" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="plus.rectangle.fill.on.folder.fill" catalog="system"/>
+                                        <state key="normal" image="square.and.arrow.up" catalog="system"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="5"/>
@@ -84,14 +81,14 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAO-cF-0b4">
-                                        <rect key="frame" x="275" y="10" width="25" height="20"/>
+                                        <rect key="frame" x="280" y="10" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="n7x-zn-e1f"/>
-                                            <constraint firstAttribute="width" constant="25" id="vO2-eS-MXp"/>
+                                            <constraint firstAttribute="width" constant="20" id="vO2-eS-MXp"/>
                                         </constraints>
                                         <color key="tintColor" red="0.78039215689999997" green="0.25490196079999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="xmark.circle.fill" catalog="system" title=" "/>
+                                        <buttonConfiguration key="configuration" style="plain" image="trash.circle" catalog="system" title=" "/>
                                         <connections>
                                             <action selector="didReCancelButtonPressd:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cKI-rO-xsm"/>
                                         </connections>
@@ -99,7 +96,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="wlO-ed-63w" firstAttribute="leading" secondItem="E5R-cT-Ptc" secondAttribute="trailing" constant="20" id="DPl-HY-9jr"/>
-                                    <constraint firstItem="E5R-cT-Ptc" firstAttribute="leading" secondItem="n57-iX-x9f" secondAttribute="trailing" constant="20" id="oCO-GO-rPj"/>
+                                    <constraint firstItem="E5R-cT-Ptc" firstAttribute="leading" secondItem="n57-iX-x9f" secondAttribute="trailing" constant="10" id="oCO-GO-rPj"/>
                                     <constraint firstAttribute="height" constant="40" id="zet-6d-00H"/>
                                 </constraints>
                             </stackView>
@@ -142,8 +139,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="plus.rectangle.fill.on.folder.fill" catalog="system" width="128" height="96"/>
-        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="trash.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

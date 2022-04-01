@@ -7,8 +7,6 @@ target 'Almnabr' do
 
   # Pods for Almnabr
   
-  
- 
     pod 'ZVProgressHUD'
     pod 'DPLocalization'
     pod 'SwiftKeychainWrapper'
@@ -26,6 +24,11 @@ target 'Almnabr' do
     
     pod 'AMPopTip'
 
+    pod 'MOLH'
+    pod 'Kingfisher', '~> 7.0'
+    
+    pod 'Socket.IO-Client-Swift', '~> 16.0.1'
+    
   target 'AlmnabrTests' do
     inherit! :search_paths
     # Pods for testing

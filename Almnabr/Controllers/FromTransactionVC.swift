@@ -15,11 +15,10 @@ import DPLocalization
 import FontAwesome_swift
 import DropDown
 import FAPanels
+import MOLH
 
 class FromTransactionVC: UIViewController {
-
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblnodata: UILabel!
+     
     
     @IBOutlet weak var lblsearchTemplateName: UILabel!
     @IBOutlet weak var lblsearchGroupType: UILabel!
@@ -30,6 +29,7 @@ class FromTransactionVC: UIViewController {
     @IBOutlet weak var viewsearchGroupType: UIView!
     @IBOutlet weak var viewsearchGroupe1: UIView!
     @IBOutlet weak var viewsearchGroupe2: UIView!
+
     
     @IBOutlet weak var btnsearchTemplateName: UIButton!
     @IBOutlet weak var btnsearchGroupType: UIButton!
@@ -41,10 +41,17 @@ class FromTransactionVC: UIViewController {
     @IBOutlet weak var imgDropGroupe1: UIImageView!
     @IBOutlet weak var imgDropGroupe2: UIImageView!
     
+  
+    
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var table: UITableView!
     
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var viewsearch: UIView!
+    @IBOutlet weak var img_nodata: UIImageView!
+    @IBOutlet weak var tableHeightConstraint:NSLayoutConstraint!
+    
     
     var StrTitle:String = ""
     var StrSubMenue:String = ""
@@ -86,8 +93,8 @@ class FromTransactionVC: UIViewController {
         //  setupCollection()
         get_FormTransaction_data(showLoading: true, loadOnly: true)
         get_Template_name()
-//        get_Group_Type()
-//        get_Group1()
+        //        get_Group_Type()
+        //        get_Group1()
         
         
         
@@ -103,8 +110,14 @@ class FromTransactionVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
+    
+    
+//    override func viewDidLayoutSubviews() {
+//        tableHeightConstraint.constant = table.contentSize.height
+//        
+//    }
     
     // MARK: - Config Navigation
     func configNavigation() {
@@ -116,43 +129,35 @@ class FromTransactionVC: UIViewController {
     }
     
     
+    
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
         
-        
-        lblTitle.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblTitle.font = .kufiBoldFont(ofSize: 15)
-        
-      
-        self.lblnodata.text =  "txt_NoData".localized()
-        self.lblnodata.font = .kufiRegularFont(ofSize: 15)
-        self.lblnodata.isHidden = true
-      
-        
-        self.viewsearchTemplateName.setBorderGray()
+        self.viewsearchTemplateName.setBorderGrayWidthCorner(1, 20)
         self.lblsearchTemplateName.text =  "txt_TemplateName".localized()
-        self.lblsearchTemplateName.font = .kufiRegularFont(ofSize: 15)
+        self.lblsearchTemplateName.font = .kufiRegularFont(ofSize: 13)
         
-        self.viewsearchGroupType.setBorderGray()
+        self.viewsearchGroupType.setBorderGrayWidthCorner(1, 20)
         self.lblsearchGroupType.text =  "txt_GroupType".localized()
-        self.lblsearchGroupType.font = .kufiRegularFont(ofSize: 15)
+        self.lblsearchGroupType.font = .kufiRegularFont(ofSize: 13)
         
-        self.viewsearchGroupe1.setBorderGray()
+        self.viewsearch.setBorderGrayWidthCorner(1, 20)
+        self.viewsearchGroupe1.setBorderGrayWidthCorner(1, 20)
         self.lblsearchGroupe1.text =  "txt_Groupe1".localized()
-        self.lblsearchGroupe1.font = .kufiRegularFont(ofSize: 15)
+        self.lblsearchGroupe1.font = .kufiRegularFont(ofSize: 13)
         
-        self.viewsearchGroupe2.setBorderGray()
+        self.viewsearchGroupe2.setBorderGrayWidthCorner(1, 20)
         self.lblsearchGroupe2.text =  "txt_Groupe2".localized()
-        self.lblsearchGroupe2.font = .kufiRegularFont(ofSize: 15)
+        self.lblsearchGroupe2.font = .kufiRegularFont(ofSize: 13)
         
-        self.lblnodata.isHidden = false
+        self.img_nodata.isHidden = false
         
         btnsearchTemplateName.isHidden = true
         btnsearchGroupType.isHidden = true
         btnsearchGroupe1.isHidden = true
         btnsearchGroupe2.isHidden = true
-       
+        
         self.imgDropTemplateName.image = dropDownmage
         self.imgDropGroupe1.image = dropDownmage
         self.imgDropGroupe2.image = dropDownmage
@@ -160,17 +165,13 @@ class FromTransactionVC: UIViewController {
         
         searchBar.delegate = self
         
-        self.mainView.setBorderGray()
-        
-        self.lblTitle.text =  "Form Transaction".localized()
-        
         
         table.dataSource = self
         table.delegate = self
         
-        let nib = UINib(nibName: "TransactionTVCell", bundle: nil)
-        table.register(nib, forCellReuseIdentifier: "TransactionTVCell")
-       
+        let nib = UINib(nibName: "FormTransactionTVCell", bundle: nil)
+        table.register(nib, forCellReuseIdentifier: "FormTransactionTVCell")
+        
         
     }
     
@@ -182,19 +183,19 @@ class FromTransactionVC: UIViewController {
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
         APIManager.sendRequestGetAuth(urlString:   "p/formstransactions/\(projects_profile_id)/\(pageNumber)/10?search_key=\(search)&projects_profile_id=\(projects_profile_id)&platform_group1_code_system=\(StrsearchGroup1Code)&platform_group_type_code_system=\(StrsearchGroupTypeCode)&platform_group2_code_system=\(StrsearchGroup2)&template_id=\(StrsearchByTempelateCode)" ) { (response) in
-          
+            
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
             }
             let status = response["status"] as? Bool
-           // let total = response["total"] as? Int
+            // let total = response["total"] as? Int
             if loadOnly {
                 self.table.reloadData()
             }
             
             let page = response["page"] as? [String:Any]
             if status == true{
-               // self.total = total!
+                // self.total = total!
                 
                 if  let records = response["records"] as? NSArray{
                     for i in records {
@@ -209,9 +210,9 @@ class FromTransactionVC: UIViewController {
                     
                     
                     if records.count == 0 {
-                        self.lblnodata.isHidden = false
+                        self.img_nodata.isHidden = false
                     }else{
-                        self.lblnodata.isHidden = true
+                        self.img_nodata.isHidden = true
                     }
                     
                     if pageObj.total_pages > self.pageNumber {
@@ -226,7 +227,7 @@ class FromTransactionVC: UIViewController {
                 
             }else{
                 self.hideLoadingActivity()
-                self.lblnodata.isHidden = false
+                self.img_nodata.isHidden = false
                 // self.showAMessage(withTitle: "error", message: "Please try again")
             }
             
@@ -236,15 +237,16 @@ class FromTransactionVC: UIViewController {
     
     
     
-  
+    
     
     func get_Template_name(){
         
         self.showLoadingActivity()
-        let language = dp_get_current_language()
+        let language =  MOLHLanguage.currentAppleLanguage()
         APIManager.sendRequestGetAuth(urlString: "p/get_templates_for_transactions?lang_key=\(language ?? "ar")&projects_work_area_id=\(projects_work_area_id)" ) { (response) in
             
-            
+            self.arr_Tempelate = []
+            self.arr_TempelateLabel = []
             let status = response["status"] as? Bool
             if status == true{
                 if  let list = response["records"] as? NSArray{
@@ -272,7 +274,8 @@ class FromTransactionVC: UIViewController {
         self.showLoadingActivity()
         APIManager.sendRequestGetAuth(urlString: "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(StrsearchByTempelateCode)&required_type=type&group1=\(self.StrsearchGroup1Code)&type=" ) { (response) in
             
-            
+            self.arr_GroupType = []
+            self.arr_GroupTypeLabel = []
             let status = response["status"] as? Bool
             if status == true{
                 if  let list = response["records"] as? NSArray{
@@ -296,12 +299,13 @@ class FromTransactionVC: UIViewController {
     
     func get_Group1(){
         
-
+        
         //pforms/get_group1_type_group2?projects_work_area_id=1&template_id=1&required_type=group1&group1=&type=
         self.showLoadingActivity()
         APIManager.sendRequestGetAuth(urlString: "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(StrsearchByTempelateCode)&required_type=group1&group1=&type=" ) { (response) in
             
-            
+            self.arr_Group1 = []
+            self.arr_Group1Label = []
             let status = response["status"] as? Bool
             if status == true{
                 if  let list = response["records"] as? NSArray{
@@ -324,17 +328,19 @@ class FromTransactionVC: UIViewController {
     
     
     func get_Group2(){
-       
+        
         //StrsearchGroupTypeCode
         
-   //https://nahidh.sa/backend/pforms/get_group1_type_group2?projects_work_area_id=1&template_id=1&required_type=group2&group1=2&type=WIR
+        //https://nahidh.sa/backend/pforms/get_group1_type_group2?projects_work_area_id=1&template_id=1&required_type=group2&group1=2&type=WIR
         self.arr_Group2Label = []
         self.showLoadingActivity()
         APIManager.sendRequestGetAuth(urlString: "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(StrsearchByTempelateCode)&required_type=group2&group1=\(self.StrsearchGroup1Code)&type=\(self.StrsearchGroupTypeCode)" ) { (response) in
             
-            
+            self.arr_Group2 = []
+            self.arr_Group2Label = []
             let status = response["status"] as? Bool
             if status == true{
+                
                 if  let list = response["records"] as? NSArray{
                     for i in list {
                         let dict = i as? [String:Any]
@@ -355,14 +361,14 @@ class FromTransactionVC: UIViewController {
         }
     }
     
-
-
-//
-//    func sendData(MyStringToSend : String) {
-//
-//    let CVC = childViewControllers.last as! LanguageVC
-//    CVC.ChangeLabel( MyStringToSend)
-//    }
+    
+    
+    //
+    //    func sendData(MyStringToSend : String) {
+    //
+    //    let CVC = childViewControllers.last as! LanguageVC
+    //    CVC.ChangeLabel( MyStringToSend)
+    //    }
     
     
     @IBAction func btnSearchTemplateName_Click(_ sender: Any) {
@@ -390,12 +396,12 @@ class FromTransactionVC: UIViewController {
                     self.StrsearchByTempelateCode = i.value
                     self.imgDropTemplateName.image = dropDownmage
                     self.btnsearchTemplateName.isHidden = false
-                  
+                    
                     self.get_Group1()
                 }
                 
             }
-
+            
         }
         dropDown.direction = .bottom
         dropDown.anchorView = viewsearchTemplateName
@@ -431,11 +437,11 @@ class FromTransactionVC: UIViewController {
                     self.imgDropGroupType.image = dropDownmage
                     self.btnsearchGroupType.isHidden = false
                     self.get_Group2()
-                   
+                    
                 }
                 
             }
-
+            
         }
         dropDown.direction = .bottom
         dropDown.anchorView = viewsearchGroupType
@@ -474,16 +480,16 @@ class FromTransactionVC: UIViewController {
                     self.imgDropGroupe1.image = dropDownmage
                     //get_Group2()
                     self.get_Group_Type()
-                  
+                    
                 }
                 
             }
         }
-   
+        
         dropDown.direction = .bottom
         dropDown.anchorView = viewsearchGroupe1
         dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchGroupe1.bounds.height)
-        dropDown.width = viewsearchGroupe1.bounds.width
+        dropDown.width = viewsearchGroupe1.bounds.width * 2
         dropDown.show()
     }
     
@@ -516,7 +522,7 @@ class FromTransactionVC: UIViewController {
                 
             }
         }
-  
+        
         dropDown.direction = .bottom
         dropDown.anchorView = viewsearchGroupe2
         dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchGroupe2.bounds.height)
@@ -541,12 +547,12 @@ class FromTransactionVC: UIViewController {
     
     @IBAction func btnSearchGroupe2Delete_Click(_ sender: Any) {
         self.lblsearchGroupe2.text = "txt_Groupe2".localized()
-      
+        
         self.btnsearchGroupe2.isHidden = true
     }
     
     
-   
+    
 }
 
 
@@ -558,77 +564,56 @@ extension FromTransactionVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVCell", for: indexPath) as! TransactionTVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FormTransactionTVCell", for: indexPath) as! FormTransactionTVCell
         
         let obj = arr_data[indexPath.item]
         
-        let no =  "Platform Code System".localized() + "  \(obj.template_platform_code_system)"
-        let Description = "Platform".localized() + "  \(obj.platformname)"
-        let from = "Template Name".localized() + "  \(obj.templatename)"
-        let to = "Group One".localized() + "  \(obj.group1name)"
-        let barcode = "Group Type    ".localized() + "  \(obj.typename)"
-        let type = "Group Two".localized() + "  \(obj.group2name)"
+        let Code =  "\(obj.template_platform_code_system)"
+        let Platform = "Platform".localized() + ":  \(obj.platformname)"
+        let Template =  "\(obj.templatename)"
+        let G1 = "G1".localized() + ":  \(obj.group1name)"
+        let GroupType =  "\(obj.typename)"
+        let G2 = "G2".localized() + ":  \(obj.group2name)"
         
-        cell.lbKeylNo.text = no
-        cell.lblKeyDesc.text = Description
-        cell.lblKeyFrom.text = from
-        cell.lblKeyTo.text = to
-        cell.lblKeyBarCode.text = barcode
-        cell.lblKeyType.text = type
+        let maincolor = "#1A3665".getUIColor()
         
-        
-        cell.lblKeyModule.isHidden = true
-        cell.lblKeyWriter.isHidden = true
-        cell.lblKeySubmitter.isHidden = true
-        cell.lblKeyLastUpdate.isHidden = true
-        cell.lblKeyStatus.isHidden = true
-        
-        
-        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["Platform Code System".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lbKeylNo.attributedText = attributedWithTextColor
-        
-        let Descriptionattributed: NSAttributedString = Description.attributedStringWithColor(["Platform".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyDesc.attributedText = Descriptionattributed
-        
-        let fromattributed: NSAttributedString = from.attributedStringWithColor(["Template Name".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyFrom.attributedText = fromattributed
-        
-        let Toattributed: NSAttributedString = to.attributedStringWithColor(["Group One".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyTo.attributedText = Toattributed
-        
-        
-        let Barcodeattributed: NSAttributedString = barcode.attributedStringWithColor(["Group Type".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyBarCode.attributedText = Barcodeattributed
-        
-        let Typeattributed: NSAttributedString = type.attributedStringWithColor(["Group Two".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyType.attributedText = Typeattributed
+      
+        cell.lblCode.text = Code
+        cell.lblTemplate.text = Template
+        cell.lblGroupType.text = GroupType
         
        
-        cell.viewBack.setcorner()
+        let Platformattribute: NSAttributedString = Platform.attributedStringWithColor(["Platform"], color: maincolor)
+        cell.lblplatform.attributedText = Platformattribute
         
-       
+        
+        let G1attribute: NSAttributedString = G1.attributedStringWithColor(["G1"], color: maincolor)
+        cell.lblGroup1.attributedText = G1attribute
+        
+        let G2attribute: NSAttributedString = G2.attributedStringWithColor(["G2"], color: maincolor)
+        cell.lblGroup2.attributedText = G2attribute
+        
+     
         return cell
         
     }
     
-      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         
         
         print("Selected rows after selection: ", tableView.indexPathsForSelectedRows?.count ?? 0)
         let obj = self.arr_data[indexPath.item]
         
-        let vc : FormDetailsVC = AppDelegate.mainSB.instanceVC()
-      
+        //here
+        let vc : ProjectDetailVC = AppDelegate.mainSB.instanceVC()
+        
         let nav = UINavigationController.init(rootViewController: vc)
-      
+        IsTransaction = true
         vc.title =  self.title
         vc.ProjectObj = obj
-        vc.MenuObj = self.MenuObj
-        vc.StrSubMenue =  self.StrSubMenue
-       // vc.Object = self.ob
         _ =  panel?.center(nav)
     }
- 
+    
      
     
             
@@ -705,15 +690,15 @@ extension FromTransactionVC:UISearchBarDelegate {
 }
 
  
-extension UIApplication {
-    static var window: UIWindow? {
-        if #available(iOS 13, *) {
-            return UIApplication.shared.windows.first { $0.isKeyWindow }
-        } else {
-            return UIApplication.shared.keyWindow
-        }
-    }
-
-}
-
- 
+//extension UIApplication {
+//    static var window: UIWindow? {
+//        if #available(iOS 13, *) {
+//            return UIApplication.shared.windows.first { $0.isKeyWindow }
+//        } else {
+//            return UIApplication.shared.keyWindow
+//        }
+//    }
+//
+//}
+//
+// 

@@ -14,7 +14,7 @@ class NotificationVC: UIViewController {
     @IBOutlet weak var imgBack: UIButton!
     
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblnodata: UILabel!
+    @IBOutlet weak var imgnodata: UIImageView!
     
     @IBOutlet weak var table: UITableView!
     
@@ -28,7 +28,7 @@ class NotificationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configGUI()
-        
+        configNavigation()
         get_Notificaions_data(showLoading: true, loadOnly: true)
         
     }
@@ -39,16 +39,35 @@ class NotificationVC: UIViewController {
     //------------------------------------------------------
     func configGUI() {
         
-        
-        lblTitle.font = .kufiBoldFont(ofSize: 20)
-        lblTitle.text = "Notification"
-        
-        
         table.dataSource = self
         table.delegate = self
         let nib = UINib(nibName: "NotificationCell", bundle: nil)
         table.register(nib, forCellReuseIdentifier: "NotificationCell")
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // Hide the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Show the Navigation Bar
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    // MARK: - Config Navigation
+    func configNavigation() {
+        
+        _ = self.navigationController?.preferredStatusBarStyle
+        self.view.backgroundColor = maincolor //F0F4F8
+        //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
+        navigationController?.navigationBar.barTintColor = maincolor
+       addNavigationBarTitle(navigationTitle: "Notifications".localized())
+        UINavigationBar.appearance().backgroundColor = maincolor
     }
     
     
@@ -71,8 +90,7 @@ class NotificationVC: UIViewController {
             let status = response["status"] as? Bool
             if loadOnly {
                 self.table.reloadData()
-            }
-            
+            } 
             
             let page = response["page"] as? [String:Any]
             if status == true{
@@ -90,9 +108,9 @@ class NotificationVC: UIViewController {
                         self.allItemDownloaded = true
                     }
                     if records.count == 0 {
-                        self.lblnodata.isHidden = false
+                        self.imgnodata.isHidden = false
                     }else{
-                        self.lblnodata.isHidden = true
+                        self.imgnodata.isHidden = true
                     }
                     self.table.reloadData()
                     self.hideLoadingActivity()
@@ -100,16 +118,15 @@ class NotificationVC: UIViewController {
                 self.hideLoadingActivity()
             }else{
                 self.hideLoadingActivity()
-                self.lblnodata.isHidden = false
+                self.imgnodata.isHidden = false
             }
             if self.arr_data.count == 0 {
-                self.lblnodata.isHidden = false
+                self.imgnodata.isHidden = false
             }else{
-                self.lblnodata.isHidden = true
+                self.imgnodata.isHidden = true
             }
             
             self.hideLoadingActivity()
-            // self.lblnodata.isHidden = false
         }
     }
     
@@ -145,6 +162,8 @@ class NotificationVC: UIViewController {
     
     
     @IBAction func btn_back(_ sender: Any) {
+        self.table.removeFromSuperview()
+        self.view.removeFromSuperview()
         self.navigationController?.popViewController(animated: true)
         
     }
@@ -170,18 +189,14 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
         cell.lblTitle.text = obj.noty_messages_title
         cell.lblSubTitle.text = obj.noty_messages_body
         
-        cell.lblDate.font = .kufiRegularFont(ofSize: 13)
-        cell.lblTitle.font = .kufiBoldFont(ofSize: 16)
-        cell.lblSubTitle.font = .kufiRegularFont(ofSize: 15)
+        cell.lblDate.font = .kufiRegularFont(ofSize: 12)
+        cell.lblTitle.font = .kufiRegularFont(ofSize: 13)
+        cell.lblSubTitle.font = .kufiRegularFont(ofSize: 12)
         
         cell.btnDeleteAction = {
             () in
             self.get_Delete_notification(message_id:obj.noty_messages_id)
         }
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .clear
-        cell.selectedBackgroundView = backgroundView
         
         return cell
         
@@ -189,14 +204,18 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //                let obj = arr_data[indexPath.item]
-        //                let vc:ProjectDetailsVC = AppDelegate.mainSB.instanceVC()
-        //                vc.title =  self.title
-        //                vc.Object = obj
-        //                vc.MenuObj = self.MenuObj
-        //                vc.StrSubMenue =  self.StrSubMenue
-        //                vc.StrMenue = self.StrMenue
-        //                _ =  panel?.center(vc)
+        let obj = arr_data[indexPath.item]
+        
+        if let ios = obj.extra_data["ios"] as? String {
+            let splitString = ios.components(separatedBy: "ios/transactions")
+            let url = "\(splitString[1])"
+            let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+            vc.str_url = "\(splitString[1])"
+            vc.IsFromNotification = true
+            self.navigationController?.pushViewController(vc, animated: true)
+    
+        }
+  
     }
     
     

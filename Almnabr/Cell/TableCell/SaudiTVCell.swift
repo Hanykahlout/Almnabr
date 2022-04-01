@@ -10,7 +10,6 @@ import UIKit
 
 class SaudiTVCell: UITableViewCell {
     
-    
     @IBOutlet weak var btn_delete: UIButton!
     @IBOutlet weak var lblNumber: UILabel!
     @IBOutlet weak var tf_Title: UITextField!
@@ -19,14 +18,17 @@ class SaudiTVCell: UITableViewCell {
     @IBOutlet weak var stack_status: UIStackView!
     @IBOutlet weak var btn_checkYes: UIButton!
     @IBOutlet weak var btn_checkNo: UIButton!
-    
+    @IBOutlet weak var btn_SelectFile: UIButton!
     @IBOutlet weak var viewBack: UIView!
     
     var btnDeleteAction : (()->())?
-    var btnEndEditingAction : (()->())?
     var btnYesAction : (()->())?
     var btnNoAction : (()->())?
+    var btnEndEditingAction : (()->())?
     
+    @IBAction func didEndEditingButtonPressd(_ sender: Any) {
+        btnEndEditingAction?()
+    }
     
     @IBAction func didReCancelButtonPressd(_ sender: Any) {
         btnDeleteAction!()
@@ -43,9 +45,7 @@ class SaudiTVCell: UITableViewCell {
     }
     
     
-    @IBAction func didEndEditingButtonPressd(_ sender: Any) {
-        btnEndEditingAction?()
-    }
+  
     
     override func awakeFromNib() {
         super.awakeFromNib()

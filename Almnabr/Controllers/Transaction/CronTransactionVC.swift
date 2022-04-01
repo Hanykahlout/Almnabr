@@ -10,27 +10,20 @@ import UIKit
 import DPLocalization
 import FontAwesome_swift
 import DropDown
+import MOLH
 
 class CronTransactionVC: UIViewController {
     
-    @IBOutlet weak var viewTheme: UIView!
     @IBOutlet weak var header: HeaderView!
-    @IBOutlet weak var btnMenu: UIView!
-    @IBOutlet weak var imgNext1: UIImageView!
-    @IBOutlet weak var imgNext2: UIImageView!
     
-    @IBOutlet weak var lblHome: UIButton!
-    @IBOutlet weak var lblMenuName: UILabel!
-    @IBOutlet weak var lblSubMenuName: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var tableHeightConstraint:NSLayoutConstraint!
     
-    @IBOutlet weak var lblnodata: UILabel!
-    
+    @IBOutlet weak var view_refresh: UIView!
     @IBOutlet weak var btnRefrsh: UIButton!
-    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var table: UITableView!
     
-    @IBOutlet weak var collection: UICollectionView!
+    @IBOutlet weak var imgnodata: UIImageView!
     
     var StrTitle:String = ""
     var StrSubMenue:String = ""
@@ -68,6 +61,8 @@ class CronTransactionVC: UIViewController {
         // Show the Navigation Bar
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
+
+    
     
     // MARK: - Config Navigation
     func configNavigation() {
@@ -83,44 +78,25 @@ class CronTransactionVC: UIViewController {
     //------------------------------------------------------
     func configGUI() {
         
+        lblTitle.textColor =  "1A3665".getUIColor()
+        lblTitle.font = .kufiRegularFont(ofSize: 17)
+        lblTitle.text =  StrSubMenue
         
-        lblHome.titleLabel?.textColor =  HelperClassSwift.bcolor.getUIColor()
-        lblHome.titleLabel?.font = .kufiRegularFont(ofSize: 15)
-        
-        lblMenuName.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblMenuName.font = .kufiRegularFont(ofSize: 15)
-        
-        lblTitle.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblTitle.font = .kufiBoldFont(ofSize: 15)
-        
-        lblSubMenuName.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblSubMenuName.font = .kufiRegularFont(ofSize: 15)
-        
-        
-        self.lblHome.titleLabel?.text =  "Home".localized()
-        self.lblHome.titleLabel?.font = .kufiRegularFont(ofSize: 15)
-        
-        
-        self.lblnodata.text =  "txt_NoData".localized()
-        self.lblnodata.font = .kufiRegularFont(ofSize: 15)
-        self.lblnodata.isHidden = true
-        
-        self.mainView.setBorderGray()
-        
-        self.lblMenuName.text =  MenuObj?.menu_name
-        self.lblSubMenuName.text =  StrSubMenue
-        self.lblTitle.text =  StrSubMenue
-        
-        let nextimage =  UIImage.fontAwesomeIcon(name: .angleRight, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
-        self.imgNext1.image = nextimage
-        self.imgNext2.image = nextimage
+        self.imgnodata.isHidden = true
         
         
         table.dataSource = self
         table.delegate = self
-        let nib = UINib(nibName: "TransactionTVCell", bundle: nil)
-        table.register(nib, forCellReuseIdentifier: "TransactionTVCell")
+        let nib = UINib(nibName: "CornTransactionTVCell", bundle: nil)
+        table.register(nib, forCellReuseIdentifier: "CornTransactionTVCell")
  
+        view_refresh.layer.applySketchShadow(
+          color: .black,
+          alpha: 0.6,
+          x: 0,
+          y: 3,
+          blur: 3,
+          spread: 0)
         
     }
     
@@ -156,9 +132,9 @@ class CronTransactionVC: UIViewController {
                     let pageObj = PageObj(page!)
                     
                     if records.count == 0 {
-                        self.lblnodata.isHidden = false
+                        self.imgnodata.isHidden = false
                     }else{
-                        self.lblnodata.isHidden = true
+                        self.imgnodata.isHidden = true
                     }
                     if pageObj.total_pages > self.pageNumber {
                         self.allItemDownloaded = false
@@ -171,7 +147,7 @@ class CronTransactionVC: UIViewController {
                 
             }else{
                 self.hideLoadingActivity()
-                self.lblnodata.isHidden = false
+                self.imgnodata.isHidden = false
             }
             
             
@@ -182,7 +158,7 @@ class CronTransactionVC: UIViewController {
     
     
     func menu_select(){
-        let language = dp_get_current_language()
+        let language =  MOLHLanguage.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{
@@ -209,62 +185,40 @@ extension CronTransactionVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVCell", for: indexPath) as! TransactionTVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CornTransactionTVCell", for: indexPath) as! CornTransactionTVCell
         
         let obj = arr_data[indexPath.item]
         
-       
+        let Id = "\(obj.transaction_request_id)"
+        let FormName = "Form Name".localized() + ":  \(obj.transaction_key)"
+        let Attempt =  "\(obj.transactions_cronjob_try_to_submitting)"
+        let lastUpdate = "\(obj.transactions_cronjob_last_update)"
+        let Error = "Error".localized() + ":  \(obj.transactions_cronjob_err)"
         
-        let no =  "No.".localized() + "  \(obj.transaction_request_id)"
-        let Description = "Form Name".localized() + "  \(obj.transaction_key)"
-        let from = "Attempt".localized() + "  \(obj.transactions_cronjob_last_update)"
-        let to = "Last Update".localized() + "  \(obj.transactions_cronjob_last_update)"
-        let type = "Error".localized() + "  \(obj.transactions_cronjob_err)"
+        let maincolor = "#1A3665".getUIColor()
         
-        cell.lbKeylNo.text = no
-        cell.lblKeyDesc.text = Description
-        cell.lblKeyFrom.text = from
-        cell.lblKeyTo.text = to
-        cell.lblKeyType.text = type
+        cell.lblNo.text = Id
         
-        cell.lblKeyBarCode.isHidden = true
-        cell.lblKeyStatus.isHidden = true
-        cell.lblKeyModule.isHidden = true
-        cell.lblKeySubmitter.isHidden = true
-        cell.lblKeyLastUpdate.isHidden = true
-        cell.lblKeyStatus.isHidden = true
-        cell.lblKeyWriter.isHidden = true
+        let FormNameattributed: NSAttributedString = FormName.attributedStringWithColor(["Form Name".localized()], color: maincolor)
+        cell.lblFormName.attributedText = FormNameattributed
         
-        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["No.".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lbKeylNo.attributedText = attributedWithTextColor
+        let Attemptattributed: NSAttributedString = Attempt.attributedStringWithColor(["Attempt".localized()], color: maincolor)
+        cell.lblAttempt.attributedText = Attemptattributed
         
-        let Descriptionattributed: NSAttributedString = Description.attributedStringWithColor(["Form Name".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyDesc.attributedText = Descriptionattributed
-        
-        let fromattributed: NSAttributedString = from.attributedStringWithColor(["Attempt".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyFrom.attributedText = fromattributed
-        
-        let Toattributed: NSAttributedString = to.attributedStringWithColor(["Last Update".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyTo.attributedText = Toattributed
+        cell.lblLastUpdate.text = lastUpdate
         
         
        
-        let Typeattributed: NSAttributedString = type.attributedStringWithColor(["Error".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyType.attributedText = Typeattributed
+        let Errorattributed: NSAttributedString = Error.attributedStringWithColor(["Error".localized()], color: .red)
+        cell.lblError.attributedText = Errorattributed
         
         
-        cell.btnDelete.isHidden = false
         
-        
-        cell.viewBack.setcorner()
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .white
-        cell.selectedBackgroundView = backgroundView
         
         return cell
         
     }
+    
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if tableView.tag == 0 {

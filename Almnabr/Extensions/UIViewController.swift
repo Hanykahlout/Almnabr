@@ -9,8 +9,10 @@
 import Foundation
 import ZVProgressHUD
 import DPLocalization
+import MOLH
 
 extension UIViewController {
+    
     
 
     func showAMessage(withTitle title: String, message : String) {
@@ -37,10 +39,13 @@ extension UIViewController {
 //        ZVProgressHUD.maskType = .black
 //        ZVProgressHUD.strokeWith = 2.0
         ZVProgressHUD.show()
+       // CustomLoader.sharedInstance.startAnimation()
     }
     
     @objc func hideLoadingActivity() {
+   //     CustomLoader.sharedInstance.stopAnimation()
         ZVProgressHUD.dismiss()
+        
     }
     
     func delayWithSeconds(_ seconds: Double, completion: @escaping () -> ()) {
@@ -61,7 +66,7 @@ extension UIViewController {
             UIApplication.shared.applicationIconBadgeNumber = 0
 
             NewSuccessModel.removeLoginSuccessToken()
-            
+            puplic_total = 0 
             guard let window = UIApplication.shared.keyWindow else {return}
            
             let vc : SignInVC = AppDelegate.mainSB.instanceVC()
@@ -78,7 +83,22 @@ extension UIViewController {
         lblNavigationTile.textAlignment = .center
         //lblNavigationTile.backgroundColor = .clear
         lblNavigationTile.textColor = .white
-        lblNavigationTile.font = .boldSystemFont(ofSize: 22)
+        lblNavigationTile.font = .kufiBoldFont(ofSize: 15)
+        lblNavigationTile.text = navigationTitle.localized()
+        lblNavigationTile.frame = CGRect(x: 0, y: 0, width: 120, height: 30)
+        
+        
+        let barImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 82, height: 30))
+        //barImage.image = UIImage(named: "icon_nav_bar.png")
+        self.navigationItem.titleView = lblNavigationTile
+    }
+    
+    func addNavigationBarTitleColor(navigationTitle: String) {
+        let lblNavigationTile = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 30))
+        lblNavigationTile.textAlignment = .center
+        //lblNavigationTile.backgroundColor = .clear
+        lblNavigationTile.textColor = maincolor
+        lblNavigationTile.font = .kufiBoldFont(ofSize: 15)
         lblNavigationTile.text = navigationTitle.localized()
         lblNavigationTile.frame = CGRect(x: 0, y: 0, width: 120, height: 30)
         
@@ -101,7 +121,7 @@ extension UIViewController {
     }
     
     func isArabicSelected() -> Bool {
-        if dp_get_current_language() == "ar" {
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
             return true
         }
         return false
@@ -201,4 +221,28 @@ extension UIView{
         ZVProgressHUD.dismiss()
     }
     
+}
+
+extension UIViewController {
+
+func switchRootViewController(rootViewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
+        guard let window = UIApplication.shared.keyWindow else { return }
+        if animated {
+            UIView.transition(with: window, duration: 0.3
+                , options: .transitionCrossDissolve, animations: {
+                    let oldState: Bool = UIView.areAnimationsEnabled
+                    UIView.setAnimationsEnabled(false)
+                    let navController = UINavigationController.init(rootViewController: rootViewController)
+                    navController.navigationBar.isHidden = true
+                    window.rootViewController = navController
+                    UIView.setAnimationsEnabled(oldState)
+            }, completion: { (finished: Bool) -> () in
+                if (completion != nil) {
+                    completion!()
+                }
+            })
+        } else {
+            window.rootViewController = rootViewController
+        }
+    }
 }

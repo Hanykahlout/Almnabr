@@ -25,24 +25,34 @@ class FinalResultVC: UIViewController {
         configGUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+         configGUI()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+       // configGUI()
+    }
     
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
          
         
-        self.lbl_Title.text =  "Final Result ".localized()
-        self.lbl_Title.font = .kufiBoldFont(ofSize: 15)
-        self.lbl_Title.textColor =  HelperClassSwift.acolor.getUIColor()
+        self.lbl_Title.text =  "Final Result".localized()
+        self.lbl_Title.font = .kufiRegularFont(ofSize: 14)
+        self.lbl_Title.textColor =  maincolor
         
         
         self.lbl_Thanks.text =  "Thank you, we will review your request. wait the result soon.".localized()
-        self.lbl_Thanks.font = .kufiBoldFont(ofSize: 16)
+        self.lbl_Thanks.font = .kufiRegularFont(ofSize: 13)
         self.lbl_Thanks.textColor =  "#555".getUIColor()
         
         
         
-        icon_noPermission.loadGif(name: "no-permission")
+        icon_noPermission.no_permission()
         
         self.lbl_noPermission.text =  "You not have permission to access this step".localized()
         self.lbl_noPermission.font = .kufiRegularFont(ofSize: 15)
@@ -62,6 +72,7 @@ class FinalResultVC: UIViewController {
                 self.view_main.isHidden = false
             }
         }
+        
       
     }
 

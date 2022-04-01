@@ -61,15 +61,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         rootController.leftPanelPosition = .front
 
         // rootController.configs.rightPanelWidth = (window?.frame.size.width)!
-        let width = UIScreen.main.bounds.width - 80
+        let width = UIScreen.main.bounds.width - 150
         
         
         rootController.configs.leftPanelWidth = width
         rootController.configs.rightPanelWidth = width
        
         rootController.configs.maxAnimDuration = 0.3
-        rootController.configs.canRightSwipe = false
-        rootController.configs.canLeftSwipe = false
+        rootController.configs.canRightSwipe = true
+        rootController.configs.canLeftSwipe = true
         rootController.configs.changeCenterPanelAnimated = false
         window?.rootViewController = rootController
         UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
@@ -141,7 +141,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneDidBecomeActive(_ scene: UIScene) {
         
-    
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
     }
 

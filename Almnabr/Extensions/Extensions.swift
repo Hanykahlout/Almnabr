@@ -8,7 +8,7 @@
 
 import Foundation
 import DPLocalization
-
+import MOLH
 
 extension Date {
     func asStringHHmmss() -> String {
@@ -73,8 +73,8 @@ extension Date {
         let dateFormatter = DateFormatter()
         //dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = formatString
-        
-        if dp_get_current_language() == "ar" {
+       
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
             dateFormatter.locale = Locale(identifier: "ar_EG")
             //print("printar")
         } else {
@@ -162,7 +162,8 @@ extension Date {
         let dateFormatter = DateFormatter()
         //dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "dd MMM yyyy   hh a"
-        if dp_get_current_language() == "ar" {
+        
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
             dateFormatter.locale = Locale(identifier: "ar_EG")
             //print("printar")
         } else {
@@ -179,7 +180,7 @@ extension Date {
         let dateFormatter = DateFormatter()
         //dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        if dp_get_current_language() == "ar" {
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
             dateFormatter.locale = Locale(identifier: "ar_EG")
             //print("printar")
         } else {
@@ -346,6 +347,7 @@ import Foundation
 import UIKit
 extension String {
     
+    
     var withoutHtmlTags: String {
         return self.replacingOccurrences(of: "<[^>]+>", with: "", options:
         .regularExpression, range: nil).replacingOccurrences(of: "&[^;]+;", with:
@@ -409,7 +411,8 @@ extension String {
        return keyString
     }
     
-    
+   
+
    
     
     func localized(withComment comment: String? = nil) -> String {
@@ -714,7 +717,7 @@ extension String {
         
         dateFormatter1.dateFormat = "dd MMM yyyy   hh a" //Your date format
 
-        if dp_get_current_language() == "ar" {
+        if MOLHLanguage.currentAppleLanguage()  == "ar" {
             dateFormatter1.locale = Locale(identifier: "ar_EG")
         } else {
             dateFormatter1.locale = Locale(identifier: "en_US")
@@ -736,7 +739,7 @@ extension String {
         
         let dateFormatter1 = DateFormatter()
         dateFormatter1.dateFormat = "dd MMM yyyy  hh a"
-        if dp_get_current_language() == "ar" {
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
             dateFormatter1.locale = Locale(identifier: "ar_EG")
            
         } else {
@@ -765,7 +768,7 @@ extension String {
         //dateFormatter1.amSymbol = "am"
         //dateFormatter1.pmSymbol = "pm"
         
-        if dp_get_current_language() == "ar" {
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
             dateFormatter1.locale = Locale(identifier: "ar_EG")
             print("printar")
         } else {
@@ -1593,6 +1596,27 @@ extension UILabel {
         attributedText = attributedString
     }
 
+    func setFontAndcolor(stringValue: String, coloredValue: String, withTextSize: CGFloat  , color:UIColor) {
+        let attritext = [
+            
+            NSAttributedString.Key.font : UIFont(name: "DroidArabicKufi-Bold", size: withTextSize)!,
+            NSAttributedString.Key.foregroundColor : color] as [NSAttributedString.Key : Any]
+        
+        let attritext1 = [
+            
+            NSAttributedString.Key.font : UIFont(name: "DroidArabicKufi", size: withTextSize)!,
+            NSAttributedString.Key.foregroundColor : "#717889".getUIColor()] as [NSAttributedString.Key : Any]
+        
+        
+        let attributeString = NSMutableAttributedString(string: coloredValue.localized(),
+                                                        attributes: attritext)
+        
+        let attributeString1 = NSMutableAttributedString(string: stringValue,
+                                                        attributes: attritext1)
+        
+        attributeString.append(attributeString1)
+        self.attributedText = attributeString
+    }
 }
 
 
@@ -1647,14 +1671,22 @@ extension UITableView {
         return self.indexPathForRow(at: location)
     }
     
-    func scrollToBottom(animated: Bool){
-        DispatchQueue.main.async {
-            let indexPath = IndexPath(
-                row: self.numberOfRows(inSection:  self.numberOfSections - 1) - 1,
-                section: self.numberOfSections - 1)
-            self.scrollToRow(at: indexPath, at: .bottom, animated: animated)
-        }
-    }
+    func scrollToBottom(isAnimated:Bool = true){
+
+         DispatchQueue.main.async {
+             let indexPath = IndexPath(
+                 row: self.numberOfRows(inSection:  self.numberOfSections-1) - 1,
+                 section: self.numberOfSections - 1)
+             if self.hasRowAtIndexPath(indexPath: indexPath) {
+                 self.scrollToRow(at: indexPath, at: .bottom, animated: isAnimated)
+             }
+         }
+     }
+    
+    func hasRowAtIndexPath(indexPath: IndexPath) -> Bool {
+          return indexPath.section < self.numberOfSections && indexPath.row < self.numberOfRows(inSection: indexPath.section)
+      }
+    
     
     func scrollToTop(animated: Bool) {
         DispatchQueue.main.async {
@@ -1707,6 +1739,24 @@ import UIKit
 
 extension UIView {
     
+
+    func setBorderGrayWidthCorner(_ borderWidth:CGFloat,_ radius:CGFloat) {
+        self.layer.borderColor = #colorLiteral(red: 0.8537729979, green: 0.8537931442, blue: 0.8537823558, alpha: 1)
+        self.layer.borderWidth = borderWidth
+       // let radius = self.frame.height / 2
+        self.layer.cornerRadius = radius
+        self.layer.masksToBounds = true
+    }
+    
+    func setBorderColorWidthCorner(_ borderWidth:CGFloat,_ radius:CGFloat , color:UIColor) {
+        self.layer.borderColor = color.cgColor
+        self.layer.borderWidth = borderWidth
+       // let radius = self.frame.height / 2
+        self.layer.cornerRadius = radius
+        self.layer.masksToBounds = true
+    }
+    
+    
     func setBorderGray() {
         self.layer.borderColor = #colorLiteral(red: 0.8537729979, green: 0.8537931442, blue: 0.8537823558, alpha: 1)
         self.layer.borderWidth = 1
@@ -1718,6 +1768,13 @@ extension UIView {
         self.layer.borderColor = #colorLiteral(red: 0.8537729979, green: 0.8537931442, blue: 0.8537823558, alpha: 1)
         self.layer.borderWidth = borderWidth
         let radius = self.frame.height / 2
+        self.layer.masksToBounds = true
+    }
+    
+    func setBorderWithColor(_ borderColor:UIColor) {
+        self.layer.borderColor = borderColor.cgColor
+        self.layer.borderWidth = 1
+        //let radius = self.frame.height / 2
         self.layer.masksToBounds = true
     }
     
@@ -2131,6 +2188,17 @@ extension UICollectionView {
         let location = view.convert(CGPoint.zero, to: self)
         return self.indexPathForItem(at: location)
     }
+    
+    func dequeueCVCell<T: UICollectionViewCell>(indexPath:IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: String(describing: T.self), for: indexPath) as? T else {
+            fatalError("Could not locate viewcontroller with with identifier \(String(describing: T.self)) in storyboard.")
+        }
+        return cell
+    }
+    
+    func registerCell(id: String) {
+        self.register(UINib(nibName: id, bundle: nil), forCellWithReuseIdentifier: id)
+    }
 }
 
 
@@ -2158,6 +2226,15 @@ func instanceVC<T: UIViewController>() -> T {
     return vc
     }}
 
+extension UIApplication {
+    static var window: UIWindow? {
+            if #available(iOS 13, *) {
+                return UIApplication.shared.windows.first { $0.isKeyWindow }
+            } else {
+                return UIApplication.shared.keyWindow
+            }
+        }
+}
 extension String {
     func attributedStringWithColor(_ strings: [String], color: UIColor, characterSpacing: UInt? = nil) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(string: self)
@@ -2174,4 +2251,43 @@ extension String {
 
         return attributedString
     }
+}
+
+
+extension NSMutableAttributedString {
+
+    func setColorForText(textForAttribute: String, withColor color: UIColor) {
+        let range: NSRange = self.mutableString.range(of: textForAttribute, options: .caseInsensitive)
+
+        // Swift 4.2 and above
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+
+        // Swift 4.1 and below
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+    }
+
+}
+
+extension CALayer {
+  func applySketchShadow(
+    color: UIColor = .black,
+    alpha: Float = 0.5,
+    x: CGFloat = 0,
+    y: CGFloat = 2,
+    blur: CGFloat = 4,
+    spread: CGFloat = 0)
+  {
+    masksToBounds = false
+    shadowColor = color.cgColor
+    shadowOpacity = alpha
+    shadowOffset = CGSize(width: x, height: y)
+    shadowRadius = blur / 2.0
+    if spread == 0 {
+      shadowPath = nil
+    } else {
+      let dx = -spread
+      let rect = bounds.insetBy(dx: dx, dy: dx)
+      shadowPath = UIBezierPath(rect: rect).cgPath
+    }
+  }
 }

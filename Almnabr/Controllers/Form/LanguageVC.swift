@@ -10,6 +10,8 @@ import UIKit
 import DropDown
 import DPLocalization
 
+var IsTransaction:Bool = false
+
 class LanguageVC: UIViewController {
 
     
@@ -54,20 +56,17 @@ class LanguageVC: UIViewController {
 
         configGUI()
         get_Lang()
-        print(ProjectObj?.group1name)
         update_observer()
    
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Hide the Navigation Bar
-        if StatusObject?.Configurations == false {
-            view_noPermission.isHidden = false
-            self.btnNext.isHidden = true
-           
-        }
+        
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        configGUI()
+    
     }
     
     
@@ -87,14 +86,12 @@ class LanguageVC: UIViewController {
      
         self.view.backgroundColor = .white//F0F4F8
         
-        lblLanguage.textColor =  HelperClassSwift.acolor.getUIColor()
+        lblLanguage.textColor = maincolor
         lblLanguage.font = .kufiBoldFont(ofSize: 15)
-        lblLanguage.text = "txt_Language"
+        lblLanguage.text = "txt_Language".localized()
         
-        //self.lblLanguageSelect.text = "English"
-     
        
-        self.lblLanguageSelect.text =  "English"
+        self.lblLanguageSelect.text =  "English".localized()
         self.lblLanguageSelect.font = .kufiRegularFont(ofSize: 15)
         
         self.viewLanguageSelect.setBorderGray()
@@ -107,42 +104,42 @@ class LanguageVC: UIViewController {
         
         self.viewStep.backgroundColor = HelperClassSwift.acolor.getUIColor()
         self.lblStep.text = "txt_Language".localized()
-        self.lblStep.font = .kufiBoldFont(ofSize: 15)
-        self.lblStep.textColor = HelperClassSwift.acolor.getUIColor()
+        self.lblStep.font = .kufiRegularFont(ofSize: 15)
+        self.lblStep.textColor = "#616263".getUIColor()
+        //HelperClassSwift.acolor.getUIColor()
         
-        self.btnNext.backgroundColor = HelperClassSwift.acolor.getUIColor()
+        //self.btnNext.backgroundColor = HelperClassSwift.acolor.getUIColor()
         
         
-        self.viewStep.setBorderGrayWidth(3)
+        self.viewStep.setBorderGrayWidth(0.5)
         let Stepimage =  UIImage.fontAwesomeIcon(name: .building, style: .solid, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
         self.imgStep.image = Stepimage
         
-        icon_noPermission.loadGif(name: "no-permission")
+        icon_noPermission.no_permission()
         
         self.lbl_noPermission.text =  "You not have permission to access this step".localized()
         self.lbl_noPermission.font = .kufiRegularFont(ofSize: 15)
         self.lbl_noPermission.textColor =  "#333".getUIColor()
          
       
-        if isFromTransaction == false{
+        if IsTransaction == false{
             
             if StatusObject?.Configurations == false {
                 view_noPermission.isHidden = false
                 self.btnNext.isHidden = true
-               
+            }else{
+                view_noPermission.isHidden = true
+                self.btnNext.isHidden = false
             }
         }else{
             view_noPermission.isHidden = true
         }
         
-        self.btnNext.setTitle("Next".localized(), for: .normal)
-        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
-        self.btnNext.setTitleColor(.white, for: .normal)
-        self.btnNext.setRounded(10)
-//        self.ProjectObj?.projects_work_area_id = "1"
-//        self.ProjectObj?.template_id = "1"
-//        self.ProjectObj?.template_platform_code_system = "2.WIR.1.1"
-        
+//        self.btnNext.setTitle("Next".localized(), for: .normal)
+//        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+//        self.btnNext.setTitleColor(.white, for: .normal)
+//        self.btnNext.setRounded(10)
+
     }
     
     
@@ -177,12 +174,15 @@ class LanguageVC: UIViewController {
     private func update_observer(){
         NotificationCenter.default.addObserver(forName: NSNotification.Name("update_langVC"), object: nil, queue: .main) { notifi in
                  // guard let index = notifi.object as? Int else { return }
-            if StatusObject?.Configurations == false {
-                self.view_noPermission.isHidden = false
-                self.btnNext.isHidden = true
-                self.mainView.isHidden = true
-               
+            if IsTransaction == false{
+                if StatusObject?.Configurations == false {
+                  self.view_noPermission.isHidden = false
+                    self.btnNext.isHidden = true
+                    //self.mainView.isHidden = true
+                   
+                }
             }
+           
         }
     }
     
@@ -217,14 +217,37 @@ class LanguageVC: UIViewController {
   
     @IBAction func btnSiteLevel_Click(_ sender: Any) {
         
-        let vc:SiteLevelVC = AppDelegate.mainSB.instanceVC()
-        vc.StrLanguage = self.StrLanguage
-        vc.ProjectObj = self.ProjectObj
-     
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        switch ProjectObj?.templatename {
+        case "MSR":
+            let vc:LocationVC = AppDelegate.mainSB.instanceVC()
+            vc.StrLanguage = self.StrLanguage
+            vc.ProjectObj = self.ProjectObj
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "WIR":
+            let vc:SiteLevelVC = AppDelegate.mainSB.instanceVC()
+            vc.StrLanguage = self.StrLanguage
+            vc.ProjectObj = self.ProjectObj
+         
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            let vc:SiteLevelVC = AppDelegate.mainSB.instanceVC()
+            vc.StrLanguage = self.StrLanguage
+            vc.ProjectObj = self.ProjectObj
+         
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+       
+        
     }
     
     
     
     
+}
+
+extension UIImageView {
+    func no_permission() {
+        self.image = .init(named: "no-permission")
+    }
 }

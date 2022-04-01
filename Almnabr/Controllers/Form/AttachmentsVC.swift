@@ -21,6 +21,19 @@ struct attachment {
     var IsNew:Bool = false
 }
 
+struct notes {
+    
+    var id:String?
+    var title:String?
+    var result:String?
+    var Required:String?
+    var img:UIImage?
+    var url:URL?
+    var type:String?
+    var index:Int = 0
+    var IsNew:Bool = false
+}
+
 struct SaudiBuillding {
     
     var Status:String?
@@ -28,6 +41,18 @@ struct SaudiBuillding {
     var index:Int = 0
 }
 
+struct NoteObj {
+    
+    var Title:String?
+    var index:Int = 0
+}
+
+
+struct special_approvers {
+    
+    var Title:String?
+    var id:String?
+}
 
 struct Technical_Assistants {
     
@@ -76,6 +101,8 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     
     @IBOutlet weak var Stack_contractor: UIView!
     
+    @IBOutlet weak var img_nodata: UIImageView!
+    
     
     var arr_default_attachment:[FileObj] = []
     var arr_data:[AttachmentsObj] = []
@@ -89,6 +116,14 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     var work_site:String = "ALL"
     var units :String = ""
     var user_position:String = "CTT01"
+    
+    var transaction_id:String = "0"
+    
+    var projects_work_area_id:String = ""
+    var template_platform_code_system:String = ""
+    var template_id:String = ""
+    
+    var template_platform_group_type_code_system:String = ""
     
     var arr_NoData:[String] = ["No items found".localized()]
     
@@ -118,6 +153,15 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         configGUI()
         get_default_attachments()
         get_ContractorTeamUsers()
+        
+        self.img_nodata.isHidden = true
+//        if self.arr_default_attachment.count == 0{
+//            self.img_nodata.isHidden = false
+//        }else{
+//            self.img_nodata.isHidden = true
+//        }
+        
+        
     }
     
     
@@ -141,16 +185,13 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     func configGUI() {
  
         
-        self.mainView.setBorderGray()
-        
         viewContractor.setBorderGray()
         imagePickerController.delegate = self
         
         self.viewStep.backgroundColor = HelperClassSwift.acolor.getUIColor()
         self.lblStep.text = "txt_Attachments".localized()
-        self.lblStep.font = .kufiBoldFont(ofSize: 15)
-        self.lblStep.textColor = HelperClassSwift.acolor.getUIColor()
-        
+        self.lblStep.font = .kufiRegularFont(ofSize: 15)
+        self.lblStep.textColor = "#616263".getUIColor()
         
         self.lblAttachments.text = "txt_Attachments".localized()
         self.lblAttachments.font = .kufiRegularFont(ofSize: 15)
@@ -189,12 +230,6 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         self.btnYes.image = UIImage(named: "check")
         
         
-        
-        
-        self.btnNext.backgroundColor = HelperClassSwift.acolor.getUIColor()
-        self.btnPrevious.backgroundColor = HelperClassSwift.acolor.getUIColor()
-        
-        
         self.viewStep.setBorderGrayWidth(3)
         let Stepimage =  UIImage.fontAwesomeIcon(name: .building, style: .solid, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
         self.imgStep.image = Stepimage
@@ -206,9 +241,81 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         table.register(nib, forCellReuseIdentifier: "AttachmentsCell")
         
         if userObj?.user_type_id == "1" {
-            self.arr_file.append(attachment(title: "Signed Contractor Request PDF", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
-            self.Selected_index = self.Selected_index + 1
+            switch ProjectObj.template_platform_group_type_code_system {
+            case "WIR":
+                self.arr_file.append(attachment(title: "Signed Contractor Request PDF", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+                
+                self.Selected_index = self.Selected_index + 1
+                
+            case "DSR":
+                self.arr_file.append(attachment(title: "Signed Contractor Request PDF", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+                self.arr_file.append(attachment(title: "Stamped PDF drawings", Required: "Yes", img: nil, url: nil,type: "img" ,index: 1 , IsNew: true))
+                self.arr_file.append(attachment(title: "Drawings Source in (ZIP) file", Required: "Yes", img: nil, url: nil,type: "img" ,index: 2 , IsNew: true))
+                self.Selected_index = self.Selected_index + 1
+                
+            case "MIR":
+                self.arr_file.append(attachment(title: "lang_sign_and_stamp_contractor_request", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+                self.arr_file.append(attachment(title: "Material Specification", Required: "Yes", img: nil, url: nil,type: "img" ,index: 1 , IsNew: true))
+                
+                self.Selected_index = 2
+                
+            case "MSR":
+                self.arr_file.append(attachment(title: "Signed Contractor Request PDF", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+                self.arr_file.append(attachment(title: "Material Specification", Required: "Yes", img: nil, url: nil,type: "img" ,index: 1 , IsNew: true))
+                
+                self.arr_file.append(attachment(title: "Certificate of origin", Required: "No", img: nil, url: nil,type: "img" ,index: 2 , IsNew: true))
+                self.arr_file.append(attachment(title: "SASO or SABR", Required: "No", img: nil, url: nil,type: "img" ,index: 3 , IsNew: true))
+                self.arr_file.append(attachment(title: "Another specification", Required: "No", img: nil, url: nil,type: "img" ,index: 4 , IsNew: true))
+                self.arr_file.append(attachment(title: "Authorities requirements", Required: "No", img: nil, url: nil,type: "img" ,index: 5 , IsNew: true))
+                
+                self.Selected_index = 6
+                
+            case "SQR":
+                self.arr_file.append(attachment(title: "lang_sign_and_stamp_contractor_request", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+                self.arr_file.append(attachment(title: "Material Specification", Required: "Yes", img: nil, url: nil,type: "img" ,index: 1 , IsNew: true))
+                
+                self.Selected_index = 2
+            default:
+                print("nil")
+            }
             
+        }else if userObj?.user_type_id == "4" {
+            switch ProjectObj.template_platform_group_type_code_system {
+            case "WIR":
+                self.arr_file.append(attachment(title: "Signed Contractor Request PDF", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+                
+                self.Selected_index = self.Selected_index + 1
+                
+            case "DSR":
+              
+                self.arr_file.append(attachment(title: "Stamped PDF drawings", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+                self.arr_file.append(attachment(title: "Drawings Source in (ZIP) file", Required: "Yes", img: nil, url: nil,type: "img" ,index: 1 , IsNew: true))
+                self.Selected_index = self.Selected_index + 1
+                
+            case "MIR":
+                self.arr_file.append(attachment(title: "Material Specification", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+                
+                self.Selected_index = 1
+                
+            case "MSR":
+                self.arr_file.append(attachment(title: "Signed Contractor Request PDF", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+                self.arr_file.append(attachment(title: "Material Specification", Required: "Yes", img: nil, url: nil,type: "img" ,index: 1 , IsNew: true))
+                
+                self.arr_file.append(attachment(title: "Certificate of origin", Required: "No", img: nil, url: nil,type: "img" ,index: 2 , IsNew: true))
+                self.arr_file.append(attachment(title: "SASO or SABR", Required: "No", img: nil, url: nil,type: "img" ,index: 3 , IsNew: true))
+                self.arr_file.append(attachment(title: "Another specification", Required: "No", img: nil, url: nil,type: "img" ,index: 4 , IsNew: true))
+                self.arr_file.append(attachment(title: "Authorities requirements", Required: "No", img: nil, url: nil,type: "img" ,index: 5 , IsNew: true))
+                
+                self.Selected_index = 6
+                
+            case "SQR":
+                self.arr_file.append(attachment(title: "lang_sign_and_stamp_contractor_request", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+                self.arr_file.append(attachment(title: "Material Specification", Required: "Yes", img: nil, url: nil,type: "img" ,index: 1 , IsNew: true))
+                
+                self.Selected_index = 2
+            default:
+                print("nil")
+            }
         }
         
         let userType = userObj?.user_type_id
@@ -218,17 +325,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         }else{
             Stack_contractor.isHidden = true
         }
-       
-        self.btnNext.setTitle("Next".localized(), for: .normal)
-        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
-        self.btnNext.setTitleColor(.white, for: .normal)
-        self.btnNext.setRounded(10)
         
-        
-        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
-        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
-        self.btnPrevious.setTitleColor(.white, for: .normal)
-        self.btnPrevious.setRounded(10)
         
     }
     
@@ -241,14 +338,14 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         
         self.showLoadingActivity()
         
-        guard ProjectObj != nil else{
-            return
-        }
+//        guard ProjectObj != nil else{
+//            return
+//        }
        
         var params = [:] as [String : String]
         
-       params["projects_work_area_id"] = ProjectObj.projects_work_area_id
-       params["platform_code_system"] = ProjectObj.template_platform_code_system
+       params["projects_work_area_id"] = self.projects_work_area_id
+       params["platform_code_system"] = self.template_platform_code_system
        params["lang_key"] = StrLanguage
        params["work_site"] = self.work_site
         
@@ -277,7 +374,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         
      
         
-        APIManager.sendRequestPostAuth(urlString: "form/FORM_WIR/get_default_attachments", parameters: params ) { (response) in
+        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/get_default_attachments", parameters: params ) { (response) in
             self.hideLoadingActivity()
            
             
@@ -297,10 +394,12 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
                   
                         
                         let value = attachment(title:i.label, img: nil, url: URL(string: i.file_path), type: "file",index: self.Selected_index)
-                        self.Selected_index = self.Selected_index + 1
+                        self.Selected_index = self.arr_file.count - 1
+                        //self.Selected_index + 1
                         self.arr_file.append(value)
          
                     }
+            
                     
                     self.table.reloadData()
                     
@@ -358,34 +457,55 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         }
   
         for i in arr_file {
-            self.parm["attachments[\(i.index)][attach_title]"] = i.title
-            self.parm["attachments[\(i.index )][required]"] = i.Required
-        }
-
-        
-        showLoadingActivity()
-        
-        APIManager.func_Upload(queryString: "/form/FORM_WIR/cr/2/0", arr_file, param: self.parm ) { (respnse ) in
             
-            let status = respnse["status"] as? Bool
-            let errors = respnse["error"] as? String
-
-            
-            if status == true{
-                
-                let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
-                let page = UINavigationController.init(rootViewController: vc)
-                _ =  self.panel?.center(page)
-       
+            let urlStr = i.url
+            let img = i.img
+                 
+            if (urlStr == nil && img == nil) {
+                showAMessage(withTitle: "error".localized(), message: "Please enter your file".localized())
+                return
             }else{
+                for i in arr_file {
+                    self.parm["attachments[\(i.index)][attach_title]"] = i.title
+                    self.parm["attachments[\(i.index )][required]"] = i.Required
+                }
+                self.parm["contractor_manager_step_require"] = "1"
+                showLoadingActivity()
+                let code = ProjectObj.template_platform_group_type_code_system
+                var formUrl = "/form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/2/\(transaction_id)"
+                if code == "MIR" ||  code == "MSR" || code == "SQR"{
+                    formUrl =  "/form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/3/\(transaction_id)"
+                }
                 
-                self.hideLoadingActivity()
-                self.showAMessage(withTitle: "error".localized(), message: errors ?? "something went wrong")
+                APIManager.func_Upload(queryString: formUrl, arr_file, param: self.parm ) { (respnse ) in
+                    
+                    let status = respnse["status"] as? Bool
+                    let errors = respnse["error"] as? String
+
+                    
+                    if status == true{
+                        
+                        let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
+                        let page = UINavigationController.init(rootViewController: vc)
+                        _ =  self.panel?.center(page)
+               
+                    }else{
+                        
+                        self.hideLoadingActivity()
+                        self.showAMessage(withTitle: "error".localized(), message: errors ?? "something went wrong")
+                    }
+                    self.hideLoadingActivity()
+                    
+                    
+                }
+                
             }
-            self.hideLoadingActivity()
-            
-            
         }
+        
+       
+
+        
+   
         
         
         
@@ -397,7 +517,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     func get_ContractorTeamUsers(){
       
        self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "/form/FORM_WIR/contractor_users?lang_key=\(StrLanguage)&projects_work_area_id=\(ProjectObj.projects_work_area_id))&user_position=\(self.user_position)" ) { (response) in
+        APIManager.sendRequestGetAuth(urlString: "/form/FORM_\(self.template_platform_group_type_code_system)/contractor_users?lang_key=\(StrLanguage)&projects_work_area_id=\(self.projects_work_area_id))&user_position=\(self.user_position)" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -451,9 +571,14 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         if is_nil {
             self.showAMessage(withTitle: "error".localized(), message: "Attach file to the last entry at First")
         }else{
-            let new_index = (Selected_index + 1)
-            self.arr_file.append(attachment(title: "", Required: "No", img: nil, url: nil,type: "file", index: new_index))
-            self.table.reloadData()
+            
+            let new_index = arr_file.count + 1
+           // attachment(title: "", Required: "No", img: nil, url: nil, type: "file", index: new_index, IsNew: true)
+            self.arr_file.append(attachment(title: "", Required: "No", img: nil, url: nil,type: "file", index: new_index ,IsNew: true))
+          
+            self.table.beginUpdates()
+            self.table.insertRows(at: [IndexPath.init(row: self.arr_file.count-1, section: 0)], with: .automatic)
+            self.table.endUpdates()
         }
         
      
@@ -542,48 +667,89 @@ extension AttachmentsVC: UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      
             let cell = tableView.dequeueReusableCell(withIdentifier: "AttachmentsCell", for: indexPath) as! AttachmentsCell
+        
+        let obj = arr_file[indexPath.item]
+        
+        if obj.title != ""{
             
-            let obj = arr_file[indexPath.item]
- 
-            if obj.title != ""{
-                
-                if obj.title != "Signed Contractor Request PDF" {
-                
-                    cell.btn_Select.setImage(UIImage(named: "icon-pdf"), for: .normal)
-                }
-                cell.lblNo.text =  "#" + "\(obj.index + 1)"
-                cell.lblNo.font = .kufiRegularFont(ofSize: 17)
-                cell.tfTitle.text = obj.title
-                cell.btn_Select.tintColor = HelperClassSwift.acolor.getUIColor()
-                cell.btn_delete.isHidden = true
-                cell.tfTitle.isUserInteractionEnabled = false
-                
-                
+          
+            
+            if obj.IsNew == true {
+                cell.btn_Select.setImage( UIImage(systemName: "square.and.arrow.up"), for: .normal)
             }else{
                 
-                cell.btn_Select.setImage( UIImage(systemName: "plus.rectangle.fill.on.folder.fill"), for: .normal)
-               
-                cell.lblNo.text =  "#" + "\(indexPath.item + 1)"
-                cell.lblNo.font = .kufiRegularFont(ofSize: 17)
-                cell.tfTitle.text = ""
-                cell.tfTitle.placeholder = "Description"
-                cell.btn_Select.tintColor = HelperClassSwift.acolor.getUIColor()
-                cell.btn_delete.isHidden = false
-                cell.tfTitle.isUserInteractionEnabled = true
+                if obj.title != "Signed Contractor Request PDF" {
+                    cell.btn_Select.setImage(UIImage(named: "icon-pdf"), for: .normal)
+                }else if obj.title != "Stamped PDF drawings" {
+                    cell.btn_Select.setImage(UIImage(named: "icon-pdf"), for: .normal)
+                }else if obj.title != "Drawings Source in (ZIP) file" {
+                    cell.btn_Select.setImage(UIImage(named: "icon-pdf"), for: .normal)
+                }
+                
             }
-     
+            
+            if (obj.img != nil || obj.url != nil) {
+                cell.btn_Select.tintColor = "#3ea832".getUIColor()
+            }else{
+                cell.btn_Select.tintColor = HelperClassSwift.acolor.getUIColor()
+            }
+            cell.lblNo.text =  "#" + "\(indexPath.item + 1)"
+            cell.lblNo.font = .kufiRegularFont(ofSize: 13)
+            cell.tfTitle.text = obj.title
+            
+            if obj.IsNew == true {
+                cell.btn_delete.isHidden = false
+            }else{
+                cell.btn_delete.isHidden = true
+            }
+            
+            if obj.Required == "Yes" {
+                cell.btn_delete.isHidden = true
+            }else{
+                cell.btn_delete.isHidden = false
+            }
+            
+            cell.tfTitle.isUserInteractionEnabled = false
+            
+            
+        }else{
+            
+            if (obj.img != nil || obj.url != nil) {
+                cell.btn_Select.tintColor = "#3ea832".getUIColor()
+            }else{
+                cell.btn_Select.tintColor = HelperClassSwift.acolor.getUIColor()
+            }
+            
+            //"plus.rectangle.fill.on.folder.fill"
+            cell.btn_Select.setImage( UIImage(systemName: "square.and.arrow.up"), for: .normal)
+            
+            cell.lblNo.text =  "#" + "\(indexPath.item + 1)"
+            cell.lblNo.font = .kufiRegularFont(ofSize: 13)
+            cell.tfTitle.text = ""
+            cell.tfTitle.placeholder = "Description".localized()
+            //cell.btn_Select.tintColor = HelperClassSwift.acolor.getUIColor()
+            if obj.IsNew == true {
+                cell.btn_delete.isHidden = false
+            }else{
+                cell.btn_delete.isHidden = true
+            }
+            
+            cell.tfTitle.isUserInteractionEnabled = true
+        }
+        
         
         cell.btnDeleteAction = {
-            () in
+          
             self.arr_file.remove(at: indexPath.item)
             self.table.reloadData()
             
         }
         
+        cell.btnEndEditingAction = {
+            self.arr_file[indexPath.item].title = cell.tfTitle.text ?? ""
+        }
         cell.btnUploadAction = {
-            () in
-           
-            
+          
             if obj.url != nil && obj.IsNew == false{
                 let url = obj.url!.absoluteString
                 let vc:PDFViewrVC  = AppDelegate.mainSB.instanceVC()
@@ -593,23 +759,23 @@ extension AttachmentsVC: UITableViewDelegate , UITableViewDataSource{
                 vc.Strurl = url
                 self.present(vc, animated: true, completion: nil)
             }else{
-                self.Selected_index = indexPath.item
+                self.Selected_index = obj.index
                 self.Upload_file()
             }
             
-          
+            
             
         }
         
-                return cell
+        return cell
         
         
-  
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let obj = arr_file[indexPath.item]
-     
+        
     }
 }
 
@@ -622,17 +788,13 @@ extension AttachmentsVC : UIImagePickerControllerDelegate  {
         
         if let image = (info[.originalImage] as? UIImage){
             
-            
-            let value = attachment(img: image, url: nil, type: "img",index: Selected_index)
-            //self.arr_file.append(value)
-            //self.arr_file = self.arr_file.map { $0.img == nil ? image : nil }
-            
             if let row = self.arr_file.firstIndex(where: {$0.index == self.Selected_index}) {
-                
-                arr_file[row] = attachment(title:arr_file[row].title, Required:  arr_file[row].Required , img: image, url: nil ,type: "img",index: Selected_index)
+                 
+                arr_file[row].type = "img"
+                arr_file[row].img = image
+                arr_file[row].url = nil
+                self.table.reloadData()
             }
-           
-            self.table.reloadData()
             
         }
         
@@ -648,7 +810,7 @@ extension AttachmentsVC : UIImagePickerControllerDelegate  {
                 self.showAMessage(withTitle: "error".localized(), message: "image must be less than 10 MB".localized())
                 return
             }
-           // self.Collection.reloadData()
+            // self.Collection.reloadData()
         }
         
         picker.dismiss(animated: true) {
@@ -682,15 +844,14 @@ extension AttachmentsVC: UIDocumentPickerDelegate {
             getDataFrom(url: url) { (data) in
                 if let data = data {
                     
-                    
-                    let value = attachment(img: nil, url: url, type: "file",index: Selected_index)
-                   
-                    
                     if let row = self.arr_file.firstIndex(where: {$0.index == self.Selected_index}) {
-                        arr_file[row] = value
+                        
+                        arr_file[row].type = "file"
+                        arr_file[row].img = nil
+                        arr_file[row].url = url
+                        self.table.reloadData()
                     }
                     
-                    self.table.reloadData()
                     
                     let Size1: Int = data.count ?? 0
                     let size  = Size1/1000000
@@ -700,7 +861,7 @@ extension AttachmentsVC: UIDocumentPickerDelegate {
                         return
                     }
                     
-                  //  self.Collection.reloadData()
+                    //  self.Collection.reloadData()
                     
                 }
                 
@@ -709,7 +870,7 @@ extension AttachmentsVC: UIDocumentPickerDelegate {
         }
     }
     
-
+    
     func getDataFrom(url: URL, completion: (Data?)->()) {
         do {
             let data = try Data.init(contentsOf: url, options: .dataReadingMapped)
@@ -729,5 +890,8 @@ extension AttachmentsVC: UIDocumentPickerDelegate {
         }
         return String(data: data, encoding: String.Encoding.utf8)
     }
-
+    
 }
+
+
+//template_platform_group_type_code_system

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+let maincolor = "#1A3665".getUIColor()
 
 class ContractorManagerApprovalVC: UIViewController {
 
@@ -38,12 +39,23 @@ class ContractorManagerApprovalVC: UIViewController {
         configGUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configGUI()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+      // configGUI()
+    }
+    
     
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
         
-        icon_noPermission.loadGif(name: "no-permission")
+        icon_noPermission.no_permission()
         
         self.lbl_noPermission.text =  "You not have permission to access this step".localized()
         self.lbl_noPermission.font = .kufiRegularFont(ofSize: 15)
@@ -94,7 +106,7 @@ class ContractorManagerApprovalVC: UIViewController {
         
         
         self.btn_submit.setTitle("Submit".localized(), for: .normal)
-        self.btn_submit.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btn_submit.backgroundColor =  "#1A3665".getUIColor()
         self.btn_submit.setTitleColor(.white, for: .normal)
         
         
@@ -114,7 +126,7 @@ class ContractorManagerApprovalVC: UIViewController {
                          
                           "contractor_rejected_notes":self.txt_notes.text ?? ""]
             
-            APIManager.sendRequestPostAuth(urlString: "form/FORM_WIR/Contractor_Manager_Approval/0", parameters: params ) { (response) in
+            APIManager.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Contractor_Manager_Approval/0", parameters: params ) { (response) in
                 self.hideLoadingActivity()
                
                 
@@ -125,9 +137,9 @@ class ContractorManagerApprovalVC: UIViewController {
                 if status == true{
                     self.hideLoadingActivity()
                     self.showAMessage(withTitle: "Success".localized(), message: msg ?? "Thank you. The operation was completed successfully.", completion: {
-
+                        self.configGUI()
                         self.update_Config()
-//                        self.configGUI()
+
 //                        self.change_page(SelectedIndex:3)
                     })
                     

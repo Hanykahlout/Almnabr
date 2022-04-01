@@ -9,11 +9,12 @@
 import UIKit
 import DPLocalization
 import DropDown
-
+import MOLH
 
 struct uintObj{
     var unit:String?
     var value:String?
+    var label:String?
     
 }
 class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
@@ -40,6 +41,8 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var btnCancel: UIButton!
     
+    let maincolor = "#1A3665".getUIColor()
+    
     var delegate: GeneralDelegate!
     let dropDown = DropDown()
     
@@ -59,10 +62,17 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
     
     var StrUnit:String = ""
     var StrWorkLevel:String = ""
+    var StrWL_label:String = ""
     var ProjectObj:templateObj!
     var transaction_separation:String = ""
     
     var StrLanguage:String = "en"
+    
+    var projects_work_area_id:String = ""
+    var template_platform_code_system:String = ""
+    var template_id:String = ""
+    var phase_zone_block_cluster_g_nos:String = ""
+    
     
     
     override func viewDidLoad() {
@@ -79,7 +89,7 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
     func configGUI() {
         
         
-        lblGeneralnumber.textColor =  HelperClassSwift.acolor.getUIColor()
+        lblGeneralnumber.textColor =  maincolor
         lblGeneralnumber.font = .kufiBoldFont(ofSize: 15)
         lblGeneralnumber.text = "txt_Generalnumber".localized()
         
@@ -90,13 +100,13 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
         self.lblFillWorkLevels.font = .kufiRegularFont(ofSize: 15)
         
         
-        self.viewUnit.setBorderGray()
+        self.viewUnit.setBorderGrayWidthCorner(1, 20)
         self.tfUnit.placeholder =  "txt_SearchGeneralNumbers".localized()
         self.tfUnit.font = .kufiRegularFont(ofSize: 15)
         
         self.tfUnit.delegate = self
         
-        self.viewWorkLevel.setBorderGray()
+        self.viewWorkLevel.setBorderGrayWidthCorner(1, 20)
         self.lblWorkLevel.text =  "txt_FillWorkLevels".localized()
         self.lblWorkLevel.font = .kufiRegularFont(ofSize: 15)
         
@@ -107,19 +117,16 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
         self.imgDropWorkLevel.image = dropDownmage
         
         self.btnSubmit.setTitle("Submit".localized(), for: .normal)
-        self.btnSubmit.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnSubmit.backgroundColor =  maincolor
         self.btnSubmit.setTitleColor(.white, for: .normal)
         self.btnSubmit.setRounded(10)
         
         
         self.btnCancel.setTitle("Cancel".localized(), for: .normal)
-        self.btnCancel.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnCancel.backgroundColor =  maincolor
         self.btnCancel.setTitleColor(.white, for: .normal)
         self.btnCancel.setRounded(10)
         
-        
-//        self.btnCancel.backgroundColor = HelperClassSwift.acolor.getUIColor()
-//        self.btnSubmit.backgroundColor = HelperClassSwift.acolor.getUIColor()
     }
     
     
@@ -127,16 +134,18 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
     
     func get_WorkLevel(){
         
-        guard ProjectObj != nil else{
-            return
-        }
+//        guard ProjectObj != nil else{
+//            return
+//        }
+        //let language = MOLH.currentAppleLanguage()
+       let lang =  MOLHLanguage.currentAppleLanguage()
         self.showLoadingActivity()
-        let language = dp_get_current_language()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/get_work_levels_for_transaction?lang_key=\(language ?? "en")&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=\(ProjectObj.template_platform_code_system)&work_site=GN&transaction_separation=\(transaction_separation)&template_id=\(ProjectObj.template_id)&work_site_nos=1" ) { (response) in
+        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/get_work_levels_for_transaction?lang_key=\(lang)&projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=GN&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_nos=1" ) { (response) in
             
             
             let status = response["status"] as? Bool
             if status == true{
+                self.arr_WorkLevels = []
                 if  let list = response["records"] as? NSArray{
                     for i in list {
                         let dict = i as? [String:Any]
@@ -160,16 +169,16 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
     
     func get_Unit(searchTxt:String){
         
-        guard ProjectObj != nil else{
-            return
-        }
+//        guard ProjectObj != nil else{
+//            return
+//        }
         self.showLoadingActivity()
-        let language = dp_get_current_language()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=\(ProjectObj.template_platform_code_system)&work_site=GN&transaction_separation=\(transaction_separation)&template_id=\(ProjectObj.template_id)&work_site_type=G&work_site_zones=&work_site_blocks=&work_site_clusters=&search_key=\(searchTxt)" ) { (response) in
+        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=GN&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=G&work_site_zones=&work_site_blocks=&work_site_clusters=&search_key=\(searchTxt)" ) { (response) in
             
             
             let status = response["status"] as? Bool
             if status == true{
+                self.arr_Unit = []
                 if  let list = response["records"] as? NSArray{
                     for i in list {
                         let dict = i as? [String:Any]
@@ -258,7 +267,8 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
                     self.lblWorkLevel.text =  item
                     let i =  self.arr_WorkLevels[index]
                     self.StrWorkLevel = i.value
-                    let Str_unit = uintObj(unit: StrUnit, value: i.value)
+                    self.StrWL_label = i.label
+                    let Str_unit = uintObj(unit: StrUnit, value: i.value , label: i.label)
                     self.arr_unit.append(Str_unit)
                     self.imgDropUnit.image = dropDownmage
                     self.btnWorkLevel.isHidden = false
@@ -299,7 +309,7 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
         if (StrUnit == "" || StrWorkLevel == "" ){
             self.showAMessage(withTitle: "Error", message: "missed data")
         }else{
-            let obj = GeneralObj(number: 1, units: StrUnit, Worklevels: StrWorkLevel)
+            let obj = GeneralObj(number: 1, units: StrUnit, Worklevels: StrWorkLevel,label:self.StrWL_label)
             var arr:[GeneralObj] = []
             arr.append(obj)
             delegate.pass(data: arr, unit_arr: arr_unit)
@@ -320,7 +330,7 @@ extension AddGeneralNoVC : UITextViewDelegate{
             
             self.viewUnit.layer.borderColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
             self.viewUnit.layer.borderWidth = 1
-            self.viewUnit.layer.cornerRadius = 4
+            self.viewUnit.layer.cornerRadius = 20
             self.viewUnit.layer.masksToBounds = true
             
         }
@@ -332,11 +342,11 @@ extension AddGeneralNoVC : UITextViewDelegate{
             if tfUnit.text == "" {
                 self.viewUnit.layer.borderColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
                 self.viewUnit.layer.borderWidth = 1
-                self.viewUnit.layer.cornerRadius = 4
+                self.viewUnit.layer.cornerRadius = 20
                 self.viewUnit.layer.masksToBounds = true
             }else{
                
-                self.viewUnit.setBorderGray()
+                self.viewUnit.setBorderGrayWidthCorner(1, 20)
                 get_Unit(searchTxt:tfUnit.text!)
             }
             

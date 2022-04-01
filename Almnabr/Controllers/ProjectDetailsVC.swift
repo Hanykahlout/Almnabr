@@ -9,53 +9,19 @@
 import UIKit
 import DPLocalization
 import FontAwesome_swift
+import MOLH
 
 class ProjectDetailsVC: UIViewController {
     
+    @IBOutlet weak var imgnodata: UIImageView!
+    
+    @IBOutlet weak var lblProjectName: UILabel!
     
     
-    @IBOutlet weak var imgNext1: UIImageView!
-    @IBOutlet weak var imgNext2: UIImageView!
-    
-    @IBOutlet weak var lblHome: UIButton!
-    @IBOutlet weak var btnAddQuotation: UIButton!
-    @IBOutlet weak var lblMenuName: UILabel!
-    @IBOutlet weak var lblSubMenuName: UILabel!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblnodata: UILabel!
-    @IBOutlet weak var lblQuotationsnodata: UILabel!
-    
-    @IBOutlet weak var lblBranchName: UILabel!
-    @IBOutlet weak var lblProjectNameEn: UILabel!
-    @IBOutlet weak var lblProjectNameAr: UILabel!
-    @IBOutlet weak var lblCustomerName: UILabel!
-    @IBOutlet weak var lblcustomer_type: UILabel!
-    @IBOutlet weak var lblWriter: UILabel!
-    @IBOutlet weak var lblOnDate: UILabel!
-    @IBOutlet weak var lblOnupdated: UILabel!
-    @IBOutlet weak var lblLocation: UILabel!
-    
-    
-    @IBOutlet weak var lblValBranchName: UILabel!
-    @IBOutlet weak var lblValProjectNameEn: UILabel!
-    @IBOutlet weak var lblValProjectNameAr: UILabel!
-    @IBOutlet weak var lblValCustomerName: UILabel!
-    @IBOutlet weak var lblValcustomer_type: UILabel!
-    @IBOutlet weak var lblValWriter: UILabel!
-    @IBOutlet weak var lblValOnDate: UILabel!
-    @IBOutlet weak var lblValOnupdated: UILabel!
-    @IBOutlet weak var lblValLocation: UILabel!
-    
-    @IBOutlet weak var lblServicesTitle: UILabel!
-    @IBOutlet weak var view_img: UIView!
-    @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var lblServices: UILabel!
     @IBOutlet weak var lblQuotations: UILabel!
     @IBOutlet weak var lblProjects: UILabel!
-    @IBOutlet weak var lblProjectTitle: UILabel!
     
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var projectView: UIView!
     @IBOutlet weak var projectVieww: UIView!
     
     @IBOutlet weak var View_project: UIView!
@@ -64,17 +30,12 @@ class ProjectDetailsVC: UIViewController {
     @IBOutlet weak var SelectedView_project: UIView!
     @IBOutlet weak var SelectedView_Quotation: UIView!
     
-    @IBOutlet weak var collection: UICollectionView!
-    @IBOutlet weak var collectionQuotation: UICollectionView!
     @IBOutlet weak var collectionServieces: UICollectionView!
-    @IBOutlet weak var Services:ServicesView!
     
     @IBOutlet weak var header: HeaderView!
     
-    @IBOutlet weak var tableQuotation: UITableView!
     @IBOutlet weak var tableProjects: UITableView!
     
-    @IBOutlet weak var searchBar: UISearchBar!
     
     var QuotationSearchKey:String = ""
     var ProjectSearchKey:String = ""
@@ -90,6 +51,7 @@ class ProjectDetailsVC: UIViewController {
     var MenuObj:MenuObj?
     var SubMenuObj:MenuObj?
     
+    var add:Bool = false
     var Object:projectObj?
     var arr_Projectdata:[projectQuotObj] = []
     
@@ -104,7 +66,7 @@ class ProjectDetailsVC: UIViewController {
     var cellWidths: [CGFloat] = [900]
     
     let fontStyle: FontAwesomeStyle = .solid
-    
+    let maincolor = "#1A3665".getUIColor()
 
     
     override public func viewDidLoad() {
@@ -113,10 +75,10 @@ class ProjectDetailsVC: UIViewController {
         configGUI()
         setupCollection()
         
-        
+        get_Projects_Details()
         get_Projects_data(showLoading: true, loadOnly: true)
         get_quotation_data(showLoading: true, loadOnly: true)
-        get_Projects_Details()
+       
         
         header.btnAction = menu_select
     }
@@ -151,150 +113,175 @@ class ProjectDetailsVC: UIViewController {
         
         
         self.tableProjects.isHidden = false
-        //self.tableQuotation.isHidden = true
-        
-        lblHome.titleLabel?.textColor =  HelperClassSwift.bcolor.getUIColor()
-        lblHome.titleLabel?.font = .kufiRegularFont(ofSize: 15)
-        
-        lblMenuName.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblMenuName.font = .kufiRegularFont(ofSize: 15)
-        
-        lblTitle.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblTitle.font = .kufiBoldFont(ofSize: 15)
-        
-        lblSubMenuName.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblSubMenuName.font = .kufiRegularFont(ofSize: 15)
         
         
-        self.lblHome.titleLabel?.text =  "txt_Home".localized()
-        self.lblHome.titleLabel?.font = .kufiRegularFont(ofSize: 15)
+        lblProjectName.textColor =  maincolor
+        lblProjectName.font = .kufiBoldFont(ofSize: 15)
+        lblProjectName.text = Object!.projects_profile_name_en ?? "---"
         
-        self.lblnodata.text =  "txt_NoData".localized()
-        self.lblnodata.font = .kufiRegularFont(ofSize: 15)
-        self.lblnodata.isHidden = true
+//        let barnch = "Branch".localized() + " : " + Object!.branch_name ?? "---"
+//        let branchAtr: NSAttributedString = barnch.attributedStringWithColor(["Branch".localized()], color: HelperClassSwift.acolor.getUIColor())
+//        self.lblBranchName.attributedText = branchAtr
+//        lblBranchName.font = .kufiRegularFont(ofSize: 15)
         
-        self.lblQuotationsnodata.text =  "txt_NoData".localized()
-        self.lblQuotationsnodata.font = .kufiRegularFont(ofSize: 15)
-        self.lblQuotationsnodata.isHidden = true
+//        let project_name = "txt_Project_Name_En".localized() + " : " + Object!.projects_profile_name_en ?? "---"
+//        let project_nameAtr: NSAttributedString = project_name.attributedStringWithColor(["txt_Project_Name_En".localized()], color: HelperClassSwift.acolor.getUIColor())
+//        self.lblProjectNameEn.attributedText = project_nameAtr
+//        lblProjectNameEn.font = .kufiRegularFont(ofSize: 15)
         
-        self.lblBranchName.text =  "Branch".localized() + " :"
-        self.lblBranchName.font = .kufiRegularFont(ofSize: 15)
-        self.lblBranchName.textColor =  HelperClassSwift.bcolor.getUIColor()
+//        let project_nameAr = "txt_Project_Name_Ar".localized() + " : " + Object!.projects_profile_name_en ?? "---"
+//        let project_nameArAtr: NSAttributedString = project_nameAr.attributedStringWithColor(["txt_Project_Name_Ar".localized()], color: HelperClassSwift.acolor.getUIColor())
+//        self.lblProjectNameAr.attributedText = project_nameArAtr
+//        lblProjectNameAr.font = .kufiRegularFont(ofSize: 15)
+//
+//        let customer_name = "Customers".localized() + " : " + Object!.customer_name ?? "---"
+//        let customer_nameAtr: NSAttributedString = customer_name.attributedStringWithColor(["Customers".localized()], color: HelperClassSwift.acolor.getUIColor())
+//        self.lblCustomerName.attributedText = customer_nameAtr
+//        lblCustomerName.font = .kufiRegularFont(ofSize: 15)
+//
+//
+//        let Project_Type = "txt_Project_Type".localized() + " : " + Object!.customer_type_id ?? "---"
+//        let Project_TypeAtr: NSAttributedString = Project_Type.attributedStringWithColor(["txt_Project_Type".localized()], color: HelperClassSwift.acolor.getUIColor())
+//        self.lblcustomer_type.attributedText = Project_TypeAtr
+//        lblcustomer_type.font = .kufiRegularFont(ofSize: 15)
+//
+//
+//        let Writer = "Writer".localized() + " : " + Object!.writer ?? "---"
+//        let WriterAtr: NSAttributedString = Writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
+//        self.lblWriter.attributedText = WriterAtr
+//        lblWriter.font = .kufiRegularFont(ofSize: 15)
+//
+//        let On_date = "On Date".localized() + " : " + Object!.projects_profile_created_datetime ?? "---"
+//        let On_dateAtr: NSAttributedString = On_date.attributedStringWithColor(["On Date".localized()], color: HelperClassSwift.acolor.getUIColor())
+//        self.lblOnDate.attributedText = On_dateAtr
+//        lblOnDate.font = .kufiRegularFont(ofSize: 15)
+//
+//
+//        let updated = "txt_update".localized() + " : " + Object!.projects_profile_updated_datetime ?? "---"
+//        let updatedAtr: NSAttributedString = updated.attributedStringWithColor(["txt_update".localized()], color: HelperClassSwift.acolor.getUIColor())
+//        self.lblOnupdated.attributedText = updatedAtr
+//        lblOnupdated.font = .kufiRegularFont(ofSize: 15)
+//
+//        let location = "txt_location".localized() + " : " + Object!.projects_profile_location ?? "---"
+//        let locationAtr: NSAttributedString = location.attributedStringWithColor(["txt_location".localized()], color: HelperClassSwift.acolor.getUIColor())
+//        self.lblLocation.attributedText = locationAtr
+//        lblLocation.font = .kufiRegularFont(ofSize: 15)
         
-        self.lblProjectNameEn.text =  "txt_Project_Name_En".localized() + " :"
-        self.lblProjectNameEn.font = .kufiRegularFont(ofSize: 15)
-        self.lblProjectNameEn.textColor =  HelperClassSwift.bcolor.getUIColor()
         
-        self.lblProjectNameAr.text =  "txt_Project_Name_Ar".localized() + " :"
-        self.lblProjectNameAr.font = .kufiRegularFont(ofSize: 15)
-        self.lblProjectNameAr.textColor =  HelperClassSwift.bcolor.getUIColor()
+//        self.lblBranchName.text =  "Branch".localized() + " :"
+//        self.lblBranchName.font =  .kufiBoldFont(ofSize: 14)
+//        self.lblBranchName.textColor =  HelperClassSwift.bcolor.getUIColor()
+//
+//        self.lblProjectNameEn.text =  "txt_Project_Name_En".localized() + " :"
+//        self.lblProjectNameEn.font =  .kufiBoldFont(ofSize: 14)
+//        self.lblProjectNameEn.textColor =  HelperClassSwift.bcolor.getUIColor()
         
-        self.lblCustomerName.text =  "Customers".localized() + " :"
-        self.lblCustomerName.font = .kufiRegularFont(ofSize: 15)
-        self.lblCustomerName.textColor =  HelperClassSwift.bcolor.getUIColor()
+//        self.lblProjectNameAr.text =  "txt_Project_Name_Ar".localized() + " :"
+//        self.lblProjectNameAr.font =  .kufiBoldFont(ofSize: 14)
+//        self.lblProjectNameAr.textColor =  HelperClassSwift.bcolor.getUIColor()
         
-        self.lblcustomer_type.text =  "txt_Project_Type".localized() + " :"
-        self.lblcustomer_type.font = .kufiRegularFont(ofSize: 15)
-        self.lblcustomer_type.textColor =  HelperClassSwift.bcolor.getUIColor()
+//        self.lblCustomerName.text =  "Customers".localized() + " :"
+//        self.lblCustomerName.font =  .kufiBoldFont(ofSize: 14)
+//        self.lblCustomerName.textColor =  HelperClassSwift.bcolor.getUIColor()
+//
+//        self.lblcustomer_type.text =  "txt_Project_Type".localized() + " :"
+//        self.lblcustomer_type.font =  .kufiBoldFont(ofSize: 14)
+//        self.lblcustomer_type.textColor =  HelperClassSwift.bcolor.getUIColor()
         
-        self.lblWriter.text =  "Writer".localized() + " :"
-        self.lblWriter.font = .kufiRegularFont(ofSize: 15)
-        self.lblWriter.textColor =  HelperClassSwift.bcolor.getUIColor()
+//        self.lblWriter.text =  "Writer".localized() + " :"
+//        self.lblWriter.font =  .kufiBoldFont(ofSize: 14)
+//        self.lblWriter.textColor =  HelperClassSwift.bcolor.getUIColor()
         
-        self.lblOnDate.text =  "On Date".localized() + " :"
-        self.lblOnDate.font = .kufiRegularFont(ofSize: 15)
-        self.lblOnDate.textColor =  HelperClassSwift.bcolor.getUIColor()
+//        self.lblOnDate.text =  "On Date".localized() + " :"
+//        self.lblOnDate.font =  .kufiBoldFont(ofSize: 14)
+//        self.lblOnDate.textColor =  HelperClassSwift.bcolor.getUIColor()
         
-        self.lblOnupdated.text =  "txt_update".localized() + " :"
-        self.lblOnupdated.font = .kufiRegularFont(ofSize: 15)
-        self.lblOnupdated.textColor =  HelperClassSwift.bcolor.getUIColor()
+//        self.lblOnupdated.text =  "txt_update".localized() + " :"
+//        self.lblOnupdated.font =  .kufiBoldFont(ofSize: 14)
+//        self.lblOnupdated.textColor =  HelperClassSwift.bcolor.getUIColor()
         
-        self.lblLocation.text =  "txt_location".localized() + " :"
-        self.lblLocation.font = .kufiRegularFont(ofSize: 15)
-        self.lblLocation.textColor =  HelperClassSwift.bcolor.getUIColor()
+//        self.lblLocation.text =  "txt_location".localized() + " :"
+//        self.lblLocation.font =  .kufiBoldFont(ofSize: 14)
+//        self.lblLocation.textColor =  HelperClassSwift.bcolor.getUIColor()
         
-        self.lblValBranchName.text =  Object?.branch_name
-        self.lblValBranchName.font = .kufiBoldFont(ofSize: 14)
-        self.lblValBranchName.textColor =  HelperClassSwift.bcolor.getUIColor()
+//        lblValBranchName.isHidden = true
+//        lblValProjectNameEn.isHidden = true
+//        lblValProjectNameAr.isHidden = true
+//        lblValCustomerName.isHidden = true
+//        lblValcustomer_type.isHidden = true
+//        lblValWriter.isHidden = true
+//        lblValOnDate.isHidden = true
+//        lblValOnupdated.isHidden = true
+//        lblValLocation.isHidden = true
         
-        self.lblValProjectNameEn.text =  Object?.projects_profile_name_en
-        self.lblValProjectNameEn.font = .kufiBoldFont(ofSize: 14)
-        
-        self.lblValProjectNameAr.text =  Object?.projects_profile_name_ar
-        self.lblValProjectNameAr.font = .kufiBoldFont(ofSize: 14)
-        
-        self.lblValCustomerName.text =  Object?.customer_name
-        self.lblValCustomerName.font = .kufiBoldFont(ofSize: 14)
-        
-        self.lblValcustomer_type.text =  Object?.customer_type
-        self.lblValcustomer_type.font = .kufiBoldFont(ofSize: 14)
-        
-        self.lblValWriter.text =  Object?.writer
-        self.lblValWriter.font = .kufiBoldFont(ofSize: 14)
-        
-        self.lblValOnDate.text =  Object?.projects_profile_created_datetime
-        self.lblValOnDate.font = .kufiBoldFont(ofSize: 14)
-        
-        self.lblValOnupdated.text =  Object?.projects_profile_updated_datetime
-        self.lblValOnupdated.font = .kufiBoldFont(ofSize: 14)
-        
-        self.lblValLocation.text =  Object?.projects_profile_location
-        self.lblValLocation.font = .kufiBoldFont(ofSize: 14)
+//        self.lblValBranchName.text =  Object?.branch_name
+//        self.lblValBranchName.font = .kufiRegularFont(ofSize: 14)
+//        self.lblValBranchName.textColor =  HelperClassSwift.bcolor.getUIColor()
+//
+//        self.lblValProjectNameEn.text =  Object?.projects_profile_name_en
+//        self.lblValProjectNameEn.font = .kufiRegularFont(ofSize: 14)
+//
+//        self.lblValProjectNameAr.text =  Object?.projects_profile_name_ar
+//        self.lblValProjectNameAr.font = .kufiRegularFont(ofSize: 14)
+//
+//        self.lblValCustomerName.text =  Object?.customer_name
+//        self.lblValCustomerName.font = .kufiRegularFont(ofSize: 14)
+//
+//        self.lblValcustomer_type.text =  Object?.customer_type
+//        self.lblValcustomer_type.font = .kufiRegularFont(ofSize: 14)
+//
+//        self.lblValWriter.text =  Object?.writer
+//        self.lblValWriter.font = .kufiRegularFont(ofSize: 14)
+//
+//        self.lblValOnDate.text =  Object?.projects_profile_created_datetime
+//        self.lblValOnDate.font = .kufiRegularFont(ofSize: 14)
+//
+//        self.lblValOnupdated.text =  Object?.projects_profile_updated_datetime
+//        self.lblValOnupdated.font = .kufiRegularFont(ofSize: 14)
+//
+//        self.lblValLocation.text =  Object?.projects_profile_location
+//        self.lblValLocation.font = .kufiRegularFont(ofSize: 14)
         
         
         self.lblServices.text =  "Services".localized()
-        self.lblServices.font = .kufiRegularFont(ofSize: 14)
+        self.lblServices.font = .kufiRegularFont(ofSize: 17)
         self.lblServices.textColor =  HelperClassSwift.bcolor.getUIColor()
         
         self.lblQuotations.text =  "txt_Quotations".localized()
-        self.lblQuotations.font = .kufiBoldFont(ofSize: 12)
-        self.lblQuotations.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lblQuotations.font = .kufiRegularFont(ofSize: 15)
+        //self.lblQuotations.textColor =  maincolor
         
         self.lblProjects.text =  "txt_Projects".localized()
-        self.lblProjects.font = .kufiBoldFont(ofSize: 12)
-        self.lblProjects.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lblProjects.font = .kufiRegularFont(ofSize: 15)
+        //self.lblProjects.textColor =  maincolor
         
-        self.lblProjectTitle.text =  "txt_Projects".localized()
-        self.lblProjectTitle.font = .kufiBoldFont(ofSize: 15)
-        self.lblProjectTitle.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.SelectedView_project.backgroundColor = maincolor
+        self.SelectedView_Quotation.backgroundColor = maincolor
         
-        
-        self.View_project.setBorderGrayNoCorner()
-        self.View_Quotation.setBorderGrayNoCorner()
+//        self.View_project.setBorderGrayNoCorner()
+//        self.View_Quotation.setBorderGrayNoCorner()
         
         self.SelectedView_Quotation.isHidden = true
         
-        self.mainView.setBorderGray()
-        self.projectView.setBorderGray()
-        self.projectVieww.setBorderGray()
+//        self.mainView.setBorderGray()
+//        self.projectView.setBorderGray()
+//        self.projectVieww.setBorderGray()
+      
         
-        self.lblMenuName.text =  self.StrMenue
-        self.lblSubMenuName.text =  StrSubMenue
-        self.lblTitle.text =  "Project Details".localized()
-        
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GoToAllProject))
-
-        lblSubMenuName.isUserInteractionEnabled = true
-        lblSubMenuName.addGestureRecognizer(tapGesture)
-        
-        self.btnAddQuotation.isHidden = true
-        
-        let nextimage =  UIImage.fontAwesomeIcon(name: .angleRight, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
-        self.imgNext1.image = nextimage
-        self.imgNext2.image = nextimage
-        
-        self.SelectedView_project.backgroundColor = HelperClassSwift.bcolor.getUIColor()
-        self.SelectedView_Quotation.backgroundColor = HelperClassSwift.bcolor.getUIColor()
-        
-        
-        let Addimage =  UIImage.fontAwesomeIcon(name: .plus, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 25, height: 25))
-        self.btnAddQuotation.setImage(Addimage, for: .normal)
-        
-        
+       // self.btnAddQuotation.isHidden = true
+      
+      
        
     }
     
+    func is_hide_Qutation(){
+        
+        if userObj?.is_admin == "1" || add == true {
+            self.View_Quotation.isHidden = false
+        }else{
+            self.View_Quotation.isHidden = true
+        }
+    }
     
     func setupCollection(){
         
@@ -302,8 +289,8 @@ class ProjectDetailsVC: UIViewController {
         collectionServieces.dataSource = self
         
         
-        let nib = UINib(nibName: "TransactionTVCell", bundle: nil)
-        tableProjects.register(nib, forCellReuseIdentifier: "TransactionTVCell")
+        let nib = UINib(nibName: "SubProjectTVCell", bundle: nil)
+        tableProjects.register(nib, forCellReuseIdentifier: "SubProjectTVCell")
         
     }
     
@@ -343,9 +330,9 @@ class ProjectDetailsVC: UIViewController {
                     let pageObj = PageObj(page!)
                     
                     if records.count == 0 {
-                        self.lblnodata.isHidden = false
+                        self.imgnodata.isHidden = false
                     }else{
-                        self.lblnodata.isHidden = true
+                        self.imgnodata.isHidden = true
                     }
                     if pageObj.total_pages > self.pageNumber {
                         self.allItemDownloaded = false
@@ -358,9 +345,9 @@ class ProjectDetailsVC: UIViewController {
                 
             }else{
                 self.hideLoadingActivity()
-                self.lblnodata.isHidden = false
+                self.imgnodata.isHidden = false
             }
-            self.lblQuotationsnodata.isHidden = true
+//            self.lblQuotationsnodata.isHidden = true
             
             
         }
@@ -407,21 +394,21 @@ class ProjectDetailsVC: UIViewController {
                     }
                     
                     if records.count == 0 {
-                        self.lblQuotationsnodata.isHidden = false
+                        self.imgnodata.isHidden = false
                     }else{
-                        self.lblQuotationsnodata.isHidden = true
+                        self.imgnodata.isHidden = true
                     }
                     //self.tableQuotation.reloadData()
                     self.hideLoadingActivity()
                 }
                 
             }else{
-                self.lblnodata.isHidden = true
+                self.imgnodata.isHidden = true
                 self.hideLoadingActivity()
-                self.lblQuotationsnodata.isHidden = false
+                //self.lblQuotationsnodata.isHidden = false
             }
             
-            
+            self.is_hide_Qutation()
         }
     }
     
@@ -441,6 +428,11 @@ class ProjectDetailsVC: UIViewController {
             
             
             let status = response["status"] as? Bool
+            let add = response["add"] as? Bool
+
+            self.add = add ?? false
+            self.tableProjects.reloadData()
+            //self.tableQuotation.reloadData()
             
             let service_user_data = response["service_user_data"] as? [String:Any]
             if status == true{
@@ -451,7 +443,7 @@ class ProjectDetailsVC: UIViewController {
                         self.arr_Users.append(obj)
                         self.CustomerName.append(obj.label  + "\n")
                     }
-                    self.lblValCustomerName.text = self.CustomerName
+                   // self.lblValCustomerName.text = self.CustomerName
                 }
                 if  let services = service_user_data!["services"] as? NSArray{
                     
@@ -474,13 +466,13 @@ class ProjectDetailsVC: UIViewController {
             
         }
     
-        self.lblQuotationsnodata.isHidden = true
+       // self.lblQuotationsnodata.isHidden = true
     }
     
     
     
     func menu_select(){
-        let language = dp_get_current_language()
+        let language =  MOLHLanguage.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{
@@ -489,14 +481,7 @@ class ProjectDetailsVC: UIViewController {
         
     }
     
-    @objc func GoToAllProject() {
-        let vc:AllPrpjectsVC = AppDelegate.mainSB.instanceVC()
-     //   vc.title =  self.title
-        vc.MenuObj = MenuObj
-        vc.StrSubMenue =  "All Projects".localized()
-        vc.StrMenue = "Projects".localized()
-        _ =  panel?.center(vc)
-    }
+  
     
     @IBAction func btnProject_Click(_ sender: Any) {
         
@@ -504,11 +489,11 @@ class ProjectDetailsVC: UIViewController {
         self.tableProjects.reloadData()
         self.SelectedView_project.isHidden = false
         self.SelectedView_Quotation.isHidden = true
-        self.lblProjectTitle.text =  "txt_Projects".localized()
-        self.btnAddQuotation.isHidden = true
+        //self.lblProjectTitle.text =  "txt_Projects".localized()
+        //self.btnAddQuotation.isHidden = true
         
-        self.lblnodata.isHidden = false
-        self.lblQuotationsnodata.isHidden = true
+//        self.lblnodata.isHidden = false
+//        self.lblQuotationsnodata.isHidden = true
         
             UIView.transition(with: tableProjects, duration: 0.4,
                               options: .transitionFlipFromTop,
@@ -522,12 +507,12 @@ class ProjectDetailsVC: UIViewController {
         //self.tableProjects.isHidden = true
         self.IsPrpjectTable = false
         self.tableProjects.reloadData()
-        self.btnAddQuotation.isHidden = false
+       // self.btnAddQuotation.isHidden = false
         self.SelectedView_project.isHidden = true
         self.SelectedView_Quotation.isHidden = false
-        self.lblProjectTitle.text =  "txt_Quotations".localized()
-        self.lblnodata.isHidden = true
-        self.lblQuotationsnodata.isHidden = false
+        //self.lblProjectTitle.text =  "txt_Quotations".localized()
+//        self.lblnodata.isHidden = true
+//        self.lblQuotationsnodata.isHidden = false
         
             UIView.transition(with: tableProjects, duration: 0.4,
                               options: .transitionFlipFromTop,
@@ -558,167 +543,177 @@ extension ProjectDetailsVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVCell", for: indexPath) as! TransactionTVCell
+       // let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVCell", for: indexPath) as! TransactionTVCell
         
-       //if tableView == tableProjects{
         if IsPrpjectTable == true{
+            let Projectell = tableView.dequeueReusableCell(withIdentifier: "SubProjectTVCell", for: indexPath) as! SubProjectTVCell
+            
+            
             let obj = arr_Projectdata[indexPath.item]
             
-            let no =  "Project ID".localized() + "  \(obj.projects_supervision_id)"
-            let Description = "Quotation Number".localized() + "  \(obj.projects_quotation_id)"
-            let from = "Subject".localized() + "  \(obj.quotation_subject)"
-            let to = "Grand Total".localized() + "  \(obj.quotation_grand_total)"
-            let type = "Tax Amount".localized() + "  \(obj.quotation_tax_amount)"
-            let Module = "Net Amount".localized() + "  \(obj.quotation_net_amount)"
-            let Submitter = "Approved Date".localized() + "  \(obj.quotation_approved_date)"
-            let writer = "Writer".localized() + "  \(obj.writer)"
-            let LastUpdate = "On Date".localized() + "  \(obj.quotation_created_date)"
+            let Id =  "ID".localized() + ": \(obj.projects_supervision_id)"
+            let Q_No = "Quotation Number".localized() + ": \(obj.projects_quotation_id)"
+            let subject = "Subject".localized() + "  \(obj.quotation_subject)"
+            let Grand_Total = "\(obj.quotation_grand_total)"
+            let Tax_Amount =   "\(obj.quotation_tax_amount)"
+            let net_amount =  "\(obj.quotation_net_amount)"
+            let ApprovedDate = "Approved Date".localized() + ": \(obj.quotation_approved_date)"
+            let writer = "By".localized() + ": \(obj.writer)"
+            let date = "\(obj.quotation_created_date)"
             
             
-            cell.lbKeylNo.text = no
-            cell.lblKeyDesc.text = Description
-            cell.lblKeyFrom.text = from
-            cell.lblKeyTo.text = to
-            cell.lblKeyType.text = type
-            cell.lblKeyWriter.text = writer
-            cell.lblKeyLastUpdate.text = LastUpdate
-            cell.lblKeySubmitter.text = Submitter
-            cell.lblKeyModule.text = Module
             
-            cell.lblKeyBarCode.isHidden = true
-            cell.lblKeyStatus.isHidden = true
-            cell.lblKeyBarCode.isHidden = true
+            Projectell.lblTaxAmount.text = "Tax Amount".localized()
+            Projectell.lblNetAmount.text = "Net Amount".localized()
+            Projectell.lblGrandTotal.text = "Grand Total".localized()
             
-            
-            let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["Project ID".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lbKeylNo.attributedText = attributedWithTextColor
-            
-            let Descriptionattributed: NSAttributedString = Description.attributedStringWithColor(["Quotation Number".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblKeyDesc.attributedText = Descriptionattributed
-            
-            let fromattributed: NSAttributedString = from.attributedStringWithColor(["Subject".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblKeyFrom.attributedText = fromattributed
-            
-            let Toattributed: NSAttributedString = to.attributedStringWithColor(["Grand Total".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblKeyTo.attributedText = Toattributed
+            if userObj?.is_admin == "1" || self.add == true {
+                Projectell.lblSubject.isHidden = false
+                Projectell.StackAmount.isHidden = false
+                Projectell.lblWriter.isHidden = false
+                Projectell.lblDate.isHidden = false
+                Projectell.lblApprovedDate.isHidden = false
+                Projectell.lblQ_No.isHidden = false
+            }else{
+                
+                Projectell.lblSubject.isHidden = false
+                Projectell.StackAmount.isHidden = true
+                Projectell.StackDate.isHidden = true
+                Projectell.StackWriter.isHidden = true
+                Projectell.height.constant = 90
+                Projectell.lblWriter.isHidden = true
+                Projectell.lblDate.isHidden = true
+                Projectell.lblApprovedDate.isHidden = true
+                Projectell.lblQ_No.isHidden = true
+            }
             
             
-           
-            let Typeattributed: NSAttributedString = type.attributedStringWithColor(["Tax Amount".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblKeyType.attributedText = Typeattributed
+            let Idattribute: NSAttributedString = Id.attributedStringWithColor(["ID".localized()], color: maincolor)
+            Projectell.lblId.attributedText = Idattribute
+            
+            let Q_Noattribute: NSAttributedString = Q_No.attributedStringWithColor(["Quotation Number".localized()], color: maincolor)
+            Projectell.lblQ_No.attributedText = Q_Noattribute
+            
+            let Subjectattribute: NSAttributedString = subject.attributedStringWithColor(["Subject".localized()], color: maincolor)
+            Projectell.lblSubject.attributedText = Subjectattribute
             
             
-            let Moduleattributed: NSAttributedString = Module.attributedStringWithColor(["Net Amount".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblKeyModule.attributedText = Moduleattributed
+            Projectell.lblValGrandTotal.text = Grand_Total
+            Projectell.lblValTaxAmount.text = Tax_Amount
+            Projectell.lblValNetAmount.text = net_amount
             
-            let Writerattributed: NSAttributedString = writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblKeyWriter.attributedText = Writerattributed
+            let Writerattribute: NSAttributedString = writer.attributedStringWithColor(["By".localized()], color: maincolor)
+            Projectell.lblWriter.attributedText = Writerattribute
             
-            let Submitterattributed: NSAttributedString = Submitter.attributedStringWithColor(["Approved Date".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblKeySubmitter.attributedText = Submitterattributed
+            let ApprovedDateAtt: NSAttributedString = ApprovedDate.attributedStringWithColor(["Approved Date".localized()], color: maincolor)
+            Projectell.lblApprovedDate.attributedText = ApprovedDateAtt
             
           
-            let Lastattributed: NSAttributedString = LastUpdate.attributedStringWithColor(["On Date".localized()], color: HelperClassSwift.acolor.getUIColor())
-            cell.lblKeyLastUpdate.attributedText = Lastattributed
+            Projectell.lblDate.text = date
             
-            cell.viewBack.setcorner()
-            let backgroundView = UIView()
-            backgroundView.backgroundColor = .white
-            cell.selectedBackgroundView = backgroundView
+            Projectell.viewBack.layer.applySketchShadow(
+              color: .black,
+              alpha: 0.6,
+              x: 0,
+              y: 13,
+              blur: 16,
+              spread: 0)
+            Projectell.viewBack.setRounded(20)
+            //Projectell.viewBack.setcorner()
             
-            return cell
-        }else{
-            let obj = arr_data[indexPath.item]
-         
-                     let Description = "Quotation Number".localized() + "  \(obj.projects_quotation_id)"
-                     let from = "Subject".localized() + "  \(obj.quotation_subject)"
-                     let to = "Grand Total".localized() + "  \(obj.quotation_grand_total)"
-                     let type = "Tax Amount".localized() + "  \(obj.quotation_tax_amount)"
-                     let Module = "Net Amount".localized() + "  \(obj.quotation_net_amount)"
-         
-                     let Submitter = "Approved Date".localized() + "  \(obj.quotation_approved_date)"
-                     let writer = "Writer".localized() + "  \(obj.writer)"
-                     let LastUpdate = "Submitted Date".localized() + "  \(obj.quotation_created_date)"
-                     let Status = "Status".localized() + "New"
-         
-         
-                     cell.lblKeyDesc.text = Description
-                     cell.lblKeyFrom.text = from
-                     cell.lblKeyTo.text = to
-                     cell.lblKeyType.text = type
-                     cell.lblKeyWriter.text = writer
-                     cell.lblKeyLastUpdate.text = LastUpdate
-                     cell.lblKeySubmitter.text = Submitter
-                     cell.lblKeyModule.text = Module
-                     cell.lblKeyStatus.text = Status
-         
-         
-                     cell.lblKeyBarCode.isHidden = true
-                     cell.lbKeylNo.isHidden = true
-                     cell.lblKeyBarCode.isHidden = true
-         
-         
-            let Descriptionattributed: NSAttributedString = Description.attributedStringWithColor(["Quotation Number".localized()], color: HelperClassSwift.acolor.getUIColor())
-                     cell.lblKeyDesc.attributedText = Descriptionattributed
-         
-            let fromattributed: NSAttributedString = from.attributedStringWithColor(["Subject".localized()], color: HelperClassSwift.acolor.getUIColor())
-                     cell.lblKeyFrom.attributedText = fromattributed
-         
-            let Toattributed: NSAttributedString = to.attributedStringWithColor(["Grand Total".localized()], color: HelperClassSwift.acolor.getUIColor())
-                     cell.lblKeyTo.attributedText = Toattributed
-         
-         
-         
-            let Typeattributed: NSAttributedString = type.attributedStringWithColor(["Tax Amount".localized()], color: HelperClassSwift.acolor.getUIColor())
-                     cell.lblKeyType.attributedText = Typeattributed
-         
-         
-            let Moduleattributed: NSAttributedString = Module.attributedStringWithColor(["Net Amount".localized()], color: HelperClassSwift.acolor.getUIColor())
-                     cell.lblKeyModule.attributedText = Moduleattributed
-         
-            let Writerattributed: NSAttributedString = writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
-                     cell.lblKeyWriter.attributedText = Writerattributed
-         
-         
-         
-            let Submitterattributed: NSAttributedString = Submitter.attributedStringWithColor(["Approved Date".localized()], color: HelperClassSwift.acolor.getUIColor())
-                     cell.lblKeySubmitter.attributedText = Submitterattributed
-         
-         
-            let Lastattributed: NSAttributedString = LastUpdate.attributedStringWithColor(["Submitted Date".localized()], color: HelperClassSwift.acolor.getUIColor())
-                     cell.lblKeyLastUpdate.attributedText = Lastattributed
-         
-            let Statusattributed: NSAttributedString = Status.attributedStringWithColor(["Status".localized()], color: HelperClassSwift.acolor.getUIColor())
-                     cell.lblKeyStatus.attributedText = Statusattributed
-         
-         
-         
-                     cell.viewBack.setcorner()
-         
-                     let backgroundView = UIView()
-                     backgroundView.backgroundColor = .white
-                     cell.selectedBackgroundView = backgroundView
-         
-                     return cell
-            
+            return Projectell
         }
-  
+//        else{
+//            let obj = arr_data[indexPath.item]
+//
+//                     let Description = "Quotation Number".localized() + "  \(obj.projects_quotation_id)"
+//                     let from = "Subject".localized() + "  \(obj.quotation_subject)"
+//                     let to = "Grand Total".localized() + "  \(obj.quotation_grand_total)"
+//                     let type = "Tax Amount".localized() + "  \(obj.quotation_tax_amount)"
+//                     let Module = "Net Amount".localized() + "  \(obj.quotation_net_amount)"
+//
+//                     let Submitter = "Approved Date".localized() + "  \(obj.quotation_approved_date)"
+//                     let writer = "Writer".localized() + "  \(obj.writer)"
+//                     let LastUpdate = "Submitted Date".localized() + "  \(obj.quotation_created_date)"
+//                     let Status = "Status".localized() + "New"
+//
+//
+//                     cell.lblKeyDesc.text = Description
+//                     cell.lblKeyFrom.text = from
+//                     cell.lblKeyTo.text = to
+//                     cell.lblKeyType.text = type
+//                     cell.lblKeyWriter.text = writer
+//                     cell.lblKeyLastUpdate.text = LastUpdate
+//                     cell.lblKeySubmitter.text = Submitter
+//                     cell.lblKeyModule.text = Module
+//                     cell.lblKeyStatus.text = Status
+//
+//
+//                     cell.lblKeyBarCode.isHidden = true
+//                     cell.lbKeylNo.isHidden = true
+//                     cell.lblKeyBarCode.isHidden = true
+//
+//
+//            let Descriptionattributed: NSAttributedString = Description.attributedStringWithColor(["Quotation Number".localized()], color: HelperClassSwift.acolor.getUIColor())
+//                     cell.lblKeyDesc.attributedText = Descriptionattributed
+//
+//            let fromattributed: NSAttributedString = from.attributedStringWithColor(["Subject".localized()], color: HelperClassSwift.acolor.getUIColor())
+//                     cell.lblKeyFrom.attributedText = fromattributed
+//
+//            let Toattributed: NSAttributedString = to.attributedStringWithColor(["Grand Total".localized()], color: HelperClassSwift.acolor.getUIColor())
+//                     cell.lblKeyTo.attributedText = Toattributed
+//
+//
+//
+//            let Typeattributed: NSAttributedString = type.attributedStringWithColor(["Tax Amount".localized()], color: HelperClassSwift.acolor.getUIColor())
+//                     cell.lblKeyType.attributedText = Typeattributed
+//
+//
+//            let Moduleattributed: NSAttributedString = Module.attributedStringWithColor(["Net Amount".localized()], color: HelperClassSwift.acolor.getUIColor())
+//                     cell.lblKeyModule.attributedText = Moduleattributed
+//
+//            let Writerattributed: NSAttributedString = writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
+//                     cell.lblKeyWriter.attributedText = Writerattributed
+//
+//
+//
+//            let Submitterattributed: NSAttributedString = Submitter.attributedStringWithColor(["Approved Date".localized()], color: HelperClassSwift.acolor.getUIColor())
+//                     cell.lblKeySubmitter.attributedText = Submitterattributed
+//
+//
+//            let Lastattributed: NSAttributedString = LastUpdate.attributedStringWithColor(["Submitted Date".localized()], color: HelperClassSwift.acolor.getUIColor())
+//                     cell.lblKeyLastUpdate.attributedText = Lastattributed
+//
+//            let Statusattributed: NSAttributedString = Status.attributedStringWithColor(["Status".localized()], color: HelperClassSwift.acolor.getUIColor())
+//                     cell.lblKeyStatus.attributedText = Statusattributed
+//
+//
+//
+//                     cell.viewBack.setcorner()
+//
+//
+//                     return cell
+//
+//        }
+        return UITableViewCell()
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if IsPrpjectTable == true{
-                let obj = arr_Projectdata[indexPath.item]
+            let obj = arr_Projectdata[indexPath.item]
             projects_profile_id = obj.projects_profile_id
             projects_work_area_id = obj.projects_work_area_id
             projects_supervision_id = obj.projects_supervision_id
-                let vc:SubProjectDetailsVC = AppDelegate.mainSB.instanceVC()
-                vc.title =  self.title
-                vc.Object = Object
-                vc.StrSubMenue =  self.StrSubMenue
-                vc.StrMenue = self.StrMenue
-                vc.MenuObj = self.MenuObj
-                _ =  panel?.center(vc)
+            let vc:SupervisionOperationVC = AppDelegate.mainSB.instanceVC()
+            vc.title =  self.title
+            vc.Object = Object
+            vc.StrSubMenue =  self.StrSubMenue
+            vc.StrMenue = self.StrMenue
+            vc.MenuObj = self.MenuObj
+            self.navigationController?.pushViewController(vc, animated: true)
+//            _ =  panel?.center(vc)
                 
         }else{
             print("nil")
@@ -799,7 +794,11 @@ extension ProjectDetailsVC: UICollectionViewDataSource ,UICollectionViewDelegate
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+       // cell.view_img.backgroundColor = HelperClassSwift.acolor.getUIColor()
+        
+    }
 }
 
 
@@ -833,3 +832,8 @@ extension ProjectDetailsVC:UISearchBarDelegate {
 }
 
  
+
+
+///https://nahidh.sa/backend/MRpWxXzlMesi27d/1/10?branch_id=&search_services=&search_key=
+/////All project
+///

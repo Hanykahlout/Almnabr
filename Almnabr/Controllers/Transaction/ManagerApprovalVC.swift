@@ -61,6 +61,7 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var imgDropOwner: UIImageView!
     @IBOutlet weak var btn_cancel_ownerUsers: UIButton!
     @IBOutlet weak var stack_uploadAttachment: UIView!
+    @IBOutlet weak var lbl_uploadAttachments: UILabel!
     @IBOutlet weak var table: UITableView!
     
     var Selected_index:Int = 0
@@ -93,23 +94,36 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
         configGUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configGUI()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+      //  configGUI()
+    }
+    
     
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
         
-        icon_noPermission.loadGif(name: "no-permission")
+        icon_noPermission.no_permission()
         
         self.lbl_noPermission.text =  "You not have permission to access this step".localized()
         self.lbl_noPermission.font = .kufiRegularFont(ofSize: 15)
         self.lbl_noPermission.textColor =  "#333".getUIColor()
         
-        
+        self.lbl_uploadAttachments.text = "Upload attachment".localized() + " *"
+        self.lbl_uploadAttachments.font = .kufiRegularFont(ofSize: 13)
         if StatusObject?.Manager_Approval == false {
             view_noPermission.isHidden = false
             self.view_main.isHidden = true
 
         }else{
+            self.get_OwnerUser()
             view_noPermission.isHidden = true
             self.view_main.isHidden = false
         }
@@ -125,37 +139,37 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
         
         
         self.lbl_CustomerNote.text =  "( Note : The consultant decision in this request will not be confirmed until reviewing owner representative response )".localized()
-        self.lbl_CustomerNote.font = .kufiBoldFont(ofSize: 16)
+        self.lbl_CustomerNote.font = .kufiRegularFont(ofSize: 12)
         self.lbl_CustomerNote.textColor =  .red
         
         
         self.lbl_Title.text =  "Manager Approval".localized()
-        self.lbl_Title.font = .kufiBoldFont(ofSize: 15)
-        self.lbl_Title.textColor =  HelperClassSwift.acolor.getUIColor()
+        self.lbl_Title.font = .kufiRegularFont(ofSize: 13)
+        self.lbl_Title.textColor =  maincolor
         
     
-        self.lbl_ManagerApprovalQ.text =  "Manager Approval !?. ".localized()
-        self.lbl_ManagerApprovalQ.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_ManagerApprovalQ.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_ManagerApprovalQ.text =  "Manager Approval".localized() +  " !?. "
+        self.lbl_ManagerApprovalQ.font = .kufiRegularFont(ofSize: 13)
+        self.lbl_ManagerApprovalQ.textColor =  maincolor
         
         
         self.lbl_Return.text =  "Return to technical assistant to re-submit".localized()
-        self.lbl_Return.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_Return.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_Return.font = .kufiRegularFont(ofSize: 13)
+       // self.lbl_Return.textColor =  maincolor
         
         
         self.lbl_Approve.text =  "Approve".localized()
-        self.lbl_Approve.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_Approve.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_Approve.font = .kufiRegularFont(ofSize: 13)
+       // self.lbl_Approve.textColor = maincolor
         
         self.lbl_notes.text =  "Rejected Notes :".localized()
-        self.lbl_notes.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_notes.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_notes.font = .kufiRegularFont(ofSize: 13)
+        self.lbl_notes.textColor =  maincolor
         
         
         self.lbl_CustomerRepresntativeQ.text =  "Customer Representative Required !?.".localized()
-        self.lbl_CustomerRepresntativeQ.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_CustomerRepresntativeQ.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_CustomerRepresntativeQ.font = .kufiRegularFont(ofSize: 13)
+        self.lbl_CustomerRepresntativeQ.textColor =  maincolor
         
         
         self.btn_checkNo.setImage(UIImage(named: "uncheck"), for: .normal)
@@ -163,36 +177,36 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
         
         
         self.lbl_No.text =  "No".localized()
-        self.lbl_No.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_No.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_No.font = .kufiRegularFont(ofSize: 13)
+       // self.lbl_No.textColor =  maincolor
         
         self.lbl_Yes.text =  "Yes".localized()
-        self.lbl_Yes.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_Yes.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_Yes.font = .kufiRegularFont(ofSize: 13)
+      //  self.lbl_Yes.textColor =  HelperClassSwift.bcolor.getUIColor()
         
         
         self.lbl_upload.text =  "Upload customer approved document".localized()
-        self.lbl_upload.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_upload.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_upload.font = .kufiRegularFont(ofSize: 13)
+// self.lbl_upload.textColor =  HelperClassSwift.bcolor.getUIColor()
         
         self.lbl_Assign.text =  "Assign owner user for confirmation".localized()
-        self.lbl_Assign.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_Assign.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_Assign.font = .kufiRegularFont(ofSize: 13)
+    //    self.lbl_Assign.textColor =  HelperClassSwift.bcolor.getUIColor()
         
         
         self.lbl_CustomerUploadQ.text =  "Customer Representative ? :".localized()
-        self.lbl_CustomerUploadQ.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_CustomerUploadQ.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_CustomerUploadQ.font = .kufiRegularFont(ofSize: 13)
+        self.lbl_CustomerUploadQ.textColor =  maincolor
         
         
         self.lbl_ownerUsers.text = "Owner users".localized()
-        self.lbl_ownerUsers.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_ownerUsers.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_ownerUsers.font = .kufiRegularFont(ofSize: 13)
+        self.lbl_ownerUsers.textColor =  maincolor
         
         
         self.lbl_ownerUserSelect.text = "Owner users".localized()
-        self.lbl_ownerUserSelect.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_ownerUserSelect.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_ownerUserSelect.font = .kufiRegularFont(ofSize: 13)
+      //  self.lbl_ownerUserSelect.textColor =  HelperClassSwift.bcolor.getUIColor()
         
         self.lbl_CustomerUploadQ.isHidden = true
         self.stack_CustomerUpload.isHidden = true
@@ -209,15 +223,14 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
         
         self.view_txtView.setBorderGray()
         
-        self.view_main.setBorderGray()
         
         self.btn_cancel_ownerUsers.isHidden = true
         
         self.btn_submit.setTitle("Submit".localized(), for: .normal)
-        self.btn_submit.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btn_submit.backgroundColor = "#1A3665".getUIColor()
         self.btn_submit.setTitleColor(.white, for: .normal)
         
-        self.get_OwnerUser()
+       
         
         self.stack_uploadAttachment.isHidden = true
         
@@ -233,7 +246,7 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
      
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/customer_users?lang_key=en&user_position=CST001,CSM001&projects_work_area_id=\(obj_FormWir?.projects_work_area_id ?? "1")" ) { (response) in
+        APIManager.sendRequestGetAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/customer_users?lang_key=en&user_position=CST001,CSM001&projects_work_area_id=\(obj_FormWir?.projects_work_area_id ?? "1")" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -270,7 +283,7 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
                           "customer_representative_type":self.customer_representative_type,
                           "owner_users" : owner_users,
                           "transactions_persons_action_code" : "501658"]
-            APIManager.sendRequestPostAuth(urlString: "form/FORM_WIR/Manager_Approval/0", parameters: params ) { (response) in
+            APIManager.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Manager_Approval/0", parameters: params ) { (response) in
                 self.hideLoadingActivity()
                
                 
@@ -307,10 +320,15 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
     
     func Submit_request(){
         
-        guard arr_file.count != 0 else {
-            showAMessage(withTitle: "error".localized(), message: "Please enter your file".localized())
-            return
+        
+        if self.customer_representative_type == "upload_customer_approved_document" {
+           
+            guard arr_file.count != 0 else {
+                showAMessage(withTitle: "error".localized(), message: "Please enter your file".localized())
+                return
+            }
         }
+   
         if self.manager_approval_approval_status == "Return" {
             guard txt_notes.text != "" else {
                 showAMessage(withTitle: "error".localized(), message: "Please enter your Notes".localized())
@@ -336,7 +354,7 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
         
         showLoadingActivity()
         
-        APIManager.func_Upload(queryString: "/form/FORM_WIR/Manager_Approval/0", arr_file, param: self.param ) { (respnse ) in
+        APIManager.func_Upload(queryString: "/form/\(obj_transaction?.transaction_key ?? " ")/Manager_Approval/0", arr_file, param: self.param ) { (respnse ) in
             
             let status = respnse["status"] as? Bool
             let msg = respnse["msg"] as? String
@@ -585,9 +603,9 @@ extension ManagerApprovalVC: UITableViewDelegate , UITableViewDataSource{
         cell.btn_Select.setImage( UIImage(systemName: "plus.rectangle.fill.on.folder.fill"), for: .normal)
         
         cell.lblNo.text =  "#" + "\(indexPath.item + 1)"
-        cell.lblNo.font = .kufiRegularFont(ofSize: 17)
+        cell.lblNo.font = .kufiRegularFont(ofSize: 13)
         cell.tfTitle.text = obj.title
-        cell.tfTitle.placeholder = "Description"
+        cell.tfTitle.placeholder = "Description".localized()
         cell.btn_Select.tintColor = HelperClassSwift.acolor.getUIColor()
         cell.btn_delete.isHidden = false
         cell.tfTitle.isUserInteractionEnabled = true

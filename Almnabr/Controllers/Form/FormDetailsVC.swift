@@ -9,6 +9,7 @@
 import UIKit
 import DPLocalization
 import FontAwesome_swift
+import MOLH
 
 class FormDetailsVC: UIViewController {
 
@@ -85,7 +86,7 @@ class FormDetailsVC: UIViewController {
     }
     
     func menu_select(){
-        let language = dp_get_current_language()
+        let language =  MOLHLanguage.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{
@@ -108,6 +109,7 @@ class FormDetailsVC: UIViewController {
     //------------------------------------------------------
     func configGUI() {
         
+        IsTransaction = true
         
     
         lblHome.titleLabel?.textColor =  HelperClassSwift.bcolor.getUIColor()
@@ -240,7 +242,7 @@ class FormDetailsVC: UIViewController {
             let destination = segue.destination as! UINavigationController
             let vc = destination.topViewController as! LanguageVC
             vc.isFromTransaction = true
-            
+            IsTransaction = true
            // let vc: LanguageVC = segue.destination as! LanguageVC
             vc.ProjectObj = ProjectObj
         }

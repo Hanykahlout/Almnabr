@@ -13,8 +13,6 @@ import DropDown
 
 class DocumentsVC: UIViewController {
     
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblnodata: UILabel!
     
     @IBOutlet weak var lblActive: UILabel!
     @IBOutlet weak var lblDocumentType: UILabel!
@@ -35,6 +33,10 @@ class DocumentsVC: UIViewController {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var viewsearch: UIView!
+    @IBOutlet weak var img_nodata: UIImageView!
+    @IBOutlet weak var tableHeightConstraint:NSLayoutConstraint!
     
     var StrTitle:String = ""
     var StrSubMenue:String = ""
@@ -101,19 +103,17 @@ class DocumentsVC: UIViewController {
         addNavigationBarTitle(navigationTitle: StrTitle)
     }
     
+//    override func viewDidLayoutSubviews() {
+//        tableHeightConstraint.constant = table.contentSize.height
+//        
+//    }
+    
     
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
         
-        
-        lblTitle.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblTitle.font = .kufiBoldFont(ofSize: 15)
-        
-        
-        self.lblnodata.text =  "txt_NoData".localized()
-        self.lblnodata.font = .kufiRegularFont(ofSize: 15)
-        self.lblnodata.isHidden = true
+        self.viewsearch.setBorderGrayWidthCorner(1, 20)
         
         
         self.viewActive.setBorderGray()
@@ -128,7 +128,7 @@ class DocumentsVC: UIViewController {
         self.lblDivision.text =  "txt_Division".localized()
         self.lblDivision.font = .kufiRegularFont(ofSize: 15)
         
-        self.lblnodata.isHidden = false
+        self.img_nodata.isHidden = false
         
         btnDivision.isHidden = true
         btnDocumentType.isHidden = true
@@ -138,9 +138,7 @@ class DocumentsVC: UIViewController {
         self.imgDropDocumentType.image = dropDownmage
         self.imgDropActive.image = dropDownmage
         
-        self.mainView.setBorderGray()
-        
-        self.lblTitle.text =  "Documents".localized()
+       
         
         searchBar.delegate = self
         
@@ -189,9 +187,9 @@ class DocumentsVC: UIViewController {
                     
                     
                     if records.count == 0 {
-                        self.lblnodata.isHidden = false
+                        self.img_nodata.isHidden = false
                     }else{
-                        self.lblnodata.isHidden = true
+                        self.img_nodata.isHidden = true
                     }
                     
                     if pageObj.total_pages > self.pageNumber {
@@ -206,7 +204,7 @@ class DocumentsVC: UIViewController {
                 
             }else{
                 self.hideLoadingActivity()
-                self.lblnodata.isHidden = false
+                self.img_nodata.isHidden = false
                 // self.showAMessage(withTitle: "error", message: "Please try again")
             }
             

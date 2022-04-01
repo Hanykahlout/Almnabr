@@ -19,6 +19,8 @@ class MyPageViewController: UIPageViewController {
         super.viewDidLoad()
         
         dataSource = self
+       
+       
         
         let page1: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "FromTransactionVC")
         let page2: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "TeamUserVC")
@@ -103,3 +105,4 @@ extension MyPageViewController: UIPageViewControllerDataSource {
         return 0
     }
 }
+

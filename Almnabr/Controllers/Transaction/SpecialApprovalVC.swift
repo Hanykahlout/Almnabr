@@ -28,15 +28,26 @@ class SpecialApprovalVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configGUI()
+       configGUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+         configGUI()
+    }
+    
+    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        configGUI()
+//    }
     
     
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
         
-        icon_noPermission.loadGif(name: "no-permission")
+        icon_noPermission.no_permission()
         
         self.lbl_noPermission.text =  "You not have permission to access this step".localized()
         self.lbl_noPermission.font = .kufiRegularFont(ofSize: 15)
@@ -55,23 +66,23 @@ class SpecialApprovalVC: UIViewController {
         self.txt_notes.text = ""
         
         self.lbl_Title.text =  "Special Approval".localized()
-        self.lbl_Title.font = .kufiBoldFont(ofSize: 15)
-        self.lbl_Title.textColor =  HelperClassSwift.acolor.getUIColor()
+        self.lbl_Title.font = .kufiRegularFont(ofSize: 14)
+        self.lbl_Title.textColor =  maincolor
         
         
         
-        self.lbl_notes.text =  "Notes :".localized()
-        self.lbl_notes.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_notes.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_notes.text =  "Notes".localized() + " :"
+        self.lbl_notes.font = .kufiRegularFont(ofSize: 13)
+        self.lbl_notes.textColor =  maincolor
         
         
         self.view_txtView.setBorderGray()
         
-        self.view_main.setBorderGray()
+       // self.view_main.setBorderGray()
         
         
         self.btn_submit.setTitle("Submit".localized(), for: .normal)
-        self.btn_submit.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btn_submit.backgroundColor = "#1A3665".getUIColor()
         self.btn_submit.setTitleColor(.white, for: .normal)
         
     }
@@ -90,7 +101,7 @@ class SpecialApprovalVC: UIViewController {
             let params = ["transaction_request_id" : obj_transaction?.transaction_request_id ?? "0",
                           "notes":self.txt_notes.text ?? ""]
             
-            APIManager.sendRequestPostAuth(urlString: "form/FORM_WIR/Special_Approval/0", parameters: params ) { (response) in
+            APIManager.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Special_Approval/0", parameters: params ) { (response) in
                 self.hideLoadingActivity()
                
                 

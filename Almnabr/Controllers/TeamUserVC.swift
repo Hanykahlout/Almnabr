@@ -13,9 +13,6 @@ import DropDown
 
 class TeamUserVC: UIViewController {
 
-   
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblnodata: UILabel!
     
     @IBOutlet weak var lblPosition: UILabel!
     
@@ -28,6 +25,10 @@ class TeamUserVC: UIViewController {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var viewsearch: UIView!
+    @IBOutlet weak var img_nodata: UIImageView!
+    @IBOutlet weak var tableHeightConstraint:NSLayoutConstraint!
     
     
     var StrTitle:String = ""
@@ -72,7 +73,7 @@ class TeamUserVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: - Config Navigation
@@ -83,6 +84,10 @@ class TeamUserVC: UIViewController {
         
         addNavigationBarTitle(navigationTitle: StrTitle)
     }
+//    override func viewDidLayoutSubviews() {
+//        tableHeightConstraint.constant = table.contentSize.height
+//        
+//    }
     
     
     //MARK: - Config GUI
@@ -90,16 +95,9 @@ class TeamUserVC: UIViewController {
     func configGUI() {
         
         
-        lblTitle.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblTitle.font = .kufiBoldFont(ofSize: 15)
-        
-      
-        self.lblnodata.text =  "txt_NoData".localized()
-        self.lblnodata.font = .kufiRegularFont(ofSize: 15)
-        self.lblnodata.isHidden = true
-      
-        
-        self.viewPosition.setBorderGray()
+       
+        //self.viewPosition.setBorderGray()
+        self.viewPosition.setBorderGrayWidthCorner(1, 20)
         self.lblPosition.text =  "txt_Position".localized()
         self.lblPosition.font = .kufiRegularFont(ofSize: 15)
         
@@ -107,18 +105,18 @@ class TeamUserVC: UIViewController {
         
         btnPosition.isHidden = true
       
-        self.mainView.setBorderGray()
+        //self.mainView.setBorderGray()
         
-        self.lblTitle.text =  "Team Users".localized()
-        self.lblnodata.isHidden = false
+        
+        self.img_nodata.isHidden = false
         searchBar.delegate = self
         
         self.imgDropPosition.image = dropDownmage
         
         table.dataSource = self
         table.delegate = self
-        let nib = UINib(nibName: "TransactionTVCell", bundle: nil)
-        table.register(nib, forCellReuseIdentifier: "TransactionTVCell")
+        let nib = UINib(nibName: "TeamUserTVCell", bundle: nil)
+        table.register(nib, forCellReuseIdentifier: "TeamUserTVCell")
        
         
     }
@@ -153,9 +151,9 @@ class TeamUserVC: UIViewController {
                     
                   
                     if self.arr_data.count == 0 {
-                        self.lblnodata.isHidden = false
+                        self.img_nodata.isHidden = false
                     }else{
-                        self.lblnodata.isHidden = true
+                        self.img_nodata.isHidden = true
                     }
                     
                     if pageObj.total_pages > self.pageNumber {
@@ -170,7 +168,7 @@ class TeamUserVC: UIViewController {
                 
             }else{
                 self.hideLoadingActivity()
-                self.lblnodata.isHidden = false
+                self.img_nodata.isHidden = false
             }
             
             
@@ -266,59 +264,37 @@ extension TeamUserVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVCell", for: indexPath) as! TransactionTVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TeamUserTVCell", for: indexPath) as! TeamUserTVCell
         
         let obj = arr_data[indexPath.item]
         
-        let no =  "Name".localized() + "  \(obj.label)"
-        let Description = "Title".localized() + "  \(obj.teamtitle)"
-        let from = "Positions".localized() + "  \(obj.position)"
-        let to = "Role".localized() + "  \(obj.project_user_group_mention_key)"
-        let writer = "Writer".localized() + "  \(obj.writer)"
-        let LastUpdate = "On Date".localized() + "  \(obj.project_user_group_created_datetime)"
+        let Name =  "\(obj.label)"
+        let Title = "Title".localized() + ":  \(obj.teamtitle)"
+        let Positions = "\(obj.position)"
+        let Role = "Role".localized() + "  \(obj.project_user_group_mention_key)"
+        let writer = "By".localized() + ":  \(obj.writer)"
+        let Date = "\(obj.project_user_group_created_datetime)"
+        
+        let maincolor = "#1A3665".getUIColor()
+        
+      
+        cell.lblName.text = Name
+        cell.lblPosition.text = Positions
+        cell.lblWriter.text = writer
+        cell.lblDate.text = Date
         
         
-        cell.lbKeylNo.text = no
-        cell.lblKeyDesc.text = Description
-        cell.lblKeyFrom.text = from
-        cell.lblKeyTo.text = to
-        cell.lblKeyWriter.text = writer
-        cell.lblKeyLastUpdate.text = LastUpdate
-        
-        cell.lblKeyModule.isHidden = true
-        cell.lblKeyBarCode.isHidden = true
-        cell.lblKeyType.isHidden = true
-        cell.lblKeySubmitter.isHidden = true
-        
-        cell.lblKeyStatus.isHidden = true
+        let Titleattribute: NSAttributedString = Title.attributedStringWithColor(["Title"], color: maincolor)
+        cell.lblTitle.attributedText = Titleattribute
         
         
-        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["Name".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lbKeylNo.attributedText = attributedWithTextColor
+        let Roleattributed: NSAttributedString = Role.attributedStringWithColor(["Role".localized()], color: maincolor)
+        cell.lblRole.attributedText = Roleattributed
         
-        let Descriptionattributed: NSAttributedString = Description.attributedStringWithColor(["Title".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyDesc.attributedText = Descriptionattributed
+        let writerattributed: NSAttributedString = writer.attributedStringWithColor(["writer".localized()], color: maincolor)
+        cell.lblWriter.attributedText = writerattributed
         
-        let fromattributed: NSAttributedString = from.attributedStringWithColor(["Positions".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyFrom.attributedText = fromattributed
-        
-        let Toattributed: NSAttributedString = to.attributedStringWithColor(["Role".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyTo.attributedText = Toattributed
-        
-        
-        let Writerattributed: NSAttributedString = writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyWriter.attributedText = Writerattributed
-        
-        
-        let Lastattributed: NSAttributedString = LastUpdate.attributedStringWithColor(["On Date".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyLastUpdate.attributedText = Lastattributed
-        
-        
-        cell.viewBack.setcorner()
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .white
-        cell.selectedBackgroundView = backgroundView
+        cell.viewBack.setRounded(12)
         
         return cell
         

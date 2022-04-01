@@ -40,11 +40,11 @@ class PersonDetailsVC: UIViewController {
     // MARK: - Config Navigation
     func configNavigation() {
         _ = self.navigationController?.preferredStatusBarStyle
-        self.view.backgroundColor = HelperClassSwift.acolor.getUIColor() //F0F4F8
+        self.view.backgroundColor = maincolor //F0F4F8
         //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
-        navigationController?.navigationBar.barTintColor = HelperClassSwift.acolor.getUIColor()
+        navigationController?.navigationBar.barTintColor = maincolor
        addNavigationBarTitle(navigationTitle: "Person Details".localized())
-        UINavigationBar.appearance().backgroundColor = HelperClassSwift.acolor.getUIColor()
+        UINavigationBar.appearance().backgroundColor = maincolor
     }
     
     
@@ -76,17 +76,25 @@ extension PersonDetailsVC: UITableViewDelegate , UITableViewDataSource{
         
         let obj = arr_data[indexPath.item]
        
-        
-        
         let no =  "#".localized() + "  \(indexPath.item + 1)"
         let Name = "Name".localized() + "  \(obj.first_name ) \(obj.last_name)"
         let Type = "Type".localized() + "  \(obj.transaction_persons_type)"
-        let View = "View".localized() + "  right"
+        let View = "View".localized()
         let ViewTime = "View Time".localized() + "  \(obj.transactions_persons_view_datetime)"
         let LastViewTime = "Last View Time".localized() + "  \(obj.transactions_persons_view_datetime_lastupdate)"
         let step = "step".localized() + "  \(obj.transactions_persons_last_step)"
         let DateTime = "Date & Time".localized() + "  \(obj.transactions_persons_action_datetime)"
         
+        cell.img_mark.isHidden = false
+        if obj.transactions_persons_view == "1" {
+            cell.img_mark.image = UIImage(systemName: "checkmark")
+            cell.img_mark.tintColor = "#4ca832".getUIColor()
+        }else{
+            cell.img_mark.tintColor = "#bf2a2a".getUIColor()
+            cell.img_mark.image = UIImage(systemName: "xmark")
+        }
+     
+    
         cell.lbKeylNo.text = no
         cell.lblKeyDesc.text = Name
         cell.lblKeyFrom.text = Type

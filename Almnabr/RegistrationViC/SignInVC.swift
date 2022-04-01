@@ -11,6 +11,7 @@ import DropDown
 import DPLocalization
 import FAPanels
 import LocalAuthentication
+import MOLH
 
 class SignInVC: UIViewController {
 
@@ -103,6 +104,8 @@ class SignInVC: UIViewController {
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
+        
+        
         txtControlEmailAdress.txtField.placeholder = "txt_username_address".localized()
         txtControlPassword.txtField.placeholder = "txt_password".localized()
         txtControlPassword.txtField.font = .kufiRegularFont(ofSize: 15)
@@ -223,8 +226,8 @@ class SignInVC: UIViewController {
     
     func login(Username:String , Password:String){
 
-    showLoadingActivity()
-        
+         showLoadingActivity()
+        //AppInstance.showLoader()
         var fcmToken = ""
         var language = ""
         
@@ -232,21 +235,22 @@ class SignInVC: UIViewController {
         fcmToken = fcm_token
     }
 
-        if let Language = dp_get_current_language() {
-            language = Language
-        }
-        
+//        if let Language = dp_get_current_language() {
+//            language = Language
+//        }
+         
         
     let params = ["username" : Username,
                   "password" : Password,
-                  "noti_registrationId": fcmToken,
-                  "language":language,
+                  "noti_registrationId": "\(Auth_User.FCMtoken)",
+                  "language": MOLHLanguage.currentAppleLanguage(),
                   "platform":"ios"]
 
     
     
     APIManager.postAnyData(queryString: "login", parameters: params ) { (responseObject, error) in
         self.hideLoadingActivity()
+       // AppInstance.hideLoader()
         self.btnLogin.isEnabled = true
         self.btnLogin.isUserInteractionEnabled = true
         if responseObject.error != nil && (responseObject.error?.count)! > 0 {
@@ -305,6 +309,35 @@ class SignInVC: UIViewController {
         }
     }
     
+    
+    //change langugae using Molh Library
+    
+    func change_language(){
+        
+        guard let window = UIApplication.shared.keyWindow else { return }
+        
+        self.showAMessage(withTitle: "Change language".localized(), message: "Restart app recommanded to change the language".localized(), completion:{
+            MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
+            MOLH.reset()
+            
+            window.makeKeyAndVisible()
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromLeft, animations: {
+            }, completion: { completed in
+                
+                
+                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                    
+                    exit(EXIT_SUCCESS)
+                })
+            })
+            
+            
+        })
+        
+        
+    }
+    
     @IBAction func btnLogin_Click(_ sender: Any) {
         
         self.view.endEditing(true)
@@ -325,19 +358,20 @@ class SignInVC: UIViewController {
         dropDown.dataSource = self.arr_lang
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             
-            if item == self.arr_lang[0] {
-                print(item)
-                HelperClassSwift.setUserInformation(value: "en", key: Constants.kAppLanguageSelect)
-                dp_set_current_language("en")
-                change_lang(lang: "en")
-                self.reloadViewControllers()
-             
-            }else{
-                HelperClassSwift.setUserInformation(value: "ar", key: Constants.kAppLanguageSelect)
-                dp_set_current_language("ar")
-                change_lang(lang: "ar")
-                self.reloadViewControllers()
-            }
+            self.change_language()
+//            if item == self.arr_lang[0] {
+//                print(item)
+//                HelperClassSwift.setUserInformation(value: "en", key: Constants.kAppLanguageSelect)
+//                dp_set_current_language("en")
+//                change_lang(lang: "en")
+//                self.reloadViewControllers()
+//
+//            }else{
+//                HelperClassSwift.setUserInformation(value: "ar", key: Constants.kAppLanguageSelect)
+//                dp_set_current_language("ar")
+//                change_lang(lang: "ar")
+//                self.reloadViewControllers()
+//            }
             
         }
         dropDown.direction = .bottom

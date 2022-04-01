@@ -5,30 +5,34 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7A841DED-1A68-467E-B5E9-A368D9CA3D3F"
+            uuid = "8266AD71-5DA8-4E9B-BA09-353FF1215DCE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            breakpointStackSelectionBehavior = "1"
-            scope = "1"
-            stopOnStyle = "0">
+            filePath = "Almnabr/Controllers/Transaction/ContractorManagerApprovalVC.swift"
+            startingColumnNumber = "17"
+            endingColumnNumber = "23"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "submit_Request()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F586C31C-C777-4361-AB7C-9835C0F564DB"
+            uuid = "F1574B4A-E09E-4DE9-92A9-174CB3FE0FAD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Almnabr/Controllers/Form/SiteLevelVC.swift"
+            filePath = "Almnabr/Controllers/Transaction/ManagerApprovalVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
-            landmarkName = "Configuration_step1()"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "submit_Request()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

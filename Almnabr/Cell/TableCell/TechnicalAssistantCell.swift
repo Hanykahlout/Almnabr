@@ -27,12 +27,14 @@ class TechnicalAssistantCell: UITableViewCell {
     @IBOutlet weak var btn_checkNo: UIButton!
     
     @IBOutlet weak var viewBack: UIView!
+    @IBOutlet weak var viewSelectResult: UIView!
     
- 
+    @IBOutlet weak var lblSelectedResult: UILabel!
     
     var btnDeleteAction : (()->())?
     var btnUploadAction : (()->())?
-    
+    var btnSelectResultAction : (()->())?
+    var btnEndEditingAction : (()->())?
     var btnYesAction : (()->())?
     var btnNoAction : (()->())?
     
@@ -54,6 +56,15 @@ class TechnicalAssistantCell: UITableViewCell {
         btnYesAction?()
     }
     
+    @IBAction func didSelectResultPressd(_ sender: Any) {
+        btnSelectResultAction?()
+    }
+    
+    
+    @IBAction func didEndEditingButtonPressd(_ sender: Any) {
+        btnEndEditingAction?()
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,14 +74,15 @@ class TechnicalAssistantCell: UITableViewCell {
         self.btn_checkYes.setImage(UIImage(named: "uncheck"), for: .normal)
         self.btn_checkNo.setImage(UIImage(named: "uncheck"), for: .normal)
          
-        lblNumber.font = .kufiRegularFont(ofSize: 15)
-        lbl_Title.font = .kufiRegularFont(ofSize: 15)
-        tf_Title.font = .kufiRegularFont(ofSize: 15)
-        lbl_Status.font = .kufiRegularFont(ofSize: 15)
-        lbl_EvaluationResult.font = .kufiRegularFont(ofSize: 15)
-        lbl_Attachments.font = .kufiRegularFont(ofSize: 15)
-        lblNo.font = .kufiRegularFont(ofSize: 15)
-        lblYes.font = .kufiRegularFont(ofSize: 15)
+        self.viewSelectResult.setBorderGray()
+//        lblNumber.font = .kufiRegularFont(ofSize: 15)
+//        lbl_Title.font = .kufiRegularFont(ofSize: 15)
+//        tf_Title.font = .kufiRegularFont(ofSize: 15)
+//        lbl_Status.font = .kufiRegularFont(ofSize: 15)
+//        lbl_EvaluationResult.font = .kufiRegularFont(ofSize: 15)
+//        lbl_Attachments.font = .kufiRegularFont(ofSize: 15)
+//        lblNo.font = .kufiRegularFont(ofSize: 15)
+//        lblYes.font = .kufiRegularFont(ofSize: 15)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

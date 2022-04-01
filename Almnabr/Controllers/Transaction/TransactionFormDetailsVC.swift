@@ -11,11 +11,14 @@ import DPLocalization
 import FontAwesome_swift
 
 import AMPopTip
+import MOLH
 
 var StatusObject:StepStatusObj?
 var obj_transaction:Tcore?
+var FormWirObject:form_wir_dataObj?
 var obj_FormWir:WorkAreaInfoObj?
 var arr_Technical_Assistants_Evaluation:[Technical_Assistants_EvaluationObj] = []
+var arr_form_unit_level:[project_supervision_form_unit_levelObj] = []
 
 class TransactionFormDetailsVC: UIViewController {
     
@@ -44,11 +47,13 @@ class TransactionFormDetailsVC: UIViewController {
     @IBOutlet weak var lblValChapter: UILabel!
     @IBOutlet weak var lblValItemName: UILabel!
     @IBOutlet weak var lblValFormSpecifications: UILabel!
+  
+    @IBOutlet weak var lblValLang_drawing_file: UILabel!
+    
+    
     @IBOutlet weak var btnLocation: UIButton!
     @IBOutlet weak var btnFormVersions: UIButton!
     @IBOutlet weak var btnPreview: UIButton!
-    @IBOutlet weak var lblValLang_drawing_file: UILabel!
-    
     
     @IBOutlet weak var lblSelectedStep: UILabel!
     @IBOutlet weak var lblValSelectedStep: UILabel!
@@ -57,6 +62,7 @@ class TransactionFormDetailsVC: UIViewController {
     @IBOutlet weak var btnLastValStepOpened: UIButton!
     @IBOutlet weak var btnWaitingFor: UIButton!
     @IBOutlet weak var lblStep: UILabel!
+    @IBOutlet weak var lblWaitingFor: UILabel!
     
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var slider: UIProgressView!
@@ -70,15 +76,28 @@ class TransactionFormDetailsVC: UIViewController {
     @IBOutlet weak var btnAllProject: UIButton!
     @IBOutlet weak var btnSupervisionOperations: UIButton!
     
+    @IBOutlet weak var btnEvalutionResult: UIButton!
+    
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var btnPrevious: UIButton!
+    
+    @IBOutlet weak var container_view: UIView!
+    @IBOutlet weak var view_pager: UIView!
+    
     
     var StrTitle:String = ""
 
     var projectId:String = ""
     var CustomerName:String = ""
     
+    var transaction_status:String = ""
+    
     var SelectedIndex:Int = 1
+    
+    var str_url:String = ""
+    var IsFromNotification:Bool = false
+    let maincolor = "#1A3665".getUIColor()
+    
     
     var Object:Tcore?
     var transactions_request:Tcore?
@@ -92,43 +111,63 @@ class TransactionFormDetailsVC: UIViewController {
     
     
     
-    let arr_step:[String] = [ "Configurations",
-                              "Contractor Team Approval",
-                              "Contractor Manager Approval",
-                              "Recipient Verification",
-                              "Techinical Assistant",
-                              "Special Approval",
-                              "Evaluation Result",
-                              "Authorized Positions Approval",
-                              "Manager Approval",
-                              "Owners Representative",
-                              "Final Result"]
+    let arr_step:[String] = [ "Configurations".localized(),
+                              "Contractor Team Approval".localized(),
+                              "Contractor Manager Approval".localized(),
+                              "Recipient Verification".localized(),
+                              "Techinical Assistant".localized(),
+                              "Special Approval".localized(),
+                              "Evaluation Result".localized(),
+                              "Authorized Positions Approval".localized(),
+                              "Manager Approval".localized(),
+                              "Owners Representative".localized(),
+                              "Final Result".localized()]
     
     let arr_Valstep:[String] = [ "Configurations",
-                              "Contractor_Team_Approval",
-                              "Contractor_Manager_Approval",
-                              "Recipient_Verification",
-                              "Techinical_Assistant",
-                              "Special_Approval",
-                              "Evaluation_Result",
-                              "Authorized_Positions Approval",
-                              "Manager_Approval",
-                              "Owners_Representative",
-                              "last"]
+                                 "Contractor_Team_Approval",
+                                 "Contractor_Manager_Approval",
+                                 "Recipient_Verification",
+                                 "Techinical_Assistant",
+                                 "Special_Approval",
+                                 "Evaluation_Result",
+                                 "Authorized_Positions Approval",
+                                 "Manager_Approval",
+                                 "Owners_Representative",
+                                 "last"]
     
     var arr_waitingFor:[String] = []
     var parentPageVC: TransactionFormPageaVC!
 
     private let page_count = 11
+    var request_id:String = "0"
+    var Form:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if IsFromNotification == true{
+            let splitString = str_url.components(separatedBy: "/vr/")
+            
+            let Form = str_url.components(separatedBy: "/form/")
+            print("Part before space: \(Form[1])")
+            self.Form = str_url
+            //Form[1]
+           self.request_id = "\(splitString[1])"
+        }else{
+            if Object?.transaction_request_id != nil {
+                self.request_id =  Object?.transaction_request_id ?? "0"
+                self.Form = Object?.transaction_key ?? ""
+            }
+        }
+        
         self.mainView.isHidden = true
+        self.arr_waitingFor = []
         get_Request()
         configNavigation()
-        
+       
         update_Config()
+        
+
     }
 
     
@@ -145,17 +184,18 @@ class TransactionFormDetailsVC: UIViewController {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+
     }
     
     
     // MARK: - Config Navigation
     func configNavigation() {
         _ = self.navigationController?.preferredStatusBarStyle
-        self.view.backgroundColor = HelperClassSwift.acolor.getUIColor() //F0F4F8
+        self.view.backgroundColor = maincolor //F0F4F8
         //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
-        navigationController?.navigationBar.barTintColor = HelperClassSwift.acolor.getUIColor()
+        navigationController?.navigationBar.barTintColor = maincolor
        addNavigationBarTitle(navigationTitle: "Form Details".localized())
-        UINavigationBar.appearance().backgroundColor = HelperClassSwift.acolor.getUIColor()
+        UINavigationBar.appearance().backgroundColor = maincolor
     }
     
     
@@ -163,131 +203,171 @@ class TransactionFormDetailsVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "FormDetailsPager",
            let destinationVC = segue.destination as? TransactionFormPageaVC {
-            //  destinationVC.numberToDisplay = counter
-            // destinationVC.displayPageForIndex(index: self.SelectedIndex)
             if let controller = self.parentPageVC {
-                //    controller.displayPageForIndex(index: self.SelectedIndex)
+                controller.displayPageForIndex(index: self.SelectedIndex)
             }
         }
     }
 
-    
+  
+   
+
     
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
         
+ 
+        mainView.layer.applySketchShadow(
+          color: .black,
+          alpha: 0.6,
+          x: 0,
+          y: 13,
+          blur: 16,
+          spread: 0)
+        mainView.setRounded(20)
+        
+        view_pager.layer.applySketchShadow(
+          color: .black,
+          alpha: 0.6,
+          x: 0,
+          y: 13,
+          blur: 16,
+          spread: 0)
+        view_pager.setRounded(20)
         
         
-        self.slider.progressTintColor = HelperClassSwift.acolor.getUIColor()
+        self.slider.progressTintColor = maincolor
         self.slider.progress = 0.1
        
         self.title = "Form Details".localized()
         
-        self.lblStep.font = .kufiRegularFont(ofSize: 15)
-        self.lblStep.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lblStep.font = .kufiRegularFont(ofSize: 13)
+        self.lblStep.textColor =  maincolor
         self.lblStep.text =  "step 1 of \(page_count)"
         
-        self.lblRequestNumber.text =  "Request Number".localized() + " :"
-        self.lblRequestNumber.font = .kufiRegularFont(ofSize: 15)
-        self.lblRequestNumber.textColor =  HelperClassSwift.bcolor.getUIColor()
+       
+        self.lblRequestNumber.font = .kufiRegularFont(ofSize: 13)
         
-        self.lblProjectTitle.text =  "Project Title".localized() + " :"
-        self.lblProjectTitle.font = .kufiRegularFont(ofSize: 15)
-        self.lblProjectTitle.textColor =  HelperClassSwift.bcolor.getUIColor()
+        if Object?.transaction_request_id == nil {
+            
+            let RN = "Request Number".localized() + ":  \(self.request_id)"
+            
+            let RNattribute: NSAttributedString = RN.attributedStringWithColor(["Request Number"], color: maincolor)
+            self.lblRequestNumber.attributedText = RNattribute
+            
+           // self.lblValRequestNumber.text =  self.request_id
+        }else{
+            
+            let RN = "Request Number".localized() + ":  \(Object?.transaction_request_id ?? "--")"
+            
+            let RNattribute: NSAttributedString = RN.attributedStringWithColor(["Request Number"], color: maincolor)
+            self.lblRequestNumber.attributedText = RNattribute
+            
+            //self.lblRequestNumber.text =
+            //self.lblValRequestNumber.text =  Object?.transaction_request_id
+        }
         
-        self.lblServiceName.text =  "Service Name".localized() + " :"
-        self.lblServiceName.font = .kufiRegularFont(ofSize: 15)
-        self.lblServiceName.textColor =  HelperClassSwift.bcolor.getUIColor()
+       // self.lblProjectTitle.text =  "Project Title".localized() + " :\(WorkAreaObj?.projects_profile_name)"
+        self.lblProjectTitle.font = .kufiRegularFont(ofSize: 13)
+        //self.lblProjectTitle.textColor =  HelperClassSwift.bcolor.getUIColor()
         
-        self.lblFormCode.text =  "Form Code".localized() + " :"
-        self.lblFormCode.font = .kufiRegularFont(ofSize: 15)
-        self.lblFormCode.textColor =  HelperClassSwift.bcolor.getUIColor()
+        let ProjectTitle = "Project Title".localized() + ":  \(WorkAreaObj?.projects_profile_name ?? "--")"
+        let ProjectTitleattribute: NSAttributedString = ProjectTitle.attributedStringWithColor(["Project Title"], color: maincolor)
+        self.lblProjectTitle.attributedText = ProjectTitleattribute
         
-        self.lblDivision.text =  "Division".localized() + " :"
-        self.lblDivision.font = .kufiRegularFont(ofSize: 15)
-        self.lblDivision.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-        self.lblChapter.text =  "Chapter".localized() + " :"
-        self.lblChapter.font = .kufiRegularFont(ofSize: 15)
-        self.lblChapter.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-        self.lblFormSpecifications.text =  "Form Specifications".localized() + " :"
-        self.lblFormSpecifications.font = .kufiRegularFont(ofSize: 15)
-        self.lblFormSpecifications.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-        self.lblItemName.text =  "Item Name".localized() + " :"
-        self.lblItemName.font = .kufiRegularFont(ofSize: 15)
-        self.lblItemName.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-        
-        self.lblFormVersions.text =  "Form Versions".localized() + " :"
-        self.lblFormVersions.font = .kufiBoldFont(ofSize: 14)
-        self.lblFormVersions.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-        
-        self.lblLocation.text =  "txt_location".localized() + " :"
-        self.lblLocation.font = .kufiRegularFont(ofSize: 15)
-        self.lblLocation.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-        self.lblPreview.text =  "Preview".localized() + " :"
-        self.lblPreview.font = .kufiRegularFont(ofSize: 15)
-        self.lblPreview.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-        self.lblLang_drawing_file.text =  "Lang_drawing_file".localized() + " :"
-        self.lblLang_drawing_file.font = .kufiRegularFont(ofSize: 15)
-        self.lblLang_drawing_file.textColor =  HelperClassSwift.bcolor.getUIColor()
+         
+        let Service =  "Service Name".localized() + ":  \(WorkAreaObj?.projects_services_name ?? "--")"
+        let Serviceattribute: NSAttributedString = Service.attributedStringWithColor(["Service Name"], color: maincolor)
+        self.lblServiceName.attributedText = Serviceattribute
+        self.lblServiceName.font = .kufiRegularFont(ofSize: 13)
         
         
-        self.lblValRequestNumber.text =  Object?.transaction_request_id
-        self.lblValRequestNumber.font = .kufiBoldFont(ofSize: 14)
         
-        self.lblValProjectTitle.text =  WorkAreaObj?.projects_profile_name
-        self.lblValProjectTitle.font = .kufiBoldFont(ofSize: 14)
+        let FormCode =  "Form Code".localized() + ":  \(FormWirObj?.platform_code_system ?? "--")"
+        let FormCodeattribute: NSAttributedString = FormCode.attributedStringWithColor(["Form Code"], color: maincolor)
+        self.lblFormCode.attributedText = FormCodeattribute
+        self.lblFormCode.font = .kufiRegularFont(ofSize: 13)
         
-        self.lblValServiceName.text =  WorkAreaObj?.projects_services_name
-        self.lblValServiceName.font = .kufiBoldFont(ofSize: 14)
         
-        self.lblValFormCode.text = FormWirObj?.platform_code_system
-        self.lblValFormCode.font = .kufiBoldFont(ofSize: 14)
+        let Division  =  "Division".localized() + ":  \(FormWirObj?.group1name ?? "--")"
+        let Divisionattribute: NSAttributedString = Division.attributedStringWithColor(["Division"], color: maincolor)
+        self.lblDivision.attributedText = Divisionattribute
+        self.lblDivision.font = .kufiRegularFont(ofSize: 13)
         
-        self.lblValDivision.text =  FormWirObj?.group1name
-        self.lblValDivision.font = .kufiBoldFont(ofSize: 14)
         
-        self.lblValChapter.text =  FormWirObj?.group2name
-        self.lblValChapter.font = .kufiBoldFont(ofSize: 14)
+        let Chapter =  "Chapter".localized() + ":  \(FormWirObj?.group2name ?? "--")"
+        let Chapterattribute: NSAttributedString = Chapter.attributedStringWithColor(["Chapter"], color: maincolor)
+        self.lblChapter.attributedText = Chapterattribute
+        self.lblChapter.font = .kufiRegularFont(ofSize: 13)
         
-        self.lblValItemName.text =  FormWirObj?.platformname
-        self.lblValItemName.font = .kufiBoldFont(ofSize: 14)
         
-        self.lblValFormSpecifications.text =  FormWirObj?.specification ?? "---"
-        self.lblValFormSpecifications.font = .kufiBoldFont(ofSize: 14)
+        let FormSpec =  "Form Specifications".localized() + ":  \(FormWirObj?.specification ?? "---")"
+        let FormSpecattribute: NSAttributedString = FormSpec.attributedStringWithColor(["Form Specifications"], color: maincolor)
+        self.lblFormSpecifications.attributedText = FormSpecattribute
+        self.lblFormSpecifications.font = .kufiRegularFont(ofSize: 13)
         
-       self.lblValLang_drawing_file.text =  "----"
-        self.lblValLang_drawing_file.font = .kufiBoldFont(ofSize: 14)
+        
+        let ItemName =  "Item Name".localized() + ":  \(FormWirObj?.platformname ?? "--")"
+        let ItemNameattribute: NSAttributedString = ItemName.attributedStringWithColor(["Item Name"], color: maincolor)
+        self.lblItemName.attributedText = ItemNameattribute
+        self.lblItemName.font = .kufiRegularFont(ofSize: 13)
+        
+        
+        
+        self.lblFormVersions.text =  "Form Versions".localized()
+        self.lblFormVersions.font = .kufiRegularFont(ofSize: 13)
+        self.lblFormVersions.textColor =  maincolor
+        
+        
+        self.lblLocation.text =  "txt_location".localized()
+        self.lblLocation.font = .kufiRegularFont(ofSize: 13)
+        self.lblLocation.textColor =  maincolor
+        
+        self.lblPreview.text =  "Preview".localized()
+        self.lblPreview.font = .kufiRegularFont(ofSize: 13)
+        self.lblPreview.textColor =  maincolor
+        
+        self.lblLang_drawing_file.text =  "Lang_drawing_file".localized() + ": ----"
+        self.lblLang_drawing_file.font = .kufiRegularFont(ofSize: 13)
+        self.lblLang_drawing_file.textColor =  maincolor
+        
+      
         
         
         self.lblSelectedStep.text =  "Selected Step".localized() + " :"
-        self.lblSelectedStep.font = .kufiRegularFont(ofSize: 15)
-        self.lblSelectedStep.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lblSelectedStep.font = .kufiRegularFont(ofSize: 13)
+        self.lblSelectedStep.textColor = maincolor
         
-        self.lblValSelectedStep.text =  "Recipient Verification"
-        self.lblValSelectedStep.font = .kufiBoldFont(ofSize: 15)
+        self.lblValSelectedStep.text =  "Recipient Verification".localized()
+        self.lblValSelectedStep.font = .kufiRegularFont(ofSize: 15)
         self.lblValSelectedStep.textColor =  .gray
         
         self.lblLastStepOpened.text =  "Last Step Opened".localized() + " :"
-        self.lblLastStepOpened.font = .kufiRegularFont(ofSize: 15)
+        self.lblLastStepOpened.font = .kufiRegularFont(ofSize: 13)
         self.lblLastStepOpened.textColor =  HelperClassSwift.bcolor.getUIColor()
         
         let last_step = transactions_request?.transaction_request_last_step
         
         
         if last_step == "last" {
-            self.lblLastValStepOpened.text = "Processing"
+            self.lblLastValStepOpened.text = "Processing".localized()
         }else{
             self.lblLastValStepOpened.text = last_step
         }
-        self.lblLastValStepOpened.font = .kufiBoldFont(ofSize: 15)
+        
+        if last_step == "completed" {
+            self.btnEvalutionResult.setBorderWithColor(maincolor)
+            self.btnEvalutionResult.isHidden = false
+            self.btnEvalutionResult.setTitleColor(maincolor, for: .normal)
+            self.btnEvalutionResult.titleLabel?.font = .kufiRegularFont(ofSize: 13)
+            self.btnEvalutionResult.backgroundColor =  .white
+            self.btnEvalutionResult.setTitle("Evaluation Result:".localized() + " \(self.FormWirObj?.evaluation_result ?? "C")", for: .normal)
+        }else{
+            self.btnEvalutionResult.isHidden = true
+        }
+        
+        self.lblLastValStepOpened.font = .kufiRegularFont(ofSize: 13)
         self.lblLastValStepOpened.textColor =  "#61b045".getUIColor()
         
         let i1 = arr_Valstep.firstIndex(where: {$0 == last_step})
@@ -295,54 +375,73 @@ class TransactionFormDetailsVC: UIViewController {
         let index = i1 ?? 10
         page_scroll(SelectedIndex: index + 1 )
         
-        let status = StatusObject?.to_array[SelectedIndex-1]
-        let title = (status ?? false) ? "Accepted" : "Rejected"
-       // self.btnLastValStepOpened.setTitle(title, for: .normal)
+        let index_ =  StatusObject?.to_array.firstIndex(where: {$0 == true})
         
-        if status == true {
-            
-            self.btnLastValStepOpened.setTitleColor("#3ea832".getUIColor(), for: .normal)
-            self.btnLastValStepOpened.setTitle("(Accepted)".localized(), for: .normal)
-            
+        self.btnLastValStepOpened.isHidden = false
+        let status = StatusObject?.to_array[ index_ ?? 0]
+        self.btnLastValStepOpened.titleLabel?.font = .kufiRegularFont(ofSize: 13)
+     
+        if transaction_status != ""{
+            if transaction_status == "Accepted" {
+                
+                self.btnLastValStepOpened.setTitleColor("#3ea832".getUIColor(), for: .normal)
+                self.btnLastValStepOpened.setTitle("(\(transaction_status))".localized(), for: .normal)
+                
+            }else{
+                
+                self.btnLastValStepOpened.setTitleColor(.red, for: .normal)
+                self.btnLastValStepOpened.setTitle("(\(transaction_status))".localized(), for: .normal)
+                
+            }
         }else{
-            
-            self.btnLastValStepOpened.setTitleColor(.red, for: .normal)
-            self.btnLastValStepOpened.setTitle("(Rejected)".localized(), for: .normal)
-            
+            self.btnLastValStepOpened.setTitle("", for: .normal)
         }
+       
         
         
-        self.btnNotes.setTitleColor(HelperClassSwift.acolor.getUIColor(), for: .normal)
-        self.btnPersonDetails.setTitleColor(HelperClassSwift.acolor.getUIColor(), for: .normal)
-        self.btnAttachments.setTitleColor(HelperClassSwift.acolor.getUIColor(), for: .normal)
-        self.btnHistory.setTitleColor(HelperClassSwift.acolor.getUIColor(), for: .normal)
+        self.btnNotes.setTitleColor(maincolor, for: .normal)
+        self.btnPersonDetails.setTitleColor(maincolor, for: .normal)
+        self.btnAttachments.setTitleColor(maincolor, for: .normal)
+        self.btnHistory.setTitleColor(maincolor, for: .normal)
         
         self.btnNotes.setTitle("Notes".localized(), for: .normal)
         self.btnPersonDetails.setTitle("Person Details".localized(), for: .normal)
         self.btnAttachments.setTitle("Attachments".localized(), for: .normal)
         self.btnHistory.setTitle("History".localized(), for: .normal)
         self.btnSupervisionOperations.setTitle("Supervision Operations".localized(), for: .normal)
-        self.btnAllProject.setTitle("All Project".localized(), for: .normal)
+        self.btnAllProject.setTitle("All Projects".localized(), for: .normal)
         
-        self.btnSupervisionOperations.backgroundColor =  HelperClassSwift.acolor.getUIColor()
-        self.btnAllProject.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnSupervisionOperations.backgroundColor =  maincolor
+        self.btnAllProject.backgroundColor =  maincolor
         
         self.btnSupervisionOperations.setTitleColor(.white, for: .normal)
         self.btnAllProject.setTitleColor(.white, for: .normal)
         
         
-        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
-        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        //self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        //self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
        
-        
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.btnNext.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        }else{
+            self.btnNext.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        }
         self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
         
+        var name = "Waiting for : ".localized()
+        for i in arr_waitingFor{
+            name = name + i + " "
+        }
         
-
-//
-//        let status = StatusObject?.to_array[SelectedIndex-1]
-//        let title = (status ?? false) ? "Accepted" : "Rejected"
-//        self.btnLastValStepOpened.setTitle(title, for: .normal)
+      
+        let Waitingattribute: NSAttributedString = name.attributedStringWithColor(["Waiting for : "], color: maincolor)
+        self.lblWaitingFor.attributedText = Waitingattribute
+        self.lblWaitingFor.font = .kufiRegularFont(ofSize: 13)
+        
+        
+        self.hideLoadingActivity()
     }
     
     func page_scroll(SelectedIndex:Int){
@@ -350,19 +449,26 @@ class TransactionFormDetailsVC: UIViewController {
         self.SelectedIndex = SelectedIndex
         change_page(SelectedIndex: SelectedIndex)
         self.slider.progress = Float(SelectedIndex)/Float(page_count)
-        self.lblStep.text =  "step \(SelectedIndex) of \(page_count)"
+        self.lblStep.text =  "step".localized() + " \(SelectedIndex) " + "of".localized() + " \(page_count)"
         self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
+        
     }
-    
-    
+   
     func get_Request(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "/form/FORM_WIR/vr/\(Object?.transaction_request_id ?? "0")" ) { (response) in
+        if IsFromNotification == false {
+            self.str_url = "/form/\(Object?.transaction_key ?? "FORM_WIR")/vr/\(self.request_id)"
+        }else{
+            self.str_url = self.Form
+        }
+       
+        APIManager.sendRequestGetAuth(urlString: self.str_url) { (response) in
              
-             
+            let error = response["error"] as? String
              let status = response["status"] as? Bool
              if status == true{
+                 IsTransaction = false
                  if  let step_status = response["step_status"] as? [String:Any]{
 
                      //let view = step_status["view"] as! [String:Any]
@@ -401,8 +507,56 @@ class TransactionFormDetailsVC: UIViewController {
                              
                              let recordsObj = form_wir_dataObj(records.firstObject as! [String : Any])
                              self.FormWirObj = recordsObj
+                             FormWirObject = self.FormWirObj
                          }
                      }
+                     
+                     if let form_msr_data = view_request["form_msr_data"] as? [String:Any]{
+                         let form_wir_data_status = form_msr_data["status"] as? Bool
+                         if form_wir_data_status == true{
+                             let records = form_msr_data["records"] as! NSArray
+                             
+                             let recordsObj = form_wir_dataObj(records.firstObject as! [String : Any])
+                             self.FormWirObj = recordsObj
+                             FormWirObject = self.FormWirObj
+                         }
+                     }
+                     
+                     if let form_mir_data = view_request["form_mir_data"] as? [String:Any]{
+                         let form_mir_data_status = form_mir_data["status"] as? Bool
+                         if form_mir_data_status == true{
+                             let records = form_mir_data["records"] as! NSArray
+                             
+                             let recordsObj = form_wir_dataObj(records.firstObject as! [String : Any])
+                             self.FormWirObj = recordsObj
+                             FormWirObject = self.FormWirObj
+                         }
+                     }
+                     
+                     
+                     if let form_dsr_data = view_request["form_dsr_data"] as? [String:Any]{
+                         let form_dsr_data_status = form_dsr_data["status"] as? Bool
+                         if form_dsr_data_status == true{
+                             let records = form_dsr_data["records"] as! NSArray
+                             
+                             let recordsObj = form_wir_dataObj(records.firstObject as! [String : Any])
+                             self.FormWirObj = recordsObj
+                             FormWirObject = self.FormWirObj
+                         }
+                     }
+                     
+                     
+                     if let form_sqr_data = view_request["form_sqr_data"] as? [String:Any]{
+                         let form_sqr_data_status = form_sqr_data["status"] as? Bool
+                         if form_sqr_data_status == true{
+                             let records = form_sqr_data["records"] as! NSArray
+                             
+                             let recordsObj = form_wir_dataObj(records.firstObject as! [String : Any])
+                             self.FormWirObj = recordsObj
+                             FormWirObject = self.FormWirObj
+                         }
+                     }
+                     
                      
                      if let transactions_notes = view_request["transactions_notes"] as? [String:Any]{
                          let transactions_notes_status = transactions_notes["status"] as? Bool
@@ -429,9 +583,12 @@ class TransactionFormDetailsVC: UIViewController {
                                      let dict = i as? [String:Any]
                                      let obj = transactions_personsObj.init(dict!)
                                      self.arr_transactions_persons.append(obj)
+                                     
+                                   
                                      if obj.transactions_persons_action_status == "0" {
                                          let name = obj.first_name + " " + obj.last_name
                                          self.arr_waitingFor.append(name)
+                                         self.transaction_status = obj.transactions_persons_key4
                                      }
                                  }
                              }
@@ -482,7 +639,7 @@ class TransactionFormDetailsVC: UIViewController {
                                      let dict = i as? [String:Any]
                                      let obj = project_supervision_form_unit_levelObj.init(dict!)
                                      self.arr_project_supervision_form_unit_level.append(obj)
-                                   
+                                     arr_form_unit_level.append(obj)
                                  }
                              }
 
@@ -509,12 +666,24 @@ class TransactionFormDetailsVC: UIViewController {
                  }
 
                  self.mainView.isHidden = false
-                 self.hideLoadingActivity()
+                 
                  self.configGUI()
+                 self.update_Notification()
+                 
+             }else{
+                 self.hideLoadingActivity()
+                 self.navigationController?.popViewController(animated: true)
+//                 self.showAMessage(withTitle: "Error", message: error ?? "Some thing went wrong", completion: {
+//                 
+//                 
+//                 })
              }
              
-             
-         }
+        }
+        
+//        if FormWirObj == nil{
+//            self.navigationController?.popViewController(animated: true)
+//        }
      }
     
     
@@ -522,9 +691,9 @@ class TransactionFormDetailsVC: UIViewController {
     
     
     @IBAction func btnWaitingFor_Click(_ sender: Any) {
-        var name = "Waiting for : "
+        var name = "Waiting for : ".localized()
         for i in arr_waitingFor{
-            name = name + i
+            name = name + i + " "
         } 
             let popTip = PopTip()
         popTip.bubbleColor = HelperClassSwift.acolor.getUIColor()
@@ -545,9 +714,8 @@ class TransactionFormDetailsVC: UIViewController {
     
     @IBAction func btnFormVersions_Click(_ sender: Any) {
         
-        let VC:FormVersionVC = AppDelegate.mainSB.instanceVC()
-        //vc.arr_data = self.arr_transactionsNotes
-        
+        let VC:SubFormVersionVC = AppDelegate.TransactionSB.instanceVC()
+        VC.platform_code_system = FormWirObj?.platform_code_system ?? "w"
         self.navigationController?.pushViewController(VC, animated: true)
     }
     
@@ -602,13 +770,9 @@ class TransactionFormDetailsVC: UIViewController {
             print(SelectedIndex)
             change_page(SelectedIndex: SelectedIndex)
             self.slider.progress = Float(SelectedIndex)/Float(page_count)
-            self.lblStep.text =  "step \(SelectedIndex) of \(page_count)"
+            self.lblStep.text =  "step".localized() + " \(SelectedIndex) " + "of".localized() +  " \(page_count)"
             self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
             
-            
-            let status = StatusObject?.to_array[SelectedIndex-1]
-            let title = (status ?? false) ? "Accepted" : "Rejected"
-            self.btnLastValStepOpened.setTitle(title, for: .normal)
         }
         
         
@@ -617,22 +781,33 @@ class TransactionFormDetailsVC: UIViewController {
     
     @IBAction func btnPrevious_Click(_ sender: Any) {
         print(SelectedIndex)
-        if SelectedIndex > 0 {
+        if SelectedIndex >  1 {
             
             SelectedIndex = SelectedIndex - 1
             print(SelectedIndex)
             change_page(SelectedIndex: SelectedIndex)
             self.slider.progress = Float(SelectedIndex)/Float(page_count)
-            self.lblStep.text =  "step \(SelectedIndex) of \(page_count)"
+            self.lblStep.text =  "step".localized() + " \(SelectedIndex) " + "of".localized() +  " \(page_count)"
             self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
+       
             
-            let status = StatusObject?.to_array[SelectedIndex-1]
-            let title = (status ?? false) ? "Accepted" : "Rejected"
-            self.btnLastValStepOpened.setTitle(title, for: .normal)
         }
        
     }
     
+    @IBAction func Preview_Click(_ sender: Any) {
+     //
+    let vc:PDFViewrVC  = AppDelegate.mainSB.instanceVC()
+    vc.isModalInPresentation = true
+   // vc.definesPresentationContext = true
+        var id = self.request_id
+        if id == "0" {
+            id = Object?.transaction_request_id ?? "0"
+        }
+    vc.Strurl = "form/FORM_WIR/pr/\(id)"
+    self.present(vc, animated: true, completion: nil)
+ 
+    }
     
     @IBAction func location_Click(_ sender: Any) {
         
@@ -654,17 +829,15 @@ class TransactionFormDetailsVC: UIViewController {
                                         object: nil)
     }
     
-//    private func update_Config() {
-//        NotificationCenter.default.post(name: NSNotification.Name("update_Congig"),
-//                                        object: nil)
-//    }
+    private func update_Notification() {
+        NotificationCenter.default.post(name: NSNotification.Name("update_Notification"),
+                                        object: nil)
+    }
+    
     
     private func update_Config(){
         NotificationCenter.default.addObserver(forName: NSNotification.Name("update_Config"), object: nil, queue: .main) { notifi in
-            //guard let index = notifi.object as? Int else { return }
-            //self.configGUI()
             self.get_Request()
-          
         }
     }
     

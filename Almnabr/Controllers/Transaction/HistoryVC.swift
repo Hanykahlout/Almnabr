@@ -40,11 +40,11 @@ class HistoryVC: UIViewController {
     // MARK: - Config Navigation
     func configNavigation() {
         _ = self.navigationController?.preferredStatusBarStyle
-        self.view.backgroundColor = HelperClassSwift.acolor.getUIColor() //F0F4F8
+        self.view.backgroundColor = maincolor //F0F4F8
         //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
-        navigationController?.navigationBar.barTintColor = HelperClassSwift.acolor.getUIColor()
+        navigationController?.navigationBar.barTintColor = maincolor
        addNavigationBarTitle(navigationTitle: "History".localized())
-        UINavigationBar.appearance().backgroundColor = HelperClassSwift.acolor.getUIColor()
+        UINavigationBar.appearance().backgroundColor = maincolor
     }
     
     

@@ -11,10 +11,7 @@ import FontAwesome_swift
 import DropDown
 
 class ContactsVC: UIViewController {
-    
-    
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblnodata: UILabel!
+
     
     @IBOutlet weak var lblContact: UILabel!
     
@@ -27,6 +24,11 @@ class ContactsVC: UIViewController {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var viewsearch: UIView!
+    @IBOutlet weak var img_nodata: UIImageView!
+    @IBOutlet weak var tableHeightConstraint:NSLayoutConstraint!
+    
     
     var StrTitle:String = ""
     var StrSubMenue:String = ""
@@ -67,7 +69,7 @@ class ContactsVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: - Config Navigation
@@ -79,22 +81,19 @@ class ContactsVC: UIViewController {
         addNavigationBarTitle(navigationTitle: StrTitle)
     }
     
+//    override func viewDidLayoutSubviews() {
+//        tableHeightConstraint.constant = table.contentSize.height
+//        
+//    }
     
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
         
-        
-        lblTitle.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblTitle.font = .kufiBoldFont(ofSize: 15)
+        self.viewsearch.setBorderGrayWidthCorner(1, 20)
         
         
-        self.lblnodata.text =  "txt_NoData".localized()
-        self.lblnodata.font = .kufiRegularFont(ofSize: 15)
-        self.lblnodata.isHidden = true
-        
-        
-        self.viewContact.setBorderGray()
+        self.viewContact.setBorderGrayWidthCorner(1, 20)
         self.lblContact.text =  "All".localized()
         self.lblContact.font = .kufiRegularFont(ofSize: 15)
         
@@ -102,19 +101,13 @@ class ContactsVC: UIViewController {
         searchBar.delegate = self
         btnContact.isHidden = true
         
-        self.mainView.setBorderGray()
-        
-        self.lblTitle.text =  "Contacts".localized()
-        self.lblnodata.isHidden = false
-        
-        
         self.imgDropContact.image = dropDownmage
         
         
         table.dataSource = self
         table.delegate = self
-        let nib = UINib(nibName: "TransactionTVCell", bundle: nil)
-        table.register(nib, forCellReuseIdentifier: "TransactionTVCell")
+        let nib = UINib(nibName: "ContactTVCell", bundle: nil)
+        table.register(nib, forCellReuseIdentifier: "ContactTVCell")
         
         
     }
@@ -153,9 +146,9 @@ class ContactsVC: UIViewController {
                     
                     
                     if self.arr_data.count == 0 {
-                        self.lblnodata.isHidden = false
+                        self.img_nodata.isHidden = false
                     }else{
-                        self.lblnodata.isHidden = true
+                        self.img_nodata.isHidden = true
                     }
                     if pageObj.total_pages > self.pageNumber {
                         self.allItemDownloaded = false
@@ -169,7 +162,7 @@ class ContactsVC: UIViewController {
                 
             }else{
                 self.hideLoadingActivity()
-                self.lblnodata.isHidden = false
+                self.img_nodata.isHidden = false
             }
             
             
@@ -264,68 +257,79 @@ extension ContactsVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVCell", for: indexPath) as! TransactionTVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ContactTVCell", for: indexPath) as! ContactTVCell
         
         let obj = arr_data[indexPath.item]
         
-        let no =  "Name".localized() + "  \(obj.contacts_name)"
-        let Description = "Type".localized() + "  \(obj.contacts_type)"
-        let from = "Email".localized() + "  \(obj.contacts_email)"
-        let to = "Mobile".localized() + "  \(obj.contacts_mobile)"
+        let Name =  "\(obj.contacts_name)"
+        let Type = "Type".localized() + "  \(obj.contacts_type)"
+        let Email = "\(obj.contacts_email)"
+        let Mobile = "\(obj.contacts_mobile)"
         
-        let Submitter = "Whatsapp".localized() + "  \(obj.contacts_whatsapp)"
-        let Status = "Fax".localized() + "  \(obj.contacts_fax)"
-        let writer = "Writer".localized() + "  \(obj.writer)"
-        let LastUpdate = "On Date".localized() + "  \(obj.contacts_created_datetime)"
+        let Whatsapp = "\(obj.contacts_whatsapp)"
+        let Fax = "\(obj.contacts_fax)"
+        let writer = "By".localized() + ":  \(obj.writer)"
+        let Date =  "\(obj.contacts_created_datetime)"
         
-        
-        cell.lbKeylNo.text = no
-        cell.lblKeyDesc.text = Description
-        cell.lblKeyFrom.text = from
-        cell.lblKeyTo.text = to
-        cell.lblKeyWriter.text = writer
-        cell.lblKeyLastUpdate.text = LastUpdate
-        cell.lblKeySubmitter.text = Submitter
-        cell.lblKeyStatus.text = Status
-        
-        cell.lblKeyModule.isHidden = true
-        cell.lblKeyBarCode.isHidden = true
-        cell.lblKeyType.isHidden = true
+        let maincolor = "#1A3665".getUIColor()
         
         
-        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["Name".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lbKeylNo.attributedText = attributedWithTextColor
+        cell.lblName.text = Name
+        cell.lblWriter.text = writer
+        cell.lblDate.text = Date
         
-        let Descriptionattributed: NSAttributedString = Description.attributedStringWithColor(["Type".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyDesc.attributedText = Descriptionattributed
+        cell.btnfax.setTitle(Fax, for: .normal)
+        cell.btnwhats.setTitle(Whatsapp, for: .normal)
+        cell.btnMoile.setTitle(Mobile, for: .normal)
+        cell.btnEmail.setTitle(Email, for: .normal)
         
-        let fromattributed: NSAttributedString = from.attributedStringWithColor(["Email".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyFrom.attributedText = fromattributed
+        cell.viewBack.setRounded(12)
         
-        let Toattributed: NSAttributedString = to.attributedStringWithColor(["Mobile".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyTo.attributedText = Toattributed
-        
-        
-        let Writerattributed: NSAttributedString = writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyWriter.attributedText = Writerattributed
+        let Typeattribute: NSAttributedString = Type.attributedStringWithColor(["Type"], color: maincolor)
+        cell.lblType.attributedText = Typeattribute
         
         
-        let Lastattributed: NSAttributedString = LastUpdate.attributedStringWithColor(["On Date".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyLastUpdate.attributedText = Lastattributed
+        let writerattribute: NSAttributedString = writer.attributedStringWithColor(["By"], color: maincolor)
+        cell.lblWriter.attributedText = writerattribute
         
+      
+        cell.btn_FaxAction = {
+            print("nil")
+        }
         
-        let Submitterattributed: NSAttributedString = Submitter.attributedStringWithColor(["Whatsapp".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeySubmitter.attributedText = Submitterattributed
+        cell.btn_EmailAction = {
+            let googleUrlString = "googlegmail:///co?to=\(Email)"
+
+            if let googleUrl = URL(string: googleUrlString) {
+                UIApplication.shared.open(googleUrl, options: [:]) {
+                    success in
+                    if !success {
+                         // Notify user or handle failure as appropriate
+                    }
+                }
+            }
+            
+        }
         
-        let Statusattributed: NSAttributedString = Status.attributedStringWithColor(["Fax".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyStatus.attributedText = Statusattributed
+        cell.btn_whatsAction = {
+            UIApplication.shared.openURL(URL(string:"https://api.whatsapp.com/send?phone=\(Whatsapp)")!)
+        }
         
-        
-        cell.viewBack.setcorner()
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .white
-        cell.selectedBackgroundView = backgroundView
+        cell.btn_MobileAction = {
+            
+            
+            if let url = URL(string: "tel://\(Mobile)"),
+              UIApplication.shared.canOpenURL(url) {
+                 if #available(iOS 10, *) {
+                   UIApplication.shared.open(url, options: [:], completionHandler:nil)
+                  } else {
+                      UIApplication.shared.openURL(url)
+                  }
+              } else {
+                       // add error message here
+              }
+            
+        }
         
         return cell
         

@@ -38,18 +38,20 @@ class PDFViewrVC: UIViewController, CAAnimationDelegate {
             let status = response["status"] as? Bool
             if status == true{
                 if  let base64 = response["base64"] as? String{
-                    do {
-                        
+                    do { 
                         try self.savePdf(StrBase64: base64)
                         self.loadPDFAndShare()
                     } catch  {
+                        self.hideLoadingActivity()
                         print("FALLO EL GUARDAR EL PDF")
                     }
-                   // self.saveBase64StringToPDF(base64)
-                    self.hideLoadingActivity()
+                    // self.saveBase64StringToPDF(base64)
+                    
                 }
+            }else{
+                self.hideLoadingActivity()
             }
-            self.hideLoadingActivity()
+          
             
         }
     }
@@ -124,6 +126,7 @@ class PDFViewrVC: UIViewController, CAAnimationDelegate {
                 let data = try Data(contentsOf: pdfURL)
                 webView.load(data, mimeType: "application/pdf", characterEncodingName:"", baseURL: pdfURL.deletingPathExtension())
                 print("pdf file loading...")
+                 self.hideLoadingActivity()
 
             }
             catch {
@@ -143,6 +146,7 @@ class PDFViewrVC: UIViewController, CAAnimationDelegate {
        
         if let decodeData = NSData(base64Encoded: StrBase64, options: .ignoreUnknownCharacters) {
             WebView.load(decodeData as Data as Data, mimeType: "application/pdf", characterEncodingName: "utf-8", baseURL: NSURL(fileURLWithPath: "") as URL)
+             self.hideLoadingActivity()
         }
         
     }
@@ -153,6 +157,7 @@ class PDFViewrVC: UIViewController, CAAnimationDelegate {
             let pdfDocURL = documentsURL.appendingPathComponent("document.pdf")
             let document = NSData(contentsOf: pdfDocURL)
            
+            self.hideLoadingActivity()
 //            let activityViewController: UIActivityViewController = UIActivityViewController(activityItems: [document!], applicationActivities: nil)
 //            activityViewController.popoverPresentationController?.sourceView=self.view
 //            present(activityViewController, animated: true, completion: nil)

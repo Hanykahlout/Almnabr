@@ -23,6 +23,7 @@ class TransactionTVCell: UITableViewCell {
     @IBOutlet weak var lblLastUpdate: UILabel!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var viewBack: UIView!
+    @IBOutlet weak var img_mark: UIImageView!
     
     @IBOutlet weak var lbKeylNo: UILabel!
     @IBOutlet weak var lblKeyDesc: UILabel!
@@ -31,12 +32,16 @@ class TransactionTVCell: UITableViewCell {
     @IBOutlet weak var lblKeyBarCode: UILabel!
     @IBOutlet weak var lblKeyType: UILabel!
     @IBOutlet weak var lblKeyModule: UILabel!
+    @IBOutlet weak var lblKeyForm: UILabel!
     @IBOutlet weak var lblKeyWriter: UILabel!
     @IBOutlet weak var lblKeySubmitter: UILabel!
     @IBOutlet weak var lblKeyLastUpdate: UILabel!
     @IBOutlet weak var lblKeyStatus: UILabel!
 
     @IBOutlet weak var btnDelete: UIButton!
+    
+   
+    
    // func setRecord(
 //                    transaction_request_id: String,
 //                    transaction_request_description: String,
@@ -68,6 +73,15 @@ class TransactionTVCell: UITableViewCell {
         super.awakeFromNib()
         
         selectionStyle = .none
+        self.lblKeyForm.isHidden = true
+        self.viewBack.layer.applySketchShadow(
+          color: .black,
+          alpha: 0.6,
+          x: 0,
+          y: 13,
+          blur: 16,
+          spread: 0)
+        
         // Initialization code
         
 //        lbKeylNo.font = .kufiBoldFont(ofSize: 14)

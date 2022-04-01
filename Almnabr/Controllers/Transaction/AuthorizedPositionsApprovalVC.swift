@@ -32,18 +32,23 @@ class AuthorizedPositionsApprovalVC: UIViewController {
     
     
     var authorized_positions_approval_status:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configGUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configGUI()
+    }
     
     //MARK: - Config GUI
     //------------------------------------------------------
     func configGUI() {
         
-        icon_noPermission.loadGif(name: "no-permission")
+        icon_noPermission.no_permission()
         
         self.lbl_noPermission.text =  "You not have permission to access this step".localized()
         self.lbl_noPermission.font = .kufiRegularFont(ofSize: 15)
@@ -66,36 +71,36 @@ class AuthorizedPositionsApprovalVC: UIViewController {
         self.btn_checkReject.setImage(UIImage(named: "uncheck"), for: .normal)
         
         self.lbl_Title.text =  "Authorized Positions Approval".localized()
-        self.lbl_Title.font = .kufiBoldFont(ofSize: 15)
-        self.lbl_Title.textColor =  HelperClassSwift.acolor.getUIColor()
+        self.lbl_Title.font = .kufiRegularFont(ofSize: 13)
+        self.lbl_Title.textColor = maincolor
         
         
         self.lbl_ReserveRequestQ.text =  "Authorized Positions Approval".localized() + "  ?!"
-        self.lbl_ReserveRequestQ.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_ReserveRequestQ.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_ReserveRequestQ.font = .kufiRegularFont(ofSize: 13)
+        self.lbl_ReserveRequestQ.textColor =  maincolor
         
         
         self.lbl_Reject.text =  "Reject and return to update".localized()
-        self.lbl_Reject.font = .kufiRegularFont(ofSize: 15)
+        self.lbl_Reject.font = .kufiRegularFont(ofSize: 13)
         self.lbl_Reject.textColor =  HelperClassSwift.bcolor.getUIColor()
         
         
         self.lbl_ReserveRequest.text =  "Reserve Request".localized()
-        self.lbl_ReserveRequest.font = .kufiRegularFont(ofSize: 15)
+        self.lbl_ReserveRequest.font = .kufiRegularFont(ofSize: 13)
         self.lbl_ReserveRequest.textColor =  HelperClassSwift.bcolor.getUIColor()
         
         self.lbl_notes.text =  "Rejected Notes :".localized()
         self.lbl_notes.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_notes.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.lbl_notes.textColor = maincolor
         
         
         self.view_txtView.setBorderGray()
         
-        self.view_main.setBorderGray()
+        //self.view_main.setBorderGray()
         
         
         self.btn_submit.setTitle("Submit".localized(), for: .normal)
-        self.btn_submit.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btn_submit.backgroundColor =  "#1A3665".getUIColor()
         self.btn_submit.setTitleColor(.white, for: .normal)
         
         
@@ -111,7 +116,7 @@ class AuthorizedPositionsApprovalVC: UIViewController {
                      
                       "rejected_notes":self.txt_notes.text ?? ""]
         
-            APIManager.sendRequestPostAuth(urlString: "form/FORM_WIR/Authorized_Positions_Approval/0", parameters: params ) { (response) in
+            APIManager.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Authorized_Positions_Approval/0", parameters: params ) { (response) in
                 self.hideLoadingActivity()
                
                 

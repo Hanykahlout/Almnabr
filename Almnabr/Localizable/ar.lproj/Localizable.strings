@@ -16,14 +16,14 @@
 "error" = "خطأ";
 "token_missing" = "Token missing";
 "ok" = "OK";
-"are_you_sure" = "Are you sure?";
-"btn_yes" = "YES";
-"btn_no" = "NO";
+"are_you_sure" = "هل انت متأكد ؟";
+"btn_yes" = "نعم";
+"btn_no" = "لا";
 "btn_create_new_account" = "Create new account";
 
-"nav_settings" = "Settings";
-"lbl_logout" = "Logout";
-"lbl_settings" = "Settings";
+"nav_settings" = "الاعدادات";
+"lbl_logout" = "تسجيل خروج";
+"lbl_settings" = "الاعدادات";
 
 "English" = "انجليزي";
 "Arabic" = "عربي";
@@ -169,27 +169,175 @@
 "Platform" = "Platform";
 "Template Name" = "اسم النموذج";
 "Group One" =  "مجموعات ١";
-"Group Type" = "نوع المجموعة";;
+"Group Type" = "نوع المجموعة";
 "Group Two" = "مجموعات ٢";
 
-"txt_config" = "Configations";
-"txt_Language" = "Language";
+"txt_config" = "خطوة تقديم طلب";
+"txt_Language" = "اللغة";
 
-"txt_SiteLevel" = "Site Level";
-"txt_Phases"  = "By Phases";
-"txt_GeneralNo"  = "General Numbers";
-"txt_AllUnits"  = "For All Units";
-"txt_WorkSite"  = "Work Site";
-"txt_No"  = "No";
-"txt_Yes"  = "Yes";
-"txt_SeparateUnits"  = "Separate Units";
+"txt_SiteLevel" = "موقع العمل";
+"txt_Phases"  = "رقم المنطقة و البلوك";
+"txt_GeneralNo"  = "رقم الوحدة العام";
+"txt_AllUnits"  = "جميع الوحدات";
+"txt_WorkSite"  = "  موقع العمل ";
+"txt_No"  = "لا";
+"txt_Yes"  = "تاكيد";
+"txt_SeparateUnits"  = "هل ترغب بفصل الوحدات ؟ : ";
 
-"txt_FillWorkLevel" = "Fill Work Level";
+"txt_FillWorkLevel" = " اختيار موقع العمل ";
 
-"txt_Generalnumber" = "General number";
+"txt_Generalnumber" = "رقم الوحدة العام";
 
-"txt_SearchGeneralNumbers" = "Search General Numbers";
-"txt_FillWorkLevels" = "Fill Work Levels";
-"txt_SearchGeneralNumbers" = "Search General Numbers";
-"txt_FillWorkLevels" = "Fill Work Levels";
+"txt_SearchGeneralNumbers" = "البحث بالرقم العام ";
+"txt_FillWorkLevels" = " اختيار موقع العمل ";
+"txt_SearchGeneralNumbers" = "البحث بالرقم العام";
+"txt_FillWorkLevels" = " اختيار موقع العمل ";
 
+
+"all_pending_need_action" = "جميع الإجراءات المعلقة";
+
+"Form Details" = "بيانات النموذج";
+"Request Number" = "رقم الطلب";
+"Project Title" =  "اسم المشروع";
+
+"Service Name" = "اسم الخدمة";
+"Form Code" = "رمز النموذج";
+"Division" = "الباب";
+"Chapter" = "الفصل";
+
+"Form Specifications" =  "المواصفات الفنية";
+"Item Name" = "اسم البند";
+"Form Versions" =  "إصدارات النموذج";
+"txt_location" = "موقع العمل";
+"Preview" = "مشاهدة";
+"Lang_drawing_file" = "drawing file";
+"Selected Step" =  "الخطوة المحددة";
+"Recipient Verification" = "Recipient Verification";
+"Last Step Opened" =  "الوضع الحالي للنموذج متوقف عند";
+"Processing" = "Processing";
+"Evaluation Result:" = "التقييم النهائي:";
+
+"Notes" = "الملاحظات";
+"Person Details" = "بيانات المشاركين";
+"Attachments" = "المرفقات";
+
+"Supervision Operations" = "المشروع";
+
+"You not have permission to access this step" = "ليس لديك صلاحية للوصول إلى هذه الخطوة";
+"step" = "الخطوة";
+ "of" = "من";
+
+
+"Configurations" = " خطوة تقديم طلب";
+"Contractor Team Approval" = "موافقة فريق العمل للمقاول";
+"Contractor Manager Approval" = "موافقة مدير المشروع عند المقاول";
+"Recipient Verification" = " إستلام الطلب" ;
+"Techinical Assistant" = "المساعد التقني" ;
+"Special Approval" = "مساعدة خاصة" ;
+"Evaluation Result" = "التقييم النهائي" ;
+"Authorized Positions Approval" = " موافقة مدقق الطلب" ;
+"Manager Approval" = "موافقة مدير المشروع عند الإستشاري" ;
+"Owners Representative" = "موافقة ممثل المالك" ;
+"Final Result" = "خطوة الإعتماد" ;
+
+"Return to technical assistant to re-submit" = "رفض و إعادة التقييم مره اخرى";
+"Approve" = "قبول";
+"Rejected Notes :" = "سبب الرفض : ";
+"Customer Representative Required !?." = "إشراك ممثل المالك في الطلب !?.";
+"No" = " لا";
+"Yes" = " تاكيد ";
+"Upload customer approved document" = "رفع مستند موجه من المالك بهذا الطلب";
+"Assign owner user for confirmation" = "إشراك إلكتروني في الطلب";
+"Customer Representative ? :" = " طريقة إشراك ممثل المالك : ";
+"Owner users" = "اسم ممثل المالك ";
+"Submit" = "اعتماد";
+"( Note : The consultant decision in this request will not be confirmed until reviewing owner representative response )" = "( ملاحظة : لا يعتد برأي الإستشاري في هذا الطلب إلا بعد الإطلاع على رد ممثل المالك )";
+
+
+"Upload attachment" = "إرفاق المستند ";
+"Description" = "وصف";
+
+"Owner Representative" = " موافقة ممثل المالك ";
+"Notes" = "الملاحظات";
+
+"Final Result" = "خطوة الإعتماد";
+"Thank you, we will review your request. wait the result soon." = "جاري إعتماد الطلب شكرا لك ";
+
+
+"Waiting for : " = "بإنتظار :";
+
+"View" = "مشاهدة";
+"View Time" = "مشاهدة الوقت";
+"Last View Time" = "وقت آخر مشاهدة";
+"Date & Time" = "التاريخ والوقت";
+
+
+"Attachments Title" = "اسم المرفق";
+"Date" = "التاريخ";
+"Attachment Type" = "نوع المرفق";
+"File Size" = "حجم الملف";
+
+"Form Versions" = " إصدارات النموذج ";
+"Selected unites and levels" = "الوحدات المختارة";
+
+
+"Work Level" = "موقع العمل";
+"Units" = "الوحدة";
+
+"Transaction Number" = "رقم الطلب";
+"Unit" = "الوحدة";
+
+"Group Type" = "نوع المجموعة";
+"Platform Code System" = "رقم البند في النظام";
+"Platform" = "بند";
+
+"Supervision ID" = "رقم المشروع";
+"Supervision Name" = "اسم الخدمة";
+
+"Next" = "التالي";
+"Previous" = "السابق";
+"Cancel" = "تراجع";
+
+"zones" = "المنطقة";
+"Blocks" = "البلوك";
+"Clusters" = "الكلستر";
+
+
+
+"txt_ByPhase" = "رقم المنطقة و البلوك";
+"txt_Zone" = "المنطقة";
+"txt_Blocks" = "البلوك";
+"txt_Clustre" = "الكلستر";
+"txt_Unit" = "الوحدة";
+
+"txt_FormVersion" = "إصدارات النموذج";
+"txt_Relatedforms" = "نماذج مرتبطة بالنموذج الحالي";
+"txt_Attachments" = "المرفقات";
+"Related Forms : " = "نماذج مرتبطة :";
+
+"lbl_ContractorManager" = "مدير المقاول";
+"lbl_ContractorTeamUsers" = "مستخدمي فريق المقاول";
+
+"Reject and return to update" = "رفض و إعادة";
+"Request Approval !?. " = "قبول العملية !?.";
+
+"Contractor Manager Approval" = "موافقة مدير المشروع عند المقاول";
+"Contractor Team Approval " = "موافقة فريق العمل للمقاول";
+
+"Reserve Request" = "إستلام الطلب";
+"Recipient Verification " = "إستلام الطلب";
+"Technical Assistant" = "المساعد التقني";
+"Check List" = "بنود المراجعة";
+"Saudi Bulding Code :" =   "بنود مراجعة كود البناء السعودي :";
+"Special Approvals !?" = "طلب رأي فني او موافقة من زميل !?";
+
+"add users" = "اسم المستخدم الأول والأخير";
+
+"Evaluation Result: " = "  التقييم النهائي: ";
+"Evaluation Status: " = "الحالة :";
+"Attachments" = "المرفقات";
+"Title: " = "الوصف: ";
+"Result" = "النتيجة";
+
+"Notifications" = "الاشعارات";
+"Related Forms" = "نماذج مرتبطة";

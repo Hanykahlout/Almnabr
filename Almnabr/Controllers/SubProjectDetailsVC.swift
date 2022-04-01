@@ -9,6 +9,7 @@
 import UIKit
 import DPLocalization
 import FontAwesome_swift
+import MOLH
 
 class SubProjectDetailsVC: UIViewController {
     
@@ -137,7 +138,7 @@ class SubProjectDetailsVC: UIViewController {
     
     
     func menu_select(){
-        let language = dp_get_current_language()
+        let language =  MOLHLanguage.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{
@@ -190,11 +191,12 @@ class SubProjectDetailsVC: UIViewController {
     @IBAction func btnSupervision_Click(_ sender: Any) {
       
         let vc:SupervisionOperationVC = AppDelegate.mainSB.instanceVC()
+        let page = UINavigationController.init(rootViewController: vc)
         vc.MenuObj = MenuObj
         vc.StrSubMenue =  "All Projects".localized()
         vc.StrMenue = "Projects".localized()
         vc.Object = self.Object
-        _ =  panel?.center(vc)
+        _ =  panel?.center(page)
         
     }
 }

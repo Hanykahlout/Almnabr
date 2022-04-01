@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FAPanels
 
 
 struct Auth_User {
@@ -63,7 +64,21 @@ struct Auth_User {
         return nil
     }
     
-  
+    static var push_menu_nav : UIViewController? {
+        if let window = UIApplication.window {
+            if let menu = window.rootViewController as? FAPanelController {
+                if let nav = menu.children[2] as? UINavigationController {
+                    if let top = nav.topViewController {
+                        return top
+                    }
+                }
+                return nil
+            }
+        }
+        return nil
+    }
+
+      
 //    static func func_openSpecificScreen(_ values:[AnyHashable:Any])  {
 //        var content = values["content"] as? String ?? ""
 //        var click_action = values["click_action"] as? String ?? ""

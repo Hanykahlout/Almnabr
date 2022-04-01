@@ -10,32 +10,29 @@ import UIKit
 import DPLocalization
 import FontAwesome_swift
 import DropDown
+import MOLH
 
 class AllPrpjectsVC: UIViewController {
     
     
-    @IBOutlet weak var imgNext1: UIImageView!
-    @IBOutlet weak var imgNext2: UIImageView!
-    
-    @IBOutlet weak var lblHome: UIButton!
-    @IBOutlet weak var lblMenuName: UILabel!
-    @IBOutlet weak var lblSubMenuName: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblnodata: UILabel!
     
     @IBOutlet weak var lblsearchByServices: UILabel!
     @IBOutlet weak var lblsearchByBranch: UILabel!
     
     
+    @IBOutlet weak var viewsearch: UIView!
     @IBOutlet weak var viewsearchByServices: UIView!
     @IBOutlet weak var viewsearchByBranch: UIView!
+    
+    
+    @IBOutlet weak var img_nodata: UIImageView!
     
     @IBOutlet weak var imgDropServices: UIImageView!
     @IBOutlet weak var imgDropBranch: UIImageView!
     
     @IBOutlet weak var mainView: UIView!
     
-    @IBOutlet weak var collection: UICollectionView!
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var header: HeaderView!
     
@@ -110,57 +107,31 @@ class AllPrpjectsVC: UIViewController {
     //------------------------------------------------------
     func configGUI() {
         
-       
-        lblHome.titleLabel?.textColor =  HelperClassSwift.bcolor.getUIColor()
-        lblHome.titleLabel?.font = .kufiRegularFont(ofSize: 15)
-        
-        lblMenuName.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblMenuName.font = .kufiRegularFont(ofSize: 15)
-        
-        lblTitle.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblTitle.font = .kufiBoldFont(ofSize: 15)
-        
-        lblSubMenuName.textColor =  HelperClassSwift.acolor.getUIColor()
-        lblSubMenuName.font = .kufiRegularFont(ofSize: 15)
+        self.viewsearch.setBorderGrayWidthCorner(1, 20)
         
         
-        self.lblHome.titleLabel?.text =  "txt_Home".localized()
-        self.lblHome.titleLabel?.font = .kufiRegularFont(ofSize: 15)
-        
-        self.lblnodata.text =  "txt_NoData".localized()
-        self.lblnodata.font = .kufiRegularFont(ofSize: 15)
-        self.lblnodata.isHidden = true
-        
-        self.viewsearchByBranch.setBorderGray()
+        self.viewsearchByBranch.setBorderGrayWidthCorner(1, 20)
         self.lblsearchByBranch.text =  "txt_searchByBranch".localized()
         self.lblsearchByBranch.font = .kufiRegularFont(ofSize: 15)
         
         
-        self.viewsearchByServices.setBorderGray()
+        self.viewsearchByServices.setBorderGrayWidthCorner(1, 20)
         self.lblsearchByServices.text =  "txt_searchByServices".localized()
         self.lblsearchByServices.font = .kufiRegularFont(ofSize: 15)
         searchBar.delegate = self
-        
-        self.mainView.setBorderGray()
 
         self.StrMenue =  MenuObj?.menu_name ?? "Projects".localized()
-        self.lblMenuName.text = MenuObj?.menu_name ?? "All Projects".localized()
-        self.lblSubMenuName.text =  StrSubMenue
+      
         self.lblTitle.text =  StrSubMenue
         
-        let nextimage =  UIImage.fontAwesomeIcon(name: .angleRight, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
-        self.imgNext1.image = nextimage
-        self.imgNext2.image = nextimage
-        
-       
-        
+      
         self.imgDropBranch.image = dropDownmage
         self.imgDropServices.image = dropDownmage
         
         table.dataSource = self
         table.delegate = self
-        let nib = UINib(nibName: "TransactionTVCell", bundle: nil)
-        table.register(nib, forCellReuseIdentifier: "TransactionTVCell")
+        let nib = UINib(nibName: "ProjectTVCell", bundle: nil)
+        table.register(nib, forCellReuseIdentifier: "ProjectTVCell")
         
     }
     
@@ -204,9 +175,9 @@ class AllPrpjectsVC: UIViewController {
                         self.allItemDownloaded = true
                     }
                     if records.count == 0 {
-                        self.lblnodata.isHidden = false
+                        self.img_nodata.isHidden = false
                     }else{
-                        self.lblnodata.isHidden = true
+                        self.img_nodata.isHidden = true
                     }
                     self.table.reloadData()
                     self.hideLoadingActivity()
@@ -214,7 +185,7 @@ class AllPrpjectsVC: UIViewController {
                 
             }else{
                 self.hideLoadingActivity()
-                self.lblnodata.isHidden = false
+               // self.lblnodata.isHidden = false
             }
             
             
@@ -275,7 +246,7 @@ class AllPrpjectsVC: UIViewController {
         }
     }
     func menu_select(){
-        let language = dp_get_current_language()
+        let language =  MOLHLanguage.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{
@@ -361,69 +332,62 @@ extension AllPrpjectsVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVCell", for: indexPath) as! TransactionTVCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProjectTVCell", for: indexPath) as! ProjectTVCell
         
         let obj = arr_data[indexPath.item]
       
         
-        let no =  "Project ID".localized() + "  \(obj.projects_profile_id)"
-        let Description = "Project Title".localized() + "  \(obj.project_title)"
-        let from = "Branch".localized() + "  \(obj.branch_name)"
-        let to = "Project Type".localized() + "  \(obj.customer_type)"
-        let type = "Customers".localized() + "  \(obj.customer_title_en)"
-        let writer = "Writer".localized() + "  \(obj.writer)"
-        let LastUpdate = "On Date".localized() + "  \(obj.projects_profile_created_datetime)"
+        let Id =  "ID" + ":  \(obj.projects_profile_id)"
+        let Title = "Title".localized() + ":  \(obj.project_title)"
+        let Branch = "Branch".localized() + ":  \(obj.branch_name)"
+        let Type = "Type".localized() + ":  \(obj.customer_type)"
+        let Customers = "Customers".localized() + "  \(obj.customer_title_en)"
+        let writer = "By".localized() + ": \(obj.writer)"
+        let date = "  \(obj.projects_profile_created_datetime)"
        
         
-        cell.lbKeylNo.text = no
-        cell.lblKeyDesc.text = Description
-        cell.lblKeyFrom.text = from
-        cell.lblKeyTo.text = to
-        cell.lblKeyType.text = type
-        cell.lblKeyWriter.text = writer
-        cell.lblKeyLastUpdate.text = LastUpdate
+        cell.lblId.text = Id
+        cell.lblBranch.text = Branch
+        cell.lblTitle.text = Title
+        cell.lblType.text = Type
+        cell.lblCustomers.text = Customers
+        cell.lblWriter.text = writer
+        cell.lblDate.text = date
+
+        let maincolor = "#1A3665".getUIColor()
+        let Idattribute: NSAttributedString = Id.attributedStringWithColor(["ID"], color: "#1A3665".getUIColor())
+        cell.lblId.attributedText = Idattribute
         
-        cell.lblKeyBarCode.isHidden = true
-        cell.lblKeyStatus.isHidden = true
-        cell.lblKeySubmitter.isHidden = true
-        cell.lblKeyModule.isHidden = true
-        cell.lblKeyBarCode.isHidden = true
+        let titleattribute: NSAttributedString = Title.attributedStringWithColor(["Title".localized()], color: maincolor)
+        cell.lblTitle.attributedText = titleattribute
         
+        let branchAttribute: NSAttributedString = Branch.attributedStringWithColor(["Branch".localized()], color: maincolor)
+        cell.lblBranch.attributedText = branchAttribute
         
-        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["Project ID".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lbKeylNo.attributedText = attributedWithTextColor
-        
-        let Descriptionattributed: NSAttributedString = Description.attributedStringWithColor(["Project Title".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyDesc.attributedText = Descriptionattributed
-        
-        let fromattributed: NSAttributedString = from.attributedStringWithColor(["Branch".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyFrom.attributedText = fromattributed
-        
-        let Toattributed: NSAttributedString = to.attributedStringWithColor(["Project Type".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyTo.attributedText = Toattributed
+        let Typeattributed: NSAttributedString = Type.attributedStringWithColor(["Type".localized()], color: maincolor)
+        cell.lblType.attributedText = Typeattributed
         
         
        
-        let Typeattributed: NSAttributedString = type.attributedStringWithColor(["Customers".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyType.attributedText = Typeattributed
+        let Customersattributed: NSAttributedString = Customers.attributedStringWithColor(["Customers".localized()], color: maincolor)
+        cell.lblCustomers.attributedText = Customersattributed
         
         
         
-        let Writerattributed: NSAttributedString = writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyWriter.attributedText = Writerattributed
-      
-        let Lastattributed: NSAttributedString = LastUpdate.attributedStringWithColor(["On Date".localized()], color: HelperClassSwift.acolor.getUIColor())
-        cell.lblKeyLastUpdate.attributedText = Lastattributed
-        
+        let Writerattributed: NSAttributedString = writer.attributedStringWithColor(["By".localized()], color: maincolor)
+        cell.lblWriter.attributedText = Writerattributed
+
+        cell.lblDate.text = date
+        cell.lblDate.textColor = maincolor
        
-        
-        
-        cell.viewBack.setcorner()
-        
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = .white
-        cell.selectedBackgroundView = backgroundView
-        
+        cell.viewBack.layer.applySketchShadow(
+          color: .black,
+          alpha: 0.6,
+          x: 0,
+          y: 13,
+          blur: 16,
+          spread: 0)
+        cell.viewBack.setRounded(20)
         return cell
         
     }
@@ -437,7 +401,8 @@ extension AllPrpjectsVC: UITableViewDelegate , UITableViewDataSource{
                 vc.MenuObj = self.MenuObj
                 vc.StrSubMenue =  self.StrSubMenue
                 vc.StrMenue = self.StrMenue
-                _ =  panel?.center(vc)
+        self.navigationController?.pushViewController(vc, animated: true)
+//                _ =  panel?.center(vc)
     }
     
     

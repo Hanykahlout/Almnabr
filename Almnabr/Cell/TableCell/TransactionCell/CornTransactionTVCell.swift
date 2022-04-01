@@ -13,16 +13,38 @@ class CornTransactionTVCell: UITableViewCell {
     
     @IBOutlet weak var lblNo: UILabel!
     @IBOutlet weak var lblFormName: UILabel!
+    @IBOutlet weak var lblError: UILabel!
     @IBOutlet weak var lblAttempt: UILabel!
     @IBOutlet weak var lblLastUpdate: UILabel!
+    @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var btnDelete: UIButton!
     
+    var btn_Action : (()->())?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        selectionStyle = .none
+        
+        
+        self.viewBack.layer.applySketchShadow(
+          color: .gray,
+          alpha: 0.6,
+          x: 0,
+          y: 3,
+          blur: 3,
+          spread: 0)
+        
     }
 
+   
+    
+    
+    @IBAction func didReButtonPressd(_ sender: Any) {
+        btn_Action!()
+    }
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

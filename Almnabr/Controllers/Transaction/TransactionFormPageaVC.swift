@@ -11,7 +11,7 @@ import UIKit
 class TransactionFormPageaVC: UIPageViewController {
     
     
-    var pages = [UIViewController]()
+    var pages : [UIViewController] = []
     var newIndex = 1
     
     private var currentPageIndex: Int = 0
@@ -22,10 +22,11 @@ class TransactionFormPageaVC: UIPageViewController {
         dataSource = self
       
         let vc: LanguageVC = AppDelegate.mainSB.instanceVC()
-        vc.ProjectObj?.projects_work_area_id = "1"
-        vc.ProjectObj?.template_id = "1"
-        vc.ProjectObj?.template_platform_code_system = "2.WIR.1.1"
-        let page1 = UINavigationController.init(rootViewController: vc)
+        let page1 = UINavigationController(rootViewController: vc)
+        
+//        vc.ProjectObj?.projects_work_area_id = "1"
+//        vc.ProjectObj?.template_id = "1"
+//        vc.ProjectObj?.template_platform_code_system = "2.WIR.1.1"
         
         let page2: ContractorTeamApprovalVC = AppDelegate.TransactionSB.instanceVC()
         let page3: ContractorManagerApprovalVC = AppDelegate.TransactionSB.instanceVC()
@@ -56,12 +57,15 @@ class TransactionFormPageaVC: UIPageViewController {
         pager_observer()
     }
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        // self.displayPageForIndex(index: index)
-         displayPageForIndex(index: newIndex, animated: true)
+       //  displayPageForIndex(index: newIndex, animated: true)
     }
     
     
@@ -83,9 +87,16 @@ class TransactionFormPageaVC: UIPageViewController {
         print("index\( index)")
         print("currentPageIndex\( currentPageIndex)")
         if index  < self.currentPageIndex {
-            self.setViewControllers([self.pages[index - 1]], direction: .reverse, animated: true, completion: nil)
+            
+            DispatchQueue.main.async {
+                self.setViewControllers([self.pages[index - 1]], direction: .reverse, animated: true, completion: nil)
+            }
+          
         } else if index > self.currentPageIndex   {
-            self.setViewControllers([self.pages[index - 1]], direction: .forward, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.setViewControllers([self.pages[index - 1]], direction: .forward, animated: true, completion: nil)
+            }
+          
         }
         
         self.currentPageIndex = index
@@ -126,3 +137,22 @@ extension TransactionFormPageaVC: UIPageViewControllerDataSource {
         return 0
     }
 }
+
+//extension TransactionFormPageaVC {
+//    fileprivate func viewControllerAtIndex(_ index: Int) -> UIViewController? {
+//        if vc_array.count == 0 || index >= vc_array.count {
+//            return nil
+//        }
+//        return vc_array[index]
+//    }
+//    
+//    fileprivate func indexOfViewController(_ viewController: UIViewController) -> Int? {
+//        return vc_array.firstIndex(of: viewController)
+//    }
+//    
+//    private func getCurrentIndex() -> Int? {
+//        guard let current = self.pageViewController.viewControllers?.first else {return nil }
+//        return vc_array.firstIndex(of: current)
+//    }
+//}
+

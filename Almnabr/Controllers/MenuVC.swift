@@ -22,6 +22,7 @@ class MenuVC: UIViewController {
     @IBOutlet weak var viewTheme: UIView!
     
     private var arr_data : [MenuObj] = []
+    private var arr_menu : [MenuObj] = []
     
     var selectedIndexPath: IndexPath?
     let fontStyle: FontAwesomeStyle = .solid
@@ -39,9 +40,6 @@ class MenuVC: UIViewController {
         }
         
     }
-    
-    
-    
     
     func setup_data(){
         
@@ -117,12 +115,33 @@ class MenuVC: UIViewController {
              let status = response["status"] as? Bool
              if status == true{
                  if  let records = response["records"] as? NSArray{
+                     
                      for i in records {
                          let dict = i as? [String:Any]
                          let obj = MenuObj.init(dict!)
-                         self.arr_data.append(obj)
+                         if obj.menu_id != "30" {
+                             self.arr_data.append(obj)
+                         }
                          
                      }
+                     
+                    
+                    
+//                     for obj in self.arr_menu {
+//                         switch obj.menu_id {
+//                         case "1":
+//                             self.arr_data.append(obj)
+//                         case "30":
+//                             self.arr_data.append(obj)
+//                             print(obj.menu_name)
+//                         case "12":
+//                             self.arr_data.append(obj)
+//                             print(obj.menu_name)
+//                         default:
+//                             print("no needed")
+//                         }
+//                     }
+                     
                      self.tableview.reloadData()
                      self.hideLoadingActivity()
                  }
@@ -299,13 +318,20 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
                     _ =  panel?.center(vc)
                     
-                    case "73":
+                case "73":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
                     let vc:AllPrpjectsVC = AppDelegate.mainSB.instanceVC()
                     let nav = UINavigationController.init(rootViewController: vc)
                     vc.title =  obj.menu_name
                     vc.MenuObj = obj
                     vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
+                    _ =  panel?.center(nav)
+                case "94":
+                    cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
+                    let vc:AllTicketVC = AppDelegate.TicketSB.instanceVC()
+                    let nav = UINavigationController.init(rootViewController: vc)
+                    //vc.title =  obj.menu_name
+                    //obj.menu[indexPath.row - 1].menu_name
                     _ =  panel?.center(nav)
                     
                     

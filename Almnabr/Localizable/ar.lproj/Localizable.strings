@@ -341,3 +341,12 @@
 
 "Notifications" = "الاشعارات";
 "Related Forms" = "نماذج مرتبطة";
+
+"txt_SearchGeneralNo" = "البحث بالرقم العام";
+
+"ID" = "الرقم ";
+"Name" = "الاسم ";
+"Supervision" = "المشروع";
+"Code" = "الرمز";
+"Specifications" = "المواصفات الفنية";
+"From" = "من";

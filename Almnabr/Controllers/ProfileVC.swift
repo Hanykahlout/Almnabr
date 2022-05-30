@@ -27,11 +27,16 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var collection_category: UICollectionView!
     
     var arr_category :[String] = ["Contract","Job","Communications","Contact","Bank","Education","Passport","Insurance","Vacations","Notes","Attachments","Modules","Signature"]
+    var arr_img:[String] = ["doc.on.doc.fill","bag.fill","link","person.2.fill","iphone.homebutton","text.book.closed.fill","airplane","building.fill","person.crop.rectangle.stack.fill","doc","paperclip","rectangle.stack.person.crop.fill","signature"]
+    var profile_obj:ProfileObj?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         get_profile()
         header.btnAction = self.menu_select
+      
         view_profile.layer.applySketchShadow(
             color: .gray,
             alpha: 0.6,
@@ -86,18 +91,21 @@ class ProfileVC: UIViewController {
             if status == true{
                 if let data = response["data"] as? [String:Any] {
                     let profile = ProfileObj(data)
+                    
+                    self.profile_obj = profile
                     self.lblName.text = profile.employee_title_name + " " + profile.firstname_english + " " + profile.secondname_english + " " + profile.lastname_english
                     self.lblJobTitle.text =  "," + profile.job_title_iqama
                     self.lblLocation.text = profile.countryname
                     if profile.employee_status == "1" {
-                        self.lblStatus.text = "Active"
+                       // self.lblStatus.text = "Active"
                         self.view_Status.backgroundColor = "32CD32".getUIColor()
                     }else{
-                        self.lblStatus.text = "Not Active"
+                       // self.lblStatus.text = "Not Active"
                         self.view_Status.backgroundColor = "FF0000".getUIColor()
                         
                     }
                     
+                   
                     let url = URL(string: APIManager.serverURL + profile.profile_image)
                    // imageView.kf.setImage(with: url)
                   print(url)
@@ -131,6 +139,8 @@ extension ProfileVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
             cell.lblTitle.font = .kufiRegularFont(ofSize: 12)
             //cell.lblTitle.textColor = maincolor
             cell.lblTitle.text = item
+            cell.img_Category.image = UIImage(systemName: arr_img[indexPath.item])
+            cell.img_Category.tintColor = maincolor
 //            cell.view_img.setBorderGrayWidth(3)
 //            cell.view_img.setRounded()
             
@@ -146,42 +156,56 @@ extension ProfileVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
             switch item {
             case "Contract":
                 let vc:ContractDetailsVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Job":
                 let vc:JobDetailsVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Communications":
                 let vc:CommunicationsVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Contact":
                 let vc:ContactDetailsVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
+                
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Bank":
                 let vc:BankDetailsVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Education":
                 let vc:EducationDetailsVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Passport":
                 let vc:PassportDetailsVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Insurance":
                 let vc:InsuranceDetailsVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Vacations":
                 let vc:VacationFormVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Notes":
                 let vc:UserNotesVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Attachments":
                 let vc:UserAttachmentsVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Modules":
                 let vc:ModulesVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
             case "Signature":
                 let vc:SignatureVC = AppDelegate.HRSB.instanceVC()
+                vc.profile_obj = self.profile_obj
                 self.navigationController?.pushViewController(vc, animated: true)
                 
                 

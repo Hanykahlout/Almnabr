@@ -10,6 +10,7 @@ import UIKit
 import DPLocalization
 import FontAwesome_swift
 import MOLH
+import Alamofire
 
 class ProjectDetailVC: UIViewController {
     
@@ -35,7 +36,8 @@ class ProjectDetailVC: UIViewController {
     
     var ProjectObj:templateObj?
     var StrTitle:String = ""
-   
+    var Drawing_file:String = ""
+    
     var Object:projectObj?
     
     var MenuObj:MenuObj?
@@ -46,7 +48,7 @@ class ProjectDetailVC: UIViewController {
         configGUI()
         
         
-       
+        get_data()
        
     }
     
@@ -101,25 +103,25 @@ class ProjectDetailVC: UIViewController {
         lblForm.font = .kufiRegularFont(ofSize: 16)
         lblForm.textColor =  "#616263".getUIColor()
         
-        lblSupervisionID.text = "ID: ".localized() + ProjectObj!.projects_work_area_id + "     Name: ".localized() + ProjectName!
+        lblSupervisionID.text = "ID".localized() + ": " + ProjectObj!.projects_work_area_id + "     Name".localized() + ": " + ProjectName!
         lblSupervisionID.font = .kufiRegularFont(ofSize: 15)
         lblSupervisionID.textColor =  "1A3665".getUIColor()
         
-        lblSupervisionName.text = "Name: ".localized() + ProjectName!
+        lblSupervisionName.text = "Name".localized() + ": " + ProjectName!
         lblSupervisionName.font = .kufiRegularFont(ofSize: 15)
         lblSupervisionName.textColor =  "1A3665".getUIColor()
         
         
-        lblFormCode.text = "Code: ".localized() +  ProjectObj!.template_platform_code_system
+        lblFormCode.text = "Code".localized() + ": " + ProjectObj!.template_platform_code_system
         lblFormCode.font = .kufiRegularFont(ofSize: 15)
         lblFormCode.textColor =  "1A3665".getUIColor()
         
-        lblFormName.text = "Name: ".localized() + ProjectObj!.platformname
+        lblFormName.text = "Name".localized() + ": " + ProjectObj!.platformname
         lblFormName.font = .kufiRegularFont(ofSize: 15)
         lblFormName.textColor =  "1A3665".getUIColor()
         
         
-        lblFormSpecifications.text = "Specifications: ".localized() + "---"
+        lblFormSpecifications.text = "Specifications".localized() + ": ---"
         lblFormSpecifications.font = .kufiRegularFont(ofSize: 15)
         lblFormSpecifications.textColor =  "1A3665".getUIColor()
         
@@ -138,6 +140,30 @@ class ProjectDetailVC: UIViewController {
           y: 13,
           blur: 16,
           spread: 0)
+    }
+    
+    func get_data(){
+    
+      self.showLoadingActivity()
+        
+        let param = ["projects_work_area_id" : ProjectObj?.projects_work_area_id ?? "1",
+                     "platform_code_system" : ProjectObj?.template_platform_code_system ?? "2.WIR.1.1",
+                     "template_id" : ProjectObj?.template_id ?? "1"] as [String :Any]
+        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(ProjectObj?.template_platform_group_type_code_system ?? "WIR")/cr/0/0",parameters: param) { (response) in
+            //,Parameters : param
+            let status = response["status"] as? Bool
+            if status == true{
+                if  let data = response["data"] as? [String:Any]{
+                    
+                    self.Drawing_file = data["drawing_file"] as? String ?? ""
+                    self.hideLoadingActivity()
+                }
+            }else{
+                self.hideLoadingActivity()
+            }
+            
+            
+        }
     }
     
     
@@ -178,5 +204,14 @@ class ProjectDetailVC: UIViewController {
         
     }
     
+    @IBAction func btnDrawing_file_Click(_ sender: Any) {
+        let url = Drawing_file
+        let vc:PDFViewrVC  = AppDelegate.mainSB.instanceVC()
+        vc.isModalInPresentation = true
+        vc.definesPresentationContext = true
+        vc.Strurl = self.Drawing_file
+        self.present(vc, animated: true, completion: nil)
+        
+    }
 
 }

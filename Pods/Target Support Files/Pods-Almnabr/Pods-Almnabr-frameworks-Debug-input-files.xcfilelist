@@ -21,6 +21,7 @@ ${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework
 ${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework
 ${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework
 ${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework
+${BUILT_PRODUCTS_DIR}/SwiftSignatureView/SwiftSignatureView.framework
 ${BUILT_PRODUCTS_DIR}/ZVActivityIndicatorView/ZVActivityIndicatorView.framework
 ${BUILT_PRODUCTS_DIR}/ZVProgressHUD/ZVProgressHUD.framework
 ${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework

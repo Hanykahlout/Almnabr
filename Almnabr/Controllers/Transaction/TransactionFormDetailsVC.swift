@@ -17,6 +17,7 @@ var StatusObject:StepStatusObj?
 var obj_transaction:Tcore?
 var FormWirObject:form_wir_dataObj?
 var obj_FormWir:WorkAreaInfoObj?
+var data_FormWir:[String:Any] = [:]
 var arr_Technical_Assistants_Evaluation:[Technical_Assistants_EvaluationObj] = []
 var arr_form_unit_level:[project_supervision_form_unit_levelObj] = []
 
@@ -141,6 +142,9 @@ class TransactionFormDetailsVC: UIViewController {
     private let page_count = 11
     var request_id:String = "0"
     var Form:String = ""
+    var IsComplete:Bool = false
+    
+    var filePath:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -161,6 +165,8 @@ class TransactionFormDetailsVC: UIViewController {
         }
         
         self.mainView.isHidden = true
+        self.view_pager.isHidden = true
+        
         self.arr_waitingFor = []
         get_Request()
         configNavigation()
@@ -236,6 +242,10 @@ class TransactionFormDetailsVC: UIViewController {
           spread: 0)
         view_pager.setRounded(20)
         
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
+            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        }
         
         self.slider.progressTintColor = maincolor
         self.slider.progress = 0.1
@@ -357,6 +367,8 @@ class TransactionFormDetailsVC: UIViewController {
         }
         
         if last_step == "completed" {
+            self.IsComplete = true
+            self.lblPreview.text = "Review".localized()
             self.btnEvalutionResult.setBorderWithColor(maincolor)
             self.btnEvalutionResult.isHidden = false
             self.btnEvalutionResult.setTitleColor(maincolor, for: .normal)
@@ -468,6 +480,9 @@ class TransactionFormDetailsVC: UIViewController {
             let error = response["error"] as? String
              let status = response["status"] as? Bool
              if status == true{
+                 
+                 data_FormWir = response
+                 
                  IsTransaction = false
                  if  let step_status = response["step_status"] as? [String:Any]{
 
@@ -509,7 +524,9 @@ class TransactionFormDetailsVC: UIViewController {
                              self.FormWirObj = recordsObj
                              FormWirObject = self.FormWirObj
                          }
+                        
                      }
+                     
                      
                      if let form_msr_data = view_request["form_msr_data"] as? [String:Any]{
                          let form_wir_data_status = form_msr_data["status"] as? Bool
@@ -666,6 +683,8 @@ class TransactionFormDetailsVC: UIViewController {
                  }
 
                  self.mainView.isHidden = false
+                 self.view_pager.isHidden = false
+                 
                  
                  self.configGUI()
                  self.update_Notification()
@@ -804,7 +823,11 @@ class TransactionFormDetailsVC: UIViewController {
         if id == "0" {
             id = Object?.transaction_request_id ?? "0"
         }
+//        obj.file_path != ""
     vc.Strurl = "form/FORM_WIR/pr/\(id)"
+        if self.IsComplete {
+            vc.Strurl = self.filePath
+        }
     self.present(vc, animated: true, completion: nil)
  
     }

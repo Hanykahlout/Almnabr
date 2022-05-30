@@ -94,7 +94,7 @@ class ProjectDetailsVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     // MARK: - Config Navigation
@@ -308,7 +308,7 @@ class ProjectDetailsVC: UIViewController {
         
         let search:String = ProjectSearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
-        APIManager.sendRequestGetAuth(urlString: "xZLCctvSvZ9DGb8/\(Object!.projects_profile_id)/1/10?search_key=\(search)" ) { (response) in
+        APIManager.sendRequestGetAuth(urlString: "xZLCctvSvZ9DGb8/\(Object!.projects_profile_id)/\(self.pageNumber)/10?search_key=\(search)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_Projectdata.removeAll()

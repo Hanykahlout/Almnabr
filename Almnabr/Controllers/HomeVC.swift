@@ -28,7 +28,7 @@ class HomeVC: UIViewController   {
     var session: NFCNDEFReaderSession?
     var message:String = ""
     
-    private var manager = SocketManager(socketURL: URL(string:"http://localhost:3000")!)
+    private var manager = SocketManager(socketURL: URL(string:"https://node.almnabr.com/")!)
    // var socket  = io.connect('https://node.almnabr.com', {secure: true, auth: {token: "توكن اليوزر هنا"}});
     
     private var socket: SocketIOClient!

@@ -265,7 +265,7 @@ class SignInVC: UIViewController {
             NewSuccessModel.saveLoginSuccessToken(userToken: (responseObject.user_data?.token!)!)
             self.GoToHome()
             Auth_User.user_id = responseObject.user_data?.user_id ?? "0"
-         
+            Auth_User.user_type_id = responseObject.user_data?.user_type_id ?? "1"
             HelperClassSwift.IsFirstLunch = false
             HelperClassSwift.UserName = responseObject.user_data?.user_username ?? "0"
             HelperClassSwift.UserPassword = Password
@@ -357,8 +357,10 @@ class SignInVC: UIViewController {
   
         dropDown.dataSource = self.arr_lang
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+           
+          self.change_language()
             
-            self.change_language()
+            
 //            if item == self.arr_lang[0] {
 //                print(item)
 //                HelperClassSwift.setUserInformation(value: "en", key: Constants.kAppLanguageSelect)

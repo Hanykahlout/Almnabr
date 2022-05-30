@@ -146,6 +146,8 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
             let status = response["status"] as? Bool
             if status == true{
                 self.arr_WorkLevels = []
+                self.arr_WorkLevelsLabel = []
+                
                 if  let list = response["records"] as? NSArray{
                     for i in list {
                         let dict = i as? [String:Any]
@@ -179,6 +181,7 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
             let status = response["status"] as? Bool
             if status == true{
                 self.arr_Unit = []
+                self.arr_UnitlLabel = []
                 if  let list = response["records"] as? NSArray{
                     for i in list {
                         let dict = i as? [String:Any]
@@ -288,7 +291,7 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
     
     
     @IBAction func btnUnitDelete_Click(_ sender: Any) {
-        self.tfUnit.text = "txt_SearchGeneralNo".localized()
+        self.tfUnit.placeholder = "txt_SearchGeneralNo".localized()
         self.btnUnit.isHidden = true
     }
     

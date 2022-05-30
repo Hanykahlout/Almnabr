@@ -9,6 +9,7 @@
 import UIKit
 import MobileCoreServices
 import DropDown
+import MOLH
 
 struct attachment {
     
@@ -103,6 +104,11 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     
     @IBOutlet weak var img_nodata: UIImageView!
     
+    @IBOutlet weak var collection_contractors: UICollectionView!
+    
+    @IBOutlet weak var Viewcollection_contractors: UIView!
+    
+    
     
     var arr_default_attachment:[FileObj] = []
     var arr_data:[AttachmentsObj] = []
@@ -132,6 +138,9 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     
     var arr_contractor:[ContractorObj] = []
     var arr_contractor_label:[String] = []
+    var arr_SelectedContractor:[String] = []
+    var arr_ObjectSelectedcontractor:[ContractorObj] = []
+    
     var arr_unit:[uintObj] = []
     
     let imagePickerController = UIImagePickerController()
@@ -176,7 +185,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     
@@ -184,6 +193,10 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     //------------------------------------------------------
     func configGUI() {
  
+        self.parm["contractor_manager_step_require"] = "0"
+        
+        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
         
         viewContractor.setBorderGray()
         imagePickerController.delegate = self
@@ -226,14 +239,19 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         
         
         
-        self.btnNo.image = UIImage(named: "uncheck")
-        self.btnYes.image = UIImage(named: "check")
+        self.btnYes.image = UIImage(named: "uncheck")
+        self.btnNo.image = UIImage(named: "check")
         
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
+            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        }
         
         self.viewStep.setBorderGrayWidth(3)
         let Stepimage =  UIImage.fontAwesomeIcon(name: .building, style: .solid, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
         self.imgStep.image = Stepimage
         
+       
         
         table.dataSource = self
         table.delegate = self
@@ -282,9 +300,10 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         }else if userObj?.user_type_id == "4" {
             switch ProjectObj.template_platform_group_type_code_system {
             case "WIR":
-                self.arr_file.append(attachment(title: "Signed Contractor Request PDF", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
-                
-                self.Selected_index = self.Selected_index + 1
+                print("no files for type id 4")
+//                self.arr_file.append(attachment(title: "Signed Contractor Request PDF", Required: "No", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
+//
+//                self.Selected_index = self.Selected_index + 1
                 
             case "DSR":
               
@@ -325,7 +344,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         }else{
             Stack_contractor.isHidden = true
         }
-        
+        self.Viewcollection_contractors.isHidden = true
         
     }
     
@@ -393,7 +412,10 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
                     for i in self.arr_default_attachment{
                   
                         
-                        let value = attachment(title:i.label, img: nil, url: URL(string: i.file_path), type: "file",index: self.Selected_index)
+                              
+//                              let value = attachment(title:i.label, img: nil, url: URL(string: i.file_path), type: "file",index: self.Selected_index , IsNew: false , required : "No")
+                        
+                        let value = attachment(title:i.label, Required: "Yes", img: nil, url: URL(string: i.file_path) ,type: "file" , index: self.Selected_index , IsNew : false)
                         self.Selected_index = self.arr_file.count - 1
                         //self.Selected_index + 1
                         self.arr_file.append(value)
@@ -451,13 +473,25 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     
     func Submit_request(){
         
-        guard arr_file.count != 0 else {
-            showAMessage(withTitle: "error".localized(), message: "Please enter your file".localized())
-            return
-        }
+//        guard arr_file.count != 0 else {
+//            showAMessage(withTitle: "error".localized(), message: "Please enter your file".localized())
+//            return
+//        }
   
+        var Con_users = ""
+        for item in arr_ObjectSelectedcontractor{
+            if arr_ObjectSelectedcontractor.count > 1 {
+                Con_users = item.user_id + "," + Con_users
+               
+            }else{
+                Con_users = item.user_id
+            }
+        }
+        if arr_ObjectSelectedcontractor.count > 1 { Con_users =  String(Con_users.dropLast())}
+        
+        self.parm["contractor_team_users"] = Con_users
+        
         for i in arr_file {
-            
             let urlStr = i.url
             let img = i.img
                  
@@ -469,7 +503,8 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
                     self.parm["attachments[\(i.index)][attach_title]"] = i.title
                     self.parm["attachments[\(i.index )][required]"] = i.Required
                 }
-                self.parm["contractor_manager_step_require"] = "1"
+            }}
+                
                 showLoadingActivity()
                 let code = ProjectObj.template_platform_group_type_code_system
                 var formUrl = "/form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/2/\(transaction_id)"
@@ -496,21 +531,10 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
                     }
                     self.hideLoadingActivity()
                     
-                    
-                }
-                
             }
         }
         
-       
-
         
-   
-        
-        
-        
-    }
-
     
     
     
@@ -589,39 +613,63 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     @IBAction func btnContractorTeamUser_Click(_ sender: Any) {
         
         self.imgDropContractor.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
         
-        if self.arr_contractor_label.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.imgDropContractor.image = dropDownmage
-            }
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }else{
-            dropDown.dataSource = self.arr_contractor_label
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_contractor_label
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_contractor_label[index] {
+                let object =  self.arr_contractor[index]
                 
-                if item == self.arr_contractor_label[index] {
-                    self.lblSelectContractor.text =  item
-                    let i =  self.arr_contractor[index]
-                    //self.StrWorkLevel = i.value
-                    self.parm["contractor_team_users"] = i.value
-                    self.imgDropContractor.image = dropDownmage
-                    self.btnDeleteContractor.isHidden = false
-                    
+                if self.arr_SelectedContractor.contains(name) == false{
+                    self.arr_SelectedContractor.append(name)
+                    self.arr_ObjectSelectedcontractor.append(object)
                 }
+                self.Viewcollection_contractors.isHidden = false
+                self.collection_contractors.reloadData()
                 
+                self.imgDropContractor.image = self.dropDownmage
             }
-            
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewContractor
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewContractor.bounds.height)
-        dropDown.width = viewContractor.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+        
+//        self.imgDropContractor.image = dropUpmage
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_contractor_label.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//                self.imgDropContractor.image = dropDownmage
+//            }
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        }else{
+//            dropDown.dataSource = self.arr_contractor_label
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_contractor_label[index] {
+//                    self.lblSelectContractor.text =  item
+//                    let i =  self.arr_contractor[index]
+//                    //self.StrWorkLevel = i.value
+//                    self.parm["contractor_team_users"] = i.value
+//                    self.imgDropContractor.image = dropDownmage
+//                    self.btnDeleteContractor.isHidden = false
+//
+//                }
+//
+//            }
+//
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewContractor
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewContractor.bounds.height)
+//        dropDown.width = viewContractor.bounds.width
+//        dropDown.show()
 
     }
     
@@ -672,9 +720,8 @@ extension AttachmentsVC: UITableViewDelegate , UITableViewDataSource{
         
         if obj.title != ""{
             
-          
-            
             if obj.IsNew == true {
+               
                 cell.btn_Select.setImage( UIImage(systemName: "square.and.arrow.up"), for: .normal)
             }else{
                 
@@ -697,11 +744,11 @@ extension AttachmentsVC: UITableViewDelegate , UITableViewDataSource{
             cell.lblNo.font = .kufiRegularFont(ofSize: 13)
             cell.tfTitle.text = obj.title
             
-            if obj.IsNew == true {
-                cell.btn_delete.isHidden = false
-            }else{
-                cell.btn_delete.isHidden = true
-            }
+//            if obj.IsNew == true {
+//                cell.btn_delete.isHidden = false
+//            }else{
+//                cell.btn_delete.isHidden = true
+//            }
             
             if obj.Required == "Yes" {
                 cell.btn_delete.isHidden = true
@@ -762,9 +809,6 @@ extension AttachmentsVC: UITableViewDelegate , UITableViewDataSource{
                 self.Selected_index = obj.index
                 self.Upload_file()
             }
-            
-            
-            
         }
         
         return cell
@@ -895,3 +939,38 @@ extension AttachmentsVC: UIDocumentPickerDelegate {
 
 
 //template_platform_group_type_code_system
+
+extension AttachmentsVC: UICollectionViewDataSource ,UICollectionViewDelegate , UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+            return arr_SelectedContractor.count
+       
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "unitCVCell", for: indexPath) as! unitCVCell
+        
+            cell.lblTitle.text = arr_SelectedContractor[indexPath.row]
+            cell.viewBack.setBorderWithColor("458FB8".getUIColor())
+            cell.lblTitle.font = .kufiRegularFont(ofSize: 11)
+            
+            cell.btnDeleteAction = {
+              
+                self.arr_SelectedContractor.remove(at: indexPath.item)
+                self.collection_contractors.reloadData()
+                if self.arr_SelectedContractor.count == 0 {
+                    self.Viewcollection_contractors.isHidden = true
+                }
+                
+            }
+            
+            return cell
+        }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+       // cell.view_img.backgroundColor = HelperClassSwift.acolor.getUIColor()
+        
+    }
+}

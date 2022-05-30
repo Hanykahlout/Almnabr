@@ -8,6 +8,7 @@
 
 import UIKit
 import DPLocalization
+import MOLH
 
 class RelatedFormsVC: UIViewController {
 
@@ -103,7 +104,7 @@ class RelatedFormsVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     
@@ -143,17 +144,20 @@ class RelatedFormsVC: UIViewController {
         let nib = UINib(nibName: "RelatedFormTVCell", bundle: nil)
         table.register(nib, forCellReuseIdentifier: "RelatedFormTVCell")
        
-//        self.btnNext.setTitle("Next".localized(), for: .normal)
+        
 //        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
 //        self.btnNext.setTitleColor(.white, for: .normal)
 //        self.btnNext.setRounded(10)
         
-        
-//        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
+        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
 //        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
 //        self.btnPrevious.setTitleColor(.white, for: .normal)
 //        self.btnPrevious.setRounded(10)
-        
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
+            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        }
         
     }
     

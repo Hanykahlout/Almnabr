@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MOLH
 
 class MyTrannsactionTVCell: UITableViewCell {
 
@@ -34,6 +35,20 @@ class MyTrannsactionTVCell: UITableViewCell {
         viewBack.layer.shadowOffset = .zero
         viewBack.layer.shadowRadius = 4
         
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
+            lblNo.textAlignment = .right
+            lblDesc.textAlignment = .right
+            lblFrom.textAlignment = .right
+            lblForm.textAlignment = .right
+            lblTo.textAlignment = .right
+            lblBarCode.textAlignment = .right
+            lblType.textAlignment = .right
+            lblModule.textAlignment = .right
+            lblWriter.textAlignment = .right
+            lblSubmitter.textAlignment = .right
+            lblLastUpdate.textAlignment = .right
+            lblStatus.textAlignment = .right
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

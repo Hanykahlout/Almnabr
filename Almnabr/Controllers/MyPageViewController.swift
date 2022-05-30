@@ -20,7 +20,7 @@ class MyPageViewController: UIPageViewController {
         
         dataSource = self
        
-       
+        self.isPagingEnabled = false
         
         let page1: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "FromTransactionVC")
         let page2: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "TeamUserVC")

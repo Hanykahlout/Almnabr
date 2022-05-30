@@ -91,7 +91,7 @@ class DocumentsVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: - Config Navigation
@@ -116,15 +116,15 @@ class DocumentsVC: UIViewController {
         self.viewsearch.setBorderGrayWidthCorner(1, 20)
         
         
-        self.viewActive.setBorderGray()
+        self.viewActive.setBorderGrayWidthCorner(1, 20)
         self.lblActive.text =  "txt_Active".localized()
         self.lblActive.font = .kufiRegularFont(ofSize: 15)
         
-        self.viewDocumentType.setBorderGray()
+        self.viewDocumentType.setBorderGrayWidthCorner(1, 20)
         self.lblDocumentType.text =  "txt_DocumentType".localized()
         self.lblDocumentType.font = .kufiRegularFont(ofSize: 15)
         
-        self.viewDivision.setBorderGray()
+        self.viewDivision.setBorderGrayWidthCorner(1, 20)
         self.lblDivision.text =  "txt_Division".localized()
         self.lblDivision.font = .kufiRegularFont(ofSize: 15)
         
@@ -299,36 +299,53 @@ class DocumentsVC: UIViewController {
     @IBAction func btnActive_Click(_ sender: Any) {
         
         self.imgDropActive.image = dropUpmage
-        
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        if self.arr_ActiveLabel.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            self.imgDropActive.image = dropDownmage
-        }else{
-        dropDown.dataSource = self.arr_ActiveLabel
-      
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            
-            if item == self.arr_ActiveLabel[index] {
-                self.lblActive.text =  item
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_ActiveLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_ActiveLabel[index] {
+                self.lblActive.text =  name
                 let i =  self.arr_ActiveVlaue[index]
                 self.StrActive = i
                 self.btnActive.isHidden = false
-                self.imgDropActive.image = dropDownmage
-                get_Documents_data(showLoading: true, loadOnly: true)
-                
-            }
-            
-        }}
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewActive
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewActive.bounds.height)
-        dropDown.width = viewActive.bounds.width
-        dropDown.show()
+                self.imgDropActive.image = self.dropDownmage
+                self.get_Documents_data(showLoading: true, loadOnly: true)
+           }
+        }
+        self.present(vc, animated: true, completion: nil)
+        
+        
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//        if self.arr_ActiveLabel.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//            self.imgDropActive.image = dropDownmage
+//        }else{
+//        dropDown.dataSource = self.arr_ActiveLabel
+//
+//        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//            if item == self.arr_ActiveLabel[index] {
+//                self.lblActive.text =  item
+//                let i =  self.arr_ActiveVlaue[index]
+//                self.StrActive = i
+//                self.btnActive.isHidden = false
+//                self.imgDropActive.image = dropDownmage
+//                get_Documents_data(showLoading: true, loadOnly: true)
+//
+//            }
+//
+//        }}
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewActive
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewActive.bounds.height)
+//        dropDown.width = viewActive.bounds.width
+//        dropDown.show()
     }
     
     
@@ -336,39 +353,58 @@ class DocumentsVC: UIViewController {
         
         
         self.imgDropDocumentType.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        if self.arr_DocumentTypeLabel.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.imgDropDocumentType.image = dropDownmage
-            }
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }else{
-            
-        dropDown.dataSource = self.arr_DocumentTypeLabel
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            
-            if item == self.arr_DocumentTypeLabel[index] {
-                self.lblDocumentType.text =  item
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_DocumentTypeLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_DocumentTypeLabel[index] {
+                self.lblDocumentType.text =  name
                 let i =  self.arr_DocumentType[index]
                 self.StrDocumentType = i.value
                 //self.StrsearchGroupTypeCode = i.code
-                self.imgDropDocumentType.image = dropDownmage
+                self.imgDropDocumentType.image = self.dropDownmage
                 self.btnDocumentType.isHidden = false
-                get_Documents_data(showLoading: true, loadOnly: true)
+                self.get_Documents_data(showLoading: true, loadOnly: true)
                 
             }
-            
-        }}
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewDocumentType
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewDocumentType.bounds.height)
-        dropDown.width = viewDocumentType.bounds.width
-        dropDown.show()
+        }
+        self.present(vc, animated: true, completion: nil)
+        
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_DocumentTypeLabel.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//                self.imgDropDocumentType.image = dropDownmage
+//            }
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        }else{
+//
+//        dropDown.dataSource = self.arr_DocumentTypeLabel
+//        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//            if item == self.arr_DocumentTypeLabel[index] {
+//                self.lblDocumentType.text =  item
+//                let i =  self.arr_DocumentType[index]
+//                self.StrDocumentType = i.value
+//                //self.StrsearchGroupTypeCode = i.code
+//                self.imgDropDocumentType.image = dropDownmage
+//                self.btnDocumentType.isHidden = false
+//                get_Documents_data(showLoading: true, loadOnly: true)
+//
+//            }
+//
+//        }}
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewDocumentType
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewDocumentType.bounds.height)
+//        dropDown.width = viewDocumentType.bounds.width
+//        dropDown.show()
     }
     
     
@@ -376,41 +412,57 @@ class DocumentsVC: UIViewController {
     
     @IBAction func btnDivision_Click(_ sender: Any) {
         
-        
         self.imgDropDivision.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        if self.arr_DivisionLabel.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.imgDropDivision.image = dropDownmage
-            }
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }else{
-            
-        dropDown.dataSource = self.arr_DivisionLabel
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            
-            if item == self.arr_DivisionLabel[index] {
-                self.lblDivision.text =  item
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_DivisionLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_DivisionLabel[index] {
+                self.lblDivision.text =  name
                 let i =  self.arr_Division[index].value
                 self.StrDivision = i
-                //self.StrsearchGroup1Code = i
                 self.btnDivision.isHidden = false
-                self.imgDropDivision.image = dropDownmage
-                get_Documents_data(showLoading: true, loadOnly: true)
-                
+                self.imgDropDivision.image = self.dropDownmage
+                self.get_Documents_data(showLoading: true, loadOnly: true)
             }
-            
-        }}
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewDivision
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewDivision.bounds.height)
-        dropDown.width = viewDivision.bounds.width
-        dropDown.show()
+        }
+        self.present(vc, animated: true, completion: nil)
+        
+//        self.imgDropDivision.image = dropUpmage
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_DivisionLabel.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//                self.imgDropDivision.image = dropDownmage
+//            }
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        }else{
+//
+//        dropDown.dataSource = self.arr_DivisionLabel
+//        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//            if item == self.arr_DivisionLabel[index] {
+//                self.lblDivision.text =  item
+//                let i =  self.arr_Division[index].value
+//                self.StrDivision = i
+//                //self.StrsearchGroup1Code = i
+//                self.btnDivision.isHidden = false
+//                self.imgDropDivision.image = dropDownmage
+//                get_Documents_data(showLoading: true, loadOnly: true)
+//            }
+//
+//        }}
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewDivision
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewDivision.bounds.height)
+//        dropDown.width = viewDivision.bounds.width
+//        dropDown.show()
     }
     
 

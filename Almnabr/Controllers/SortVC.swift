@@ -82,13 +82,13 @@ class SortVC: UIViewController , UITextFieldDelegate {
     func configNavigation() {
 //        self.view.backgroundColor = .white
         
-        self.view.backgroundColor = HelperClassSwift.acolor.getUIColor()
+        self.view.backgroundColor = maincolor
         _ = self.navigationController?.preferredStatusBarStyle
 //        self.view.backgroundColor = HelperClassSwift.acolor.getUIColor() //F0F4F8
         //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
-        navigationController?.navigationBar.barTintColor = HelperClassSwift.acolor.getUIColor()
+        navigationController?.navigationBar.barTintColor = maincolor
        addNavigationBarTitle(navigationTitle: "Sorting".localized())
-        UINavigationBar.appearance().backgroundColor = HelperClassSwift.acolor.getUIColor()
+        UINavigationBar.appearance().backgroundColor = maincolor
     }
     
     
@@ -98,18 +98,18 @@ class SortVC: UIViewController , UITextFieldDelegate {
        
         
         self.btnReset.setTitle("Reset".localized(), for: .normal)
-        self.btnReset.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnReset.backgroundColor =  maincolor
         self.btnReset.setTitleColor(.white, for: .normal)
         self.btnReset.setRounded(10)
         
         
         self.btnSubmit.setTitle("Submit".localized(), for: .normal)
-        self.btnSubmit.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnSubmit.backgroundColor =  maincolor
         self.btnSubmit.setTitleColor(.white, for: .normal)
         self.btnSubmit.setRounded(10)
         
         self.btnSave.setTitle("Save".localized(), for: .normal)
-        self.btnSave.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        self.btnSave.backgroundColor =  maincolor
         self.btnSave.setTitleColor(.white, for: .normal)
         self.btnSave.setRounded(10)
         
@@ -221,54 +221,79 @@ class SortVC: UIViewController , UITextFieldDelegate {
         //-> String
        var selected_item:String = ""
         var Iscanceled:Bool = false
-        //"title".localized()
-       //self.img_Drop.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
+        if arr_dataSource.count > 0 {
         
-        dropDown.cancelAction = {
-            btn_drop.isHidden = false
-            img_Drop.image = self.dropDownmage
-            Iscanceled = true
-        }
-        if arr_dataSource.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                img_Drop.image = dropDownmage
-            }
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }else{
-            dropDown.dataSource = arr_dataSource
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                
-                if item == arr_dataSource[index] {
-                    Iscanceled = false
-                    if IsChooseFilter == true {
-                        let i =  self.arr_filter_list[index].filter_id
-                        selected_item = i
-                        
-                        self.get_filter_details(filter_id:  i,index:index)
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_dataSource
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == arr_dataSource[index] {
+                Iscanceled = false
+                if self.IsChooseFilter == true {
+                    let i =  self.arr_filter_list[index].filter_id
+                    selected_item = i
+                    
+                    self.get_filter_details(filter_id:  i,index:index)
 
-                    }else{
-                        selected_item = item
-                    }
-                    
-                    btn_drop.isHidden = false
-                    img_Drop.image = self.dropDownmage
-                    tf_name.text =  item
-                    
+                }else{
+                    selected_item = name
                 }
-                
+                btn_drop.isHidden = false
+                img_Drop.image = self.dropDownmage
+                tf_name.text =  name
             }
         }
+        self.present(vc, animated: true, completion: nil)
+    }
         
-        dropDown.direction = .bottom
-        dropDown.anchorView = view_drop
-        dropDown.bottomOffset = CGPoint(x: 0, y: view_drop.bounds.height)
-        dropDown.width = view_drop.bounds.width
-        dropDown.show()
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        dropDown.cancelAction = {
+//            btn_drop.isHidden = false
+//            img_Drop.image = self.dropDownmage
+//            Iscanceled = true
+//        }
+//        if arr_dataSource.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//                img_Drop.image = dropDownmage
+//            }
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        }else{
+//            dropDown.dataSource = arr_dataSource
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == arr_dataSource[index] {
+//                    Iscanceled = false
+//                    if IsChooseFilter == true {
+//                        let i =  self.arr_filter_list[index].filter_id
+//                        selected_item = i
+//
+//                        self.get_filter_details(filter_id:  i,index:index)
+//
+//                    }else{
+//                        selected_item = item
+//                    }
+//
+//                    btn_drop.isHidden = false
+//                    img_Drop.image = self.dropDownmage
+//                    tf_name.text =  item
+//
+//                }
+//
+//            }
+//        }
+//
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = view_drop
+//        dropDown.bottomOffset = CGPoint(x: 0, y: view_drop.bounds.height)
+//        dropDown.width = view_drop.bounds.width
+//        dropDown.show()
         return (selected_item ,Iscanceled )
     }
     

@@ -91,11 +91,11 @@ class CronTransactionVC: UIViewController {
         table.register(nib, forCellReuseIdentifier: "CornTransactionTVCell")
  
         view_refresh.layer.applySketchShadow(
-          color: .black,
+          color: .gray,
           alpha: 0.6,
           x: 0,
-          y: 3,
-          blur: 3,
+          y: 1,
+          blur: 1,
           spread: 0)
         
     }

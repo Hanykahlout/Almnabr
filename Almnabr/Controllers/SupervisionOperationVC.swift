@@ -34,7 +34,7 @@ class SupervisionOperationVC: UIViewController {
     var SelectedIndex:Int = 0
     var MenuObj:MenuObj?
     
-    let maincolor = "458FB8".getUIColor()
+   // let maincolor = "458FB8".getUIColor()
     
     var index = 0
     var identifiers: NSArray = ["ProjectRequestVC", "SupervisionOperationDetailsVC"]
@@ -63,7 +63,7 @@ class SupervisionOperationVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: - Config Navigation

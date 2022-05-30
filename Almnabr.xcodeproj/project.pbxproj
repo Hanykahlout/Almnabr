@@ -39,7 +39,6 @@
 		FA0324E1270113F300372EA6 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0324E0270113F200372EA6 /* MenuCell.swift */; };
 		FA10D1A7275BBDB400F3716B /* TestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA10D1A6275BBDB300F3716B /* TestApi.swift */; };
 		FA10D1AC275BCA2600F3716B /* TransactionFormDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA10D1AB275BCA2600F3716B /* TransactionFormDetailsVC.swift */; };
-		FA1809602704695A00B493A7 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18095F2704695A00B493A7 /* Model.swift */; };
 		FA180964270494AB00B493A7 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180963270494AB00B493A7 /* AuthUser.swift */; };
 		FA18DB39274867EA004E64DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA18DB38274867EA004E64DD /* GoogleService-Info.plist */; };
 		FA1B281627AADC470066061F /* TechnicalAssitantCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1B281427AADC470066061F /* TechnicalAssitantCVCell.swift */; };
@@ -67,6 +66,9 @@
 		FA4975AC2793659600891C9F /* DropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4975AB2793659600891C9F /* DropDownView.xib */; };
 		FA4975AE279365A900891C9F /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4975AD279365A900891C9F /* DropDownView.swift */; };
 		FA4975B027936BFC00891C9F /* SortVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4975AF27936BFC00891C9F /* SortVC.swift */; };
+		FA4A4C382803488700B9C658 /* ModulesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4A4C362803488700B9C658 /* ModulesTVCell.swift */; };
+		FA4A4C392803488700B9C658 /* ModulesTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4A4C372803488700B9C658 /* ModulesTVCell.xib */; };
+		FA4A4C3B2804865D00B9C658 /* AddSignatureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4A4C3A2804865D00B9C658 /* AddSignatureVC.swift */; };
 		FA4FEE6E277B98EF00E77C80 /* SpecialApproversCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4FEE6D277B98EF00E77C80 /* SpecialApproversCell.swift */; };
 		FA530A38270CC0B10071CDC8 /* TransactionApproveTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA530A36270CC0B10071CDC8 /* TransactionApproveTVCell.swift */; };
 		FA530A39270CC0B10071CDC8 /* TransactionApproveTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA530A37270CC0B10071CDC8 /* TransactionApproveTVCell.xib */; };
@@ -76,9 +78,20 @@
 		FA530A43270CEC810071CDC8 /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA530A42270CEC810071CDC8 /* CustomHeaderView.swift */; };
 		FA530A45270CEFF10071CDC8 /* MyTransactionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA530A44270CEFF10071CDC8 /* MyTransactionHeaderView.xib */; };
 		FA530A47270CF00E0071CDC8 /* MyTransactionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA530A46270CF00E0071CDC8 /* MyTransactionHeaderView.swift */; };
+		FA534A662806000D008814A9 /* ProfileContactTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA534A642806000D008814A9 /* ProfileContactTVCell.swift */; };
+		FA534A672806000D008814A9 /* ProfileContactTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA534A652806000D008814A9 /* ProfileContactTVCell.xib */; };
 		FA556379279C8B2D00542310 /* TemplateFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA556378279C8B2D00542310 /* TemplateFilterVC.swift */; };
 		FA55637B279CA86800542310 /* SubFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA55637A279CA86800542310 /* SubFilterVC.swift */; };
 		FA5AC1162761187100E6C42D /* PersonDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5AC1152761186F00E6C42D /* PersonDetailsVC.swift */; };
+		FA5C976C2816B01100A2AA5A /* TaskAttachmentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5C976A2816B01100A2AA5A /* TaskAttachmentCell.swift */; };
+		FA5C976D2816B01100A2AA5A /* TaskAttachmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5C976B2816B01100A2AA5A /* TaskAttachmentCell.xib */; };
+		FA5C976F2816B40200A2AA5A /* TaskAttachmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5C976E2816B40200A2AA5A /* TaskAttachmentVC.swift */; };
+		FA5C977228170FA200A2AA5A /* TaskTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5C977028170FA200A2AA5A /* TaskTVCell.swift */; };
+		FA5C977328170FA200A2AA5A /* TaskTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5C977128170FA200A2AA5A /* TaskTVCell.xib */; };
+		FA5C977528195F2500A2AA5A /* TaskHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5C977428195F2500A2AA5A /* TaskHistoryVC.swift */; };
+		FA5C97782819602400A2AA5A /* TaskHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5C97762819602400A2AA5A /* TaskHistoryCell.swift */; };
+		FA5C97792819602400A2AA5A /* TaskHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5C97772819602400A2AA5A /* TaskHistoryCell.xib */; };
+		FA5C977B281A976600A2AA5A /* Ticket.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5C977A281A976500A2AA5A /* Ticket.storyboard */; };
 		FA5CB0F927CFBA6E0023A372 /* RequirementsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CB0F827CFBA6E0023A372 /* RequirementsVC.swift */; };
 		FA5CB0FB27D020490023A372 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CB0FA27D020480023A372 /* LocationVC.swift */; };
 		FA5CB0FE27D028AE0023A372 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CB0FC27D028AD0023A372 /* LabelCell.swift */; };
@@ -102,6 +115,18 @@
 		FA78EA1027D284DA0023E48D /* SupervisionOperationDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78EA0F27D284DA0023E48D /* SupervisionOperationDetailsVC.swift */; };
 		FA78EA1327D2B01A0023E48D /* ProjectRequestTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78EA1127D2B0190023E48D /* ProjectRequestTVCell.swift */; };
 		FA78EA1427D2B01A0023E48D /* ProjectRequestTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA78EA1227D2B0190023E48D /* ProjectRequestTVCell.xib */; };
+		FA7A93C927FC689400EF6ECC /* EducationTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7A93C727FC689400EF6ECC /* EducationTVCell.swift */; };
+		FA7A93CA27FC689400EF6ECC /* EducationTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7A93C827FC689400EF6ECC /* EducationTVCell.xib */; };
+		FA7A93CD27FCD87B00EF6ECC /* InsuranceTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7A93CB27FCD87B00EF6ECC /* InsuranceTVCell.swift */; };
+		FA7A93CE27FCD87B00EF6ECC /* InsuranceTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7A93CC27FCD87B00EF6ECC /* InsuranceTVCell.xib */; };
+		FA7A93CF27FD87B000EF6ECC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA18095F2704695A00B493A7 /* Model.swift */; };
+		FA7A93D427FF05CB00EF6ECC /* VacationFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7A93D227FF05CB00EF6ECC /* VacationFormCell.swift */; };
+		FA7A93D527FF05CB00EF6ECC /* VacationFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7A93D327FF05CB00EF6ECC /* VacationFormCell.xib */; };
+		FA7A93D82801BBCD00EF6ECC /* ProfileNotesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7A93D62801BBCC00EF6ECC /* ProfileNotesTVCell.swift */; };
+		FA7A93D92801BBCD00EF6ECC /* ProfileNotesTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7A93D72801BBCC00EF6ECC /* ProfileNotesTVCell.xib */; };
+		FA7A93DC2801C64900EF6ECC /* profileAttachmentsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7A93DA2801C64800EF6ECC /* profileAttachmentsTVCell.swift */; };
+		FA7A93DD2801C64900EF6ECC /* profileAttachmentsTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7A93DB2801C64800EF6ECC /* profileAttachmentsTVCell.xib */; };
+		FA7BD97E28270D8B00EF1020 /* AddTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7BD97D28270D8B00EF1020 /* AddTaskVC.swift */; };
 		FA7E99492732E8050038931D /* FormDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E99482732E8050038931D /* FormDetailsVC.swift */; };
 		FA7F941027D768BF00E03A34 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA7F940F27D768BF00E03A34 /* PassKit.framework */; };
 		FA7F941327D77AC100E03A34 /* MyTrannsactionTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7F941127D77AC100E03A34 /* MyTrannsactionTVCell.swift */; };
@@ -110,8 +135,21 @@
 		FA7F941827D782E900E03A34 /* ApprovalTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7F941627D782E900E03A34 /* ApprovalTVCell.xib */; };
 		FA82792827971A8B00CE2411 /* ViewLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA82792627971A8B00CE2411 /* ViewLabelCell.swift */; };
 		FA82792927971A8B00CE2411 /* ViewLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA82792727971A8B00CE2411 /* ViewLabelCell.xib */; };
+		FA83CD7C282C248B008A6CE0 /* TaskUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA83CD7B282C248A008A6CE0 /* TaskUsersVC.swift */; };
+		FA85D020280D74900080A0EA /* AllTicketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85D01F280D74900080A0EA /* AllTicketVC.swift */; };
+		FA85D024280D94500080A0EA /* TicketTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85D022280D94500080A0EA /* TicketTVCell.swift */; };
+		FA85D025280D94500080A0EA /* TicketTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA85D023280D94500080A0EA /* TicketTVCell.xib */; };
+		FA85D027280E1D7A0080A0EA /* AddTicketVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85D026280E1D790080A0EA /* AddTicketVC.swift */; };
+		FA85D02928104DE70080A0EA /* TaskFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85D02828104DE60080A0EA /* TaskFilterVC.swift */; };
+		FA85D02B281062C20080A0EA /* PickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA85D02A281062C20080A0EA /* PickerVC.swift */; };
 		FA8A75A6273DB1C1005A2F29 /* FormVersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8A75A4273DB1C1005A2F29 /* FormVersionCell.swift */; };
 		FA8A75A7273DB1C1005A2F29 /* FormVersionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8A75A5273DB1C1005A2F29 /* FormVersionCell.xib */; };
+		FA8B952A27F76785003F9D7B /* ContractTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8B952827F76784003F9D7B /* ContractTVCell.swift */; };
+		FA8B952B27F76785003F9D7B /* ContractTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8B952927F76784003F9D7B /* ContractTVCell.xib */; };
+		FA8B952E27F779BF003F9D7B /* JobDetailsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8B952C27F779BF003F9D7B /* JobDetailsTVCell.swift */; };
+		FA8B952F27F779BF003F9D7B /* JobDetailsTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8B952D27F779BF003F9D7B /* JobDetailsTVCell.xib */; };
+		FA8B953227F88D3F003F9D7B /* CommunicationsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8B953027F88D3F003F9D7B /* CommunicationsTVCell.swift */; };
+		FA8B953327F88D3F003F9D7B /* CommunicationsTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8B953127F88D3F003F9D7B /* CommunicationsTVCell.xib */; };
 		FA95FD07275EFB6F00DE7854 /* TransactionFormPageaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA95FD06275EFB6E00DE7854 /* TransactionFormPageaVC.swift */; };
 		FA95FD09275EFE0500DE7854 /* ContractorManagerApprovalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA95FD08275EFE0500DE7854 /* ContractorManagerApprovalVC.swift */; };
 		FA95FD0B275EFE1E00DE7854 /* ContractorTeamApprovalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA95FD0A275EFE1E00DE7854 /* ContractorTeamApprovalVC.swift */; };
@@ -131,6 +169,8 @@
 		FA9768BD2735D74B000A3576 /* FormVersionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9768BC2735D74B000A3576 /* FormVersionVC.swift */; };
 		FA9768BF2735D764000A3576 /* RelatedFormsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9768BE2735D764000A3576 /* RelatedFormsVC.swift */; };
 		FA9768C1273691BE000A3576 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9768C0273691BE000A3576 /* MyPageViewController.swift */; };
+		FA9DF8D72815979A0015D492 /* TicketCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9DF8D62815979A0015D492 /* TicketCollectionViewController.swift */; };
+		FA9DF8D9281597FA0015D492 /* TicketCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9DF8D8281597FA0015D492 /* TicketCollectionViewCell.swift */; };
 		FA9E7D84270E4620003A1D16 /* GridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9E7D83270E4620003A1D16 /* GridLayout.swift */; };
 		FA9E7D87270E46AE003A1D16 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9E7D85270E46AE003A1D16 /* GridCell.swift */; };
 		FA9E7D88270E46AE003A1D16 /* GridCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9E7D86270E46AE003A1D16 /* GridCell.xib */; };
@@ -142,6 +182,13 @@
 		FA9FB0A627163F0D0037871C /* ServicesCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FB0A427163F0D0037871C /* ServicesCVCell.swift */; };
 		FA9FB0A727163F0D0037871C /* ServicesCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9FB0A527163F0D0037871C /* ServicesCVCell.xib */; };
 		FA9FB0AB2716C7FA0037871C /* SubProjectDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9FB0AA2716C7F90037871C /* SubProjectDetailsVC.swift */; };
+		FAA3A09828083A6200B87DAD /* ModulesUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA3A09728083A6100B87DAD /* ModulesUserVC.swift */; };
+		FAA3A09B28083D3300B87DAD /* ModuleUserTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA3A09928083D3300B87DAD /* ModuleUserTVCell.swift */; };
+		FAA3A09C28083D3300B87DAD /* ModuleUserTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAA3A09A28083D3300B87DAD /* ModuleUserTVCell.xib */; };
+		FAA3A09E2809E51500B87DAD /* YPDrawSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA3A09D2809E51500B87DAD /* YPDrawSignatureView.swift */; };
+		FAA88ECF282AD1F20082432F /* TaskDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA88ECE282AD1F20082432F /* TaskDetailVC.swift */; };
+		FAA88ED2282B0D730082432F /* TaskCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA88ED0282B0D720082432F /* TaskCommentCell.swift */; };
+		FAA88ED3282B0D730082432F /* TaskCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAA88ED1282B0D720082432F /* TaskCommentCell.xib */; };
 		FAA9C4CD27B32B52003C051E /* notification3.wav in Resources */ = {isa = PBXBuildFile; fileRef = FAA9C4CC27B32B51003C051E /* notification3.wav */; };
 		FAAB76DF270B96DB00731505 /* ApproveTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAB76DE270B96DB00731505 /* ApproveTransactionVC.swift */; };
 		FAAB76E1270B96F200731505 /* CronTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAB76E0270B96F200731505 /* CronTransactionVC.swift */; };
@@ -209,7 +256,18 @@
 		FAD531472770FE9600C8E2AD /* SaudiTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD531452770FE9600C8E2AD /* SaudiTVCell.swift */; };
 		FAD531482770FE9600C8E2AD /* SaudiTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAD531462770FE9600C8E2AD /* SaudiTVCell.xib */; };
 		FADB7D6F2764F51000F36044 /* EzPopup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADB7D6E2764F51000F36044 /* EzPopup.framework */; };
+		FADC2FF928245B5200921011 /* TicketDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC2FF828245B5200921011 /* TicketDetailsVC.swift */; };
+		FADC2FFC2826B68800921011 /* TaskUserTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FADC2FFA2826B68700921011 /* TaskUserTVCell.swift */; };
+		FADC2FFD2826B68800921011 /* TaskUserTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FADC2FFB2826B68700921011 /* TaskUserTVCell.xib */; };
 		FAE13A4E27293C2D00509550 /* DroidKufi-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FAE13A4D27293C2D00509550 /* DroidKufi-Regular.ttf */; };
+		FAF7623128300174000DEAFE /* CheckListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7623028300174000DEAFE /* CheckListVC.swift */; };
+		FAF7623428300262000DEAFE /* CheckListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7623228300262000DEAFE /* CheckListCell.swift */; };
+		FAF7623528300262000DEAFE /* CheckListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAF7623328300262000DEAFE /* CheckListCell.xib */; };
+		FAF76238283051A5000DEAFE /* SubTaskTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF76236283051A5000DEAFE /* SubTaskTVCell.swift */; };
+		FAF76239283051A5000DEAFE /* SubTaskTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAF76237283051A5000DEAFE /* SubTaskTVCell.xib */; };
+		FAF7623D28305594000DEAFE /* TaskUsersCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7623B28305594000DEAFE /* TaskUsersCVCell.swift */; };
+		FAF7623E28305594000DEAFE /* TaskUsersCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAF7623C28305594000DEAFE /* TaskUsersCVCell.xib */; };
+		FAF7624028306133000DEAFE /* SubTaskListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF7623F28306133000DEAFE /* SubTaskListVC.swift */; };
 		FAF9D43E278DE050002D8AEF /* ProjectRequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9D43C278DE050002D8AEF /* ProjectRequestCell.swift */; };
 		FAF9D43F278DE050002D8AEF /* ProjectRequestCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAF9D43D278DE050002D8AEF /* ProjectRequestCell.xib */; };
 		FAF9D441278DEB70002D8AEF /* ProjectRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF9D440278DEB70002D8AEF /* ProjectRequestVC.swift */; };
@@ -311,6 +369,9 @@
 		FA4975AB2793659600891C9F /* DropDownView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDownView.xib; sourceTree = "<group>"; };
 		FA4975AD279365A900891C9F /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		FA4975AF27936BFC00891C9F /* SortVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortVC.swift; sourceTree = "<group>"; };
+		FA4A4C362803488700B9C658 /* ModulesTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesTVCell.swift; sourceTree = "<group>"; };
+		FA4A4C372803488700B9C658 /* ModulesTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModulesTVCell.xib; sourceTree = "<group>"; };
+		FA4A4C3A2804865D00B9C658 /* AddSignatureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSignatureVC.swift; sourceTree = "<group>"; };
 		FA4FEE6D277B98EF00E77C80 /* SpecialApproversCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialApproversCell.swift; sourceTree = "<group>"; };
 		FA530A36270CC0B10071CDC8 /* TransactionApproveTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionApproveTVCell.swift; sourceTree = "<group>"; };
 		FA530A37270CC0B10071CDC8 /* TransactionApproveTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionApproveTVCell.xib; sourceTree = "<group>"; };
@@ -320,9 +381,20 @@
 		FA530A42270CEC810071CDC8 /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		FA530A44270CEFF10071CDC8 /* MyTransactionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyTransactionHeaderView.xib; sourceTree = "<group>"; };
 		FA530A46270CF00E0071CDC8 /* MyTransactionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTransactionHeaderView.swift; sourceTree = "<group>"; };
+		FA534A642806000D008814A9 /* ProfileContactTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContactTVCell.swift; sourceTree = "<group>"; };
+		FA534A652806000D008814A9 /* ProfileContactTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileContactTVCell.xib; sourceTree = "<group>"; };
 		FA556378279C8B2D00542310 /* TemplateFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemplateFilterVC.swift; sourceTree = "<group>"; };
 		FA55637A279CA86800542310 /* SubFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFilterVC.swift; sourceTree = "<group>"; };
 		FA5AC1152761186F00E6C42D /* PersonDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailsVC.swift; sourceTree = "<group>"; };
+		FA5C976A2816B01100A2AA5A /* TaskAttachmentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAttachmentCell.swift; sourceTree = "<group>"; };
+		FA5C976B2816B01100A2AA5A /* TaskAttachmentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskAttachmentCell.xib; sourceTree = "<group>"; };
+		FA5C976E2816B40200A2AA5A /* TaskAttachmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAttachmentVC.swift; sourceTree = "<group>"; };
+		FA5C977028170FA200A2AA5A /* TaskTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTVCell.swift; sourceTree = "<group>"; };
+		FA5C977128170FA200A2AA5A /* TaskTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTVCell.xib; sourceTree = "<group>"; };
+		FA5C977428195F2500A2AA5A /* TaskHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHistoryVC.swift; sourceTree = "<group>"; };
+		FA5C97762819602400A2AA5A /* TaskHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHistoryCell.swift; sourceTree = "<group>"; };
+		FA5C97772819602400A2AA5A /* TaskHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskHistoryCell.xib; sourceTree = "<group>"; };
+		FA5C977A281A976500A2AA5A /* Ticket.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Ticket.storyboard; sourceTree = "<group>"; };
 		FA5CB0F827CFBA6E0023A372 /* RequirementsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementsVC.swift; sourceTree = "<group>"; };
 		FA5CB0FA27D020480023A372 /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		FA5CB0FC27D028AD0023A372 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
@@ -346,6 +418,17 @@
 		FA78EA0F27D284DA0023E48D /* SupervisionOperationDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupervisionOperationDetailsVC.swift; sourceTree = "<group>"; };
 		FA78EA1127D2B0190023E48D /* ProjectRequestTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRequestTVCell.swift; sourceTree = "<group>"; };
 		FA78EA1227D2B0190023E48D /* ProjectRequestTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectRequestTVCell.xib; sourceTree = "<group>"; };
+		FA7A93C727FC689400EF6ECC /* EducationTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EducationTVCell.swift; sourceTree = "<group>"; };
+		FA7A93C827FC689400EF6ECC /* EducationTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EducationTVCell.xib; sourceTree = "<group>"; };
+		FA7A93CB27FCD87B00EF6ECC /* InsuranceTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceTVCell.swift; sourceTree = "<group>"; };
+		FA7A93CC27FCD87B00EF6ECC /* InsuranceTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsuranceTVCell.xib; sourceTree = "<group>"; };
+		FA7A93D227FF05CB00EF6ECC /* VacationFormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationFormCell.swift; sourceTree = "<group>"; };
+		FA7A93D327FF05CB00EF6ECC /* VacationFormCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VacationFormCell.xib; sourceTree = "<group>"; };
+		FA7A93D62801BBCC00EF6ECC /* ProfileNotesTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNotesTVCell.swift; sourceTree = "<group>"; };
+		FA7A93D72801BBCC00EF6ECC /* ProfileNotesTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileNotesTVCell.xib; sourceTree = "<group>"; };
+		FA7A93DA2801C64800EF6ECC /* profileAttachmentsTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = profileAttachmentsTVCell.swift; sourceTree = "<group>"; };
+		FA7A93DB2801C64800EF6ECC /* profileAttachmentsTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = profileAttachmentsTVCell.xib; sourceTree = "<group>"; };
+		FA7BD97D28270D8B00EF1020 /* AddTaskVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskVC.swift; sourceTree = "<group>"; };
 		FA7E99482732E8050038931D /* FormDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormDetailsVC.swift; sourceTree = "<group>"; };
 		FA7F940F27D768BF00E03A34 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		FA7F941127D77AC100E03A34 /* MyTrannsactionTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTrannsactionTVCell.swift; sourceTree = "<group>"; };
@@ -354,8 +437,21 @@
 		FA7F941627D782E900E03A34 /* ApprovalTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ApprovalTVCell.xib; sourceTree = "<group>"; };
 		FA82792627971A8B00CE2411 /* ViewLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLabelCell.swift; sourceTree = "<group>"; };
 		FA82792727971A8B00CE2411 /* ViewLabelCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewLabelCell.xib; sourceTree = "<group>"; };
+		FA83CD7B282C248A008A6CE0 /* TaskUsersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskUsersVC.swift; sourceTree = "<group>"; };
+		FA85D01F280D74900080A0EA /* AllTicketVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTicketVC.swift; sourceTree = "<group>"; };
+		FA85D022280D94500080A0EA /* TicketTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketTVCell.swift; sourceTree = "<group>"; };
+		FA85D023280D94500080A0EA /* TicketTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TicketTVCell.xib; sourceTree = "<group>"; };
+		FA85D026280E1D790080A0EA /* AddTicketVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTicketVC.swift; sourceTree = "<group>"; };
+		FA85D02828104DE60080A0EA /* TaskFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFilterVC.swift; sourceTree = "<group>"; };
+		FA85D02A281062C20080A0EA /* PickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerVC.swift; sourceTree = "<group>"; };
 		FA8A75A4273DB1C1005A2F29 /* FormVersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVersionCell.swift; sourceTree = "<group>"; };
 		FA8A75A5273DB1C1005A2F29 /* FormVersionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormVersionCell.xib; sourceTree = "<group>"; };
+		FA8B952827F76784003F9D7B /* ContractTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractTVCell.swift; sourceTree = "<group>"; };
+		FA8B952927F76784003F9D7B /* ContractTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractTVCell.xib; sourceTree = "<group>"; };
+		FA8B952C27F779BF003F9D7B /* JobDetailsTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobDetailsTVCell.swift; sourceTree = "<group>"; };
+		FA8B952D27F779BF003F9D7B /* JobDetailsTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailsTVCell.xib; sourceTree = "<group>"; };
+		FA8B953027F88D3F003F9D7B /* CommunicationsTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationsTVCell.swift; sourceTree = "<group>"; };
+		FA8B953127F88D3F003F9D7B /* CommunicationsTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunicationsTVCell.xib; sourceTree = "<group>"; };
 		FA95FD06275EFB6E00DE7854 /* TransactionFormPageaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormPageaVC.swift; sourceTree = "<group>"; };
 		FA95FD08275EFE0500DE7854 /* ContractorManagerApprovalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractorManagerApprovalVC.swift; sourceTree = "<group>"; };
 		FA95FD0A275EFE1E00DE7854 /* ContractorTeamApprovalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractorTeamApprovalVC.swift; sourceTree = "<group>"; };
@@ -375,6 +471,8 @@
 		FA9768BC2735D74B000A3576 /* FormVersionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVersionVC.swift; sourceTree = "<group>"; };
 		FA9768BE2735D764000A3576 /* RelatedFormsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelatedFormsVC.swift; sourceTree = "<group>"; };
 		FA9768C0273691BE000A3576 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		FA9DF8D62815979A0015D492 /* TicketCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCollectionViewController.swift; sourceTree = "<group>"; };
+		FA9DF8D8281597FA0015D492 /* TicketCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA9E7D83270E4620003A1D16 /* GridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridLayout.swift; sourceTree = "<group>"; };
 		FA9E7D85270E46AE003A1D16 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		FA9E7D86270E46AE003A1D16 /* GridCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GridCell.xib; sourceTree = "<group>"; };
@@ -386,6 +484,13 @@
 		FA9FB0A427163F0D0037871C /* ServicesCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesCVCell.swift; sourceTree = "<group>"; };
 		FA9FB0A527163F0D0037871C /* ServicesCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServicesCVCell.xib; sourceTree = "<group>"; };
 		FA9FB0AA2716C7F90037871C /* SubProjectDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubProjectDetailsVC.swift; sourceTree = "<group>"; };
+		FAA3A09728083A6100B87DAD /* ModulesUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesUserVC.swift; sourceTree = "<group>"; };
+		FAA3A09928083D3300B87DAD /* ModuleUserTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleUserTVCell.swift; sourceTree = "<group>"; };
+		FAA3A09A28083D3300B87DAD /* ModuleUserTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModuleUserTVCell.xib; sourceTree = "<group>"; };
+		FAA3A09D2809E51500B87DAD /* YPDrawSignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YPDrawSignatureView.swift; sourceTree = "<group>"; };
+		FAA88ECE282AD1F20082432F /* TaskDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailVC.swift; sourceTree = "<group>"; };
+		FAA88ED0282B0D720082432F /* TaskCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCommentCell.swift; sourceTree = "<group>"; };
+		FAA88ED1282B0D720082432F /* TaskCommentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCommentCell.xib; sourceTree = "<group>"; };
 		FAA9C4CC27B32B51003C051E /* notification3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = notification3.wav; sourceTree = "<group>"; };
 		FAAB76DE270B96DB00731505 /* ApproveTransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApproveTransactionVC.swift; sourceTree = "<group>"; };
 		FAAB76E0270B96F200731505 /* CronTransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CronTransactionVC.swift; sourceTree = "<group>"; };
@@ -454,7 +559,18 @@
 		FAD531452770FE9600C8E2AD /* SaudiTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaudiTVCell.swift; sourceTree = "<group>"; };
 		FAD531462770FE9600C8E2AD /* SaudiTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SaudiTVCell.xib; sourceTree = "<group>"; };
 		FADB7D6E2764F51000F36044 /* EzPopup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = EzPopup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FADC2FF828245B5200921011 /* TicketDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketDetailsVC.swift; sourceTree = "<group>"; };
+		FADC2FFA2826B68700921011 /* TaskUserTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskUserTVCell.swift; sourceTree = "<group>"; };
+		FADC2FFB2826B68700921011 /* TaskUserTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskUserTVCell.xib; sourceTree = "<group>"; };
 		FAE13A4D27293C2D00509550 /* DroidKufi-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DroidKufi-Regular.ttf"; sourceTree = "<group>"; };
+		FAF7623028300174000DEAFE /* CheckListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListVC.swift; sourceTree = "<group>"; };
+		FAF7623228300262000DEAFE /* CheckListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckListCell.swift; sourceTree = "<group>"; };
+		FAF7623328300262000DEAFE /* CheckListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckListCell.xib; sourceTree = "<group>"; };
+		FAF76236283051A5000DEAFE /* SubTaskTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskTVCell.swift; sourceTree = "<group>"; };
+		FAF76237283051A5000DEAFE /* SubTaskTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubTaskTVCell.xib; sourceTree = "<group>"; };
+		FAF7623B28305594000DEAFE /* TaskUsersCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskUsersCVCell.swift; sourceTree = "<group>"; };
+		FAF7623C28305594000DEAFE /* TaskUsersCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskUsersCVCell.xib; sourceTree = "<group>"; };
+		FAF7623F28306133000DEAFE /* SubTaskListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubTaskListVC.swift; sourceTree = "<group>"; };
 		FAF9D43C278DE050002D8AEF /* ProjectRequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRequestCell.swift; sourceTree = "<group>"; };
 		FAF9D43D278DE050002D8AEF /* ProjectRequestCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectRequestCell.xib; sourceTree = "<group>"; };
 		FAF9D440278DEB70002D8AEF /* ProjectRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRequestVC.swift; sourceTree = "<group>"; };
@@ -558,8 +674,8 @@
 				FA3D9D2C275D1CDB00807BA7 /* MainView */,
 				FA03245526FB9D4D00372EA6 /* Fonts */,
 				FA03242526FB9BFA00372EA6 /* AppDelegate.swift */,
-				FAA9C4CC27B32B51003C051E /* notification3.wav */,
 				FA03242726FB9BFA00372EA6 /* SceneDelegate.swift */,
+				FAA9C4CC27B32B51003C051E /* notification3.wav */,
 				FA03242E26FB9BFE00372EA6 /* Assets.xcassets */,
 				FA03243326FB9BFE00372EA6 /* Info.plist */,
 				FA18DB38274867EA004E64DD /* GoogleService-Info.plist */,
@@ -660,12 +776,11 @@
 		FA03245C26FB9E1600372EA6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FA7BD97F282931CE00EF1020 /* Home */,
+				FA85D01E280D746B0080A0EA /* Tasks */,
 				FABDBA8027F2F99B003961FC /* Profile */,
 				FAD0749A274D4C5000B9C7B3 /* Notification */,
 				FA3D32B027343AEE00A5472A /* PresentVC */,
-				FA0324D826FE220C00372EA6 /* HomeVC.swift */,
-				FA0324DA26FE221F00372EA6 /* MenuVC.swift */,
-				FA03242926FB9BFA00372EA6 /* ViewController.swift */,
 				FAD333A227135EC80093175E /* Peojects */,
 				FAC32FB02708B1480046A0F6 /* Transaction */,
 			);
@@ -789,6 +904,7 @@
 				FA03242B26FB9BFA00372EA6 /* Main.storyboard */,
 				FA3D9D2D275D1D0000807BA7 /* Transaction.storyboard */,
 				FABDBAA527F47B59003961FC /* HR.storyboard */,
+				FA5C977A281A976500A2AA5A /* Ticket.storyboard */,
 			);
 			name = MainView;
 			path = Fonts;
@@ -820,6 +936,17 @@
 			path = MenuCell;
 			sourceTree = "<group>";
 		};
+		FA7BD97F282931CE00EF1020 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FA85D02A281062C20080A0EA /* PickerVC.swift */,
+				FA0324D826FE220C00372EA6 /* HomeVC.swift */,
+				FA0324DA26FE221F00372EA6 /* MenuVC.swift */,
+				FA03242926FB9BFA00372EA6 /* ViewController.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
 		FA7E99472732E7E70038931D /* Form */ = {
 			isa = PBXGroup;
 			children = (
@@ -837,6 +964,78 @@
 				FA29703127431439000000F7 /* PDFViewrVC.swift */,
 			);
 			path = Form;
+			sourceTree = "<group>";
+		};
+		FA85D01E280D746B0080A0EA /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				FA85D01F280D74900080A0EA /* AllTicketVC.swift */,
+				FA85D026280E1D790080A0EA /* AddTicketVC.swift */,
+				FA85D02828104DE60080A0EA /* TaskFilterVC.swift */,
+				FA9DF8D62815979A0015D492 /* TicketCollectionViewController.swift */,
+				FA9DF8D8281597FA0015D492 /* TicketCollectionViewCell.swift */,
+				FA5C976E2816B40200A2AA5A /* TaskAttachmentVC.swift */,
+				FA5C977428195F2500A2AA5A /* TaskHistoryVC.swift */,
+				FADC2FF828245B5200921011 /* TicketDetailsVC.swift */,
+				FA7BD97D28270D8B00EF1020 /* AddTaskVC.swift */,
+				FAA88ECE282AD1F20082432F /* TaskDetailVC.swift */,
+				FA83CD7B282C248A008A6CE0 /* TaskUsersVC.swift */,
+				FAF7623028300174000DEAFE /* CheckListVC.swift */,
+				FAF7623F28306133000DEAFE /* SubTaskListVC.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		FA85D021280D93F80080A0EA /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				FA85D022280D94500080A0EA /* TicketTVCell.swift */,
+				FA85D023280D94500080A0EA /* TicketTVCell.xib */,
+				FA5C976A2816B01100A2AA5A /* TaskAttachmentCell.swift */,
+				FA5C976B2816B01100A2AA5A /* TaskAttachmentCell.xib */,
+				FA5C977028170FA200A2AA5A /* TaskTVCell.swift */,
+				FA5C977128170FA200A2AA5A /* TaskTVCell.xib */,
+				FA5C97762819602400A2AA5A /* TaskHistoryCell.swift */,
+				FA5C97772819602400A2AA5A /* TaskHistoryCell.xib */,
+				FADC2FFA2826B68700921011 /* TaskUserTVCell.swift */,
+				FADC2FFB2826B68700921011 /* TaskUserTVCell.xib */,
+				FAA88ED0282B0D720082432F /* TaskCommentCell.swift */,
+				FAA88ED1282B0D720082432F /* TaskCommentCell.xib */,
+				FAF7623228300262000DEAFE /* CheckListCell.swift */,
+				FAF7623328300262000DEAFE /* CheckListCell.xib */,
+				FAF76236283051A5000DEAFE /* SubTaskTVCell.swift */,
+				FAF76237283051A5000DEAFE /* SubTaskTVCell.xib */,
+			);
+			name = Task;
+			sourceTree = "<group>";
+		};
+		FA8B952727F76760003F9D7B /* ProfileCell */ = {
+			isa = PBXGroup;
+			children = (
+				FA8B952827F76784003F9D7B /* ContractTVCell.swift */,
+				FA8B952927F76784003F9D7B /* ContractTVCell.xib */,
+				FA8B952C27F779BF003F9D7B /* JobDetailsTVCell.swift */,
+				FA8B952D27F779BF003F9D7B /* JobDetailsTVCell.xib */,
+				FA8B953027F88D3F003F9D7B /* CommunicationsTVCell.swift */,
+				FA8B953127F88D3F003F9D7B /* CommunicationsTVCell.xib */,
+				FA7A93C727FC689400EF6ECC /* EducationTVCell.swift */,
+				FA7A93C827FC689400EF6ECC /* EducationTVCell.xib */,
+				FA7A93CB27FCD87B00EF6ECC /* InsuranceTVCell.swift */,
+				FA7A93CC27FCD87B00EF6ECC /* InsuranceTVCell.xib */,
+				FA7A93D227FF05CB00EF6ECC /* VacationFormCell.swift */,
+				FA7A93D327FF05CB00EF6ECC /* VacationFormCell.xib */,
+				FA7A93D62801BBCC00EF6ECC /* ProfileNotesTVCell.swift */,
+				FA7A93D72801BBCC00EF6ECC /* ProfileNotesTVCell.xib */,
+				FA7A93DA2801C64800EF6ECC /* profileAttachmentsTVCell.swift */,
+				FA7A93DB2801C64800EF6ECC /* profileAttachmentsTVCell.xib */,
+				FA4A4C362803488700B9C658 /* ModulesTVCell.swift */,
+				FA4A4C372803488700B9C658 /* ModulesTVCell.xib */,
+				FA534A642806000D008814A9 /* ProfileContactTVCell.swift */,
+				FA534A652806000D008814A9 /* ProfileContactTVCell.xib */,
+				FAA3A09928083D3300B87DAD /* ModuleUserTVCell.swift */,
+				FAA3A09A28083D3300B87DAD /* ModuleUserTVCell.xib */,
+			);
+			name = ProfileCell;
 			sourceTree = "<group>";
 		};
 		FA9FB0A1271630EB0037871C /* CustomCell */ = {
@@ -890,7 +1089,10 @@
 				FABDBA9B27F47735003961FC /* UserNotesVC.swift */,
 				FABDBAA127F477F4003961FC /* UserAttachmentsVC.swift */,
 				FABDBA9F27F477D8003961FC /* ModulesVC.swift */,
+				FAA3A09728083A6100B87DAD /* ModulesUserVC.swift */,
 				FABDBAA327F47806003961FC /* SignatureVC.swift */,
+				FA4A4C3A2804865D00B9C658 /* AddSignatureVC.swift */,
+				FAA3A09D2809E51500B87DAD /* YPDrawSignatureView.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -918,6 +1120,8 @@
 		FAC32FB22708C8CB0046A0F6 /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
+				FA85D021280D93F80080A0EA /* Task */,
+				FA8B952727F76760003F9D7B /* ProfileCell */,
 				FAAF205227DA11EC00AD255B /* FormCell */,
 				FAF9D43B278DDF54002D8AEF /* ProjectCell */,
 				FAD07495274D4AB400B9C7B3 /* Notification */,
@@ -932,6 +1136,7 @@
 		FAC32FB32708C8DD0046A0F6 /* CollectionCell */ = {
 			isa = PBXGroup;
 			children = (
+				FAF7623A28305556000DEAFE /* Task */,
 				FA9FB0A1271630EB0037871C /* CustomCell */,
 				FA9E7D8F270F409D003A1D16 /* CronTransactionCell.swift */,
 				FA9E7D90270F409D003A1D16 /* CronTransactionCell.xib */,
@@ -1028,6 +1233,15 @@
 				FA35CE4A271DCCA600FF6AE4 /* SuperVvsionOperation */,
 			);
 			name = Peojects;
+			sourceTree = "<group>";
+		};
+		FAF7623A28305556000DEAFE /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				FAF7623B28305594000DEAFE /* TaskUsersCVCell.swift */,
+				FAF7623C28305594000DEAFE /* TaskUsersCVCell.xib */,
+			);
+			name = Task;
 			sourceTree = "<group>";
 		};
 		FAF9D43B278DDF54002D8AEF /* ProjectCell */ = {
@@ -1167,22 +1381,29 @@
 				FA9E7D92270F409D003A1D16 /* CronTransactionCell.xib in Resources */,
 				FA0324CC26FBEC4300372EA6 /* TextFieldWithLabelView.xib in Resources */,
 				FA0324D226FC66A900372EA6 /* Localizable.strings in Resources */,
+				FA7A93CE27FCD87B00EF6ECC /* InsuranceTVCell.xib in Resources */,
 				FA7F941427D77AC100E03A34 /* MyTrannsactionTVCell.xib in Resources */,
 				FAA9C4CD27B32B52003C051E /* notification3.wav in Resources */,
 				FA1B281727AADC470066061F /* TechnicalAssitantCVCell.xib in Resources */,
 				FA7F941827D782E900E03A34 /* ApprovalTVCell.xib in Resources */,
 				FAD07499274D4AD500B9C7B3 /* NotificationCell.xib in Resources */,
 				FAAF206027DB734900AD255B /* ContactTVCell.xib in Resources */,
+				FA5C97792819602400A2AA5A /* TaskHistoryCell.xib in Resources */,
+				FA8B952B27F76785003F9D7B /* ContractTVCell.xib in Resources */,
+				FA8B953327F88D3F003F9D7B /* CommunicationsTVCell.xib in Resources */,
 				FABF3633276AA06F0029810D /* NotesCell.xib in Resources */,
+				FAF7623528300262000DEAFE /* CheckListCell.xib in Resources */,
 				FA658B26274404DA001FC641 /* AttachmentsCell.xib in Resources */,
 				FA4975AC2793659600891C9F /* DropDownView.xib in Resources */,
 				FA530A45270CEFF10071CDC8 /* MyTransactionHeaderView.xib in Resources */,
 				FA400D492718C61A0097C7D1 /* ServicesView.xib in Resources */,
+				FA7A93CA27FC689400EF6ECC /* EducationTVCell.xib in Resources */,
 				FAAF206827DCEF9400AD255B /* Related formsTVCell.xib in Resources */,
 				FAC32FBC270AE8A80046A0F6 /* SubMenuTVCell.xib in Resources */,
 				FA95FD1B275EFFF600DE7854 /* no-permission.gif in Resources */,
 				FA5CB10B27D203320023A372 /* ProjectTVCell.xib in Resources */,
 				FA03243226FB9BFE00372EA6 /* LaunchScreen.storyboard in Resources */,
+				FA5C976D2816B01100A2AA5A /* TaskAttachmentCell.xib in Resources */,
 				FAC788D427104436009AC355 /* HeaderView.xib in Resources */,
 				FA9E7D88270E46AE003A1D16 /* GridCell.xib in Resources */,
 				FA18DB39274867EA004E64DD /* GoogleService-Info.plist in Resources */,
@@ -1190,30 +1411,44 @@
 				FAE13A4E27293C2D00509550 /* DroidKufi-Regular.ttf in Resources */,
 				FABDBAA627F47B59003961FC /* HR.storyboard in Resources */,
 				FA530A41270CEC6D0071CDC8 /* CustomHeaderView.xib in Resources */,
+				FA7A93DD2801C64900EF6ECC /* profileAttachmentsTVCell.xib in Resources */,
 				FA530A39270CC0B10071CDC8 /* TransactionApproveTVCell.xib in Resources */,
 				FAAF0C9427E8A3C10032C4AD /* SimpleSubProjectCell.xib in Resources */,
 				FA03242F26FB9BFE00372EA6 /* Assets.xcassets in Resources */,
 				FA78EA0C27D267BA0023E48D /* SubProjectTVCell.xib in Resources */,
 				FA3D32AB27342D6B00A5472A /* ViewLanguage.xib in Resources */,
 				FA8A75A7273DB1C1005A2F29 /* FormVersionCell.xib in Resources */,
+				FAA3A09C28083D3300B87DAD /* ModuleUserTVCell.xib in Resources */,
+				FAF7623E28305594000DEAFE /* TaskUsersCVCell.xib in Resources */,
 				FAAF205627DA121000AD255B /* FormTransactionTVCell.xib in Resources */,
 				FA9FB0A727163F0D0037871C /* ServicesCVCell.xib in Resources */,
+				FAF76239283051A5000DEAFE /* SubTaskTVCell.xib in Resources */,
+				FA7A93D92801BBCD00EF6ECC /* ProfileNotesTVCell.xib in Resources */,
+				FA5C977328170FA200A2AA5A /* TaskTVCell.xib in Resources */,
 				FA78EA1427D2B01A0023E48D /* ProjectRequestTVCell.xib in Resources */,
 				FAAF205C27DA284900AD255B /* TeamUserTVCell.xib in Resources */,
+				FA5C977B281A976600A2AA5A /* Ticket.storyboard in Resources */,
 				FA9E7D8E270F39DC003A1D16 /* ApprovalTransactionCell.xib in Resources */,
 				FAC32FAD2707662C0046A0F6 /* DroidKufi-Bold.ttf in Resources */,
+				FA4A4C392803488700B9C658 /* ModulesTVCell.xib in Resources */,
 				FAC32FB72708C91D0046A0F6 /* TransactionTVCell.xib in Resources */,
 				FA03242D26FB9BFA00372EA6 /* Main.storyboard in Resources */,
 				FA530A3F270CCA9D0071CDC8 /* CornTransactionTVCell.xib in Resources */,
 				FAB54E9C27EF2EE7003297E1 /* FormVersionTVCell.xib in Resources */,
 				FAF9D43F278DE050002D8AEF /* ProjectRequestCell.xib in Resources */,
+				FA534A672806000D008814A9 /* ProfileContactTVCell.xib in Resources */,
+				FA8B952F27F779BF003F9D7B /* JobDetailsTVCell.xib in Resources */,
+				FA7A93D527FF05CB00EF6ECC /* VacationFormCell.xib in Resources */,
+				FAA88ED3282B0D730082432F /* TaskCommentCell.xib in Resources */,
 				FA5CB10327D0C6B90023A372 /* TextCVCell.xib in Resources */,
 				FAD333A8271383090093175E /* ProjectCell.xib in Resources */,
 				FACFBA40273AD235007C248C /* GeneralNoCell.xib in Resources */,
 				FA9768B527355A91000A3576 /* FromTransactionView.xib in Resources */,
+				FADC2FFD2826B68800921011 /* TaskUserTVCell.xib in Resources */,
 				FA5CB0FF27D028AE0023A372 /* LabelCell.xib in Resources */,
 				FA025FB92785E73600AB38C8 /* View_notification.xib in Resources */,
 				FAAF207027E75E6F00AD255B /* SimpleNoteCell.xib in Resources */,
+				FA85D025280D94500080A0EA /* TicketTVCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1344,6 +1579,9 @@
 			files = (
 				FABDBA9C27F47735003961FC /* UserNotesVC.swift in Sources */,
 				FA0324C826FBE2C900372EA6 /* NewSuccessModel.swift in Sources */,
+				FAF7624028306133000DEAFE /* SubTaskListVC.swift in Sources */,
+				FA8B952A27F76785003F9D7B /* ContractTVCell.swift in Sources */,
+				FA85D024280D94500080A0EA /* TicketTVCell.swift in Sources */,
 				FAAB76DF270B96DB00731505 /* ApproveTransactionVC.swift in Sources */,
 				FA9768B227353DDD000A3576 /* CollectionViewCell.swift in Sources */,
 				FA9FB0A0271447EA0037871C /* ProjectDetailsVC.swift in Sources */,
@@ -1362,22 +1600,30 @@
 				FA4FEE6E277B98EF00E77C80 /* SpecialApproversCell.swift in Sources */,
 				FA0324DB26FE221F00372EA6 /* MenuVC.swift in Sources */,
 				FAB54E9B27EF2EE6003297E1 /* FormVersionTVCell.swift in Sources */,
+				FA83CD7C282C248B008A6CE0 /* TaskUsersVC.swift in Sources */,
 				FABDBA8C27F47671003961FC /* CommunicationsVC.swift in Sources */,
 				FABDBA8A27F47656003961FC /* JobDetailsVC.swift in Sources */,
 				FA5D6D572767AE8A0088B206 /* TechnicalAssistantCell.swift in Sources */,
+				FA7A93C927FC689400EF6ECC /* EducationTVCell.swift in Sources */,
 				FA03242A26FB9BFA00372EA6 /* ViewController.swift in Sources */,
+				FA9DF8D72815979A0015D492 /* TicketCollectionViewController.swift in Sources */,
 				FAAF206727DCEF9400AD255B /* RelatedFormsTVCell.swift in Sources */,
 				FA9768B92735D71E000A3576 /* LanguageVC.swift in Sources */,
 				FA530A43270CEC810071CDC8 /* CustomHeaderView.swift in Sources */,
+				FADC2FFC2826B68800921011 /* TaskUserTVCell.swift in Sources */,
 				FAAF206F27E75E6F00AD255B /* SimpleNoteCell.swift in Sources */,
+				FA85D02928104DE70080A0EA /* TaskFilterVC.swift in Sources */,
 				FA95FD13275EFE6A00DE7854 /* OwnersRepresentativeVC.swift in Sources */,
 				FA0324C326FBD5D200372EA6 /* UIViewController.swift in Sources */,
 				FA95FD0D275EFE2F00DE7854 /* EvaluationResultVC.swift in Sources */,
 				FA7E99492732E8050038931D /* FormDetailsVC.swift in Sources */,
 				FAD531472770FE9600C8E2AD /* SaudiTVCell.swift in Sources */,
 				FA03242626FB9BFA00372EA6 /* AppDelegate.swift in Sources */,
+				FA8B953227F88D3F003F9D7B /* CommunicationsTVCell.swift in Sources */,
 				FAAF205527DA121000AD255B /* FormTransactionTVCell.swift in Sources */,
 				FAD53143276D190500C8E2AD /* FormVersionsVC.swift in Sources */,
+				FA534A662806000D008814A9 /* ProfileContactTVCell.swift in Sources */,
+				FAF7623128300174000DEAFE /* CheckListVC.swift in Sources */,
 				FABDBAA027F477D8003961FC /* ModulesVC.swift in Sources */,
 				FA5CB10527D0DF640023A372 /* ProjectDetailVC.swift in Sources */,
 				FA3D32AF27342E8000A5472A /* ViewLanguage.swift in Sources */,
@@ -1388,9 +1634,12 @@
 				FABDBA8827F4763D003961FC /* ContractDetailsVC.swift in Sources */,
 				FA95FD15275EFE7C00DE7854 /* RecipientVerificationVC.swift in Sources */,
 				FA5CB10D27D2183F0023A372 /* Shaddow.swift in Sources */,
+				FA5C97782819602400A2AA5A /* TaskHistoryCell.swift in Sources */,
 				FABF6712275F886A00BB019A /* NotesVC.swift in Sources */,
 				FABDBA8E27F4768B003961FC /* ContactDetailsVC.swift in Sources */,
+				FAF76238283051A5000DEAFE /* SubTaskTVCell.swift in Sources */,
 				FA9768C1273691BE000A3576 /* MyPageViewController.swift in Sources */,
+				FA5C976F2816B40200A2AA5A /* TaskAttachmentVC.swift in Sources */,
 				FABDBA8427F3162F003961FC /* CategoryCell.swift in Sources */,
 				FA5CB0FB27D020490023A372 /* LocationVC.swift in Sources */,
 				FABDBAA227F477F4003961FC /* UserAttachmentsVC.swift in Sources */,
@@ -1401,7 +1650,10 @@
 				FA03249926FBA64800372EA6 /* ResponseModel.swift in Sources */,
 				FA78EA0E27D283790023E48D /* SupervisionPager.swift in Sources */,
 				FA95FD17275EFE9100DE7854 /* SpecialApprovalVC.swift in Sources */,
+				FA4A4C382803488700B9C658 /* ModulesTVCell.swift in Sources */,
 				FABDBA8227F2F9DE003961FC /* ProfileVC.swift in Sources */,
+				FA7A93CF27FD87B000EF6ECC /* Model.swift in Sources */,
+				FAA88ECF282AD1F20082432F /* TaskDetailVC.swift in Sources */,
 				FA9E7D91270F409D003A1D16 /* CronTransactionCell.swift in Sources */,
 				FA35CE4C271DCCF400FF6AE4 /* FromTransactionVC.swift in Sources */,
 				FACFBA43273AD24D007C248C /* ByPhasesCell.swift in Sources */,
@@ -1412,21 +1664,29 @@
 				FA400D472716F1030097C7D1 /* TestCell.swift in Sources */,
 				FA44341527623F8D00DF6A9B /* FormsAttachmentsVC.swift in Sources */,
 				FA5CB10727D112590023A372 /* unitCVCell.swift in Sources */,
+				FA5C977528195F2500A2AA5A /* TaskHistoryVC.swift in Sources */,
 				FA9768BF2735D764000A3576 /* RelatedFormsVC.swift in Sources */,
+				FA85D020280D74900080A0EA /* AllTicketVC.swift in Sources */,
 				FA3D32B227343B5D00A5472A /* GeneralNumberVC.swift in Sources */,
 				FA5CB10227D0C6B90023A372 /* TextCVCell.swift in Sources */,
 				FA95FD07275EFB6F00DE7854 /* TransactionFormPageaVC.swift in Sources */,
 				FA5CB0FE27D028AE0023A372 /* LabelCell.swift in Sources */,
+				FA8B952E27F779BF003F9D7B /* JobDetailsTVCell.swift in Sources */,
+				FA85D02B281062C20080A0EA /* PickerVC.swift in Sources */,
 				FA0324C626FBDAC000372EA6 /* TextFieldWithLabelView.swift in Sources */,
+				FAF7623D28305594000DEAFE /* TaskUsersCVCell.swift in Sources */,
 				FA9768B727355AAA000A3576 /* FromTransactionView.swift in Sources */,
 				FA025FBB2785E77800AB38C8 /* View_notification.swift in Sources */,
 				FAC48D8E27947E17007F3EDF /* FilterVC.swift in Sources */,
 				FA530A38270CC0B10071CDC8 /* TransactionApproveTVCell.swift in Sources */,
+				FA7A93D82801BBCD00EF6ECC /* ProfileNotesTVCell.swift in Sources */,
+				FAA3A09B28083D3300B87DAD /* ModuleUserTVCell.swift in Sources */,
 				FA9768BD2735D74B000A3576 /* FormVersionVC.swift in Sources */,
 				FAD07498274D4AD500B9C7B3 /* NotificationCell.swift in Sources */,
 				FA35CE4E271F572500FF6AE4 /* TeamUserVC.swift in Sources */,
 				FABDBAA427F47806003961FC /* SignatureVC.swift in Sources */,
 				FA3D32B427343B8400A5472A /* ByPhases.swift in Sources */,
+				FA7BD97E28270D8B00EF1020 /* AddTaskVC.swift in Sources */,
 				FAD0749C274D4C6C00B9C7B3 /* NotificationVC.swift in Sources */,
 				FAAF205B27DA284900AD255B /* TeamUserTVCell.swift in Sources */,
 				FAAF0C9327E8A3C10032C4AD /* SimpleSubProjectCell.swift in Sources */,
@@ -1440,6 +1700,8 @@
 				FAC788D627104448009AC355 /* HeaderView.swift in Sources */,
 				FA0324CA26FBE3EE00372EA6 /* NewUserInfoModel.swift in Sources */,
 				FA4975AE279365A900891C9F /* DropDownView.swift in Sources */,
+				FA85D027280E1D7A0080A0EA /* AddTicketVC.swift in Sources */,
+				FA7A93DC2801C64900EF6ECC /* profileAttachmentsTVCell.swift in Sources */,
 				FA35CE522720BA2700FF6AE4 /* DocumentsVC.swift in Sources */,
 				FAC32FAF27086F620046A0F6 /* TransactionsVC.swift in Sources */,
 				FA400D4B2718C63A0097C7D1 /* ServicesView.swift in Sources */,
@@ -1448,9 +1710,10 @@
 				FA0324E1270113F300372EA6 /* MenuCell.swift in Sources */,
 				FA9E7D8D270F39DC003A1D16 /* ApprovalTransactionCell.swift in Sources */,
 				FABDBA9227F476B8003961FC /* EducationDetailsVC.swift in Sources */,
+				FAA88ED2282B0D730082432F /* TaskCommentCell.swift in Sources */,
 				FABF3632276AA06F0029810D /* NotesCell.swift in Sources */,
-				FA1809602704695A00B493A7 /* Model.swift in Sources */,
 				FA443419276275EC00DF6A9B /* AuthorizedPositionsApprovalVC.swift in Sources */,
+				FA9DF8D9281597FA0015D492 /* TicketCollectionViewCell.swift in Sources */,
 				FA55637B279CA86800542310 /* SubFilterVC.swift in Sources */,
 				FA95FD11275EFE5900DE7854 /* ManagerApprovalVC.swift in Sources */,
 				FA9FB0AB2716C7FA0037871C /* SubProjectDetailsVC.swift in Sources */,
@@ -1468,19 +1731,28 @@
 				FA95FD0F275EFE4300DE7854 /* FinalResultVC.swift in Sources */,
 				FABDBA9627F476E6003961FC /* InsuranceDetailsVC.swift in Sources */,
 				FA180964270494AB00B493A7 /* AuthUser.swift in Sources */,
+				FA5C977228170FA200A2AA5A /* TaskTVCell.swift in Sources */,
+				FA7A93D427FF05CB00EF6ECC /* VacationFormCell.swift in Sources */,
 				FAD333A427135EEF0093175E /* AllPrpjectsVC.swift in Sources */,
 				FA9FB0A627163F0D0037871C /* ServicesCVCell.swift in Sources */,
 				FACFBA3F273AD235007C248C /* GeneralNoCell.swift in Sources */,
 				FAC32FBB270AE8A80046A0F6 /* SubMenuTVCell.swift in Sources */,
 				FABDBA9027F476A2003961FC /* BankDetailsVC.swift in Sources */,
+				FA4A4C3B2804865D00B9C658 /* AddSignatureVC.swift in Sources */,
 				FAAF206B27DCFE0400AD255B /* RelatedFormTVCell.swift in Sources */,
+				FADC2FF928245B5200921011 /* TicketDetailsVC.swift in Sources */,
 				FA78EA1327D2B01A0023E48D /* ProjectRequestTVCell.swift in Sources */,
+				FAA3A09828083A6200B87DAD /* ModulesUserVC.swift in Sources */,
+				FA7A93CD27FCD87B00EF6ECC /* InsuranceTVCell.swift in Sources */,
 				FA44341327623F4500DF6A9B /* HistoryVC.swift in Sources */,
+				FA5C976C2816B01100A2AA5A /* TaskAttachmentCell.swift in Sources */,
 				FA9E7D84270E4620003A1D16 /* GridLayout.swift in Sources */,
 				FABDBA9827F476FF003961FC /* VacationFormVC.swift in Sources */,
+				FAF7623428300262000DEAFE /* CheckListCell.swift in Sources */,
 				FAC32FB62708C91D0046A0F6 /* TransactionTVCell.swift in Sources */,
 				FA556379279C8B2D00542310 /* TemplateFilterVC.swift in Sources */,
 				FAAF205F27DB734900AD255B /* ContactTVCell.swift in Sources */,
+				FAA3A09E2809E51500B87DAD /* YPDrawSignatureView.swift in Sources */,
 				FA82792827971A8B00CE2411 /* ViewLabelCell.swift in Sources */,
 				FA03249726FBA5B600372EA6 /* Constants.swift in Sources */,
 				FACFBA49273B1EDA007C248C /* AddGeneralNoVC.swift in Sources */,
@@ -1677,7 +1949,7 @@
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1706,7 +1978,7 @@
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

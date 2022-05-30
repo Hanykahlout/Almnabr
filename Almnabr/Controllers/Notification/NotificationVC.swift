@@ -32,7 +32,7 @@ class NotificationVC: UIViewController {
         get_Notificaions_data(showLoading: true, loadOnly: true)
         
     }
-    
+
     
     
     //MARK: - Config GUI
@@ -56,6 +56,10 @@ class NotificationVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
+        if self.isMovingFromParent {
+            self.update_Notification()
+          //  self.navigationController?.popViewController(animated: true)
+        }
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -164,8 +168,13 @@ class NotificationVC: UIViewController {
     @IBAction func btn_back(_ sender: Any) {
         self.table.removeFromSuperview()
         self.view.removeFromSuperview()
-        self.navigationController?.popViewController(animated: true)
+     
         
+    }
+    
+    private func update_Notification() {
+        NotificationCenter.default.post(name: NSNotification.Name("update_Function"),
+                                        object: nil)
     }
     
     
@@ -206,14 +215,38 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
         
         let obj = arr_data[indexPath.item]
         
+        
+     
         if let ios = obj.extra_data["ios"] as? String {
-            let splitString = ios.components(separatedBy: "ios/transactions")
-            let url = "\(splitString[1])"
-            let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
-            vc.str_url = "\(splitString[1])"
-            vc.IsFromNotification = true
-            self.navigationController?.pushViewController(vc, animated: true)
-    
+            if ios != "" {
+                if ios.contains("transactions") {
+                    let splitString = ios.components(separatedBy: "ios/transactions")
+                   // let url = "\(splitString[1])"
+                    let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+                    vc.str_url = "\(splitString[1])"
+                    vc.IsFromNotification = true
+                    self.navigationController?.pushViewController(vc, animated: true)
+                    
+                }else if  ios.contains("tasks") {
+//                    let vc:TicketCollectionViewController = AppDelegate.TicketSB.instanceVC()
+//                    let splitString = ios.components(separatedBy: "tasks/view/")
+//                    print("Part before space: \(splitString[1])")
+//                    vc.object?.ticket_id = splitString[1]
+//                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+              
+            }else{
+                if let angular = obj.extra_data["angular"] as? String {
+//                    if  angular.contains("tasks") {
+//                       let vc:TicketCollectionViewController = AppDelegate.TicketSB.instanceVC()
+//                       let splitString = angular.components(separatedBy: "tasks/view/")
+//                       print("Part before space: \(splitString[1])")
+//                       vc.ticket_id = splitString[1]
+//                        vc.isFromNotificaion = true
+//                       self.navigationController?.pushViewController(vc, animated: true)
+//                   }
+                }
+            }
         }
   
     }

@@ -37,7 +37,16 @@ struct Auth_User {
         }
     }
 
-
+    static var user_type_id : String {
+        get {
+            let ud = UserDefaults.standard
+            return ud.value(forKey: "user_type_id") as? String ?? ""
+        }
+        set(user_id) {
+            let ud = UserDefaults.standard
+            ud.set(user_id, forKey: "user_type_id")
+        }
+    }
 
     
     

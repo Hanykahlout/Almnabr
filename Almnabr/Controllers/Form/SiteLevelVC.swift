@@ -8,7 +8,7 @@
 
 import UIKit
 import DropDown
-
+import MOLH
 
 
 protocol GeneralDelegate {
@@ -117,6 +117,10 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     var GeneralTable:Bool = true
     var ProjectObj:templateObj!
     
+    var FormWirObj:form_wir_dataObj?
+    
+    var wirObject:[String:Any] = [:]
+ 
     var params = [:] as [String : String]
     
     var projects_work_area_id:String = ""
@@ -131,8 +135,9 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         
-        if self.ProjectObj == nil {
+        if wirObject.isEmpty {
             
             self.transaction_id = obj_transaction?.transaction_request_id ?? "0"
             self.projects_work_area_id = obj_FormWir?.projects_work_area_id ?? "0"
@@ -155,6 +160,19 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
        // print(obj_transaction?.transaction_request_id)
     }
     
+//    func config_wir_obj(){
+//
+//            let form_wir_data_status = wirObject["status"] as? Bool
+//            if form_wir_data_status == true{
+//                let records = wirObject["records"] as! NSArray
+//
+//                let recordsObj = form_wir_dataObj(records.firstObject as! [String : Any])
+//                self.FormWirObj = recordsObj
+//
+//
+//            }
+////        }
+//    }
 
     
     
@@ -168,7 +186,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     
@@ -256,16 +274,22 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         self.imgStep.image = Stepimage
         
        
-//        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnNext.setTitle("Next".localized(), for: .normal)
 //        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
 //        self.btnNext.setTitleColor(.white, for: .normal)
 //        self.btnNext.setRounded(10)
         
         
-//        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
+        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
 //        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
 //        self.btnPrevious.setTitleColor(.white, for: .normal)
 //        self.btnPrevious.setRounded(10)
+        
+        
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
+            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        }
         
     }
     
@@ -314,6 +338,8 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
                     }
                     self.hideLoadingActivity()
                 }
+            }else{
+                self.hideLoadingActivity()
             }
             
             

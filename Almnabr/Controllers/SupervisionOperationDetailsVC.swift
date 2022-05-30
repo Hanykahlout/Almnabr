@@ -55,7 +55,7 @@ class SupervisionOperationDetailsVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: - Config Navigation
@@ -143,11 +143,11 @@ extension SupervisionOperationDetailsVC: UICollectionViewDataSource ,UICollectio
         let item = arrFormStep[indexPath.item]
         cell.lbl_Title.text = item
         cell.lbl_Title.font = .kufiRegularFont(ofSize: 13)
-        cell.lbl_Title.textColor = HelperClassSwift.bcolor.getUIColor()
+        cell.lbl_Title.textColor = maincolor
         cell.view_img.setBorderGrayWidth(3)
         
         if indexPath.item == SelectedIndex {
-            cell.view_img.backgroundColor = HelperClassSwift.acolor.getUIColor()
+            cell.view_img.backgroundColor = maincolor
         }else{
             cell.view_img.backgroundColor = HelperClassSwift.bcolor.getUIColor()
         }

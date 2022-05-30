@@ -10,11 +10,18 @@ import UIKit
 
 class BankDetailsVC: UIViewController {
 
+    @IBOutlet weak var lblBankName: UILabel!
+    @IBOutlet weak var lblAccountNumber: UILabel!
+    
+    var profile_obj:ProfileObj?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configNavigation()
+        configGUI()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -40,4 +47,21 @@ class BankDetailsVC: UIViewController {
         UINavigationBar.appearance().backgroundColor = maincolor
     }
 
+    
+    
+    //MARK: - Config GUI
+    //------------------------------------------------------
+    func configGUI() {
+       
+       
+        let BankName = "Bank Name".localized() + " : \(profile_obj?.bankname ?? "---")"
+        let AccountNumber = "Account Number".localized() + " : \(profile_obj?.account_number ?? "---")"
+        
+        let Bankattribute: NSAttributedString = BankName.attributedStringWithColor(["Bank Name"], color: maincolor)
+        self.lblBankName.attributedText = Bankattribute
+        
+        let Accountattribute: NSAttributedString = AccountNumber.attributedStringWithColor(["Account Number"], color: maincolor)
+        self.lblAccountNumber.attributedText = Accountattribute
+    }
+    
 }

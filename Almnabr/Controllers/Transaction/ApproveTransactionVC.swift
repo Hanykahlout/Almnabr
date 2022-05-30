@@ -112,8 +112,15 @@ class ApproveTransactionVC: UIViewController {
         self.imgnodata.isHidden = true
         
         self.viewsearchByForm.setBorderGrayWidthCorner(1, 20)
-        self.lblsearchByForm.text =  "txt_searchByForm".localized()
+        self.lblsearchByForm.text = "WIR"
+        //"txt_searchByForm".localized()
         self.lblsearchByForm.font = .kufiRegularFont(ofSize: 15)
+        
+        // for first puplish
+        self.viewsearchByForm.isUserInteractionEnabled = false
+        self.StrsearchByForm = "FORM_WIR"
+        
+        
         
         self.viewsearchAdmin.setBorderGrayWidthCorner(1, 20)
         self.lblsearchAdmin.text =  "txt_searchAll".localized()
@@ -301,68 +308,101 @@ class ApproveTransactionVC: UIViewController {
     @IBAction func btnSearchForm_Click(_ sender: Any) {
         
         self.imgDropForm.image = dropUpmage
-        
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        if self.arr_formeLabel.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            self.imgDropForm.image = dropDownmage
-        }else{
-            dropDown.dataSource = self.arr_formeLabel
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                
-                if item == self.arr_formeLabel[index] {
-                    self.lblsearchByForm.text =  item
-                    let i =  self.arr_form[index].value
-                    self.StrsearchByForm = i
-                    self.imgDropForm.image = dropDownmage
-                    get_Transaction_data(showLoading: true, loadOnly: true)
-                }
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_formeLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_formeLabel[index] {
+                self.lblsearchByForm.text =  name
+                let i =  self.arr_form[index].value
+                self.StrsearchByForm = i
+                self.imgDropForm.image = self.dropDownmage
+                self.get_Transaction_data(showLoading: true, loadOnly: true)
             }
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchByForm
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByForm.bounds.height)
-        dropDown.width = viewsearchByForm.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_formeLabel.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//            self.imgDropForm.image = dropDownmage
+//        }else{
+//            dropDown.dataSource = self.arr_formeLabel
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_formeLabel[index] {
+//                    self.lblsearchByForm.text =  item
+//                    let i =  self.arr_form[index].value
+//                    self.StrsearchByForm = i
+//                    self.imgDropForm.image = dropDownmage
+//                    get_Transaction_data(showLoading: true, loadOnly: true)
+//                }
+//            }
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchByForm
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByForm.bounds.height)
+//        dropDown.width = viewsearchByForm.bounds.width
+//        dropDown.show()
     }
     
     
     
     @IBAction func btnSearchModule_Click(_ sender: Any) {
         
-        self.imgDropModule.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        if self.arr_moduleLabel.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            self.imgDropModule.image = dropDownmage
-        }else{
-            dropDown.dataSource = self.arr_moduleLabel
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                
-                if item == self.arr_moduleLabel[index] {
-                    self.lblsearchByModule.text =  item
-                    let i =  self.arr_module[index].value
-                    self.StrsearchByModule = i
-                    self.imgDropModule.image = dropDownmage
-                    get_Transaction_data(showLoading: true, loadOnly: true)
-                }
+        self.imgDropForm.image = dropUpmage
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_moduleLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_moduleLabel[index] {
+                self.lblsearchByModule.text =  name
+                let i =  self.arr_module[index].value
+                self.StrsearchByModule = i
+                self.imgDropModule.image = self.dropDownmage
+                self.get_Transaction_data(showLoading: true, loadOnly: true)
             }
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchByModule
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByModule.bounds.height)
-        dropDown.width = viewsearchByModule.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+        
+//        self.imgDropModule.image = dropUpmage
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_moduleLabel.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//            self.imgDropModule.image = dropDownmage
+//        }else{
+//            dropDown.dataSource = self.arr_moduleLabel
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_moduleLabel[index] {
+//                    self.lblsearchByModule.text =  item
+//                    let i =  self.arr_module[index].value
+//                    self.StrsearchByModule = i
+//                    self.imgDropModule.image = dropDownmage
+//                    get_Transaction_data(showLoading: true, loadOnly: true)
+//                }
+//            }
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchByModule
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByModule.bounds.height)
+//        dropDown.width = viewsearchByModule.bounds.width
+//        dropDown.show()
     }
     
     

@@ -90,7 +90,7 @@ class AllPrpjectsVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     // MARK: - Config Navigation
@@ -137,7 +137,15 @@ class AllPrpjectsVC: UIViewController {
     
     
     
-    
+    func menu_select(){
+        let language =  MOLHLanguage.currentAppleLanguage()
+        if language == "ar"{
+            panel?.openRight(animated: true)
+        }else{
+            panel?.openLeft(animated: true)
+        }
+        
+    }
     
     
     func get_Projects_data(showLoading: Bool, loadOnly: Bool){
@@ -245,47 +253,55 @@ class AllPrpjectsVC: UIViewController {
             
         }
     }
-    func menu_select(){
-        let language =  MOLHLanguage.currentAppleLanguage()
-        if language == "ar"{
-            panel?.openRight(animated: true)
-        }else{
-            panel?.openLeft(animated: true)
-        }
-        
-    }
-    
+ 
 
  
     
     
     @IBAction func btnSearchBranch_Click(_ sender: Any) {
         
-      
         self.imgDropBranch.image = dropUpmage
-        
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        dropDown.dataSource = self.arr_branchLabel
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            
-            if item == self.arr_branchLabel[index] {
-                self.lblsearchByBranch.text =  item
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_branchLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_branchLabel[index] {
+                self.lblsearchByBranch.text =  name
                 let i =  self.arr_branch[index].value
                 self.StrsearchByBranch = i
-                self.imgDropBranch.image = dropDownmage
-                get_Projects_data(showLoading: true, loadOnly: true)
+                self.imgDropBranch.image = self.dropDownmage
+                self.get_Projects_data(showLoading: true, loadOnly: true)
             }
-            
+
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchByBranch
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByBranch.bounds.height)
-        dropDown.width = viewsearchByBranch.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+        
+        
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        dropDown.dataSource = self.arr_branchLabel
+//        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//            if item == self.arr_branchLabel[index] {
+//                self.lblsearchByBranch.text =  item
+//                let i =  self.arr_branch[index].value
+//                self.StrsearchByBranch = i
+//                self.imgDropBranch.image = dropDownmage
+//                get_Projects_data(showLoading: true, loadOnly: true)
+//            }
+//
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchByBranch
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByBranch.bounds.height)
+//        dropDown.width = viewsearchByBranch.bounds.width
+//        dropDown.show()
     }
     
     
@@ -293,28 +309,46 @@ class AllPrpjectsVC: UIViewController {
     @IBAction func btnSearchServices_Click(_ sender: Any) {
         
         self.imgDropServices.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        dropDown.dataSource = self.arr_ServicesLabel
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            
-            if item == self.arr_ServicesLabel[index] {
-                self.lblsearchByServices.text =  item
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_ServicesLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_ServicesLabel[index] {
+                self.lblsearchByServices.text =  name
                 let i =  self.arr_Services[index].value
                 self.StrsearchByServices = i
-                self.imgDropServices.image = dropDownmage
-                get_Projects_data(showLoading: true, loadOnly: true)
+                self.imgDropServices.image = self.dropDownmage
+                self.get_Projects_data(showLoading: true, loadOnly: true)
             }
-            
+
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchByServices
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByServices.bounds.height)
-        dropDown.width = viewsearchByServices.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+//        self.imgDropServices.image = dropUpmage
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        dropDown.dataSource = self.arr_ServicesLabel
+//        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//            if item == self.arr_ServicesLabel[index] {
+//                self.lblsearchByServices.text =  item
+//                let i =  self.arr_Services[index].value
+//                self.StrsearchByServices = i
+//                self.imgDropServices.image = dropDownmage
+//                get_Projects_data(showLoading: true, loadOnly: true)
+//            }
+//
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchByServices
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByServices.bounds.height)
+//        dropDown.width = viewsearchByServices.bounds.width
+//        dropDown.show()
     }
     
     
@@ -380,14 +414,14 @@ extension AllPrpjectsVC: UITableViewDelegate , UITableViewDataSource{
         cell.lblDate.text = date
         cell.lblDate.textColor = maincolor
        
-        cell.viewBack.layer.applySketchShadow(
-          color: .black,
-          alpha: 0.6,
-          x: 0,
-          y: 13,
-          blur: 16,
-          spread: 0)
-        cell.viewBack.setRounded(20)
+//        cell.viewBack.layer.applySketchShadow(
+//          color: .black,
+//          alpha: 0.6,
+//          x: 0,
+//          y: 13,
+//          blur: 16,
+//          spread: 0)
+        //cell.viewBack.setRounded(20)
         return cell
         
     }

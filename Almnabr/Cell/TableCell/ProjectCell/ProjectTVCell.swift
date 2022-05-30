@@ -22,12 +22,13 @@ class ProjectTVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
        
-        selectionStyle = .none
         
-        viewBack.layer.shadowColor = UIColor.black.cgColor
-        viewBack.layer.shadowOpacity = 1
+        selectionStyle = .none
+        viewBack.layer.shadowColor = UIColor.systemGray.cgColor
+        viewBack.layer.shadowOpacity = 0.8
         viewBack.layer.shadowOffset = .zero
-        viewBack.layer.shadowRadius = 2
+        viewBack.layer.shadowRadius = 4
+        viewBack.layer.cornerRadius = 20
         
     }
 

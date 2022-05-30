@@ -20,6 +20,7 @@ class TransactionFormPageaVC: UIPageViewController {
         super.viewDidLoad()
         
         dataSource = self
+        self.isPagingEnabled = false
       
         let vc: LanguageVC = AppDelegate.mainSB.instanceVC()
         let page1 = UINavigationController(rootViewController: vc)

@@ -97,18 +97,18 @@ extension HistoryVC: UITableViewDelegate , UITableViewDataSource{
         cell.lblKeyTo.isHidden = true
         
         
-        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["#".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["#".localized()], color: maincolor)
         cell.lbKeylNo.attributedText = attributedWithTextColor
         
-        let Nameattributed: NSAttributedString = Name.attributedStringWithColor(["Name".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let Nameattributed: NSAttributedString = Name.attributedStringWithColor(["Name".localized()], color: maincolor)
         cell.lblKeyDesc.attributedText = Nameattributed
         
        
-        let Notesattributed: NSAttributedString = Notes.attributedStringWithColor(["Notes".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let Notesattributed: NSAttributedString = Notes.attributedStringWithColor(["Notes".localized()], color: maincolor)
         cell.lblKeyFrom.attributedText = Notesattributed
         
         
-        let Lastattributed: NSAttributedString = OnDate.attributedStringWithColor(["On Date".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let Lastattributed: NSAttributedString = OnDate.attributedStringWithColor(["On Date".localized()], color: maincolor)
         cell.lblKeyLastUpdate.attributedText = Lastattributed
         
         

@@ -9,6 +9,7 @@
 import UIKit
 import DropDown
 import DPLocalization
+import MOLH
 
 var IsTransaction:Bool = false
 
@@ -44,6 +45,8 @@ class LanguageVC: UIViewController {
     var arr_lang = ["English".localized(),"Arabic".localized()]
     var ProjectObj:templateObj?
     
+//    var FormWirObj:form_wir_dataObj?
+   
     var StrLanguage:String = "en"
     
     let dropUpmage =  UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
@@ -135,7 +138,11 @@ class LanguageVC: UIViewController {
             view_noPermission.isHidden = true
         }
         
-//        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnNext.setTitle("Next".localized(), for: .normal)
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
+            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        }
+        //arrow.right
 //        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
 //        self.btnNext.setTitleColor(.white, for: .normal)
 //        self.btnNext.setRounded(10)
@@ -228,7 +235,7 @@ class LanguageVC: UIViewController {
             let vc:SiteLevelVC = AppDelegate.mainSB.instanceVC()
             vc.StrLanguage = self.StrLanguage
             vc.ProjectObj = self.ProjectObj
-         
+            vc.wirObject = data_FormWir
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             let vc:SiteLevelVC = AppDelegate.mainSB.instanceVC()
@@ -240,9 +247,6 @@ class LanguageVC: UIViewController {
        
         
     }
-    
-    
-    
     
 }
 

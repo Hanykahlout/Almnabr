@@ -43,9 +43,6 @@ class RequirementsVC: UIViewController {
     @IBOutlet weak var lbl_Material_Description: UILabel!
     @IBOutlet weak var txt_Material_Description: UITextView!
     
-  
-    
-    
     @IBOutlet weak var imgStep: UIImageView!
     @IBOutlet weak var viewStep: UIView!
     @IBOutlet weak var lblStep: UILabel!
@@ -232,6 +229,14 @@ class RequirementsVC: UIViewController {
         dropDown.anchorView = view
         dropDown.backgroundColor = .white
         dropDown.cornerRadius = 2.0
+        
+        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
+        
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
+            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        }
          
     }
     
@@ -444,15 +449,11 @@ class RequirementsVC: UIViewController {
                 dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                     
                     if item == self.arr_lblsupplier[index] {
-                       // self.tf_supplier_list.text =  item
                         let object =  self.arr_supplier[index]
                         if arr_Selectedsupplier.contains(item) == false{
                             self.arr_Selectedsupplier.append(item)
                             self.arr_ObjectSelectedsupplier.append(object)
                         }
-                       
-                      
-                        //self.imgDropSupplier.image = dropDownmage
                         self.Viewcollection_supplier.isHidden = false
                         self.collection_supplier.reloadData()
                         

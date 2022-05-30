@@ -29,6 +29,7 @@ class TransactionsVC: UIViewController {
     @IBOutlet weak var viewsearchByModule: UIView!
     @IBOutlet weak var viewsearchByForm: UIView!
     @IBOutlet weak var viewsearchAllPending: UIView!
+    @IBOutlet weak var viewsearch: UIView!
     
     @IBOutlet weak var imgDropAdmin: UIImageView!
     @IBOutlet weak var imgDropModule: UIImageView!
@@ -50,7 +51,7 @@ class TransactionsVC: UIViewController {
     var StrsearchByModule:String = ""
     var StrsearchByForm:String = ""
     var SearchKey:String = ""
-    var SearchAllpending:String = "all_pending"
+    var SearchAllpending:String = "all_pending_need_action"
     var StrsearchByAdmin:Int = 0
     var pageNumber = 1
     var total:Int = 0
@@ -63,7 +64,7 @@ class TransactionsVC: UIViewController {
     var arr_form:[ModuleObj] = []
     var arr_formeLabel:[String] = []
     var arr_Admin:[String] = ["Admin".localized(),"Users".localized()]
-    var arr_AllPending:[String] = ["all_pending".localized(),"all_complete".localized(),"all_sent".localized()]
+    var arr_AllPending:[String] = ["all_pending_need_action" , "all_pending","all_complete","all_sent"]
     var cellWidths: [CGFloat] = [1200]
     var arr_NoData:[String] = ["No items found".localized()]
     
@@ -107,6 +108,10 @@ class TransactionsVC: UIViewController {
     }
     
     
+//        override func viewDidLayoutSubviews() {
+//            tableHeightConstraint.constant = table.contentSize.height
+//
+//        }
     
     //MARK: - Config GUI
     //------------------------------------------------------
@@ -119,15 +124,21 @@ class TransactionsVC: UIViewController {
         
         self.imgnodata.isHidden = true
         
+        self.viewsearch.setBorderGrayWidthCorner(1, 20)
         
         self.viewsearchAllPending.setBorderGrayWidthCorner(1, 20)
-        self.lblAllPending.text =  "All Pending".localized()
+        self.lblAllPending.text =  "All pending need action".localized()
         self.lblAllPending.font = .kufiRegularFont(ofSize: 15)
         
         
         self.viewsearchByForm.setBorderGrayWidthCorner(1, 20)
-        self.lblsearchByForm.text =  "txt_searchByForm".localized()
+        self.lblsearchByForm.text = "WIR"
+        //"txt_searchByForm".localized()
         self.lblsearchByForm.font = .kufiRegularFont(ofSize: 15)
+        
+        // for first puplish
+        self.viewsearchByForm.isUserInteractionEnabled = false
+        self.StrsearchByForm = "FORM_WIR"
         
         
         self.viewsearchAdmin.setBorderGrayWidthCorner(1, 20)
@@ -295,39 +306,64 @@ class TransactionsVC: UIViewController {
     
     @IBAction func btnSearchAdmin_Click(_ sender: Any) {
         
-        self.imgDropAdmin.image = dropUpmage
-        
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        if self.arr_Admin.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            self.imgDropAdmin.image = dropDownmage
-        }else{
-            dropDown.dataSource = self.arr_Admin
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                
-                if item == self.arr_Admin[index] {
-                    self.lblsearchAdmin.text =  item
-                    //let i =  self.arr_module[index].value
-                    if item == "Admin" {
-                        self.StrsearchByAdmin = 1
-                    }else{
-                        self.StrsearchByAdmin = 0
-                    }
-                    self.imgDropAdmin.image = dropDownmage
-                    self.get_Transaction_data(showLoading: true, loadOnly: true)
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_Admin
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            
+            if name == self.arr_Admin[index] {
+                self.lblsearchAdmin.text =  name
+                //let i =  self.arr_module[index].value
+                if name == "Admin" {
+                    self.StrsearchByAdmin = 1
+                }else{
+                    self.StrsearchByAdmin = 0
                 }
-                
-            }}
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchAdmin
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchAdmin.bounds.height)
-        dropDown.width = viewsearchAdmin.bounds.width
-        dropDown.show()
+                self.imgDropAdmin.image = self.dropDownmage
+                self.get_Transaction_data(showLoading: true, loadOnly: true)
+            }
+          
+           // self.sig_id = self.arr_sig_id[index].id
+        }
+        self.present(vc, animated: true, completion: nil)
+        
+        
+        
+//        self.imgDropAdmin.image = dropUpmage
+//
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_Admin.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//            self.imgDropAdmin.image = dropDownmage
+//        }else{
+//            dropDown.dataSource = self.arr_Admin
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_Admin[index] {
+//                    self.lblsearchAdmin.text =  item
+//                    //let i =  self.arr_module[index].value
+//                    if item == "Admin" {
+//                        self.StrsearchByAdmin = 1
+//                    }else{
+//                        self.StrsearchByAdmin = 0
+//                    }
+//                    self.imgDropAdmin.image = dropDownmage
+//                    self.get_Transaction_data(showLoading: true, loadOnly: true)
+//                }
+//
+//            }}
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchAdmin
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchAdmin.bounds.height)
+//        dropDown.width = viewsearchAdmin.bounds.width
+//        dropDown.show()
     }
     
     
@@ -336,99 +372,151 @@ class TransactionsVC: UIViewController {
         
         self.imgDropForm.image = dropUpmage
         
-        
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        if self.arr_formeLabel.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            self.imgDropForm.image = dropDownmage
-        }else{
-            dropDown.dataSource = self.arr_formeLabel
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                
-                if item == self.arr_formeLabel[index] {
-                    self.lblsearchByForm.text =  item
-                    let i =  self.arr_form[index].value
-                    self.StrsearchByForm = i
-                    self.imgDropForm.image = dropDownmage
-                    self.get_Transaction_data(showLoading: true, loadOnly: true)
-                }
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_formeLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_formeLabel[index] {
+                self.lblsearchByForm.text =  name
+                let i =  self.arr_form[index].value
+                self.StrsearchByForm = i
+               
+                self.imgDropForm.image = self.dropDownmage
+                self.get_Transaction_data(showLoading: true, loadOnly: true)
             }
+          
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchByForm
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByForm.bounds.height)
-        dropDown.width = viewsearchByForm.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+        
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_formeLabel.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//            self.imgDropForm.image = dropDownmage
+//        }else{
+//            dropDown.dataSource = self.arr_formeLabel
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_formeLabel[index] {
+//                    self.lblsearchByForm.text =  item
+//                    let i =  self.arr_form[index].value
+//                    self.StrsearchByForm = i
+//                    self.imgDropForm.image = dropDownmage
+//                    self.get_Transaction_data(showLoading: true, loadOnly: true)
+//                }
+//            }
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchByForm
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByForm.bounds.height)
+//        dropDown.width = viewsearchByForm.bounds.width
+//        dropDown.show()
     }
     
     
     
     @IBAction func btnSearchModule_Click(_ sender: Any) {
         
-        self.imgDropModule.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        if self.arr_moduleLabel.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            self.imgDropModule.image = dropDownmage
-        }else{
-            dropDown.dataSource = self.arr_moduleLabel
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                
-                if item == self.arr_moduleLabel[index] {
-                    self.lblsearchByModule.text =  item
-                    let i =  self.arr_module[index].value
-                    self.StrsearchByModule = i
-                    self.imgDropModule.image = dropDownmage
-                    self.get_Transaction_data(showLoading: true, loadOnly: true)
-                }
+        self.imgDropForm.image = dropUpmage
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_moduleLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_moduleLabel[index] {
+                self.lblsearchByModule.text =  name
+                let i =  self.arr_module[index].value
+                self.StrsearchByModule = i
+                self.imgDropModule.image = self.dropDownmage
+                self.get_Transaction_data(showLoading: true, loadOnly: true)
             }
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchByModule
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByModule.bounds.height)
-        dropDown.width = viewsearchByModule.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+//        self.imgDropModule.image = dropUpmage
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//        if self.arr_moduleLabel.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//            self.imgDropModule.image = dropDownmage
+//        }else{
+//            dropDown.dataSource = self.arr_moduleLabel
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_moduleLabel[index] {
+//                    self.lblsearchByModule.text =  item
+//                    let i =  self.arr_module[index].value
+//                    self.StrsearchByModule = i
+//                    self.imgDropModule.image = dropDownmage
+//                    self.get_Transaction_data(showLoading: true, loadOnly: true)
+//                }
+//            }
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchByModule
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByModule.bounds.height)
+//        dropDown.width = viewsearchByModule.bounds.width
+//        dropDown.show()
     }
     
     
     @IBAction func btnSearchAllPending_Click(_ sender: Any) {
         
-        self.imgDropAllPending.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        if self.arr_AllPending.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            self.imgDropAllPending.image = dropDownmage
-        }else{
-            dropDown.dataSource = self.arr_AllPending
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                
-                if item == self.arr_AllPending[index] {
-                    self.lblAllPending.text =  item
-                    // let i =  self.arr_module[index].value
-                    self.SearchAllpending = item
-                    self.imgDropAllPending.image = dropDownmage
-                    self.get_Transaction_data(showLoading: true, loadOnly: true)
-                }
+        self.imgDropForm.image = dropUpmage
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_AllPending
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_AllPending[index] {
+                self.lblAllPending.text =  name
+                // let i =  self.arr_module[index].value
+                self.SearchAllpending = name
+                self.imgDropAllPending.image = self.dropDownmage
+                self.get_Transaction_data(showLoading: true, loadOnly: true)
             }
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchAllPending
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchAllPending.bounds.height)
-        dropDown.width = viewsearchAllPending.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+//        self.imgDropAllPending.image = dropUpmage
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//        if self.arr_AllPending.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//            self.imgDropAllPending.image = dropDownmage
+//        }else{
+//            dropDown.dataSource = self.arr_AllPending
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_AllPending[index] {
+//                    self.lblAllPending.text =  item
+//                    // let i =  self.arr_module[index].value
+//                    self.SearchAllpending = item
+//                    self.imgDropAllPending.image = dropDownmage
+//                    self.get_Transaction_data(showLoading: true, loadOnly: true)
+//                }
+//            }
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchAllPending
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchAllPending.bounds.height)
+//        dropDown.width = viewsearchAllPending.bounds.width
+//        dropDown.show()
     }
     
     
@@ -449,14 +537,15 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         
         let Id = "\(obj.transaction_request_id)"
         let Description = "Description".localized() + "  \(obj.transaction_request_description)"
-        let from = "from".localized() + ":  \(obj.transaction_from_name)"
+        let from = "From".localized() + ":  \(obj.transaction_from_name)"
         let to = "To".localized() + ":  \(obj.transaction_to_name)"
-        let barcode = "Barcode".localized() + "  \(obj.barcode)"
+        let barcode = "  \(obj.barcode)"
+        //"Barcode".localized() +
         let type = "Type".localized() + ":  \(obj.transactions_type_name)"
         let Module = "Module".localized() + ":  \(obj.module_name)"
         let Form = "Form".localized() + ":  \(obj.transactions_name)"
         let writer = "By".localized() + ":  \(obj.transaction_request_user_name_writer)"
-        let Submitter = "Submitter".localized() + "  \(obj.transactions_submitter_user_name)"
+        let Submitter = "Submitter".localized() + ":  \(obj.transactions_submitter_user_name)"
         let LastUpdate =  "\(obj.transactions_date_last_update)"
         let Status = "\(obj.transaction_request_status)"
         
@@ -468,10 +557,11 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         let Descattribute: NSAttributedString = Description.attributedStringWithColor(["Description".localized()], color: maincolor)
         cell.lblDesc.attributedText = Descattribute
         
-        let fromattributed: NSAttributedString = from.attributedStringWithColor(["from".localized()], color: maincolor)
-        cell.lblForm.attributedText = fromattributed
+        let fromattributed: NSAttributedString = from.attributedStringWithColor(["From".localized()], color: maincolor)
+        cell.lblFrom.attributedText = fromattributed
         
-        cell.lblTo.text = to
+        let Toattributed: NSAttributedString = to.attributedStringWithColor(["To".localized()], color: maincolor)
+        cell.lblTo.attributedText = Toattributed
         
         
         cell.lblBarCode.text = barcode
@@ -528,8 +618,13 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         
         let vc : TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
         vc.Object = obj
+        //vc.filePath = obj.url
         self.navigationController?.pushViewController(vc, animated: true)
         
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     

@@ -14,7 +14,8 @@ class ProjectRequestVC: UIViewController , filterDelegate {
     @IBOutlet weak var table: UITableView!
     
     @IBOutlet weak var imgnodata: UIImageView!
-
+    @IBOutlet weak var view_filter: UIView!
+    @IBOutlet weak var view_sort: UIView!
     
     var arr_data:[ProjectRequestObj] = []
     var params:[String:Any] = [:]
@@ -73,6 +74,11 @@ class ProjectRequestVC: UIViewController , filterDelegate {
         let nib = UINib(nibName: "ProjectRequestTVCell", bundle: nil)
         table.register(nib, forCellReuseIdentifier: "ProjectRequestTVCell")
         
+        view_filter.setBorderGray()
+        view_sort.setBorderGray()
+        
+        view_filter.setRounded()
+        view_sort.setRounded()
 //       let sortImage  =  UIImage.fontAwesomeIcon(name: .sortAmountDownAlt , style: .solid, textColor:  .gray, size: CGSize(width: 25, height: 25))
 //        let filterImage  = UIImage.fontAwesomeIcon(name: .filter , style: .solid, textColor:  .gray, size: CGSize(width: 25, height: 25))
 //
@@ -275,6 +281,7 @@ extension ProjectRequestVC: UITableViewDelegate , UITableViewDataSource{
         
         vc.request_id =  obj.transaction_request_id
         vc.IsFromNotification = false
+        vc.filePath = obj.file_path
         self.navigationController?.pushViewController(vc, animated: true)
         
 //        if let top_vc = UIApplication.get_topvc() {

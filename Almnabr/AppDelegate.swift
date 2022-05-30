@@ -20,6 +20,8 @@ import MOLH
 
 var AppInstance: AppDelegate!
 @main
+
+
 class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenterDelegate {
     
     var window: UIWindow?
@@ -27,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     static let mainSB = UIStoryboard(name: "Main", bundle: nil)
     static let TransactionSB = UIStoryboard(name: "Transaction", bundle: nil)
     static let HRSB = UIStoryboard(name: "HR", bundle: nil)
+    static let TicketSB = UIStoryboard(name: "Ticket", bundle: nil)
     let gcmMessageIDKey = "gcm.message_id"
     
     
@@ -52,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().tintColor = .white
         
-        //MOLH.setLanguageTo("ar")
+        MOLH.setLanguageTo("ar")
         if MOLHLanguage.currentAppleLanguage() == "ar" {
             
             UIView.appearance().semanticContentAttribute = .forceRightToLeft

@@ -108,36 +108,33 @@ extension PersonDetailsVC: UITableViewDelegate , UITableViewDataSource{
         cell.lblKeySubmitter.isHidden = true
         cell.lblKeyStatus.isHidden = true
         
-        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["#".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["#".localized()], color: maincolor)
         cell.lbKeylNo.attributedText = attributedWithTextColor
         
-        let Nameattributed: NSAttributedString = Name.attributedStringWithColor(["Name".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let Nameattributed: NSAttributedString = Name.attributedStringWithColor(["Name".localized()], color: maincolor)
         cell.lblKeyDesc.attributedText = Nameattributed
         
        
-        let Typeattributed: NSAttributedString = Type.attributedStringWithColor(["Type".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let Typeattributed: NSAttributedString = Type.attributedStringWithColor(["Type".localized()], color: maincolor)
         cell.lblKeyFrom.attributedText = Typeattributed
         
-        let Viewattributed: NSAttributedString = View.attributedStringWithColor(["View".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let Viewattributed: NSAttributedString = View.attributedStringWithColor(["View".localized()], color: maincolor)
         cell.lblKeyTo.attributedText = Viewattributed
         
-        let ViewTimeattributed: NSAttributedString = ViewTime.attributedStringWithColor(["View Time".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let ViewTimeattributed: NSAttributedString = ViewTime.attributedStringWithColor(["View Time".localized()], color: maincolor)
         cell.lblKeyBarCode.attributedText = ViewTimeattributed
         
         
-        let LastViewTimeattributed: NSAttributedString = LastViewTime.attributedStringWithColor(["Last View Time".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let LastViewTimeattributed: NSAttributedString = LastViewTime.attributedStringWithColor(["Last View Time".localized()], color: maincolor)
         cell.lblKeyType.attributedText = LastViewTimeattributed
         
         
-        let stepattributed: NSAttributedString = step.attributedStringWithColor(["step".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let stepattributed: NSAttributedString = step.attributedStringWithColor(["step".localized()], color: maincolor)
         cell.lblKeyModule.attributedText = stepattributed
         
-        let DateTimeattributed: NSAttributedString = DateTime.attributedStringWithColor(["Date & Time".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let DateTimeattributed: NSAttributedString = DateTime.attributedStringWithColor(["Date & Time".localized()], color: maincolor)
         cell.lblKeyWriter.attributedText = DateTimeattributed
-        
-        
-        
-        
+         
         cell.viewBack.setcorner()
         
        

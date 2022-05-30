@@ -21,7 +21,7 @@ class SupervisionPager: UIPageViewController {
         
         dataSource = self
        
-       
+        self.isPagingEnabled = false
         
         let page1: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "SupervisionOperationDetailsVC")
         let page2: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ProjectRequestVC")

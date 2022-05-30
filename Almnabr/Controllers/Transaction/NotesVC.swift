@@ -95,17 +95,17 @@ extension NotesVC: UITableViewDelegate , UITableViewDataSource{
         cell.lblKeySubmitter.isHidden = true
         cell.lblKeyStatus.isHidden = true
         
-        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["#".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let attributedWithTextColor: NSAttributedString = no.attributedStringWithColor(["#".localized()], color: maincolor)
         cell.lbKeylNo.attributedText = attributedWithTextColor
         
-        let Descriptionattributed: NSAttributedString = Notes.attributedStringWithColor(["Notes".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let Descriptionattributed: NSAttributedString = Notes.attributedStringWithColor(["Notes".localized()], color: maincolor)
         cell.lblKeyDesc.attributedText = Descriptionattributed
         
        
-        let Writerattributed: NSAttributedString = writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let Writerattributed: NSAttributedString = writer.attributedStringWithColor(["Writer".localized()], color: maincolor)
         cell.lblKeyWriter.attributedText = Writerattributed
         
-        let Lastattributed: NSAttributedString = OnDate.attributedStringWithColor(["On Date".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let Lastattributed: NSAttributedString = OnDate.attributedStringWithColor(["On Date".localized()], color: maincolor)
         cell.lblKeyLastUpdate.attributedText = Lastattributed
         
         cell.viewBack.setcorner()

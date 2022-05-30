@@ -106,26 +106,26 @@ extension FormsAttachmentsVC: UITableViewDelegate , UITableViewDataSource{
             cell.btnAction.isHidden = true
         }
        
-            let Numberattributed: NSAttributedString = Number.attributedStringWithColor(["#".localized()], color: HelperClassSwift.acolor.getUIColor())
+            let Numberattributed: NSAttributedString = Number.attributedStringWithColor(["#".localized()], color: maincolor)
             cell.lblNo.attributedText = Numberattributed
         
         
-        let AttachmentsTitleattributed: NSAttributedString = AttachmentsTitle.attributedStringWithColor(["Attachments Title".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let AttachmentsTitleattributed: NSAttributedString = AttachmentsTitle.attributedStringWithColor(["Attachments Title".localized()], color: maincolor)
         cell.lblUnit.attributedText = AttachmentsTitleattributed
        
             
-            let Writerattributed: NSAttributedString = Writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let Writerattributed: NSAttributedString = Writer.attributedStringWithColor(["Writer".localized()], color: maincolor)
             cell.lblWorklevel.attributedText = Writerattributed
             
             
-            let Dateattributed: NSAttributedString = Date.attributedStringWithColor(["Date".localized()], color: HelperClassSwift.acolor.getUIColor())
+            let Dateattributed: NSAttributedString = Date.attributedStringWithColor(["Date".localized()], color: maincolor)
             cell.lblEvaluationResult.attributedText = Dateattributed
             
         
-        let FileSizeattributed: NSAttributedString = FileSize.attributedStringWithColor(["File Size".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let FileSizeattributed: NSAttributedString = FileSize.attributedStringWithColor(["File Size".localized()], color: maincolor)
         cell.lblDate.attributedText = FileSizeattributed
         
-        let AttachmentTypeattributed: NSAttributedString = AttachmentType.attributedStringWithColor(["Attachment Type".localized()], color: HelperClassSwift.acolor.getUIColor())
+        let AttachmentTypeattributed: NSAttributedString = AttachmentType.attributedStringWithColor(["Attachment Type".localized()], color: maincolor)
         cell.lblBarcode.attributedText = AttachmentTypeattributed
         
         

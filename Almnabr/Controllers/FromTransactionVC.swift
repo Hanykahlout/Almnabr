@@ -375,79 +375,119 @@ class FromTransactionVC: UIViewController {
         
         self.imgDropTemplateName.image = dropUpmage
         
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        if self.arr_TempelateLabel.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.imgDropTemplateName.image = dropDownmage
-            }
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }else{
-            dropDown.dataSource = self.arr_TempelateLabel
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_TempelateLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_TempelateLabel[index] {
+                self.lblsearchTemplateName.text =  name
+                let i =  self.arr_Tempelate[index]
+                self.StrsearchByTempelateCode = i.value
+                self.imgDropTemplateName.image = self.dropDownmage
+                self.btnsearchTemplateName.isHidden = false
                 
-                if item == self.arr_TempelateLabel[index] {
-                    self.lblsearchTemplateName.text =  item
-                    let i =  self.arr_Tempelate[index]
-                    self.StrsearchByTempelateCode = i.value
-                    self.imgDropTemplateName.image = dropDownmage
-                    self.btnsearchTemplateName.isHidden = false
-                    
-                    self.get_Group1()
-                }
-                
+                self.get_Group1()
             }
-            
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchTemplateName
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchTemplateName.bounds.height)
-        dropDown.width = viewsearchTemplateName.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+//        self.imgDropTemplateName.image = dropUpmage
+//
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_TempelateLabel.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//                self.imgDropTemplateName.image = dropDownmage
+//            }
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        }else{
+//            dropDown.dataSource = self.arr_TempelateLabel
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_TempelateLabel[index] {
+//                    self.lblsearchTemplateName.text =  item
+//                    let i =  self.arr_Tempelate[index]
+//                    self.StrsearchByTempelateCode = i.value
+//                    self.imgDropTemplateName.image = dropDownmage
+//                    self.btnsearchTemplateName.isHidden = false
+//
+//                    self.get_Group1()
+//                }
+//
+//            }
+//
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchTemplateName
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchTemplateName.bounds.height)
+//        dropDown.width = viewsearchTemplateName.bounds.width
+//        dropDown.show()
     }
     
     
     @IBAction func btnSearchGroupType_Click(_ sender: Any) {
         
         self.imgDropGroupType.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
         
-        if self.arr_GroupTypeLabel.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.imgDropGroupType.image = dropDownmage
-            }
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }else{
-            dropDown.dataSource = self.arr_GroupTypeLabel
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                
-                if item == self.arr_GroupTypeLabel[index] {
-                    self.lblsearchGroupType.text =  item
-                    let i =  self.arr_GroupType[index]
-                    self.StrsearchGroupType = i.value
-                    self.StrsearchGroupTypeCode = i.value
-                    self.imgDropGroupType.image = dropDownmage
-                    self.btnsearchGroupType.isHidden = false
-                    self.get_Group2()
-                    
-                }
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_GroupTypeLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_GroupTypeLabel[index] {
+                self.lblsearchGroupType.text =  name
+                let i =  self.arr_GroupType[index]
+                self.StrsearchGroupType = i.value
+                self.StrsearchGroupTypeCode = i.value
+                self.imgDropGroupType.image = self.dropDownmage
+                self.btnsearchGroupType.isHidden = false
+                self.get_Group2()
                 
             }
-            
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchGroupType
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchGroupType.bounds.height)
-        dropDown.width = viewsearchGroupType.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_GroupTypeLabel.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//                self.imgDropGroupType.image = dropDownmage
+//            }
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        }else{
+//            dropDown.dataSource = self.arr_GroupTypeLabel
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_GroupTypeLabel[index] {
+//                    self.lblsearchGroupType.text =  item
+//                    let i =  self.arr_GroupType[index]
+//                    self.StrsearchGroupType = i.value
+//                    self.StrsearchGroupTypeCode = i.value
+//                    self.imgDropGroupType.image = dropDownmage
+//                    self.btnsearchGroupType.isHidden = false
+//                    self.get_Group2()
+//
+//                }
+//
+//            }
+//
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchGroupType
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchGroupType.bounds.height)
+//        dropDown.width = viewsearchGroupType.bounds.width
+//        dropDown.show()
     }
     
     
@@ -456,78 +496,116 @@ class FromTransactionVC: UIViewController {
     @IBAction func btnSearchGroupe1_Click(_ sender: Any) {
         
         self.imgDropGroupe1.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        if self.arr_Group1Label.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.imgDropGroupe1.image = dropDownmage
-            }
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }else{
-            dropDown.dataSource = self.arr_Group1Label
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                
-                if item == self.arr_Group1Label[index] {
-                    self.lblsearchGroupe1.text =  item
-                    let i =  self.arr_Group1[index].value
-                    self.StrsearchGroup1 = i
-                    self.StrsearchGroup1Code = i
-                    self.btnsearchGroupe1.isHidden = false
-                    self.imgDropGroupe1.image = dropDownmage
-                    //get_Group2()
-                    self.get_Group_Type()
-                    
-                }
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_Group1Label
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_Group1Label[index] {
+                self.lblsearchGroupe1.text =  name
+                let i =  self.arr_Group1[index].value
+                self.StrsearchGroup1 = i
+                self.StrsearchGroup1Code = i
+                self.btnsearchGroupe1.isHidden = false
+                self.imgDropGroupe1.image = self.dropDownmage
+                self.get_Group_Type()
                 
             }
+            
         }
+        self.present(vc, animated: true, completion: nil)
         
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchGroupe1
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchGroupe1.bounds.height)
-        dropDown.width = viewsearchGroupe1.bounds.width * 2
-        dropDown.show()
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_Group1Label.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//                self.imgDropGroupe1.image = dropDownmage
+//            }
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        }else{
+//            dropDown.dataSource = self.arr_Group1Label
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_Group1Label[index] {
+//                    self.lblsearchGroupe1.text =  item
+//                    let i =  self.arr_Group1[index].value
+//                    self.StrsearchGroup1 = i
+//                    self.StrsearchGroup1Code = i
+//                    self.btnsearchGroupe1.isHidden = false
+//                    self.imgDropGroupe1.image = dropDownmage
+//                    //get_Group2()
+//                    self.get_Group_Type()
+//
+//                }
+//
+//            }
+//        }
+//
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchGroupe1
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchGroupe1.bounds.height)
+//        dropDown.width = viewsearchGroupe1.bounds.width * 2
+//        dropDown.show()
     }
     
     
     @IBAction func btnSearchGroupe2_Click(_ sender: Any) {
         
-        self.imgDropGroupe2.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        if self.arr_Group2Label.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.imgDropGroupe2.image = dropDownmage
+        self.imgDropGroupe1.image = dropUpmage
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_Group2Label
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_Group2Label[index] {
+                self.lblsearchGroupe2.text =  name
+                let i =  self.arr_Group2[index].value
+                self.StrsearchGroup2 = i
+                self.btnsearchGroupe2.isHidden = false
+                self.imgDropGroupe2.image = self.dropDownmage
+                self.get_FormTransaction_data(showLoading: true, loadOnly: true)
             }
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }else{
-            dropDown.dataSource = self.arr_Group2Label
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                
-                if item == self.arr_Group2Label[index] {
-                    self.lblsearchGroupe2.text =  item
-                    let i =  self.arr_Group2[index].value
-                    self.StrsearchGroup2 = i
-                    self.btnsearchGroupe2.isHidden = false
-                    self.imgDropGroupe2.image = dropDownmage
-                    self.get_FormTransaction_data(showLoading: true, loadOnly: true)
-                }
-                
-            }
+            
         }
+        self.present(vc, animated: true, completion: nil)
         
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewsearchGroupe2
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchGroupe2.bounds.height)
-        dropDown.width = viewsearchGroupe2.bounds.width
-        dropDown.show()
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//        if self.arr_Group2Label.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//                self.imgDropGroupe2.image = dropDownmage
+//            }
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        }else{
+//            dropDown.dataSource = self.arr_Group2Label
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//                if item == self.arr_Group2Label[index] {
+//                    self.lblsearchGroupe2.text =  item
+//                    let i =  self.arr_Group2[index].value
+//                    self.StrsearchGroup2 = i
+//                    self.btnsearchGroupe2.isHidden = false
+//                    self.imgDropGroupe2.image = dropDownmage
+//                    self.get_FormTransaction_data(showLoading: true, loadOnly: true)
+//                }
+//
+//            }
+//        }
+//
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewsearchGroupe2
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchGroupe2.bounds.height)
+//        dropDown.width = viewsearchGroupe2.bounds.width
+//        dropDown.show()
     }
     
     @IBAction func btnSearchTemplateNameDelete_Click(_ sender: Any) {

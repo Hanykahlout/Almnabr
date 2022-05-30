@@ -31,9 +31,10 @@ class HeaderView:  UIView {
     override func awakeFromNib() {
         
         super.awakeFromNib()
-        
+        self.addShape()
         viewTheme.backgroundColor = .clear
-        self.addShape(acolor: HelperClassSwift.acolor, bcolor: HelperClassSwift.bcolor)
+        
+        update_Function()
        // if isFirstLunch == true {
             self.get_Notificaions_data()
           
@@ -48,7 +49,11 @@ class HeaderView:  UIView {
         
     }
     
-    
+    private func update_Function(){
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("update_Function"), object: nil, queue: .main) { notifi in
+            self.get_Notificaions_data()
+        }
+    }
     
     func get_Notificaions_data(){
         
@@ -59,6 +64,7 @@ class HeaderView:  UIView {
             print(total)
             puplic_total = total ?? 0
            isFirstLunch = false
+            self.addShape()
 //            if HelperClassSwift.IsLoadTheme == false {
 //                self.get_theme()
 //            }else{
@@ -70,7 +76,7 @@ class HeaderView:  UIView {
     
     
     
-    func addShape(acolor:String,bcolor:String){
+    func addShape(){
         
         //add a shape
 //        let shape = CAShapeLayer()

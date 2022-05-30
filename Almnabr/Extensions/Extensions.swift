@@ -1760,7 +1760,7 @@ extension UIView {
     func setBorderGray() {
         self.layer.borderColor = #colorLiteral(red: 0.8537729979, green: 0.8537931442, blue: 0.8537823558, alpha: 1)
         self.layer.borderWidth = 1
-        self.layer.cornerRadius = 4
+        //self.layer.cornerRadius = 4
         self.layer.masksToBounds = true
     }
     

@@ -15,6 +15,7 @@ class APIManager: NSObject {
    
     
     static let serverURL = "https://nahidh.sa/backend"
+
     
     
     static func convertToDictionary(text: String) -> [String: Any]? {
@@ -324,7 +325,7 @@ class APIManager: NSObject {
         let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let getApi = URL(string: urlStr)!
         
-        
+       
         let auth = [ "X-API-KEY":"12345",
                      "Content-Type":"application/x-www-form-urlencoded"]
         Alamofire.request(getApi, method: .post, parameters: parameters, encoding:  URLEncoding.default, headers: auth).responseObject { (response: DataResponse<ResponseModel>) in

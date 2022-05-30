@@ -204,38 +204,57 @@ class ContactsVC: UIViewController {
     @IBAction func btnContact_Click(_ sender: Any) {
         
         self.imgDropContact.image = dropUpmage
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-        
-        if self.arr_ContactLabel.count == 0 {
-            dropDown.dataSource = self.arr_NoData
-            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.imgDropContact.image = dropDownmage
-            }
-            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        }else{
-            
-        dropDown.dataSource = self.arr_ContactLabel
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            
-            if item == self.arr_ContactLabel[index] {
-                self.lblContact.text =  item
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  arr_ContactLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_ContactLabel[index] {
+                self.lblContact.text =  name
                 let i =  self.arr_Contactvalue[index]
                 self.StrContact = i
-                self.imgDropContact.image = dropDownmage
+                self.imgDropContact.image = self.dropDownmage
                 //self.btnContact.isHidden = false
-                get_Contact_data(showLoading: true, loadOnly: true)
+                self.get_Contact_data(showLoading: true, loadOnly: true)
                 
             }
-            
-        }}
-        dropDown.direction = .bottom
-        dropDown.anchorView = viewContact
-        dropDown.bottomOffset = CGPoint(x: 0, y: viewContact.bounds.height)
-        dropDown.width = viewContact.bounds.width
-        dropDown.show()
+        }
+        self.present(vc, animated: true, completion: nil)
+        
+//        self.imgDropContact.image = dropUpmage
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//
+//        if self.arr_ContactLabel.count == 0 {
+//            dropDown.dataSource = self.arr_NoData
+//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//                self.imgDropContact.image = dropDownmage
+//            }
+//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+//        }else{
+//
+//        dropDown.dataSource = self.arr_ContactLabel
+//        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//
+//            if item == self.arr_ContactLabel[index] {
+//                self.lblContact.text =  item
+//                let i =  self.arr_Contactvalue[index]
+//                self.StrContact = i
+//                self.imgDropContact.image = dropDownmage
+//                //self.btnContact.isHidden = false
+//                get_Contact_data(showLoading: true, loadOnly: true)
+//
+//            }
+//
+//        }}
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = viewContact
+//        dropDown.bottomOffset = CGPoint(x: 0, y: viewContact.bounds.height)
+//        dropDown.width = viewContact.bounds.width
+//        dropDown.show()
     }
     
     

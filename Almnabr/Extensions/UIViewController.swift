@@ -93,6 +93,21 @@ extension UIViewController {
         self.navigationItem.titleView = lblNavigationTile
     }
     
+    func addNavigationBarTitlee(navigationTitle: String) {
+        let lblNavigationTile = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 30))
+        lblNavigationTile.textAlignment = .justified
+        //lblNavigationTile.backgroundColor = .clear
+        lblNavigationTile.textColor = .white
+        lblNavigationTile.font = .kufiRegularFont(ofSize: 15)
+        lblNavigationTile.text = navigationTitle.localized()
+        lblNavigationTile.frame = CGRect(x: 0, y: 0, width: 120, height: 30)
+        
+        
+        let barImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 82, height: 30))
+        //barImage.image = UIImage(named: "icon_nav_bar.png")
+        self.navigationItem.titleView = lblNavigationTile
+    }
+    
     func addNavigationBarTitleColor(navigationTitle: String) {
         let lblNavigationTile = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 30))
         lblNavigationTile.textAlignment = .center

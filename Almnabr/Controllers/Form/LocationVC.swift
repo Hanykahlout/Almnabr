@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MOLH
 
 class LocationVC: UIViewController  {
 
@@ -58,7 +59,7 @@ class LocationVC: UIViewController  {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     
@@ -67,7 +68,8 @@ class LocationVC: UIViewController  {
     func configGUI() {
         
         
-       
+        self.btnNext.setTitle("Next".localized(), for: .normal)
+        self.btnPrevious.setTitle("Previous".localized(), for: .normal)
         
         self.lblAllUnits.text =  "txt_units".localized()
         self.lblWorkSite.text = "txt_workLevels".localized()
@@ -91,6 +93,10 @@ class LocationVC: UIViewController  {
         self.params["template_id"] = ProjectObj.template_id
        
         
+        if MOLHLanguage.currentAppleLanguage() == "ar" {
+            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+        }
     }
     
 

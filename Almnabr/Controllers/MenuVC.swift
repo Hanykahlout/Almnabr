@@ -8,7 +8,7 @@
 
 import UIKit
 import FontAwesome_swift
-
+import FAPanels
 class MenuVC: UIViewController {
     
     @IBOutlet weak var imgUserProfile: UIImageView!
@@ -119,9 +119,9 @@ class MenuVC: UIViewController {
                      for i in records {
                          let dict = i as? [String:Any]
                          let obj = MenuObj.init(dict!)
-                         if obj.menu_id != "30" {
-                             self.arr_data.append(obj)
-                         }
+//                         if obj.menu_id != "30" {
+                         self.arr_data.append(obj)
+//                         }
                          
                      }
                      
@@ -333,6 +333,12 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     //vc.title =  obj.menu_name
                     //obj.menu[indexPath.row - 1].menu_name
                     _ =  panel?.center(nav)
+                case "19":
+                    let vc:SettingsPermissionVC = AppDelegate.HRSB.instanceVC()
+                    let nav = UINavigationController(rootViewController: vc)
+                    
+                    nav.modalPresentationStyle = .fullScreen
+                    panel?.center(nav)
                     
                     
                 default:
@@ -408,4 +414,17 @@ extension UILabel {
     self.text = "\(unicodeIcon)"
     self.sizeToFit()
   }
+}
+
+
+extension UIViewController{
+   func backToDash(){
+       let vc : HomeVC = AppDelegate.mainSB.instanceVC()
+       let nav = UINavigationController.init(rootViewController: vc)
+       if let delegate = UIApplication.shared.delegate as? AppDelegate{
+           if let window = delegate.window?.rootViewController as? FAPanelController{
+               window.center(nav)
+           }
+       }
+   }
 }

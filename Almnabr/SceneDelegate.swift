@@ -36,6 +36,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let _ = (scene as? UIWindowScene) else { return }
         
+        if let delegate = UIApplication.shared.delegate as? AppDelegate{
+            delegate.window = self.window
+        }
         
         get_theme()
         HelperClassSwift.IsLoggedOut = false

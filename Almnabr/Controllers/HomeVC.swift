@@ -44,6 +44,7 @@ class HomeVC: UIViewController   {
      
         
         let token =  "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        print("XXX-TOKEN",token)
         self.manager.config = SocketIOClientConfiguration(
             arrayLiteral: .connectParams(["Authorization": "test"]),.secure(false) )
        
@@ -94,6 +95,7 @@ class HomeVC: UIViewController   {
     
     func menu_select(){
         let language =  MOLHLanguage.currentAppleLanguage()
+        print("HHHHHI",language)
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{

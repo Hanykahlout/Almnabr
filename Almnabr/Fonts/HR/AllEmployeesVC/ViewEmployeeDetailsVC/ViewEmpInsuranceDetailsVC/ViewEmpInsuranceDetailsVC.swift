@@ -48,7 +48,9 @@ class ViewEmpInsuranceDetailsVC: UIViewController {
     
     private func setUpDropDown(){
         dropDown.anchorView = filterView
+        
         dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        
         dropDown.dataSource = ["All","Spouse","Son","Daugther","Others"]
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.filterArrow.transform = .init(rotationAngle: 0)
@@ -104,6 +106,7 @@ extension ViewEmpInsuranceDetailsVC:UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InsuranceDetailsTableViewCell", for: indexPath) as! InsuranceDetailsTableViewCell
+        cell.delegate = self
         cell.setData(data:data[indexPath.row],indexPath:indexPath)
         return cell
     }
@@ -124,6 +127,7 @@ extension ViewEmpInsuranceDetailsVC:InsuranceDetailsCellDelegate{
         self.deleteInsurant(key_id: id,indexPath:indexPath)
     }
 }
+
 
 // MARK: - API Handling
 
@@ -170,6 +174,8 @@ extension ViewEmpInsuranceDetailsVC{
                 var alertVC:UIAlertController!
                 if let status = data.status,status{
                     alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
+                    self.data.remove(at: indexPath.row)
+                    self.tableView.reloadData()
                 }else{
                     alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
                 }

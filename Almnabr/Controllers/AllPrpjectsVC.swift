@@ -427,13 +427,13 @@ extension AllPrpjectsVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-                let obj = arr_data[indexPath.item]
-                let vc:ProjectDetailsVC = AppDelegate.mainSB.instanceVC()
-                vc.title =  self.title
-                vc.Object = obj
-                vc.MenuObj = self.MenuObj
-                vc.StrSubMenue =  self.StrSubMenue
-                vc.StrMenue = self.StrMenue
+        let obj = arr_data[indexPath.item]
+        let vc:ProjectDetailsVC = AppDelegate.mainSB.instanceVC()
+        vc.title =  self.title
+        vc.Object = obj
+        vc.MenuObj = self.MenuObj
+        vc.StrSubMenue =  self.StrSubMenue
+        vc.StrMenue = self.StrMenue
         self.navigationController?.pushViewController(vc, animated: true)
 //                _ =  panel?.center(vc)
     }

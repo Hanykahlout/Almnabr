@@ -41,8 +41,6 @@ class HomeVC: UIViewController   {
         header.btnAction = menu_select
         check_notifi()
         
-     
-        
         let token =  "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         print("XXX-TOKEN",token)
         self.manager.config = SocketIOClientConfiguration(

@@ -116,12 +116,12 @@ class SupervisionOperationDetailsVC: UIViewController {
   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ChangePager",
-           let destinationVC = segue.destination as? MyPageViewController {
-            if let controller = self.parentPageViewController {
-           
-            }
-        }
+//        if segue.identifier == "ChangePager",
+//           let destinationVC = segue.destination as? MyPageViewController {
+//            if let controller = self.parentPageViewController {
+//
+//            }
+//        }
     }
     
     

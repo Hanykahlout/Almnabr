@@ -110,8 +110,6 @@ class MenuVC: UIViewController {
         
         self.showLoadingActivity()
          APIManager.sendRequestGetAuth(urlString: "menu" ) { (response) in
-             
-             
              let status = response["status"] as? Bool
              if status == true{
                  if  let records = response["records"] as? NSArray{
@@ -119,13 +117,8 @@ class MenuVC: UIViewController {
                      for i in records {
                          let dict = i as? [String:Any]
                          let obj = MenuObj.init(dict!)
-//                         if obj.menu_id != "30" {
                          self.arr_data.append(obj)
-//                         }
-                         
                      }
-                     
-                    
                     
 //                     for obj in self.arr_menu {
 //                         switch obj.menu_id {
@@ -146,12 +139,8 @@ class MenuVC: UIViewController {
                      self.hideLoadingActivity()
                  }
              }
-             
-             
          }
      }
-    
-    
     
     
     
@@ -231,8 +220,8 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
             }else{
                 let str = obj.icon.dropFirst(3)
                 cell.icon.image = UIImage.fontAwesomeIcon(code: String(str), style: self.fontStyle, textColor: color, size: CGSize(width: 40, height: 40))
-             
             }
+            
             if obj.menu.count > 0{
                 cell.icon_dropdown.isHidden = false
                 if obj.IsOpened {
@@ -248,6 +237,7 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
 
             
         }else{
+            
             let objj = arr_data[indexPath.section].menu[indexPath.row - 1]
             cell.lbl_title.text = arr_data[indexPath.section].menu[indexPath.row - 1].menu_name
             cell.lbl_title.textColor = color
@@ -290,7 +280,7 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
          //   }
         }else{
             tableview.reloadSections([indexPath.section], with: UITableView.RowAnimation.automatic)
-           
+            print("Data ID:",obj.menu[indexPath.row - 1].menu_id)
             if arr_data[indexPath.section].menu.count > 0 {
                 switch obj.menu[indexPath.row - 1].menu_id {
                 case "13":
@@ -339,7 +329,12 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     
                     nav.modalPresentationStyle = .fullScreen
                     panel?.center(nav)
-                    
+                case "21":
+                    let vc = AllEmployeesVC()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.setNavigationBarHidden(true, animated: true)
+                    nav.modalPresentationStyle = .fullScreen
+                    panel?.center(nav)
                     
                 default:
                     print(" no menu id ")
@@ -350,12 +345,6 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
             }
 
         }
-        
-        
-      
-
- 
-
     }
     
 }

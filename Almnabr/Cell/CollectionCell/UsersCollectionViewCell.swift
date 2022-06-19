@@ -7,9 +7,10 @@
 //
 
 import UIKit
-
+import MOLH
 protocol UsersCollectionViewCellDelegate{
     func removeAction(indexPath:IndexPath)
+    func removeAction(type:CollectionType,indexPath:IndexPath)
 }
 
 typealias UsersDelegate = UIViewController & UsersCollectionViewCellDelegate
@@ -20,6 +21,7 @@ class UsersCollectionViewCell: UICollectionViewCell {
     
     weak var delegate:UsersDelegate?
     private var indexPath:IndexPath!
+    var type:CollectionType?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -29,8 +31,31 @@ class UsersCollectionViewCell: UICollectionViewCell {
         self.indexPath = indexPath
         titleLabel.text = data.label
     }
-
+    
+    func setData(type:CollectionType,data:SelectionInfo,indexPath:IndexPath){
+        self.indexPath = indexPath
+        self.type = type
+        titleLabel.text = MOLHLanguage.currentAppleLanguage() == "en" ? data.name_english ?? "" : data.name_arabic ?? ""
+    }
+    
+    
+    func setData(type:CollectionType,data:SearchBranchRecords,indexPath:IndexPath){
+        self.indexPath = indexPath
+        self.type = type
+        titleLabel.text = data.label ?? ""
+    }
+    
+    func setData(type:CollectionType,data:FilterGetRecords2,indexPath:IndexPath){
+        self.indexPath = indexPath
+        self.type = type
+        titleLabel.text = data.quotation_subject ?? ""
+    }
+    
     @IBAction func deleteAction(_ sender: Any) {
-        self.delegate?.removeAction(indexPath: self.indexPath)
+        if let type = type {
+            delegate?.removeAction(type: type, indexPath: indexPath)
+        }else{
+            delegate?.removeAction(indexPath: indexPath)
+        }
     }
 }

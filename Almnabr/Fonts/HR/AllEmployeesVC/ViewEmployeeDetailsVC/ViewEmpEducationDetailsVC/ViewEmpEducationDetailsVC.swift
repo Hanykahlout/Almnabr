@@ -1,0 +1,176 @@
+//
+//  ViewEmpEducationDetailsVC.swift
+//  Almnabr
+//
+//  Created by Hany Alkahlout on 12/06/2022.
+//  Copyright © 2022 Samar Akkila. All rights reserved.
+//
+
+import UIKit
+
+class ViewEmpEducationDetailsVC: UIViewController {
+
+    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var membershipNumberLabel: UILabel!
+    @IBOutlet weak var graduationYearLabel: UILabel!
+    @IBOutlet weak var graduationLabel: UILabel!
+    @IBOutlet weak var expiryDateLabel: UILabel!
+    @IBOutlet weak var tableView: UITableView!
+    
+    private var pageNumber = 1
+    private var totalPages = 1
+    private var data = [EducationRecord]()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initlization()
+        // Do any additional setup after loading the view.
+    }
+
+    private func initlization(){
+        setUpTableView()
+        searchTextField.addTarget(self, action: #selector(searchAction(textField:)), for: .editingChanged)
+        getAllEducationDetails(isFromBottom: false)
+        addObserver()
+    }
+    
+    private func addObserver(){
+        NotificationCenter.default.addObserver(forName: .init("LoadingEducation"), object: nil, queue: .main) { notify in
+            self.getAllEducationDetails(isFromBottom: false)
+        }
+    }
+    
+    @objc private func searchAction(textField:UITextField){
+        getAllEducationDetails(isFromBottom: false)
+    }
+    
+    
+    @IBAction func addAction(_ sender: Any) {
+        goToAddVC(isView: false, data: nil)
+    }
+    
+    
+    @IBAction func uploadAction(_ sender: Any) {
+        let vc = AddAttachmentViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
+    @IBAction func attachAction(_ sender: Any) {
+//        APIController.shard.getAttachmentPreview { data in
+//            if let status = data.status , status{
+//
+//            }
+//        }
+    }
+    
+}
+
+
+extension ViewEmpEducationDetailsVC:UITableViewDelegate,UITableViewDataSource{
+    private func setUpTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(.init(nibName: "EducationDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "EducationDetailsTableViewCell")
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "EducationDetailsTableViewCell", for: indexPath) as! EducationDetailsTableViewCell
+        cell.delegate = self
+        cell.setData(data: data[indexPath.row],indexPath: indexPath)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == data.count - 1{
+            if pageNumber < totalPages{
+                pageNumber += 1
+                getAllEducationDetails(isFromBottom: true)
+            }
+        }
+    }
+}
+
+// MARK: - Table View Cell Delegate
+
+extension ViewEmpEducationDetailsVC:EducationDetailsCellDelegate{
+    func deleteAction(id:String,indexPath: IndexPath) {
+        deleteEducation(keyId: id,indexPath: indexPath)
+    }
+    
+    func updateAction(data:EducationRecord) {
+        goToAddVC(isView: false, data: data)
+    }
+    
+    func viewAction(data:EducationRecord) {
+        goToAddVC(isView: true, data: data)
+    }
+    
+    private func goToAddVC(isView:Bool,data:EducationRecord?){
+        let vc = AddEmpEduDetailsViewController()
+        vc.data = data
+        vc.isView = isView
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+}
+
+
+
+// MARK: - API Handling
+extension ViewEmpEducationDetailsVC{
+    private func getAllEducationDetails(isFromBottom:Bool){
+        if !isFromBottom{
+            pageNumber = 1
+        }
+        showLoadingActivity()
+        APIController.shard.getAllEducationDetails(pageNumber: "\(pageNumber)", searchKey: searchTextField.text!, branch_id: ViewEmployeeDetailsVC.empData.data?.branch_id ?? "", id: ViewEmployeeDetailsVC.empData.data?.employee_number ?? "", employee_id_number: ViewEmployeeDetailsVC.empData.data?.employee_id_number ?? "") { data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status,status{
+                    if isFromBottom{
+                        self.data.append(contentsOf: data.records ?? [])
+                    }else{
+                        self.data = data.records ?? []
+                    }
+                    self.totalPages = data.page?.total_pages ?? 1
+                }else{
+                    self.data.removeAll()
+                }
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    
+    private func deleteEducation(keyId:String,indexPath:IndexPath){
+        let alertVC = UIAlertController(title: "Confirmation !!!", message: "Are you sure !?", preferredStyle: .alert)
+        alertVC.addAction(.init(title: "Yes", style: .default, handler: { action in
+            let empId  = ViewEmployeeDetailsVC.empData.data?.employee_number ?? ""
+            self.showLoadingActivity()
+            APIController.shard.deleteEmpEducation(key_id: keyId, empId: empId) { data in
+                self.hideLoadingActivity()
+                DispatchQueue.main.async{
+                    var alertVC:UIAlertController!
+                    if let status = data.status,status{
+                        self.data.remove(at: indexPath.row)
+                        self.tableView.reloadData()
+                        alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
+                    }else{
+                        alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
+                    }
+                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+                    self.present(alertVC, animated: true)
+                }
+            }
+        }))
+        alertVC.addAction(.init(title: "No", style: .default, handler: nil))
+        present(alertVC, animated: true)
+    }
+    
+}
+

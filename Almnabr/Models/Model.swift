@@ -82,7 +82,7 @@ class MenuObj {
         self.icon              = Obj["icon"] as? String ?? ""
         self.type              = Obj["type"] as? String ?? ""
         self.IsOpened          = Obj["IsOpened"] as? Bool ?? false
-        let data_Array         = Obj["menu"] as? [[String:Any]] ?? []
+        let data_Array         = Obj["children"] as? [[String:Any]] ?? []
         self.menu              = data_Array.map{SubMenuObj.init($0)}
     }}
 

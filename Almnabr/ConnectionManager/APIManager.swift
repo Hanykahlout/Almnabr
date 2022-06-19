@@ -16,8 +16,6 @@ class APIManager: NSObject {
     
     static let serverURL = "https://nahidh.sa/backend"
 
-    
-    
     static func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {
@@ -456,7 +454,6 @@ class APIManager: NSObject {
         Alamofire.request( strURL , method: .get, parameters: nil,
                            encoding:  URLEncoding.default, headers: auth).responseJSON
             { response in
-                            
                             if(response.result.isSuccess)
                             {
                                 

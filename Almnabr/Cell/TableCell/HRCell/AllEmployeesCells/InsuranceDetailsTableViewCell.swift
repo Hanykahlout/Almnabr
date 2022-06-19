@@ -10,6 +10,8 @@ import UIKit
 
 protocol InsuranceDetailsCellDelegate{
     func deleteAction(id:String,indexPath:IndexPath)
+    func updateAction(data:InsuranceRecords)
+    func viewAction(data:InsuranceRecords)
 }
 
 typealias InsuranceDetailsDelegate = InsuranceDetailsCellDelegate & UIViewController
@@ -22,6 +24,7 @@ class InsuranceDetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var insuranceRelationshipLabel: UILabel!
     @IBOutlet weak var writerLabel: UILabel!
     
+    private var relationshipData = ["Choose Options","Spouse","Son","Daugther","Others"]
     var delegate:InsuranceDetailsDelegate?
     private var data:InsuranceRecords!
     private var indexPath:IndexPath!
@@ -41,9 +44,12 @@ class InsuranceDetailsTableViewCell: UITableViewCell {
         self.data = data
         self.indexPath = indexPath
         dependentNameLabel.text = data.insurance_dependent_name ?? ""
-        dependentIDLabel.text = data.insurance_dependent_id ?? ""
-        insuranceNumberLabel.text = data.insurance_dependent_number ?? ""
-        insuranceRelationshipLabel.text = data.insurance_dependent_reaplationship ?? ""
+        dependentIDLabel.text = data.insurance_dependent_number ?? ""
+        insuranceNumberLabel.text = data.insurance_dependent_ins_no ?? ""
+        if let index = Int(data.insurance_dependent_reaplationship ?? ""){
+            insuranceRelationshipLabel.text = relationshipData[index]
+        }
+        
         writerLabel.text = data.insurance_dependent_writer ?? ""
         
     }
@@ -54,8 +60,10 @@ class InsuranceDetailsTableViewCell: UITableViewCell {
     
     
     @IBAction func viewAction(_ sender: Any) {
+        delegate?.viewAction(data: data)
     }
     
     @IBAction func editAction(_ sender: Any) {
+        delegate?.updateAction(data: data)
     }
 }

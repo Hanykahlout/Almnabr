@@ -700,7 +700,33 @@ class APIController{
     }
     
     
+    func updateInsuranceDetails(body:[String:Any],callback:@escaping(_ data:UpdateSettingResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/hr_update_insurance"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .put , parameters:body,encoding: URLEncoding.httpBody,headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
     
+    func addInsuranceDetails(body:[String:Any],callback:@escaping(_ data:UpdateSettingResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/hr_create_insurance"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .post , parameters:body,headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
     
     
 }

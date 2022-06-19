@@ -30,7 +30,7 @@ class AddAttachmentViewController: UIViewController {
     private var selectedItems = [SearchBranchRecords]()
     private var dropDown = DropDown()
     private var fileUrl:URL?
-    
+    var attachmentType = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
@@ -103,7 +103,7 @@ class AddAttachmentViewController: UIViewController {
         var param:[String:Any] = [:]
         
         param["employee_number"] = ViewEmployeeDetailsVC.empData.data?.employee_number ?? ""
-        param["attachment_type"] = "EN0001"
+        param["attachment_type"] = attachmentType
         param["attachment_descriptions"] = descriptionTextField.text!
 
         for index in 0..<selectedItems.count {

@@ -52,6 +52,7 @@ class ViewEmpEducationDetailsVC: UIViewController {
     
     @IBAction func uploadAction(_ sender: Any) {
         let vc = AddAttachmentViewController()
+        vc.attachmentType = "EN0001"
         navigationController?.pushViewController(vc, animated: true)
     }
     

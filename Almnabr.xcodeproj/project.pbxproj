@@ -87,6 +87,8 @@
 		3F9ADAFC285F143600D68791 /* InsuranceDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9ADAFA285F143600D68791 /* InsuranceDetailsTableViewCell.xib */; };
 		3F9ADB00285F1C9B00D68791 /* InsuranceRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9ADAFE285F1C9B00D68791 /* InsuranceRecords.swift */; };
 		3F9ADB01285F1C9B00D68791 /* InsuranceGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9ADAFF285F1C9B00D68791 /* InsuranceGetResponse.swift */; };
+		3F9ADB04285F2A6C00D68791 /* UpdateInsuranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9ADB02285F2A6C00D68791 /* UpdateInsuranceViewController.swift */; };
+		3F9ADB05285F2A6C00D68791 /* UpdateInsuranceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9ADB03285F2A6C00D68791 /* UpdateInsuranceViewController.xib */; };
 		3F9C9E812859D39900C5322B /* LicencesGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C9E802859D39900C5322B /* LicencesGetResponse.swift */; };
 		3F9C9E842859E62E00C5322B /* ContactDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C9E822859E62E00C5322B /* ContactDetailsTableViewCell.swift */; };
 		3F9C9E852859E62E00C5322B /* ContactDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F9C9E832859E62E00C5322B /* ContactDetailsTableViewCell.xib */; };
@@ -151,6 +153,10 @@
 		3FD1C5FC284E383100A42DAA /* FilterGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1C5F6284E383000A42DAA /* FilterGetResponse.swift */; };
 		3FD3F55E2858C25A007CC5BB /* JopDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3F55C2858C25A007CC5BB /* JopDetailsResponse.swift */; };
 		3FD3F55F2858C25A007CC5BB /* JopDetailsRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3F55D2858C25A007CC5BB /* JopDetailsRecords.swift */; };
+		3FD73DA4285F4DF700AC3507 /* AddInsuranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD73DA2285F4DF700AC3507 /* AddInsuranceViewController.swift */; };
+		3FD73DA5285F4DF700AC3507 /* AddInsuranceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD73DA3285F4DF700AC3507 /* AddInsuranceViewController.xib */; };
+		3FD73DA8285F514600AC3507 /* AddInsuranceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD73DA6285F514600AC3507 /* AddInsuranceTableViewCell.swift */; };
+		3FD73DA9285F514600AC3507 /* AddInsuranceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD73DA7285F514600AC3507 /* AddInsuranceTableViewCell.xib */; };
 		3FDF828A28575E1500FEAA49 /* EditEmployeePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDF828928575E1500FEAA49 /* EditEmployeePageViewController.swift */; };
 		3FDF828C2857939400FEAA49 /* ViewEmployeePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDF828B2857939400FEAA49 /* ViewEmployeePageVC.swift */; };
 		3FE0435F284CB18300738F22 /* AllEmployeesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0435D284CB18300738F22 /* AllEmployeesVC.swift */; };
@@ -524,6 +530,8 @@
 		3F9ADAFA285F143600D68791 /* InsuranceDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsuranceDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		3F9ADAFE285F1C9B00D68791 /* InsuranceRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsuranceRecords.swift; sourceTree = "<group>"; };
 		3F9ADAFF285F1C9B00D68791 /* InsuranceGetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsuranceGetResponse.swift; sourceTree = "<group>"; };
+		3F9ADB02285F2A6C00D68791 /* UpdateInsuranceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateInsuranceViewController.swift; sourceTree = "<group>"; };
+		3F9ADB03285F2A6C00D68791 /* UpdateInsuranceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdateInsuranceViewController.xib; sourceTree = "<group>"; };
 		3F9C9E802859D39900C5322B /* LicencesGetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicencesGetResponse.swift; sourceTree = "<group>"; };
 		3F9C9E822859E62E00C5322B /* ContactDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		3F9C9E832859E62E00C5322B /* ContactDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactDetailsTableViewCell.xib; sourceTree = "<group>"; };
@@ -588,6 +596,10 @@
 		3FD1C5F6284E383000A42DAA /* FilterGetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterGetResponse.swift; sourceTree = "<group>"; };
 		3FD3F55C2858C25A007CC5BB /* JopDetailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JopDetailsResponse.swift; sourceTree = "<group>"; };
 		3FD3F55D2858C25A007CC5BB /* JopDetailsRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JopDetailsRecords.swift; sourceTree = "<group>"; };
+		3FD73DA2285F4DF700AC3507 /* AddInsuranceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInsuranceViewController.swift; sourceTree = "<group>"; };
+		3FD73DA3285F4DF700AC3507 /* AddInsuranceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddInsuranceViewController.xib; sourceTree = "<group>"; };
+		3FD73DA6285F514600AC3507 /* AddInsuranceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInsuranceTableViewCell.swift; sourceTree = "<group>"; };
+		3FD73DA7285F514600AC3507 /* AddInsuranceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddInsuranceTableViewCell.xib; sourceTree = "<group>"; };
 		3FDF828928575E1500FEAA49 /* EditEmployeePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEmployeePageViewController.swift; sourceTree = "<group>"; };
 		3FDF828B2857939400FEAA49 /* ViewEmployeePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEmployeePageVC.swift; sourceTree = "<group>"; };
 		3FE0435D284CB18300738F22 /* AllEmployeesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEmployeesVC.swift; sourceTree = "<group>"; };
@@ -1122,6 +1134,10 @@
 			children = (
 				3FA1D27B2856304F000885FA /* ViewEmpInsuranceDetailsVC.swift */,
 				3FA1D27C2856304F000885FA /* ViewEmpInsuranceDetailsVC.xib */,
+				3F9ADB02285F2A6C00D68791 /* UpdateInsuranceViewController.swift */,
+				3F9ADB03285F2A6C00D68791 /* UpdateInsuranceViewController.xib */,
+				3FD73DA2285F4DF700AC3507 /* AddInsuranceViewController.swift */,
+				3FD73DA3285F4DF700AC3507 /* AddInsuranceViewController.xib */,
 			);
 			path = ViewEmpInsuranceDetailsVC;
 			sourceTree = "<group>";
@@ -1273,6 +1289,8 @@
 				3F935E4E285A1F8800D7B779 /* EducationDetailsTableViewCell.xib */,
 				3F9ADAF9285F143600D68791 /* InsuranceDetailsTableViewCell.swift */,
 				3F9ADAFA285F143600D68791 /* InsuranceDetailsTableViewCell.xib */,
+				3FD73DA6285F514600AC3507 /* AddInsuranceTableViewCell.swift */,
+				3FD73DA7285F514600AC3507 /* AddInsuranceTableViewCell.xib */,
 			);
 			path = AllEmployeesCells;
 			sourceTree = "<group>";
@@ -2278,6 +2296,7 @@
 				FAF76239283051A5000DEAFE /* SubTaskTVCell.xib in Resources */,
 				FA7A93D92801BBCD00EF6ECC /* ProfileNotesTVCell.xib in Resources */,
 				FA5C977328170FA200A2AA5A /* TaskTVCell.xib in Resources */,
+				3FD73DA9285F514600AC3507 /* AddInsuranceTableViewCell.xib in Resources */,
 				3F217B0A285B3D8A00759569 /* AddAttachmentViewController.xib in Resources */,
 				FA78EA1427D2B01A0023E48D /* ProjectRequestTVCell.xib in Resources */,
 				FAAF205C27DA284900AD255B /* TeamUserTVCell.xib in Resources */,
@@ -2286,6 +2305,7 @@
 				FAC32FAD2707662C0046A0F6 /* DroidKufi-Bold.ttf in Resources */,
 				FA4A4C392803488700B9C658 /* ModulesTVCell.xib in Resources */,
 				FAC32FB72708C91D0046A0F6 /* TransactionTVCell.xib in Resources */,
+				3F9ADB05285F2A6C00D68791 /* UpdateInsuranceViewController.xib in Resources */,
 				3FA1D26228562EB8000885FA /* ViewEmpJoiningDetailsVC.xib in Resources */,
 				3F14367228489F50008ABC19 /* SettingsTableViewCell.xib in Resources */,
 				FA03242D26FB9BFA00372EA6 /* Main.storyboard in Resources */,
@@ -2308,6 +2328,7 @@
 				FACFBA40273AD235007C248C /* GeneralNoCell.xib in Resources */,
 				3F9C9E852859E62E00C5322B /* ContactDetailsTableViewCell.xib in Resources */,
 				3FA338702858A90E00194AC6 /* JopDetailsTableViewCell.xib in Resources */,
+				3FD73DA5285F4DF700AC3507 /* AddInsuranceViewController.xib in Resources */,
 				FA9768B527355A91000A3576 /* FromTransactionView.xib in Resources */,
 				FADC2FFD2826B68800921011 /* TaskUserTVCell.xib in Resources */,
 				3FA1D27A2856302A000885FA /* ViewEmpPassportDetailsVC.xib in Resources */,
@@ -2447,12 +2468,14 @@
 			files = (
 				FABDBA9C27F47735003961FC /* UserNotesVC.swift in Sources */,
 				3F14366D28489EB6008ABC19 /* SearchBranch.swift in Sources */,
+				3FD73DA8285F514600AC3507 /* AddInsuranceTableViewCell.swift in Sources */,
 				FA0324C826FBE2C900372EA6 /* NewSuccessModel.swift in Sources */,
 				FAF7624028306133000DEAFE /* SubTaskListVC.swift in Sources */,
 				3FD1C5FB284E383100A42DAA /* FilterRecords.swift in Sources */,
 				FA8B952A27F76785003F9D7B /* ContractTVCell.swift in Sources */,
 				3FA5225C2858E2C6004F3C8E /* JobListResponse.swift in Sources */,
 				FA85D024280D94500080A0EA /* TicketTVCell.swift in Sources */,
+				3F9ADB04285F2A6C00D68791 /* UpdateInsuranceViewController.swift in Sources */,
 				FAAB76DF270B96DB00731505 /* ApproveTransactionVC.swift in Sources */,
 				3FA8CB6C2848BCE200434CE4 /* SettingsData.swift in Sources */,
 				FA9768B227353DDD000A3576 /* CollectionViewCell.swift in Sources */,
@@ -2525,6 +2548,7 @@
 				3F65AC6C2850A43400035471 /* BankDetailsViewController.swift in Sources */,
 				FA5CB10527D0DF640023A372 /* ProjectDetailVC.swift in Sources */,
 				3FA1D289285630F0000885FA /* ViewEmpAttachmentsVC.swift in Sources */,
+				3FD73DA4285F4DF700AC3507 /* AddInsuranceViewController.swift in Sources */,
 				3F76506E2850917D00FB8A97 /* SectionCollectionViewCell.swift in Sources */,
 				FA3D32AF27342E8000A5472A /* ViewLanguage.swift in Sources */,
 				FA0324DD27005F1A00372EA6 /* SignInVC.swift in Sources */,

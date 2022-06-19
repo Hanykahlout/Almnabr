@@ -32,18 +32,27 @@ class ViewEmpInsuranceDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
-        // Do any additional setup after loading the view.
+
     }
+    
     
     private func initlization(){
         setInsuranceData()
         setUpTableView()
         setUpDropDown()
         getInsuranceData(isFromBottom: false)
+        addObserver()
         filterView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(filterViewAction)))
         searchTextField.addTarget(self, action: #selector(searchAction(textField:)), for: .editingChanged)
+        
     }
     
+    
+    private func addObserver(){
+        NotificationCenter.default.addObserver(forName: .init(rawValue: "ReloadInsuranceDetails"), object: nil, queue: .main) { notify in
+            self.getInsuranceData(isFromBottom: false)
+        }
+    }
     
     
     private func setUpDropDown(){
@@ -55,10 +64,8 @@ class ViewEmpInsuranceDetailsVC: UIViewController {
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.filterArrow.transform = .init(rotationAngle: 0)
             self.filterLabel.text = item
-            if item != "All"{
-                self.selectedSearchStatus = index
-                self.getInsuranceData(isFromBottom: false)
-            }
+            self.selectedSearchStatus = item == "All" ? nil : index
+            self.getInsuranceData(isFromBottom: false)
         }
         
         dropDown.cancelAction = { [unowned self] in
@@ -67,26 +74,35 @@ class ViewEmpInsuranceDetailsVC: UIViewController {
     }
     
     
+    
     private func setInsuranceData(){
         insuranceTypeClassLabel.text = ViewEmployeeDetailsVC.empData.data?.insurance_type_class ?? ""
         insuranceNumberLabel.text = ViewEmployeeDetailsVC.empData.data?.insurance_number ?? ""
         insuranceDateLabel.text = ViewEmployeeDetailsVC.empData.data?.insurance_date ?? ""
     }
     
+    
     @objc private func searchAction(textField:UITextField){
         self.getInsuranceData(isFromBottom: false)
     }
+    
     
     @objc private func filterViewAction(){
         self.filterArrow.transform = .init(rotationAngle: .pi)
         dropDown.show()
     }
     
+    
     @IBAction func addAction(_ sender: Any) {
+        let vc = AddInsuranceViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
     @IBAction func uploadAction(_ sender: Any) {
+        let vc = AddAttachmentViewController()
+        vc.attachmentType = "IR0001"
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -121,10 +137,26 @@ extension ViewEmpInsuranceDetailsVC:UITableViewDelegate, UITableViewDataSource{
     }
 
 }
+
 // MARK: - Table View Cell Delegate
 extension ViewEmpInsuranceDetailsVC:InsuranceDetailsCellDelegate{
     func deleteAction(id: String, indexPath: IndexPath) {
         self.deleteInsurant(key_id: id,indexPath:indexPath)
+    }
+    
+    func updateAction(data: InsuranceRecords) {
+        goToUpdateVC(data:data,isView: false)
+    }
+    
+    func viewAction(data: InsuranceRecords) {
+        goToUpdateVC(data:data,isView: true)
+    }
+    
+    private func goToUpdateVC(data: InsuranceRecords,isView:Bool){
+        let vc = UpdateInsuranceViewController()
+        vc.data = data
+        vc.isView = isView
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

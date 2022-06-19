@@ -148,11 +148,6 @@ class SettingsUpdateViewController: UIViewController {
         
     }
     
-    
-    private func verification(){
-        
-    }
-    
     private func employeeTitleTypeShow(){
         addButton.isHidden = true
         tableView.isHidden = true

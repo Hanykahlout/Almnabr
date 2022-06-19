@@ -40,9 +40,10 @@ class ViewEmployeeDetailsVC: UIViewController {
             data = data.reversed()
             collectionView.reloadData()
         }
-        
         getEmployeeViewData()
     }
+    
+  
     
     
     private func setUpPageViewController(){

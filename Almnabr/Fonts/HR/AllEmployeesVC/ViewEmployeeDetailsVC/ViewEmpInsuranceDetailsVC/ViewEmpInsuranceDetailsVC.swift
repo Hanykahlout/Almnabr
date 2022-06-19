@@ -7,24 +7,176 @@
 //
 
 import UIKit
-
+import DropDown
 class ViewEmpInsuranceDetailsVC: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var insuranceNumberLabel: UILabel!
+    @IBOutlet weak var insuranceDateLabel: UILabel!
+    @IBOutlet weak var insuranceTypeClassLabel: UILabel!
+    
+    @IBOutlet weak var filterView: UIView!
+    @IBOutlet weak var filterArrow: UIImageView!
+    @IBOutlet weak var filterLabel: UILabel!
+    
+    @IBOutlet weak var searchTextField: UITextField!
+    private var data = [InsuranceRecords]()
+    private var pageNumber = 1
+    private var totolPages = 1
+    private var selectedSearchStatus:Int?
+    
+    private var dropDown = DropDown()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        initlization()
         // Do any additional setup after loading the view.
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    private func initlization(){
+        setInsuranceData()
+        setUpTableView()
+        setUpDropDown()
+        getInsuranceData(isFromBottom: false)
+        filterView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(filterViewAction)))
+        searchTextField.addTarget(self, action: #selector(searchAction(textField:)), for: .editingChanged)
     }
-    */
+    
+    
+    
+    private func setUpDropDown(){
+        dropDown.anchorView = filterView
+        dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.dataSource = ["All","Spouse","Son","Daugther","Others"]
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.filterArrow.transform = .init(rotationAngle: 0)
+            self.filterLabel.text = item
+            if item != "All"{
+                self.selectedSearchStatus = index
+                self.getInsuranceData(isFromBottom: false)
+            }
+        }
+        
+        dropDown.cancelAction = { [unowned self] in
+            self.filterArrow.transform = .init(rotationAngle: 0)
+        }
+    }
+    
+    
+    private func setInsuranceData(){
+        insuranceTypeClassLabel.text = ViewEmployeeDetailsVC.empData.data?.insurance_type_class ?? ""
+        insuranceNumberLabel.text = ViewEmployeeDetailsVC.empData.data?.insurance_number ?? ""
+        insuranceDateLabel.text = ViewEmployeeDetailsVC.empData.data?.insurance_date ?? ""
+    }
+    
+    @objc private func searchAction(textField:UITextField){
+        self.getInsuranceData(isFromBottom: false)
+    }
+    
+    @objc private func filterViewAction(){
+        self.filterArrow.transform = .init(rotationAngle: .pi)
+        dropDown.show()
+    }
+    
+    @IBAction func addAction(_ sender: Any) {
+    }
+    
+    
+    @IBAction func uploadAction(_ sender: Any) {
+    }
+    
+    
+}
 
+
+extension ViewEmpInsuranceDetailsVC:UITableViewDelegate, UITableViewDataSource{
+    private func setUpTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(.init(nibName: "InsuranceDetailsTableViewCell", bundle: nil), forCellReuseIdentifier: "InsuranceDetailsTableViewCell")
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "InsuranceDetailsTableViewCell", for: indexPath) as! InsuranceDetailsTableViewCell
+        cell.setData(data:data[indexPath.row],indexPath:indexPath)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == data.count - 1{
+            if pageNumber < totolPages{
+                pageNumber += 1
+                getInsuranceData(isFromBottom: true)
+            }
+        }
+    }
+
+}
+// MARK: - Table View Cell Delegate
+extension ViewEmpInsuranceDetailsVC:InsuranceDetailsCellDelegate{
+    func deleteAction(id: String, indexPath: IndexPath) {
+        self.deleteInsurant(key_id: id,indexPath:indexPath)
+    }
+}
+
+// MARK: - API Handling
+
+
+extension ViewEmpInsuranceDetailsVC{
+    
+    private func getInsuranceData(isFromBottom:Bool){
+        var selectedStatusIndex = ""
+        if let index = selectedSearchStatus{
+            selectedStatusIndex = "\(index)"
+        }
+        if !isFromBottom{
+            pageNumber = 1
+        }
+        
+        let empId = ViewEmployeeDetailsVC.empData.data?.employee_number ?? ""
+        let empIdNumber = ViewEmployeeDetailsVC.empData.data?.employee_id_number ?? ""
+        let branchId = ViewEmployeeDetailsVC.empData.data?.branch_id ?? ""
+        showLoadingActivity()
+        APIController.shard.getInsuranceData(pageNumber: "\(pageNumber)", empId: empId, empIdNumber: empIdNumber, branchId: branchId, searchKey: searchTextField.text!, searchStatus: selectedStatusIndex) { data in
+            DispatchQueue.main.async{
+                self.hideLoadingActivity()
+                if let status = data.status , status{
+                    if isFromBottom{
+                        self.data.append(contentsOf: data.records ?? [])
+                    }else{
+                        self.data = data.records ?? []
+                    }
+                }else{
+                    self.data.removeAll()
+                }
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    private func deleteInsurant(key_id:String,indexPath:IndexPath){
+        let empId = ViewEmployeeDetailsVC.empData.data?.employee_number ?? ""
+        let branchId = ViewEmployeeDetailsVC.empData.data?.branch_id ?? ""
+        showLoadingActivity()
+        APIController.shard.deleteInsuranceDetails(key_id: key_id, branchId: branchId, empId: empId) { data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                var alertVC:UIAlertController!
+                if let status = data.status,status{
+                    alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
+                }else{
+                    alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
+                }
+                alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+                self.present(alertVC, animated: true)
+            }
+        }
+    }
+    
 }

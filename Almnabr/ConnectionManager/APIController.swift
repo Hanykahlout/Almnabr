@@ -418,8 +418,8 @@ class APIController{
         }
     }
     
-    func deleteJopDetails(key_id:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/POSITION/\(empId)/6"
+    func deleteJopDetails(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/POSITION/\(empId)/\(branchId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -513,8 +513,8 @@ class APIController{
         }
     }
     
-    func deleteEmpContact(key_id:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/CONTACT/\(empId)/6"
+    func deleteEmpContact(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/CONTACT/\(empId)/\(branchId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -572,8 +572,8 @@ class APIController{
         }
     }
     
-    func deleteEmpEducation(key_id:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/EDUCATION/\(empId)/6"
+    func deleteEmpEducation(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/EDUCATION/\(empId)/\(branchId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -660,6 +660,48 @@ class APIController{
             }
         }
     }
+    
+    func getInsuranceData(pageNumber:String,empId:String,empIdNumber:String,branchId:String,searchKey:String,searchStatus:String,callback:@escaping(_ data:InsuranceGetResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/hr_insurance_dependents/\(pageNumber)/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param:[String:Any] = ["id": empId,
+                  "employee_id_number": empIdNumber,
+                  "branch_id": branchId,
+                  "searchKey": searchKey,
+                  "searchStatus": searchStatus]
+        
+        Alamofire.request(strURL, method: .post , parameters:param,headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : InsuranceGetResponse = Mapper<InsuranceGetResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func deleteInsuranceDetails(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/INSURANCE/\(empId)/\(branchId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param = ["key_ids[]":key_id]
+        Alamofire.request(strURL, method: .delete , parameters:param,encoding: URLEncoding.httpBody,headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     
 }
 

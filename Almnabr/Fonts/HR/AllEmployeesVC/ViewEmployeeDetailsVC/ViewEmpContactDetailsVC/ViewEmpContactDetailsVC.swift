@@ -140,7 +140,8 @@ extension ViewEmpContactDetailsVC{
     
     func deleteContact(id:String,indexPath:IndexPath){
         showLoadingActivity()
-        APIController.shard.deleteEmpContact(key_id: id, empId: ViewEmployeeDetailsVC.empData.data?.employee_number ?? "") { data in
+        let branchId = ViewEmployeeDetailsVC.empData.data?.branch_id ?? ""
+        APIController.shard.deleteEmpContact(key_id: id, branchId: branchId ,empId: ViewEmployeeDetailsVC.empData.data?.employee_number ?? "") { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status,status{

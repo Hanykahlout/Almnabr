@@ -120,7 +120,6 @@ extension ViewEmpEducationDetailsVC:EducationDetailsCellDelegate{
 }
 
 
-
 // MARK: - API Handling
 extension ViewEmpEducationDetailsVC{
     private func getAllEducationDetails(isFromBottom:Bool){
@@ -151,8 +150,9 @@ extension ViewEmpEducationDetailsVC{
         let alertVC = UIAlertController(title: "Confirmation !!!", message: "Are you sure !?", preferredStyle: .alert)
         alertVC.addAction(.init(title: "Yes", style: .default, handler: { action in
             let empId  = ViewEmployeeDetailsVC.empData.data?.employee_number ?? ""
+            let branchId = ViewEmployeeDetailsVC.empData.data?.branch_id ?? ""
             self.showLoadingActivity()
-            APIController.shard.deleteEmpEducation(key_id: keyId, empId: empId) { data in
+            APIController.shard.deleteEmpEducation(key_id: keyId,branchId: branchId, empId: empId) { data in
                 self.hideLoadingActivity()
                 DispatchQueue.main.async{
                     var alertVC:UIAlertController!

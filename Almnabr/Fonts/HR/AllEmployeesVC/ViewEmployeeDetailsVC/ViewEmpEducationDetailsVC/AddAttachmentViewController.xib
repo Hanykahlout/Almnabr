@@ -20,9 +20,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddAttachmentViewController" customModule="Almnabr" customModuleProvider="target">
             <connections>
+                <outlet property="attachTypeArrow" destination="BYH-Lz-ckB" id="gYF-rL-A7H"/>
+                <outlet property="attachmentTypeTextField" destination="K5K-zp-jJM" id="hOJ-eb-xaf"/>
                 <outlet property="backButton" destination="gs3-AU-DKf" id="UDS-vf-ZxJ"/>
                 <outlet property="collectionView" destination="5TW-Wh-Mv4" id="0ga-B0-ySO"/>
                 <outlet property="descriptionTextField" destination="p0e-l1-6Fb" id="SGU-HP-Ljt"/>
+                <outlet property="fileSelectionView" destination="bff-Jl-Dcu" id="jCd-aO-eKN"/>
                 <outlet property="selectFileButton" destination="ar1-hZ-J3y" id="u0e-wJ-ekc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="visiblityArrow" destination="tS6-CL-MCC" id="m65-pl-8gh"/>
@@ -63,10 +66,18 @@
                     </constraints>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="XhS-4L-fJK">
-                    <rect key="frame" x="16" y="100" width="382" height="166"/>
+                    <rect key="frame" x="16" y="100" width="382" height="219"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p0e-l1-6Fb">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Attachment Tyoe" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K5K-zp-jJM">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="49o-k8-0cv"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p0e-l1-6Fb">
+                            <rect key="frame" x="0.0" y="53" width="382" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="Zeb-HQ-d6N"/>
                             </constraints>
@@ -74,7 +85,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahJ-A3-tq0">
-                            <rect key="frame" x="0.0" y="53" width="382" height="60"/>
+                            <rect key="frame" x="0.0" y="106" width="382" height="60"/>
                             <subviews>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="5TW-Wh-Mv4">
                                     <rect key="frame" x="0.0" y="0.0" width="347" height="60"/>
@@ -127,7 +138,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bff-Jl-Dcu">
-                            <rect key="frame" x="0.0" y="121" width="382" height="45"/>
+                            <rect key="frame" x="0.0" y="174" width="382" height="45"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="EId-IL-HmP">
                                     <rect key="frame" x="10" y="5" width="362" height="35"/>
@@ -201,6 +212,13 @@
                         <action selector="submitAction:" destination="-1" eventType="touchUpInside" id="oAC-Do-NMl"/>
                     </connections>
                 </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downward-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="BYH-Lz-ckB">
+                    <rect key="frame" x="363" y="115" width="15" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="Fjy-ph-E9h"/>
+                        <constraint firstAttribute="width" constant="15" id="qx5-VW-etT"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -208,10 +226,12 @@
                 <constraint firstItem="rfY-Q4-mFg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9aH-Wf-6a6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XhS-4L-fJK" secondAttribute="trailing" constant="16" id="AZL-I7-ZJm"/>
                 <constraint firstAttribute="trailing" secondItem="bqb-OE-aBv" secondAttribute="trailing" constant="16" id="GD5-te-DOK"/>
+                <constraint firstItem="BYH-Lz-ckB" firstAttribute="trailing" secondItem="K5K-zp-jJM" secondAttribute="trailing" constant="-20" id="H84-BK-YZb"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rfY-Q4-mFg" secondAttribute="trailing" id="IcD-MS-Un6"/>
                 <constraint firstItem="XhS-4L-fJK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Oaj-V5-ymE"/>
                 <constraint firstItem="bqb-OE-aBv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="QKe-wF-3MB"/>
                 <constraint firstItem="rfY-Q4-mFg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="UF8-oa-VO8"/>
+                <constraint firstItem="BYH-Lz-ckB" firstAttribute="centerY" secondItem="K5K-zp-jJM" secondAttribute="centerY" id="hJv-Ah-kVV"/>
                 <constraint firstItem="XhS-4L-fJK" firstAttribute="top" secondItem="rfY-Q4-mFg" secondAttribute="bottom" constant="20" id="lRG-Pi-Nlz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="bqb-OE-aBv" secondAttribute="bottom" constant="20" id="waH-6t-dxb"/>
             </constraints>

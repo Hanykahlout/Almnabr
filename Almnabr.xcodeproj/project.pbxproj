@@ -36,6 +36,14 @@
 		3F217B0A285B3D8A00759569 /* AddAttachmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F217B08285B3D8A00759569 /* AddAttachmentViewController.xib */; };
 		3F2B2C1028524F5B00C33FAD /* EmployeeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B2C0E28524F5A00C33FAD /* EmployeeResponse.swift */; };
 		3F2B2C1128524F5B00C33FAD /* EditBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B2C0F28524F5B00C33FAD /* EditBody.swift */; };
+		3F397D7D28609DC700A7DAB4 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D7B28609DC700A7DAB4 /* AddNotesViewController.swift */; };
+		3F397D7E28609DC700A7DAB4 /* AddNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F397D7C28609DC700A7DAB4 /* AddNotesViewController.xib */; };
+		3F397D812860BE6300A7DAB4 /* AttachmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D7F2860BE6300A7DAB4 /* AttachmentTableViewCell.swift */; };
+		3F397D822860BE6300A7DAB4 /* AttachmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F397D802860BE6300A7DAB4 /* AttachmentTableViewCell.xib */; };
+		3F397D862860C1F000A7DAB4 /* AttachmentsGetREsponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D842860C1F000A7DAB4 /* AttachmentsGetREsponse.swift */; };
+		3F397D872860C1F000A7DAB4 /* AttachmentRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D852860C1F000A7DAB4 /* AttachmentRecords.swift */; };
+		3F397D8A2860CD4400A7DAB4 /* AttachmentTypeRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D882860CD4400A7DAB4 /* AttachmentTypeRecords.swift */; };
+		3F397D8B2860CD4400A7DAB4 /* AttachmentTypeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D892860CD4400A7DAB4 /* AttachmentTypeResponse.swift */; };
 		3F3EED7C284E1EEA00FFFC46 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3EED7A284E1EEA00FFFC46 /* FilterViewController.swift */; };
 		3F3EED7D284E1EEA00FFFC46 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F3EED7B284E1EEA00FFFC46 /* FilterViewController.xib */; };
 		3F48C53C285883AF004D33F8 /* EmpViewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C538285883AE004D33F8 /* EmpViewResponse.swift */; };
@@ -135,6 +143,10 @@
 		3FA5225D2858E2C6004F3C8E /* Joblists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5225B2858E2C6004F3C8E /* Joblists.swift */; };
 		3FA8CB6C2848BCE200434CE4 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8CB692848BCE200434CE4 /* SettingsData.swift */; };
 		3FA8CB6D2848BCE200434CE4 /* SettingsDataRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8CB6A2848BCE200434CE4 /* SettingsDataRecords.swift */; };
+		3FAAB63E28609025007B9150 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB63C28609024007B9150 /* NoteTableViewCell.swift */; };
+		3FAAB63F28609025007B9150 /* NoteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FAAB63D28609025007B9150 /* NoteTableViewCell.xib */; };
+		3FAAB6432860937B007B9150 /* NoteRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB6412860937B007B9150 /* NoteRecords.swift */; };
+		3FAAB6442860937B007B9150 /* NotesGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB6422860937B007B9150 /* NotesGetResponse.swift */; };
 		3FAD7A232850D3660063B15E /* GroupNameResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD7A212850D3650063B15E /* GroupNameResponse.swift */; };
 		3FAD7A252850F5E20063B15E /* BanksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD7A242850F5E20063B15E /* BanksResponse.swift */; };
 		3FAF671D284CB8CD00BEF1D6 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAF671B284CB8CD00BEF1D6 /* EmployeeTableViewCell.swift */; };
@@ -479,6 +491,14 @@
 		3F217B08285B3D8A00759569 /* AddAttachmentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAttachmentViewController.xib; sourceTree = "<group>"; };
 		3F2B2C0E28524F5A00C33FAD /* EmployeeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeResponse.swift; sourceTree = "<group>"; };
 		3F2B2C0F28524F5B00C33FAD /* EditBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBody.swift; sourceTree = "<group>"; };
+		3F397D7B28609DC700A7DAB4 /* AddNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
+		3F397D7C28609DC700A7DAB4 /* AddNotesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddNotesViewController.xib; sourceTree = "<group>"; };
+		3F397D7F2860BE6300A7DAB4 /* AttachmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentTableViewCell.swift; sourceTree = "<group>"; };
+		3F397D802860BE6300A7DAB4 /* AttachmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttachmentTableViewCell.xib; sourceTree = "<group>"; };
+		3F397D842860C1F000A7DAB4 /* AttachmentsGetREsponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentsGetREsponse.swift; sourceTree = "<group>"; };
+		3F397D852860C1F000A7DAB4 /* AttachmentRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentRecords.swift; sourceTree = "<group>"; };
+		3F397D882860CD4400A7DAB4 /* AttachmentTypeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentTypeRecords.swift; sourceTree = "<group>"; };
+		3F397D892860CD4400A7DAB4 /* AttachmentTypeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentTypeResponse.swift; sourceTree = "<group>"; };
 		3F3EED7A284E1EEA00FFFC46 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		3F3EED7B284E1EEA00FFFC46 /* FilterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		3F48C538285883AE004D33F8 /* EmpViewResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpViewResponse.swift; sourceTree = "<group>"; };
@@ -578,6 +598,10 @@
 		3FA5225B2858E2C6004F3C8E /* Joblists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Joblists.swift; sourceTree = "<group>"; };
 		3FA8CB692848BCE200434CE4 /* SettingsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		3FA8CB6A2848BCE200434CE4 /* SettingsDataRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDataRecords.swift; sourceTree = "<group>"; };
+		3FAAB63C28609024007B9150 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		3FAAB63D28609025007B9150 /* NoteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteTableViewCell.xib; sourceTree = "<group>"; };
+		3FAAB6412860937B007B9150 /* NoteRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteRecords.swift; sourceTree = "<group>"; };
+		3FAAB6422860937B007B9150 /* NotesGetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesGetResponse.swift; sourceTree = "<group>"; };
 		3FAD7A212850D3650063B15E /* GroupNameResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNameResponse.swift; sourceTree = "<group>"; };
 		3FAD7A242850F5E20063B15E /* BanksResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BanksResponse.swift; sourceTree = "<group>"; };
 		3FAF671B284CB8CD00BEF1D6 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
@@ -980,6 +1004,17 @@
 			path = Designables;
 			sourceTree = "<group>";
 		};
+		3F397D832860C16600A7DAB4 /* Attachments Details */ = {
+			isa = PBXGroup;
+			children = (
+				3F397D852860C1F000A7DAB4 /* AttachmentRecords.swift */,
+				3F397D842860C1F000A7DAB4 /* AttachmentsGetREsponse.swift */,
+				3F397D882860CD4400A7DAB4 /* AttachmentTypeRecords.swift */,
+				3F397D892860CD4400A7DAB4 /* AttachmentTypeResponse.swift */,
+			);
+			path = "Attachments Details";
+			sourceTree = "<group>";
+		};
 		3F3EED78284E1E9200FFFC46 /* AllEmployeesVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1002,6 +1037,8 @@
 		3F48C537285883A0004D33F8 /* ViewEmpResponse */ = {
 			isa = PBXGroup;
 			children = (
+				3F397D832860C16600A7DAB4 /* Attachments Details */,
+				3FAAB64028609370007B9150 /* Notes Details */,
 				3F9ADAFD285F1C8F00D68791 /* Insurance Details */,
 				3F935E51285A231B00D7B779 /* Education Details */,
 				3F9C9E862859F1A500C5322B /* Contact Details */,
@@ -1156,6 +1193,8 @@
 			children = (
 				3FA1D283285630D6000885FA /* ViewEmpNotesVC.swift */,
 				3FA1D284285630D6000885FA /* ViewEmpNotesVC.xib */,
+				3F397D7B28609DC700A7DAB4 /* AddNotesViewController.swift */,
+				3F397D7C28609DC700A7DAB4 /* AddNotesViewController.xib */,
 			);
 			path = ViewEmpNotesVC;
 			sourceTree = "<group>";
@@ -1261,6 +1300,15 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		3FAAB64028609370007B9150 /* Notes Details */ = {
+			isa = PBXGroup;
+			children = (
+				3FAAB6412860937B007B9150 /* NoteRecords.swift */,
+				3FAAB6422860937B007B9150 /* NotesGetResponse.swift */,
+			);
+			path = "Notes Details";
+			sourceTree = "<group>";
+		};
 		3FAF6719284CB89B00BEF1D6 /* SettingsCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1291,6 +1339,10 @@
 				3F9ADAFA285F143600D68791 /* InsuranceDetailsTableViewCell.xib */,
 				3FD73DA6285F514600AC3507 /* AddInsuranceTableViewCell.swift */,
 				3FD73DA7285F514600AC3507 /* AddInsuranceTableViewCell.xib */,
+				3FAAB63C28609024007B9150 /* NoteTableViewCell.swift */,
+				3FAAB63D28609025007B9150 /* NoteTableViewCell.xib */,
+				3F397D7F2860BE6300A7DAB4 /* AttachmentTableViewCell.swift */,
+				3F397D802860BE6300A7DAB4 /* AttachmentTableViewCell.xib */,
 			);
 			path = AllEmployeesCells;
 			sourceTree = "<group>";
@@ -2262,6 +2314,7 @@
 				FA03243226FB9BFE00372EA6 /* LaunchScreen.storyboard in Resources */,
 				3F65AC6D2850A43400035471 /* BankDetailsViewController.xib in Resources */,
 				FA5C976D2816B01100A2AA5A /* TaskAttachmentCell.xib in Resources */,
+				3F397D7E28609DC700A7DAB4 /* AddNotesViewController.xib in Resources */,
 				FAC788D427104436009AC355 /* HeaderView.xib in Resources */,
 				3F87BCC42848CE170031098B /* SettingsAlertViewController.xib in Resources */,
 				FA9E7D88270E46AE003A1D16 /* GridCell.xib in Resources */,
@@ -2272,6 +2325,7 @@
 				3FB03C8A2848AC1F003859E1 /* SettingViewController.xib in Resources */,
 				FAE13A4E27293C2D00509550 /* DroidKufi-Regular.ttf in Resources */,
 				FABDBAA627F47B59003961FC /* HR.storyboard in Resources */,
+				3FAAB63F28609025007B9150 /* NoteTableViewCell.xib in Resources */,
 				FA530A41270CEC6D0071CDC8 /* CustomHeaderView.xib in Resources */,
 				FA7A93DD2801C64900EF6ECC /* profileAttachmentsTVCell.xib in Resources */,
 				3F87BCCC2848EB310031098B /* UpdateSettingsTableViewCell.xib in Resources */,
@@ -2337,6 +2391,7 @@
 				FA025FB92785E73600AB38C8 /* View_notification.xib in Resources */,
 				3FAF671E284CB8CD00BEF1D6 /* EmployeeTableViewCell.xib in Resources */,
 				FAAF207027E75E6F00AD255B /* SimpleNoteCell.xib in Resources */,
+				3F397D822860BE6300A7DAB4 /* AttachmentTableViewCell.xib in Resources */,
 				FA85D025280D94500080A0EA /* TicketTVCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2508,6 +2563,7 @@
 				FABDBA8C27F47671003961FC /* CommunicationsVC.swift in Sources */,
 				3F943D6D284E5A9D0046BCCB /* FilterGetResponse2.swift in Sources */,
 				FABDBA8A27F47656003961FC /* JobDetailsVC.swift in Sources */,
+				3F397D862860C1F000A7DAB4 /* AttachmentsGetREsponse.swift in Sources */,
 				3F9C9E842859E62E00C5322B /* ContactDetailsTableViewCell.swift in Sources */,
 				FA5D6D572767AE8A0088B206 /* TechnicalAssistantCell.swift in Sources */,
 				FA7A93C927FC689400EF6ECC /* EducationTVCell.swift in Sources */,
@@ -2556,6 +2612,7 @@
 				FAD333A7271383090093175E /* ProjectCell.swift in Sources */,
 				3F14366B28489EB6008ABC19 /* PermissionMentions.swift in Sources */,
 				FA95FD0B275EFE1E00DE7854 /* ContractorTeamApprovalVC.swift in Sources */,
+				3F397D872860C1F000A7DAB4 /* AttachmentRecords.swift in Sources */,
 				3FA1D26D28562F47000885FA /* ViewEmpContactDetailsVC.swift in Sources */,
 				FABDBA8827F4763D003961FC /* ContractDetailsVC.swift in Sources */,
 				FA95FD15275EFE7C00DE7854 /* RecipientVerificationVC.swift in Sources */,
@@ -2574,10 +2631,12 @@
 				FABDBAA227F477F4003961FC /* UserAttachmentsVC.swift in Sources */,
 				FAF9D43E278DE050002D8AEF /* ProjectRequestCell.swift in Sources */,
 				FA5CB0F927CFBA6E0023A372 /* RequirementsVC.swift in Sources */,
+				3FAAB6442860937B007B9150 /* NotesGetResponse.swift in Sources */,
 				FA44341727626BA300DF6A9B /* SelectesUnits&levelsVC.swift in Sources */,
 				FA1D64AB2774C5C900FA7735 /* SubFormVersionVC.swift in Sources */,
 				FA03249926FBA64800372EA6 /* ResponseModel.swift in Sources */,
 				3FAF671D284CB8CD00BEF1D6 /* EmployeeTableViewCell.swift in Sources */,
+				3FAAB6432860937B007B9150 /* NoteRecords.swift in Sources */,
 				3FD3F55F2858C25A007CC5BB /* JopDetailsRecords.swift in Sources */,
 				3F3EED7C284E1EEA00FFFC46 /* FilterViewController.swift in Sources */,
 				3FA8CB6D2848BCE200434CE4 /* SettingsDataRecords.swift in Sources */,
@@ -2616,7 +2675,9 @@
 				FA5CB10227D0C6B90023A372 /* TextCVCell.swift in Sources */,
 				FA95FD07275EFB6F00DE7854 /* TransactionFormPageaVC.swift in Sources */,
 				3F9C9E812859D39900C5322B /* LicencesGetResponse.swift in Sources */,
+				3F397D8B2860CD4400A7DAB4 /* AttachmentTypeResponse.swift in Sources */,
 				FA5CB0FE27D028AE0023A372 /* LabelCell.swift in Sources */,
+				3F397D812860BE6300A7DAB4 /* AttachmentTableViewCell.swift in Sources */,
 				3FD3F55E2858C25A007CC5BB /* JopDetailsResponse.swift in Sources */,
 				FA8B952E27F779BF003F9D7B /* JobDetailsTVCell.swift in Sources */,
 				3FA1D26528562ED0000885FA /* ViewEmpJobDetailsVC.swift in Sources */,
@@ -2652,11 +2713,13 @@
 				3FD1C5FA284E383100A42DAA /* SelectionInfo.swift in Sources */,
 				FA530A47270CF00E0071CDC8 /* MyTransactionHeaderView.swift in Sources */,
 				FA29703227431439000000F7 /* PDFViewrVC.swift in Sources */,
+				3F397D7D28609DC700A7DAB4 /* AddNotesViewController.swift in Sources */,
 				FAC788D627104448009AC355 /* HeaderView.swift in Sources */,
 				FA0324CA26FBE3EE00372EA6 /* NewUserInfoModel.swift in Sources */,
 				3F87BCD0284903060031098B /* EditingData.swift in Sources */,
 				FA4975AE279365A900891C9F /* DropDownView.swift in Sources */,
 				FA85D027280E1D7A0080A0EA /* AddTicketVC.swift in Sources */,
+				3F397D8A2860CD4400A7DAB4 /* AttachmentTypeRecords.swift in Sources */,
 				3FA1D27528562FE2000885FA /* ViewEmpEducationDetailsVC.swift in Sources */,
 				FA7A93DC2801C64900EF6ECC /* profileAttachmentsTVCell.swift in Sources */,
 				3FA1D285285630D6000885FA /* ViewEmpNotesVC.swift in Sources */,
@@ -2699,6 +2762,7 @@
 				FA5CB10A27D203320023A372 /* ProjectTVCell.swift in Sources */,
 				FA95FD09275EFE0500DE7854 /* ContractorManagerApprovalVC.swift in Sources */,
 				FA9E7D87270E46AE003A1D16 /* GridCell.swift in Sources */,
+				3FAAB63E28609025007B9150 /* NoteTableViewCell.swift in Sources */,
 				FAAF206327DBDC8E00AD255B /* ByPhaseTVCell.swift in Sources */,
 				3F1436942848A120008ABC19 /* UIButtonDesignable.swift in Sources */,
 				FA6FAFFB2703231600A31D8E /* FontAwesome.swift in Sources */,

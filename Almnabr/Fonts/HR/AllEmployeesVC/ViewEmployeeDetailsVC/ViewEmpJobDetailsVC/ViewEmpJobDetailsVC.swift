@@ -28,8 +28,16 @@ class ViewEmpJobDetailsVC: UIViewController {
         addObserver()
         setUpTableView()
         setUpTextField()
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         getJopDetailsData(isFromBottom: false)
     }
+    
     
     private func addObserver(){
         NotificationCenter.default.addObserver(forName: NSNotification.Name("LoadingPositions"), object: nil, queue: .main) { notifi in

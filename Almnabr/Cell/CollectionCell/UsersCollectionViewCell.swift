@@ -8,6 +8,7 @@
 
 import UIKit
 import MOLH
+
 protocol UsersCollectionViewCellDelegate{
     func removeAction(indexPath:IndexPath)
     func removeAction(type:CollectionType,indexPath:IndexPath)
@@ -22,6 +23,7 @@ class UsersCollectionViewCell: UICollectionViewCell {
     weak var delegate:UsersDelegate?
     private var indexPath:IndexPath!
     var type:CollectionType?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,6 +33,12 @@ class UsersCollectionViewCell: UICollectionViewCell {
         self.indexPath = indexPath
         titleLabel.text = data.label
     }
+    
+    func setData(data:AttachmentTypeRecords,indexPath:IndexPath){
+        self.indexPath = indexPath
+        titleLabel.text = data.title ?? ""
+    }
+    
     
     func setData(type:CollectionType,data:SelectionInfo,indexPath:IndexPath){
         self.indexPath = indexPath
@@ -50,6 +58,8 @@ class UsersCollectionViewCell: UICollectionViewCell {
         self.type = type
         titleLabel.text = data.quotation_subject ?? ""
     }
+    
+    
     
     @IBAction func deleteAction(_ sender: Any) {
         if let type = type {

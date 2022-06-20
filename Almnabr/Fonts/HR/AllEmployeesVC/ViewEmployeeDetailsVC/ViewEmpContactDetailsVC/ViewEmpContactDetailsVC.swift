@@ -32,9 +32,16 @@ class ViewEmpContactDetailsVC: UIViewController {
         setUpTableView()
         setUpTextField()
         setContactDetails()
-        getAllContacts(isFromBottom: false)
+        
         addObserver()
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getAllContacts(isFromBottom: false)
+    }
+    
     
     private func setUpTextField(){
         searchTextField.addTarget(self, action: #selector(searchAction(textField:)), for: .editingChanged)

@@ -40,13 +40,16 @@ class ViewEmpInsuranceDetailsVC: UIViewController {
         setInsuranceData()
         setUpTableView()
         setUpDropDown()
-        getInsuranceData(isFromBottom: false)
+        
         addObserver()
         filterView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(filterViewAction)))
         searchTextField.addTarget(self, action: #selector(searchAction(textField:)), for: .editingChanged)
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getInsuranceData(isFromBottom: false)
+    }
     
     private func addObserver(){
         NotificationCenter.default.addObserver(forName: .init(rawValue: "ReloadInsuranceDetails"), object: nil, queue: .main) { notify in

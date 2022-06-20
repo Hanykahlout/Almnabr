@@ -50,7 +50,7 @@ class InsuranceDetailsTableViewCell: UITableViewCell {
             insuranceRelationshipLabel.text = relationshipData[index]
         }
         
-        writerLabel.text = data.insurance_dependent_writer ?? ""
+        writerLabel.text = data.name ?? ""
         
     }
     

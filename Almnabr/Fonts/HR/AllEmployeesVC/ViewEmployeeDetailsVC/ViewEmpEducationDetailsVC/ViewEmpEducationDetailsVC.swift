@@ -30,8 +30,13 @@ class ViewEmpEducationDetailsVC: UIViewController {
     private func initlization(){
         setUpTableView()
         searchTextField.addTarget(self, action: #selector(searchAction(textField:)), for: .editingChanged)
-        getAllEducationDetails(isFromBottom: false)
+        
         addObserver()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getAllEducationDetails(isFromBottom: false)
     }
     
     private func addObserver(){

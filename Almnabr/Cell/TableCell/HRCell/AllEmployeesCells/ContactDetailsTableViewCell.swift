@@ -43,7 +43,7 @@ class ContactDetailsTableViewCell: UITableViewCell {
         nameLabel.text = data.contact_person_name ?? ""
         mobileLabel.text = data.contact_mobile_number ?? ""
         emailLabel.text = data.contact_email_address ?? ""
-        writerLabel.text = "\(data.name ?? "") \(data.contact_writer ?? "")"
+        writerLabel.text = data.name ?? ""
     }
 
     

@@ -45,7 +45,7 @@ class EducationDetailsTableViewCell: UITableViewCell {
         educationTitleLabel.text = data.education_title ?? ""
         descriptionLabel.text = data.education_descriptions ?? ""
         durationLabel.text = "\(data.education_start_date ?? "") To \(data.education_end_date ?? "")"
-        writerLabel.text = data.education_writer ?? ""
+        writerLabel.text = data.name ?? ""
         onDateLabel.text = data.education_createddatetime ?? ""
         
     }

@@ -14,26 +14,31 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Attachments : Mappable {
-	var en0001 : String?
-	var en0001_d : String?
-	var id0001 : String?
-	var id0001_d : String?
-    var ir0001: String?
-    var ir0001_d: String?
-    
+struct CommunicationSubmitResponse : Mappable {
+	var status : Bool?
+	var transaction_request_id : Int?
+	var transaction_key : String?
+	var url : String?
+	var error : String?
+	var errorList : [String]?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		en0001 <- map["en0001"]
-		en0001_d <- map["en0001_d"]
-		id0001 <- map["id0001"]
-		id0001_d <- map["id0001_d"]
-        ir0001 <- map["ir0001"]
-        ir0001_d <- map["ir0001_d"]
+		status <- map["status"]
+		transaction_request_id <- map["transaction_request_id"]
+		transaction_key <- map["transaction_key"]
+		url <- map["url"]
+		error <- map["error"]
+		errorList <- map["errorList"]
+        
 	}
 
 }
+
+
+
+

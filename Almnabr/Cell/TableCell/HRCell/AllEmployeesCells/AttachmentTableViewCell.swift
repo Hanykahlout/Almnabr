@@ -9,8 +9,9 @@
 import UIKit
 import DropDown
 protocol AttachmentCellDelegate{
-    func deleteAction(id:String,indexPath:IndexPath)
+    func deleteAction(data: AttachmentRecords,indexPath:IndexPath)
     func editAattchment(data:AttachmentRecords)
+    func previewAttachmentAction(data:AttachmentRecords)
 }
 
 class AttachmentTableViewCell: UITableViewCell {
@@ -49,7 +50,7 @@ class AttachmentTableViewCell: UITableViewCell {
         dropDown.selectionAction = { (index: Int, item: String) in
             if index == 0 {
                 // View Attachment
-                
+                self.delegate?.previewAttachmentAction(data: self.data)
             }else{
                 // Edit Attachment
                 self.delegate?.editAattchment(data: self.data)
@@ -75,7 +76,7 @@ class AttachmentTableViewCell: UITableViewCell {
     }
     
     @IBAction func deleteAction(_ sender: Any) {
-        delegate?.deleteAction(id: data.file_records_id ?? "", indexPath: indexPath)
+        delegate?.deleteAction(data: data, indexPath: indexPath)
     }
     
 }

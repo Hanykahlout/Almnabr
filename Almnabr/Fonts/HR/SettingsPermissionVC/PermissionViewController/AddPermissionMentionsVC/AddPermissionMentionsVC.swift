@@ -237,10 +237,7 @@ extension AddPermissionMentionsVC:UICollectionViewDelegate,UICollectionViewDataS
 }
 
 extension AddPermissionMentionsVC:UsersCollectionViewCellDelegate{
-    func removeAction(type: CollectionType, indexPath: IndexPath) {
-        // not for this VC
-    }
-    
+  
     func removeAction(indexPath: IndexPath) {
         selectedUsersData.remove(at: indexPath.row)
         collectionView.reloadData()

@@ -17,10 +17,11 @@ class ViewEmpEducationDetailsVC: UIViewController {
     @IBOutlet weak var expiryDateLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var attachmentPreviewView: UIView!
     private var pageNumber = 1
     private var totalPages = 1
     private var data = [EducationRecord]()
-    
+    private var filePath = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
@@ -30,18 +31,33 @@ class ViewEmpEducationDetailsVC: UIViewController {
     private func initlization(){
         setUpTableView()
         searchTextField.addTarget(self, action: #selector(searchAction(textField:)), for: .editingChanged)
-        
         addObserver()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getAllEducationDetails(isFromBottom: false)
+        setUpAttachmentPreview()
     }
+    
+    private func setUpAttachmentPreview(){
+        let filePath = ViewEmployeeDetailsVC.empData.attachments?.en0001
+        if let filePath = filePath {
+            self.filePath = filePath
+            attachmentPreviewView.isHidden = false
+        }else{
+            attachmentPreviewView.isHidden = true
+        }
+    }
+    
     
     private func addObserver(){
         NotificationCenter.default.addObserver(forName: .init("LoadingEducation"), object: nil, queue: .main) { notify in
             self.getAllEducationDetails(isFromBottom: false)
+        }
+        NotificationCenter.default.addObserver(forName: .init("SetUpAttachReviewEN"), object: nil, queue: .main) { notify in
+            self.setUpAttachmentPreview()
         }
     }
     
@@ -61,13 +77,17 @@ class ViewEmpEducationDetailsVC: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    
-    @IBAction func attachAction(_ sender: Any) {
-//        APIController.shard.getAttachmentPreview { data in
-//            if let status = data.status , status{
-//
-//            }
-//        }
+    @IBAction func attachmentPreviewAction(_ sender: Any) {
+        APIController.shard.getAttachmentPreview(filePath:filePath) { data in
+            DispatchQueue.main.async {
+                if let status = data.status , status{
+                    let vc = WebViewViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    vc.data = data
+                    self.navigationController?.present(nav, animated: true)
+                }
+            }
+        }
     }
     
 }

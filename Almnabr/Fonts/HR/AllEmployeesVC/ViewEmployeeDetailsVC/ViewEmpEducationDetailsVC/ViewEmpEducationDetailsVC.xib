@@ -20,6 +20,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewEmpEducationDetailsVC" customModule="Almnabr" customModuleProvider="target">
             <connections>
+                <outlet property="attachmentPreviewView" destination="tCc-QB-6k2" id="cjp-lu-hAu"/>
                 <outlet property="expiryDateLabel" destination="gZK-K7-YhL" id="42J-hZ-X4q"/>
                 <outlet property="graduationLabel" destination="Rdj-xn-fLf" id="8AP-8B-xMi"/>
                 <outlet property="graduationYearLabel" destination="bA5-44-p59" id="dSf-Fo-5OK"/>
@@ -222,7 +223,7 @@
                     <rect key="frame" x="353" y="216.5" width="45" height="45"/>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                     <connections>
-                        <action selector="attachAction:" destination="-1" eventType="touchUpInside" id="ZV8-II-EaB"/>
+                        <action selector="attachmentPreviewAction:" destination="-1" eventType="touchUpInside" id="WQc-hL-glz"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EqC-Vw-DIX">

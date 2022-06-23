@@ -19,6 +19,8 @@ struct UpdateSettingResponse : Mappable {
 	var status_code : Int?
 	var msg : String?
     var error:String?
+    var attachments: Attachments?
+
     
 	init?(map: Map) {
 
@@ -30,6 +32,7 @@ struct UpdateSettingResponse : Mappable {
 		status_code <- map["status_code"]
 		msg <- map["msg"]
         error <- map["error"]
+        attachments <- map["attachments"]
         
 	}
 

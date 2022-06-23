@@ -9,7 +9,7 @@
 import UIKit
 import DropDown
 class ViewEmpInsuranceDetailsVC: UIViewController {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var insuranceNumberLabel: UILabel!
@@ -20,6 +20,8 @@ class ViewEmpInsuranceDetailsVC: UIViewController {
     @IBOutlet weak var filterArrow: UIImageView!
     @IBOutlet weak var filterLabel: UILabel!
     
+    @IBOutlet weak var attachmentPreviewView: UIView!
+    
     @IBOutlet weak var searchTextField: UITextField!
     private var data = [InsuranceRecords]()
     private var pageNumber = 1
@@ -27,12 +29,12 @@ class ViewEmpInsuranceDetailsVC: UIViewController {
     private var selectedSearchStatus:Int?
     
     private var dropDown = DropDown()
-    
+    private var filePath = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
-
+        
     }
     
     
@@ -44,16 +46,30 @@ class ViewEmpInsuranceDetailsVC: UIViewController {
         addObserver()
         filterView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(filterViewAction)))
         searchTextField.addTarget(self, action: #selector(searchAction(textField:)), for: .editingChanged)
-        
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getInsuranceData(isFromBottom: false)
+        setUpAttachmentView()
+    }
+    
+    private func setUpAttachmentView(){
+        let filePath = ViewEmployeeDetailsVC.empData.attachments?.ir0001
+        if let filePath = filePath{
+            self.filePath = filePath
+            attachmentPreviewView.isHidden = false
+        }else{
+            attachmentPreviewView.isHidden = true
+        }
     }
     
     private func addObserver(){
         NotificationCenter.default.addObserver(forName: .init(rawValue: "ReloadInsuranceDetails"), object: nil, queue: .main) { notify in
             self.getInsuranceData(isFromBottom: false)
+        }
+        NotificationCenter.default.addObserver(forName: .init(rawValue: "SetUpAttachReviewIR"), object: nil, queue: .main) { notify in
+            self.setUpAttachmentView()
         }
     }
     
@@ -108,6 +124,18 @@ class ViewEmpInsuranceDetailsVC: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func attachmentPreviewAction(_ sender: Any) {
+        APIController.shard.getAttachmentPreview(filePath:filePath) { data in
+            DispatchQueue.main.async {
+                if let status = data.status , status{
+                    let vc = WebViewViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    vc.data = data
+                    self.navigationController?.present(nav, animated: true)
+                }
+            }
+        }
+    }
     
 }
 
@@ -138,7 +166,7 @@ extension ViewEmpInsuranceDetailsVC:UITableViewDelegate, UITableViewDataSource{
             }
         }
     }
-
+    
 }
 
 // MARK: - Table View Cell Delegate

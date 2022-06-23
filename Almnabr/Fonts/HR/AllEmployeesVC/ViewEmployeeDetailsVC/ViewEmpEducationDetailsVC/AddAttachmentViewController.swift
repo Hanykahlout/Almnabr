@@ -41,7 +41,7 @@ class AddAttachmentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
-        // Do any additional setup after loading the view.
+
     }
     
     private func initlization(){
@@ -225,6 +225,7 @@ extension AddAttachmentViewController:UICollectionViewDelegate,UICollectionViewD
 
 // MARK: - Collection View Cell Delegate
 extension AddAttachmentViewController: UsersCollectionViewCellDelegate{
+ 
     func removeAction(indexPath: IndexPath) {
         selectedItems.remove(at: indexPath.row)
         collectionView.reloadData()
@@ -232,11 +233,7 @@ extension AddAttachmentViewController: UsersCollectionViewCellDelegate{
             visiblityLabel.isHidden = false
         }
     }
-    
-    func removeAction(type: CollectionType, indexPath: IndexPath) {
-        // no action here
-    }
-    
+   
 }
 
 
@@ -269,6 +266,15 @@ extension AddAttachmentViewController{
         if !isUpdate{
             APIController.shard.uploadAttachmentData(fileUrl: fileUrl, body: body) { data in
                 self.handleResponseData(data: data)
+                if self.attachmentType == "EN0001"{
+                    ViewEmployeeDetailsVC.empData.attachments?.en0001 = data.attachments?.en0001
+                    ViewEmployeeDetailsVC.empData.attachments?.en0001_d = data.attachments?.en0001_d
+                    NotificationCenter.default.post(name: .init(rawValue: "SetUpAttachReviewEN"), object: nil)
+                }else if self.attachmentType == "IR0001"{
+                    ViewEmployeeDetailsVC.empData.attachments?.ir0001 = data.attachments?.ir0001
+                    ViewEmployeeDetailsVC.empData.attachments?.ir0001_d = data.attachments?.ir0001_d
+                    NotificationCenter.default.post(name: .init(rawValue: "SetUpAttachReviewIR"), object: nil)
+                }
             }
         }else{
             APIController.shard.updateAttachmentData(body: body) { data in

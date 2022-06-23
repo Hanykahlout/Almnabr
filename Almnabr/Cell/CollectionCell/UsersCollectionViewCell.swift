@@ -11,7 +11,14 @@ import MOLH
 
 protocol UsersCollectionViewCellDelegate{
     func removeAction(indexPath:IndexPath)
+    func removeAction(index:Int,indexPath:IndexPath)
     func removeAction(type:CollectionType,indexPath:IndexPath)
+}
+
+extension UsersCollectionViewCellDelegate{
+    func removeAction(indexPath:IndexPath){}
+    func removeAction(index:Int,indexPath:IndexPath){}
+    func removeAction(type:CollectionType,indexPath:IndexPath){}
 }
 
 typealias UsersDelegate = UIViewController & UsersCollectionViewCellDelegate
@@ -22,11 +29,18 @@ class UsersCollectionViewCell: UICollectionViewCell {
     
     weak var delegate:UsersDelegate?
     private var indexPath:IndexPath!
+    private var index:Int?
     var type:CollectionType?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    func setData(index:Int,data:SearchBranchRecords,indexPath:IndexPath){
+        self.index = index
+        self.indexPath = indexPath
+        titleLabel.text = data.label
     }
     
     func setData(data:SearchBranchRecords,indexPath:IndexPath){
@@ -65,7 +79,12 @@ class UsersCollectionViewCell: UICollectionViewCell {
         if let type = type {
             delegate?.removeAction(type: type, indexPath: indexPath)
         }else{
-            delegate?.removeAction(indexPath: indexPath)
+            if let index = index {
+                delegate?.removeAction(index:index,indexPath: indexPath)
+            }else{
+                delegate?.removeAction(indexPath: indexPath)
+            }
+            
         }
     }
 }

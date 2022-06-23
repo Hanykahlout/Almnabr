@@ -50,7 +50,7 @@ class ViewEmpNotesVC: UIViewController {
         dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
         dropDown.dataSource = ["All","Public","Private"]
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.filterView.transform = .init(rotationAngle: 0)
+            self.filterArrow.transform = .init(rotationAngle: 0)
             self.filterLabel.text = item
             switch item{
             case "Public":
@@ -64,7 +64,7 @@ class ViewEmpNotesVC: UIViewController {
         }
         
         dropDown.cancelAction = { [unowned self] in
-            self.filterView.transform = .init(rotationAngle: 0)
+            self.filterArrow.transform = .init(rotationAngle: 0)
         }
         filterView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(filterAction)))
     }

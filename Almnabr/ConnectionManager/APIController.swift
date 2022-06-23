@@ -661,8 +661,8 @@ class APIController{
         }
     }
     
-    func getAttachmentPreview(callback:@escaping(_ data:GetImageResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/file/NUXti954IeEAHZBx8Fkq/dDdNUElZRXpSNmJqQTF6V2xqWUthVXdHZWJWV3VYSERRVmRDVW1VRWxwK0hHRVJwNVBVVXIrSW1pY0VwSm9mRQ"
+    func getAttachmentPreview(filePath:String,callback:@escaping(_ data:GetImageResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/\(filePath)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -684,10 +684,10 @@ class APIController{
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
         let param:[String:Any] = ["id": empId,
-                  "employee_id_number": empIdNumber,
-                  "branch_id": branchId,
-                  "searchKey": searchKey,
-                  "searchStatus": searchStatus]
+                                  "employee_id_number": empIdNumber,
+                                  "branch_id": branchId,
+                                  "searchKey": searchKey,
+                                  "searchStatus": searchStatus]
         
         Alamofire.request(strURL, method: .post , parameters:param,headers:headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
@@ -748,9 +748,9 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let param:Parameters = ["id": empId,
-                         "branch_id": branchId,
-                         "search_key": searchKey,
-                         "search_status": searchStatus]
+                                "branch_id": branchId,
+                                "search_key": searchKey,
+                                "search_status": searchStatus]
         Alamofire.request(strURL, method: .post , parameters:param,headers:headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : NotesGetResponse = Mapper<NotesGetResponse>().map(JSONString:str){
@@ -777,17 +777,17 @@ class APIController{
     
     
     func addNote(note_id:String?,description:String,reminderStatusSelection:String,reminderDate:String,statusSelection:String,linkListSelection:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-
+        
         let strURL = "\(APIManager.serverURL)/\(note_id == nil ? "hr_create_notes" : "hr_update_notes")"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
         var param = ["note_description": description,
-                   "note_remainder_status": reminderStatusSelection,
-                   "note_remainder_date": reminderDate,
-                   "show_status": statusSelection,
-                   "link_with_view_list": linkListSelection,
-                   "id": empId]
+                     "note_remainder_status": reminderStatusSelection,
+                     "note_remainder_date": reminderDate,
+                     "show_status": statusSelection,
+                     "link_with_view_list": linkListSelection,
+                     "id": empId]
         
         if let note_id = note_id {
             param["note_id"] = note_id
@@ -810,9 +810,9 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let param:Parameters = ["branch_id": branchId,
-                          "employee_number": empId,
-                          "search_key": searchKey,
-                          "attachmentType":attachmentType ]
+                                "employee_number": empId,
+                                "search_key": searchKey,
+                                "attachmentType":attachmentType ]
         
         Alamofire.request(strURL, method: .post , parameters:param,headers:headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
@@ -851,6 +851,88 @@ class APIController{
             }
         }
     }
+    
+    func searchForUser(searchText:String,lang:String,id:String,callback:@escaping(_ data:SearchUserResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/tc/getformuserslist?search=\(searchText)&lang_key=\(lang)&user_type_id=\(id)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .get , parameters:nil,headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SearchUserResponse = Mapper<SearchUserResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func submitCommunicationDetails(isIncoming:Bool,files:[String:URL],body:[String:Any],callback:@escaping(_ data:CommunicationSubmitResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/form/\(isIncoming ? "FORM_C2" : "FORM_C1")/cr/0"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            for file in files{
+                
+                do{
+                    let data = try Data(contentsOf: file.value)
+                    multipartFormData.append(data, withName: file.key, fileName: "\(Date.init().timeIntervalSince1970).\(file.value.pathExtension)", mimeType: file.value.mimeType())
+                }catch{
+                    
+                }
+            }
+            for (key, value) in body {
+                if let temp = value as? String {
+                    multipartFormData.append(temp.data(using: .utf8)!, withName: key)
+                }
+            }
+            
+        }, to: URL(string: strURL)!, method: .post , headers: headers) { (result:SessionManager.MultipartFormDataEncodingResult) in
+            switch result{
+            case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
+                upload.responseJSON { (response:DataResponse<Any>) in
+                    if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                        if let parsedMapperString : CommunicationSubmitResponse = Mapper<CommunicationSubmitResponse>().map(JSONString:str){
+                            callback(parsedMapperString)
+                        }
+                    }
+                }
+            case .failure(let error):
+                print("Error:",error.localizedDescription)
+                break
+            }
+        }
+    }
+    
+    func getModulesFilter(callback:@escaping(_ data:GetModulsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/module"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .post , parameters:nil,headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : GetModulsResponse = Mapper<GetModulsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func getModules(pageNumber:String,searchKey:String,module_name:String,empId:String,callback:@escaping(_ data:AllModulesResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/employeemodules/\(pageNumber)/10?search_key=\(searchKey)&module_name=\(module_name)&id=\(empId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .get , parameters:nil,headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AllModulesResponse = Mapper<AllModulesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
 }
 
 

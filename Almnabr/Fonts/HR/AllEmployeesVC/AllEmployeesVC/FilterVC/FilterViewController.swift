@@ -596,10 +596,6 @@ extension FilterViewController{
 
 extension FilterViewController:UsersCollectionViewCellDelegate{
     
-    func removeAction(indexPath: IndexPath) {
-        // not for this VC
-    }
-    
     func removeAction(type: CollectionType, indexPath: IndexPath) {
         switch type {
         case .nationalityCollectionView:

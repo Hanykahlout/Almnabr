@@ -14,26 +14,32 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Attachments : Mappable {
-	var en0001 : String?
-	var en0001_d : String?
-	var id0001 : String?
-	var id0001_d : String?
-    var ir0001: String?
-    var ir0001_d: String?
-    
+struct ModulesRecords : Mappable {
+	var module_key : String?
+	var module_phrase_key : String?
+	var module_enabled : String?
+	var module_default : String?
+	var module_version : String?
+	var module_primary_table : String?
+	var module_primary_tabke_key : String?
+	var module_primary_table_field : String?
+	var module_phrase_val : String?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		en0001 <- map["en0001"]
-		en0001_d <- map["en0001_d"]
-		id0001 <- map["id0001"]
-		id0001_d <- map["id0001_d"]
-        ir0001 <- map["ir0001"]
-        ir0001_d <- map["ir0001_d"]
+		module_key <- map["module_key"]
+		module_phrase_key <- map["module_phrase_key"]
+		module_enabled <- map["module_enabled"]
+		module_default <- map["module_default"]
+		module_version <- map["module_version"]
+		module_primary_table <- map["module_primary_table"]
+		module_primary_tabke_key <- map["module_primary_tabke_key"]
+		module_primary_table_field <- map["module_primary_table_field"]
+		module_phrase_val <- map["module_phrase_val"]
 	}
 
 }

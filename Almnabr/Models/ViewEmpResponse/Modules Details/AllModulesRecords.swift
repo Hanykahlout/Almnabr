@@ -14,26 +14,40 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Attachments : Mappable {
-	var en0001 : String?
-	var en0001_d : String?
-	var id0001 : String?
-	var id0001_d : String?
-    var ir0001: String?
-    var ir0001_d: String?
-    
+struct AllModulesRecords : Mappable {
+	var mention_id : String?
+	var branch_id : String?
+	var user_id : String?
+	var user_type_id : String?
+	var module_key : String?
+	var permission_key : String?
+	var private_key : String?
+	var private_value : String?
+	var group_key : String?
+	var create_by_user_id : String?
+	var create_date : String?
+	var modulename : String?
+	var writer : String?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		en0001 <- map["en0001"]
-		en0001_d <- map["en0001_d"]
-		id0001 <- map["id0001"]
-		id0001_d <- map["id0001_d"]
-        ir0001 <- map["ir0001"]
-        ir0001_d <- map["ir0001_d"]
+		mention_id <- map["mention_id"]
+		branch_id <- map["branch_id"]
+		user_id <- map["user_id"]
+		user_type_id <- map["user_type_id"]
+		module_key <- map["module_key"]
+		permission_key <- map["permission_key"]
+		private_key <- map["private_key"]
+		private_value <- map["private_value"]
+		group_key <- map["group_key"]
+		create_by_user_id <- map["create_by_user_id"]
+		create_date <- map["create_date"]
+		modulename <- map["modulename"]
+		writer <- map["writer"]
 	}
 
 }

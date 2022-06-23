@@ -116,14 +116,27 @@ extension ViewEmpAttachmentsVC:UITableViewDelegate,UITableViewDataSource{
 
 // MARK: - Table View Cell Delegate
 extension ViewEmpAttachmentsVC:AttachmentCellDelegate{
-    func deleteAction(id: String, indexPath: IndexPath) {
-        deleteAttachment(id: id, indexPath: indexPath)
+    func deleteAction(data: AttachmentRecords, indexPath: IndexPath) {
+        deleteAttachment(data: data, indexPath: indexPath)
     }
     
     func editAattchment(data: AttachmentRecords) {
         let vc = AddAttachmentViewController()
         vc.attachmentData = data
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func previewAttachmentAction(data: AttachmentRecords) {
+        APIController.shard.getAttachmentPreview(filePath:data.file_path ?? "") { data in
+            DispatchQueue.main.async {
+                if let status = data.status , status{
+                    let vc = WebViewViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    vc.data = data
+                    self.navigationController?.present(nav, animated: true)
+                }
+            }
+        }
     }
 }
 
@@ -157,10 +170,6 @@ extension ViewEmpAttachmentsVC:UsersCollectionViewCellDelegate{
             docTypeLabel.isHidden = false
         }
         self.getAllAttachments(isFromBottom: false)
-    }
-    
-    func removeAction(type: CollectionType, indexPath: IndexPath) {
-        // not for this VC
     }
 
 }
@@ -198,16 +207,23 @@ extension ViewEmpAttachmentsVC{
     }
     
     
-    func deleteAttachment(id:String,indexPath:IndexPath){
+    func deleteAttachment(data attachmentData: AttachmentRecords,indexPath:IndexPath){
         let empId = ViewEmployeeDetailsVC.empData.data?.employee_number ?? ""
         let branchId = ViewEmployeeDetailsVC.empData.data?.branch_id ?? ""
         showLoadingActivity()
-        APIController.shard.deleteAttachment(key_id: id, branchId: branchId, empId: empId) { data in
+        APIController.shard.deleteAttachment(key_id: attachmentData.file_records_id ?? "", branchId: branchId, empId: empId) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 var alertVC:UIAlertController!
                 if let status = data.status,status{
                     alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
+                    if attachmentData.key_code == "EN0001"{
+                        ViewEmployeeDetailsVC.empData.attachments?.en0001 = nil
+                        ViewEmployeeDetailsVC.empData.attachments?.en0001_d = nil
+                    }else if attachmentData.key_code == "IR0001"{
+                        ViewEmployeeDetailsVC.empData.attachments?.ir0001 = nil
+                        ViewEmployeeDetailsVC.empData.attachments?.ir0001_d = nil
+                    }
                     self.data.remove(at: indexPath.row)
                     self.tableView.reloadData()
                 }else{

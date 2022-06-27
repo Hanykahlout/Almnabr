@@ -343,3 +343,7 @@
 "ID" = "ID";
 "Name" = "Name";
 "Specifications" = "Specifications";
+
+"Incoming" = "Incoming";
+"Outgoing" = "Outgoing";
+

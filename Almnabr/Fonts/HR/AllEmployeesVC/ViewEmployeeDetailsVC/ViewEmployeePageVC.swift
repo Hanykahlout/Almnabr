@@ -11,6 +11,7 @@ import UIKit
 class ViewEmployeePageVC: UIPageViewController {
     
     private var containerVCs = [UIViewController]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -68,7 +69,7 @@ extension ViewEmployeePageVC: UIPageViewControllerDelegate , UIPageViewControlle
         }
         let index = currentIndex - 1
         guard index >= 0 else { return nil }
-        
+        NotificationCenter.default.post(name: .init(rawValue: "ViewEmpPageControllerScrolled"), object: index)
         return containerVCs[index]
     }
     
@@ -80,7 +81,7 @@ extension ViewEmployeePageVC: UIPageViewControllerDelegate , UIPageViewControlle
         let index = currentIndex + 1
 
         guard index < containerVCs.count  else { return nil }
-        
+        NotificationCenter.default.post(name: .init(rawValue: "ViewEmpPageControllerScrolled"), object: index)
         return containerVCs[index]
     }
     

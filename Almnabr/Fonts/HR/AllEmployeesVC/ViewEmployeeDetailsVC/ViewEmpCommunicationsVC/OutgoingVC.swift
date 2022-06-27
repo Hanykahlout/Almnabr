@@ -10,6 +10,7 @@ import UIKit
 import MOLH
 import DropDown
 import Fastis
+
 class OutgoingVC: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
@@ -110,7 +111,9 @@ class OutgoingVC: UIViewController {
     private var currentIndexPath:IndexPath?
     private var selectedLang = ""
     private var selectedDatainAr = ""
+    
     var isIncoming = false
+    var myTranstion:String?
     override func viewDidLoad() {
         super.viewDidLoad()
         initlziation()
@@ -192,7 +195,8 @@ class OutgoingVC: UIViewController {
         receipientDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.receipientArrow.transform = .init(rotationAngle: 0)
             self.receipientTextField.text = item
-            if !self.receipientSearchResult.isEmpty{
+            
+            if !self.receipientSearchResult.isEmpty && item != "There are no Data's" {
                 self.receipientTextField.text = item
                 self.selectedReceipientSearchResult = receipientSearchResult[index]
             }
@@ -423,7 +427,7 @@ class OutgoingVC: UIViewController {
     
     
     @IBAction func backAction(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        navigationController?.dismiss(animated: true)
     }
     
     
@@ -715,7 +719,10 @@ extension OutgoingVC{
                 if let status = data.status,status{
                     alertVC = UIAlertController(title: "Success", message: "Action has been completed successfully !!!", preferredStyle: .alert)
                     alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: { action in
-                        // Go to next VC
+                        let vc:ViewOutgoingViewController = AppDelegate.HRSB.instanceVC()
+                        vc.id = "\(data.transaction_request_id ?? -1)"
+                        vc.isIncoming = self.isIncoming
+                        self.navigationController?.pushViewController(vc, animated: true)
                     }))
                 }else{
                     alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)

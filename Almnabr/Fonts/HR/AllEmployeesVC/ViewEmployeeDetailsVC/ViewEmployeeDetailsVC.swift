@@ -33,6 +33,7 @@ class ViewEmployeeDetailsVC: UIViewController {
     private func intilization(){
         setUpCollectionView()
         setCollectionData()
+        addObserver()
         if MOLHLanguage.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
             forwordImageView.transform = .init(rotationAngle: .pi)
@@ -43,7 +44,15 @@ class ViewEmployeeDetailsVC: UIViewController {
         getEmployeeViewData()
     }
     
-  
+    
+    private func addObserver(){
+        NotificationCenter.default.addObserver(forName: .init("ViewEmpPageControllerScrolled"), object: nil, queue: .main) { notify in
+            guard let index = notify.object as? Int else { return }
+            print("ASDASDASD-Index",index)
+            let lang = MOLHLanguage.currentAppleLanguage()
+            self.goToSelectedCell(indexPath:  IndexPath(row: lang == "en" ? index : (self.data.count - 1) - index, section: 0))
+        }
+    }
     
     
     private func setUpPageViewController(){

@@ -22,7 +22,6 @@ class WebViewViewController: UIViewController {
             backButton.transform = .init(rotationAngle: .pi)
         }
         if let data = data {
-            print("AASDASD", data.base64 ?? "")
             if let fileData = Data(base64Encoded: data.base64 ?? ""){
                 webView.load(fileData, mimeType: data.content_type ?? "", characterEncodingName: "", baseURL: URL(string: "https://nahidh.sa/backend")!)
             }

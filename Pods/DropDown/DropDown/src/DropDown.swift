@@ -58,7 +58,6 @@ public final class DropDown: UIView {
 		case manual
 
 	}
-
 	/// The direction where the drop down will show from the `anchorView`.
 	public enum Direction {
 
@@ -376,7 +375,12 @@ public final class DropDown: UIView {
 			reloadAllComponents()
 		}
 	}
-
+    
+    public func convertToArLang(){
+        self.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+        tableView.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
+    }
+   
 	/**
 	The localization keys for the data source for the drop down.
 
@@ -503,6 +507,8 @@ public final class DropDown: UIView {
 
 private extension DropDown {
 
+    
+    
 	func setup() {
 		tableView.register(cellNib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
 
@@ -638,6 +644,8 @@ extension DropDown {
 
 		tableViewContainer.addUniversalConstraints(format: "|[tableView]|", views: ["tableView": tableView])
 	}
+    
+    
 
 	public override func layoutSubviews() {
 		super.layoutSubviews()

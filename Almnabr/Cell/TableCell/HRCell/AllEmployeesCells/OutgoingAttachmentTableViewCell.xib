@@ -155,7 +155,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eU7-Ic-l74">
-                                                <rect key="frame" x="158" y="0.0" width="303" height="45"/>
+                                                <rect key="frame" x="158" y="18" width="303" height="27"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="27" id="xnC-mn-Y65"/>
+                                                </constraints>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" image="delete"/>
                                                 <connections>

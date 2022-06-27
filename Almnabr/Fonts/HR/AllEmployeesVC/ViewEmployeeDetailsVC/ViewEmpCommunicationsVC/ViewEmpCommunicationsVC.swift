@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import MOLH
 
 class ViewEmpCommunicationsVC: UIViewController {
     
@@ -17,7 +18,6 @@ class ViewEmpCommunicationsVC: UIViewController {
     @IBOutlet weak var seachTextField: UITextField!
     @IBOutlet weak var addButton: UIButton!
     
-    private var addDropDown = DropDown()
     private var filterDropDown = DropDown()
     
     override func viewDidLoad() {
@@ -31,26 +31,19 @@ class ViewEmpCommunicationsVC: UIViewController {
     }
     
     private func setUpDropDownLists(){
-        // ADD Drop Down
-        addDropDown.anchorView = addButton
-        
-        addDropDown.bottomOffset = CGPoint(x: 0, y:(addDropDown.anchorView?.plainView.bounds.height)!)
-        
-        addDropDown.dataSource = ["lang_incoming","lang_outgoing"]
-        addDropDown.selectionAction = { (index: Int, item: String) in
-            
-            let vc = OutgoingVC()
-            vc.isIncoming = index == 0
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
-        
         // Filter Drop Down
         filterDropDown.anchorView = filterView
         
-        filterDropDown.bottomOffset = CGPoint(x: 0, y:(filterDropDown.anchorView?.plainView.bounds.height)!)
-        filterDropDown.dataSource = ["Incoming","Outgoing"]
-        filterLabel.text = "Outgoing"
+        filterDropDown.bottomOffset = CGPoint(x: 0 , y:(filterDropDown.anchorView?.plainView.bounds.height)!)
+        
+        if MOLHLanguage.currentAppleLanguage() == "ar"{
+            filterDropDown.convertToArLang()
+        }
+        
+        
+        filterDropDown.dataSource = ["Incoming".localized(),"Outgoing".localized()]
+        filterLabel.text = "Outgoing".localized()
+        
         filterDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.filterArrow.transform = .init(rotationAngle: 0)
             self.filterLabel.text = item
@@ -70,7 +63,28 @@ class ViewEmpCommunicationsVC: UIViewController {
     
     
     @IBAction func addAction(_ sender: Any) {
-        addDropDown.show()
+        let alertVC = UIAlertController(title: "Choose the type of connections you want to make ", message: "", preferredStyle: .actionSheet)
+        alertVC.addAction(.init(title: "lang_incoming", style: .default, handler: { action in
+            let vc = OutgoingVC()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            nav.setNavigationBarHidden(true, animated: false)
+            vc.isIncoming = true
+            self.navigationController?.present(nav, animated: true)
+        }))
+        
+        alertVC.addAction(.init(title: "lang_outgoing", style: .default, handler: { action in
+            let vc = OutgoingVC()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            nav.setNavigationBarHidden(true, animated: false)
+            
+            vc.isIncoming = false
+            self.navigationController?.present(nav, animated: true)
+        }))
+        
+        alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+        present(alertVC, animated: true)
     }
     
 }

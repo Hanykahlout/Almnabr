@@ -14,6 +14,7 @@ class ModulesTableViewCell: UITableViewCell {
     @IBOutlet weak var moduleIdsLabel: UILabel!
     @IBOutlet weak var writerLabel: UILabel!
     @IBOutlet weak var onDateLabel: UILabel!
+    private var data:AllModulesRecords!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -26,6 +27,7 @@ class ModulesTableViewCell: UITableViewCell {
     }
     
     func setData(data:AllModulesRecords){
+        self.data = data
         moduleLabel.text = data.modulename ?? ""
         moduleIdsLabel.text = data.private_value ?? ""
         writerLabel.text = data.writer ?? ""
@@ -33,5 +35,6 @@ class ModulesTableViewCell: UITableViewCell {
     }
     
     @IBAction func viewAction(_ sender: Any) {
+        NotificationCenter.default.post(name: .init(rawValue: "GoToUsersVC"), object: data)
     }
 }

@@ -33,6 +33,7 @@ class ViewEmpModulesVC: UIViewController {
     
     private func initlization(){
         filterLabel.text = "Modules - All"
+        addCellObserver()
         setUpTableView()
         setUpDropDownList()
         getModules()
@@ -44,6 +45,14 @@ class ViewEmpModulesVC: UIViewController {
         getAllModules(isFromBottom: false)
     }
     
+    private func addCellObserver(){
+        NotificationCenter.default.addObserver(forName: .init(rawValue: "GoToUsersVC"), object: nil, queue: .main) { notify in
+            guard let data = notify.object as? AllModulesRecords else { return }
+            let vc = UsersViewController()
+            vc.module = data
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     
     private func setUpDropDownList(){
         dropDown.anchorView = filterView

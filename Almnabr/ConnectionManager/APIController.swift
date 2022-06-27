@@ -392,10 +392,11 @@ class APIController{
         let strURL = "\(APIManager.serverURL)/\(url)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
-        
+        print("URLSASADASD-1",strURL)
         Alamofire.request(strURL, method: .get , parameters:nil,headers:headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : GetImageResponse = Mapper<GetImageResponse>().map(JSONString:str){
+                    print("URLSASADASD-2",parsedMapperString.base64)
                     callback(parsedMapperString)
                 }
             }
@@ -932,6 +933,39 @@ class APIController{
             }
         }
     }
+    
+    func getModuleUers(body:[String:Any],callback:@escaping(_ data:ModuleUersResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/moduleusers"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .post , parameters:body,headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ModuleUersResponse = Mapper<ModuleUersResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    
+    func getMyTransactionData(url:String,callback:@escaping(_ data:TransactionResponse)->Void){
+    
+        let strURL = "\(APIManager.serverURL)/\(url)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .get , parameters: nil,headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                print("AAAAQW-Str",str)
+                if let parsedMapperString : TransactionResponse = Mapper<TransactionResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
     
 }
 

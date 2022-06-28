@@ -16,6 +16,7 @@ import ObjectMapper
 
 struct form_c2_dataRecords : Mappable {
 	var form_c2_data_id : String?
+    var form_c1_data_id : String?
 	var transaction_key : String?
 	var transaction_request_id : String?
 	var subject : String?
@@ -36,6 +37,7 @@ struct form_c2_dataRecords : Mappable {
 	mutating func mapping(map: Map) {
 
 		form_c2_data_id <- map["form_c2_data_id"]
+        form_c1_data_id <- map["form_c1_data_id"]
 		transaction_key <- map["transaction_key"]
 		transaction_request_id <- map["transaction_request_id"]
 		subject <- map["subject"]
@@ -48,6 +50,8 @@ struct form_c2_dataRecords : Mappable {
 		transaction_to <- map["transaction_to"]
 		transaction_from_name <- map["transaction_from_name"]
 		transaction_to_name <- map["transaction_to_name"]
+        
+
 	}
 
 }

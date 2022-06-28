@@ -17,9 +17,9 @@ class ViewOutgoingViewController: UIViewController {
     private var pageController:ViewOutgoingPageVC!
     private var data = [SectionInfo]()
     private var selectedIndex = 0
-    var isIncoming = false
     var id = ""
     public static var data:TransactionResponse?
+    var isIncoming = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +43,7 @@ class ViewOutgoingViewController: UIViewController {
         super.viewWillAppear(animated)
         
     }
+    
     
     private func addObservers(){
         NotificationCenter.default.addObserver(forName: .init("ChangeDescriptionTitle"), object: nil, queue: . main) { notify in

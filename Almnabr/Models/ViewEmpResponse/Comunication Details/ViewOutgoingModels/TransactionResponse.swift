@@ -26,9 +26,12 @@ struct TransactionResponse : Mappable {
 	var transactions_persons : Transactions_persons?
 	var transactions_buttons : Transactions_buttons?
 	var form_c2_data : Form_c2_data?
+    var form_c1_data : Form_c2_data?
 	var transactions_extra : Transactions_extra?
 	var form_c2_files : Form_c2_files?
-
+    var form_c1_files : Form_c2_files?
+    var isIncoming = false
+    
 	init?(map: Map) {
 
 	}
@@ -45,8 +48,12 @@ struct TransactionResponse : Mappable {
 		transactions_persons <- map["transactions_persons"]
 		transactions_buttons <- map["transactions_buttons"]
 		form_c2_data <- map["form_c2_data"]
+        form_c1_data <- map["form_c1_data"]
+        
 		transactions_extra <- map["transactions_extra"]
 		form_c2_files <- map["form_c2_files"]
+        form_c1_files <- map["form_c1_files"]
+        
 	}
 
 }

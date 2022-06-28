@@ -10,6 +10,12 @@ import UIKit
 
 class ViewAttachTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var attachwithPdfStackView: UIStackView!
+    @IBOutlet weak var officialPaperStackView: UIStackView!
+    @IBOutlet weak var attachWithPdfLabel: UILabel!
+    @IBOutlet weak var officialPaperLabel: UILabel!
+    
+    
     @IBOutlet weak var titleLabel: UILabel!
     private var fileURL = ""
     override func awakeFromNib() {
@@ -19,12 +25,16 @@ class ViewAttachTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
+
         // Configure the view for the selected state
     }
     
-    func setData(data:form_c2_filesRecords){
-        titleLabel.text = data.form_c2_file_attach_title ?? ""
+    func setData(isIncoming:Bool,data:form_c2_filesRecords){
+        attachwithPdfStackView.isHidden = isIncoming
+        officialPaperStackView.isHidden = isIncoming
+        attachWithPdfLabel.text = data.form_c1_file_attach_with_the_document ?? "" == "1" ? "Yes" : "No"
+        officialPaperLabel.text = data.form_c1_file_print_official_paper ?? "" == "1" ? "Yes" : "No"
+        titleLabel.text = isIncoming ? data.form_c2_file_attach_title ?? "" : data.form_c1_file_attach_title ?? ""
         fileURL = data.link ?? ""
     }
     

@@ -11,17 +11,19 @@ import UIKit
 class ViewOutgoingPageVC: UIPageViewController {
     
     private var containerVCs = [UIViewController]()
-    var isIncoming = false
     var id = ""
+    var isIncoming = false
     override func viewDidLoad() {
         super.viewDidLoad()
         let requestDetailsVC = RequestDetailsViewController()
-        requestDetailsVC.isIncoming = isIncoming
         requestDetailsVC.id = id
+        requestDetailsVC.isIncoming = isIncoming
         containerVCs.append(requestDetailsVC)
         containerVCs.append(OngoingViewDetailsViewController())
         containerVCs.append(PresonDetailsViewController())
-        containerVCs.append(OutgoingAttachViewController())
+        let outgoingAttachVC = OutgoingAttachViewController()
+        containerVCs.append(outgoingAttachVC)
+        
         containerVCs.append(OutgoingHistoryViewController())
         delegate = self
         dataSource = self

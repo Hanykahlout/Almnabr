@@ -111,8 +111,8 @@ class OutgoingVC: UIViewController {
     private var currentIndexPath:IndexPath?
     private var selectedLang = ""
     private var selectedDatainAr = ""
-    
     var isIncoming = false
+
     var myTranstion:String?
     override func viewDidLoad() {
         super.viewDidLoad()

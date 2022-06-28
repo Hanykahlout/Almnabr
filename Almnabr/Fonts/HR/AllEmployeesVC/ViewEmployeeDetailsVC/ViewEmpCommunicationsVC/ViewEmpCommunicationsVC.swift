@@ -65,26 +65,26 @@ class ViewEmpCommunicationsVC: UIViewController {
     @IBAction func addAction(_ sender: Any) {
         let alertVC = UIAlertController(title: "Choose the type of connections you want to make ", message: "", preferredStyle: .actionSheet)
         alertVC.addAction(.init(title: "lang_incoming", style: .default, handler: { action in
-            let vc = OutgoingVC()
-            let nav = UINavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .fullScreen
-            nav.setNavigationBarHidden(true, animated: false)
-            vc.isIncoming = true
-            self.navigationController?.present(nav, animated: true)
+            self.goToOutgoingVC(isIncoming: true)
         }))
         
         alertVC.addAction(.init(title: "lang_outgoing", style: .default, handler: { action in
-            let vc = OutgoingVC()
-            let nav = UINavigationController(rootViewController: vc)
-            nav.modalPresentationStyle = .fullScreen
-            nav.setNavigationBarHidden(true, animated: false)
-            
-            vc.isIncoming = false
-            self.navigationController?.present(nav, animated: true)
+            self.goToOutgoingVC(isIncoming: false)
         }))
         
         alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
         present(alertVC, animated: true)
     }
+    
+    
+    private func goToOutgoingVC(isIncoming:Bool){
+        let vc = OutgoingVC()
+        vc.isIncoming = isIncoming
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
+        nav.setNavigationBarHidden(true, animated: false)
+        self.navigationController?.present(nav, animated: true)
+    }
+    
     
 }

@@ -14,10 +14,9 @@ class RequestDetailsViewController: UIViewController {
     @IBOutlet weak var barcodeLabel: UILabel!
     @IBOutlet weak var createdByLabel: UILabel!
     @IBOutlet weak var createdDateLabel: UILabel!
-    var isIncoming = false
     var id = ""
     @IBOutlet weak var statusLabel: UILabel!
-    
+    var isIncoming = false
     override func viewDidLoad() {
         super.viewDidLoad()
         initlizaiton()
@@ -33,6 +32,7 @@ class RequestDetailsViewController: UIViewController {
                 self.hideLoadingActivity()
                 if let status = data.status, status{
                     ViewOutgoingViewController.data = data
+                    ViewOutgoingViewController.data?.isIncoming = self.isIncoming
                     NotificationCenter.default.post(name: .init(rawValue: "ChangeDescriptionTitle"), object: data.transactions_request?.transaction_request_description ?? "")
                     self.setData()
                 }

@@ -1,9 +1,9 @@
 //
-//  BottomBorderTextField.swift
-//  Momma
+//  L102Localizer.swift
+//  Advertiser
 //
-//  Created by Momen Sisalem on 1/2/20.
-//  Copyright © 2020 Momen MReyad Sisalem. All rights reserved.
+//  Created by HanyMac on 1/24/18.
+//  Copyright © 2018 Hany Alkahlout. All rights reserved.
 //
 
 import Foundation

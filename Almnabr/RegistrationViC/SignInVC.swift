@@ -314,8 +314,8 @@ class SignInVC: UIViewController {
     
     func change_language(){
         
-        guard let window = UIApplication.shared.keyWindow else { return }
         
+        if let window = (UIApplication.shared.delegate as? AppDelegate)?.window{
         self.showAMessage(withTitle: "Change language".localized(), message: "Restart app recommanded to change the language".localized(), completion:{
             MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
             MOLH.reset()
@@ -325,16 +325,16 @@ class SignInVC: UIViewController {
             }, completion: { completed in
                 
                 
-                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                    
-                    exit(EXIT_SUCCESS)
-                })
+//                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+//                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+//                    
+//                    exit(EXIT_SUCCESS)
+//                })
             })
             
             
         })
-        
+        }
         
     }
     

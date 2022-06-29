@@ -44,6 +44,9 @@
 		3F1436952848A120008ABC19 /* GraidentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1436862848A120008ABC19 /* GraidentView.swift */; };
 		3F1436962848A120008ABC19 /* UILabelDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1436872848A120008ABC19 /* UILabelDesignable.swift */; };
 		3F1436992848A801008ABC19 /* SettingsPermissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1436972848A801008ABC19 /* SettingsPermissionVC.swift */; };
+		3F1F94D7286C38ED00E454BF /* AllEmployeesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F94D9286C38ED00E454BF /* AllEmployeesVC.xib */; };
+		3F1F94E1286C3D6E00E454BF /* L102Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1F94DF286C3D6E00E454BF /* L102Localizer.swift */; };
+		3F1F94E2286C3D6E00E454BF /* L102Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1F94E0286C3D6E00E454BF /* L102Language.swift */; };
 		3F217B09285B3D8A00759569 /* AddAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F217B07285B3D8A00759569 /* AddAttachmentViewController.swift */; };
 		3F217B0A285B3D8A00759569 /* AddAttachmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F217B08285B3D8A00759569 /* AddAttachmentViewController.xib */; };
 		3F2B2C1028524F5B00C33FAD /* EmployeeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B2C0E28524F5A00C33FAD /* EmployeeResponse.swift */; };
@@ -228,7 +231,6 @@
 		3FDF828A28575E1500FEAA49 /* EditEmployeePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDF828928575E1500FEAA49 /* EditEmployeePageViewController.swift */; };
 		3FDF828C2857939400FEAA49 /* ViewEmployeePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FDF828B2857939400FEAA49 /* ViewEmployeePageVC.swift */; };
 		3FE0435F284CB18300738F22 /* AllEmployeesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE0435D284CB18300738F22 /* AllEmployeesVC.swift */; };
-		3FE04360284CB18300738F22 /* AllEmployeesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FE0435E284CB18300738F22 /* AllEmployeesVC.xib */; };
 		3FF6EDA7284B4DE00003E6F4 /* UpdateSettingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6EDA6284B4DDF0003E6F4 /* UpdateSettingResponse.swift */; };
 		3FF6EDB1284B6C220003E6F4 /* AddPermissionMentionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6EDAF284B6C220003E6F4 /* AddPermissionMentionsVC.swift */; };
 		3FF6EDB2284B6C220003E6F4 /* AddPermissionMentionsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6EDB0284B6C220003E6F4 /* AddPermissionMentionsVC.xib */; };
@@ -555,6 +557,10 @@
 		3F1436862848A120008ABC19 /* GraidentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraidentView.swift; sourceTree = "<group>"; };
 		3F1436872848A120008ABC19 /* UILabelDesignable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelDesignable.swift; sourceTree = "<group>"; };
 		3F1436972848A801008ABC19 /* SettingsPermissionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPermissionVC.swift; sourceTree = "<group>"; };
+		3F1F94DC286C396B00E454BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AllEmployeesVC.xib; sourceTree = "<group>"; };
+		3F1F94DD286C39DE00E454BF /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AllEmployeesVC.strings; sourceTree = "<group>"; };
+		3F1F94DF286C3D6E00E454BF /* L102Localizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L102Localizer.swift; sourceTree = "<group>"; };
+		3F1F94E0286C3D6E00E454BF /* L102Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L102Language.swift; sourceTree = "<group>"; };
 		3F217B07285B3D8A00759569 /* AddAttachmentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAttachmentViewController.swift; sourceTree = "<group>"; };
 		3F217B08285B3D8A00759569 /* AddAttachmentViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAttachmentViewController.xib; sourceTree = "<group>"; };
 		3F2B2C0E28524F5A00C33FAD /* EmployeeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeResponse.swift; sourceTree = "<group>"; };
@@ -739,7 +745,6 @@
 		3FDF828928575E1500FEAA49 /* EditEmployeePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEmployeePageViewController.swift; sourceTree = "<group>"; };
 		3FDF828B2857939400FEAA49 /* ViewEmployeePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEmployeePageVC.swift; sourceTree = "<group>"; };
 		3FE0435D284CB18300738F22 /* AllEmployeesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllEmployeesVC.swift; sourceTree = "<group>"; };
-		3FE0435E284CB18300738F22 /* AllEmployeesVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllEmployeesVC.xib; sourceTree = "<group>"; };
 		3FF6EDA6284B4DDF0003E6F4 /* UpdateSettingResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSettingResponse.swift; sourceTree = "<group>"; };
 		3FF6EDAF284B6C220003E6F4 /* AddPermissionMentionsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPermissionMentionsVC.swift; sourceTree = "<group>"; };
 		3FF6EDB0284B6C220003E6F4 /* AddPermissionMentionsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPermissionMentionsVC.xib; sourceTree = "<group>"; };
@@ -1089,6 +1094,7 @@
 		3F1436762848A120008ABC19 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				3F1F94DE286C3D6E00E454BF /* Language */,
 				3F1436782848A120008ABC19 /* ViewCustomExtension.swift */,
 				3F1436792848A120008ABC19 /* Designables */,
 			);
@@ -1116,6 +1122,15 @@
 			path = Designables;
 			sourceTree = "<group>";
 		};
+		3F1F94DE286C3D6E00E454BF /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				3F1F94DF286C3D6E00E454BF /* L102Localizer.swift */,
+				3F1F94E0286C3D6E00E454BF /* L102Language.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
 		3F397D832860C16600A7DAB4 /* Attachments Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -1132,7 +1147,7 @@
 			children = (
 				3F3EED79284E1EA300FFFC46 /* FilterVC */,
 				3FE0435D284CB18300738F22 /* AllEmployeesVC.swift */,
-				3FE0435E284CB18300738F22 /* AllEmployeesVC.xib */,
+				3F1F94D9286C38ED00E454BF /* AllEmployeesVC.xib */,
 			);
 			path = AllEmployeesVC;
 			sourceTree = "<group>";
@@ -2582,7 +2597,7 @@
 				3F14367228489F50008ABC19 /* SettingsTableViewCell.xib in Resources */,
 				FA03242D26FB9BFA00372EA6 /* Main.storyboard in Resources */,
 				3F05A9BA2868AA2300D90CE7 /* PersonDetailsTableViewCell.xib in Resources */,
-				3FE04360284CB18300738F22 /* AllEmployeesVC.xib in Resources */,
+				3F1F94D7286C38ED00E454BF /* AllEmployeesVC.xib in Resources */,
 				3FB305B9286863CD00CAC16F /* RequestDetailsViewController.xib in Resources */,
 				3FA1D26E28562F47000885FA /* ViewEmpContactDetailsVC.xib in Resources */,
 				FA530A3F270CCA9D0071CDC8 /* CornTransactionTVCell.xib in Resources */,
@@ -2840,6 +2855,7 @@
 				FAF7623128300174000DEAFE /* CheckListVC.swift in Sources */,
 				FABDBAA027F477D8003961FC /* ModulesVC.swift in Sources */,
 				3F65AC6C2850A43400035471 /* BankDetailsViewController.swift in Sources */,
+				3F1F94E2286C3D6E00E454BF /* L102Language.swift in Sources */,
 				FA5CB10527D0DF640023A372 /* ProjectDetailVC.swift in Sources */,
 				3FA1D289285630F0000885FA /* ViewEmpAttachmentsVC.swift in Sources */,
 				3FB305D42868702500CAC16F /* form_c2_filesRecords.swift in Sources */,
@@ -3075,6 +3091,7 @@
 				FABDBA9827F476FF003961FC /* VacationFormVC.swift in Sources */,
 				FAF7623428300262000DEAFE /* CheckListCell.swift in Sources */,
 				3F48C54128589439004D33F8 /* GetImageResponse.swift in Sources */,
+				3F1F94E1286C3D6E00E454BF /* L102Localizer.swift in Sources */,
 				FAC32FB62708C91D0046A0F6 /* TransactionTVCell.swift in Sources */,
 				FA556379279C8B2D00542310 /* TemplateFilterVC.swift in Sources */,
 				FAAF205F27DB734900AD255B /* ContactTVCell.swift in Sources */,
@@ -3119,6 +3136,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3F1F94D9286C38ED00E454BF /* AllEmployeesVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F1F94DC286C396B00E454BF /* Base */,
+				3F1F94DD286C39DE00E454BF /* ar */,
+			);
+			name = AllEmployeesVC.xib;
+			sourceTree = "<group>";
+		};
 		FA03242B26FB9BFA00372EA6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         UIApplication.shared.statusBarStyle = .darkContent
-        
+        L102Localizer.DoTheMagic()
         AppInstance = self
         IQKeyboardManager.shared.enable = true
         

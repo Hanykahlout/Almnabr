@@ -9,7 +9,6 @@
 import Foundation
 import ZVProgressHUD
 import DPLocalization
-import MOLH
 
 extension UIViewController {
     
@@ -156,10 +155,7 @@ extension UIViewController {
     }
     
     func isArabicSelected() -> Bool {
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
-            return true
-        }
-        return false
+        return L102Language.currentAppleLanguage() == "ar"
     }
     
     

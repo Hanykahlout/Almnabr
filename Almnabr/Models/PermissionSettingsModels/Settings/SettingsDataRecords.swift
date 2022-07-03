@@ -27,6 +27,7 @@ struct SettingsDataRecords : Mappable {
 	var settings_updated_datetime : String?
 	var name : String?
 
+    
 	init?(map: Map) {
 
 	}

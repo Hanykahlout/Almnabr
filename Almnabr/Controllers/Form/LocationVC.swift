@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 class LocationVC: UIViewController  {
 
@@ -93,7 +92,7 @@ class LocationVC: UIViewController  {
         self.params["template_id"] = ProjectObj.template_id
        
         
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         }

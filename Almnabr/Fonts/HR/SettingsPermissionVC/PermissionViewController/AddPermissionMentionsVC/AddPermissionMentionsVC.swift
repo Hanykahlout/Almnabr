@@ -8,7 +8,7 @@
 
 import UIKit
 import DropDown
-import MOLH
+
 class AddPermissionMentionsVC: UIViewController {
     
     @IBOutlet weak var branchView: UIView!
@@ -46,7 +46,7 @@ class AddPermissionMentionsVC: UIViewController {
     }
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             backButton.transform = .init(rotationAngle: .pi)
         }
         userLabel.isHidden = false
@@ -163,14 +163,14 @@ extension AddPermissionMentionsVC{
         APIController.shard.addPermissionMentionsData(branch_id: branch_id, group_id: group_id, users_id: users_id) { data in
             if let status = data.status{
                 if status{
-                    let alertVC = UIAlertController(title: "Success", message: data.msg ?? "" , preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel,handler: { action in
+                    let alertVC = UIAlertController(title: "Success".localized(), message: data.msg ?? "" , preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel,handler: { action in
                         self.navigationController?.popViewController(animated: true)
                     }))
                     self.present(alertVC, animated: true)
                 }else{
-                    let alertVC = UIAlertController(title: "Error", message: data.error ?? "" , preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel))
+                    let alertVC = UIAlertController(title: "error".localized().localized(), message: data.error ?? "" , preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel))
                     self.present(alertVC, animated: true)
                 }
             }

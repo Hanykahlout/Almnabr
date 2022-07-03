@@ -9,22 +9,19 @@
 import Foundation
 import UIKit
 
-let APPLE_LANGUAGE_KEY = "AppleLanguages"
+let APPLE_LANGUAGE_KEY = "Apple_Languages"
 
 class L102Language {
     /// get current Apple language
     class func currentAppleLanguage() -> String{
         let userdef = UserDefaults.standard
-        let langArray = userdef.object(forKey: APPLE_LANGUAGE_KEY) as! NSArray
-        let current = langArray.firstObject as! String
-        let endIndex = current.startIndex
-        let currentWithoutLocale = current.substring(to: current.index(endIndex, offsetBy: 2))
-        return currentWithoutLocale
+        guard let langArray = userdef.object(forKey: APPLE_LANGUAGE_KEY) as? NSArray else { return "en" }
+        return langArray.firstObject as? String ?? "en"
     }
     
     class func currentAppleLanguageFull() -> String{
         let userdef = UserDefaults.standard
-        let langArray = userdef.object(forKey: APPLE_LANGUAGE_KEY) as! NSArray
+        guard let langArray = userdef.object(forKey: APPLE_LANGUAGE_KEY) as? NSArray else { return "en" }
         let current = langArray.firstObject as! String
         return current
     }
@@ -60,22 +57,8 @@ class L102Language {
             }) { (finished) -> Void in
                 
             }
-            
-//            let vc = view.storyboard?.instantiateViewController(withIdentifier: rootViewController)
-//            let appDlg = UIApplication.shared.delegate as? AppDelegate
-//            appDlg?.window?.rootViewController = vc
         }
+        
     }
-    
-    class func changeRunLanguage(newLang: String)  {
-        if L102Language.currentAppleLanguage() != newLang {
-            if newLang == "ar" {
-                L102Language.setAppleLAnguageTo(lang: "ar")
-                UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            }else if newLang == "en"{
-                L102Language.setAppleLAnguageTo(lang: "en")
-                UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            }
-        }
-    }
+
 }

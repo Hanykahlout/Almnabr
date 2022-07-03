@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MOLH
+
 class EditEmployeePageViewController: UIPageViewController {
     
     
@@ -55,7 +55,7 @@ class EditEmployeePageViewController: UIPageViewController {
     }
     
     private func getSelectedSection(index:Int) -> (SelectedSection,IndexPath)?{
-        if MOLHLanguage.currentAppleLanguage() == "en"{
+        if L102Language.currentAppleLanguage() == "en"{
         switch index{
         case 0:
             return (.IDDetailsVC,IndexPath(item: 0, section: 0))

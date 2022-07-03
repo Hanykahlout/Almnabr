@@ -11,6 +11,7 @@ import UIKit
 class OutgoingAttachViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messageLabel: UILabel!
     private var data = [form_c2_filesRecords]()
     
     override func viewDidLoad() {
@@ -24,6 +25,8 @@ class OutgoingAttachViewController: UIViewController {
         addObserver()
         setUpTableView()
         self.data = ViewOutgoingViewController.data?.isIncoming ?? true ? ViewOutgoingViewController.data?.form_c2_files?.records ?? [] : ViewOutgoingViewController.data?.form_c1_files?.records ?? []
+        messageLabel.text = "There Are No Data !!!".localized()
+        messageLabel.isHidden = !data.isEmpty
     }
 
     

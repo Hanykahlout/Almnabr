@@ -98,7 +98,6 @@ PODS:
   - IQKeyboardManagerSwift (6.5.6)
   - JTAppleCalendar (8.0.4)
   - Kingfisher (7.2.0)
-  - MOLH (1.4.3)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -131,7 +130,6 @@ DEPENDENCIES:
   - FontAwesome.swift
   - IQKeyboardManagerSwift
   - Kingfisher (~> 7.0)
-  - MOLH
   - Socket.IO-Client-Swift (~> 16.0.1)
   - SwiftKeychainWrapper
   - SwiftSignatureView
@@ -160,7 +158,6 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - JTAppleCalendar
     - Kingfisher
-    - MOLH
     - nanopb
     - ObjectMapper
     - PrettyCards
@@ -195,7 +192,6 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   JTAppleCalendar: f95b02c64f56d6f938fbf6582a04dcab9d709ebd
   Kingfisher: 3ac0b75b155cabc0e544877d1a4deea29feece92
-  MOLH: e45827d200aeb1310641090fd8cd03ad2b42ae72
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   ObjectMapper: 97111c97e054a6ee25917662106689f0b4127b37
   PrettyCards: 2b078f2396a42f7f0c4d6624b875149dcb49d3ed
@@ -208,6 +204,6 @@ SPEC CHECKSUMS:
   ZVActivityIndicatorView: 7e79667deaaeeb8f92bb8b4f6ac746e3d9c95058
   ZVProgressHUD: c7c293ca76c109b451fe5186bc69062692f283a1
 
-PODFILE CHECKSUM: 972d928020f418886815c034f063187c874a3357
+PODFILE CHECKSUM: 485f3d8a2dc1a037415e5d742243c0301a3d0f16
 
 COCOAPODS: 1.11.3

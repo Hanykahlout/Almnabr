@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 import DropDown
 import Fastis
 class AddNotesViewController: UIViewController {
@@ -41,7 +40,7 @@ class AddNotesViewController: UIViewController {
     }
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
         }
         setUpDropDownLists()
@@ -60,17 +59,17 @@ class AddNotesViewController: UIViewController {
             descriptionTextView.text = data.note_description ?? ""
             
             reminderStatusSelection = data.note_remainder_status ?? ""
-            reminderStatusTextField.text = reminderStatusSelection == "1" ? "Yes" : "No"
+            reminderStatusTextField.text = reminderStatusSelection == "1" ? "Yes".localized() : "No".localized()
             
             remainderDateTextField.isHidden = reminderStatusSelection != "1"
             calenderButton.isHidden = reminderStatusSelection != "1"
             remainderDateTextField.text = data.note_remainder_date ?? ""
             
             statusSelection = data.show_status ?? ""
-            statusTextField.text = statusSelection == "1" ? "Public" : "Private"
+            statusTextField.text = statusSelection == "1" ? "Public".localized() : "Private".localized()
             
             linkListSelection = data.link_with_view_list ?? ""
-            linkListTextField.text = linkListSelection == "1" ? "Yes" : "No"
+            linkListTextField.text = linkListSelection == "1" ? "Yes".localized() : "No".localized()
 
         }
         
@@ -80,7 +79,7 @@ class AddNotesViewController: UIViewController {
     }
     
     private func setUpDateController(){
-        dateController.title = "Choose Date"
+        dateController.title = "Choose Date".localized()
         
         dateController.allowToChooseNilDate = true
         dateController.shortcuts = [.today]
@@ -99,11 +98,11 @@ class AddNotesViewController: UIViewController {
         reminderStatusDropDown.anchorView = reminderStatusTextField
         
         reminderStatusDropDown.bottomOffset = CGPoint(x: 0, y:(reminderStatusDropDown.anchorView?.plainView.bounds.height)!)
-        reminderStatusDropDown.dataSource = ["Yes","No"]
+        reminderStatusDropDown.dataSource = ["Yes".localized(),"No".localized()]
         reminderStatusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.reminderStatusArrow.transform = .init(rotationAngle: 0)
             self.reminderStatusTextField.text = item
-            let isNo = item == "No"
+            let isNo = item == "No".localized()
             self.calenderButton.isHidden = isNo
             self.remainderDateTextField.isHidden = isNo
             self.reminderStatusSelection = isNo ? "0" : "1"
@@ -118,12 +117,12 @@ class AddNotesViewController: UIViewController {
         // statusDropDown
         
         statusDropDown.anchorView = statusTextField
-        statusDropDown.dataSource = ["Public","Private"]
+        statusDropDown.dataSource = ["Public".localized(),"Private".localized()]
         statusDropDown.bottomOffset = CGPoint(x: 0, y:(statusDropDown.anchorView?.plainView.bounds.height)!)
         statusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.statusArrow.transform = .init(rotationAngle: 0)
             self.statusTextField.text = item
-            let isPrivate = item == "Private"
+            let isPrivate = item == "Private".localized()
             self.statusSelection = isPrivate ? "0" : "1"
         }
         
@@ -135,13 +134,13 @@ class AddNotesViewController: UIViewController {
         
         // linkListDropDown
         linkListDropDown.anchorView = linkListTextField
-        linkListDropDown.dataSource = ["Yes","No"]
+        linkListDropDown.dataSource = ["Yes".localized(),"No".localized()]
         linkListDropDown.bottomOffset = CGPoint(x: 0, y:(linkListDropDown.anchorView?.plainView.bounds.height)!)
         
         linkListDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.linkListArrow.transform = .init(rotationAngle: 0)
             self.linkListTextField.text = item
-            let isNo = item == "No"
+            let isNo = item == "No".localized()
             self.linkListSelection = isNo ? "0" : "1"
         }
         
@@ -195,14 +194,14 @@ extension AddNotesViewController{
                 self.hideLoadingActivity()
                 var alertVC:UIAlertController!
                 if let status = data.status,status{
-                    alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel,handler: { action in
+                    alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel,handler: { action in
                         NotificationCenter.default.post(name: .init(rawValue: "ReloadNotes"), object: nil)
                         self.navigationController?.popViewController(animated: true)
                     }))
                 }else{
-                    alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel))
+                    alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel))
                 }
                 self.present(alertVC, animated: true)
             }

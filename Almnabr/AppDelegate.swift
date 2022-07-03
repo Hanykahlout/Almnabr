@@ -16,7 +16,6 @@ import FirebaseCore
 import Firebase
 import UserNotifications
 import AVFAudio
-import MOLH
 
 var AppInstance: AppDelegate!
 @main
@@ -35,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        UIApplication.shared.statusBarStyle = .darkContent
+//        UIApplication.shared.statusBarStyle = .darkContent
         L102Localizer.DoTheMagic()
         AppInstance = self
         IQKeyboardManager.shared.enable = true
@@ -54,19 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         UINavigationBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().tintColor = .white
-        
-//        MOLH.setLanguageTo("ar")
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
-            
-            UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            UISlider.appearance().semanticContentAttribute = .forceLeftToRight
-            
-            
-        } else {
-            
-            UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            UISlider.appearance().semanticContentAttribute = .forceLeftToRight
-        }
         
        // let notificationContent = UNMutableNotificationContent()
        // notificationContent.sound = UNNotificationSound(named: "notification3.wav")

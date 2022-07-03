@@ -10,6 +10,7 @@ import UIKit
 import DropDown
 class ViewEmpNotesVC: UIViewController {
     
+    @IBOutlet weak var filterStackView: UIStackView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var filterArrow: UIImageView!
@@ -48,14 +49,15 @@ class ViewEmpNotesVC: UIViewController {
         dropDown.anchorView = filterView
         
         dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
-        dropDown.dataSource = ["All","Public","Private"]
+        dropDown.width = filterStackView.bounds.width
+        dropDown.dataSource = ["All".localized(),"Public".localized(),"Private".localized()]
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.filterArrow.transform = .init(rotationAngle: 0)
             self.filterLabel.text = item
             switch item{
-            case "Public":
+            case "Public".localized():
                 selectedFilterIndex = "1"
-            case "Private":
+            case "Private".localized():
                 selectedFilterIndex = "0"
             default:
                 selectedFilterIndex = ""
@@ -166,13 +168,13 @@ extension ViewEmpNotesVC{
                 self.hideLoadingActivity()
                 var alertVC:UIAlertController!
                 if let status = data.status,status{
-                    alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
+                    alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
                     self.data.remove(at: indexPath.row)
                     self.tableView.reloadData()
                 }else{
-                    alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
+                    alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
                 }
-                alertVC.addAction(.init(title: "Cancel", style: .cancel))
+                alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel))
                 self.present(alertVC, animated: true)
             }
         }

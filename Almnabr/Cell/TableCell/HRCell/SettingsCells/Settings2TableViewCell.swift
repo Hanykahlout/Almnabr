@@ -51,7 +51,6 @@ class Settings2TableViewCell: UITableViewCell {
     
     @IBAction func eyeAction(_ sender: Any) {
         self.delegate?.goToSettingsAlert(data:data)
-        
     }
     
     

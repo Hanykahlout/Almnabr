@@ -8,7 +8,7 @@
 
 import UIKit
 import DropDown
-import MOLH
+
 class SettingsUpdateViewController: UIViewController {
     
     @IBOutlet weak var typeLabel: UILabel!
@@ -48,7 +48,7 @@ class SettingsUpdateViewController: UIViewController {
     
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             backButton.transform = .init(rotationAngle: .pi)
         }
         setUpTableView()
@@ -60,20 +60,19 @@ class SettingsUpdateViewController: UIViewController {
     private func setData(){
         if isUpdate{
             updateButton.setTitle("Update", for: .normal)
-            titleLabel.text = "Update Settings"
+            titleLabel.text = "Update Settings".localized()
             let type = data.settings_type ?? ""
             if type == "BANK"{
-                self.typeLabel.text = "Bank Name"
+                self.typeLabel.text = "Bank Name".localized()
                 self.bankNameTypeShow()
             }else if type == "ETIT"{
-                self.typeLabel.text = "Employee Title"
+                self.typeLabel.text = "Employee Title".localized()
                 self.employeeTitleTypeShow()
             }else if type == "JTIT"{
-                self.typeLabel.text = "Job Positions"
+                self.typeLabel.text = "Job Positions".localized()
                 let licenseIndex = data.settings_need_licence ?? ""
                 if licenseIndex == "1"{
                     self.jopPositionsYesTypeShow()
-                    self.getEditingData()
                 }else{
                     self.jopPositionsNoTypeShow()
                 }
@@ -89,8 +88,8 @@ class SettingsUpdateViewController: UIViewController {
             neededLicenseView.isHidden = true
             addButton.isHidden = true
             tableView.isHidden = true
-            updateButton.setTitle("Add", for: .normal)
-            titleLabel.text = "Add Settings"
+            updateButton.setTitle("Add".localized(), for: .normal)
+            titleLabel.text = "Add Settings".localized()
         }
     }
     
@@ -104,17 +103,17 @@ class SettingsUpdateViewController: UIViewController {
     private func setUpDropDownLists(){
         // Settings Type drop down list
         typeDropDown.anchorView = settingView
-        typeDropDown.dataSource = ["Employee Title","Bank Name","Job Positions"]
+        typeDropDown.dataSource = ["Employee Title".localized(),"Bank Name".localized(),"Job Positions".localized()]
         typeDropDown.bottomOffset = CGPoint(x: 0, y:(typeDropDown.anchorView?.plainView.bounds.height)!)
         
         typeDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             typeArrow.transform = .init(rotationAngle: 0)
             typeLabel.text = item
-            if item == "Employee Title"{
+            if item == "Employee Title".localized(){
                 self.employeeTitleTypeShow()
-            }else if item == "Bank Name"{
+            }else if item == "Bank Name".localized(){
                 self.bankNameTypeShow()
-            }else if item == "Job Positions"{
+            }else if item == "Job Positions".localized(){
                 if licenseData.isEmpty{
                     self.jopPositionsNoTypeShow()
                 }else{
@@ -129,13 +128,13 @@ class SettingsUpdateViewController: UIViewController {
         
         // Need License drop down list
         licencesDropDown.anchorView = neededLicenseView
-        licencesDropDown.dataSource = ["Yes","No"]
+        licencesDropDown.dataSource = ["Yes".localized(),"No".localized()]
         licencesDropDown.bottomOffset = CGPoint(x: 0, y:(licencesDropDown.anchorView?.plainView.bounds.height)!)
         
         licencesDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             licenseLabel.text = item
             licenseArrow.transform = .init(rotationAngle: 0)
-            if item == "Yes"{
+            if item == "Yes".localized(){
                 self.jopPositionsYesTypeShow()
             }else{
                 self.jopPositionsNoTypeShow()
@@ -197,7 +196,7 @@ class SettingsUpdateViewController: UIViewController {
         body["settings_name_english"] = titleEnTextField.text!
         body["settings_name_arabic"] = titleArTextField.text!
         body["settings_short_code"] = shortCodeTextField.text!
-        body["settings_need_licence"] = licencesDropDown.selectedItem == "Yes" ? 1 : 0
+        body["settings_need_licence"] = licencesDropDown.selectedItem == "Yes".localized() ? "1" : "0"
         body["settings_status"] = isUpdate ? data.settings_status : "1"
         for index in 0 ..< licenseData.count{
             let obj = licenseData[index]
@@ -209,11 +208,11 @@ class SettingsUpdateViewController: UIViewController {
     
     private func getSettingsType()->String{
         switch typeLabel.text{
-        case "Bank Name":
+        case "Bank Name".localized():
             return "BANK"
-        case "Employee Title":
+        case "Employee Title".localized():
             return "ETIT"
-        case "Job Positions":
+        case "Job Positions".localized():
             return "JTIT"
         default:
             return ""
@@ -281,7 +280,8 @@ extension SettingsUpdateViewController{
         APIController.shard.getEditingData(setting_id: data.settings_id ?? "") { editingData in
             self.hideLoadingActivity()
             DispatchQueue.main.async {
-                self.licenseData = editingData.licenceData ?? []
+                print("ZZZZZZ",editingData.licenceData ?? [])
+                self.licenseData =  editingData.licenceData ?? []
                 self.tableViewHeight.constant = CGFloat(110 * self.licenseData.count)
                 self.tableView.reloadData()
             }
@@ -293,9 +293,9 @@ extension SettingsUpdateViewController{
             if let status = data.status{
                 DispatchQueue.main.async {
                     if status{
-                        self.showAlert(title: "Success", message: data.msg ?? "")
+                        self.showAlert(title: "Success".localized(), message: data.msg ?? "")
                     }else{
-                        self.showAlert(title: "Error", message: data.error ?? "")
+                        self.showAlert(title: "error".localized(), message: data.error ?? "")
                     }
                 }
             }
@@ -307,9 +307,9 @@ extension SettingsUpdateViewController{
             if let status = data.status{
                 DispatchQueue.main.async {
                     if status{
-                        self.showAlert(title: "Success", message: data.msg ?? "")
+                        self.showAlert(title: "Success".localized(), message: data.msg ?? "")
                     }else{
-                        self.showAlert(title: "Error", message: data.error ?? "")
+                        self.showAlert(title: "error".localized(), message: data.error ?? "")
                     }
                 }
             }
@@ -318,8 +318,8 @@ extension SettingsUpdateViewController{
     
     private func showAlert(title:String,message:String){
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.addAction(.init(title: "Cancel", style: .cancel,handler: { action in
-            if title == "Success"{
+        alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel,handler: { action in
+            if title == "Success".localized(){
                 self.navigationController?.popViewController(animated: true)
             }
         }))

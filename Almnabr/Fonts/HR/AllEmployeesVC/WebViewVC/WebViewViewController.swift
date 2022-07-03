@@ -2,7 +2,6 @@
 
 import UIKit
 import WebKit
-import MOLH
 class WebViewViewController: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
@@ -18,7 +17,7 @@ class WebViewViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
         }
         if let data = data {

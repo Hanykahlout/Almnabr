@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 
 class SupervisionOperationDetailsVC: UIViewController {
@@ -90,7 +89,7 @@ class SupervisionOperationDetailsVC: UIViewController {
     
     
     func menu_select(){
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{

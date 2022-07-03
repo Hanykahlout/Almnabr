@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 import Fastis
 import DropDown
 
@@ -22,7 +21,7 @@ class UpdateInsuranceViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var submitButton: UIButton!
     
-    private var relationshipData = ["Choose Options","Spouse","Son","Daugther","Others"]
+    private var relationshipData = ["Choose".localized(),"Spouse".localized(),"Son".localized(),"Daugther".localized(),"Others".localized()]
     private var dateController = FastisController(mode: .single)
     private var dropDown = DropDown()
     private var selectedRelationship:Int?
@@ -39,7 +38,7 @@ class UpdateInsuranceViewController: UIViewController {
     
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
         }
         setInsuranceCellData()
@@ -78,7 +77,7 @@ class UpdateInsuranceViewController: UIViewController {
     
     private func setUpDateController(){
         insuranceDateTextField.isEnabled = false
-        dateController.title = "Choose Date"
+        dateController.title = "Choose Date".localized()
         
         dateController.allowToChooseNilDate = true
         dateController.shortcuts = [.today]
@@ -147,14 +146,14 @@ extension UpdateInsuranceViewController{
                 self.hideLoadingActivity()
                 var alertVC:UIAlertController!
                 if let status = data.status,status{
-                    alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: { action in
+                    alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: { action in
                         NotificationCenter.default.post(name: .init(rawValue: "ReloadInsuranceDetails"), object: nil)
                         self.navigationController?.popViewController(animated: true)
                     }))
                 }else{
-                    alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+                    alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: nil))
                 }
                 self.present(alertVC, animated: true)
             }

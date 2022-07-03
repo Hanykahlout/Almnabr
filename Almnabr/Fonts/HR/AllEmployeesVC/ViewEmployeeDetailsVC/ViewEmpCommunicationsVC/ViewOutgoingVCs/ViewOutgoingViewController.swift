@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 class ViewOutgoingViewController: UIViewController {
 
@@ -28,11 +27,6 @@ class ViewOutgoingViewController: UIViewController {
     
     private func initlization(){
         setCollectionViewData()
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
-            backButton.transform = .init(rotationAngle: .pi)
-            data = data.reversed()
-        }
-        
         addObservers()
         setUpPageViewController()
         setUpCollectionView()
@@ -41,30 +35,34 @@ class ViewOutgoingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        if L102Language.currentAppleLanguage() == "ar"{
+            backButton.transform = .init(rotationAngle: .pi)
+            data = data.reversed()
+            goToSelectedCell(indexPath: IndexPath.init(row: data.count - 1, section: 0))
+        }
     }
     
     
     private func addObservers(){
         NotificationCenter.default.addObserver(forName: .init("ChangeDescriptionTitle"), object: nil, queue: . main) { notify in
             guard let description = notify.object as? String else { return }
-            self.data[MOLHLanguage.currentAppleLanguage() == "ar" ? self.data.count - 2 : 1].title = description
+            self.data[L102Language.currentAppleLanguage() == "ar" ? self.data.count - 2 : 1].title = description
         }
         
         NotificationCenter.default.addObserver(forName: .init("ViewOutgoingPageControllerScrolled"), object: nil, queue: .main) { notify in
             guard let index = notify.object as? Int else { return }
-            let lang = MOLHLanguage.currentAppleLanguage()
+            let lang = L102Language.currentAppleLanguage()
             self.goToSelectedCell(indexPath: IndexPath(row: lang == "en" ? index : (self.data.count - 1) - index, section: 0))
             
         }
     }
     
     private func setCollectionViewData(){
-        data.append(.init(bgColor: UIColor(named: "AppColor")!, icon: UIImage(systemName: "doc.on.doc")!, title: "Request Details"))
-        data.append(.init(bgColor: .black, icon: UIImage(systemName: "doc.on.doc")!, title: "Description"))
-        data.append(.init(bgColor: .black, icon: UIImage(systemName: "doc.on.doc")!, title: "Person Details"))
-        data.append(.init(bgColor: .black, icon: UIImage(systemName: "doc.on.doc")!, title: "Attachments"))
-        data.append(.init(bgColor: .black, icon: UIImage(systemName: "doc.on.doc")!, title: "History"))
+        data.append(.init(bgColor: UIColor(named: "AppColor")!, icon: UIImage(systemName: "doc.on.doc")!, title: "Request Details".localized()))
+        data.append(.init(bgColor: .black, icon: UIImage(systemName: "doc.on.doc")!, title: "Description".localized()))
+        data.append(.init(bgColor: .black, icon: UIImage(systemName: "doc.on.doc")!, title: "Person Details".localized()))
+        data.append(.init(bgColor: .black, icon: UIImage(systemName: "doc.on.doc")!, title: "Attachments".localized()))
+        data.append(.init(bgColor: .black, icon: UIImage(systemName: "doc.on.doc")!, title: "History".localized()))
         
     }
 
@@ -113,7 +111,7 @@ extension ViewOutgoingViewController:UICollectionViewDelegate,UICollectionViewDa
         goToSelectedCell(indexPath: indexPath)
         let oldIndex = selectedIndex
         selectedIndex = indexPath.row
-        pageController.changeVC(index: MOLHLanguage.currentAppleLanguage() == "en" ? selectedIndex : (data.count - 1) - selectedIndex , direction: oldIndex < selectedIndex ? .forward : .reverse)
+        pageController.changeVC(index: L102Language.currentAppleLanguage() == "en" ? selectedIndex : (data.count - 1) - selectedIndex , direction: oldIndex < selectedIndex ? .forward : .reverse)
 
     }
 
@@ -128,7 +126,7 @@ extension ViewOutgoingViewController:UICollectionViewDelegate,UICollectionViewDa
         }
 
         collectionView.reloadData()
-        collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: false)
+        collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: true)
     }
 
 }

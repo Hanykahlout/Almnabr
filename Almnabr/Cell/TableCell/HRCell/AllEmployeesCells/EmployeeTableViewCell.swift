@@ -9,7 +9,6 @@
 import UIKit
 import Kingfisher
 import DropDown
-import MOLH
 protocol EmployeeTableViewCellDelegate{
     func deleteAction(id:String,indexPath:IndexPath)
     func goToEdiVC(empID:String,empImage:String)
@@ -42,9 +41,9 @@ class EmployeeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         dropDown.anchorView = menuButton
-        dropDown.dataSource = ["View","Edit","Upload Signature","Delete"]
+        dropDown.dataSource = ["View".localized(),"Edit".localized(),"Upload Signature".localized(),"Delete".localized()]
         
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             dropDown.bottomOffset = CGPoint(x: menuButton.frame.maxX , y:(dropDown.anchorView?.plainView.bounds.height)!)
         }else{
             dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
@@ -84,14 +83,14 @@ class EmployeeTableViewCell: UITableViewCell {
         }
 
         
-        nameLabel.text = (data.employee_name ?? "").uppercased()
-        employeeNumberLabel.text = data.employee_number ?? ""
-        idNumberLabel.text = data.employee_id_number ?? ""
-        referenceNoLabel.text = data.e_reference_no ?? ""
-        jopTitleLabel.text = data.job_title_iqama ?? ""
-        idDetailsLabel.text = data.employee_id_number ?? ""
-        nationalityLabel.text = data.nationality ?? ""
-        writerLabel.text = data.name ?? ""
+        nameLabel.text = (data.employee_name ?? "------").uppercased()
+        employeeNumberLabel.text = data.employee_number ?? "------"
+        idNumberLabel.text = data.employee_id_number ?? "------"
+        referenceNoLabel.text = data.e_reference_no ?? "------"
+        jopTitleLabel.text = data.job_title_iqama ?? "------"
+        idDetailsLabel.text = data.employee_id_number ?? "------"
+        nationalityLabel.text = data.nationality ?? "------"
+        writerLabel.text = data.name ?? "------"
         statusLabel.text = (data.employee_status ?? "") == "0" ? "InActive" : "Active"
     }
     

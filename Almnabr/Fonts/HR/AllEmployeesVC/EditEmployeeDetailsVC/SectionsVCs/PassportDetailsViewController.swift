@@ -94,7 +94,7 @@ class PassportDetailsViewController: UIViewController {
         expiryDateEnTextField.isEnabled = false
         expiryDateArTextField.isEnabled = true
         
-        fastisController.title = "Choose Date"
+        fastisController.title = "Choose Date".localized()
         fastisController.allowToChooseNilDate = true
         fastisController.shortcuts = [.today]
         

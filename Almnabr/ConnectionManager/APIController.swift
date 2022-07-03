@@ -392,11 +392,9 @@ class APIController{
         let strURL = "\(APIManager.serverURL)/\(url)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
-        print("URLSASADASD-1",strURL)
         Alamofire.request(strURL, method: .get , parameters:nil,headers:headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : GetImageResponse = Mapper<GetImageResponse>().map(JSONString:str){
-                    print("URLSASADASD-2",parsedMapperString.base64)
                     callback(parsedMapperString)
                 }
             }
@@ -965,7 +963,6 @@ class APIController{
             }
         }
     }
-    
     
 }
 

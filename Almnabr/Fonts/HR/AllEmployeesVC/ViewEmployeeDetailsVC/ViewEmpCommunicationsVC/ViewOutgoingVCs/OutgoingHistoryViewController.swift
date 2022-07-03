@@ -11,6 +11,7 @@ import UIKit
 class OutgoingHistoryViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var messageLabel: UILabel!
     private var data = [transactions_recordsRecords]()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,8 @@ class OutgoingHistoryViewController: UIViewController {
     private func initlziation(){
         setUpTableView()
         self.data = ViewOutgoingViewController.data?.transactions_records?.records ?? []
-        
+        messageLabel.text = "There Are No Data !!!".localized()
+        messageLabel.isHidden = !data.isEmpty
     }
     
     

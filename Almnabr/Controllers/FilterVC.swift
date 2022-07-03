@@ -8,7 +8,6 @@
 
 import UIKit
 import DropDown
-import MOLH
 
 protocol FilterDelegate {
     func passFilter(zone_arr: labelObj,Block_arr: labelObj,Cluster_arr: labelObj)
@@ -454,7 +453,7 @@ class FilterVC: UIViewController , UITextFieldDelegate ,FilterDelegate , SubFilt
         
         self.showLoadingActivity()
         
-        let language = MOLHLanguage.currentAppleLanguage()
+        let language = L102Language.currentAppleLanguage()
         
         APIManager.sendRequestGetAuth(urlString: "lpworklevel?lang_key=\(language)") { (response) in
             self.hideLoadingActivity()

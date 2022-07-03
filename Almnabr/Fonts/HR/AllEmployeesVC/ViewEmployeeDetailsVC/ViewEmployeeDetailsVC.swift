@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 class ViewEmployeeDetailsVC: UIViewController {
 
     @IBOutlet weak var backButton: UIButton!
@@ -34,7 +33,7 @@ class ViewEmployeeDetailsVC: UIViewController {
         setUpCollectionView()
         setCollectionData()
         addObserver()
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
             forwordImageView.transform = .init(rotationAngle: .pi)
             reverseImageView.transform = .init(rotationAngle: .pi)
@@ -49,7 +48,7 @@ class ViewEmployeeDetailsVC: UIViewController {
         NotificationCenter.default.addObserver(forName: .init("ViewEmpPageControllerScrolled"), object: nil, queue: .main) { notify in
             guard let index = notify.object as? Int else { return }
             print("ASDASDASD-Index",index)
-            let lang = MOLHLanguage.currentAppleLanguage()
+            let lang = L102Language.currentAppleLanguage()
             self.goToSelectedCell(indexPath:  IndexPath(row: lang == "en" ? index : (self.data.count - 1) - index, section: 0))
         }
     }
@@ -73,27 +72,28 @@ class ViewEmployeeDetailsVC: UIViewController {
     
     
     private func setCollectionData(){
-        data.append(.init(bgColor: UIColor(named: "AppColor")!, icon: UIImage(systemName: "person.fill")!, title: "ID Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "doc.on.doc")!, title: "Contract Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "doc.on.doc")!, title: "Joining Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "bag.fill")!, title: "Jop Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "link.circle.fill")!, title: "Communications"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.2.fill")!, title: "Contact Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "building.columns.fill")!, title: "Bank Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "book.closed.fill")!, title: "Education Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "airplane")!, title: "Passport Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "building.2")!, title: "Insurance Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.text.rectangle.fill")!, title: "lang_vacations"))
+        data.append(.init(bgColor: UIColor(named: "AppColor")!, icon: UIImage(systemName: "person.fill")!, title: "ID Details".localized()))
         
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "note.text")!, title: "Notes"))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "doc.on.doc")!, title: "Contract Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "doc.on.doc")!, title: "Joining Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "bag.fill")!, title: "Job Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "link.circle.fill")!, title: "Communications".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.2.fill")!, title: "Contact Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "building.columns.fill")!, title: "Bank Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "book.closed.fill")!, title: "Education Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "airplane")!, title: "Passport Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "building.2")!, title: "Insurance Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.text.rectangle.fill")!, title: "Vacations".localized()))
         
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(named: "attach-icon")!, title: "Attachments"))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "note.text")!, title: "Notes".localized()))
         
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.text.rectangle.fill")!, title: "Modules"))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(named: "attach-icon")!, title: "Attachments".localized()))
         
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "dollarsign.circle.fill")!, title: "lang_finanial_details"))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.text.rectangle.fill")!, title: "Modules".localized()))
         
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "calendar")!, title: "lang_calender_view"))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "dollarsign.circle.fill")!, title: "Financial Details".localized()))
+        
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "calendar")!, title: "Calendar View".localized()))
 
     }
     
@@ -107,8 +107,10 @@ class ViewEmployeeDetailsVC: UIViewController {
         if selectedIndex < data.count - 1{
             selectedIndex += 1
         }
-        let lang = MOLHLanguage.currentAppleLanguage()
+        
+        let lang = L102Language.currentAppleLanguage()
         pageController.changeVC(index: selectedIndex, direction: lang == "en" ? .forward : .reverse)
+        print("ASSSA--> ",lang)
         let index = lang == "en" ? selectedIndex : (data.count - 1) - selectedIndex
         goToSelectedCell(indexPath: IndexPath(row: index, section: 0))
         
@@ -119,7 +121,7 @@ class ViewEmployeeDetailsVC: UIViewController {
         if selectedIndex > 0{
             selectedIndex -= 1
         }
-        let lang = MOLHLanguage.currentAppleLanguage()
+        let lang = L102Language.currentAppleLanguage()
         pageController.changeVC(index: selectedIndex, direction: lang == "en" ? .reverse : .forward)
         let index = lang == "en" ? selectedIndex : (data.count - 1) - selectedIndex
         goToSelectedCell(indexPath: IndexPath(row: index , section: 0))
@@ -149,7 +151,7 @@ extension ViewEmployeeDetailsVC: UICollectionViewDelegate , UICollectionViewData
         goToSelectedCell(indexPath: indexPath)
         let oldIndex = selectedIndex
         selectedIndex = indexPath.row
-        pageController.changeVC(index: MOLHLanguage.currentAppleLanguage() == "en" ? selectedIndex : (data.count - 1) - selectedIndex , direction: oldIndex < selectedIndex ? .forward : .reverse)
+        pageController.changeVC(index: L102Language.currentAppleLanguage() == "en" ? selectedIndex : (data.count - 1) - selectedIndex , direction: oldIndex < selectedIndex ? .forward : .reverse)
         
     }
     

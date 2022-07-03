@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 class UsersViewController: UIViewController {
 
     @IBOutlet weak var emptyDataImageView: UIImageView!
@@ -23,7 +22,7 @@ class UsersViewController: UIViewController {
     }
     
     private func initlziation(){
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
         }
         setUpTableView()

@@ -17,7 +17,6 @@ class SettingsAlertViewController: UIViewController {
     var data:SettingsDataRecords!
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

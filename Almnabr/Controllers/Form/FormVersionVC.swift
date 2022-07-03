@@ -8,7 +8,6 @@
 
 import UIKit
 import DPLocalization
-import MOLH
 
 class FormVersionVC: UIViewController {
     
@@ -112,7 +111,7 @@ class FormVersionVC: UIViewController {
 //        self.btnPrevious.setTitleColor(.white, for: .normal)
 //        self.btnPrevious.setRounded(10)
         
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         }

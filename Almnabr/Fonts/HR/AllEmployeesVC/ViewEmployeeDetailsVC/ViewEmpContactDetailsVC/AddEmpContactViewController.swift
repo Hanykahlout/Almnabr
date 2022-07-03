@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 class AddEmpContactViewController: UIViewController {
     @IBOutlet weak var personNameTextField: UITextField!
@@ -24,7 +23,7 @@ class AddEmpContactViewController: UIViewController {
     }
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
         }
         setUpMobileTextField()
@@ -72,15 +71,15 @@ extension AddEmpContactViewController{
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status , status {
-                    let alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: { action in
+                    let alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: { action in
                         NotificationCenter.default.post(name: .init("LoadingContacts"), object: nil)
                         self.navigationController?.popViewController(animated: true)
                     }))
                     self.present(alertVC, animated: true)
                 }else{
-                    let alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+                    let alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: nil))
                     self.present(alertVC, animated: true)
                 }
             }

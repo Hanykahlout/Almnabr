@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 import DropDown
 import Fastis
 
@@ -122,7 +121,7 @@ class OutgoingVC: UIViewController {
     
     
     private func initlziation(){
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
         }
         setUpDropDownLists()
@@ -151,14 +150,14 @@ class OutgoingVC: UIViewController {
         calenderButton.isHidden = !isIncoming
         receipientArrow.isHidden = !isIncoming
         
-        titleLabel.text = isIncoming ? "Incoming" : "Outgoing"
+        titleLabel.text = isIncoming ? "Incoming".localized() : "Outgoing".localized()
         
     }
     
     
     private func setUpDateController(){
         
-        dateController.title = "Choose Date"
+        dateController.title = "Choose Date".localized()
         dateController.allowToChooseNilDate = true
         dateController.shortcuts = [.today]
         dateController.doneHandler = { result in
@@ -221,7 +220,7 @@ class OutgoingVC: UIViewController {
         languageDropDown.anchorView = languageTextField
         
         languageDropDown.bottomOffset = CGPoint(x: 0, y:(languageDropDown.anchorView?.plainView.bounds.height)!)
-        languageDropDown.dataSource = ["Arabic","English"]
+        languageDropDown.dataSource = ["Arabic".localized(),"English".localized()]
         languageDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.languageArrow.transform = .init(rotationAngle: 0)
             self.languageTextField.text = item
@@ -569,14 +568,15 @@ extension OutgoingVC:OutgoingAttachmentCellDelegate{
     func selectFileAction(indexPath:IndexPath) {
         currentIndexPath = indexPath
         let alertVC = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        alertVC.addAction(.init(title: "Choose Photo", style: .default, handler: { action in
+        alertVC.addAction(.init(title: "Choose Photo".localized(), style: .default, handler: { action in
             self.setImageBy(source: .photoLibrary)
         }))
-        alertVC.addAction(.init(title: "Choose Pdf", style: .default, handler: { action in
+        alertVC.addAction(.init(title: "Choose Pdf".localized(), style: .default, handler: { action in
             self.selectAttachment()
         }))
         present(alertVC, animated: true, completion: nil)
     }
+    
     func deleteAction() {
         if attachmentsCount > 1{
             attachmentsCount -= 1
@@ -584,6 +584,8 @@ extension OutgoingVC:OutgoingAttachmentCellDelegate{
             attachmentsTableView.reloadData()
         }
     }
+    
+    
     private func selectAttachment(){
         documentPickerController = UIDocumentPickerViewController(
             forOpeningContentTypes: [.pdf])
@@ -718,16 +720,16 @@ extension OutgoingVC{
                 self.hideLoadingActivity()
                 var alertVC: UIAlertController!
                 if let status = data.status,status{
-                    alertVC = UIAlertController(title: "Success", message: "Action has been completed successfully !!!", preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: { action in
+                    alertVC = UIAlertController(title: "Success".localized(), message: "Action has been completed successfully !!!".localized(), preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: { action in
                         let vc:ViewOutgoingViewController = AppDelegate.HRSB.instanceVC()
                         vc.id = "\(data.transaction_request_id ?? -1)"
                         vc.isIncoming = self.isIncoming
                         self.navigationController?.pushViewController(vc, animated: true)
                     }))
                 }else{
-                    alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+                    alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: nil))
                 }
                 self.present(alertVC, animated: true)
             }
@@ -744,7 +746,7 @@ extension OutgoingVC{
     }
     
     private func empNameASearchForUser(){
-        let lang = MOLHLanguage.currentAppleLanguage()
+        let lang = L102Language.currentAppleLanguage()
         APIController.shard.searchForUser(searchText: employeeNameATextField.text!, lang: lang , id: "1") { data in
             if let status = data.status,status{
                 if let list = data.list{
@@ -761,7 +763,7 @@ extension OutgoingVC{
     }
     
     private func empNameBSearchForUser(){
-        let lang = MOLHLanguage.currentAppleLanguage()
+        let lang = L102Language.currentAppleLanguage()
         APIController.shard.searchForUser(searchText: employeeNameBTextField.text!, lang: lang , id: "1") { data in
             if let status = data.status,status{
                 if let list = data.list{
@@ -778,7 +780,7 @@ extension OutgoingVC{
     }
     
     private func empNameCSearchForUser(){
-        let lang = MOLHLanguage.currentAppleLanguage()
+        let lang = L102Language.currentAppleLanguage()
         APIController.shard.searchForUser(searchText: employeeNameCTextField.text!, lang: lang , id: "1") { data in
             if let status = data.status,status{
                 if let list = data.list{
@@ -796,7 +798,7 @@ extension OutgoingVC{
     
     
     private func markSearchForUser(){
-        let lang = MOLHLanguage.currentAppleLanguage()
+        let lang = L102Language.currentAppleLanguage()
         APIController.shard.searchForUser(searchText: markerUsersTextField.text!, lang: lang , id: "1") { data in
             if let status = data.status,status{
                 if let list = data.list{
@@ -813,7 +815,7 @@ extension OutgoingVC{
     
     
     private func reviewSearchForUser(){
-        let lang = MOLHLanguage.currentAppleLanguage()
+        let lang = L102Language.currentAppleLanguage()
         APIController.shard.searchForUser(searchText: reviewersUsersTextField.text!, lang: lang , id: "1") { data in
             if let status = data.status,status{
                 if let list = data.list{
@@ -829,7 +831,7 @@ extension OutgoingVC{
     }
     
     private func receipientSearchForUser(){
-        let lang = MOLHLanguage.currentAppleLanguage()
+        let lang = L102Language.currentAppleLanguage()
         APIController.shard.searchForUser(searchText: receipientTextField.text!, lang: lang , id: "1") { data in
             if let status = data.status,status{
                 if let list = data.list{

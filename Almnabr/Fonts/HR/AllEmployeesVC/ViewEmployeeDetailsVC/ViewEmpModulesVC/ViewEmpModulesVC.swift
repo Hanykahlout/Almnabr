@@ -32,7 +32,7 @@ class ViewEmpModulesVC: UIViewController {
     }
     
     private func initlization(){
-        filterLabel.text = "Modules - All"
+        filterLabel.text = "All".localized()
         addCellObserver()
         setUpTableView()
         setUpDropDownList()
@@ -118,7 +118,7 @@ extension ViewEmpModulesVC{
             if let status = data.status,status{
                 self.filterData = data.records ?? []
                 self.dropDown.dataSource = self.filterData.map{$0.module_phrase_val ?? ""}
-                self.dropDown.dataSource.append("Modules - All")
+                self.dropDown.dataSource.append("All".localized())
             }
         }
     }

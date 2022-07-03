@@ -36,7 +36,7 @@ class ViewEmpIDDetailsVC: UIViewController {
     @IBOutlet weak var workTypeLabel: UILabel!
     @IBOutlet weak var groupNameEnglishLabel: UILabel!
     @IBOutlet weak var onDateLabel: UILabel!
-    private let workTypeData = ["Full Time","Part Time","Contract","Others"]
+    private let workTypeData = ["Full Time".localized(),"Part Time".localized(),"Contract".localized(),"Others".localized()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +52,9 @@ class ViewEmpIDDetailsVC: UIViewController {
     private func setEmpData(){
         let data = ViewEmployeeDetailsVC.empData
         let percentNumber = data.profile_percentage?.total ?? "00.00"
-        profilePercentLabel.text = "Profile : \(percentNumber)%"
+        profilePercentLabel.text = "\("Profile".localized()): \(percentNumber)%"
         profilePercentProgressView.progress = Float(percentNumber)! / 100
-        empAgeLabel.text = "Age \(data.data?.age_in_years ?? "")"
+        empAgeLabel.text = "\("Age".localized()) \(data.data?.age_in_years ?? "")"
         empNumberLabel.text = data.data?.employee_number ?? ""
         self.getImagFormAPI(url: data.data?.profile_image ?? "")
         empIDNumberLabel.text = data.data?.employee_id_number ?? ""
@@ -65,21 +65,21 @@ class ViewEmpIDDetailsVC: UIViewController {
         expiryDateLabel.text = "\(data.data?.iqama_expiry_date_english ?? "") - \(data.data?.iqama_expiry_date_arabic ?? "")"
         copyNumberLabel.text = data.data?.copy_number ?? ""
         dateOfBirthLabel.text = "\(data.data?.birth_date_english ?? "") - \(data.data?.birth_date_arabic ?? "")"
-        genderLabel.text = data.data?.gender == "M" ? "Male" : "FeMale"
+        genderLabel.text = data.data?.gender == "M" ? "Male".localized() : "FeMale".localized()
         nationalityLabel.text = data.data?.nationality ?? ""
         usersTypeLabel.text = data.data?.typename ?? ""
         jobTitleLabel.text = data.data?.job_title_iqama ?? ""
         lang_human_resources_job_titleLabel.text = data.data?.jobname ?? ""
-        statusLabel.text = data.data?.employee_status == "1" ? "Active" : "In Active"
+        statusLabel.text = data.data?.employee_status == "1" ? "Active".localized() : "Inactive".localized()
         
         if data.data?.marital_status == "S"{
-            self.maritalStatusLabel.text = "Single"
+            self.maritalStatusLabel.text = "Single".localized()
         }else if data.data?.marital_status == "M"{
-            self.maritalStatusLabel.text = "Married"
+            self.maritalStatusLabel.text = "Married".localized()
         }else if data.data?.marital_status == "D"{
-            self.maritalStatusLabel.text = "Diversed"
+            self.maritalStatusLabel.text = "Diversed".localized()
         }else{
-            self.maritalStatusLabel.text = "Others"
+            self.maritalStatusLabel.text = "Others".localized()
         }
         
         
@@ -109,15 +109,18 @@ class ViewEmpIDDetailsVC: UIViewController {
     
     private func getImagFormAPI(url:String){
         APIController.shard.getImage(url: url) { data in
-            if let status = data.status,status{
-                DispatchQueue.main.async{
+            DispatchQueue.main.async{
+                if let status = data.status,status{
+                    
                     if let image = self.convertBase64StringToImage(imageBase64String: data.base64 ?? ""){
                         self.empImageView.image = image
+                        return
                     }
+                    
                 }
+                self.empImageView.image = UIImage(named: "male")!
             }
         }
     }
-    
     
 }

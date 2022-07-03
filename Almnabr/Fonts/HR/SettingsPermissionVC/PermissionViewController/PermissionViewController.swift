@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 import FAPanels
 import DropDown
 
@@ -16,6 +15,7 @@ class PermissionViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     
+    @IBOutlet weak var sortStackView: UIStackView!
     
     @IBOutlet weak var seachView: UIView!
     @IBOutlet weak var groupsView: UIView!
@@ -110,7 +110,7 @@ class PermissionViewController: UIViewController {
         dropDownSearch.anchorView = seachView
         
         dropDownSearch.bottomOffset = CGPoint(x: 0, y:(dropDownSearch.anchorView?.plainView.bounds.height)!)
-        
+        dropDownSearch.width = sortStackView.bounds.width
         dropDownSearch.selectionAction = { [unowned self] (index: Int, item: String) in
             searchArrow.transform = .init(rotationAngle: 0)
             
@@ -120,7 +120,7 @@ class PermissionViewController: UIViewController {
                 self.searchBranchId = selectedItem.value ?? ""
             }else{
                 self.searchBranchId = ""
-                selectedBranchLabel.text = "Search By Branches"
+                selectedBranchLabel.text = "Search By Branches".localized()
             }
             
             self.getPermissionMentionsData(isNewPage: false)
@@ -132,6 +132,7 @@ class PermissionViewController: UIViewController {
         // Group Drop Down List
         dropDownGroups.anchorView = groupsView
         dropDownGroups.bottomOffset = CGPoint(x: 0, y:(dropDownGroups.anchorView?.plainView.bounds.height)!)
+        dropDownGroups.width = sortStackView.bounds.width
         dropDownGroups.selectionAction = { [unowned self] (index: Int, item: String) in
             groupsArrow.transform = .init(rotationAngle: 0)
             
@@ -142,7 +143,7 @@ class PermissionViewController: UIViewController {
                 self.groupId = selectedItem.value ?? ""
             }else{
                 self.groupId = ""
-                selectedGroupLabel.text = "Groups"
+                selectedGroupLabel.text = "Groups".localized()
             }
             self.getPermissionMentionsData(isNewPage: false)
             
@@ -157,6 +158,7 @@ class PermissionViewController: UIViewController {
         // Users Drop Down List
         dropDownUsers.anchorView = usersView
         dropDownUsers.bottomOffset = CGPoint(x: 0, y:(dropDownUsers.anchorView?.plainView.bounds.height)!)
+        dropDownUsers.width = sortStackView.bounds.width
         dropDownUsers.selectionAction = { [unowned self] (index: Int, item: String) in
             
             usersArrow.transform = .init(rotationAngle: 0)
@@ -166,7 +168,7 @@ class PermissionViewController: UIViewController {
                 self.userId = selectedItem.value ?? ""
             }else{
                 self.userId = ""
-                selectedUserLabel.text = "Users"
+                selectedUserLabel.text = "Users".localized()
             }
             
             self.getPermissionMentionsData(isNewPage: false)
@@ -273,7 +275,7 @@ extension PermissionViewController{
         APIController.shard.getSearchBranchMenu { data in
             if let status = data.status , status{
                 var arr = [String]()
-                arr.append("All")
+                arr.append("All".localized())
                 arr.append(contentsOf: data.records?.map{$0.label ?? "nil"} ?? [])
                 self.dropDownSearch.dataSource = arr
                 self.searchBranchsData = data.records ?? []
@@ -285,7 +287,7 @@ extension PermissionViewController{
         APIController.shard.getGroupsMenu { data in
             if let status = data.status , status{
                 var arr = [String]()
-                arr.append("All")
+                arr.append("All".localized())
                 arr.append(contentsOf: data.records?.map{$0.label ?? "nil"} ?? [])
                 self.dropDownGroups.dataSource = arr
                 self.GroupsData = data.records ?? []
@@ -298,7 +300,7 @@ extension PermissionViewController{
         APIController.shard.getUsersMenu { data in
             if let status = data.status , status{
                 var arr = [String]()
-                arr.append("All")
+                arr.append("All".localized())
                 arr.append(contentsOf: data.records?.map{$0.label ?? "nil"} ?? [])
                 self.dropDownUsers.dataSource = arr
                 self.userData = data.records ?? []
@@ -317,15 +319,15 @@ extension PermissionViewController:SettingsTableViewCellDelegate{
                 self.hideLoadingActivity()
                 if let status = data.status{
                     if status{
-                        let alertVC = UIAlertController(title: "Success", message: data.msg ?? "", preferredStyle: .alert)
-                        alertVC.addAction(.init(title: "Cancel", style: .cancel,handler: { action in
+                        let alertVC = UIAlertController(title: "Success".localized(), message: data.msg ?? "", preferredStyle: .alert)
+                        alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel,handler: { action in
                             self.data.remove(at: indexPath.row)
                             self.tableView.reloadData()
                         }))
                         self.present(alertVC, animated: true)
                     }else{
-                        let alertVC = UIAlertController(title: "Error", message: data.error ?? "", preferredStyle: .alert)
-                        alertVC.addAction(.init(title: "Cancel", style: .cancel))
+                        let alertVC = UIAlertController(title: "error".localized(), message: data.error ?? "", preferredStyle: .alert)
+                        alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel))
                         self.present(alertVC, animated: true)
                     }
                 }

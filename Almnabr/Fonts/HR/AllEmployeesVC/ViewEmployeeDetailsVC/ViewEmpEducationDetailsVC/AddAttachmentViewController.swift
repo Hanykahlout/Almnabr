@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 import DropDown
 import MobileCoreServices
 import UniformTypeIdentifiers
@@ -45,7 +44,7 @@ class AddAttachmentViewController: UIViewController {
     }
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
         }
         setUpCollectionView()
@@ -132,10 +131,10 @@ class AddAttachmentViewController: UIViewController {
     
     @IBAction func selectFileAction(_ sender: Any) {
         let alertVC = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        alertVC.addAction(.init(title: "Choose Photo", style: .default, handler: { action in
+        alertVC.addAction(.init(title: "Choose Photo".localized(), style: .default, handler: { action in
             self.setImageBy(source: .photoLibrary)
         }))
-        alertVC.addAction(.init(title: "Choose Pdf", style: .default, handler: { action in
+        alertVC.addAction(.init(title: "Choose Pdf".localized(), style: .default, handler: { action in
             self.selectAttachment()
         }))
         present(alertVC, animated: true, completion: nil)
@@ -173,6 +172,7 @@ extension AddAttachmentViewController:UIDocumentPickerDelegate{
         guard let myURL = urls.first else {
             return
         }
+        selectFileButton.setTitle(myURL.lastPathComponent, for: .normal)
         self.fileUrl = myURL
     }
     
@@ -194,10 +194,10 @@ extension AddAttachmentViewController : UIImagePickerControllerDelegate , UINavi
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let imgUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL
+        selectFileButton.setTitle(imgUrl?.lastPathComponent ?? "Select File".localized(), for: .normal)
         fileUrl = imgUrl
         dismiss(animated: true, completion: nil)
     }
-    
 }
 
 
@@ -289,13 +289,13 @@ extension AddAttachmentViewController{
             
             var alertVC:UIAlertController!
             if let status = data.status,status{
-                alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
-                alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: { action in
+                alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
+                alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: { action in
                     self.navigationController?.popViewController(animated: true)
                 }))
             }else{
-                alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
-                alertVC.addAction(.init(title: "Cancel", style: .cancel, handler:nil))
+                alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
+                alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler:nil))
             }
             self.present(alertVC, animated: true)
         }

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 class SettingsPermissionVC: UIViewController {
     
@@ -32,7 +31,7 @@ class SettingsPermissionVC: UIViewController {
     
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             backButton.transform = .init(rotationAngle: .pi)
         }
         setUpViews()

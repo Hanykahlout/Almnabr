@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 protocol UsersCollectionViewCellDelegate{
     func removeAction(indexPath:IndexPath)
@@ -57,7 +56,7 @@ class UsersCollectionViewCell: UICollectionViewCell {
     func setData(type:CollectionType,data:SelectionInfo,indexPath:IndexPath){
         self.indexPath = indexPath
         self.type = type
-        titleLabel.text = MOLHLanguage.currentAppleLanguage() == "en" ? data.name_english ?? "" : data.name_arabic ?? ""
+        titleLabel.text = L102Language.currentAppleLanguage() == "en" ? data.name_english ?? "" : data.name_arabic ?? ""
     }
     
     

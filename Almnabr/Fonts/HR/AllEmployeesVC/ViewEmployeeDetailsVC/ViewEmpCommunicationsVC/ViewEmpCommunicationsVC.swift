@@ -8,7 +8,6 @@
 
 import UIKit
 import DropDown
-import MOLH
 
 class ViewEmpCommunicationsVC: UIViewController {
     
@@ -36,7 +35,7 @@ class ViewEmpCommunicationsVC: UIViewController {
         
         filterDropDown.bottomOffset = CGPoint(x: 0 , y:(filterDropDown.anchorView?.plainView.bounds.height)!)
         
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             filterDropDown.convertToArLang()
         }
         
@@ -63,16 +62,16 @@ class ViewEmpCommunicationsVC: UIViewController {
     
     
     @IBAction func addAction(_ sender: Any) {
-        let alertVC = UIAlertController(title: "Choose the type of connections you want to make ", message: "", preferredStyle: .actionSheet)
-        alertVC.addAction(.init(title: "lang_incoming", style: .default, handler: { action in
+        let alertVC = UIAlertController(title: "Choose the type of connections you want to make ".localized(), message: "", preferredStyle: .actionSheet)
+        alertVC.addAction(.init(title: "Incoming".localized(), style: .default, handler: { action in
             self.goToOutgoingVC(isIncoming: true)
         }))
         
-        alertVC.addAction(.init(title: "lang_outgoing", style: .default, handler: { action in
+        alertVC.addAction(.init(title: "Outgoing".localized(), style: .default, handler: { action in
             self.goToOutgoingVC(isIncoming: false)
         }))
         
-        alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+        alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: nil))
         present(alertVC, animated: true)
     }
     

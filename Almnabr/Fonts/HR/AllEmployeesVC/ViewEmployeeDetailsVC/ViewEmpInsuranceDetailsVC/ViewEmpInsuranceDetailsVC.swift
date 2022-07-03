@@ -79,11 +79,12 @@ class ViewEmpInsuranceDetailsVC: UIViewController {
         
         dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
         
-        dropDown.dataSource = ["All","Spouse","Son","Daugther","Others"]
+        dropDown.dataSource = ["All".localized(),"Spouse".localized(),"Son".localized(),"Daugther".localized(),"Others".localized()]
+        
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             self.filterArrow.transform = .init(rotationAngle: 0)
             self.filterLabel.text = item
-            self.selectedSearchStatus = item == "All" ? nil : index
+            self.selectedSearchStatus = item == "All".localized() ? nil : index
             self.getInsuranceData(isFromBottom: false)
         }
         
@@ -236,13 +237,13 @@ extension ViewEmpInsuranceDetailsVC{
                 self.hideLoadingActivity()
                 var alertVC:UIAlertController!
                 if let status = data.status,status{
-                    alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
+                    alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
                     self.data.remove(at: indexPath.row)
                     self.tableView.reloadData()
                 }else{
-                    alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
+                    alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
                 }
-                alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+                alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: nil))
                 self.present(alertVC, animated: true)
             }
         }

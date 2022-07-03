@@ -22,7 +22,6 @@ struct LicenceData : Mappable {
 	var licence_writer : String?
 	var licence_created_datetime : String?
 	var licence_updated_datetime : String?
-
     
 	init?(map: Map) {
 

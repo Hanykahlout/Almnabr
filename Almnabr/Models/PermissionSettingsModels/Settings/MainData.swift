@@ -26,6 +26,8 @@ struct MainData : Mappable {
 	var settings_created_datetime : String?
 	var settings_updated_datetime : String?
 
+    
+    
 	init?(map: Map) {
 
 	}

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 import Fastis
 class AddInsuranceViewController: UIViewController {
     
@@ -26,7 +25,7 @@ class AddInsuranceViewController: UIViewController {
     }
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
         }
         setUpTableView()
@@ -37,7 +36,7 @@ class AddInsuranceViewController: UIViewController {
     
     private func setUpDateController(){
         insuranceDateTextFiled.isEnabled = false
-        dateController.title = "Choose Date"
+        dateController.title = "Choose Date".localized()
         
         dateController.allowToChooseNilDate = true
         dateController.shortcuts = [.today]
@@ -135,14 +134,14 @@ extension AddInsuranceViewController{
                 self.hideLoadingActivity()
                 var alertVC:UIAlertController!
                 if let status = data.status,status{
-                    alertVC = UIAlertController(title: "Sucess", message: data.msg, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: { action in
+                    alertVC = UIAlertController(title: "Sucess".localized(), message: data.msg, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: { action in
                         NotificationCenter.default.post(name: .init(rawValue: "ReloadInsuranceDetails"), object: nil)
                         self.navigationController?.popViewController(animated: true)
                     }))
                 }else{
-                    alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+                    alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: nil))
                 }
                 self.present(alertVC, animated: true)
             }

@@ -8,7 +8,6 @@
 
 import UIKit
 import DropDown
-import MOLH
 
 
 protocol GeneralDelegate {
@@ -286,7 +285,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
 //        self.btnPrevious.setRounded(10)
         
         
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         }

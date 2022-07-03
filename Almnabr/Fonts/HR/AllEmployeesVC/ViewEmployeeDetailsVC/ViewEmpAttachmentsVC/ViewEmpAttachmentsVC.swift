@@ -216,7 +216,7 @@ extension ViewEmpAttachmentsVC{
                 self.hideLoadingActivity()
                 var alertVC:UIAlertController!
                 if let status = data.status,status{
-                    alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
+                    alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
                     if attachmentData.key_code == "EN0001"{
                         ViewEmployeeDetailsVC.empData.attachments?.en0001 = nil
                         ViewEmployeeDetailsVC.empData.attachments?.en0001_d = nil
@@ -227,9 +227,9 @@ extension ViewEmpAttachmentsVC{
                     self.data.remove(at: indexPath.row)
                     self.tableView.reloadData()
                 }else{
-                    alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
+                    alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
                 }
-                alertVC.addAction(.init(title: "Cancel", style: .cancel))
+                alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel))
                 self.present(alertVC, animated: true)
             }
         }

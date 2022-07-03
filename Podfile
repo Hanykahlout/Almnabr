@@ -24,7 +24,7 @@ target 'Almnabr' do
     
     pod 'AMPopTip'
 
-    pod 'MOLH'
+    
     pod 'Kingfisher', '~> 7.0'
     
     pod "SwiftSignatureView"

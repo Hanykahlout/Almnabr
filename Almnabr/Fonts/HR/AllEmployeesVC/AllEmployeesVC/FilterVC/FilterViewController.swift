@@ -8,13 +8,12 @@
 
 import UIKit
 import DropDown
-import MOLH
 import Fastis
 
 
 class FilterViewController: UIViewController {
     
-    
+
     @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var lang_nationality_typeView: UIView!
@@ -98,7 +97,7 @@ class FilterViewController: UIViewController {
     
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             backButton.transform = .init(rotationAngle: .pi)
         }
         
@@ -160,13 +159,13 @@ class FilterViewController: UIViewController {
             }
             
             selectedNationalityType = filterInfo.selectedNationalityType
-            lang_nationality_typeLabel.text = MOLHLanguage.currentAppleLanguage() == "ar" ? selectedNationalityType?.name_arabic ?? "" : selectedNationalityType?.name_english ?? ""
+            lang_nationality_typeLabel.text = L102Language.currentAppleLanguage() == "ar" ? selectedNationalityType?.name_arabic ?? "" : selectedNationalityType?.name_english ?? ""
         }
     }
     
     private func setUpDatePicker(){
         
-        fastisController.title = "Choose range"
+        fastisController.title = "Choose Range".localized()
         fastisController.allowToChooseNilDate = true
         fastisController.shortcuts = [.today, .lastWeek]
         fastisController.doneHandler = { resultRange in
@@ -215,7 +214,8 @@ class FilterViewController: UIViewController {
             lang_nationality_typeArrow.transform = .init(rotationAngle: 0)
             self.lang_nationality_typeLabel.text = item
             self.selectedNationalityType = lang_nationalityData[index]
-             
+            nationalityView.isHidden = self.selectedNationalityType?.id == "saudi"
+            
         }
         
         lang_nationalityDropDown.cancelAction = { [unowned self] in
@@ -322,9 +322,9 @@ class FilterViewController: UIViewController {
     }
     
     private func filterAction(body:[String:Any],filterInfo:FilterInfo?){
-        NotificationCenter.default.post(name: NSNotification.Name("FilterAction"), object: [body,filterInfo])
+        let data:[Any?] = [body,filterInfo]
+        NotificationCenter.default.post(name: NSNotification.Name("FilterAction"), object: data )
         navigationController?.popViewController(animated: true)
-        
     }
     
     
@@ -396,9 +396,10 @@ class FilterViewController: UIViewController {
         let lang_membership_expiry_date = (lang_membership_expiry_dateTextField.text!).components(separatedBy: " - ")
         let lang_contract_expiry_date = (lang_contract_expiry_dateTextField.text!).components(separatedBy: " - ")
       
-        
-        for index in 0..<selectedNationality.count{
-            body["nationality[\(index)]"] = selectedNationality[index].value ?? ""
+        if !nationalityView.isHidden{
+            for index in 0..<selectedNationality.count{
+                body["nationality[\(index)]"] = selectedNationality[index].value ?? ""
+            }
         }
         
         for index in 0..<selectedProjectNameEnglish.count{
@@ -556,9 +557,9 @@ extension FilterViewController{
                     self.statusData = data.records?.employee_statuses ?? []
                     
                     
-                    self.lang_nationalityDropDown.dataSource = (data.records?.nationality_types ?? []).map{MOLHLanguage.currentAppleLanguage() == "ar"  ? $0.name_arabic ?? "" : $0.name_english ?? ""}
-                    self.positionsDropDown.dataSource = (data.records?.positions ?? []).map{MOLHLanguage.currentAppleLanguage() == "ar"  ? $0.name_arabic ?? "" : $0.name_english ?? ""}
-                    self.statusDropDown.dataSource = (data.records?.employee_statuses ?? []).map{MOLHLanguage.currentAppleLanguage() == "ar"  ? $0.name_arabic ?? "" : $0.name_english ?? ""}
+                    self.lang_nationalityDropDown.dataSource = (data.records?.nationality_types ?? []).map{L102Language.currentAppleLanguage() == "ar"  ? $0.name_arabic ?? "" : $0.name_english ?? ""}
+                    self.positionsDropDown.dataSource = (data.records?.positions ?? []).map{L102Language.currentAppleLanguage() == "ar"  ? $0.name_arabic ?? "" : $0.name_english ?? ""}
+                    self.statusDropDown.dataSource = (data.records?.employee_statuses ?? []).map{L102Language.currentAppleLanguage() == "ar"  ? $0.name_arabic ?? "" : $0.name_english ?? ""}
                 }
             }
         }

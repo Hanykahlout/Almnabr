@@ -22,6 +22,9 @@ class ViewEmpEducationDetailsVC: UIViewController {
     private var totalPages = 1
     private var data = [EducationRecord]()
     private var filePath = ""
+    private let graduationData = ["SL":"Below SSLC","SS":"SSLC","HS":"HSC","DP":"Diploma".localized(),"UG":"Bachelor Degree".localized(),"PG":"Master Degree".localized(),"DC":"Doctorate".localized()]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
@@ -39,6 +42,7 @@ class ViewEmpEducationDetailsVC: UIViewController {
         super.viewWillAppear(animated)
         getAllEducationDetails(isFromBottom: false)
         setUpAttachmentPreview()
+        setEduData()
     }
     
     private func setUpAttachmentPreview(){
@@ -51,6 +55,13 @@ class ViewEmpEducationDetailsVC: UIViewController {
         }
     }
     
+    
+    private func setEduData(){
+        membershipNumberLabel.text = ViewEmployeeDetailsVC.empData.data?.membership_number ?? "-----"
+        graduationYearLabel.text = ViewEmployeeDetailsVC.empData.data?.primary_graduation_year ?? "-----"
+        graduationLabel.text = graduationData[ViewEmployeeDetailsVC.empData.data?.primary_education_level ?? ""] ?? "-----"
+        expiryDateLabel.text = ViewEmployeeDetailsVC.empData.data?.passport_expiry_date_english ?? "-----"
+    }
     
     private func addObserver(){
         NotificationCenter.default.addObserver(forName: .init("LoadingEducation"), object: nil, queue: .main) { notify in
@@ -173,8 +184,8 @@ extension ViewEmpEducationDetailsVC{
     
     
     private func deleteEducation(keyId:String,indexPath:IndexPath){
-        let alertVC = UIAlertController(title: "Confirmation !!!", message: "Are you sure !?", preferredStyle: .alert)
-        alertVC.addAction(.init(title: "Yes", style: .default, handler: { action in
+        let alertVC = UIAlertController(title: "Confirmation !!!".localized(), message: "Are you sure !?".localized(), preferredStyle: .alert)
+        alertVC.addAction(.init(title: "Yes".localized(), style: .default, handler: { action in
             let empId  = ViewEmployeeDetailsVC.empData.data?.employee_number ?? ""
             let branchId = ViewEmployeeDetailsVC.empData.data?.branch_id ?? ""
             self.showLoadingActivity()
@@ -185,16 +196,16 @@ extension ViewEmpEducationDetailsVC{
                     if let status = data.status,status{
                         self.data.remove(at: indexPath.row)
                         self.tableView.reloadData()
-                        alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
+                        alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
                     }else{
-                        alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
+                        alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
                     }
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: nil))
                     self.present(alertVC, animated: true)
                 }
             }
         }))
-        alertVC.addAction(.init(title: "No", style: .default, handler: nil))
+        alertVC.addAction(.init(title: "No".localized(), style: .default, handler: nil))
         present(alertVC, animated: true)
     }
     

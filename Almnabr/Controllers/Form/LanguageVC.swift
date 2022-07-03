@@ -9,7 +9,6 @@
 import UIKit
 import DropDown
 import DPLocalization
-import MOLH
 
 var IsTransaction:Bool = false
 
@@ -139,7 +138,7 @@ class LanguageVC: UIViewController {
         }
         
         self.btnNext.setTitle("Next".localized(), for: .normal)
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         }
         //arrow.right

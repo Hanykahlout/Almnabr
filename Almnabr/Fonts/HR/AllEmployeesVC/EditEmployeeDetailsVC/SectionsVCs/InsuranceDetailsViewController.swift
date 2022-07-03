@@ -46,7 +46,7 @@ class InsuranceDetailsViewController: UIViewController {
     
     private func setUpDatePicker(){
         insuranceDateTextField.isEnabled = false
-        fastisController.title = "Choose Date"
+        fastisController.title = "Choose Date".localized()
         fastisController.allowToChooseNilDate = true
         fastisController.shortcuts = [.today]
         fastisController.doneHandler = { result in

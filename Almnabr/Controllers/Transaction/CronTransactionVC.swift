@@ -10,7 +10,6 @@ import UIKit
 import DPLocalization
 import FontAwesome_swift
 import DropDown
-import MOLH
 
 class CronTransactionVC: UIViewController {
     
@@ -158,7 +157,7 @@ class CronTransactionVC: UIViewController {
     
     
     func menu_select(){
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{

@@ -8,7 +8,6 @@
 
 import UIKit
 import DropDown
-import MOLH
 
 class SubFilterVC: UIViewController {
 
@@ -176,7 +175,7 @@ class SubFilterVC: UIViewController {
         
         self.showLoadingActivity()
         
-        let language = MOLHLanguage.currentAppleLanguage()
+        let language = L102Language.currentAppleLanguage()
         
         let url = "p/get_templates_for_transactions?lang_key=\(language)&projects_work_area_id=\(projects_work_area_id)"
         APIManager.sendRequestGetAuth(urlString: url) { (response) in

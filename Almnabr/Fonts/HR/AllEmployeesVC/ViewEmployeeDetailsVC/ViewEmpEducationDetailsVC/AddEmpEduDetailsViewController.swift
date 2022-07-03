@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 import Fastis
 class AddEmpEduDetailsViewController: UIViewController {
     
@@ -33,7 +32,7 @@ class AddEmpEduDetailsViewController: UIViewController {
     
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
         }
         
@@ -46,7 +45,7 @@ class AddEmpEduDetailsViewController: UIViewController {
         startDateTextField.isEnabled = false
         endDateTextField.isEnabled = false
         
-        dateController.title = "Choose Date"
+        dateController.title = "Choose Date".localized()
         
         dateController.allowToChooseNilDate = true
         dateController.shortcuts = [.today]
@@ -100,15 +99,15 @@ class AddEmpEduDetailsViewController: UIViewController {
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status,status{
-                    let alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Ok", style: .default, handler: { action in
+                    let alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "ok".localized(), style: .default, handler: { action in
                         NotificationCenter.default.post(name: NSNotification.Name("LoadingEducation"), object: nil)
                         self.navigationController?.popViewController(animated: true)
                     }))
                     self.present(alertVC, animated: true)
                 }else{
-                    let alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+                    let alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: nil))
                     self.present(alertVC, animated: true)
                 }
             }

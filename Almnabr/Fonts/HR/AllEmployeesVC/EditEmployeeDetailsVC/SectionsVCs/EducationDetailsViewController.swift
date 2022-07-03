@@ -31,9 +31,9 @@ class EducationDetailsViewController: UIViewController {
     private var selectedGraduation = ""
     private var selectedRatingDegree = ""
     
-    private let graduationData = ["SL":"Below SSLC","SS":"SSLC","HS":"HSC","DP":"Diploma","UG":"Bachelor Degree","PG":"Master Degree","DC":"Doctorate"]
+    private let graduationData = ["SL":"Below SSLC","SS":"SSLC","HS":"HSC","DP":"Diploma".localized(),"UG":"Bachelor Degree".localized(),"PG":"Master Degree".localized(),"DC":"Doctorate".localized()]
     
-    private let ratingDegreesData = ["AE":"Associate engineer","PE":"Professional engineer","CE":"Consultant engineer","O":"Other"]
+    private let ratingDegreesData = ["AE":"Associate engineer".localized(),"PE":"Professional engineer".localized(),"CE":"Consultant engineer".localized(),"O":"Other".localized()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,7 +138,7 @@ class EducationDetailsViewController: UIViewController {
     private func setUpDatePicker(){
         membershipExpiryEnTextField.isEnabled = false
         membershipExpiryDateArTextField.isEnabled = true
-        fastisController.title = "Choose Date"
+        fastisController.title = "Choose Date".localized()
         fastisController.allowToChooseNilDate = true
         fastisController.shortcuts = [.today]
         

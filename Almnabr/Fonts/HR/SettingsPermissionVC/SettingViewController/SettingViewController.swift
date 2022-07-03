@@ -15,14 +15,18 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var filterArrow: UIImageView!
-    
+    @IBOutlet weak var filterStackView: UIStackView!
     @IBOutlet weak var messageLabel: UILabel!
+    
+    
     private var filterDropDown = DropDown()
     private var data = [SettingsDataRecords]()
     private var refrechContrl = UIRefreshControl()
     private var pageNumber = 1
     private var totalPages:Int?
     private var seletedFitlerType = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
@@ -53,8 +57,9 @@ class SettingViewController: UIViewController {
     
     private func setUpDropDown(){
         filterDropDown.anchorView = filterView
-        filterDropDown.dataSource = ["All","Bank Name", "Employee Title", "Jop Positions"]
+        filterDropDown.dataSource = ["All".localized(),"Bank Name".localized(), "Employee Title".localized(), "Job Positions".localized()]
         filterDropDown.bottomOffset = CGPoint(x: 0, y:(filterDropDown.anchorView?.plainView.bounds.height)!)
+        filterDropDown.width = filterStackView.bounds.width
         
         filterDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             filterArrow.transform = .init(rotationAngle: 0)
@@ -72,13 +77,13 @@ class SettingViewController: UIViewController {
     
     private func getType(title:String)->String{
         switch title{
-        case "Bank Name":
+        case "Bank Name".localized():
             return "BANK"
-        case "All":
+        case "All".localized():
             return "ALL"
-        case "Employee Title":
+        case "Employee Title".localized():
             return "ETIT"
-        case "Jop Positions":
+        case "Job Positions".localized():
             return "JTIT"
         default:
             break
@@ -153,16 +158,16 @@ extension SettingViewController{
                 }
                 self.hideLoadingActivity()
                 self.messageLabel.isHidden = true
-                if let status = data.status{
-                    if status{
-                        self.totalPages = data.page?.total_pages
-                        if isNewPage{
-                            self.data.append(contentsOf: data.records ?? [])
-                        }else{
-                            self.data = data.records ?? []
-                        }
-                        self.tableView.reloadData()
+                if let status = data.status , status{
+                    
+                    self.totalPages = data.page?.total_pages
+                    if isNewPage{
+                        self.data.append(contentsOf: data.records ?? [])
+                    }else{
+                        self.data = data.records ?? []
                     }
+                    self.tableView.reloadData()
+                    
                 }else{
                     self.messageLabel.text = data.error ?? ""
                     self.messageLabel.isHidden = false
@@ -180,27 +185,25 @@ extension SettingViewController:Settings2TableViewCellDelegate{
         APIController.shard.deleteSettingsData(id: data[indexPath.row].settings_id ?? "") { data in
             if let status = data.status{
                 if status{
-                    let alertVC = UIAlertController(title: "Success", message: data.msg ?? "", preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel,handler: { action in
+                    let alertVC = UIAlertController(title: "Success".localized(), message: data.msg ?? "", preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel,handler: { action in
                         self.data.remove(at: indexPath.row)
                         self.tableView.reloadData()
                     }))
                     self.present(alertVC, animated: true)
                 }else{
-                    let alertVC = UIAlertController(title: "Error", message: data.error ?? "", preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel))
+                    let alertVC = UIAlertController(title: "error".localized(), message: data.error ?? "", preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel))
                     self.present(alertVC, animated: true)
                 }
             }
         }
-        
-        data.remove(at: indexPath.row)
-        tableView.reloadData()
     }
     
     func goToUpdateVC(data: SettingsDataRecords) {
         let vc = SettingsUpdateViewController()
         vc.isUpdate = true
+    
         vc.data = data
         navigationController?.pushViewController(vc, animated: true)
     }

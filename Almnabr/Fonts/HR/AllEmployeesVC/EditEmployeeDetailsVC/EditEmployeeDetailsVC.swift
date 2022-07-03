@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 class EditEmployeeDetailsVC: UIViewController {
     
@@ -47,7 +46,7 @@ class EditEmployeeDetailsVC: UIViewController {
         setUpCollectionView()
         getEmployeeData()
         addPageVCObserver()
-        if MOLHLanguage.currentAppleLanguage() == "ar"{
+        if L102Language.currentAppleLanguage() == "ar"{
             backButton.transform = .init(rotationAngle: .pi)
             data = data.reversed()
             collectionView.reloadData()
@@ -88,12 +87,12 @@ class EditEmployeeDetailsVC: UIViewController {
     
     
     private func setCollectionData(){
-        data.append(.init(bgColor: UIColor(named: "AppColor")!, icon: UIImage(systemName: "person.fill")!, title: "ID Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.text.rectangle.fill")!, title: "Contact Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "building.columns.fill")!, title: "Bank Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "book.closed.fill")!, title: "Education Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "airplane")!, title: "Passport Details"))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "building.2")!, title: "Insurance Details"))
+        data.append(.init(bgColor: UIColor(named: "AppColor")!, icon: UIImage(systemName: "person.fill")!, title: "ID Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.text.rectangle.fill")!, title: "Contact Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "building.columns.fill")!, title: "Bank Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "book.closed.fill")!, title: "Education Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "airplane")!, title: "Passport Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "building.2")!, title: "Insurance Details".localized()))
     
     }
     
@@ -102,40 +101,40 @@ class EditEmployeeDetailsVC: UIViewController {
         switch selectedSection {
         case .IDDetailsVC:
             
-            nextButotn.setTitle("Next", for: .normal)
+            nextButotn.setTitle("Next".localized(), for: .normal)
             previousButton.isHidden = true
         case .ContactDetailsVC:
             
-            nextButotn.setTitle("Next", for: .normal)
+            nextButotn.setTitle("Next".localized(), for: .normal)
             previousButton.isHidden = false
         case .BankDetailsVC:
             
-            nextButotn.setTitle("Next", for: .normal)
+            nextButotn.setTitle("Next".localized(), for: .normal)
             previousButton.isHidden = false
             
             
         case .EducationDetailsVC:
             
-            nextButotn.setTitle("Next", for: .normal)
+            nextButotn.setTitle("Next".localized(), for: .normal)
             previousButton.isHidden = false
             
             
         case .PassportDetailsVC:
             
-            nextButotn.setTitle("Next", for: .normal)
+            nextButotn.setTitle("Next".localized(), for: .normal)
             previousButton.isHidden = false
             
             
         case .InsuranceDetailsVC:
             
-            nextButotn.setTitle("Submit", for: .normal)
+            nextButotn.setTitle("Submit".localized(), for: .normal)
             previousButton.isHidden = false
         }
     }
     
     
     @IBAction func nextAction(_ sender: Any) {
-        let lang = MOLHLanguage.currentAppleLanguage()
+        let lang = L102Language.currentAppleLanguage()
         if lang == "ar"{
             switch selectedSection {
             case .IDDetailsVC:
@@ -186,7 +185,7 @@ class EditEmployeeDetailsVC: UIViewController {
     
     
     @IBAction func previousAction(_ sender: Any) {
-        let lang = MOLHLanguage.currentAppleLanguage()
+        let lang = L102Language.currentAppleLanguage()
         if lang == "ar"{
             switch selectedSection {
             case .IDDetailsVC:
@@ -246,15 +245,15 @@ class EditEmployeeDetailsVC: UIViewController {
             self.hideLoadingActivity()
             DispatchQueue.main.async {
                 if let status = data.status,status{
-                    let alertVC = UIAlertController(title: "Success", message: data.msg ?? "", preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel,handler: { action in
+                    let alertVC = UIAlertController(title: "Success".localized(), message: data.msg ?? "", preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel,handler: { action in
                         EditEmployeeDetailsVC.empImage = nil
                         self.navigationController?.popViewController(animated: true)
                     }))
                     self.present(alertVC, animated: true, completion: nil)
                 }else{
-                    let alertVC = UIAlertController(title: "Error", message: data.error ?? "", preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel))
+                    let alertVC = UIAlertController(title: "error".localized(), message: data.error ?? "", preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel))
                     self.present(alertVC, animated: true, completion: nil)
                 }
             }
@@ -293,7 +292,7 @@ extension EditEmployeeDetailsVC:UICollectionViewDelegate,UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         goToSelectedCell(indexPath: indexPath)
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             switch indexPath.row{
             case 0:
                 selectedSection = .InsuranceDetailsVC
@@ -330,7 +329,7 @@ extension EditEmployeeDetailsVC:UICollectionViewDelegate,UICollectionViewDataSou
         }
         showSection()
         var direction:UIPageViewController.NavigationDirection!
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             direction =  selectedIndex < indexPath.row ? .forward : .reverse
         }else{
             direction =  selectedIndex < indexPath.row ? .reverse : .forward

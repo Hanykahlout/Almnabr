@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 
 class AllEmployeesVC: UIViewController {
@@ -28,7 +27,7 @@ class AllEmployeesVC: UIViewController {
     }
     
     private func initlization(){
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             backButton.transform = .init(rotationAngle: .pi)
         }
         observeFilterAction()
@@ -161,16 +160,16 @@ extension AllEmployeesVC{
         APIController.shard.deleteEmployee(id: id) { data in
             DispatchQueue.main.async {
                 if let status = data.status,status{
-                    let alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel,handler: { action in
+                    let alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel,handler: { action in
                         self.data.remove(at: indexPath.row)
                         self.tableView.reloadData()
                     }))
                     self.present(alertVC, animated: true)
                     
                 }else{
-                    let alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel))
+                    let alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel))
                     self.present(alertVC, animated: true)
                 }
             }
@@ -179,3 +178,4 @@ extension AllEmployeesVC{
     
     
 }
+ 

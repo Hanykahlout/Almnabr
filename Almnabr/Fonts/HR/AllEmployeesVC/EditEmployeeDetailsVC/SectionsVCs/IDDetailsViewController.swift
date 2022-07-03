@@ -85,13 +85,14 @@ class IDDetailsViewController: UIViewController {
     private let fastisController = FastisController(mode: .single)
     
     public var empImageString = ""
-    private let workTypeData = ["Full Time","Part Time","Contract","Others"]
+    private let workTypeData = ["Full Time".localized(),"Part Time".localized(),"Contract".localized(),"Others".localized()]
     private var selectedBranchID = ""
     private var selectedNationality = ""
     private var selectedWorkType = ""
     private var selectedEmpTitle = ""
     private var selectedGroupID = ""
-    
+    private var selectedGender = ""
+    private var selectedMaritalStatus = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,7 +179,7 @@ class IDDetailsViewController: UIViewController {
                 EditEmployeeDetailsVC.editBody.birth_date_english = self.birthDateEnglishTextField.text!
                 
                 EditEmployeeDetailsVC.editBody.copy_number = self.copyNumberTextField.text!
-                EditEmployeeDetailsVC.editBody.gender = String(self.genderTextField.text!.first ?? .init(""))
+                EditEmployeeDetailsVC.editBody.gender = self.selectedGender
                 EditEmployeeDetailsVC.editBody.nationality = self.selectedNationality
                 EditEmployeeDetailsVC.editBody.job_title_iqama = self.jopTitleTextField.text!
                 EditEmployeeDetailsVC.editBody.religion = self.religionTextField.text!
@@ -186,7 +187,7 @@ class IDDetailsViewController: UIViewController {
                 EditEmployeeDetailsVC.editBody.work_location = self.workLocationTextField.text!
                 EditEmployeeDetailsVC.editBody.employee_title = self.selectedEmpTitle
                 EditEmployeeDetailsVC.editBody.group_id = self.selectedGroupID
-                EditEmployeeDetailsVC.editBody.marital_status = String(self.maritalStatusTextField.text!.first ?? .init(""))
+                EditEmployeeDetailsVC.editBody.marital_status = self.selectedMaritalStatus
                 EditEmployeeDetailsVC.editBody.work_type = self.selectedWorkType
                 EditEmployeeDetailsVC.editBody.profile_image = ""
         }
@@ -198,7 +199,8 @@ class IDDetailsViewController: UIViewController {
         self.selectedBranchID = EditEmployeeDetailsVC.editBody.branch_id
         self.branchTextField.text = self.branchsData.filter{$0.value ?? "" == EditEmployeeDetailsVC.editBody.branch_id}.first?.label ?? ""
         
-        self.genderTextField.text = EditEmployeeDetailsVC.editBody.gender == "M" ? "Male" : "FeMale"
+        self.genderTextField.text = EditEmployeeDetailsVC.editBody.gender == "M" ? "Male".localized() : "FeMale".localized()
+        self.selectedGender = EditEmployeeDetailsVC.editBody.gender
         
         self.selectedNationality = EditEmployeeDetailsVC.editBody.nationality
         self.nationalityTextField.text = self.nationalityData.filter{$0.value == EditEmployeeDetailsVC.editBody.nationality}.first?.label ?? ""
@@ -237,15 +239,15 @@ class IDDetailsViewController: UIViewController {
             self.workTypeTextField.text = self.workTypeData[number + 1]
         }
         
-        
+        self.selectedMaritalStatus = EditEmployeeDetailsVC.editBody.marital_status
         if EditEmployeeDetailsVC.editBody.marital_status == "S"{
-            self.maritalStatusTextField.text = "Single"
+            self.maritalStatusTextField.text = "Single".localized()
         }else if EditEmployeeDetailsVC.editBody.marital_status == "M"{
-            self.maritalStatusTextField.text = "Married"
+            self.maritalStatusTextField.text = "Married".localized()
         }else if EditEmployeeDetailsVC.editBody.marital_status == "D"{
-            self.maritalStatusTextField.text = "Diversed"
+            self.maritalStatusTextField.text = "Diversed".localized()
         }else{
-            self.maritalStatusTextField.text = "Others"
+            self.maritalStatusTextField.text = "Others".localized()
         }
         
     }
@@ -271,15 +273,28 @@ class IDDetailsViewController: UIViewController {
         // maritalStatusDropDown
         maritalStatusDropDown.anchorView = maritalStatusTextField
         
-        maritalStatusDropDown.dataSource = ["Single","Married","Diversed","Others"]
+        maritalStatusDropDown.dataSource = ["Single".localized(),"Married".localized(),"Diversed".localized(),"Others".localized()]
         
         maritalStatusDropDown.bottomOffset = CGPoint(x: 0, y:(maritalStatusDropDown.anchorView?.plainView.bounds.height)!)
         
         maritalStatusDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             maritalStatusArrow.transform = .init(rotationAngle: 0)
             self.maritalStatusTextField.text = item
-            
+            switch index {
+            case 0:
+                self.selectedMaritalStatus = "S"
+            case 1:
+                self.selectedMaritalStatus = "M"
+            case 2:
+                self.selectedMaritalStatus = "D"
+            case 3:
+                self.selectedMaritalStatus = "O"
+            default:
+                break
+            }
         }
+        
+        
         maritalStatusDropDown.cancelAction = { [unowned self] in
             maritalStatusArrow.transform = .init(rotationAngle: 0)
         }
@@ -287,13 +302,16 @@ class IDDetailsViewController: UIViewController {
         
         // genderDropDown
         genderDropDown.anchorView = genderTextField
-        genderDropDown.dataSource = ["Male","FeMale"]
+        genderDropDown.dataSource = ["Male".localized(),"FeMale".localized()]
         genderDropDown.bottomOffset = CGPoint(x: 0, y:(genderDropDown.anchorView?.plainView.bounds.height)!)
         
         genderDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             genderArrow.transform = .init(rotationAngle: 0)
             self.genderTextField.text = item
+            self.selectedGender = index == 0 ? "M" : "F"
+            
         }
+
         
         genderDropDown.cancelAction = { [unowned self] in
             genderArrow.transform = .init(rotationAngle: 0)
@@ -382,7 +400,7 @@ class IDDetailsViewController: UIViewController {
     
     
     private func setUpDatePicker(){
-        fastisController.title = "Choose Date"
+        fastisController.title = "Choose Date".localized()
         fastisController.allowToChooseNilDate = true
         
         fastisController.shortcuts = [.today]
@@ -477,11 +495,11 @@ class IDDetailsViewController: UIViewController {
     
     
     @IBAction func cameriaAction(_ sender: Any) {
-        let alertVC = UIAlertController(title: "Take a photo from", message: "", preferredStyle: .actionSheet)
-        alertVC.addAction(.init(title: "Gallery", style: .default,handler: { action in
+        let alertVC = UIAlertController(title: "Take a photo from".localized(), message: "", preferredStyle: .actionSheet)
+        alertVC.addAction(.init(title: "Gallery".localized(), style: .default,handler: { action in
             self.setImageBy(source: .photoLibrary)
         }))
-        alertVC.addAction(.init(title: "Camera", style: .default,handler: { action in
+        alertVC.addAction(.init(title: "Camera".localized(), style: .default,handler: { action in
             self.setImageBy(source: .camera)
         }))
         present(alertVC, animated: true)

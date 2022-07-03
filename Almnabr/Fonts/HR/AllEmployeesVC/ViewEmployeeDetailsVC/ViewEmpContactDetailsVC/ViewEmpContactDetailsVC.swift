@@ -152,15 +152,15 @@ extension ViewEmpContactDetailsVC{
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status,status{
-                    let alertVC = UIAlertController(title: "Success", message: data.msg, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: { action in
+                    let alertVC = UIAlertController(title: "Success".localized(), message: data.msg, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel, handler: { action in
                         self.data.remove(at: indexPath.row)
                         self.tableView.reloadData()
                     }))
                     self.present(alertVC, animated: true)
                 }else{
-                    let alertVC = UIAlertController(title: "Error", message: data.error, preferredStyle: .alert)
-                    alertVC.addAction(.init(title: "Cancel", style: .cancel, handler: nil))
+                    let alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "cancel".localized(), style: .cancel, handler: nil))
                     self.present(alertVC, animated: true)
                 }
             }

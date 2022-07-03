@@ -62,7 +62,7 @@ class MenuVC: UIViewController {
         self.lblUserName.text = obj?.user_username
         self.btnEmail.setTitle(obj?.user_email, for: .normal)
         self.btnMobile.setTitle(obj?.user_phone, for: .normal)
-        self.btnProfile.setTitle("Profile", for: .normal)
+        self.btnProfile.setTitle("Profile".localized(), for: .normal)
         
         
         let image =  UIImage.fontAwesomeIcon(name: .cog, style: self.fontStyle, textColor: .white, size: CGSize(width: 40, height: 40))

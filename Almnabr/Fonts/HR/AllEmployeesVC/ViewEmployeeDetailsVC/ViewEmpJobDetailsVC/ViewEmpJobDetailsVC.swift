@@ -112,8 +112,8 @@ extension ViewEmpJobDetailsVC:JopDetailsCellDelegate{
     
     
     func deleteCell(id: String,indexPath:IndexPath) {
-        let alertVC = UIAlertController(title: "Confirmation !!!", message: "Are you sure !?", preferredStyle: .alert)
-        alertVC.addAction(.init(title: "Yes", style: .default, handler: { action in
+        let alertVC = UIAlertController(title: "Confirmation !!!".localized(), message: "Are you sure !?".localized(), preferredStyle: .alert)
+        alertVC.addAction(.init(title: "Yes".localized(), style: .default, handler: { action in
             let branchId = ViewEmployeeDetailsVC.empData.data?.branch_id ?? ""
             self.showLoadingActivity()
             APIController.shard.deleteJopDetails(key_id: id,branchId:branchId ,empId: ViewEmployeeDetailsVC.empData.data?.employee_number ?? "") { data in
@@ -127,7 +127,7 @@ extension ViewEmpJobDetailsVC:JopDetailsCellDelegate{
             }
         }))
         
-        alertVC.addAction(.init(title: "No", style: .default))
+        alertVC.addAction(.init(title: "No".localized(), style: .default))
         present(alertVC, animated: true)
     }
 }

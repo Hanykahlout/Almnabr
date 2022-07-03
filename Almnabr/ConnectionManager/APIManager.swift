@@ -9,7 +9,6 @@ import UIKit
 import Alamofire
 import AlamofireObjectMapper
 import DPLocalization
-import MOLH
 
 class APIManager: NSObject {
    
@@ -218,7 +217,7 @@ class APIManager: NSObject {
     
     static func setHeaderInformation() -> HTTPHeaders {
         var headers: HTTPHeaders?
-        var language = MOLHLanguage.currentAppleLanguage()
+        var language = L102Language.currentAppleLanguage()
         if language.count == 0 {
             language = "en"
         }
@@ -233,7 +232,7 @@ class APIManager: NSObject {
     
     static func setMultipartHeaderInformation() -> HTTPHeaders {
         var headers: HTTPHeaders?
-        var language = MOLHLanguage.currentAppleLanguage()
+        var language = L102Language.currentAppleLanguage()
         if language.count == 0 {
             language = "en"
         }

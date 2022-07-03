@@ -1253,14 +1253,6 @@
 			path = "Comunication Details";
 			sourceTree = "<group>";
 		};
-		3F432BA72871E9BF009289DE /* Git */ = {
-			isa = PBXGroup;
-			children = (
-				3F432BA82871E9D7009289DE /* .gitignore */,
-			);
-			path = Git;
-			sourceTree = "<group>";
-		};
 		3F48C537285883A0004D33F8 /* ViewEmpResponse */ = {
 			isa = PBXGroup;
 			children = (
@@ -1842,7 +1834,7 @@
 		FA03241926FB9BF900372EA6 = {
 			isa = PBXGroup;
 			children = (
-				3F432BA72871E9BF009289DE /* Git */,
+				3F432BA82871E9D7009289DE /* .gitignore */,
 				FA03242426FB9BFA00372EA6 /* Almnabr */,
 				FA03243B26FB9BFE00372EA6 /* AlmnabrTests */,
 				FA03244626FB9BFE00372EA6 /* AlmnabrUITests */,

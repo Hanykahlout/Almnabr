@@ -75,6 +75,7 @@
 		3F397D8B2860CD4400A7DAB4 /* AttachmentTypeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D892860CD4400A7DAB4 /* AttachmentTypeResponse.swift */; };
 		3F3EED7C284E1EEA00FFFC46 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3EED7A284E1EEA00FFFC46 /* FilterViewController.swift */; };
 		3F3FEF282864735400F57578 /* CommunicationSubmitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3FEF272864735400F57578 /* CommunicationSubmitResponse.swift */; };
+		3F432BA92871E9D7009289DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3F432BA82871E9D7009289DE /* .gitignore */; };
 		3F43359D286393F7002C282C /* SearchUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43359C286393F7002C282C /* SearchUserResponse.swift */; };
 		3F48C53C285883AF004D33F8 /* EmpViewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C538285883AE004D33F8 /* EmpViewResponse.swift */; };
 		3F48C53D285883AF004D33F8 /* EmpViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C539285883AE004D33F8 /* EmpViewData.swift */; };
@@ -612,6 +613,7 @@
 		3F397D892860CD4400A7DAB4 /* AttachmentTypeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentTypeResponse.swift; sourceTree = "<group>"; };
 		3F3EED7A284E1EEA00FFFC46 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		3F3FEF272864735400F57578 /* CommunicationSubmitResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationSubmitResponse.swift; sourceTree = "<group>"; };
+		3F432BA82871E9D7009289DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3F43359C286393F7002C282C /* SearchUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserResponse.swift; sourceTree = "<group>"; };
 		3F48C538285883AE004D33F8 /* EmpViewResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpViewResponse.swift; sourceTree = "<group>"; };
 		3F48C539285883AE004D33F8 /* EmpViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpViewData.swift; sourceTree = "<group>"; };
@@ -1251,6 +1253,14 @@
 			path = "Comunication Details";
 			sourceTree = "<group>";
 		};
+		3F432BA72871E9BF009289DE /* Git */ = {
+			isa = PBXGroup;
+			children = (
+				3F432BA82871E9D7009289DE /* .gitignore */,
+			);
+			path = Git;
+			sourceTree = "<group>";
+		};
 		3F48C537285883A0004D33F8 /* ViewEmpResponse */ = {
 			isa = PBXGroup;
 			children = (
@@ -1832,6 +1842,7 @@
 		FA03241926FB9BF900372EA6 = {
 			isa = PBXGroup;
 			children = (
+				3F432BA72871E9BF009289DE /* Git */,
 				FA03242426FB9BFA00372EA6 /* Almnabr */,
 				FA03243B26FB9BFE00372EA6 /* AlmnabrTests */,
 				FA03244626FB9BFE00372EA6 /* AlmnabrUITests */,
@@ -2569,6 +2580,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F432BA92871E9D7009289DE /* .gitignore in Resources */,
 				3F904088286C9C30008D85B8 /* InsuranceDetailsViewController.xib in Resources */,
 				FAAF206427DBDC8F00AD255B /* ByPhaseTVCell.xib in Resources */,
 				3FDCD8C42861B65D00F93A62 /* WebViewViewController.xib in Resources */,

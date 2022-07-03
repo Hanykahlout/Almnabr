@@ -11,7 +11,6 @@ import DPLocalization
 import FontAwesome_swift
 import DropDown
 import MOLH
-
 class AllPrpjectsVC: UIViewController {
     
     

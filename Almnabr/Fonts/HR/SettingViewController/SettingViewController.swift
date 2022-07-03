@@ -1,0 +1,196 @@
+//
+//  PermissionViewController.swift
+//  Almnabr
+//
+//  Created by Hany Alkahlout on 02/06/2022.
+//  Copyright © 2022 Samar Akkila. All rights reserved.
+//
+
+import UIKit
+import DropDown
+class SettingViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var selectedFilterLabel: UILabel!
+    @IBOutlet weak var filterView: UIView!
+    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var filterArrow: UIImageView!
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    private var filterDropDown = DropDown()
+    private var data = [SettingsDataRecords]()
+    private var refrechContrl = UIRefreshControl()
+    
+    private var seletedFitlerType = ""
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initlization()
+        // Do any additional setup after loading the view.
+    }
+    
+    private func initlization(){
+        setUpTableView()
+        setUpViews()
+        setUpDropDown()
+        getSettingsData()
+    }
+    
+    private func setUpViews(){
+        refrechContrl.addTarget(self, action: #selector(refrech), for: .valueChanged)
+        
+        filterView.isUserInteractionEnabled = true
+        filterView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(filterAction)))
+        
+        searchTextField.isUserInteractionEnabled = true
+        searchTextField.addTarget(self, action: #selector(searchAction), for: .editingChanged)
+    }
+    
+    
+    private func setUpDropDown(){
+        filterDropDown.anchorView = filterView
+        filterDropDown.dataSource = ["All","Bank Name", "Employee Title", "Jop Positions"]
+        filterDropDown.bottomOffset = CGPoint(x: 0, y:(filterDropDown.anchorView?.plainView.bounds.height)!)
+        
+        filterDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            filterArrow.transform = .init(rotationAngle: 0)
+            selectedFilterLabel.text = item
+            self.seletedFitlerType = self.getType(title: item)
+            self.getSettingsData()
+        }
+        
+        filterDropDown.cancelAction = { [unowned self] in
+            filterArrow.transform = .init(rotationAngle: 0)
+        }
+        
+    }
+    
+    
+    private func getType(title:String)->String{
+        switch title{
+        case "Bank Name":
+            return "BANK"
+        case "All":
+            return "ALL"
+        case "Employee Title":
+            return "ETIT"
+        case "Jop Positions":
+            return "JTIT"
+        default:
+            break
+        }
+        return ""
+    }
+    
+    
+    @objc private func refrech(){
+        getSettingsData()
+    }
+    
+    
+    @objc private func filterAction(){
+        filterDropDown.show()
+        filterArrow.transform = .init(rotationAngle: .pi)
+    }
+    
+    @objc private func searchAction(){
+        getSettingsData()
+    }
+    
+    
+    
+}
+
+extension SettingViewController:UITableViewDelegate,UITableViewDataSource{
+    private func setUpTableView(){
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(.init(nibName: "Settings2TableViewCell", bundle: nil), forCellReuseIdentifier: "Settings2TableViewCell")
+        tableView.refreshControl = refrechContrl
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Settings2TableViewCell", for: indexPath) as! Settings2TableViewCell
+        
+        cell.setData(data: data[indexPath.row],indexPath:indexPath)
+        cell.delegate = self
+        return cell
+    }
+    
+}
+
+// MARK: - API Handling
+
+extension SettingViewController{
+    private func getSettingsData(){
+        showLoadingActivity()
+        APIController.shard.getSettingsData(searchType: seletedFitlerType, searchKey: searchTextField.text!) { data in
+            DispatchQueue.main.async {
+                if self.refrechContrl.isRefreshing{
+                    self.refrechContrl.endRefreshing()
+                }
+                self.hideLoadingActivity()
+                self.messageLabel.isHidden = true
+                if let status = data.status{
+                    if status{
+                        
+                        self.data = data.records ?? []
+                        self.tableView.reloadData()
+                    }
+                }else{
+                    self.messageLabel.text = data.error ?? ""
+                    self.messageLabel.isHidden = false
+                    self.data.removeAll()
+                    self.tableView.reloadData()
+                }
+            }
+        }
+    }
+    
+    
+}
+
+
+extension SettingViewController:Settings2TableViewCellDelegate{
+    func deleteAction(indexPath:IndexPath) {
+        APIController.shard.deleteSettingsData(id: data[indexPath.row].settings_id ?? "") { data in
+            if let status = data.status{
+                if status{
+                    let alertVC = UIAlertController(title: "Success", message: data.msg ?? "", preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel", style: .cancel,handler: { action in
+                        self.data.remove(at: indexPath.row)
+                        self.tableView.reloadData()
+                    }))
+                    self.present(alertVC, animated: true)
+                }else{
+                    let alertVC = UIAlertController(title: "Error", message: data.error ?? "", preferredStyle: .alert)
+                    alertVC.addAction(.init(title: "Cancel", style: .cancel))
+                    self.present(alertVC, animated: true)
+                }
+            }
+        }
+        
+        data.remove(at: indexPath.row)
+        tableView.reloadData()
+    }
+    
+    func goToUpdateVC(data: SettingsDataRecords) {
+        let vc = SettingsUpdateViewController()
+        vc.isUpdate = true
+        vc.data = data
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func goToSettingsAlert(data:SettingsDataRecords) {
+        let vc = SettingsAlertViewController()
+        vc.data = data
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overCurrentContext
+        navigationController?.present(nav, animated: true)
+    }
+    
+    
+}

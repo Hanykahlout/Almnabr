@@ -16,24 +16,25 @@ protocol GeneralDelegate {
 }
 
 protocol ByPhasesDelegate {
-  func passByPhasesArr(data: [ByPhaseObj])
+    func passByPhasesArr(data: [ByPhaseObj])
 }
 
+
 class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
-  
+    
     
     func pass(data: [GeneralObj],unit_arr: [uintObj]) { //conforms to protocol
-     // implement your own implementation
+        // implement your own implementation
         self.arr_unit = self.arr_unit + unit_arr
         self.arr_General = self.arr_General + data
         self.tableByGeneral.reloadData()
-      }
+    }
     
     func passByPhasesArr(data: [ByPhaseObj]) { //conforms to protocol
-     // implement your own implementation
+        // implement your own implementation
         self.arr_ByPhase = self.arr_ByPhase + data
         self.tableByPhase.reloadData()
-      }
+    }
     
     
     @IBOutlet weak var lblSeparateUnits: UILabel!
@@ -106,6 +107,8 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     var arr_ByPhase:[ByPhaseObj] = []
     var arr_unit:[uintObj] = []
     
+    var form_wir_data:templateObj?
+    
     var transaction_id:String = "0"
     
     var StrWorkLevel:String = ""
@@ -120,7 +123,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     var FormWirObj:form_wir_dataObj?
     
     var wirObject:[String:Any] = [:]
- 
+    
     var params = [:] as [String : String]
     
     var projects_work_area_id:String = ""
@@ -133,17 +136,24 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     var isAllUnits:Bool = true
     var isByPhases:Bool = false
     
+    var IsFromTransaction:Bool = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
         
-        if wirObject.isEmpty {
+        configGUI()
+        setupTable()
+        get_WorkLevel()
+        
+        if IsFromTransaction  {
             
-            self.transaction_id = obj_transaction?.transaction_request_id ?? "0"
-            self.projects_work_area_id = obj_FormWir?.projects_work_area_id ?? "0"
-            self.template_platform_code_system = FormWirObject?.platform_code_system ?? "0"
-            self.template_id = FormWirObject?.template_id ?? "0"
-            self.template_platform_group_type_code_system = FormWirObject?.template_platform_group_type_code_system ?? "WIR"
+            self.SetConfigGUI()
+            //            self.transaction_id = obj_transaction?.transaction_request_id ?? "0"
+            //            self.projects_work_area_id = obj_FormWir?.projects_work_area_id ?? "0"
+            //            self.template_platform_code_system = FormWirObject?.platform_code_system ?? "0"
+            //            self.template_id = FormWirObject?.template_id ?? "0"
+            //            self.template_platform_group_type_code_system = FormWirObject?.template_platform_group_type_code_system ?? "WIR"
         }else{
             
             self.transaction_id = "0"
@@ -153,27 +163,26 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
             self.phase_zone_block_cluster_g_nos =  ProjectObj.phase_zone_block_cluster_g_nos
             self.template_platform_group_type_code_system = ProjectObj.template_platform_group_type_code_system
         }
-        configGUI()
         
-        setupTable()
-        get_WorkLevel()
-       // print(obj_transaction?.transaction_request_id)
+        
+        
+        // print(obj_transaction?.transaction_request_id)
     }
     
-//    func config_wir_obj(){
-//
-//            let form_wir_data_status = wirObject["status"] as? Bool
-//            if form_wir_data_status == true{
-//                let records = wirObject["records"] as! NSArray
-//
-//                let recordsObj = form_wir_dataObj(records.firstObject as! [String : Any])
-//                self.FormWirObj = recordsObj
-//
-//
-//            }
-////        }
-//    }
-
+    //    func config_wir_obj(){
+    //
+    //            let form_wir_data_status = wirObject["status"] as? Bool
+    //            if form_wir_data_status == true{
+    //                let records = wirObject["records"] as! NSArray
+    //
+    //                let recordsObj = form_wir_dataObj(records.firstObject as! [String : Any])
+    //                self.FormWirObj = recordsObj
+    //
+    //
+    //            }
+    ////        }
+    //    }
+    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -194,31 +203,32 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     //------------------------------------------------------
     func configGUI() {
         
-            self.lbl_workLevel.text = "Work Level".localized()
-            self.lbl_units.text = "Units".localized()
-            
-            self.lbl_units.font = .kufiRegularFont(ofSize: 13)
-            //self.lbl_units.textColor =  HelperClassSwift.bcolor.getUIColor()
-            
-            self.lbl_workLevel.font = .kufiRegularFont(ofSize: 13)
-           // self.lbl_workLevel.textColor =  HelperClassSwift.bcolor.getUIColor()
-            
-       // lblSeparateUnits.textColor =  HelperClassSwift.bcolor.getUIColor()
+        self.arr_unit = []
+        self.lbl_workLevel.text = "Work Level".localized()
+        self.lbl_units.text = "Units".localized()
+        
+        self.lbl_units.font = .kufiRegularFont(ofSize: 13)
+        //self.lbl_units.textColor =  HelperClassSwift.bcolor.getUIColor()
+        
+        self.lbl_workLevel.font = .kufiRegularFont(ofSize: 13)
+        // self.lbl_workLevel.textColor =  HelperClassSwift.bcolor.getUIColor()
+        
+        // lblSeparateUnits.textColor =  HelperClassSwift.bcolor.getUIColor()
         lblSeparateUnits.font = .kufiRegularFont(ofSize: 13)
         lblSeparateUnits.text = "txt_SeparateUnits".localized()
         
         
         
-       // lblUnitsYes.textColor =  HelperClassSwift.bcolor.getUIColor()
+        // lblUnitsYes.textColor =  HelperClassSwift.bcolor.getUIColor()
         lblUnitsYes.font = .kufiRegularFont(ofSize: 13)
         lblUnitsYes.text = "txt_Yes".localized()
         
-       // lblUnitsNo.textColor =  HelperClassSwift.bcolor.getUIColor()
+        // lblUnitsNo.textColor =  HelperClassSwift.bcolor.getUIColor()
         lblUnitsNo.font = .kufiRegularFont(ofSize: 13)
         lblUnitsNo.text = "txt_No".localized()
         
         
-       // lblWorkSite.textColor =  HelperClassSwift.bcolor.getUIColor()
+        // lblWorkSite.textColor =  HelperClassSwift.bcolor.getUIColor()
         lblWorkSite.font = .kufiRegularFont(ofSize: 13)
         lblWorkSite.text = "txt_WorkSite".localized()
         
@@ -227,11 +237,11 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         lblAllUnits.font = .kufiRegularFont(ofSize: 11)
         lblAllUnits.text = "txt_AllUnits".localized()
         
-       // lblGeneralNo.textColor =  HelperClassSwift.bcolor.getUIColor()
+        // lblGeneralNo.textColor =  HelperClassSwift.bcolor.getUIColor()
         lblGeneralNo.font = .kufiRegularFont(ofSize: 9)
         lblGeneralNo.text = "txt_GeneralNo".localized()
         
-       // lblPhases.textColor =  HelperClassSwift.bcolor.getUIColor()
+        // lblPhases.textColor =  HelperClassSwift.bcolor.getUIColor()
         lblPhases.font = .kufiRegularFont(ofSize: 11)
         lblPhases.text = "txt_Phases".localized()
         
@@ -245,15 +255,15 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         ViewBtnGN.setBorderColorWidthCorner(1, 15, color: maincolor)
         ViewBtnByPhase.setBorderColorWidthCorner(1, 15, color: maincolor)
         
-       // lblWorkLevel.textColor = HelperClassSwift.bcolor.getUIColor()
+        // lblWorkLevel.textColor = HelperClassSwift.bcolor.getUIColor()
         lblWorkLevel.font = .kufiRegularFont(ofSize: 13)
         lblWorkLevel.text = "txt_FillWorkLevel".localized()
         
         self.btnWorkLevel.isHidden = true
-      //  lblSelectWorkLevel.textColor = .gray
+        //  lblSelectWorkLevel.textColor = .gray
         lblSelectWorkLevel.font = .kufiRegularFont(ofSize: 13)
         lblSelectWorkLevel.text = "txt_FillWorkLevel".localized()
-       
+        
         self.btnPhases.image = UIImage(named: "uncheck")
         self.btnGeneralNo.image = UIImage(named: "uncheck")
         self.btnAllUnits.image = UIImage(named: "check")
@@ -268,22 +278,22 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         self.lblStep.textColor = "#616263".getUIColor()
         //HelperClassSwift.acolor.getUIColor()
         
-
+        
         self.viewStep.setBorderGrayWidth(3)
         let Stepimage =  UIImage.fontAwesomeIcon(name: .building, style: .solid, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
         self.imgStep.image = Stepimage
         
-       
+        
         self.btnNext.setTitle("Next".localized(), for: .normal)
-//        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
-//        self.btnNext.setTitleColor(.white, for: .normal)
-//        self.btnNext.setRounded(10)
+        //        self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        //        self.btnNext.setTitleColor(.white, for: .normal)
+        //        self.btnNext.setRounded(10)
         
         
         self.btnPrevious.setTitle("Previous".localized(), for: .normal)
-//        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
-//        self.btnPrevious.setTitleColor(.white, for: .normal)
-//        self.btnPrevious.setRounded(10)
+        //        self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
+        //        self.btnPrevious.setTitleColor(.white, for: .normal)
+        //        self.btnPrevious.setRounded(10)
         
         
         if MOLHLanguage.currentAppleLanguage() == "ar" {
@@ -315,11 +325,11 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     
     
     func get_WorkLevel(){
-//        guard ProjectObj != nil else{
-//            return
-//        }
-    
-       // self.showLoadingActivity()
+        //        guard ProjectObj != nil else{
+        //            return
+        //        }
+        
+        // self.showLoadingActivity()
         APIManager.sendRequestGetAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/get_work_levels_for_transaction?projects_work_area_id=\( self.projects_work_area_id)&platform_code_system=\( self.template_platform_code_system)&transaction_separation=0&template_id=\(self.template_id)&lang_key=en&work_site=ALL" ) { (response) in
             
             
@@ -350,7 +360,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     
     func validate_work_levels(value:String){
         
-      self.showLoadingActivity()
+        self.showLoadingActivity()
         APIManager.sendRequestGetAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/validate_work_levels?projects_work_area_id=\( self.projects_work_area_id)&platform_code_system=\( self.template_platform_code_system)&work_site=ALL&transaction_separation=0&work_site_type=ALL&template_id=1&work_levels=\(value)" ) { (response) in
             
             
@@ -358,17 +368,17 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
             if status == true{
                 if  let data = response["data"] as? [String:Any]{
                     if let unit = data["level_all_building"] as? String {
-                      
+                        
                         self.units = unit
                     }
-               
-                    }
-                    self.hideLoadingActivity()
+                    
                 }
+                self.hideLoadingActivity()
             }
-            
-            
         }
+        
+        
+    }
     
     
     func Configuration_step1(){
@@ -376,10 +386,10 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         self.showLoadingActivity()
         
         self.setup_param()
-//        guard ProjectObj != nil else{
-//            return
-//        }
-       
+        //        guard ProjectObj != nil else{
+        //            return
+        //        }
+        
         
         self.params["projects_work_area_id"] =  self.projects_work_area_id
         self.params["platform_code_system"] = self.template_platform_code_system
@@ -395,12 +405,12 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
             self.params["units_and_level[\(self.level_Unit)]"] = String(self.units.dropLast())
             
         }else{
-           
+            
             var unit_str :String = ""
             var value_str :String = ""
             
             for i in arr_unit {
-             
+                
                 if value_str == i.value! {
                     unit_str = unit_str + i.unit! + ","
                     self.params["units_and_level[\(i.value ?? "level_all_building")]"] = i.unit
@@ -409,16 +419,16 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
                     self.params["units_and_level[\(i.value ?? "level_all_building")]"] = i.unit
                     value_str = i.value!
                 }
-               
+                
             }
             
         }
         
-     
+        
         
         APIManager.sendRequestPostAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/cr/1/\(transaction_id)", parameters: params ) { (response) in
             self.hideLoadingActivity()
-           
+            
             
             let status = response["status"] as? Bool
             let error = response["error"] as? String
@@ -426,7 +436,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
             
             if status == true{
                 
-               
+                
                 if SkipPage == true{
                     self.next(SkipPage: true)
                     
@@ -437,12 +447,87 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
                 self.showAMessage(withTitle: "Error", message: error ?? "Some thing went wrong")
                 
             }
-
             
-           
-            }
-
+            
+            
+        }
         
+        
+    }
+    
+    
+    func SetConfigGUI(){
+        
+        if  let view_request = data_FormWir["view_request"] as? [String:Any]{
+            
+            if  let transaction_request = view_request["transactions_request"] as? [String:Any]{
+                
+                let records = transaction_request["records"] as! [String:Any]
+                let obj = Tcore(records)
+                
+                self.StrLanguage = obj.lang_key
+                self.transaction_id = obj.transaction_request_id
+                //                self.template_platform_code_system =  obj.transactions_name
+                //                self.template_id = obj.transaction_from
+                self.transaction_separation = "0"
+                self.work_site = "GN"
+                
+                self.btnPhases.image = UIImage(named: "uncheck")
+                self.btnGeneralNo.image = UIImage(named: "check")
+                self.btnAllUnits.image = UIImage(named: "uncheck")
+                
+                self.ViewAllUnits.isHidden = true
+                self.ViewPhases.isHidden = true
+                self.ViewGeneralNo.isHidden = false
+                
+                GeneralTable = true
+                
+                isAllUnits = false
+                isGeneral = true
+                isByPhases = false
+                
+            }
+            
+            if  let form_wir_data = view_request["form_wir_data"] as? [String:Any]{
+                var arr_wir :[templateObj] = []
+                if  let records = form_wir_data["records"] as? NSArray{
+                    for i in records {
+                        let dict = i as? [String:Any]
+                        let obj =  templateObj.init(dict!)
+                        arr_wir.append(obj)
+                    }
+                    
+                    let obj = arr_wir[0]
+                    self.form_wir_data = obj
+                    
+                    //                self.StrLanguage = obj.lang_key
+                    self.template_platform_group_type_code_system = obj.platform_group_type_code_system
+                    self.projects_work_area_id = obj.projects_work_area_id
+                    self.template_platform_code_system =  obj.platform_code_system
+                    self.template_id = obj.template_id
+                    //                self.transaction_separation = "0"
+                    //                self.work_site = "GN"
+                }
+            }
+            var arr:[ByPhaseObj] = []
+            if  let unit_level = view_request["project_supervision_form_unit_level"] as? [String:Any]{
+                
+                if  let records = unit_level["records"] as? NSArray{
+                    for i in records {
+                        let dict = i as? [String:Any]
+                        let obj =  unitLevelObj.init(dict!)
+                        let item = GeneralObj(number: 1, units: obj.unit_id, Worklevels: obj.work_level_key, label: obj.work_level_label)
+                        //                        let item = ByPhaseObj(number: 1, zones: obj.Z, Blocks: obj.B, Clusters: obj.C, units: obj.unit_custom_title, Worklevels: obj.work_level_key,lblWorklevels: obj.work_level_label)
+                        //                        arr.append(item)
+                        self.arr_General.append(item)
+                        
+                    }
+                    self.tableByGeneral.reloadData()
+                    //                    self.tableByGeneral.reloadData()
+                }
+                
+            }
+        }
     }
     
     
@@ -495,7 +580,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
             VC.units_and_level = units
         }
         
-        
+        VC.IsFromTransaction = self.IsFromTransaction
         VC.arr_unit = arr_unit
         VC.ProjectObj = self.ProjectObj
         VC.StrLanguage = self.StrLanguage
@@ -509,6 +594,8 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         VC.projects_work_area_id = self.projects_work_area_id
         VC.template_platform_code_system = self.template_platform_code_system
         VC.template_platform_group_type_code_system = self.template_platform_group_type_code_system
+        VC.form_wir_data = self.form_wir_data
+     
         self.navigationController?.pushViewController(VC, animated: true)
         
     }
@@ -536,8 +623,8 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
                     let i =  self.arr_Work[index]
                     self.StrWorkLevel = i.value
                     self.validate_work_levels(value: i.value)
-                   // self.units = i.value
-                   // self.units = ProjectObj.phase_zone_block_cluster_g_nos
+                    // self.units = i.value
+                    // self.units = ProjectObj.phase_zone_block_cluster_g_nos
                     self.imgDropWorkLevel.image = dropDownmage
                     self.btnWorkLevel.isHidden = false
                     
@@ -551,7 +638,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         dropDown.bottomOffset = CGPoint(x: 0, y: viewsWorkLevel.bounds.height)
         dropDown.width = viewsWorkLevel.bounds.width
         dropDown.show()
-
+        
     }
     
     
@@ -565,7 +652,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     
     
     @IBAction func btnNext_Click(_ sender: Any) {
- 
+        
         self.Configuration_step1()
         
     }
@@ -585,21 +672,21 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         isGeneral = true
         isByPhases = false
         
-          self.btnPhases.image = UIImage(named: "uncheck")
-          self.btnGeneralNo.image = UIImage(named: "check")
-          self.btnAllUnits.image = UIImage(named: "uncheck")
-          
-          self.ViewAllUnits.isHidden = true
-          self.ViewPhases.isHidden = true
-          self.ViewGeneralNo.isHidden = false
+        self.btnPhases.image = UIImage(named: "uncheck")
+        self.btnGeneralNo.image = UIImage(named: "check")
+        self.btnAllUnits.image = UIImage(named: "uncheck")
+        
+        self.ViewAllUnits.isHidden = true
+        self.ViewPhases.isHidden = true
+        self.ViewGeneralNo.isHidden = false
         
         self.work_site = "GN"
         
-
+        
         
     }
     
-  
+    
     
     
     @IBAction func btnPhases_Click(_ sender: Any) {
@@ -619,6 +706,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         self.ViewGeneralNo.isHidden = true
         
         self.work_site = "IM"
+        self.tableByPhase.reloadData()
         //IM
         
     }
@@ -665,13 +753,13 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         self.btnUnitsNo.image = UIImage(named: "uncheck")
         self.btnUnitsYes.image = UIImage(named: "check")
         self.ViewAllUnitsSelect.isHidden = true
-    
+        
     }
     
     
     @IBAction func btnAddGeneral_Click(_ sender: Any) {
         
-    let vc:AddGeneralNoVC  = AppDelegate.mainSB.instanceVC()
+        let vc:AddGeneralNoVC  = AppDelegate.mainSB.instanceVC()
         
         vc.isModalInPresentation = true
         vc.modalPresentationStyle = .overFullScreen
@@ -705,7 +793,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         
         self.present(vc, animated: true, completion: nil)
     }
-
+    
     
 }
 
@@ -714,107 +802,74 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
 extension SiteLevelVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
+        
         if GeneralTable == true{
             return arr_General.count
         }else{
             return arr_ByPhase.count
         }
-       
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if GeneralTable == true{
-           
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GeneralNoCell", for: indexPath) as! GeneralNoCell
+            
+            let cell = tableByGeneral.dequeueReusableCell(withIdentifier: "GeneralNoCell", for: indexPath) as! GeneralNoCell
             
             let obj = arr_General[indexPath.item]
             
-    
+            
             cell.lblNo.text = "\(indexPath.item + 1)"
             cell.lblUnit.text = obj.units!
             cell.lblWorklevels.text = obj.label!
             cell.lblNo.font = .kufiRegularFont(ofSize: 17)
             cell.lblUnit.font = .kufiRegularFont(ofSize: 17)
             cell.lblWorklevels.font = .kufiRegularFont(ofSize: 17)
- 
+            
             
             cell.btnDeleteAction = {
                 
                 self.arr_General.remove(at: indexPath.item)
                 self.tableByGeneral.reloadData()
-          
+                
             }
-   
+            
             return cell
-
+            
         }else{
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ByPhaseTVCell", for: indexPath) as! ByPhaseTVCell
+            let cell = tableByPhase.dequeueReusableCell(withIdentifier: "ByPhaseTVCell", for: indexPath) as! ByPhaseTVCell
             
             let obj = arr_ByPhase[indexPath.item]
-         
-//            let Number = "#" + "  \(obj.number ?? 0)"
+            
+            //            let Number = "#" + "  \(obj.number ?? 0)"
             let zones = "\(obj.zones!)"
             let Blocks = "\(obj.Blocks!)"
             let Clusters =  "\(obj.Clusters!)"
             let Units = "\(obj.units!)"
             let WorkLevel =  "\(obj.lblWorklevels!)"
             
-            
-//            cell.lblNo.text = Number
-//
             cell.lblzones.text = zones
             cell.lblBlocks.text = Blocks
             cell.lblClusters.text = Clusters
             cell.lblWorklevels.text = WorkLevel
             cell.lblUnits.text = Units
-//
-//            cell.btnAction.tintColor = .red
-//            cell.btnAction.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
             
-           
             cell.btnDeleteAction = {
                 self.arr_ByPhase.remove(at: indexPath.item)
                 self.tableByPhase.reloadData()
                 
             }
-                
-         
-//            let Numberattributed: NSAttributedString = Number.attributedStringWithColor(["#".localized()], color: HelperClassSwift.acolor.getUIColor())
-//            cell.lblNo.attributedText = Numberattributed
-//
-//            let zonesattributed: NSAttributedString = zones.attributedStringWithColor(["zones".localized()], color: HelperClassSwift.acolor.getUIColor())
-//            cell.lblTransactionNo.attributedText = zonesattributed
-//
-//            let Blocksattributed: NSAttributedString = Blocks.attributedStringWithColor(["Blocks".localized()], color: HelperClassSwift.acolor.getUIColor())
-//            cell.lblUnit.attributedText = Blocksattributed
-//
-//
-//
-//            let Clustersattributed: NSAttributedString = Clusters.attributedStringWithColor(["Clusters".localized()], color: HelperClassSwift.acolor.getUIColor())
-//            cell.lblBarcode.attributedText = Clustersattributed
-//
-//
-//            let WorkLevelattributed: NSAttributedString = WorkLevel.attributedStringWithColor(["Work Level".localized()], color: HelperClassSwift.acolor.getUIColor())
-//            cell.lblWorklevel.attributedText = WorkLevelattributed
-//
-//
-//            let Unitsattributed: NSAttributedString = Units.attributedStringWithColor(["Units".localized()], color: HelperClassSwift.acolor.getUIColor())
-//            cell.lblDate.attributedText = Unitsattributed
-//
-//
-//            cell.viewBack.setcorner()
-         
-                     return cell
+            
+            return cell
             
         }
-  
+        
     }
     
-
+    
 }
 
 

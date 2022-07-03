@@ -170,6 +170,7 @@ class PDFViewrVC: UIViewController, CAAnimationDelegate {
     
     @IBAction func btnCancel_Click(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        self.hideLoadingActivity()
     }
 
     @objc func back(sender: UIBarButtonItem) {

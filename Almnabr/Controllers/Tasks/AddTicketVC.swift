@@ -9,10 +9,11 @@
 import UIKit
 import DropDown
 import ObjectMapper
+import FAPanels
 
 class AddTicketVC: UIViewController, UINavigationControllerDelegate {
-
-
+    
+    
     @IBOutlet weak var lblTicketDetails: UILabel!
     @IBOutlet weak var tfSubject: UITextField!
     @IBOutlet weak var lblPriority: UILabel!
@@ -50,7 +51,7 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
     
     let dropUpmage =  UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
     let dropDownmage =  UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
-     
+    
     var arr_important:[importantObj] = []
     var arr_ticket_type:[importantObj] = []
     var arr_modules:[modulesObj] = []
@@ -69,14 +70,20 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
     var param = [:] as [String : String]
     var Attachments_index:Int = 0
     var isCheckList:Bool = false
-     
+    
+    
+    var object:TicketObj?
+    var users:[HistoryObj] = []
+    var isEdit:Bool = false
     
     var ticket_type:String = ""
+    var ticket_id:String = ""
+    
     var important_id:String = ""
     var sig_id:String = ""
     var need_reply:String = ""
     var strTitle:String = ""
-    
+    var task_id:String = ""
     let imagePickerController = UIImagePickerController()
     var documentInteractionController: UIDocumentPickerViewController? = nil
     
@@ -89,6 +96,10 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
         configGUI()
         createDatePicker()
         createReplyDatePicker()
+        
+        if isEdit {
+            self.setData()
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -97,7 +108,7 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
         
     }
     
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
@@ -118,7 +129,7 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
         self.view.backgroundColor = maincolor //F0F4F8
         //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
         navigationController?.navigationBar.barTintColor = maincolor
-       addNavigationBarTitle(navigationTitle: strTitle)
+        addNavigationBarTitle(navigationTitle: strTitle)
         UINavigationBar.appearance().backgroundColor = maincolor
     }
     
@@ -126,6 +137,49 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
     
     //MARK: - Config GUI
     //------------------------------------------------------
+    
+    func setData() {
+        self.lblPriority.text = object?.important_name
+        self.lblType.text = object?.ticket_type_name
+        self.lblSignature.text =  object?.sig_name
+        txtDesc.text =  object?.ticket_detalis
+        txtNote.text = object?.notes
+        self.tfTotalDays.text = object?.time_work
+        self.tfStartDate.text =  object?.start_date
+        self.tfEndDate.text =  object?.end_date_nearly
+        self.tfSubject.text = object?.ticket_titel
+        
+        self.ticket_type = object?.ticket_type ?? "0"
+        self.important_id = object?.important_id ?? "0"
+        self.sig_id = object?.sig_id ?? "0"
+        self.need_reply = object?.need_reply ?? "0"
+        
+        
+        txtDesc.textColor = .darkGray
+        txtNote.textColor = .darkGray
+        
+        if users.count > 0 {
+            self.Viewcollection_user.isHidden = false
+        }
+        for i in users {
+            //            let dict = i as? [String:Any]
+            //            let obj = SupplierObj.init(dict!)
+            
+            let dict = ["value" : i.emp_id,
+                        "label" : i.emp_name]
+            let item = SupplierObj(dict as? [String:Any] ?? [:])
+            //            item.value = i.emp_id
+            //            item.label = i.emp_name
+            self.arr_selected_user.append(item)
+        }
+        self.collection_user.reloadData()
+        
+        if object?.need_reply == "1" {
+            switchNeedReply.isOn = true
+            self.viewNeedReply.isHidden = false
+            self.tfReplyDate.text = object?.date_reply
+        }
+    }
     func configGUI() {
         
         self.lblTicketDetails.font = .kufiRegularFont(ofSize: 15)
@@ -190,26 +244,26 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
         self.imagePickerController.delegate = self
         
         table.register(UINib(nibName: "AttachmentsCell", bundle: nil), forCellReuseIdentifier: "AttachmentsCell")
-       
+        
         table.isHidden = true
     }
     
     func createDatePicker(){
-          
-          let toolbar = UIToolbar()
-          toolbar.sizeToFit()
-      
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
         datePicker.datePickerMode = .date
-          let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-          toolbar.setItems([doneBtn], animated: true)
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        toolbar.setItems([doneBtn], animated: true)
         toolbar.backgroundColor = .white
         tfStartDate.inputAccessoryView = toolbar
         tfStartDate.inputView = datePicker
-      }
+    }
     
     
     @objc func donePressed(){
-         
+        
         tfStartDate.text = "\(datePicker.date.asStringyyyMMdd())"
         self.view.endEditing(true)
         if tfTotalDays.text != ""{
@@ -218,30 +272,30 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
             print(DayFromNow)
             self.tfEndDate.text = DayFromNow?.asStringyyyMMdd()
         }
-       
         
         
-     }
+        
+    }
     
     func createReplyDatePicker(){
-          
-          let toolbar = UIToolbar()
-          toolbar.sizeToFit()
+        
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
         datePicker.datePickerMode = .date
-          
-          let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneReplyDatePressed))
-          toolbar.setItems([doneBtn], animated: true)
+        
+        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(doneReplyDatePressed))
+        toolbar.setItems([doneBtn], animated: true)
         toolbar.backgroundColor = .white
         tfReplyDate.inputAccessoryView = toolbar
         tfReplyDate.inputView = datePicker
-      }
+    }
     
     
     @objc func doneReplyDatePressed(){
         
         tfReplyDate.text = "\(datePicker.date.asStringyyyMMdd())"
         self.view.endEditing(true)
-     }
+    }
     
     
     
@@ -253,49 +307,49 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
         APIManager.sendRequestPostAuth(urlString: "tasks/get_add", parameters: [:] ) { (response) in
             self.hideLoadingActivity()
             
-           
+            
             let status = response["status"] as? Bool
-           
+            
             if status == true{
                 
                 if let data = response["data"] as? [String:Any] {
-              
-                
-                if  let important = data["important"] as? NSArray{
-                    for i in important {
-                        let dict = i as? [String:Any]
-                        let obj = importantObj.init(dict!)
-                        self.arr_important.append(obj)
-                    } }
-                
-                if  let modules = data["modules"] as? NSArray{
-                    for i in modules {
-                        let dict = i as? [String:Any]
-                        let obj = modulesObj.init(dict!)
-                        self.arr_modules.append(obj)
-                    } }
-                
-                if  let sig_id = data["sig_id"] as? NSArray{
-                    for i in sig_id {
-                        let dict = i as? [String:Any]
-                        let obj = importantObj.init(dict!)
-                        self.arr_sig_id.append(obj)
-                    } }
-                
-                if  let ticket_status = data["ticket_status"] as? NSArray{
-                    for i in ticket_status {
-                        let dict = i as? [String:Any]
-                        let obj = importantObj.init(dict!)
-                        self.arr_ticket_status.append(obj)
-                    } }
-                
-                if  let ticket_type = data["ticket_type"] as? NSArray{
-                    for i in ticket_type {
-                        let dict = i as? [String:Any]
-                        let obj = importantObj.init(dict!)
-                        self.arr_ticket_type.append(obj)
-                    } }
-            }
+                    
+                    
+                    if  let important = data["important"] as? NSArray{
+                        for i in important {
+                            let dict = i as? [String:Any]
+                            let obj = importantObj.init(dict!)
+                            self.arr_important.append(obj)
+                        } }
+                    
+                    if  let modules = data["modules"] as? NSArray{
+                        for i in modules {
+                            let dict = i as? [String:Any]
+                            let obj = modulesObj.init(dict!)
+                            self.arr_modules.append(obj)
+                        } }
+                    
+                    if  let sig_id = data["sig_id"] as? NSArray{
+                        for i in sig_id {
+                            let dict = i as? [String:Any]
+                            let obj = importantObj.init(dict!)
+                            self.arr_sig_id.append(obj)
+                        } }
+                    
+                    if  let ticket_status = data["ticket_status"] as? NSArray{
+                        for i in ticket_status {
+                            let dict = i as? [String:Any]
+                            let obj = importantObj.init(dict!)
+                            self.arr_ticket_status.append(obj)
+                        } }
+                    
+                    if  let ticket_type = data["ticket_type"] as? NSArray{
+                        for i in ticket_type {
+                            let dict = i as? [String:Any]
+                            let obj = importantObj.init(dict!)
+                            self.arr_ticket_type.append(obj)
+                        } }
+                }
             }else{
                 self.hideLoadingActivity()
             }
@@ -310,7 +364,7 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
         for i in arr_Attachments {
             let urlStr = i.url
             let img = i.img
-                 
+            
             if (urlStr == nil && img == nil) {
                 is_nil = true
                 break
@@ -323,20 +377,17 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
             
             let new_index = arr_Attachments.count + 1
             self.arr_Attachments.append(attachment(title: "", Required: "No", img: nil, url: nil,type: "file", index: new_index ,IsNew: true))
-          
+            
             self.table.beginUpdates()
             self.table.insertRows(at: [IndexPath.init(row: self.arr_Attachments.count-1, section: 0)], with: .automatic)
             self.table.endUpdates()
         }
         
-        
-       
-        
     }
     
     
     func get_user(search_key:String){
-
+        
         var param :[String:Any] = [:]
         self.showLoadingActivity()
         APIManager.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
@@ -362,60 +413,60 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
             
         }
     }
-
+    
     
     func drop_userList(){
         let dropDown = DropDown()
         
-            if self.arr_user.count == 0 {
-                dropDown.dataSource = self.arr_NoData
-                dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                   // self.imgDropMaterial.image = dropDownmage
-                }
-                dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            }else{
-                
-                dropDown.textColor = #colorLiteral(red: 0.1878142953, green: 0.1878142953, blue: 0.1878142953, alpha: 1)
-                dropDown.dataSource = self.arr_lbluser
-                dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                    
-                    if item == self.arr_lbluser[index] {
-                        let object =  self.arr_user[index]
-                        let has_object = arr_selected_user.contains(where: { $0.label == item })
-                        if has_object == false{
-                            self.arr_selected_user.append(object)
-                            self.Viewcollection_user.isHidden = false
-                            self.collection_user.reloadData()
-                        }
-                    }
-                    
-                }
-
+        if self.arr_user.count == 0 {
+            dropDown.dataSource = self.arr_NoData
+            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+                // self.imgDropMaterial.image = dropDownmage
             }
-            dropDown.direction = .bottom
-            dropDown.anchorView = view_users
-            dropDown.bottomOffset = CGPoint(x: 0, y: view_users.bounds.height)
-            dropDown.width = view_users.bounds.width
-            dropDown.show()
-     
+            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        }else{
+            
+            dropDown.textColor = #colorLiteral(red: 0.1878142953, green: 0.1878142953, blue: 0.1878142953, alpha: 1)
+            dropDown.dataSource = self.arr_lbluser
+            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+                
+                if item == self.arr_lbluser[index] {
+                    let object =  self.arr_user[index]
+                    let has_object = arr_selected_user.contains(where: { $0.label == item })
+                    if has_object == false{
+                        self.arr_selected_user.append(object)
+                        self.Viewcollection_user.isHidden = false
+                        self.collection_user.reloadData()
+                    }
+                }
+                
+            }
+            
+        }
+        dropDown.direction = .bottom
+        dropDown.anchorView = view_users
+        dropDown.bottomOffset = CGPoint(x: 0, y: view_users.bounds.height)
+        dropDown.width = view_users.bounds.width
+        dropDown.show()
+        
     }
-   
     
     
     
-
+    
+    
     @IBAction func btnNeedReply_Changed(_ sender: UISwitch) {
         
         if (sender.isOn == true){
-                print("UISwitch state is now ON")
+            print("UISwitch state is now ON")
             self.viewNeedReply.isHidden = false
             self.need_reply = "1"
-            }
-            else{
-                print("UISwitch state is now Off")
-                self.viewNeedReply.isHidden = true
-                self.need_reply = "0"
-            }
+        }
+        else{
+            print("UISwitch state is now Off")
+            self.viewNeedReply.isHidden = true
+            self.need_reply = "0"
+        }
         
     }
     @IBAction func btnPriority_Click(_ sender: Any) {
@@ -459,13 +510,13 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
     }
     
     func Submit_request(){
-      
-  
+        
+        
         for i in arr_Attachments {
             
             let urlStr = i.url
             let img = i.img
-                 
+            
             if (urlStr == nil && img == nil) {
                 showAMessage(withTitle: "error".localized(), message: "Please enter your file".localized())
                 return
@@ -475,82 +526,95 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
                 }
             }
         }
-                showLoadingActivity()
-              
-                let Url = "tasks/add_tickets"
-             
-                APIManager.func_Upload(queryString: Url, arr_Attachments, param: self.param ) { (respnse ) in
-                    
-                    let status = respnse["status"] as? Bool
-                    let errors = respnse["error"] as? String
-
-                    
-                    if status == true{
-                        if let message = respnse["message"] as? String {
-                            self.showAMessage(withTitle: "", message: message,  completion: {
-                                
-                                self.navigationController?.popViewController(animated: true)
-                            })
-                        }
-                    }else{
-                        
-                        self.hideLoadingActivity()
-                        self.showAMessage(withTitle: "error".localized(), message: errors ?? "something went wrong")
-                    }
-                    self.hideLoadingActivity()
-                    
-                    
-                }    }
+        showLoadingActivity()
         
-        @IBAction func btnSubmit_Click(_ sender: Any) {
-            
-            guard tfSubject.text != "" else {
-                return self.showAMessage(withTitle: "", message: "Ticket subject Field Required!")
-            }
-            
-            guard tfTotalDays.text != "" else {
-                return self.showAMessage(withTitle: "", message: "Total Days Field Required!")
-            }
-            
-            guard tfStartDate.text != "" else {
-                return self.showAMessage(withTitle: "", message: "Start Date Field Required!")
-            }
-            
-            guard txtDesc.text != "Description" else {
-                return self.showAMessage(withTitle: "", message: "Ticket detalis Field Required!")
-            }
-            guard txtNote.text != "Note" else {
-                return self.showAMessage(withTitle: "", message: "Ticket detalis Field Required!")
-            }
-            
-            if self.need_reply  == "1" {
-                guard tfReplyDate.text != "" else {
-                    return self.showAMessage(withTitle: "", message: "Reply Date Field Required!")
-                }
-            }
-           
-            
-            self.param["ticket_titel"] = tfSubject.text!
-            self.param["ticket_detalis"] = txtNote.text!
-            self.param["ticket_type"] = self.ticket_type
-            self.param["important_id"] =  self.important_id
-            self.param["sig_id"] = self.sig_id
-            self.param["need_reply"] = self.need_reply
-            self.param["date_reply"] = tfReplyDate.text!
-            self.param["notes"] = txtNote.text!
-            self.param["time_work"] = tfTotalDays.text ?? "0"
-            self.param["start_date"] = tfStartDate.text!
-            self.param["end_date"] = tfEndDate.text
-            self.param["issue_link"] = ""
-            //tfIssueLink.text ?? ""
-            self.param["ref_model"] = "tasks"
-            
-            for i in arr_selected_user{
-                self.param["users[]"] = i.value
-            }
-            
-            Submit_request()
+        var  Url = "tasks/add_tickets"
+        if isEdit {
+            Url = "tasks/update_ticket"
+            self.param["ticket_id"] = self.ticket_id
         }
+        
+        APIManager.func_Upload(queryString: Url, arr_Attachments, param: self.param ) { (respnse ) in
+            
+            let status = respnse["status"] as? Bool
+            let errors = respnse["error"] as? String
+            
+            
+            if status == true{
+                if let message = respnse["message"] as? String {
+                    self.showAMessage(withTitle: "", message: message,  completion: {
+                        if self.isEdit {
+                            self.delegate!()
+                        }
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                }
+            }else{
+                
+                self.hideLoadingActivity()
+                self.showAMessage(withTitle: "error".localized(), message: errors ?? "something went wrong")
+            }
+            self.hideLoadingActivity()
+            
+            
+        }    }
+    
+    @IBAction func btnSubmit_Click(_ sender: Any) {
+        
+        guard tfSubject.text != "" else {
+            return self.showAMessage(withTitle: "", message: "Ticket subject Field Required!")
+        }
+        
+        guard tfTotalDays.text != "" else {
+            return self.showAMessage(withTitle: "", message: "Total Days Field Required!")
+        }
+        
+        guard tfStartDate.text != "" else {
+            return self.showAMessage(withTitle: "", message: "Start Date Field Required!")
+        }
+        
+        guard txtDesc.text != "Description" else {
+            return self.showAMessage(withTitle: "", message: "Ticket detalis Field Required!")
+        }
+        guard txtNote.text != "Note" else {
+            return self.showAMessage(withTitle: "", message: "Ticket detalis Field Required!")
+        }
+        
+        if self.need_reply  == "1" {
+            guard tfReplyDate.text != "" else {
+                return self.showAMessage(withTitle: "", message: "Reply Date Field Required!")
+            }
+        }
+        
+        
+        self.param["ticket_titel"] = tfSubject.text!
+        self.param["ticket_detalis"] = txtDesc.text!
+        self.param["ticket_type"] = self.ticket_type
+        self.param["important_id"] =  self.important_id
+        self.param["sig_id"] = self.sig_id
+        self.param["need_reply"] = self.need_reply
+        self.param["date_reply"] = tfReplyDate.text!
+        self.param["notes"] = txtNote.text!
+        self.param["time_work"] = tfTotalDays.text ?? "0"
+        self.param["start_date"] = tfStartDate.text!
+        self.param["end_date"] = tfEndDate.text
+        self.param["issue_link"] = ""
+        //tfIssueLink.text ?? ""
+        self.param["ref_model"] = "tasks"
+        
+        var index = 0
+        for i in arr_selected_user{
+            
+            self.param["users[\(index)]"] = i.value
+            index += 1
+        }
+        
+//        self.param["users[0]"] = "266"
+//        self.param["users[1]"] = "265"
+//        self.param["users[2]"] = "263"
+        
+        Submit_request()
+    }
     
     func Upload_file(){
         
@@ -565,7 +629,7 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
             
         }))
         
-                
+        
         actionsheet.addAction(UIAlertAction(title: "Choose Pdf".localized(), style: .default, handler: { (action:UIAlertAction)in
             
             self.documentInteractionController = UIDocumentPickerViewController(documentTypes: ["public.pdf", "public.data"], in: .import)
@@ -601,18 +665,18 @@ extension AddTicketVC: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         
-            if txtDesc.text == "" {
-                
-                txtDesc.text = "Description".localized()
-                txtDesc.font = .kufiRegularFont(ofSize: 15)
-                txtDesc.textColor = .lightGray
-            }else if txtNote.text == "" {
-                
-                txtNote.text = "Note".localized()
-                txtNote.font = .kufiRegularFont(ofSize: 15)
-                txtNote.textColor = .lightGray
-            }
-      
+        if txtDesc.text == "" {
+            
+            txtDesc.text = "Description".localized()
+            txtDesc.font = .kufiRegularFont(ofSize: 15)
+            txtDesc.textColor = .lightGray
+        }else if txtNote.text == "" {
+            
+            txtNote.text = "Note".localized()
+            txtNote.font = .kufiRegularFont(ofSize: 15)
+            txtNote.textColor = .lightGray
+        }
+        
     }
     
     
@@ -623,7 +687,7 @@ extension AddTicketVC: UITextViewDelegate {
 extension AddTicketVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          
+        
         return arr_Attachments.count
     }
     
@@ -716,7 +780,7 @@ extension AddTicketVC : UITextFieldDelegate{
                     print(DayFromNow)
                     self.tfEndDate.text = DayFromNow?.asStringyyyMMdd()
                 }
-              
+                
                 
                 
             }
@@ -733,37 +797,37 @@ extension AddTicketVC : UITextFieldDelegate{
 extension AddTicketVC: UICollectionViewDataSource ,UICollectionViewDelegate , UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-      
-            return arr_selected_user.count
-       
+        
+        return arr_selected_user.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "unitCVCell", for: indexPath) as! unitCVCell
         
-            let arr = arr_selected_user.map({"\($0.label)"})
-            cell.lblTitle.text = arr[indexPath.row]
-            cell.viewBack.setBorderWithColor("458FB8".getUIColor())
-            cell.lblTitle.font = .kufiRegularFont(ofSize: 13)
+        let arr = arr_selected_user.map({"\($0.label)"})
+        cell.lblTitle.text = arr[indexPath.row]
+        cell.viewBack.setBorderWithColor("458FB8".getUIColor())
+        cell.lblTitle.font = .kufiRegularFont(ofSize: 13)
+        
+        cell.btnDeleteAction = {
             
-            cell.btnDeleteAction = {
-              
-                self.arr_selected_user.remove(at: indexPath.item)
-                self.collection_user.reloadData()
-                if self.arr_user.count == 0 {
-                    self.Viewcollection_user.isHidden = true
-                }
-                
+            self.arr_selected_user.remove(at: indexPath.item)
+            self.collection_user.reloadData()
+            if self.arr_user.count == 0 {
+                self.Viewcollection_user.isHidden = true
             }
             
-            return cell
-      
+        }
+        
+        return cell
+        
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-       // cell.view_img.backgroundColor = HelperClassSwift.acolor.getUIColor()
+        // cell.view_img.backgroundColor = HelperClassSwift.acolor.getUIColor()
         
     }
 }
@@ -776,7 +840,7 @@ extension AddTicketVC : UIImagePickerControllerDelegate  {
         if let image = (info[.originalImage] as? UIImage){
             
             if let row = self.arr_Attachments.firstIndex(where: {$0.index == self.Selected_index}) {
-                 
+                
                 arr_Attachments[row].type = "img"
                 arr_Attachments[row].img = image
                 arr_Attachments[row].url = nil

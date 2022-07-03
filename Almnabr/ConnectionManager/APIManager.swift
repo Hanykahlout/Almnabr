@@ -13,6 +13,17 @@ import MOLH
 
 class APIManager: NSObject {
    
+    //Nahid
+    //Almnabr.NAHIDH 1.1   16
+    //socket --- https://node.nahidh.sa/
+    //server url ---- "https://nahidh.sa/backend"
+    //Api key "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
+
+    //Mnaber
+    //com.ERP.ALMNABR 1.0  3
+    //socket --- "https://node.almnabr.com/"
+    //server url ---- "https://erp.almnabr.com/backend"
+    //Api key "12345"
     
     static let serverURL = "https://nahidh.sa/backend"
 
@@ -325,9 +336,12 @@ class APIManager: NSObject {
         let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let getApi = URL(string: urlStr)!
         
-       
-        let auth = [ "X-API-KEY":"12345",
+        let auth = [ "X-API-KEY": "12345",
                      "Content-Type":"application/x-www-form-urlencoded"]
+        
+       
+//        let auth = [ "X-API-KEY":"12345",
+//                     "Content-Type":"application/x-www-form-urlencoded"]
         Alamofire.request(getApi, method: .post, parameters: parameters, encoding:  URLEncoding.default, headers: auth).responseObject { (response: DataResponse<ResponseModel>) in
             if(response.result.isSuccess){
                 print(response.result.value as Any)
@@ -381,7 +395,7 @@ class APIManager: NSObject {
         let getApi = URL(string: urlStr)!
         
         
-        let auth = [ "X-API-KEY":"12345",
+        let auth = [ "X-API-KEY":"PCGYdyKBJFya8LMaFP6baRrraRpSFc",
                      "Content-Type":"application/x-www-form-urlencoded",
                      "authorization":
                                     "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"]
@@ -513,7 +527,9 @@ class APIManager: NSObject {
                                     
                                 }
                                 
-                            }}}
+                            }
+                Auth_User.topVC()?.hideLoadingActivity()
+            }}
     
     
     static func sendRequestGetAuthTheme(urlString:String , completion: @escaping (_ response : [String : Any] ) -> Void)
@@ -606,7 +622,9 @@ class APIManager: NSObject {
                             completion(result as! [String : Any])
                         }else {
                             print(result)
-                           // completion(result as! [String : Any])
+                            Auth_User.topVC()?.hideLoadingActivity()
+                            
+                            completion( ["Status" : false])
                            
                         }
                     }
@@ -772,7 +790,7 @@ class APIManager: NSObject {
 
     
     
-    static func func_UploadEvalution(queryString:String , _ arr_attach: [notes] , param:[String:String],completion: @escaping (_ response : [String : Any])->Void)
+    static func func_UploadEvalution(queryString:String , _ arr_attach: [AttachNotes] , param:[String:String],completion: @escaping (_ response : [String : Any])->Void)
     {
         
         let auth = [ "authorization":
@@ -794,37 +812,39 @@ class APIManager: NSObject {
                 multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
             }
             
-            for i in arr_attach {
+            for item in arr_attach {
                 
-                switch i.type {
-                case "img":
-                    let data = i.img!.jpegData(compressionQuality: 0.4)
-                    if let imageData = data{
-                        multipartFormData.append(imageData,
-                                                 withName: "Evaludation_Result[\(i.index)][attachments][0][file]",
-                                                 fileName: "\(myId).jpg",
-                                                 mimeType: "image/jpeg")
+                for i in item.arr {
+                    
+                    switch i.type {
+                    case "img":
+                        let data = i.img!.jpegData(compressionQuality: 0.4)
+                        if let imageData = data{
+                            multipartFormData.append(imageData,
+                                                     withName: "Evaludation_Result[\(item.index)][attachments][\(i.index)][file]",
+                                                     fileName: "\(myId).jpg",
+                                                     mimeType: "image/jpeg")
+                            
+                        }
+                    case "file":
+                        if i.IsNew == false && i.url != nil{
+                            do {
+                                let file = try Data(contentsOf: i.url!)
+                                
+                                multipartFormData.append( file as Data, withName: "Evaludation_Result[\(item.index)][attachments][\(i.index)][file]", fileName: "\(myId)", mimeType: "text/plain")
+                            } catch {
+                                debugPrint("Couldn't get Data from URL: \(i.url): \(error)")
+                            }
+                        }
+                    default:
+                        print("no data")
+                        
                         
                     }
-                case "file":
-                    if i.IsNew == false && i.url != nil{
-                        do {
-                            let file = try Data(contentsOf: i.url!)
-                            
-                            multipartFormData.append( file as Data, withName: "Technical_Assistants_Evaluation[\(i.index)][attachments][0][file]", fileName: "\(myId)", mimeType: "text/plain")
-                        } catch {
-                            debugPrint("Couldn't get Data from URL: \(i.url): \(error)")
-                        }
-                    }
-                    
-                    
-                    
-                default:
-                    print("no data")
-                    
-                    
                 }
+                
             }
+     
            
 
      

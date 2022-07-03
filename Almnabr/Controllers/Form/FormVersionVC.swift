@@ -27,6 +27,8 @@ class FormVersionVC: UIViewController {
     var arr_data:[FormTransactionObj] = []
     var arr_unit:[uintObj] = []
     
+    var form_wir_data:templateObj?
+    
     var pageNumber = 1
     var IsOneChar:Bool = false
     var allItemDownloaded = false
@@ -46,6 +48,8 @@ class FormVersionVC: UIViewController {
     var work_site:String = "ALL"
     var params = [:] as [String : String]
     var units :String = ""
+    
+    var IsFromTransaction:Bool = false
     
     var Skipnext :Bool = false
     
@@ -132,11 +136,11 @@ class FormVersionVC: UIViewController {
             
         }
         var Formurl :String = ""
-        let code = ProjectObj.template_platform_group_type_code_system
+        let code = self.template_platform_group_type_code_system
         if code == "MIR" || code == "MSR" || code == "SQR"{
-            Formurl = "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/4/\(transaction_id)"
+            Formurl = "form/FORM_\(self.template_platform_group_type_code_system)/cr/4/\(transaction_id)"
         }else{
-            Formurl = "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/3/\(transaction_id)"
+            Formurl = "form/FORM_\(self.template_platform_group_type_code_system)/cr/3/\(transaction_id)"
         }
         APIManager.sendRequestPostAuth(urlString: Formurl, parameters: self.params ) { (response) in
             self.hideLoadingActivity()
@@ -221,7 +225,8 @@ class FormVersionVC: UIViewController {
         VC.template_platform_code_system = self.template_platform_code_system
         VC.transaction_id = self.transaction_id
         VC.template_platform_group_type_code_system = self.template_platform_group_type_code_system
-        
+        VC.form_wir_data = self.form_wir_data
+        VC.IsFromTransaction = self.IsFromTransaction
         self.navigationController?.pushViewController(VC, animated: true)
     }
       

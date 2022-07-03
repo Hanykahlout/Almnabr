@@ -28,11 +28,11 @@ class SubTaskTVCell: UITableViewCell , UICollectionViewDataSource , UICollection
         // Initialization code
         selectionStyle = .none
         
-        viewBack.layer.shadowColor = UIColor.systemGray.cgColor
-        viewBack.layer.shadowOpacity = 0.5
-        viewBack.layer.shadowOffset = .zero
-        viewBack.layer.shadowRadius = 4
-        viewBack.layer.cornerRadius = 10
+//        viewBack.layer.shadowColor = UIColor.systemGray.cgColor
+//        viewBack.layer.shadowOpacity = 0.5
+//        viewBack.layer.shadowOffset = .zero
+//        viewBack.layer.shadowRadius = 4
+//        viewBack.layer.cornerRadius = 10
         
         let nib = UINib(nibName: "TaskUsersCVCell", bundle: nil)
         collection.register(nib, forCellWithReuseIdentifier: "TaskUsersCVCell")

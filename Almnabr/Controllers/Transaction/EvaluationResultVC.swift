@@ -8,7 +8,16 @@
 
 import UIKit
 
-class EvaluationResultVC: UIViewController, UINavigationControllerDelegate {
+var EvaluationDidReply :Bool = false
+
+
+protocol AttachnmentDelegate {
+    func pass_arr(data: [notes])
+}
+
+class EvaluationResultVC: UIViewController, UINavigationControllerDelegate , AttachnmentDelegate {
+  
+    
     
     @IBOutlet weak var icon_noPermission: UIImageView!
     @IBOutlet weak var view_noPermission: UIView!
@@ -26,7 +35,7 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var btn_submit: UIButton!
     
     @IBOutlet weak var view_main: UIView!
-    @IBOutlet var tableHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableHeight: NSLayoutConstraint!
     @IBOutlet weak var lbl_EvaluationResult: UILabel!
     @IBOutlet weak var btn_EvaluationResult: UIButton!
     @IBOutlet weak var lbl_EvaluationResultSelect: UILabel!
@@ -37,7 +46,7 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate {
     @IBOutlet weak var table: UITableView!
     
     var arr_Notes:[NotesObj] = []
-    var arr_attachments:[notes] = []
+    var arr_attachments:[AttachNotes] = []
     
     var Selected_index:Int = 0
     
@@ -54,6 +63,17 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate {
         
         configGUI()
         
+//        if EvaluationDidReply {
+////            self.showLoadingActivity()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                self.configGUI()
+//                self.hideLoadingActivity()
+//                EvaluationDidReply = false
+//            }
+//        }else{
+//            configGUI()
+//            EvaluationDidReply = true
+//        }
         
     }
     
@@ -88,6 +108,7 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate {
     //------------------------------------------------------
     func configGUI() {
         
+        print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\evaluation results")
         icon_noPermission.no_permission()
         
         self.lbl_noPermission.text =  "You not have permission to access this step".localized()
@@ -157,10 +178,27 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate {
         table.register(nib, forCellReuseIdentifier: "NotesCell")
         
         imagePickerController.delegate = self
+        
     }
     
     
+//    func passByPhasesArr(data: [ByPhaseObj]) { //conforms to protocol
+//        // implement your own implementation
+//        self.arr_ByPhase = self.arr_ByPhase + data
+//        self.tableByPhase.reloadData()
+//    }
     
+    func pass_arr(data: [notes]) {
+        
+        if let row = self.arr_attachments.firstIndex(where: {$0.index == self.Selected_index}) {
+            
+            arr_attachments[row].arr = data
+            self.table.reloadData()
+        }
+        
+//        self.arr_attachments = self.arr_attachments + data
+        self.table.reloadData()
+    }
     
     func submit_Request(){
         
@@ -185,6 +223,11 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate {
             params["Evaludation_Result[\(i.index)][status]"] = ""
             params["Evaludation_Result[\(i.index)][result]"] = i.result
            // params["Evaludation_Result[\(i.index)][form_wir_file_attach_method]"] = "file"
+            for item in i.arr{
+//                params["Evaludation_Result[\(i.index)][attachments][\(item.index)][file]"] = item.id
+                params["Evaludation_Result[\(i.index)][attachments][\(item.index)][attach_title]"] = item.title
+                params["valudation_Result[\(i.index)][attachments][\(item.index)][required]"] = ""
+            }
             
         }
         
@@ -230,7 +273,7 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate {
             let status = response["status"] as? Bool
             let msg = response["msg"] as? String
             let error = response["error"] as? String
-            
+            self.arr_Notes = []
             if status == true{
                 self.hideLoadingActivity()
                 let final_result = response["final_result"] as? String
@@ -262,7 +305,7 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate {
                 
                 var index = 0
                 for i in self.arr_Notes{
-                    let obj = notes(id: i.projects_consultant_recommendations_id,title: i.extra1_title, result: i.extra1_result, Required: "1", img: nil, url: nil, type: nil, index: index, IsNew: false)
+                    let obj = AttachNotes(id: i.projects_consultant_recommendations_id,title: i.extra1_title, result: i.extra1_result, Required: "1", img: nil, url: nil, type: nil, index: index, IsNew: false , arr : [])
                     self.arr_attachments.append(obj)
                     index = index + 1
                 }
@@ -336,7 +379,7 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate {
         //        }else{
         
         let new_index = self.arr_attachments.count + 1
-        let obj = notes(id:"", title: "", result: "", Required: "0", img: nil, url: nil, type: "file", index: new_index, IsNew: true)
+        let obj = AttachNotes(id:"", title: "", result: "", Required: "0", img: nil, url: nil, type: "file", index: new_index, IsNew: true, arr : [])
         self.arr_attachments.append(obj)
         //  self.table.reloadData()
         
@@ -383,9 +426,15 @@ extension EvaluationResultVC: UITableViewDelegate , UITableViewDataSource{
         cell.lbl_Result.text =  obj.result
         cell.lbl_Result.font = .kufiRegularFont(ofSize: 12)
         
+//        if (obj.img != nil || obj.url != nil) {
+//            cell.btn_upload.tintColor = "#3ea832".getUIColor()
+//        }
         if (obj.img != nil || obj.url != nil) {
             cell.btn_upload.tintColor = "#3ea832".getUIColor()
+        }else{
+            cell.btn_upload.tintColor = HelperClassSwift.acolor.getUIColor()
         }
+        
         
         if obj.IsNew == true {
             cell.lbl_Title.isHidden = true
@@ -410,7 +459,19 @@ extension EvaluationResultVC: UITableViewDelegate , UITableViewDataSource{
         cell.btnUploadAction  = {
             
             self.Selected_index = indexPath.item
-            self.Upload_file()
+         
+            let vc:AddAttachmentsVC  = AppDelegate.TransactionSB.instanceVC()
+            
+            vc.isModalInPresentation = true
+            vc.modalPresentationStyle = .overFullScreen
+            vc.definesPresentationContext = true
+            vc.delegate = self
+//            vc.Selected_index = indexPath.item
+            vc.arr_attachments = self.arr_attachments
+            vc.arr_notes = obj.arr
+            
+            self.present(vc, animated: true, completion: nil)
+//            self.Upload_file()
         }
         
         cell.btnDeleteAction = {
@@ -448,7 +509,7 @@ extension EvaluationResultVC : UIImagePickerControllerDelegate  {
         
         if let image = (info[.originalImage] as? UIImage){
             
-            if let row = self.arr_attachments.firstIndex(where: {$0.index == self.Selected_index + 1}) {
+            if let row = self.arr_attachments.firstIndex(where: {$0.index == self.Selected_index }) {
                 
                 arr_attachments[row].type = "img"
                 arr_attachments[row].img = image
@@ -504,7 +565,7 @@ extension EvaluationResultVC: UIDocumentPickerDelegate {
                 if let data = data {
                     
                     
-                    if let row = self.arr_attachments.firstIndex(where: {$0.index == self.Selected_index + 1}) {
+                    if let row = self.arr_attachments.firstIndex(where: {$0.index == self.Selected_index}) {
                         
                         arr_attachments[row].type = "file"
                         arr_attachments[row].img = nil

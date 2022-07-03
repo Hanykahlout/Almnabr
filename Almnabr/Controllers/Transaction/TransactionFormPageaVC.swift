@@ -24,11 +24,7 @@ class TransactionFormPageaVC: UIPageViewController {
       
         let vc: LanguageVC = AppDelegate.mainSB.instanceVC()
         let page1 = UINavigationController(rootViewController: vc)
-        
-//        vc.ProjectObj?.projects_work_area_id = "1"
-//        vc.ProjectObj?.template_id = "1"
-//        vc.ProjectObj?.template_platform_code_system = "2.WIR.1.1"
-        
+
         let page2: ContractorTeamApprovalVC = AppDelegate.TransactionSB.instanceVC()
         let page3: ContractorManagerApprovalVC = AppDelegate.TransactionSB.instanceVC()
         let page4: RecipientVerificationVC = AppDelegate.TransactionSB.instanceVC()
@@ -53,7 +49,7 @@ class TransactionFormPageaVC: UIPageViewController {
         pages.append(page10)
         pages.append(page11)
         
-        setViewControllers([page1], direction: .forward, animated: false, completion: nil)
+        setViewControllers([page1], direction: .forward, animated: true, completion: nil)
         
         pager_observer()
     }
@@ -108,27 +104,55 @@ class TransactionFormPageaVC: UIPageViewController {
 extension TransactionFormPageaVC: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        let currentIndex = pages.index(of: viewController)!
+        guard let id = indexOfViewController(viewController) else {return nil}
+        let prev = id - 1
+        guard prev >= 0 else {return nil}
+        guard pages.count > prev  else {return nil}
+        return viewControllerAtIndex(prev)
         
-        // This version will not allow pages to wrap around
-        guard currentIndex > 0 else {
-            return nil
-        }
-        
-        return pages[currentIndex - 1]
+//        let currentIndex = pages.index(of: viewController)!
+//
+//        // This version will not allow pages to wrap around
+//        guard currentIndex > 0 else {
+//            return nil
+//        }
+//
+//        return pages[currentIndex - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        
-        let currentIndex = pages.index(of: viewController)!
-        
-        // This version will not allow pages to wrap around
-        guard currentIndex < pages.count - 1 else {
-            return nil
-        }
-        
-        return pages[currentIndex + 1]
+        return nil
     }
+    
+//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+//
+//        let currentIndex = pages.index(of: viewController)!
+//
+//        // This version will not allow pages to wrap around
+//        guard currentIndex < pages.count - 1 else {
+//            return nil
+//        }
+//
+//        return pages[currentIndex + 1]
+//    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard finished else {return}
+        guard let current = self.viewControllers?.first else {return}
+        guard let i = pages.firstIndex(of: current) else { return}
+        debugPrint("i is \(i)")
+        newIndex = i
+    }
+    
+    private func viewControllerAfter(_ viewController:UIViewController) -> UIViewController? {
+        guard let id = indexOfViewController(viewController) else {return nil}
+        let next = id + 1
+        guard next < pages.count else { return nil }
+        guard pages.count > next else { return nil }
+        newIndex += 1
+        return viewControllerAtIndex(next)
+    }
+    
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
         return pages.count
@@ -156,4 +180,22 @@ extension TransactionFormPageaVC: UIPageViewControllerDataSource {
 //        return vc_array.firstIndex(of: current)
 //    }
 //}
+
+extension TransactionFormPageaVC {
+    fileprivate func viewControllerAtIndex(_ index: Int) -> UIViewController? {
+        if pages.count == 0 || index >= pages.count {
+            return nil
+        }
+        return pages[index]
+    }
+    
+    fileprivate func indexOfViewController(_ viewController: UIViewController) -> Int? {
+        return pages.firstIndex(of: viewController)
+    }
+    
+    private func getCurrentIndex() -> Int? {
+        guard let current = self.viewControllers?.first else {return nil }
+        return pages.firstIndex(of: current)
+    }
+}
 

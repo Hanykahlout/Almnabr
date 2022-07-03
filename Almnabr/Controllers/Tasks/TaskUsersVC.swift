@@ -27,6 +27,7 @@ class TaskUsersVC: UIViewController {
     var arr_NoData:[String] = ["No items found".localized()]
     var arr_user :[HistoryObj] = []
     var arr_selected_user :[HistoryObj] = []
+    var arr_drop_user :[HistoryObj] = []
     var arr_lbluser :[String] = []
     var params = [:] as [String : Any]
     
@@ -59,13 +60,13 @@ class TaskUsersVC: UIViewController {
         self.btnSubmit.backgroundColor =  maincolor
         self.btnSubmit.setTitleColor(.white, for: .normal)
         self.btnSubmit.setRounded(10)
-        
+        self.btnSubmit.titleLabel?.font = .kufiRegularFont(ofSize: 14)
         
         self.btnCancel.setTitle("Cancel".localized(), for: .normal)
         self.btnCancel.backgroundColor =  maincolor
         self.btnCancel.setTitleColor(.white, for: .normal)
         self.btnCancel.setRounded(10)
-        
+        self.btnCancel.titleLabel?.font = .kufiRegularFont(ofSize: 14)
     }
 
     
@@ -79,14 +80,18 @@ class TaskUsersVC: UIViewController {
            
             if status == true{
                 
-                if let data = response["data"] as? [String:Any] {
-                if  let status_done = data["task_status_done"] as? NSArray{
-                    for i in status_done {
+                if let data = response["data"] as? NSArray {
+//                if  let status_done = data["task_status_done"] as? NSArray{
+                    for i in data {
                         let dict = i as? [String:Any]
                         let obj = HistoryObj.init(dict!)
                         self.arr_user.append(obj)
-                    } }
+                        self.arr_selected_user.append(obj)
+                    }
+                    self.collection_user.reloadData()
+                   
             }
+                self.hideLoadingActivity()
             }else{
                 self.hideLoadingActivity()
             }
@@ -99,17 +104,18 @@ class TaskUsersVC: UIViewController {
 
         var param :[String:Any] = [:]
         self.showLoadingActivity()
+//        tasks/emp_in_ticket
         APIManager.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
-                self.arr_user = []
+                self.arr_drop_user = []
                 self.arr_lbluser = []
                 if  let list = response["list"] as? NSArray{
                     for i in list {
                         let dict = i as? [String:Any]
                         let obj = HistoryObj.init(dict!)
-                        self.arr_user.append(obj)
+                        self.arr_drop_user.append(obj)
                         self.arr_lbluser.append(obj.label)
                         self.drop_userList()
                         
@@ -128,7 +134,7 @@ class TaskUsersVC: UIViewController {
     func drop_userList(){
         let dropDown = DropDown()
         
-            if self.arr_user.count == 0 {
+            if self.arr_drop_user.count == 0 {
                 dropDown.dataSource = self.arr_NoData
                 dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                    // self.imgDropMaterial.image = dropDownmage
@@ -141,12 +147,17 @@ class TaskUsersVC: UIViewController {
                 dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
                     
                     if item == self.arr_lbluser[index] {
-                        let object =  self.arr_user[index]
+                        let object =  self.arr_drop_user[index]
+                        object.emp_name = object.label
+                        object.emp_id = object.value
                         self.arr_selected_user.append(object)
+                        self.arr_user.append(object)
+                        
+//                        self.arr_selected_user.append(obj)
                        // self.Viewcollection_user.isHidden = false
-                        self.collection_user.reloadData()
+                      
                     }
-                    
+                    self.collection_user.reloadData()
                 }
 
             }
@@ -158,6 +169,57 @@ class TaskUsersVC: UIViewController {
      
     }
     
+    
+    func add_user(){
+        
+        showLoadingActivity()
+        let Url = "tasks/add_emp_on_task"
+        
+       
+        var Ids:String = ""
+        if arr_selected_user.count > 1 {
+            for i in arr_selected_user{
+                if i.emp_id == arr_selected_user.last?.emp_id
+                {
+                    Ids = Ids + i.emp_id
+                }else{
+                    Ids = Ids + i.emp_id + ","
+                }
+                
+            }
+        }else{
+            Ids = arr_selected_user[0].emp_id
+        }
+        
+        
+        let param:[String:Any] = ["task_id" : self.task_id,
+                                  "emp_id" : Ids]
+        
+        APIManager.sendRequestPostAuth(urlString: Url, parameters: param ) { (response) in
+            
+            
+            let status = response["status"] as? Bool
+            let errors = response["error"] as? String
+
+            
+            if status == true{
+                if let message = response["message"] as? String {
+                    self.showAMessage(withTitle: "", message: message,  completion: {
+                        
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                }
+            }else{
+                
+                self.hideLoadingActivity()
+                self.showAMessage(withTitle: "error".localized(), message: errors ?? "something went wrong")
+            }
+            self.hideLoadingActivity()
+            
+            
+        }
+
+    }
     
     @IBAction func btnCancel_Click(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -174,7 +236,12 @@ class TaskUsersVC: UIViewController {
 //            Phasesdelegate.passByPhasesArr(data: arr)
 //
 //
+        if arr_selected_user.count > 0 {
+            self.add_user()
+        }else{
             self.dismiss(animated: true, completion: nil)
+        }
+           
 //        }
        
     }
@@ -189,25 +256,28 @@ extension TaskUsersVC: UICollectionViewDataSource ,UICollectionViewDelegate , UI
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
       
-            return arr_selected_user.count
+            return arr_user.count
        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "unitCVCell", for: indexPath) as! unitCVCell
         
-            let arr = arr_selected_user.map({"\($0.label)"})
-            cell.lblTitle.text = arr[indexPath.row]
+        let obj = arr_user[indexPath.item]
+//            .map({"\($0.label)"})
+        cell.lblTitle.text = obj.emp_name
             cell.viewBack.setBorderWithColor("458FB8".getUIColor())
             cell.lblTitle.font = .kufiRegularFont(ofSize: 13)
-            
+        cell.lblTitle.textColor = "458FB8".getUIColor()
             cell.btnDeleteAction = {
               
                 self.arr_selected_user.remove(at: indexPath.item)
+                self.arr_user.remove(at: indexPath.item)
+                
                 self.collection_user.reloadData()
-                if self.arr_user.count == 0 {
-                   // self.Viewcollection_user.isHidden = true
-                }
+//                if self.arr_user.count == 0 {
+//                   // self.Viewcollection_user.isHidden = true
+//                }
                 
             }
             

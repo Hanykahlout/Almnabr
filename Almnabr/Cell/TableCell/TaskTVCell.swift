@@ -20,8 +20,13 @@ class TaskTVCell: UITableViewCell {
     @IBOutlet weak var viewNumber: UIView!
     @IBOutlet weak var img_check: UIImageView!
     @IBOutlet weak var lbl_totalPoints: UILabel!
+    @IBOutlet weak var lbl_relatedTask: UILabel!
     @IBOutlet weak var stack_totalPoints: UIStackView!
+    @IBOutlet weak var stack_related: UIStackView!
      
+    @IBOutlet weak var btnImportant: UIButton!
+    @IBOutlet weak var btnStatus: UIButton!
+    
     var btnEditAction : (()->())?
     var btnChangeStatusAction : (()->())?
     

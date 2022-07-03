@@ -59,9 +59,16 @@ class FinalResultVC: UIViewController {
         self.lbl_noPermission.textColor =  "#333".getUIColor()
         
         let step = obj_transaction?.transaction_request_last_step ?? "last"
-        if step == "last" || step == "completed" {
+        if step == "completed" {
             view_noPermission.isHidden = true
             self.view_main.isHidden = false
+            self.lbl_Title.isHidden = true
+            self.lbl_Thanks.isHidden = true
+        }else if step == "last" {
+            view_noPermission.isHidden = true
+            self.view_main.isHidden = false
+            self.lbl_Title.isHidden = false
+            self.lbl_Thanks.isHidden = false
         }else{
             if StatusObject?.Final_Result == false {
                 view_noPermission.isHidden = false
@@ -70,6 +77,8 @@ class FinalResultVC: UIViewController {
             }else{
                 view_noPermission.isHidden = true
                 self.view_main.isHidden = false
+//                self.lbl_Title.isHidden = false
+//                self.lbl_Thanks.isHidden = false
             }
         }
         

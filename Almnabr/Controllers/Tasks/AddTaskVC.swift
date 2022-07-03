@@ -68,12 +68,18 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
     var Attachments_index:Int = 0
     var isCheckList:Bool = false
     
+    var task_id:String = ""
     var task_type:String = ""
     var important_id:String = ""
     var task_status:String = ""
     var status:String = ""
     var ticket_id:String = ""
     var strTitle:String = ""
+    
+    var object:TaskObj?
+    var users:[HistoryObj] = []
+    var isEdit:Bool = false
+    
     
     var arr_related_task:[TaskObj] = []
     var arr_lbl_related_task:[String] = []
@@ -89,6 +95,12 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
         configNavigation()
         configGUI()
         createDatePicker()
+        
+        if isEdit {
+            
+            self.get_users()
+            self.get_task()
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -126,6 +138,62 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
     
     //MARK: - Config GUI
     //------------------------------------------------------
+    
+    
+    
+    func setData() {
+        
+        self.lblPriority.text = object?.important_name
+        self.lblStatus.text = object?.status_name
+        self.tfTotalDays.text = object?.task_time
+        self.tfStartDate.text =  object?.start_date
+        self.tfEndDate.text =  object?.end_date_task
+        self.tfSubject.text = object?.task_detailes
+        self.tfDesc.text = object?.task_detailes
+        
+        self.ticket_id = object?.ticket_id ?? "0"
+        self.important_id = object?.important_id ?? "0"
+//        self.status = object?.task_status_done ?? "0"
+        self.task_status = object?.task_status_done ?? "0"
+        
+     
+        
+        if users.count > 0 {
+            self.Viewcollection_user.isHidden = false
+        }
+        for i in users {
+            let dict = ["value" : i.emp_id,
+                        "label" : i.emp_name]
+            let item = SupplierObj(dict as? [String:Any] ?? [:])
+            self.arr_selected_user.append(item)
+        }
+        self.collection_user.reloadData()
+        
+        
+        
+        let arr_related =  object?.relateds_numbers
+        var arr_related_id :[String] = []
+        
+        if arr_related!.count > 0 {
+            self.Viewcollection_RelatedTask.isHidden = false
+        }
+        for i in arr_related! {
+//            let dict = ["task_id" : i.task_id,
+//                        "title" : i.sub_tasks_numbers]
+//            let item = SupplierObj(dict as? [String:Any] ?? [:])
+//            arr_related_id.append(i.task_id)
+            for item in arr_related_task {
+                if item.task_id == i.task_id {
+                    self.arr_selected_related.append(item)
+                }
+            }
+        }
+        
+        self.collection_RelatedTask.reloadData()
+        
+    }
+
+    
     func configGUI() {
         
         self.lblAddTask.font = .kufiRegularFont(ofSize: 15)
@@ -174,6 +242,61 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
        
         tableAttachments.isHidden = true
     }
+    
+    
+    func get_task(){
+        
+        self.showLoadingActivity()
+        
+        let param:[String:Any] = ["task_id" : self.task_id]
+        APIManager.sendRequestPostAuth(urlString: "tasks/get_task_only", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+            
+            let status = response["status"] as? Bool
+            
+            if status == true{
+                
+                if  let data = response["data"] as? [String:Any]{
+                    
+                    let obj =  TaskObj(data)
+                    self.object = obj
+                }
+                self.setData()
+                self.hideLoadingActivity()
+                
+            }else{
+                self.hideLoadingActivity()
+            }
+        }
+    }
+    
+    
+    func get_users(){
+        
+        self.showLoadingActivity()
+        APIManager.sendRequestPostAuth(urlString: "tasks/get_emp_in_task", parameters: ["task_id":self.task_id] ) { (response) in
+            self.hideLoadingActivity()
+            
+            let status = response["status"] as? Bool
+           
+            if status == true{
+                
+                if let data = response["data"] as? NSArray {
+//                if  let status_done = data["task_status_done"] as? NSArray{
+                    for i in data {
+                        let dict = i as? [String:Any]
+                        let obj = HistoryObj.init(dict!)
+                        self.users.append(obj)
+                    }
+                   
+            }
+                self.hideLoadingActivity()
+            }else{
+                self.hideLoadingActivity()
+            }
+        }
+    }
+
     
     func createDatePicker(){
           
@@ -428,8 +551,13 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
         }
                 showLoadingActivity()
               
-                let Url = "tasks/add_task"
+                var Url = "tasks/add_task"
              
+        if isEdit {
+            Url = "tasks/update_task"
+            self.param["task_id"] = self.task_id
+        }
+        
                 APIManager.func_Upload(queryString: Url, arr_Attachments, param: self.param ) { (respnse ) in
                     
                     let status = respnse["status"] as? Bool
@@ -439,7 +567,7 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
                     if status == true{
                         if let message = respnse["message"] as? String {
                             self.showAMessage(withTitle: "", message: message,  completion: {
-                                
+                                self.delegate!()
                                 self.navigationController?.popViewController(animated: true)
                                 
                             })
@@ -473,7 +601,7 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
            
             
             self.param["task_detailes"] = tfDesc.text!
-            self.param["status"] = self.task_status
+            self.param["status"] = self.status
             self.param["ticket_id"] = self.ticket_id
             self.param["title"] = tfSubject.text!
             self.param["task_time"] = tfTotalDays.text ?? "0"
@@ -481,10 +609,19 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
             self.param["end_date"] = tfEndDate.text
             self.param["important_id"] =  self.important_id
             self.param["task_status_done"] = self.task_status
+         
             
+            
+            var related_task = ""
             for i in arr_selected_related{
-                self.param["related_id[]"] = i.task_id
+                if arr_selected_related.count > 1 {
+                    related_task = i.task_id  + "," + related_task
+                }else{
+                    related_task =  i.task_id
+                }
             }
+            self.param["related_id"] = related_task
+            
             var selected_user = ""
             for i in arr_selected_user{
                 if arr_selected_user.count > 1 {
@@ -494,7 +631,10 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
                 }
             }
             self.param["users"] = selected_user
-          
+            for i in arr_Attachments{
+                self.param["attachments[\(i.index)][attach_title]"] = i.title
+            }
+            
             Submit_request()
         }
     

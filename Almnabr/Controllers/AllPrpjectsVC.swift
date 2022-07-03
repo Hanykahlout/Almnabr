@@ -371,7 +371,7 @@ extension AllPrpjectsVC: UITableViewDelegate , UITableViewDataSource{
         let obj = arr_data[indexPath.item]
       
         
-        let Id =  "ID" + ":  \(obj.projects_profile_id)"
+        let Id =  "ID".localized() + ":  \(obj.projects_profile_id)"
         let Title = "Title".localized() + ":  \(obj.project_title)"
         let Branch = "Branch".localized() + ":  \(obj.branch_name)"
         let Type = "Type".localized() + ":  \(obj.customer_type)"
@@ -482,3 +482,4 @@ extension AllPrpjectsVC:UISearchBarDelegate {
 }
 
  
+//backend/pr/qtp/1/pages/1/10 --- test

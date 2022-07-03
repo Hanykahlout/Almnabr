@@ -361,19 +361,19 @@ class SignInVC: UIViewController {
           self.change_language()
             
             
-//            if item == self.arr_lang[0] {
-//                print(item)
-//                HelperClassSwift.setUserInformation(value: "en", key: Constants.kAppLanguageSelect)
-//                dp_set_current_language("en")
-//                change_lang(lang: "en")
-//                self.reloadViewControllers()
-//
-//            }else{
-//                HelperClassSwift.setUserInformation(value: "ar", key: Constants.kAppLanguageSelect)
-//                dp_set_current_language("ar")
-//                change_lang(lang: "ar")
-//                self.reloadViewControllers()
-//            }
+            if item == self.arr_lang[0] {
+                print(item)
+                HelperClassSwift.setUserInformation(value: "en", key: Constants.kAppLanguageSelect)
+                dp_set_current_language("en")
+                change_lang(lang: "en")
+                self.reloadViewControllers()
+
+            }else{
+                HelperClassSwift.setUserInformation(value: "ar", key: Constants.kAppLanguageSelect)
+                dp_set_current_language("ar")
+                change_lang(lang: "ar")
+                self.reloadViewControllers()
+            }
             
         }
         dropDown.direction = .bottom

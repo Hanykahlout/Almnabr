@@ -35,8 +35,8 @@ class PickerVC: UIViewController {
         self.picker.delegate = self
         self.btnNext.setTitle("Done".localized(), for: .normal)
         self.btnCancel.setTitle("Cancel".localized(), for: .normal)
-        self.btnNext.titleLabel?.font = .kufiRegularFont(ofSize: 15)
-        self.btnCancel.titleLabel?.font = .kufiRegularFont(ofSize: 15)
+        self.btnNext.titleLabel?.font = .kufiRegularFont(ofSize: 14)
+        self.btnCancel.titleLabel?.font = .kufiRegularFont(ofSize: 14)
         
         if arr_data.count > 0 {
             self.name = arr_data[0]

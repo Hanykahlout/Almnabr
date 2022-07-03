@@ -21,6 +21,7 @@ class TicketDetailsVC: UIViewController {
     @IBOutlet weak var lbl_Property: UILabel!
     @IBOutlet weak var lbl_note: UILabel!
     @IBOutlet weak var lbl_desc: UILabel!
+    @IBOutlet var tableHeight: NSLayoutConstraint!
     
     var object:TicketObj?
     var ticket_id:String = ""
@@ -32,10 +33,15 @@ class TicketDetailsVC: UIViewController {
         get_data()
         configNavigation()
         get_emp_in_ticket()
-        setupAddButtonItem()
+//        setupAddButtonItem()
         //TaskUserTVCell
     }
     
+    
+    override func viewWillLayoutSubviews() {
+        super.updateViewConstraints()
+//        self.tableHeight?.constant = self.table_user.contentSize.height
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -55,7 +61,7 @@ class TicketDetailsVC: UIViewController {
     func configNavigation() {
         
         _ = self.navigationController?.preferredStatusBarStyle
-       // self.view.backgroundColor = maincolor //F0F4F8
+        self.view.backgroundColor = maincolor //F0F4F8
         //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
         navigationController?.navigationBar.barTintColor = maincolor
        addNavigationBarTitle(navigationTitle: "Ticket Details".localized())
@@ -78,8 +84,13 @@ class TicketDetailsVC: UIViewController {
     
     @objc func didTapEditButton(sender: AnyObject){
         let vc:AddTicketVC = AppDelegate.TicketSB.instanceVC()
-//        vc.object =  object
-//        vc.ticket_id =  object!.ticket_id
+        vc.object =  object
+        vc.users = self.arr_user
+        vc.isEdit = true
+        vc.ticket_id =  self.ticket_id
+        vc.delegate = {
+            self.get_data()
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -97,7 +108,7 @@ class TicketDetailsVC: UIViewController {
         self.lbl_ticket.text = "Ticket".localized()
         
         let No = "No.".localized() + ": \(object?.ticket_no ?? "---")        "
-        let title = No +  "Title".localized() + ": \(object?.ticket_titel ?? "---")"
+        let title = No +  "Subject".localized() + ": \(object?.ticket_titel ?? "---")"
         
         let title_atr: NSAttributedString = title.attributedStringWithColor(["Title".localized(),"No.".localized()], color: maincolor)
         self.lbl_title.attributedText = title_atr
@@ -131,13 +142,13 @@ class TicketDetailsVC: UIViewController {
         self.lbl_Property.attributedText = priorty_atr
         self.lbl_Property.font = .kufiRegularFont(ofSize: 14)
         
-        let note = "Note".localized() + ": \(object?.important_name ?? "---")"
-        let note_atr: NSAttributedString = note.attributedStringWithColor(["Note".localized()], color: maincolor)
+        let note = "Description".localized() + ": \(object?.notes ?? "---")"
+        let note_atr: NSAttributedString = note.attributedStringWithColor(["Description".localized()], color: maincolor)
         self.lbl_note.attributedText = note_atr
         self.lbl_note.font = .kufiRegularFont(ofSize: 14)
         
-        let desc = "Description".localized() + ": \(object?.ticket_detalis ?? "---")"
-        let desc_atr: NSAttributedString = desc.attributedStringWithColor(["Description".localized()], color: maincolor)
+        let desc = "Note".localized() + ": \(object?.ticket_detalis ?? "---")"
+        let desc_atr: NSAttributedString = desc.attributedStringWithColor(["Note".localized()], color: maincolor)
         self.lbl_desc.attributedText = desc_atr
         self.lbl_desc.font = .kufiRegularFont(ofSize: 14)
         
@@ -147,6 +158,9 @@ class TicketDetailsVC: UIViewController {
         let nib = UINib(nibName: "TaskUserTVCell", bundle: nil)
         table_user.register(nib, forCellReuseIdentifier: "TaskUserTVCell")
         
+        if object?.is_ticket_admin == true {
+            self.setupAddButtonItem()
+        }
         
     }
     
@@ -210,6 +224,70 @@ class TicketDetailsVC: UIViewController {
     
     
     
+    func unfollow_emp(emp_id:String){
+        
+        self.showLoadingActivity()
+        
+        let param : [String:Any] = ["ticket_id" : self.ticket_id,
+                                    "emp_id" : emp_id]
+       
+        APIManager.sendRequestPostAuth(urlString: "tasks/unfollow_emp_by_admin", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+           
+            let status = response["status"] as? Bool
+            let message = response["message"] as? [String:Any]
+            
+            if status == true{
+                    if let message = message?["msg"] as? String {
+                        self.showAMessage(withTitle: "", message: message,  completion: {
+                            
+                            self.dismiss(animated: true)
+                        })
+                    }
+                
+            }else{
+                let error = response["error"] as? String ?? "something went wrong"
+                    self.showAMessage(withTitle: "error".localized(), message:  error)
+              
+            }
+            self.hideLoadingActivity()
+            
+        }
+    }
+    
+    
+    func prevent_unfollow(emp_id:String){
+        
+        self.showLoadingActivity()
+        
+        let param : [String:Any] = ["ticket_id" : self.ticket_id,
+                                    "emp_id" : emp_id]
+       
+        APIManager.sendRequestPostAuth(urlString: "tasks/prevent_unfollow", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+           
+            let status = response["status"] as? Bool
+            let message = response["message"] as? [String:Any]
+            
+            if status == true{
+                    if let message = message?["msg"] as? String {
+                        self.showAMessage(withTitle: "", message: message,  completion: {
+                            
+                            self.dismiss(animated: true)
+                        })
+                    }
+                
+            }else{
+                let error = response["error"] as? String ?? "something went wrong"
+                    self.showAMessage(withTitle: "error".localized(), message:  error)
+              
+            }
+            self.hideLoadingActivity()
+            
+        }
+    }
+    
+    
     @IBAction func btnEdit_Click(_ sender: Any) {
         
     }
@@ -238,9 +316,25 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     cell.lblFirstName.text = obj.firstname_english
     cell.lblLastName.text = obj.lastname_english
     
+    cell.btnLockAction = {
+        self.prevent_unfollow(emp_id: obj.emp_id)
+    }
+    
+    cell.btnUnfollowAction = {
+        self.unfollow_emp(emp_id: obj.emp_id)
+    }
+    
+    self.viewWillLayoutSubviews()
+    
     return cell
     
 }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        self.viewWillLayoutSubviews()
+    }
+    
+    
 
 }
 

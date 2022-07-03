@@ -252,7 +252,7 @@
                 <outlet property="lblTo" destination="QY6-Ty-0wc" id="zmJ-0n-Pfg"/>
                 <outlet property="lblType" destination="T4M-3p-Whw" id="Wx5-Fy-E05"/>
                 <outlet property="lblWriter" destination="WUc-zS-O01" id="y0H-ec-D9f"/>
-                <outlet property="viewBack" destination="xVO-xh-EfE" id="a0y-ws-bFO"/>
+                <outlet property="viewBack" destination="uUy-SJ-HYa" id="ppi-he-eZs"/>
                 <outlet property="viewStatus" destination="lHv-IB-Ryb" id="cbu-Lc-FiW"/>
             </connections>
             <point key="canvasLocation" x="199.27536231884059" y="0.33482142857142855"/>

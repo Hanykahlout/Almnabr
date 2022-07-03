@@ -82,7 +82,7 @@ class MenuObj {
         self.icon              = Obj["icon"] as? String ?? ""
         self.type              = Obj["type"] as? String ?? ""
         self.IsOpened          = Obj["IsOpened"] as? Bool ?? false
-        let data_Array         = Obj["menu"] as? [[String:Any]] ?? []
+        let data_Array         = Obj["children"] as? [[String:Any]] ?? []
         self.menu              = data_Array.map{SubMenuObj.init($0)}
     }}
 
@@ -228,6 +228,7 @@ class ObjPlatformGroup {
 class PageObj {
     
     var total_records       :Int = -1
+    var Str_total_records   :String = "0"
     var per_page            :Int = -1
     var offset              :Int = -1
     var total_pages         :Int = -1
@@ -237,6 +238,7 @@ class PageObj {
         
         
         self.total_records        = Obj["total_records"] as? Int ?? -1
+        self.Str_total_records    = Obj["total_records"] as? String ?? "0"
         self.per_page             = Obj["per_page"] as? Int ?? -1
         self.offset               = Obj["offset"] as? Int ?? -1
         self.total_pages          = Obj["total_pages"] as? Int ?? -1
@@ -276,6 +278,12 @@ class Tcore {
     var barcode                                :String = ""
     var url                                    :String = ""
     var create_datetime  :String = ""
+    var language_name  :String = ""
+    var projects_work_area_id :String = ""
+    var template_platform_code_system :String = ""
+    var template_id :String = ""
+    var view_link :String = ""
+    
     
     init(_ Obj : [String:Any]) {
         
@@ -309,7 +317,11 @@ class Tcore {
         self.barcode     = Obj["barcode"] as? String ?? ""
         self.url    = Obj["url"] as? String ?? ""
         self.create_datetime    = Obj["create_datetime"] as? String ?? ""
-        
+        self.language_name    = Obj["language_name"] as? String ?? ""
+        self.projects_work_area_id = Obj["projects_work_area_id"] as? String ?? ""
+        self.template_platform_code_system = Obj["template_platform_code_system"] as? String ?? ""
+        self.template_id = Obj["template_id"] as? String ?? ""
+        self.view_link = Obj["view_link"] as? String ?? ""
         
     }}
 
@@ -540,7 +552,9 @@ class DocumentObj {
 
 class templateObj {
     
+    var platform_code_system :String = ""
     var template_platform_group_type_code_system : String = ""
+    var platform_group_type_code_system :String = ""
     var template_platform_group2_code_system :String = ""
     var template_platform_code_system  :String = ""
     var projects_work_area_id :String = ""
@@ -551,9 +565,14 @@ class templateObj {
     var typename           :String = ""
     var template_id            :String = ""
     var phase_zone_block_cluster_g_nos           :String = ""
+    var contractor_manager_default_users :String = ""
+    var contractor_manager_step_require :String = ""
+    var contractor_team_users :String = ""
+    
    
     init(_ Obj : [String:Any]) {
         
+        self.platform_group_type_code_system = Obj["platform_group_type_code_system"] as? String ?? ""
         self.template_platform_group_type_code_system  = Obj["template_platform_group_type_code_system"] as? String ?? ""
         self.template_id  = Obj["template_id"] as? String ?? ""
         self.template_platform_group2_code_system  = Obj["template_platform_group2_code_system"] as? String ?? ""
@@ -565,7 +584,11 @@ class templateObj {
         self.template_platform_code_system   = Obj["template_platform_code_system"] as? String ?? ""
         self.projects_work_area_id   = Obj["projects_work_area_id"] as? String ?? ""
         self.phase_zone_block_cluster_g_nos  = Obj["phase_zone_block_cluster_g_nos"] as? String ??  ""
-       
+        self.platform_code_system = Obj["platform_code_system"] as? String ?? ""
+        self.contractor_manager_default_users = Obj["contractor_manager_default_users"] as? String ?? ""
+        self.contractor_manager_step_require = Obj["contractor_manager_step_require"] as? String ?? ""
+        self.contractor_team_users = Obj["contractor_team_users"] as? String ?? ""
+        
     }}
 
 
@@ -774,36 +797,35 @@ class StepStatusObj {
 
 
 
-
 class WorkAreaInfoObj {
     
-    var projects_work_area_id                                : String = ""
-    var branch_id                                            : String = ""
+    var projects_work_area_id  : String = ""
+    var branch_id              : String = ""
     var supervision_settings_drawing_submittal_alert_expire  : String = ""
-    var projects_supervision_id                              : String = ""
-    var projects_profile_id                                  : String = ""
-    var drawing_file                                         : String = ""
-    var projects_profile_name                                : String = ""
-    var customer_name                                        : String = ""
-    var contractor_name                                      : String = ""
-    var projects_services_name                               : String = ""
-    var branch_name                                          : String = ""
+    var projects_supervision_id : String = ""
+    var projects_profile_id     : String = ""
+    var drawing_file            : String = ""
+    var projects_profile_name   : String = ""
+    var customer_name           : String = ""
+    var contractor_name         : String = ""
+    var projects_services_name  : String = ""
+    var branch_name             : String = ""
 
     init(_ Obj : [String:Any]) {
         
         
         
-        self.projects_work_area_id                                = Obj["projects_work_area_id"] as? String ?? ""
-        self.branch_id                                            = Obj["branch_id"] as? String ?? ""
+        self.projects_work_area_id  = Obj["projects_work_area_id"] as? String ?? ""
+        self.branch_id       = Obj["branch_id"] as? String ?? ""
         self.supervision_settings_drawing_submittal_alert_expire  = Obj["supervision_settings_drawing_submittal_alert_expire"] as? String ?? ""
-        self.projects_supervision_id                              = Obj["projects_supervision_id"] as? String ?? ""
-        self.projects_profile_id                                  = Obj["projects_profile_id"] as? String ?? ""
-        self.drawing_file                                         = Obj["drawing_file"] as? String ?? ""
-        self.projects_profile_name                                = Obj["projects_profile_name"] as? String ?? ""
-        self.customer_name                                        = Obj["customer_name"] as? String ?? ""
-        self.contractor_name                                      = Obj["contractor_name"] as? String ?? ""
-        self.projects_services_name                               = Obj["projects_services_name"] as? String ?? ""
-        self.branch_name                                          = Obj["branch_name"] as? String ?? ""
+        self.projects_supervision_id      = Obj["projects_supervision_id"] as? String ?? ""
+        self.projects_profile_id       = Obj["projects_profile_id"] as? String ?? ""
+        self.drawing_file      = Obj["drawing_file"] as? String ?? ""
+        self.projects_profile_name  = Obj["projects_profile_name"] as? String ?? ""
+        self.customer_name   = Obj["customer_name"] as? String ?? ""
+        self.contractor_name   = Obj["contractor_name"] as? String ?? ""
+        self.projects_services_name  = Obj["projects_services_name"] as? String ?? ""
+        self.branch_name   = Obj["branch_name"] as? String ?? ""
 
         
         
@@ -2134,6 +2156,7 @@ class TicketObj {
     var from_ticket_name :String = ""
     var important_name :String = "---"
     var ticket_detalis :String = "---"
+    var is_ticket_admin :Bool = false
     var insert_date :String = "---"
     var need_reply :String =  "---"
     var notes :String =  "---"
@@ -2149,10 +2172,13 @@ class TicketObj {
     var ticket_type_name :String =  "---"
     var time_work :String =  "---"
     var user_add_id :String =  "---"
-    
+    var ticket_type :String = ""
+    var important_id :String = ""
+    var sig_id :String = ""
     
     init(_ Obj : [String:Any]) {
         
+        self.is_ticket_admin = Obj["is_ticket_admin"] as? Bool ?? false
         self.can_delete = Obj["can_delete"] as? Bool ?? false
         self.can_edit = Obj["can_edit"] as? Bool ?? false
         self.can_view = Obj["can_view"] as? Bool ?? false
@@ -2179,9 +2205,9 @@ class TicketObj {
         self.time_work = Obj["time_work"] as? String ?? "---"
         self.user_add_id = Obj["user_add_id"] as? String ?? "---"
         self.ticket_detalis = Obj["ticket_detalis"] as? String ?? "---"
-        
-        
-        
+        self.ticket_type = Obj["ticket_type"] as? String ?? ""
+        self.important_id = Obj["important_id"] as? String ?? ""
+        self.sig_id = Obj["sig_id"] as? String ?? ""
         
     }}
 
@@ -2222,6 +2248,7 @@ class TaskObj {
     var end_nearly_task :String = ""
     var full_task_number :String = ""
     var important_id :String = ""
+    var task_status_done :String = ""
     var important_name :String = ""
     var insert_date :String = ""
     var is_can_delete :Bool = false
@@ -2250,13 +2277,15 @@ class TaskObj {
     var task_detailes :String = ""
     var progres :String = ""
     var files :[DocumentObj] = []
-    
+    var relateds_numbers:[RelatedNumbersObj] = []
     
     
     init(_ Obj : [String:Any]) {
         
         self.emps = Obj["emps"] as? String ?? ""
         self.end_date_nearly_ticket = Obj["end_date_nearly_ticket"] as? String ?? ""
+        self.task_status_done = Obj["task_status_done"] as? String ?? ""
+        
         self.end_date_task = Obj["end_date_task"] as? String ?? ""
         self.end_date_ticket = Obj["end_date_ticket"] as? String ?? ""
         self.end_nearly_task = Obj["end_nearly_task"] as? String ?? ""
@@ -2294,9 +2323,23 @@ class TaskObj {
         let file_arr   = Obj["files"] as? [[String:Any]] ?? []
         self.files     = file_arr.map{DocumentObj.init($0)}
         
+        let related_arr   = Obj["relateds_numbers"] as? [[String:Any]] ?? []
+        self.relateds_numbers     = related_arr.map{RelatedNumbersObj.init($0)}
+        
     }}
 
 
+
+class RelatedNumbersObj {
+     
+    var sub_tasks_numbers:String = ""
+    var task_id:String = ""
+    init(_ Obj : [String:Any]) {
+        
+        self.sub_tasks_numbers = Obj["sub_tasks_numbers"] as? String ?? ""
+        self.task_id = Obj["task_id"] as? String ?? ""
+
+    }}
 class HistoryObj {
      
     var emp_id:String = ""
@@ -2364,17 +2407,24 @@ class CommentObj {
     var insert_date:String = ""
     var is_added_comment:Bool = false
     var notes_history:String = ""
-    var reply:String = ""
+//    var reply:String = ""
     var reply_from_name:String = ""
     var ticket_id:String = ""
     var type:String = ""
     var user_add_id:String = ""
     var user_image:String = ""
     var user_image_64:String = ""
+    var isHidden :Bool = true
+    var reply :[ReplyObj] = []
+    
     
     init(_ Obj : [String:Any]) {
      
+        let reply_arr   = Obj["reply"] as? [[String:Any]] ?? []
+        self.reply      = reply_arr.map{ReplyObj.init($0)}
+        
         self.action_name = Obj["action_name"] as? String ?? ""
+        self.isHidden = Obj["isHidden"] as? Bool ?? true
         self.emp_id = Obj["emp_id"] as? String ?? ""
         self.emp_name = Obj["emp_name"] as? String ?? ""
         self.emp_name_mention = Obj["emp_name_mention"] as? String ?? ""
@@ -2384,7 +2434,7 @@ class CommentObj {
         self.insert_date = Obj["insert_date"] as? String ?? ""
         self.is_added_comment = Obj["is_added_comment"] as? Bool ?? false
         self.notes_history = Obj["notes_history"] as? String ?? ""
-        self.reply = Obj["reply"] as? String ?? ""
+//        self.reply = Obj["reply"] as? String ?? ""
         self.reply_from_name = Obj["reply_from_name"] as? String ?? ""
         self.ticket_id = Obj["ticket_id"] as? String ?? ""
         self.type = Obj["type"] as? String ?? ""
@@ -2396,7 +2446,32 @@ class CommentObj {
         
     }}
 
+class ReplyObj {
 
+    var avatar:String = ""
+    var comment_content:String = ""
+    var comment_date:String = ""
+    var files_reply:String = ""
+    var history_id:String = ""
+    var isAuthor:String = ""
+    var path_file:String = ""
+    var userName:String = ""
+    
+    
+    init(_ Obj : [String:Any]) {
+  
+        self.avatar = Obj["avatar"] as? String ?? ""
+     
+        self.comment_content = Obj["comment_content"] as? String ?? ""
+        self.comment_date = Obj["comment_date"] as? String ?? ""
+        self.files_reply = Obj["files_reply"] as? String ?? ""
+        self.history_id = Obj["history_id"] as? String ?? ""
+        self.isAuthor = Obj["isAuthor"] as? String ?? ""
+        self.path_file = Obj["path_file"] as? String ?? ""
+        self.userName = Obj["userName"] as? String ?? ""
+    }
+    
+}
 
 class PointTaskObj {
 
@@ -2415,6 +2490,7 @@ class PointTaskObj {
     var title:String = ""
     var user_add_id:String = ""
     var user_username:String = ""
+    var isHidden:Bool = true
     
     
     init(_ Obj : [String:Any]) {
@@ -2429,7 +2505,7 @@ class PointTaskObj {
         self.progres = Obj["progres"] as? String ?? ""
         self.secondname_arabic = Obj["secondname_arabic"] as? String ?? ""
         self.secondname_english = Obj["secondname_english"] as? String ?? ""
-       
+        self.isHidden = Obj["isHidden"] as? Bool ?? true
         self.task_id = Obj["task_id"] as? String ?? ""
         self.title = Obj["title"] as? String ?? ""
         self.user_add_id = Obj["user_add_id"] as? String ?? ""
@@ -2518,6 +2594,52 @@ class SubCheckObj {
         
         let user_arr   = Obj["users"] as? [[String:Any]] ?? []
         self.users     = user_arr.map{ProfileObj.init($0)}
+        
+       
+    }}
+
+
+
+class unitLevelObj {
+    
+  
+    var B :String = ""
+    var C :String = ""
+    var G :String = ""
+    var U :String = ""
+    var Z :String = ""
+    var auto_id :String = ""
+    var platform_code_system :String = ""
+    var projects_work_area_id :String = ""
+    var short_code :String = ""
+    var template_id :String = ""
+    var transaction_key :String = ""
+    var transaction_request_id :String = ""
+    var unit_custom_title :String = ""
+    var unit_id :String = ""
+    var work_level_key :String = ""
+    var work_level_label :String = ""
+    
+    
+    
+    init(_ Obj : [String:Any]) {
+     
+        self.B = Obj["B"] as? String ?? ""
+        self.C = Obj["C"] as? String ?? ""
+        self.G = Obj["G"] as? String ?? ""
+        self.U = Obj["U"] as? String ?? ""
+        self.Z = Obj["Z"] as? String ?? ""
+        self.auto_id = Obj["auto_id"] as? String ?? ""
+        self.platform_code_system = Obj["platform_code_system"] as? String ?? ""
+        self.projects_work_area_id = Obj["projects_work_area_id"] as? String ?? ""
+        self.short_code = Obj["short_code"] as? String ?? ""
+        self.template_id = Obj["template_id"] as? String ?? ""
+        self.transaction_key = Obj["transaction_key"] as? String ?? ""
+        self.transaction_request_id = Obj["transaction_request_id"] as? String ?? ""
+        self.unit_custom_title = Obj["unit_custom_title"] as? String ?? ""
+        self.unit_id = Obj["unit_id"] as? String ?? ""
+        self.work_level_key = Obj["work_level_key"] as? String ?? ""
+        self.work_level_label = Obj["work_level_label"] as? String ?? ""
         
        
     }}

@@ -315,7 +315,7 @@
 "txt_Attachments" = "المرفقات";
 "Related Forms : " = "نماذج مرتبطة :";
 
-"lbl_ContractorManager" = "مدير المقاول";
+"lbl_ContractorManager" = "تتطلب خطوة مدير المقاول";
 "lbl_ContractorTeamUsers" = "مستخدمي فريق المقاول";
 
 "Reject and return to update" = "رفض و إعادة";
@@ -339,6 +339,11 @@
 "Title: " = "الوصف: ";
 "Result" = "النتيجة";
 
+"Subject" = "الموضوع";
+"Signature" = "التوقيع الإلكتروني";
+"Note" = "ملاحظة";
+"Priorty" = "أولوية";
+
 "Notifications" = "الاشعارات";
 "Related Forms" = "نماذج مرتبطة";
 
@@ -350,3 +355,20 @@
 "Code" = "الرمز";
 "Specifications" = "المواصفات الفنية";
 "From" = "من";
+
+"My Transactions" = "معاملاتي";
+
+"Done" = "اعتماد";
+"Profile" = "الملف الشخصي";
+"Settings" = "الاعدادات";
+"Log out" = "تسجيل خروج";
+
+
+
+"all_pending_need_action" = "العمليات المعلقة والتي تتطلب اجراء";
+"all_pending" = "العمليات المعلقة والمرتطبة بي";
+"all_complete" = "العمليات المكتملة ";
+"all_sent" = "العمليات المرسلة";
+
+
+"Tickets" = "قائمة المهام";

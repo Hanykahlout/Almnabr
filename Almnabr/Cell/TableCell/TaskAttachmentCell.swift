@@ -35,7 +35,7 @@ class TaskAttachmentCell: UITableViewCell {
     }
     
     @IBAction func didReDownloadButtonPressd(_ sender: Any) {
-        btnDownloadAction!()
+//        btnDownloadAction!()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

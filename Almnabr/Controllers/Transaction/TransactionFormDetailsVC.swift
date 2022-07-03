@@ -25,7 +25,6 @@ class TransactionFormDetailsVC: UIViewController {
     
     
     @IBOutlet weak var lblTitle: UILabel!
-    
     @IBOutlet weak var lblRequestNumber: UILabel!
     @IBOutlet weak var lblProjectTitle: UILabel!
     @IBOutlet weak var lblServiceName: UILabel!
@@ -38,8 +37,6 @@ class TransactionFormDetailsVC: UIViewController {
     @IBOutlet weak var lblFormVersions: UILabel!
     @IBOutlet weak var lblPreview: UILabel!
     @IBOutlet weak var lblLang_drawing_file: UILabel!
-    
-    
     @IBOutlet weak var lblValRequestNumber: UILabel!
     @IBOutlet weak var lblValProjectTitle: UILabel!
     @IBOutlet weak var lblValServiceName: UILabel!
@@ -51,7 +48,7 @@ class TransactionFormDetailsVC: UIViewController {
   
     @IBOutlet weak var lblValLang_drawing_file: UILabel!
     
-    
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var btnLocation: UIButton!
     @IBOutlet weak var btnFormVersions: UIButton!
     @IBOutlet weak var btnPreview: UIButton!
@@ -85,6 +82,15 @@ class TransactionFormDetailsVC: UIViewController {
     @IBOutlet weak var container_view: UIView!
     @IBOutlet weak var view_pager: UIView!
     
+    @IBOutlet weak var pager_view: UIView!
+    
+    var pageViewController: UIPageViewController!
+//    var index = 0
+    
+    private var vc_array : [UIViewController] = []
+    
+    var isFromHome: Bool = false
+    var isFromFinish: Bool = false
     
     var StrTitle:String = ""
 
@@ -131,7 +137,7 @@ class TransactionFormDetailsVC: UIViewController {
                                  "Techinical_Assistant",
                                  "Special_Approval",
                                  "Evaluation_Result",
-                                 "Authorized_Positions Approval",
+                                 "Authorized_Positions_Approval",
                                  "Manager_Approval",
                                  "Owners_Representative",
                                  "last"]
@@ -145,10 +151,14 @@ class TransactionFormDetailsVC: UIViewController {
     var IsComplete:Bool = false
     
     var filePath:String = ""
+    private let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.hideLoadingActivity()
+        setupPageController()
+        
         if IsFromNotification == true{
             let splitString = str_url.components(separatedBy: "/vr/")
             
@@ -165,13 +175,43 @@ class TransactionFormDetailsVC: UIViewController {
         }
         
         self.mainView.isHidden = true
-        self.view_pager.isHidden = true
+        self.pager_view.isHidden = true
         
-        self.arr_waitingFor = []
+//        self.arr_waitingFor = []
+        
         get_Request()
+       
         configNavigation()
        
         update_Config()
+        
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        scrollView.refreshControl = refreshControl
+        
+        if MOLHLanguage.currentAppleLanguage() == "en" {
+           
+            lblRequestNumber.textAlignment = .right
+            lblProjectTitle.textAlignment = .right
+            lblServiceName.textAlignment = .right
+            lblFormCode.textAlignment = .right
+            lblDivision.textAlignment = .right
+            lblChapter.textAlignment = .right
+            lblItemName.textAlignment = .right
+            lblFormSpecifications.textAlignment = .right
+            lblLocation.textAlignment = .right
+            lblFormVersions.textAlignment = .right
+            lblPreview.textAlignment = .right
+            lblLang_drawing_file.textAlignment = .right
+            lblValRequestNumber.textAlignment = .right
+            lblValProjectTitle.textAlignment = .right
+            lblValServiceName.textAlignment = .right
+            lblValFormCode.textAlignment = .right
+            lblValDivision.textAlignment = .right
+            lblValChapter.textAlignment = .right
+            lblValItemName.textAlignment = .right
+            lblValFormSpecifications.textAlignment = .right
+            
+        }
         
 
     }
@@ -204,11 +244,16 @@ class TransactionFormDetailsVC: UIViewController {
         UINavigationBar.appearance().backgroundColor = maincolor
     }
     
+    @objc func refresh(sender:AnyObject) {
+        self.get_Request()
+        self.refreshControl.endRefreshing()
+    }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "FormDetailsPager",
            let destinationVC = segue.destination as? TransactionFormPageaVC {
+            IsTransaction = true
             if let controller = self.parentPageVC {
                 controller.displayPageForIndex(index: self.SelectedIndex)
             }
@@ -233,14 +278,14 @@ class TransactionFormDetailsVC: UIViewController {
           spread: 0)
         mainView.setRounded(20)
         
-        view_pager.layer.applySketchShadow(
+        pager_view.layer.applySketchShadow(
           color: .black,
           alpha: 0.6,
           x: 0,
           y: 13,
           blur: 16,
           spread: 0)
-        view_pager.setRounded(20)
+        pager_view.setRounded(20)
         
         if MOLHLanguage.currentAppleLanguage() == "ar" {
             self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
@@ -326,7 +371,7 @@ class TransactionFormDetailsVC: UIViewController {
         
         
         self.lblFormVersions.text =  "Form Versions".localized()
-        self.lblFormVersions.font = .kufiRegularFont(ofSize: 13)
+        self.lblFormVersions.font = .kufiRegularFont(ofSize: 12)
         self.lblFormVersions.textColor =  maincolor
         
         
@@ -346,29 +391,47 @@ class TransactionFormDetailsVC: UIViewController {
         
         
         self.lblSelectedStep.text =  "Selected Step".localized() + " :"
-        self.lblSelectedStep.font = .kufiRegularFont(ofSize: 13)
+        self.lblSelectedStep.font = .kufiRegularFont(ofSize: 12)
         self.lblSelectedStep.textColor = maincolor
         
         self.lblValSelectedStep.text =  "Recipient Verification".localized()
-        self.lblValSelectedStep.font = .kufiRegularFont(ofSize: 15)
+        self.lblValSelectedStep.font = .kufiRegularFont(ofSize: 12)
         self.lblValSelectedStep.textColor =  .gray
         
-        self.lblLastStepOpened.text =  "Last Step Opened".localized() + " :"
-        self.lblLastStepOpened.font = .kufiRegularFont(ofSize: 13)
+//        self.lblLastStepOpened.text =  "Last Step Opened".localized() + " :"
+        self.lblLastStepOpened.font = .kufiRegularFont(ofSize: 12)
         self.lblLastStepOpened.textColor =  HelperClassSwift.bcolor.getUIColor()
         
         let last_step = transactions_request?.transaction_request_last_step
         
         
+        lblLastValStepOpened.isHidden = true
+//        btnLastValStepOpened.isHidden = true
+        
         if last_step == "last" {
-            self.lblLastValStepOpened.text = "Processing".localized()
+            
+            let text = "Last Step Opened".localized() + " : " + "Processing".localized()
+           // lblLastStepOpened.attributedText  = attributedText(withString: text , boldString: "Processing".localized(), font: .kufiRegularFont(ofSize: 12))
+            
+            let attributed: NSAttributedString = text.attributedStringWithColor(["Processing".localized()], color: "#61b045".getUIColor())
+            self.lblLastStepOpened.attributedText = attributed
+           
+            
+//            self.lblLastValStepOpened.text = "Processing".localized()
         }else{
-            self.lblLastValStepOpened.text = last_step
+            let text = "Last Step Opened".localized() + " : " + (last_step ?? "--")
+//            lblLastStepOpened.attributedText  = attributedText(withString: text , boldString: last_step!, font: .kufiRegularFont(ofSize: 12))
+            let attributed: NSAttributedString = text.attributedStringWithColor([last_step ?? "--"], color: "#61b045".getUIColor())
+            self.lblLastStepOpened.attributedText = attributed
+            
+//            self.lblLastValStepOpened.text = last_step
         }
         
         if last_step == "completed" {
             self.IsComplete = true
-            self.lblPreview.text = "Review".localized()
+            self.lblPreview.text = "View".localized()
+            self.btnPreview.setImage(UIImage(systemName: "eye"), for: .normal)
+//            doc.text
             self.btnEvalutionResult.setBorderWithColor(maincolor)
             self.btnEvalutionResult.isHidden = false
             self.btnEvalutionResult.setTitleColor(maincolor, for: .normal)
@@ -386,14 +449,16 @@ class TransactionFormDetailsVC: UIViewController {
         print(i1 ?? 10)
         let index = i1 ?? 10
         page_scroll(SelectedIndex: index + 1 )
-        
+        self.SelectedIndex = index + 1
         let index_ =  StatusObject?.to_array.firstIndex(where: {$0 == true})
         
-        self.btnLastValStepOpened.isHidden = false
+       
         let status = StatusObject?.to_array[ index_ ?? 0]
         self.btnLastValStepOpened.titleLabel?.font = .kufiRegularFont(ofSize: 13)
      
         if transaction_status != ""{
+            self.btnLastValStepOpened.isHidden = false
+            
             if transaction_status == "Accepted" {
                 
                 self.btnLastValStepOpened.setTitleColor("#3ea832".getUIColor(), for: .normal)
@@ -406,6 +471,7 @@ class TransactionFormDetailsVC: UIViewController {
                 
             }
         }else{
+            self.btnLastValStepOpened.isHidden = true
             self.btnLastValStepOpened.setTitle("", for: .normal)
         }
        
@@ -434,14 +500,15 @@ class TransactionFormDetailsVC: UIViewController {
         //self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
        
         if MOLHLanguage.currentAppleLanguage() == "ar" {
-            self.btnPrevious.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-            self.btnNext.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         }else{
-            self.btnNext.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-            self.btnPrevious.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         }
         self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
         
+//        self.arr_waitingFor = []
         var name = "Waiting for : ".localized()
         for i in arr_waitingFor{
             name = name + i + " "
@@ -459,15 +526,17 @@ class TransactionFormDetailsVC: UIViewController {
     func page_scroll(SelectedIndex:Int){
         
         self.SelectedIndex = SelectedIndex
-        change_page(SelectedIndex: SelectedIndex)
+//        change_page(SelectedIndex: SelectedIndex)
+        setupPageController()
         self.slider.progress = Float(SelectedIndex)/Float(page_count)
         self.lblStep.text =  "step".localized() + " \(SelectedIndex) " + "of".localized() + " \(page_count)"
         self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
         
     }
    
+    
     func get_Request(){
-        
+        print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\1")
         self.showLoadingActivity()
         if IsFromNotification == false {
             self.str_url = "/form/\(Object?.transaction_key ?? "FORM_WIR")/vr/\(self.request_id)"
@@ -483,7 +552,7 @@ class TransactionFormDetailsVC: UIViewController {
                  
                  data_FormWir = response
                  
-                 IsTransaction = false
+                 IsTransaction = true
                  if  let step_status = response["step_status"] as? [String:Any]{
 
                      //let view = step_status["view"] as! [String:Any]
@@ -491,6 +560,9 @@ class TransactionFormDetailsVC: UIViewController {
                      let obj = StepStatusObj(edit)
                      StatusObject = obj
                      self.update_langVC()
+                     self.setupPageController()
+                     
+//                     self.change_page(SelectedIndex: SelectedIndex)
                  }
                  
                  if  let view_request = response["view_request"] as? [String:Any]{
@@ -502,6 +574,7 @@ class TransactionFormDetailsVC: UIViewController {
                              let recordsObj = Tcore(records)
                              self.transactions_request = recordsObj
                              obj_transaction = recordsObj
+                             
                          }
                      }
                     
@@ -594,7 +667,7 @@ class TransactionFormDetailsVC: UIViewController {
                      if let transactions_persons = view_request["transactions_persons"] as? [String:Any]{
                          let transactions_persons_status = transactions_persons["status"] as? Bool
                          if transactions_persons_status == true{
-                            
+                             self.arr_waitingFor = []
                              if  let records = transactions_persons["records"] as? NSArray{
                                  for i in records {
                                      let dict = i as? [String:Any]
@@ -683,7 +756,7 @@ class TransactionFormDetailsVC: UIViewController {
                  }
 
                  self.mainView.isHidden = false
-                 self.view_pager.isHidden = false
+                 self.pager_view.isHidden = false
                  
                  
                  self.configGUI()
@@ -783,11 +856,17 @@ class TransactionFormDetailsVC: UIViewController {
     
     @IBAction func btnNext_Click(_ sender: Any) {
         
+//        DispatchQueue.main.async {
+//            self.setViewControllers([self.pages[index - 1]], direction: .reverse, animated: true, completion: nil)
+//        }
+        
         print(SelectedIndex)
         if SelectedIndex < page_count {
             SelectedIndex = SelectedIndex + 1
             print(SelectedIndex)
-            change_page(SelectedIndex: SelectedIndex)
+            setupPageController()
+//            change_page(SelectedIndex: SelectedIndex)
+//            self.viewControllerAtIndex(SelectedIndex)
             self.slider.progress = Float(SelectedIndex)/Float(page_count)
             self.lblStep.text =  "step".localized() + " \(SelectedIndex) " + "of".localized() +  " \(page_count)"
             self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
@@ -804,7 +883,8 @@ class TransactionFormDetailsVC: UIViewController {
             
             SelectedIndex = SelectedIndex - 1
             print(SelectedIndex)
-            change_page(SelectedIndex: SelectedIndex)
+            setupPageController()
+//            change_page(SelectedIndex: SelectedIndex)
             self.slider.progress = Float(SelectedIndex)/Float(page_count)
             self.lblStep.text =  "step".localized() + " \(SelectedIndex) " + "of".localized() +  " \(page_count)"
             self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
@@ -815,10 +895,11 @@ class TransactionFormDetailsVC: UIViewController {
     }
     
     @IBAction func Preview_Click(_ sender: Any) {
-     //
+   
     let vc:PDFViewrVC  = AppDelegate.mainSB.instanceVC()
     vc.isModalInPresentation = true
-   // vc.definesPresentationContext = true
+        
+        
         var id = self.request_id
         if id == "0" {
             id = Object?.transaction_request_id ?? "0"
@@ -826,7 +907,8 @@ class TransactionFormDetailsVC: UIViewController {
 //        obj.file_path != ""
     vc.Strurl = "form/FORM_WIR/pr/\(id)"
         if self.IsComplete {
-            vc.Strurl = self.filePath
+            vc.Strurl =  self.transactions_request?.view_link ?? ""
+            //self.filePath
         }
     self.present(vc, animated: true, completion: nil)
  
@@ -842,14 +924,15 @@ class TransactionFormDetailsVC: UIViewController {
     }
     
     
-    private func change_page(SelectedIndex:Int) {
-        NotificationCenter.default.post(name: NSNotification.Name("Change_Form_Step"),
-                                        object: SelectedIndex)
-    }
+//    private func change_page(SelectedIndex:Int) {
+//        NotificationCenter.default.post(name: NSNotification.Name("Change_Form_Step"),
+//                                        object: SelectedIndex)
+//    }
     
     private func update_langVC() {
         NotificationCenter.default.post(name: NSNotification.Name("update_langVC"),
                                         object: nil)
+        configGUI()
     }
     
     private func update_Notification() {
@@ -865,3 +948,106 @@ class TransactionFormDetailsVC: UIViewController {
     }
     
 }
+extension TransactionFormDetailsVC {
+    private func setupPageController() {
+        pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        
+        self.vc_array = []
+        // Append VCS
+        // vc_array -> Your Array
+        let vc: LanguageVC = AppDelegate.mainSB.instanceVC()
+        let page1 = UINavigationController(rootViewController: vc)
+        vc.IsFromTransaction = true
+        IsTransaction = true
+        let page2: ContractorTeamApprovalVC = AppDelegate.TransactionSB.instanceVC()
+        let page3: ContractorManagerApprovalVC = AppDelegate.TransactionSB.instanceVC()
+        let page4: RecipientVerificationVC = AppDelegate.TransactionSB.instanceVC()
+        let page5: TechinicalAssistantVC = AppDelegate.TransactionSB.instanceVC()
+        let page6: SpecialApprovalVC = AppDelegate.TransactionSB.instanceVC()
+        let page7: EvaluationResultVC = AppDelegate.TransactionSB.instanceVC()
+        let page8: AuthorizedPositionsApprovalVC = AppDelegate.TransactionSB.instanceVC()
+        let page9: ManagerApprovalVC = AppDelegate.TransactionSB.instanceVC()
+        let page10: OwnersRepresentativeVC = AppDelegate.TransactionSB.instanceVC()
+        let page11: FinalResultVC = AppDelegate.TransactionSB.instanceVC()
+
+        
+        vc_array.append(page1)
+        vc_array.append(page2)
+        vc_array.append(page3)
+        vc_array.append(page4)
+        vc_array.append(page5)
+        vc_array.append(page6)
+        vc_array.append(page7)
+        vc_array.append(page8)
+        vc_array.append(page9)
+        vc_array.append(page10)
+        vc_array.append(page11)
+//        SelectedIndex = SelectedIndex - 1
+        let viewController = viewControllerAtIndex(SelectedIndex - 1)
+        guard let vc = viewController else { return }
+        print(vc)
+        pageViewController.setViewControllers([vc], direction: .forward, animated: true)
+        pageViewController.dataSource = self
+        
+        addChild(pageViewController)
+        pager_view.addSubview(pageViewController.view)
+        
+        pageViewController!.view.frame = pager_view.bounds
+        pageViewController.didMove(toParent: self)
+        
+        // Add the page view controller's gesture recognizers to the view controller's view so that the gestures are started more easily.
+        view.gestureRecognizers = pageViewController.gestureRecognizers
+    }
+
+}
+
+extension TransactionFormDetailsVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard let id = indexOfViewController(viewController) else {return nil}
+        let prev = id - 1
+        guard prev >= 0 else {return nil}
+        guard vc_array.count > prev  else {return nil}
+        return viewControllerAtIndex(prev)
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        return nil
+    }
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard finished else {return}
+        guard let current = self.pageViewController.viewControllers?.first else {return}
+        guard let i = vc_array.firstIndex(of: current) else { return}
+        debugPrint("i is \(i)")
+        SelectedIndex = i
+    }
+    
+    private func viewControllerAfter(_ viewController:UIViewController) -> UIViewController? {
+        guard let id = indexOfViewController(viewController) else {return nil}
+        let next = id + 1
+        guard next < vc_array.count else { return nil }
+        guard vc_array.count > next else { return nil }
+        SelectedIndex += 1
+        return viewControllerAtIndex(next)
+    }
+}
+
+extension TransactionFormDetailsVC {
+    fileprivate func viewControllerAtIndex(_ index: Int) -> UIViewController? {
+        if vc_array.count == 0 || index >= vc_array.count {
+            return nil
+        }
+        return vc_array[index]
+    }
+    
+    fileprivate func indexOfViewController(_ viewController: UIViewController) -> Int? {
+        return vc_array.firstIndex(of: viewController)
+    }
+    
+    private func getCurrentIndex() -> Int? {
+        guard let current = self.pageViewController.viewControllers?.first else {return nil }
+        return vc_array.firstIndex(of: current)
+    }
+}
+

@@ -45,6 +45,7 @@ class ProjectDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configNavigation()
         configGUI()
         
         
@@ -56,7 +57,7 @@ class ProjectDetailVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     
@@ -66,15 +67,17 @@ class ProjectDetailVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
- 
-
+    
     // MARK: - Config Navigation
+
     func configNavigation() {
-        _ = self.navigationController?.preferredStatusBarStyle
-        self.view.backgroundColor = "FFFFFF".getUIColor() //F0F4F8
-        navigationController?.navigationBar.barTintColor = .red
         
-        addNavigationBarTitle(navigationTitle: StrTitle)
+        _ = self.navigationController?.preferredStatusBarStyle
+        self.view.backgroundColor = maincolor //F0F4F8
+        //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
+        navigationController?.navigationBar.barTintColor = maincolor
+       addNavigationBarTitle(navigationTitle: "Project Details".localized())
+        UINavigationBar.appearance().backgroundColor = maincolor
     }
     
     
@@ -82,7 +85,7 @@ class ProjectDetailVC: UIViewController {
     //------------------------------------------------------
     func configGUI() {
         
-        IsTransaction = true
+        IsTransaction = false
         
     
         lblProjectDetails.font = .kufiBoldFont(ofSize: 18)
@@ -124,6 +127,9 @@ class ProjectDetailVC: UIViewController {
         lblFormSpecifications.text = "Specifications".localized() + ": ---"
         lblFormSpecifications.font = .kufiRegularFont(ofSize: 15)
         lblFormSpecifications.textColor =  "1A3665".getUIColor()
+        
+        Projectview.setBorderGray()
+        stepView.setBorderGray()
         
         Projectview.layer.applySketchShadow(
           color: .black,
@@ -180,8 +186,8 @@ class ProjectDetailVC: UIViewController {
             
             let destination = segue.destination as! UINavigationController
             let vc = destination.topViewController as! LanguageVC
-            vc.isFromTransaction = true
-            IsTransaction = true
+            vc.IsFromTransaction = false
+            IsTransaction = false
            // let vc: LanguageVC = segue.destination as! LanguageVC
             vc.ProjectObj = ProjectObj
         }

@@ -111,10 +111,10 @@ class OwnersRepresentativeVC: UIViewController, UINavigationControllerDelegate {
     
     func Submit_request(){
         
-        guard arr_file.count != 0 else {
-            showAMessage(withTitle: "error".localized(), message: "Please enter your file".localized())
-            return
-        }
+//        guard arr_file.count != 0 else {
+//            showAMessage(withTitle: "error".localized(), message: "Please enter your file".localized())
+//            return
+//        }
         
         guard txt_notes.text != "" else {
             showAMessage(withTitle: "error".localized(), message: "Please enter your Notes".localized())

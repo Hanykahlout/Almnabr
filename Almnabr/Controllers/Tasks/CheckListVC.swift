@@ -26,7 +26,7 @@ class CheckListVC: UIViewController {
         configNavigation()
         configGUI()
         get_data()
-        
+        setupAddButtonItem()
         
     }
     
@@ -45,6 +45,25 @@ class CheckListVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
+    func setupAddButtonItem() {
+        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
+        navigationItem.rightBarButtonItem = addButtonItem
+    }
+    
+    @objc func addTapped(_ sender: Any) {
+        
+        let vc:AddChecklistVC  = AppDelegate.TicketSB.instanceVC()
+        
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.task_id = self.task_id
+        vc.delegate = {
+            self.get_data()
+        }
+        self.present(vc, animated: true, completion: nil)
+    }
+    
     
     // MARK: - Config Navigation
     func configNavigation() {
@@ -56,10 +75,10 @@ class CheckListVC: UIViewController {
        addNavigationBarTitle(navigationTitle: "Check List".localized())
         UINavigationBar.appearance().backgroundColor = maincolor
     }
-    func setupAddButtonItem() {
-        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
-        navigationItem.rightBarButtonItem = addButtonItem
-    }
+//    func setupAddButtonItem() {
+//        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
+//        navigationItem.rightBarButtonItem = addButtonItem
+//    }
     
 
     
@@ -68,15 +87,14 @@ class CheckListVC: UIViewController {
     func configGUI() {
         table.dataSource = self
         table.delegate = self
+        table.estimatedRowHeight = 100
+        table.rowHeight = UITableView.automaticDimension
         let nib = UINib(nibName: "CheckListCell", bundle: nil)
         table.register(nib, forCellReuseIdentifier: "CheckListCell")
         
     }
 
 
-    @objc func addTapped(_ sender: Any) {
-      
-    }
     
     func get_data(){
         
@@ -110,6 +128,46 @@ class CheckListVC: UIViewController {
     }
     
     
+    func delete_item(point_id:String){
+        
+        self.showLoadingActivity()
+        let param :[String:Any] = ["point_id" : point_id]
+        
+        APIManager.sendRequestPostAuth(urlString: "tasks/delete_task_point_main", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+           
+            let status = response["status"] as? Bool
+            if status == true{
+                self.get_data()
+             
+            }else{
+                self.hideLoadingActivity()
+              
+            }
+        }
+    }
+
+    
+    
+    func change_task_point(point_id:String){
+        
+        self.showLoadingActivity()
+        let param :[String:Any] = ["point_id" : point_id]
+        
+        APIManager.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+           
+            let status = response["status"] as? Bool
+            if status == true{
+                self.get_data()
+             
+            }else{
+                self.hideLoadingActivity()
+              
+            }
+        }
+    }
+    
     
 }
 
@@ -126,28 +184,67 @@ extension CheckListVC: UITableViewDelegate , UITableViewDataSource{
         
         let obj = arr_data[indexPath.item]
         
-        
+        cell.arr_data = obj.sub_checks
         cell.lblTitle.text = obj.title
         cell.lblPercent.text = obj.progres + "%"
         
         let value = Float(obj.progres) ?? 0.0
-        
-        //cell.Progress.observedProgress?.completedUnitCount = 10
+        cell.setUpTable()
         cell.Progress.progress = value / 100.0
-        //value / 10.0
-        //cell.Progress.setProgress(value / 10.0 , animated: true)
         
+        cell.dropView.isHidden = obj.isHidden
+        if obj.isHidden {
+            
+            let img  = UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .darkGray, size: CGSize(width: 15, height: 15))
+            
+            cell.dropImg.setImage(img, for: .normal)
+        }else{
+            
+            let img  = UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .darkGray, size: CGSize(width: 15, height: 15))
+            
+            cell.dropImg.setImage(img, for: .normal)
+        }
+        if Auth_User.user_id == obj.user_add_id {
+            cell.deleteBtn.isHidden = false
+        }else{
+            cell.deleteBtn.isHidden = true
+        }
+        
+        cell.btnDeleteAction = {
+            self.delete_item(point_id: obj.check_id)
+        }
+        
+        cell.btnAddItemAction = {
+            
+            let vc:AddPointVC  = AppDelegate.TicketSB.instanceVC()
+            vc.point_id = obj.check_id
+            vc.delegate = {
+                self.get_data()
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        
+        cell.btnCheckAction = { point_id in
+            self.change_task_point(point_id: point_id)
+        }
         return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+//        guard let expandableItem = arr_data[indexPath.item] else {return}
+        
+        
         let obj = arr_data[indexPath.item]
-        let vc:SubTaskListVC = AppDelegate.TicketSB.instanceVC()
-        vc.str_title = obj.title
-        vc.task_id = self.task_id
-        vc.arr_data = obj.sub_checks
-        self.navigationController?.pushViewController(vc, animated: true)
+        obj.isHidden = !(obj.isHidden )
+        table.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+//        let vc:SubTaskListVC = AppDelegate.TicketSB.instanceVC()
+//        vc.str_title = obj.title
+//        vc.task_id = self.task_id
+//        vc.arr_data = obj.sub_checks
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -37,15 +37,19 @@
 		FA0324DD27005F1A00372EA6 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0324DC27005F1A00372EA6 /* SignInVC.swift */; };
 		FA0324DF2700747A00372EA6 /* ForgetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0324DE2700747A00372EA6 /* ForgetPasswordVC.swift */; };
 		FA0324E1270113F300372EA6 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0324E0270113F200372EA6 /* MenuCell.swift */; };
+		FA0647A52851DBD30049287B /* AddAttachmentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0647A42851DBD30049287B /* AddAttachmentsVC.swift */; };
 		FA10D1A7275BBDB400F3716B /* TestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA10D1A6275BBDB300F3716B /* TestApi.swift */; };
 		FA10D1AC275BCA2600F3716B /* TransactionFormDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA10D1AB275BCA2600F3716B /* TransactionFormDetailsVC.swift */; };
 		FA180964270494AB00B493A7 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180963270494AB00B493A7 /* AuthUser.swift */; };
-		FA18DB39274867EA004E64DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA18DB38274867EA004E64DD /* GoogleService-Info.plist */; };
+		FA18DB39274867EA004E64DD /* GoogleService-Infonahid.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA18DB38274867EA004E64DD /* GoogleService-Infonahid.plist */; };
 		FA1B281627AADC470066061F /* TechnicalAssitantCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1B281427AADC470066061F /* TechnicalAssitantCVCell.swift */; };
 		FA1B281727AADC470066061F /* TechnicalAssitantCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA1B281527AADC470066061F /* TechnicalAssitantCVCell.xib */; };
 		FA1D64AB2774C5C900FA7735 /* SubFormVersionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1D64AA2774C5C900FA7735 /* SubFormVersionVC.swift */; };
 		FA1D64AF2777749D00FA7735 /* NotifiRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1D64AE2777749B00FA7735 /* NotifiRoute.swift */; };
 		FA29703227431439000000F7 /* PDFViewrVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29703127431439000000F7 /* PDFViewrVC.swift */; };
+		FA2C575E286CA6B900CE5C59 /* commentRepltTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C575C286CA6B900CE5C59 /* commentRepltTVCell.swift */; };
+		FA2C575F286CA6B900CE5C59 /* commentRepltTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2C575D286CA6B900CE5C59 /* commentRepltTVCell.xib */; };
+		FA31D9532853B78000F9341E /* PagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA31D9522853B78000F9341E /* PagerVC.swift */; };
 		FA35CE49271CC88D00FF6AE4 /* SupervisionOperationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35CE48271CC88D00FF6AE4 /* SupervisionOperationVC.swift */; };
 		FA35CE4C271DCCF400FF6AE4 /* FromTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35CE4B271DCCF400FF6AE4 /* FromTransactionVC.swift */; };
 		FA35CE4E271F572500FF6AE4 /* TeamUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35CE4D271F572500FF6AE4 /* TeamUserVC.swift */; };
@@ -63,6 +67,8 @@
 		FA44341527623F8D00DF6A9B /* FormsAttachmentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA44341427623F8D00DF6A9B /* FormsAttachmentsVC.swift */; };
 		FA44341727626BA300DF6A9B /* SelectesUnits&levelsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA44341627626BA200DF6A9B /* SelectesUnits&levelsVC.swift */; };
 		FA443419276275EC00DF6A9B /* AuthorizedPositionsApprovalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA443418276275EB00DF6A9B /* AuthorizedPositionsApprovalVC.swift */; };
+		FA48C310286A58C0006B8130 /* AddChecklistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48C30F286A58BF006B8130 /* AddChecklistVC.swift */; };
+		FA48C312286AF80B006B8130 /* AddPointVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA48C311286AF80B006B8130 /* AddPointVC.swift */; };
 		FA4975AC2793659600891C9F /* DropDownView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA4975AB2793659600891C9F /* DropDownView.xib */; };
 		FA4975AE279365A900891C9F /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4975AD279365A900891C9F /* DropDownView.swift */; };
 		FA4975B027936BFC00891C9F /* SortVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4975AF27936BFC00891C9F /* SortVC.swift */; };
@@ -108,6 +114,8 @@
 		FA658B25274404DA001FC641 /* AttachmentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA658B23274404DA001FC641 /* AttachmentsCell.swift */; };
 		FA658B26274404DA001FC641 /* AttachmentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA658B24274404DA001FC641 /* AttachmentsCell.xib */; };
 		FA658B2827440829001FC641 /* AttachmentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA658B2727440829001FC641 /* AttachmentsVC.swift */; };
+		FA6B77C4286F01ED00A8EDC0 /* AddCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6B77C3286F01ED00A8EDC0 /* AddCommentVC.swift */; };
+		FA6B77C6287049F800A8EDC0 /* ActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6B77C5287049F800A8EDC0 /* ActivityVC.swift */; };
 		FA6FAFFB2703231600A31D8E /* FontAwesome.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6FAFFA2703231600A31D8E /* FontAwesome.swift */; };
 		FA78EA0B27D267BA0023E48D /* SubProjectTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA78EA0927D267BA0023E48D /* SubProjectTVCell.swift */; };
 		FA78EA0C27D267BA0023E48D /* SubProjectTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA78EA0A27D267BA0023E48D /* SubProjectTVCell.xib */; };
@@ -210,6 +218,7 @@
 		FAAF207027E75E6F00AD255B /* SimpleNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAAF206E27E75E6E00AD255B /* SimpleNoteCell.xib */; };
 		FAB54E9B27EF2EE6003297E1 /* FormVersionTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB54E9927EF2EE6003297E1 /* FormVersionTVCell.swift */; };
 		FAB54E9C27EF2EE7003297E1 /* FormVersionTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAB54E9A27EF2EE6003297E1 /* FormVersionTVCell.xib */; };
+		FAB5FFC32853DA410050F880 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAB5FFC22853DA400050F880 /* GoogleService-Info.plist */; };
 		FABDBA8227F2F9DE003961FC /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDBA8127F2F9DD003961FC /* ProfileVC.swift */; };
 		FABDBA8427F3162F003961FC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDBA8327F3162F003961FC /* CategoryCell.swift */; };
 		FABDBA8627F47624003961FC /* IdDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDBA8527F47621003961FC /* IdDetailsVC.swift */; };
@@ -338,17 +347,21 @@
 		FA0324DC27005F1A00372EA6 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		FA0324DE2700747A00372EA6 /* ForgetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordVC.swift; sourceTree = "<group>"; };
 		FA0324E0270113F200372EA6 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		FA0647A42851DBD30049287B /* AddAttachmentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAttachmentsVC.swift; sourceTree = "<group>"; };
 		FA10D1A6275BBDB300F3716B /* TestApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestApi.swift; sourceTree = "<group>"; };
 		FA10D1AB275BCA2600F3716B /* TransactionFormDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionFormDetailsVC.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		FA18095F2704695A00B493A7 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FA180963270494AB00B493A7 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		FA1809652705006200B493A7 /* Almnabr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Almnabr.entitlements; sourceTree = "<group>"; };
-		FA18DB38274867EA004E64DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FA18DB38274867EA004E64DD /* GoogleService-Infonahid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Infonahid.plist"; sourceTree = "<group>"; };
 		FA1B281427AADC470066061F /* TechnicalAssitantCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicalAssitantCVCell.swift; sourceTree = "<group>"; };
 		FA1B281527AADC470066061F /* TechnicalAssitantCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TechnicalAssitantCVCell.xib; sourceTree = "<group>"; };
 		FA1D64AA2774C5C900FA7735 /* SubFormVersionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFormVersionVC.swift; sourceTree = "<group>"; };
 		FA1D64AE2777749B00FA7735 /* NotifiRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotifiRoute.swift; sourceTree = "<group>"; };
 		FA29703127431439000000F7 /* PDFViewrVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewrVC.swift; sourceTree = "<group>"; };
+		FA2C575C286CA6B900CE5C59 /* commentRepltTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = commentRepltTVCell.swift; sourceTree = "<group>"; };
+		FA2C575D286CA6B900CE5C59 /* commentRepltTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = commentRepltTVCell.xib; sourceTree = "<group>"; };
+		FA31D9522853B78000F9341E /* PagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagerVC.swift; sourceTree = "<group>"; };
 		FA35CE48271CC88D00FF6AE4 /* SupervisionOperationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupervisionOperationVC.swift; sourceTree = "<group>"; };
 		FA35CE4B271DCCF400FF6AE4 /* FromTransactionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromTransactionVC.swift; sourceTree = "<group>"; };
 		FA35CE4D271F572500FF6AE4 /* TeamUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamUserVC.swift; sourceTree = "<group>"; };
@@ -366,6 +379,8 @@
 		FA44341427623F8D00DF6A9B /* FormsAttachmentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsAttachmentsVC.swift; sourceTree = "<group>"; };
 		FA44341627626BA200DF6A9B /* SelectesUnits&levelsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectesUnits&levelsVC.swift"; sourceTree = "<group>"; };
 		FA443418276275EB00DF6A9B /* AuthorizedPositionsApprovalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizedPositionsApprovalVC.swift; sourceTree = "<group>"; };
+		FA48C30F286A58BF006B8130 /* AddChecklistVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddChecklistVC.swift; sourceTree = "<group>"; };
+		FA48C311286AF80B006B8130 /* AddPointVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPointVC.swift; sourceTree = "<group>"; };
 		FA4975AB2793659600891C9F /* DropDownView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDownView.xib; sourceTree = "<group>"; };
 		FA4975AD279365A900891C9F /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		FA4975AF27936BFC00891C9F /* SortVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortVC.swift; sourceTree = "<group>"; };
@@ -411,6 +426,8 @@
 		FA658B23274404DA001FC641 /* AttachmentsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentsCell.swift; sourceTree = "<group>"; };
 		FA658B24274404DA001FC641 /* AttachmentsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttachmentsCell.xib; sourceTree = "<group>"; };
 		FA658B2727440829001FC641 /* AttachmentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentsVC.swift; sourceTree = "<group>"; };
+		FA6B77C3286F01ED00A8EDC0 /* AddCommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCommentVC.swift; sourceTree = "<group>"; };
+		FA6B77C5287049F800A8EDC0 /* ActivityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityVC.swift; sourceTree = "<group>"; };
 		FA6FAFFA2703231600A31D8E /* FontAwesome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontAwesome.swift; sourceTree = "<group>"; };
 		FA78EA0927D267BA0023E48D /* SubProjectTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubProjectTVCell.swift; sourceTree = "<group>"; };
 		FA78EA0A27D267BA0023E48D /* SubProjectTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubProjectTVCell.xib; sourceTree = "<group>"; };
@@ -512,6 +529,7 @@
 		FAAF206E27E75E6E00AD255B /* SimpleNoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleNoteCell.xib; sourceTree = "<group>"; };
 		FAB54E9927EF2EE6003297E1 /* FormVersionTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVersionTVCell.swift; sourceTree = "<group>"; };
 		FAB54E9A27EF2EE6003297E1 /* FormVersionTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormVersionTVCell.xib; sourceTree = "<group>"; };
+		FAB5FFC22853DA400050F880 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FABDBA8127F2F9DD003961FC /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		FABDBA8327F3162F003961FC /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		FABDBA8527F47621003961FC /* IdDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdDetailsVC.swift; sourceTree = "<group>"; };
@@ -678,7 +696,8 @@
 				FAA9C4CC27B32B51003C051E /* notification3.wav */,
 				FA03242E26FB9BFE00372EA6 /* Assets.xcassets */,
 				FA03243326FB9BFE00372EA6 /* Info.plist */,
-				FA18DB38274867EA004E64DD /* GoogleService-Info.plist */,
+				FAB5FFC22853DA400050F880 /* GoogleService-Info.plist */,
+				FA18DB38274867EA004E64DD /* GoogleService-Infonahid.plist */,
 				FAC32FAC2707662C0046A0F6 /* DroidKufi-Bold.ttf */,
 				FAE13A4D27293C2D00509550 /* DroidKufi-Regular.ttf */,
 				FA03245F26FB9E3F00372EA6 /* DroidKufi-Regular.ttf */,
@@ -839,6 +858,7 @@
 			children = (
 				FA10D1AB275BCA2600F3716B /* TransactionFormDetailsVC.swift */,
 				FA95FD06275EFB6E00DE7854 /* TransactionFormPageaVC.swift */,
+				FA31D9522853B78000F9341E /* PagerVC.swift */,
 				FA95FD08275EFE0500DE7854 /* ContractorManagerApprovalVC.swift */,
 				FA95FD0E275EFE4300DE7854 /* FinalResultVC.swift */,
 				FA95FD14275EFE7C00DE7854 /* RecipientVerificationVC.swift */,
@@ -856,6 +876,7 @@
 				FA44341627626BA200DF6A9B /* SelectesUnits&levelsVC.swift */,
 				FA443418276275EB00DF6A9B /* AuthorizedPositionsApprovalVC.swift */,
 				FA1D64AA2774C5C900FA7735 /* SubFormVersionVC.swift */,
+				FA0647A42851DBD30049287B /* AddAttachmentsVC.swift */,
 			);
 			name = SubTransaction;
 			sourceTree = "<group>";
@@ -981,7 +1002,11 @@
 				FAA88ECE282AD1F20082432F /* TaskDetailVC.swift */,
 				FA83CD7B282C248A008A6CE0 /* TaskUsersVC.swift */,
 				FAF7623028300174000DEAFE /* CheckListVC.swift */,
+				FA48C30F286A58BF006B8130 /* AddChecklistVC.swift */,
 				FAF7623F28306133000DEAFE /* SubTaskListVC.swift */,
+				FA48C311286AF80B006B8130 /* AddPointVC.swift */,
+				FA6B77C3286F01ED00A8EDC0 /* AddCommentVC.swift */,
+				FA6B77C5287049F800A8EDC0 /* ActivityVC.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -1001,6 +1026,8 @@
 				FADC2FFB2826B68700921011 /* TaskUserTVCell.xib */,
 				FAA88ED0282B0D720082432F /* TaskCommentCell.swift */,
 				FAA88ED1282B0D720082432F /* TaskCommentCell.xib */,
+				FA2C575C286CA6B900CE5C59 /* commentRepltTVCell.swift */,
+				FA2C575D286CA6B900CE5C59 /* commentRepltTVCell.xib */,
 				FAF7623228300262000DEAFE /* CheckListCell.swift */,
 				FAF7623328300262000DEAFE /* CheckListCell.xib */,
 				FAF76236283051A5000DEAFE /* SubTaskTVCell.swift */,
@@ -1406,7 +1433,7 @@
 				FA5C976D2816B01100A2AA5A /* TaskAttachmentCell.xib in Resources */,
 				FAC788D427104436009AC355 /* HeaderView.xib in Resources */,
 				FA9E7D88270E46AE003A1D16 /* GridCell.xib in Resources */,
-				FA18DB39274867EA004E64DD /* GoogleService-Info.plist in Resources */,
+				FA18DB39274867EA004E64DD /* GoogleService-Infonahid.plist in Resources */,
 				FAD531482770FE9600C8E2AD /* SaudiTVCell.xib in Resources */,
 				FAE13A4E27293C2D00509550 /* DroidKufi-Regular.ttf in Resources */,
 				FABDBAA627F47B59003961FC /* HR.storyboard in Resources */,
@@ -1434,9 +1461,11 @@
 				FAC32FB72708C91D0046A0F6 /* TransactionTVCell.xib in Resources */,
 				FA03242D26FB9BFA00372EA6 /* Main.storyboard in Resources */,
 				FA530A3F270CCA9D0071CDC8 /* CornTransactionTVCell.xib in Resources */,
+				FA2C575F286CA6B900CE5C59 /* commentRepltTVCell.xib in Resources */,
 				FAB54E9C27EF2EE7003297E1 /* FormVersionTVCell.xib in Resources */,
 				FAF9D43F278DE050002D8AEF /* ProjectRequestCell.xib in Resources */,
 				FA534A672806000D008814A9 /* ProfileContactTVCell.xib in Resources */,
+				FAB5FFC32853DA410050F880 /* GoogleService-Info.plist in Resources */,
 				FA8B952F27F779BF003F9D7B /* JobDetailsTVCell.xib in Resources */,
 				FA7A93D527FF05CB00EF6ECC /* VacationFormCell.xib in Resources */,
 				FAA88ED3282B0D730082432F /* TaskCommentCell.xib in Resources */,
@@ -1586,6 +1615,7 @@
 				FA9768B227353DDD000A3576 /* CollectionViewCell.swift in Sources */,
 				FA9FB0A0271447EA0037871C /* ProjectDetailsVC.swift in Sources */,
 				FA8A75A6273DB1C1005A2F29 /* FormVersionCell.swift in Sources */,
+				FA48C312286AF80B006B8130 /* AddPointVC.swift in Sources */,
 				FA1B281627AADC470066061F /* TechnicalAssitantCVCell.swift in Sources */,
 				FA0324D926FE220C00372EA6 /* HomeVC.swift in Sources */,
 				FA0324BB26FBCBED00372EA6 /* Extensions.swift in Sources */,
@@ -1632,6 +1662,7 @@
 				FAD333A7271383090093175E /* ProjectCell.swift in Sources */,
 				FA95FD0B275EFE1E00DE7854 /* ContractorTeamApprovalVC.swift in Sources */,
 				FABDBA8827F4763D003961FC /* ContractDetailsVC.swift in Sources */,
+				FA48C310286A58C0006B8130 /* AddChecklistVC.swift in Sources */,
 				FA95FD15275EFE7C00DE7854 /* RecipientVerificationVC.swift in Sources */,
 				FA5CB10D27D2183F0023A372 /* Shaddow.swift in Sources */,
 				FA5C97782819602400A2AA5A /* TaskHistoryCell.swift in Sources */,
@@ -1646,6 +1677,7 @@
 				FAF9D43E278DE050002D8AEF /* ProjectRequestCell.swift in Sources */,
 				FA5CB0F927CFBA6E0023A372 /* RequirementsVC.swift in Sources */,
 				FA44341727626BA300DF6A9B /* SelectesUnits&levelsVC.swift in Sources */,
+				FA2C575E286CA6B900CE5C59 /* commentRepltTVCell.swift in Sources */,
 				FA1D64AB2774C5C900FA7735 /* SubFormVersionVC.swift in Sources */,
 				FA03249926FBA64800372EA6 /* ResponseModel.swift in Sources */,
 				FA78EA0E27D283790023E48D /* SupervisionPager.swift in Sources */,
@@ -1667,11 +1699,13 @@
 				FA5C977528195F2500A2AA5A /* TaskHistoryVC.swift in Sources */,
 				FA9768BF2735D764000A3576 /* RelatedFormsVC.swift in Sources */,
 				FA85D020280D74900080A0EA /* AllTicketVC.swift in Sources */,
+				FA31D9532853B78000F9341E /* PagerVC.swift in Sources */,
 				FA3D32B227343B5D00A5472A /* GeneralNumberVC.swift in Sources */,
 				FA5CB10227D0C6B90023A372 /* TextCVCell.swift in Sources */,
 				FA95FD07275EFB6F00DE7854 /* TransactionFormPageaVC.swift in Sources */,
 				FA5CB0FE27D028AE0023A372 /* LabelCell.swift in Sources */,
 				FA8B952E27F779BF003F9D7B /* JobDetailsTVCell.swift in Sources */,
+				FA6B77C4286F01ED00A8EDC0 /* AddCommentVC.swift in Sources */,
 				FA85D02B281062C20080A0EA /* PickerVC.swift in Sources */,
 				FA0324C626FBDAC000372EA6 /* TextFieldWithLabelView.swift in Sources */,
 				FAF7623D28305594000DEAFE /* TaskUsersCVCell.swift in Sources */,
@@ -1692,6 +1726,7 @@
 				FAAF0C9327E8A3C10032C4AD /* SimpleSubProjectCell.swift in Sources */,
 				FA10D1AC275BCA2600F3716B /* TransactionFormDetailsVC.swift in Sources */,
 				FA4975B027936BFC00891C9F /* SortVC.swift in Sources */,
+				FA0647A52851DBD30049287B /* AddAttachmentsVC.swift in Sources */,
 				FA0324DF2700747A00372EA6 /* ForgetPasswordVC.swift in Sources */,
 				FA7F941727D782E900E03A34 /* ApprovalTVCell.swift in Sources */,
 				FA7F941327D77AC100E03A34 /* MyTrannsactionTVCell.swift in Sources */,
@@ -1706,6 +1741,7 @@
 				FAC32FAF27086F620046A0F6 /* TransactionsVC.swift in Sources */,
 				FA400D4B2718C63A0097C7D1 /* ServicesView.swift in Sources */,
 				FA35CE5027209BE200FF6AE4 /* ContactsVC.swift in Sources */,
+				FA6B77C6287049F800A8EDC0 /* ActivityVC.swift in Sources */,
 				FA658B25274404DA001FC641 /* AttachmentsCell.swift in Sources */,
 				FA0324E1270113F300372EA6 /* MenuCell.swift in Sources */,
 				FA9E7D8D270F39DC003A1D16 /* ApprovalTransactionCell.swift in Sources */,
@@ -1949,7 +1985,7 @@
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1978,7 +2014,7 @@
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

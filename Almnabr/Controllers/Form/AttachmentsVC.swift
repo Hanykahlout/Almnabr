@@ -24,6 +24,19 @@ struct attachment {
 
 struct notes {
     
+    var id:String = ""
+    var title:String = ""
+    var result:String = ""
+    var Required:String = ""
+    var img:UIImage?
+    var url:URL?
+    var type:String = ""
+    var index:Int = 0
+    var IsNew:Bool = false
+}
+
+struct AttachNotes {
+    
     var id:String?
     var title:String?
     var result:String?
@@ -33,7 +46,9 @@ struct notes {
     var type:String?
     var index:Int = 0
     var IsNew:Bool = false
+    var arr:[notes] = []
 }
+
 
 struct SaudiBuillding {
     
@@ -109,6 +124,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     @IBOutlet weak var Viewcollection_contractors: UIView!
     
     
+    var IsFromTransaction:Bool = false
     
     var arr_default_attachment:[FileObj] = []
     var arr_data:[AttachmentsObj] = []
@@ -122,6 +138,8 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     var work_site:String = "ALL"
     var units :String = ""
     var user_position:String = "CTT01"
+    
+    var form_wir_data:templateObj?
     
     var transaction_id:String = "0"
     
@@ -161,6 +179,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         
         configGUI()
         get_default_attachments()
+        
         get_ContractorTeamUsers()
         
         self.img_nodata.isHidden = true
@@ -259,7 +278,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         table.register(nib, forCellReuseIdentifier: "AttachmentsCell")
         
         if userObj?.user_type_id == "1" {
-            switch ProjectObj.template_platform_group_type_code_system {
+            switch self.template_platform_group_type_code_system {
             case "WIR":
                 self.arr_file.append(attachment(title: "Signed Contractor Request PDF", Required: "Yes", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
                 
@@ -298,7 +317,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
             }
             
         }else if userObj?.user_type_id == "4" {
-            switch ProjectObj.template_platform_group_type_code_system {
+            switch self.template_platform_group_type_code_system {
             case "WIR":
                 print("no files for type id 4")
 //                self.arr_file.append(attachment(title: "Signed Contractor Request PDF", Required: "No", img: nil, url: nil,type: "img" ,index: 0 , IsNew: true))
@@ -345,6 +364,21 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
             Stack_contractor.isHidden = true
         }
         self.Viewcollection_contractors.isHidden = true
+        
+        if IsFromTransaction {
+            if form_wir_data?.contractor_manager_step_require == "1" {
+                self.user_position = "CTM01"
+                self.parm["contractor_manager_step_require"] = "1"
+                self.btnNo.image = UIImage(named: "uncheck")
+                self.btnYes.image = UIImage(named: "check")
+            }else{
+                self.user_position = "CTT01"
+                self.parm["contractor_manager_step_require"] = "0"
+                self.btnNo.image = UIImage(named: "check")
+                self.btnYes.image = UIImage(named: "uncheck")
+            }
+        }
+       
         
     }
     
@@ -393,7 +427,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         
      
         
-        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/get_default_attachments", parameters: params ) { (response) in
+        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/get_default_attachments", parameters: params ) { (response) in
             self.hideLoadingActivity()
            
             
@@ -506,10 +540,10 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
             }}
                 
                 showLoadingActivity()
-                let code = ProjectObj.template_platform_group_type_code_system
-                var formUrl = "/form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/2/\(transaction_id)"
+                let code = self.template_platform_group_type_code_system
+                var formUrl = "/form/FORM_\(self.template_platform_group_type_code_system)/cr/2/\(transaction_id)"
                 if code == "MIR" ||  code == "MSR" || code == "SQR"{
-                    formUrl =  "/form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/3/\(transaction_id)"
+                    formUrl =  "/form/FORM_\(self.template_platform_group_type_code_system)/cr/3/\(transaction_id)"
                 }
                 
                 APIManager.func_Upload(queryString: formUrl, arr_file, param: self.parm ) { (respnse ) in
@@ -520,9 +554,16 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
                     
                     if status == true{
                         
-                        let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
-                        let page = UINavigationController.init(rootViewController: vc)
-                        _ =  self.panel?.center(page)
+                       
+                        
+                        let vc:AllTicketVC = AppDelegate.TicketSB.instanceVC()
+                        vc.pushToTransactionS = true
+                        let nav = UINavigationController.init(rootViewController: vc)
+                        _ =  self.panel?.center(nav)
+                        
+                        
+//                        let page = UINavigationController.init(rootViewController: vc)
+//                        _ =  self.panel?.center(page)
                
                     }else{
                         

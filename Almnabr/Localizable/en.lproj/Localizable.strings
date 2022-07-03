@@ -44,6 +44,13 @@
 "Auto" = "Auto";
 "Manual" = "Manual";
 
+
+"Subject" = "Subject";
+"Signature" = "Signature";
+"Note" = "Note";
+"Priorty" = "Priorty";
+
+
 "Last Update" = "Last Update";
 "Attempt" = "Attempt";
 "Form Name" = "Form Name";
@@ -191,7 +198,7 @@
 "txt_Relatedforms" = "Related forms";
 "txt_Attachments" = "Attachments";
 
-"lbl_ContractorManager" = "Contractor Manager";
+"lbl_ContractorManager" = "Contractor manager step requires";
 "lbl_ContractorTeamUsers" = "Contractor Team Users";
 
 "all_pending_need_action" = "All pending need action";
@@ -343,3 +350,16 @@
 "ID" = "ID";
 "Name" = "Name";
 "Specifications" = "Specifications";
+"My Transactions" = "My Transactions";
+"Done" = "Done";
+"Profile" = "Profile";
+"Settings" = "Settings";
+"Log out" = "Log out";
+
+
+"all_pending_need_action" =  "All pending need action";
+"all_pending" =  "All pending";
+"all_complete" = "All complete";
+"all_sent" = "All sent";
+
+"Tickets" = "All Ticket";

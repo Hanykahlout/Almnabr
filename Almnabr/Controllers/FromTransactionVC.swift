@@ -685,11 +685,13 @@ extension FromTransactionVC: UITableViewDelegate , UITableViewDataSource{
         //here
         let vc : ProjectDetailVC = AppDelegate.mainSB.instanceVC()
         
-        let nav = UINavigationController.init(rootViewController: vc)
-        IsTransaction = true
-        vc.title =  self.title
+//        let nav = UINavigationController.init(rootViewController: vc)
+        IsTransaction = false
         vc.ProjectObj = obj
-        _ =  panel?.center(nav)
+        self.navigationController?.pushViewController(vc, animated: true)
+//        vc.title =  self.title
+//        vc.ProjectObj = obj
+//        _ =  panel?.center(nav)
     }
     
      

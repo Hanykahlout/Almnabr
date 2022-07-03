@@ -19,10 +19,14 @@ class TaskDetailVC: UIViewController {
     @IBOutlet weak var lbl_desc: UILabel!
     @IBOutlet weak var lbl_percentage: UITextField!
     @IBOutlet var tableHeight: NSLayoutConstraint!
+    @IBOutlet var scroll: UIScrollView!
     
-    //    @IBOutlet weak var lbl_Property: UILabel!
-    //    @IBOutlet weak var lbl_note: UILabel!
-    //    @IBOutlet weak var lbl_desc: UILabel!
+    @IBOutlet weak var txt_comment: UITextView!
+    @IBOutlet weak var btnAdd_comment: UIView! {
+        didSet {
+            btnAdd_comment.isHidden = false
+        }
+    }
     
     var object:TaskObj?
     var delegate : (() -> Void)?
@@ -38,7 +42,8 @@ class TaskDetailVC: UIViewController {
         get_data()
         get_add_task()
         get_comment_tasks()
-        
+//        self.scroll.resizeScrollViewContentSize()
+        scroll.delegate  = self
         table_Activity.dataSource = self
         table_Activity.delegate = self
         let nib = UINib(nibName: "TaskCommentCell", bundle: nil)
@@ -48,8 +53,17 @@ class TaskDetailVC: UIViewController {
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
         self.tableHeight?.constant = self.table_Activity.contentSize.height
+        self.scroll.contentSize = CGSize(width: self.scroll.contentSize.width, height: self.table_Activity.contentSize.height + 500)
+//        self.scroll.resiz
+//        let contentHeight = scroll.contentSize.height
+//        self.scroll.contentSize = contentHeight
+//        + 400
+//        if arr_comments.count == 0 {
+//            self.tableHeight?.constant = 412
+//        }else{}
         
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -134,6 +148,11 @@ class TaskDetailVC: UIViewController {
         self.lbl_status_done.text = object?.status_done_name
         self.lbl_status_done.font = .kufiRegularFont(ofSize: 13)
         
+        txt_comment.delegate = self
+        
+        txt_comment.text = "comment".localized()
+        txt_comment.font = .kufiRegularFont(ofSize: 14)
+        txt_comment.textColor = .lightGray
         
         
         
@@ -289,6 +308,44 @@ class TaskDetailVC: UIViewController {
         }
     }
     
+    func Add_comment(title:String){
+        
+        self.showLoadingActivity()
+         
+        let param : [String:Any] = ["task_id" : self.task_id,
+                                    "notes" : title]
+        APIManager.sendRequestPostAuth(urlString: "tasks/add_comment_task", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+           
+            let status = response["status"] as? Bool
+//            let message = response["message"] as? String
+            
+            if status == true{
+               
+                self.get_comment_tasks()
+                self.txt_comment.text = "comment".localized()
+//                if let return_row = response["return_row"] as? [String:Any]{
+//                    let obj = CommentObj(return_row)
+//                    self.arr_comments.append(obj)
+//                    self.table_Activity.reloadData()
+//                }
+//                    self.showAMessage(withTitle: "", message: message,  completion: {
+//                        self.delegate!()
+//                        self.dismiss(animated: true)
+//                    })
+               
+            }else{
+                if let message = response["message"] as? String {
+                    self.showAMessage(withTitle: "error".localized(), message:  message)
+                }else{
+                    self.showAMessage(withTitle: "error".localized(), message:  "something went wrong")
+                }
+            }
+            self.hideLoadingActivity()
+            
+        }
+    }
+    
     @IBAction func btnAttachments_Click(_ sender: Any) {
         
         let vc:TaskAttachmentVC = AppDelegate.TicketSB.instanceVC()
@@ -337,6 +394,15 @@ class TaskDetailVC: UIViewController {
         self.present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func btnAddComment_Click(_ sender: Any) {
+        
+        guard txt_comment.text != "comment" else {
+            return self.showAMessage(withTitle: "", message: "Comment Field Required!")
+        }
+        
+        self.Add_comment(title: txt_comment.text!)
+    }
+    
     
     func CommentMenu() -> UIMenu {
         
@@ -374,11 +440,30 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCommentCell", for: indexPath) as! TaskCommentCell
         
         let obj = arr_comments[indexPath.item]
-        
+        cell.arr_reply = obj.reply
         cell.lblDate.text = obj.insert_date
         cell.lblUserName.text = obj.emp_name
         cell.lblComment.text = obj.notes_history
-        
+        cell.setUpTable()
+        cell.btnView_reply.titleLabel?.font = .kufiRegularFont(ofSize: 11)
+        cell.dropView.isHidden = obj.isHidden
+        if obj.isHidden {
+            cell.btnView_reply.setUnderLine(stringValue: "view replys", withTextSize: 12)
+        }else{
+            cell.btnView_reply.setUnderLine(stringValue: "Hide replys", withTextSize: 12)
+
+        }
+        if obj.reply.count == 0{
+            cell.btnView_reply.isHidden = true
+        }else{
+            cell.btnView_reply.isHidden = false
+        }
+        cell.btnViewReplyAction = {
+//            let obj = arr_comments[indexPath.item]
+            obj.isHidden = !(obj.isHidden )
+            self.table_Activity.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+            
+        }
         //    if obj.can_delete == false{
         //        cell.btnDelete.isHidden = true
         //    }
@@ -387,6 +472,25 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
         //        cell.btnEdit.isHidden = true
         //    }
         
+        self.viewWillLayoutSubviews()
+        cell.btnDeleteReplyAction = { comment_id in
+            self.delete_comment(comment_id: comment_id)
+        }
+        cell.btnEditReplyAction = {  comment_id , comment  in
+            
+            let vc:AddCommentVC  = AppDelegate.TicketSB.instanceVC()
+            
+            vc.isModalInPresentation = true
+            vc.modalPresentationStyle = .overFullScreen
+            vc.definesPresentationContext = true
+            vc.comment_id = comment_id
+            vc.comment =  comment
+            vc.delegate = {
+                self.get_comment_tasks()
+            }
+            self.present(vc, animated: true, completion: nil)
+            
+        }
         
         
         return cell
@@ -394,6 +498,10 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
     }
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         self.viewWillLayoutSubviews()
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -418,8 +526,36 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
         // Create your actions - take a look at different style attributes
         let ReplyAction = UIAlertAction(title: "Reply", style: .default) { (action) in
             
+            let vc:AddCommentVC  = AppDelegate.TicketSB.instanceVC()
+            
+            vc.isModalInPresentation = true
+            vc.modalPresentationStyle = .overFullScreen
+            vc.definesPresentationContext = true
+            vc.comment_id = obj.history_id
+//            vc.comment =  obj.notes_history
+            vc.header = "Add Reply".localized()
+            vc.title_str = "reply".localized()
+            vc.type = "reply"
+            vc.task_id = self.task_id
+            vc.delegate = {
+                self.get_comment_tasks()
+            }
+            self.present(vc, animated: true, completion: nil)
+            
         }
         let EditAction = UIAlertAction(title: "Edit", style: .default) { (action) in
+            
+            let vc:AddCommentVC  = AppDelegate.TicketSB.instanceVC()
+            
+            vc.isModalInPresentation = true
+            vc.modalPresentationStyle = .overFullScreen
+            vc.definesPresentationContext = true
+            vc.comment_id = obj.history_id
+            vc.comment =  obj.notes_history
+            vc.delegate = {
+                self.get_comment_tasks()
+            }
+            self.present(vc, animated: true, completion: nil)
             
         }
         
@@ -480,4 +616,51 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
         
     }
     
+}
+
+
+
+extension TaskDetailVC: UITextViewDelegate {
+    
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if txt_comment.textColor == .lightGray {
+            txt_comment.text = ""
+            txt_comment.textColor = .darkGray
+            txt_comment.font = .kufiRegularFont(ofSize: 15)
+            
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        
+            if txt_comment.text == "" {
+                
+                txt_comment.text = "comment".localized()
+                txt_comment.font = .kufiRegularFont(ofSize: 15)
+                txt_comment.textColor = .lightGray
+            }
+      
+    }
+    
+    
+}
+
+
+extension UIScrollView {
+
+    func resizeScrollViewContentSize() {
+
+        var contentRect = CGRect.zero
+
+        for view in self.subviews {
+
+            contentRect = contentRect.union(view.frame)
+
+        }
+
+        self.contentSize = contentRect.size
+
+    }
+
 }

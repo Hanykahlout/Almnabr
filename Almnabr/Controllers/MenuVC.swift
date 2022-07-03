@@ -53,28 +53,32 @@ class MenuVC: UIViewController {
         imgUserProfile.layer.borderWidth = 1
         imgUserProfile.layer.cornerRadius = 12.5
         
-        self.lblUserName.font = .kufiRegularFont(ofSize: 15)
-        self.btnEmail.titleLabel?.font = .kufiRegularFont(ofSize: 15)
-        self.btnMobile.titleLabel?.font = .kufiRegularFont(ofSize: 15)
-        self.btnProfile.titleLabel?.font = .kufiRegularFont(ofSize: 15)
+        self.lblUserName.font = .kufiRegularFont(ofSize: 14)
+        self.btnEmail.titleLabel?.font = .kufiRegularFont(ofSize: 14)
+        self.btnMobile.titleLabel?.font = .kufiRegularFont(ofSize: 14)
+        self.btnProfile.titleLabel?.font = .kufiRegularFont(ofSize: 14)
+        self.btnSetting.titleLabel?.font = .kufiRegularFont(ofSize: 14)
+        self.btnLogout.titleLabel?.font = .kufiRegularFont(ofSize: 14)
         
         let obj = userObj
         self.lblUserName.text = obj?.user_username
         self.btnEmail.setTitle(obj?.user_email, for: .normal)
         self.btnMobile.setTitle(obj?.user_phone, for: .normal)
-        self.btnProfile.setTitle("Profile", for: .normal)
+        self.btnProfile.setTitle("Profile".localized(), for: .normal)
         
         
-        let image =  UIImage.fontAwesomeIcon(name: .cog, style: self.fontStyle, textColor: .white, size: CGSize(width: 40, height: 40))
-        self.btnSetting.setImage(image, for: .normal)
+//        let image =  UIImage.fontAwesomeIcon(name: .cog, style: self.fontStyle, textColor: .white, size: CGSize(width: 40, height: 40))
+//        self.btnSetting.setImage(image, for: .normal)
         
-        
+        self.btnSetting.setTitle("nav_settings".localized(), for: .normal)
+    
+    
 //        let userimage =  UIImage.fontAwesomeIcon(name: .userCircle, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
 //        self.btnProfile.setImage(userimage, for: .normal)
         
-        let logoutimage =  UIImage.fontAwesomeIcon(name: .signOutAlt, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
-        self.btnLogout.setImage(logoutimage, for: .normal)
-        
+//        let logoutimage =  UIImage.fontAwesomeIcon(name: .signOutAlt, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
+//        self.btnLogout.setImage(logoutimage, for: .normal)
+        self.btnLogout.setTitle("Log out".localized(), for: .normal)
         
     }
     
@@ -119,9 +123,9 @@ class MenuVC: UIViewController {
                      for i in records {
                          let dict = i as? [String:Any]
                          let obj = MenuObj.init(dict!)
-                         if obj.menu_id != "30" {
+//                         if obj.menu_id != "3422" {
                              self.arr_data.append(obj)
-                         }
+//                         }
                          
                      }
                      
@@ -294,13 +298,24 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
             if arr_data[indexPath.section].menu.count > 0 {
                 switch obj.menu[indexPath.row - 1].menu_id {
                 case "13":
-                    cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
-                    let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
-                    let nav = UINavigationController.init(rootViewController: vc)
-                    vc.title =  obj.menu_name
-                    vc.MenuObj = obj
-                    vc.StrSubMenue = obj.menu[indexPath.row - 1].menu_name
-                    _ =  panel?.center(nav)
+                    
+                    guard let top_vc = HeaderView.shared.menu_vc() else { return }
+                    guard didLoadHome else { return }
+                    
+                    let vc: TransactionsVC = AppDelegate.mainSB.instanceVC()
+                   
+                    top_vc.navigationController?.pushViewController(vc, animated: true)
+
+                    
+//                    let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
+//                    self.navigationController?.pushViewController(vc, animated: true)
+//                    cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
+//                    let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
+//                    let nav = UINavigationController.init(rootViewController: vc)
+//                    vc.title =  obj.menu_name
+//                    vc.MenuObj = obj
+//                    vc.StrSubMenue = obj.menu[indexPath.row - 1].menu_name
+//                    _ =  panel?.center(nav)
                     
                 case "69":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()

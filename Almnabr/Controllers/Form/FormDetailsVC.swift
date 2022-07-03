@@ -64,9 +64,11 @@ class FormDetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        configNavigation()
         configGUI()
-        header.btnAction = menu_select
+        
+//        header.btnAction = menu_select
 
         // Do any additional setup after loading the view.
     }
@@ -94,14 +96,27 @@ class FormDetailsVC: UIViewController {
         }
         
     }
-
+//
+//    // MARK: - Config Navigation
+//    func configNavigation() {
+//        _ = self.navigationController?.preferredStatusBarStyle
+//        self.view.backgroundColor = "FFFFFF".getUIColor() //F0F4F8
+//        navigationController?.navigationBar.barTintColor = .red
+//
+//        addNavigationBarTitle(navigationTitle: StrTitle)
+//    }
+    
+    
     // MARK: - Config Navigation
+
     func configNavigation() {
-        _ = self.navigationController?.preferredStatusBarStyle
-        self.view.backgroundColor = "FFFFFF".getUIColor() //F0F4F8
-        navigationController?.navigationBar.barTintColor = .red
         
-        addNavigationBarTitle(navigationTitle: StrTitle)
+        _ = self.navigationController?.preferredStatusBarStyle
+        self.view.backgroundColor = maincolor //F0F4F8
+        //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
+        navigationController?.navigationBar.barTintColor = maincolor
+       addNavigationBarTitle(navigationTitle: "Project Details".localized())
+        UINavigationBar.appearance().backgroundColor = maincolor
     }
     
     
@@ -241,7 +256,7 @@ class FormDetailsVC: UIViewController {
             
             let destination = segue.destination as! UINavigationController
             let vc = destination.topViewController as! LanguageVC
-            vc.isFromTransaction = true
+            vc.IsFromTransaction = true
             IsTransaction = true
            // let vc: LanguageVC = segue.destination as! LanguageVC
             vc.ProjectObj = ProjectObj

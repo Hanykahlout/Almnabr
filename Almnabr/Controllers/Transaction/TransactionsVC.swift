@@ -51,8 +51,8 @@ class TransactionsVC: UIViewController {
     var StrsearchByModule:String = ""
     var StrsearchByForm:String = ""
     var SearchKey:String = ""
-    var SearchAllpending:String = "all_pending_need_action"
-    var StrsearchByAdmin:Int = 0
+    var SearchAllpending:String = "all_pending"
+    var StrsearchByAdmin:Int = 1
     var pageNumber = 1
     var total:Int = 0
     var allItemDownloaded = false
@@ -64,7 +64,10 @@ class TransactionsVC: UIViewController {
     var arr_form:[ModuleObj] = []
     var arr_formeLabel:[String] = []
     var arr_Admin:[String] = ["Admin".localized(),"Users".localized()]
+    var arr_Admin_localized:[String] = ["Admin","Users"]
     var arr_AllPending:[String] = ["all_pending_need_action" , "all_pending","all_complete","all_sent"]
+    
+    var arr_AllPending_localized:[String] = ["all_pending_need_action".localized() , "all_pending".localized(),"all_complete".localized(),"all_sent".localized()]
     var cellWidths: [CGFloat] = [1200]
     var arr_NoData:[String] = ["No items found".localized()]
     
@@ -80,6 +83,7 @@ class TransactionsVC: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
+        configNavigation()
         configGUI()
         get_Transaction_data(showLoading: true, loadOnly: true)
         get_module()
@@ -90,10 +94,23 @@ class TransactionsVC: UIViewController {
     
     
     
+    // MARK: - Config Navigation
+
+    func configNavigation() {
+        
+        _ = self.navigationController?.preferredStatusBarStyle
+        self.view.backgroundColor = maincolor //F0F4F8
+        //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
+        navigationController?.navigationBar.barTintColor = maincolor
+       addNavigationBarTitle(navigationTitle: "My Transactions".localized())
+        UINavigationBar.appearance().backgroundColor = maincolor
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         configGUI()
         get_Transaction_data(showLoading: true, loadOnly: true)
       
@@ -127,14 +144,14 @@ class TransactionsVC: UIViewController {
         self.viewsearch.setBorderGrayWidthCorner(1, 20)
         
         self.viewsearchAllPending.setBorderGrayWidthCorner(1, 20)
-        self.lblAllPending.text =  "All pending need action".localized()
-        self.lblAllPending.font = .kufiRegularFont(ofSize: 15)
+        self.lblAllPending.text =  "all_pending_need_action".localized()
+        self.lblAllPending.font = .kufiRegularFont(ofSize: 13)
         
         
         self.viewsearchByForm.setBorderGrayWidthCorner(1, 20)
         self.lblsearchByForm.text = "WIR"
         //"txt_searchByForm".localized()
-        self.lblsearchByForm.font = .kufiRegularFont(ofSize: 15)
+        self.lblsearchByForm.font = .kufiRegularFont(ofSize: 13)
         
         // for first puplish
         self.viewsearchByForm.isUserInteractionEnabled = false
@@ -143,11 +160,11 @@ class TransactionsVC: UIViewController {
         
         self.viewsearchAdmin.setBorderGrayWidthCorner(1, 20)
         self.lblsearchAdmin.text =  "txt_searchAdmin".localized()
-        self.lblsearchAdmin.font = .kufiRegularFont(ofSize: 15)
+        self.lblsearchAdmin.font = .kufiRegularFont(ofSize: 13)
         
         self.viewsearchByModule.setBorderGrayWidthCorner(1, 20)
         self.lblsearchByModule.text =  "txt_searchByModule".localized()
-        self.lblsearchByModule.font = .kufiRegularFont(ofSize: 15)
+        self.lblsearchByModule.font = .kufiRegularFont(ofSize: 13)
         
         self.imgDropAdmin.image = dropDownmage
         self.imgDropForm.image = dropDownmage
@@ -180,8 +197,10 @@ class TransactionsVC: UIViewController {
             self.showLoadingActivity()
         }
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
+
+        
         APIManager.sendRequestGetAuth(urlString: "/tc/list/\(pageNumber)/10?searchKey=\(search)&searchAdmin=\(StrsearchByAdmin)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)&searchByStatus=\(SearchAllpending)" ) { (response) in
-            
+           
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
             }
@@ -230,6 +249,7 @@ class TransactionsVC: UIViewController {
             
             
         }
+//        self.hideLoadingActivity()
     }
     
     
@@ -315,8 +335,8 @@ class TransactionsVC: UIViewController {
             
             if name == self.arr_Admin[index] {
                 self.lblsearchAdmin.text =  name
-                //let i =  self.arr_module[index].value
-                if name == "Admin" {
+                let i =  self.arr_Admin_localized[index]
+                if i == "Admin" {
                     self.StrsearchByAdmin = 1
                 }else{
                     self.StrsearchByAdmin = 0
@@ -329,41 +349,6 @@ class TransactionsVC: UIViewController {
         }
         self.present(vc, animated: true, completion: nil)
         
-        
-        
-//        self.imgDropAdmin.image = dropUpmage
-//
-//        let dropDown = DropDown()
-//        dropDown.anchorView = view
-//        dropDown.backgroundColor = .white
-//        dropDown.cornerRadius = 2.0
-//
-//        if self.arr_Admin.count == 0 {
-//            dropDown.dataSource = self.arr_NoData
-//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//            self.imgDropAdmin.image = dropDownmage
-//        }else{
-//            dropDown.dataSource = self.arr_Admin
-//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//
-//                if item == self.arr_Admin[index] {
-//                    self.lblsearchAdmin.text =  item
-//                    //let i =  self.arr_module[index].value
-//                    if item == "Admin" {
-//                        self.StrsearchByAdmin = 1
-//                    }else{
-//                        self.StrsearchByAdmin = 0
-//                    }
-//                    self.imgDropAdmin.image = dropDownmage
-//                    self.get_Transaction_data(showLoading: true, loadOnly: true)
-//                }
-//
-//            }}
-//        dropDown.direction = .bottom
-//        dropDown.anchorView = viewsearchAdmin
-//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchAdmin.bounds.height)
-//        dropDown.width = viewsearchAdmin.bounds.width
-//        dropDown.show()
     }
     
     
@@ -390,34 +375,6 @@ class TransactionsVC: UIViewController {
         }
         self.present(vc, animated: true, completion: nil)
         
-        
-//        let dropDown = DropDown()
-//        dropDown.anchorView = view
-//        dropDown.backgroundColor = .white
-//        dropDown.cornerRadius = 2.0
-//
-//        if self.arr_formeLabel.count == 0 {
-//            dropDown.dataSource = self.arr_NoData
-//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//            self.imgDropForm.image = dropDownmage
-//        }else{
-//            dropDown.dataSource = self.arr_formeLabel
-//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//
-//                if item == self.arr_formeLabel[index] {
-//                    self.lblsearchByForm.text =  item
-//                    let i =  self.arr_form[index].value
-//                    self.StrsearchByForm = i
-//                    self.imgDropForm.image = dropDownmage
-//                    self.get_Transaction_data(showLoading: true, loadOnly: true)
-//                }
-//            }
-//        }
-//        dropDown.direction = .bottom
-//        dropDown.anchorView = viewsearchByForm
-//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByForm.bounds.height)
-//        dropDown.width = viewsearchByForm.bounds.width
-//        dropDown.show()
     }
     
     
@@ -440,34 +397,7 @@ class TransactionsVC: UIViewController {
             }
         }
         self.present(vc, animated: true, completion: nil)
-        
-//        self.imgDropModule.image = dropUpmage
-//        let dropDown = DropDown()
-//        dropDown.anchorView = view
-//        dropDown.backgroundColor = .white
-//        dropDown.cornerRadius = 2.0
-//        if self.arr_moduleLabel.count == 0 {
-//            dropDown.dataSource = self.arr_NoData
-//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//            self.imgDropModule.image = dropDownmage
-//        }else{
-//            dropDown.dataSource = self.arr_moduleLabel
-//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//
-//                if item == self.arr_moduleLabel[index] {
-//                    self.lblsearchByModule.text =  item
-//                    let i =  self.arr_module[index].value
-//                    self.StrsearchByModule = i
-//                    self.imgDropModule.image = dropDownmage
-//                    self.get_Transaction_data(showLoading: true, loadOnly: true)
-//                }
-//            }
-//        }
-//        dropDown.direction = .bottom
-//        dropDown.anchorView = viewsearchByModule
-//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByModule.bounds.height)
-//        dropDown.width = viewsearchByModule.bounds.width
-//        dropDown.show()
+
     }
     
     
@@ -475,48 +405,21 @@ class TransactionsVC: UIViewController {
         
         self.imgDropForm.image = dropUpmage
         let vc :PickerVC = AppDelegate.mainSB.instanceVC()
-        vc.arr_data =  arr_AllPending
+        vc.arr_data =  arr_AllPending_localized
         vc.isModalInPresentation = true
         vc.modalPresentationStyle = .overFullScreen
         vc.definesPresentationContext = true
         vc.delegate = {name , index in
-            if name == self.arr_AllPending[index] {
+            if name == self.arr_AllPending_localized[index]  {
                 self.lblAllPending.text =  name
                 // let i =  self.arr_module[index].value
-                self.SearchAllpending = name
+                self.SearchAllpending = self.arr_AllPending[index]
                 self.imgDropAllPending.image = self.dropDownmage
                 self.get_Transaction_data(showLoading: true, loadOnly: true)
             }
         }
         self.present(vc, animated: true, completion: nil)
         
-//        self.imgDropAllPending.image = dropUpmage
-//        let dropDown = DropDown()
-//        dropDown.anchorView = view
-//        dropDown.backgroundColor = .white
-//        dropDown.cornerRadius = 2.0
-//        if self.arr_AllPending.count == 0 {
-//            dropDown.dataSource = self.arr_NoData
-//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//            self.imgDropAllPending.image = dropDownmage
-//        }else{
-//            dropDown.dataSource = self.arr_AllPending
-//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//
-//                if item == self.arr_AllPending[index] {
-//                    self.lblAllPending.text =  item
-//                    // let i =  self.arr_module[index].value
-//                    self.SearchAllpending = item
-//                    self.imgDropAllPending.image = dropDownmage
-//                    self.get_Transaction_data(showLoading: true, loadOnly: true)
-//                }
-//            }
-//        }
-//        dropDown.direction = .bottom
-//        dropDown.anchorView = viewsearchAllPending
-//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchAllPending.bounds.height)
-//        dropDown.width = viewsearchAllPending.bounds.width
-//        dropDown.show()
     }
     
     
@@ -534,6 +437,7 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         
         let obj = arr_data[indexPath.item]
         
+//        cell.viewBack.setBorderGray()
         
         let Id = "\(obj.transaction_request_id)"
         let Description = "Description".localized() + "  \(obj.transaction_request_description)"
@@ -653,3 +557,6 @@ extension TransactionsVC:UISearchBarDelegate {
     
     
 }
+//tc/list/1/10?searchKey=&searchAdmin=1&searchByForm=FORM_WIR&searchByModule=&searchByStatus=all_pending
+
+//tc/list/1/10?searchKey=&searchAdmin=0&searchByModule=&searchByForm=FORM_WIR&searchByStatus=all_pending

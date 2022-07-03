@@ -29,9 +29,10 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
     var task_id:String = ""
     
     var btnAddTaskAction : (()->())?
-    var btnEditTaskAction : (()->())?
+    var btnEditTaskAction : ((_ task_id: String , _ object :TaskObj) -> Void)?
     var btnChangeStatusAction : ((_ task_id: String ,_ status:Int) -> Void)?
     var btnSelectAction : ((_ task_id: String) -> Void)?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -193,8 +194,68 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
         if obj.total_points == obj.total_checked_points {
             cell.img_check.tintColor = "3CB371".getUIColor()
         }
+        var related:String = ""
+        if obj.relateds_numbers.count == 1 {
+            related = obj.relateds_numbers[0].sub_tasks_numbers
+        }else{
+            for i in obj.relateds_numbers{
+                related = related + "," + i.sub_tasks_numbers
+            }
+        }
+        cell.lbl_relatedTask.text = related
+        if obj.relateds_numbers.count == 0 {
+            cell.stack_related.isHidden = true
+        }else{
+            cell.stack_related.isHidden = false
+        }
+        let important_id = obj.important_id
+        
+        if obj.important_name == ""{
+            cell.btnImportant.isHidden = true
+        }else{
+            cell.btnImportant.isHidden = false
+            cell.btnImportant.setTitle(obj.important_name, for: .normal)
+        }
+        
+        if obj.status_done_name == ""{
+            cell.btnStatus.isHidden = true
+        }else{
+            cell.btnStatus.isHidden = false
+            cell.btnStatus.setTitle(obj.status_done_name, for: .normal)
+        }
+        
+        
+        switch important_id {
+        case "1":
+            cell.btnImportant.backgroundColor = "#0079bf".getUIColor()
+        case "2":
+            cell.btnImportant.backgroundColor = "#f12b54".getUIColor()
+        case "3":
+            cell.btnImportant.backgroundColor = "#e3ac07".getUIColor()
+        case "4":
+            cell.btnImportant.backgroundColor = "#e3ac07".getUIColor()
+            
+        default:
+            cell.btnImportant.backgroundColor = "#0079bf".getUIColor()
+        }
+        
+        let status_id = obj.task_status_done
+        
+         
+        switch status_id {
+        case "1":
+            cell.btnStatus.backgroundColor = "#f12b54".getUIColor()
+        case "2":
+            cell.btnStatus.backgroundColor = "#e3ac07".getUIColor()
+        case "4":
+            cell.btnStatus.backgroundColor = "#e3ac07".getUIColor()
+       
+        default:
+            cell.btnStatus.backgroundColor = "#0079bf".getUIColor()
+        }
+        
         cell.btnEditAction = {
-            self.btnEditTaskAction!()
+            self.btnEditTaskAction!(obj.task_id ,obj)
             
         }
         if obj.total_points == "0" {
@@ -220,6 +281,7 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
             default:
                 cell.btn_changeStatus.menu = self.createContextMenu()
             }
+         
           //  let interaction = UIContextMenuInteraction(delegate: self)
             //cell.btn_changeStatus.addInteraction(interaction)
         }

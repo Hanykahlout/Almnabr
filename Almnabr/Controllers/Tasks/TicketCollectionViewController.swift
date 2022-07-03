@@ -22,6 +22,8 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        set_data()
+        
         updateCollectionViewItem(with: view.bounds.size)
         if isFromNotificaion == true {
             get_data()
@@ -257,11 +259,14 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
             vc.strTitle = "Add Task".localized()
             self.navigationController?.pushViewController(vc, animated: true)
         }
-        cell.btnEditTaskAction = {
+        cell.btnEditTaskAction = { task_id , object in
             let vc:AddTaskVC = AppDelegate.TicketSB.instanceVC()
             vc.delegate = {
                 self.get_data()
             }
+            vc.isEdit = true
+            vc.task_id  = task_id
+            vc.object = object
             vc.status = "\(indexPath.item + 1)"
             vc.ticket_id = self.object?.ticket_id ?? "0"
             vc.arr_related_task = self.arr_data

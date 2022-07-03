@@ -46,14 +46,15 @@ class LanguageVC: UIViewController {
     var ProjectObj:templateObj?
     
 //    var FormWirObj:form_wir_dataObj?
-   
+    var transactions_name:String = "WIR"
     var StrLanguage:String = "en"
+    var IsFromTransaction:Bool = false
     
     let dropUpmage =  UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
     
     let dropDownmage =  UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
-    var isFromTransaction:Bool = false
-    
+//    var isFromTransaction:Bool = false
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -125,7 +126,7 @@ class LanguageVC: UIViewController {
         self.lbl_noPermission.textColor =  "#333".getUIColor()
          
       
-        if IsTransaction == false{
+        if IsFromTransaction == true{
             
             if StatusObject?.Configurations == false {
                 view_noPermission.isHidden = false
@@ -133,8 +134,10 @@ class LanguageVC: UIViewController {
             }else{
                 view_noPermission.isHidden = true
                 self.btnNext.isHidden = false
+                self.SetConfigGUI()
             }
         }else{
+            self.btnNext.isHidden = false
             view_noPermission.isHidden = true
         }
         
@@ -176,7 +179,21 @@ class LanguageVC: UIViewController {
         }
     }
     
-    
+    func SetConfigGUI(){
+        
+        if  let view_request = data_FormWir["view_request"] as? [String:Any]{
+            
+            if  let transaction_request = view_request["transactions_request"] as? [String:Any]{
+                
+                let records = transaction_request["records"] as! [String:Any]
+                let obj = Tcore(records)
+                self.lblLanguageSelect.text = obj.language_name
+                self.StrLanguage = obj.lang_key
+                self.IsFromTransaction = true
+                self.transactions_name = obj.transactions_name
+            }
+        }
+    }
     
     private func update_observer(){
         NotificationCenter.default.addObserver(forName: NSNotification.Name("update_langVC"), object: nil, queue: .main) { notifi in
@@ -225,7 +242,11 @@ class LanguageVC: UIViewController {
     @IBAction func btnSiteLevel_Click(_ sender: Any) {
         
         
-        switch ProjectObj?.templatename {
+        if  IsFromTransaction == false{
+            self.transactions_name = ProjectObj?.templatename ?? "WIR"
+        }
+        
+        switch self.transactions_name {
         case "MSR":
             let vc:LocationVC = AppDelegate.mainSB.instanceVC()
             vc.StrLanguage = self.StrLanguage
@@ -236,6 +257,7 @@ class LanguageVC: UIViewController {
             vc.StrLanguage = self.StrLanguage
             vc.ProjectObj = self.ProjectObj
             vc.wirObject = data_FormWir
+            vc.IsFromTransaction = self.IsFromTransaction
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             let vc:SiteLevelVC = AppDelegate.mainSB.instanceVC()

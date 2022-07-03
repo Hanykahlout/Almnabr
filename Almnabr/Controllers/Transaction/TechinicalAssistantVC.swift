@@ -11,6 +11,9 @@ import DropDown
 import AVFoundation
 import SwiftUI
 
+var once:Int = 0
+var DidReply:Bool = true
+
 class TechinicalAssistantVC: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var icon_noPermission: UIImageView!
@@ -79,6 +82,8 @@ class TechinicalAssistantVC: UIViewController, UINavigationControllerDelegate {
     var production_amount:Int = 0
     var production_lines:Int = 0
     
+    
+    
     var arr_Users:[ModuleObj] = []
     var arr_UsersLabel:[String] = []
     var arr_file:[SaudiBuillding] = []
@@ -107,10 +112,29 @@ class TechinicalAssistantVC: UIViewController, UINavigationControllerDelegate {
     var supplier_note_index:Int = 0
     var isCheckList:Bool = false
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+//        if DidReply {
+////            self.showLoadingActivity()
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                self.configGUI()
+////                self.hideLoadingActivity()
+//                DidReply = false
+//            }
+//        }else{
+            configGUI()
+//            DidReply = true
+//        }
+//
+//        if once == 0 {
+//            configGUI()
+//            once = 1
+//        }else{
+//            self.showLoadingActivity()
+//
+//        }
         
-        configGUI()
     }
     
     
@@ -151,6 +175,7 @@ class TechinicalAssistantVC: UIViewController, UINavigationControllerDelegate {
     //------------------------------------------------------
     func configGUI() {
         
+        print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\technical")
         icon_noPermission.no_permission()
         
         self.lbl_noPermission.text =  "You not have permission to access this step".localized()
@@ -279,6 +304,7 @@ class TechinicalAssistantVC: UIViewController, UINavigationControllerDelegate {
         
         self.table_checkList.reloadData()
         
+//        self.hideLoadingActivity()
     }
     
     func append_inArrTech(){

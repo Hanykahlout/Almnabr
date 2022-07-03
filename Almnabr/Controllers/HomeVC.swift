@@ -24,13 +24,15 @@ class HomeVC: UIViewController   {
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var header: HeaderView!
     @IBOutlet weak var tf_message: UITextField!
+    @IBOutlet weak var lbl_allCopyRes: UILabel!
     
     var session: NFCNDEFReaderSession?
     var message:String = ""
     
     private var manager = SocketManager(socketURL: URL(string:"https://node.almnabr.com/")!)
    // var socket  = io.connect('https://node.almnabr.com', {secure: true, auth: {token: "توكن اليوزر هنا"}});
-    
+//    Node.NAHIDH.Sa
+    //"https://node.almnabr.com/"
     private var socket: SocketIOClient!
 
     
@@ -42,6 +44,7 @@ class HomeVC: UIViewController   {
         check_notifi()
         
      
+        self.lbl_allCopyRes.font = .kufiRegularFont(ofSize: 12)
         
         let token =  "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         self.manager.config = SocketIOClientConfiguration(

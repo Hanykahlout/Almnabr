@@ -72,6 +72,7 @@ class RequirementsVC: UIViewController {
     var arr_ObjectSelectedmaterial:[SupplierObj] = []
     
     var related_bill_quanties:String = ""
+     
     
     let dropDown = DropDown()
     

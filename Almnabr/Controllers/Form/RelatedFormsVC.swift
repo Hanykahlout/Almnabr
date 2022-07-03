@@ -45,6 +45,9 @@ class RelatedFormsVC: UIViewController {
     var params = [:] as [String : String]
     var level_Unit = ""
     
+    var IsFromTransaction:Bool = false
+    
+    var form_wir_data:templateObj?
     var transaction_id:String = "0"
     
     var Skipnext :Bool = false
@@ -59,7 +62,7 @@ class RelatedFormsVC: UIViewController {
         
         if self.Skipnext == true {
             
-            switch ProjectObj?.templatename {
+            switch self.template_platform_group_type_code_system {
             case "MSR":
                 let vc:RequirementsVC = AppDelegate.mainSB.instanceVC()
                 self.navigationController?.pushViewController(vc, animated: true)
@@ -169,7 +172,7 @@ class RelatedFormsVC: UIViewController {
         }
         
         
-        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/1/\(transaction_id)", parameters: self.params ) { (response) in
+        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/cr/1/\(transaction_id)", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
            
             
@@ -268,7 +271,7 @@ class RelatedFormsVC: UIViewController {
         //
         //        self.navigationController?.pushViewController(VC, animated: true)
         
-        switch ProjectObj?.template_platform_group_type_code_system {
+        switch self.template_platform_group_type_code_system {
         case "MSR":
             let vc:RequirementsVC = AppDelegate.mainSB.instanceVC()
             vc.params = self.params
@@ -300,6 +303,8 @@ class RelatedFormsVC: UIViewController {
             VC.projects_work_area_id = self.projects_work_area_id
             VC.template_platform_code_system = self.template_platform_code_system
             VC.template_platform_group_type_code_system = self.template_platform_group_type_code_system
+            VC.form_wir_data = self.form_wir_data
+            VC.IsFromTransaction = self.IsFromTransaction
             self.navigationController?.pushViewController(VC, animated: true)
         default:
           print("nil")

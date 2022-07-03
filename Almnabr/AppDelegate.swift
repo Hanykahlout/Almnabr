@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().tintColor = .white
         
-        MOLH.setLanguageTo("ar")
+//        MOLH.setLanguageTo("en")
         if MOLHLanguage.currentAppleLanguage() == "ar" {
             
             UIView.appearance().semanticContentAttribute = .forceRightToLeft

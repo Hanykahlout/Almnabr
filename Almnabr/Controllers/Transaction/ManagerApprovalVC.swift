@@ -96,7 +96,7 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configGUI()
+//        configGUI()
     }
     
     
@@ -118,12 +118,13 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
         
         self.lbl_uploadAttachments.text = "Upload attachment".localized() + " *"
         self.lbl_uploadAttachments.font = .kufiRegularFont(ofSize: 13)
+        
         if StatusObject?.Manager_Approval == false {
             view_noPermission.isHidden = false
             self.view_main.isHidden = true
 
         }else{
-            self.get_OwnerUser()
+//            self.get_OwnerUser()
             view_noPermission.isHidden = true
             self.view_main.isHidden = false
         }
@@ -141,7 +142,7 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
         self.lbl_CustomerNote.text =  "( Note : The consultant decision in this request will not be confirmed until reviewing owner representative response )".localized()
         self.lbl_CustomerNote.font = .kufiRegularFont(ofSize: 12)
         self.lbl_CustomerNote.textColor =  .red
-        
+        self.lbl_CustomerNote.isHidden = true
         
         self.lbl_Title.text =  "Manager Approval".localized()
         self.lbl_Title.font = .kufiRegularFont(ofSize: 13)
@@ -461,6 +462,7 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
         self.stack_CustomerUpload.isHidden = true
         self.customr_representative_required = "No"
         stack_uploadAttachment.isHidden = true
+        self.lbl_CustomerNote.isHidden = true
     }
     
     @IBAction func btnYes_Click(_ sender: Any) {
@@ -472,6 +474,8 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
         self.stack_CustomerUpload.isHidden = false
         self.customr_representative_required = "Yes"
         
+        self.lbl_CustomerNote.isHidden = false
+        self.customer_representative_type = ""
     }
     
     
@@ -510,26 +514,50 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
     
     @IBAction func btnOwnerUsers_Click(_ sender: Any) {
         
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-  
-        dropDown.dataSource = self.arr_ownerUsersLabel
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            
-            if item == self.arr_ownerUsersLabel[index] {
-                self.owner_users = arr_ownerUsers[index].value
-                self.lbl_ownerUserSelect.text = item
+        self.imgDropOwner.image = dropUpmage
+        let vc :PickerVC = AppDelegate.mainSB.instanceVC()
+        vc.arr_data =  self.arr_ownerUsersLabel
+        vc.isModalInPresentation = true
+        vc.modalPresentationStyle = .overFullScreen
+        vc.definesPresentationContext = true
+        vc.delegate = {name , index in
+            if name == self.arr_ownerUsersLabel[index] {
+                self.owner_users = self.arr_ownerUsers[index].value
+                self.lbl_ownerUserSelect.text = name
                 self.btn_cancel_ownerUsers.isHidden = false
             }
             
+//            if name == self.arr_ServicesLabel[index] {
+//                self.lblsearchByServices.text =  name
+//                let i =  self.arr_Services[index].value
+//                self.StrsearchByServices = i
+//                self.imgDropServices.image = self.dropDownmage
+//                self.get_Projects_data(showLoading: true, loadOnly: true)
+//            }
+
         }
-        dropDown.direction = .bottom
-        dropDown.anchorView = btn_ownerUsers
-        dropDown.bottomOffset = CGPoint(x: 0, y: btn_ownerUsers.bounds.height)
-        dropDown.width = btn_ownerUsers.bounds.width
-        dropDown.show()
+        self.present(vc, animated: true, completion: nil)
+        
+//        let dropDown = DropDown()
+//        dropDown.anchorView = view
+//        dropDown.backgroundColor = .white
+//        dropDown.cornerRadius = 2.0
+//  
+//        dropDown.dataSource = self.arr_ownerUsersLabel
+//        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+//            
+//            if item == self.arr_ownerUsersLabel[index] {
+//                self.owner_users = arr_ownerUsers[index].value
+//                self.lbl_ownerUserSelect.text = item
+//                self.btn_cancel_ownerUsers.isHidden = false
+//            }
+//            
+//        }
+//        dropDown.direction = .bottom
+//        dropDown.anchorView = btn_ownerUsers
+//        dropDown.bottomOffset = CGPoint(x: 0, y: btn_ownerUsers.bounds.height)
+//        dropDown.width = btn_ownerUsers.bounds.width
+//        dropDown.show()
         
     }
     

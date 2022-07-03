@@ -69,6 +69,9 @@ class TaskAttachmentVC: UIViewController {
         navigationItem.rightBarButtonItem = addButtonItem
     }
     
+    @objc func addTapped(_ sender: Any) {
+      
+    }
 
     
     //MARK: - Config GUI
@@ -82,11 +85,6 @@ class TaskAttachmentVC: UIViewController {
     }
 
 
-
-    
-    @objc func addTapped(_ sender: Any) {
-      
-    }
     
     func get_data(){
         

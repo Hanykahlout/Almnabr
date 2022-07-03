@@ -1827,6 +1827,18 @@ extension UIView {
         }
     }
     
+    func applyShadow(radius:CGFloat) {
+        self.layer.cornerRadius = radius
+        self.layer.masksToBounds = true
+        self.layer.shadowRadius = 4.0
+        self.layer.shadowOpacity = 0.30
+        self.layer.borderColor = #colorLiteral(red: 0.8537729979, green: 0.8537931442, blue: 0.8537823558, alpha: 1)
+        self.layer.shadowOffset = CGSize(width: 0, height: 5)
+       // let radius = self.frame.height / 2
+       
+       
+    }
+    
     
     func dropShadowView(color: UIColor, opacity: Float = 0.5, offSet: CGSize, shadowRadius: CGFloat = 1, scale: Bool = true, cornerRadius: CGFloat, fillColor: UIColor) {
         let shadowLayer = CAShapeLayer()

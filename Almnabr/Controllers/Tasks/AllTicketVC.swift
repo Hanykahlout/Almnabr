@@ -16,20 +16,25 @@ class AllTicketVC: UIViewController {
     @IBOutlet weak var view_Add: UIView!
     @IBOutlet weak var view_Filter: UIView!
     @IBOutlet weak var view_Search: UIView!
+    @IBOutlet weak var lblMyTransaction : UILabel!
+    @IBOutlet weak var lblMyTicket : UILabel!
     @IBOutlet weak var header: HeaderView!
     
     var object:ModulesObj?
     var params:[String:Any] = [:]
     var pageNumber = 1
     var SearchKey:String = ""
-    
+    var pushToTransactionS :Bool = false
     var arr_data:[TicketObj] = []
     var allItemDownloaded = false
     var profile_obj:ProfileObj?
     
+    var total_records:Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        get_Transaction_data()
         configNavigation()
         configGUI()
         get_data(showLoading: true, loadOnly: true)
@@ -82,7 +87,9 @@ class AllTicketVC: UIViewController {
         self.params["end_date"] = ""
         self.params["ref_model"] = ""
         
-        self.view_Search.setBorderGrayWidthCorner(1, 20)
+//        self.view_Search.setBorderGrayWidthCorner(1, 20)
+        self.view_Search.setBorderColorWidthCorner(1, 20, color: maincolor)
+        
         self.view_Add.setBorderGrayWidthCorner(1, 20)
         self.view_Filter.setBorderGrayWidthCorner(1, 20)
         
@@ -92,6 +99,13 @@ class AllTicketVC: UIViewController {
         table.delegate = self
         let nib = UINib(nibName: "TicketTVCell", bundle: nil)
         table.register(nib, forCellReuseIdentifier: "TicketTVCell")
+        
+        if pushToTransactionS {
+            let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        self.lblMyTicket.text = "Tickets".localized() 
         
     }
 
@@ -138,6 +152,8 @@ class AllTicketVC: UIViewController {
                         self.img_nodata.isHidden = true
                     }
                     self.table.reloadData()
+                    
+                    self.lblMyTicket.text = "Tickets".localized() + " (\(pageObj.Str_total_records))"
                     self.hideLoadingActivity()
                 }
                 
@@ -146,6 +162,29 @@ class AllTicketVC: UIViewController {
                 self.img_nodata.isHidden = false
             }
         }
+    }
+    
+    func get_Transaction_data(){
+        
+//        if showLoading {
+            self.showLoadingActivity()
+//        }
+        let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
+        APIManager.sendRequestGetAuth(urlString: "tc/list/1/10?searchKey=&searchAdmin=0&searchByForm=&searchByModule=&searchByStatus=all_pending_need_action" ) { (response) in
+           
+            let status = response["status"] as? Bool
+            let total = response["total"] as? Int
+            if status == true{
+                self.total_records = total ?? 0
+                self.lblMyTransaction.text = "My Transactions".localized() + " (\(self.total_records))"
+                    self.hideLoadingActivity()
+            }else{
+                self.lblMyTransaction.text = "My Transactions".localized() + " (\(self.total_records))"
+                self.hideLoadingActivity()
+                
+            }
+        }
+            
     }
     
     func menu_select(){
@@ -199,6 +238,11 @@ class AllTicketVC: UIViewController {
             self.get_data(showLoading: true, loadOnly: true)
         }
         
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func btnMyTransaction_Click(_ sender: Any) {
+        let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -76,6 +76,7 @@
 		3F3EED7C284E1EEA00FFFC46 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3EED7A284E1EEA00FFFC46 /* FilterViewController.swift */; };
 		3F3FEF282864735400F57578 /* CommunicationSubmitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3FEF272864735400F57578 /* CommunicationSubmitResponse.swift */; };
 		3F432BA92871E9D7009289DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3F432BA82871E9D7009289DE /* .gitignore */; };
+		3F432BAB2871EB0C009289DE /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 3F432BAA2871EB0C009289DE /* .gitattributes */; };
 		3F43359D286393F7002C282C /* SearchUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43359C286393F7002C282C /* SearchUserResponse.swift */; };
 		3F48C53C285883AF004D33F8 /* EmpViewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C538285883AE004D33F8 /* EmpViewResponse.swift */; };
 		3F48C53D285883AF004D33F8 /* EmpViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C539285883AE004D33F8 /* EmpViewData.swift */; };
@@ -614,6 +615,7 @@
 		3F3EED7A284E1EEA00FFFC46 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		3F3FEF272864735400F57578 /* CommunicationSubmitResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationSubmitResponse.swift; sourceTree = "<group>"; };
 		3F432BA82871E9D7009289DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		3F432BAA2871EB0C009289DE /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		3F43359C286393F7002C282C /* SearchUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserResponse.swift; sourceTree = "<group>"; };
 		3F48C538285883AE004D33F8 /* EmpViewResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpViewResponse.swift; sourceTree = "<group>"; };
 		3F48C539285883AE004D33F8 /* EmpViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpViewData.swift; sourceTree = "<group>"; };
@@ -1834,6 +1836,7 @@
 		FA03241926FB9BF900372EA6 = {
 			isa = PBXGroup;
 			children = (
+				3F432BAA2871EB0C009289DE /* .gitattributes */,
 				3F432BA82871E9D7009289DE /* .gitignore */,
 				FA03242426FB9BFA00372EA6 /* Almnabr */,
 				FA03243B26FB9BFE00372EA6 /* AlmnabrTests */,
@@ -2635,6 +2638,7 @@
 				3F904033286C8F14008D85B8 /* AddEmpEduDetailsViewController.xib in Resources */,
 				FA18DB39274867EA004E64DD /* GoogleService-Info.plist in Resources */,
 				FAD531482770FE9600C8E2AD /* SaudiTVCell.xib in Resources */,
+				3F432BAB2871EB0C009289DE /* .gitattributes in Resources */,
 				3F90401A286C8A40008D85B8 /* OutgoingHistoryViewController.xib in Resources */,
 				3F9040C6286CB079008D85B8 /* EducationDetailsTableViewCell.xib in Resources */,
 				3F904097286C9CC0008D85B8 /* SettingViewController.xib in Resources */,

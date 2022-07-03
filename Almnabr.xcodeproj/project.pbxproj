@@ -32,6 +32,8 @@
 		3F1436952848A120008ABC19 /* GraidentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1436862848A120008ABC19 /* GraidentView.swift */; };
 		3F1436962848A120008ABC19 /* UILabelDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1436872848A120008ABC19 /* UILabelDesignable.swift */; };
 		3F1436992848A801008ABC19 /* SettingsPermissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1436972848A801008ABC19 /* SettingsPermissionVC.swift */; };
+		3F432BAE2871F591009289DE /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 3F432BAC2871F591009289DE /* .gitattributes */; };
+		3F432BAF2871F591009289DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3F432BAD2871F591009289DE /* .gitignore */; };
 		3F87BCC32848CE170031098B /* SettingsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87BCC12848CE170031098B /* SettingsAlertViewController.swift */; };
 		3F87BCC42848CE170031098B /* SettingsAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F87BCC22848CE170031098B /* SettingsAlertViewController.xib */; };
 		3F87BCC72848D39C0031098B /* SettingsUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F87BCC52848D39C0031098B /* SettingsUpdateViewController.swift */; };
@@ -372,6 +374,8 @@
 		3F1436862848A120008ABC19 /* GraidentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraidentView.swift; sourceTree = "<group>"; };
 		3F1436872848A120008ABC19 /* UILabelDesignable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelDesignable.swift; sourceTree = "<group>"; };
 		3F1436972848A801008ABC19 /* SettingsPermissionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPermissionVC.swift; sourceTree = "<group>"; };
+		3F432BAC2871F591009289DE /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
+		3F432BAD2871F591009289DE /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3F87BCC12848CE170031098B /* SettingsAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAlertViewController.swift; sourceTree = "<group>"; };
 		3F87BCC22848CE170031098B /* SettingsAlertViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsAlertViewController.xib; sourceTree = "<group>"; };
 		3F87BCC52848D39C0031098B /* SettingsUpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsUpdateViewController.swift; sourceTree = "<group>"; };
@@ -877,6 +881,8 @@
 		FA03241926FB9BF900372EA6 = {
 			isa = PBXGroup;
 			children = (
+				3F432BAC2871F591009289DE /* .gitattributes */,
+				3F432BAD2871F591009289DE /* .gitignore */,
 				FA03242426FB9BFA00372EA6 /* Almnabr */,
 				FA03243B26FB9BFE00372EA6 /* AlmnabrTests */,
 				FA03244626FB9BFE00372EA6 /* AlmnabrUITests */,
@@ -1687,6 +1693,7 @@
 				FA03242D26FB9BFA00372EA6 /* Main.storyboard in Resources */,
 				FA530A3F270CCA9D0071CDC8 /* CornTransactionTVCell.xib in Resources */,
 				FA2C575F286CA6B900CE5C59 /* commentRepltTVCell.xib in Resources */,
+				3F432BAF2871F591009289DE /* .gitignore in Resources */,
 				FAB54E9C27EF2EE7003297E1 /* FormVersionTVCell.xib in Resources */,
 				FAF9D43F278DE050002D8AEF /* ProjectRequestCell.xib in Resources */,
 				FA534A672806000D008814A9 /* ProfileContactTVCell.xib in Resources */,
@@ -1700,6 +1707,7 @@
 				FACFBA40273AD235007C248C /* GeneralNoCell.xib in Resources */,
 				FA9768B527355A91000A3576 /* FromTransactionView.xib in Resources */,
 				FADC2FFD2826B68800921011 /* TaskUserTVCell.xib in Resources */,
+				3F432BAE2871F591009289DE /* .gitattributes in Resources */,
 				FA5CB0FF27D028AE0023A372 /* LabelCell.xib in Resources */,
 				3FF6EDB2284B6C220003E6F4 /* AddPermissionMentionsVC.xib in Resources */,
 				FA025FB92785E73600AB38C8 /* View_notification.xib in Resources */,

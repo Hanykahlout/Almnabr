@@ -712,7 +712,7 @@
                                 </collectionViewFlowLayout>
                             </collectionView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zz9-0V-n9q">
-                                <rect key="frame" x="16" y="210" width="382" height="579"/>
+                                <rect key="frame" x="16" y="210" width="382" height="578"/>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Pgr-GU-Hhs">
                                 <rect key="frame" x="16" y="809" width="382" height="43"/>
@@ -758,7 +758,7 @@
                             <constraint firstItem="lyE-8F-XY0" firstAttribute="leading" secondItem="Y2z-KA-Cgv" secondAttribute="leading" id="hXJ-Yj-XTf"/>
                             <constraint firstItem="Y2z-KA-Cgv" firstAttribute="trailing" secondItem="zz9-0V-n9q" secondAttribute="trailing" constant="16" id="iqy-Vk-TZd"/>
                             <constraint firstAttribute="trailing" secondItem="lyE-8F-XY0" secondAttribute="trailing" id="jYE-mL-dAk"/>
-                            <constraint firstItem="Pgr-GU-Hhs" firstAttribute="top" secondItem="zz9-0V-n9q" secondAttribute="bottom" constant="20" id="mli-bX-l8e"/>
+                            <constraint firstItem="Pgr-GU-Hhs" firstAttribute="top" secondItem="zz9-0V-n9q" secondAttribute="bottom" constant="21" id="mli-bX-l8e"/>
                             <constraint firstItem="mlL-wq-DQE" firstAttribute="leading" secondItem="Y2z-KA-Cgv" secondAttribute="leading" constant="16" id="uUJ-eS-1g9"/>
                         </constraints>
                     </view>
@@ -2796,15 +2796,15 @@
     </scenes>
     <resources>
         <image name="Icon-previous" width="28" height="28"/>
-        <image name="arrow.left.square.fill" catalog="system" width="128" height="114"/>
-        <image name="arrow.right.square.fill" catalog="system" width="128" height="114"/>
-        <image name="arrowtriangle.down.fill" catalog="system" width="128" height="124"/>
+        <image name="arrow.left.square.fill" catalog="system" width="32" height="32"/>
+        <image name="arrow.right.square.fill" catalog="system" width="32" height="32"/>
+        <image name="arrowtriangle.down.fill" catalog="system" width="32" height="32"/>
         <image name="icon-pin" width="32" height="32"/>
         <image name="icon_empty" width="512" height="256"/>
-        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="mail.fill" catalog="system" width="128" height="93"/>
-        <image name="phone.fill" catalog="system" width="128" height="114"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="magnifyingglass" catalog="system" width="32" height="32"/>
+        <image name="mail.fill" catalog="system" width="32" height="32"/>
+        <image name="phone.fill" catalog="system" width="32" height="32"/>
+        <image name="plus" catalog="system" width="32" height="32"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

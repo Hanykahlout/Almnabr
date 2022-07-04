@@ -7,29 +7,29 @@ target 'Almnabr' do
 
   # Pods for Almnabr
   
-   # pod 'ZVProgressHUD'
-   # pod 'DPLocalization'
-   # pod 'SwiftKeychainWrapper'
-   # pod 'Alamofire', '4.7.3'
-   # pod 'AlamofireObjectMapper', '~> 5.1.0'
+    pod 'ZVProgressHUD'
+    pod 'DPLocalization'
+    pod 'SwiftKeychainWrapper'
+    pod 'Alamofire', '4.7.3'
+    pod 'AlamofireObjectMapper', '~> 5.1.0'
 
-#    pod 'EzPopup'
- #   pod 'IQKeyboardManagerSwift'
-  #  pod 'DropDown'
-   # pod 'FAPanels'
-    #pod 'FontAwesome.swift'
+    pod 'EzPopup'
+    pod 'IQKeyboardManagerSwift'
+    pod 'DropDown'
+    pod 'FAPanels'
+    pod 'FontAwesome.swift'
     
-   # pod 'Firebase'
-    #pod 'FirebaseMessaging'
+    pod 'Firebase'
+    pod 'FirebaseMessaging'
     
-   # pod 'AMPopTip'
+    pod 'AMPopTip'
 
     
-#    pod 'Kingfisher', '~> 7.0'
+    pod 'Kingfisher', '~> 7.0'
     
- #   pod "SwiftSignatureView"
-   # pod 'Fastis', '~> 1.0.0'
-  #  pod 'Socket.IO-Client-Swift', '~> 16.0.1'
+    pod "SwiftSignatureView"
+    pod 'Fastis', '~> 1.0.0'
+    pod 'Socket.IO-Client-Swift', '~> 16.0.1'
     
   target 'AlmnabrTests' do
     inherit! :search_paths

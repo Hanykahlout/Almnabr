@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0B744FF2C666ACD69C544A82 /* Pods_Almnabr_AlmnabrUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B38CC6A9089F6D0E16C87D80 /* Pods_Almnabr_AlmnabrUITests.framework */; };
+		3F124EA728735D5F00D014EA /* HR.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F124EA928735D5F00D014EA /* HR.storyboard */; };
+		3F124EAC28735D6C00D014EA /* Ticket.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F124EAE28735D6C00D014EA /* Ticket.storyboard */; };
+		3F124EB128735D7F00D014EA /* Transaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F124EB328735D7F00D014EA /* Transaction.storyboard */; };
 		3F14366A28489EB6008ABC19 /* Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F14366428489EB6008ABC19 /* Records.swift */; };
 		3F14366B28489EB6008ABC19 /* PermissionMentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F14366528489EB6008ABC19 /* PermissionMentions.swift */; };
 		3F14366C28489EB6008ABC19 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F14366628489EB6008ABC19 /* Page.swift */; };
@@ -107,7 +110,6 @@
 		FA3D32AF27342E8000A5472A /* ViewLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3D32AE27342E8000A5472A /* ViewLanguage.swift */; };
 		FA3D32B227343B5D00A5472A /* GeneralNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3D32B127343B5D00A5472A /* GeneralNumberVC.swift */; };
 		FA3D32B427343B8400A5472A /* ByPhases.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3D32B327343B8400A5472A /* ByPhases.swift */; };
-		FA3D9D2E275D1D0000807BA7 /* Transaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA3D9D2D275D1D0000807BA7 /* Transaction.storyboard */; };
 		FA400D472716F1030097C7D1 /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA400D462716F1030097C7D1 /* TestCell.swift */; };
 		FA400D492718C61A0097C7D1 /* ServicesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA400D482718C61A0097C7D1 /* ServicesView.xib */; };
 		FA400D4B2718C63A0097C7D1 /* ServicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA400D4A2718C63A0097C7D1 /* ServicesView.swift */; };
@@ -145,7 +147,6 @@
 		FA5C977528195F2500A2AA5A /* TaskHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5C977428195F2500A2AA5A /* TaskHistoryVC.swift */; };
 		FA5C97782819602400A2AA5A /* TaskHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5C97762819602400A2AA5A /* TaskHistoryCell.swift */; };
 		FA5C97792819602400A2AA5A /* TaskHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA5C97772819602400A2AA5A /* TaskHistoryCell.xib */; };
-		FA5C977B281A976600A2AA5A /* Ticket.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5C977A281A976500A2AA5A /* Ticket.storyboard */; };
 		FA5CB0F927CFBA6E0023A372 /* RequirementsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CB0F827CFBA6E0023A372 /* RequirementsVC.swift */; };
 		FA5CB0FB27D020490023A372 /* LocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CB0FA27D020480023A372 /* LocationVC.swift */; };
 		FA5CB0FE27D028AE0023A372 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5CB0FC27D028AD0023A372 /* LabelCell.swift */; };
@@ -283,7 +284,6 @@
 		FABDBAA027F477D8003961FC /* ModulesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDBA9F27F477D8003961FC /* ModulesVC.swift */; };
 		FABDBAA227F477F4003961FC /* UserAttachmentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDBAA127F477F4003961FC /* UserAttachmentsVC.swift */; };
 		FABDBAA427F47806003961FC /* SignatureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDBAA327F47806003961FC /* SignatureVC.swift */; };
-		FABDBAA627F47B59003961FC /* HR.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FABDBAA527F47B59003961FC /* HR.storyboard */; };
 		FABF3632276AA06F0029810D /* NotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABF3630276AA06E0029810D /* NotesCell.swift */; };
 		FABF3633276AA06F0029810D /* NotesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FABF3631276AA06F0029810D /* NotesCell.xib */; };
 		FABF6712275F886A00BB019A /* NotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABF6711275F886A00BB019A /* NotesVC.swift */; };
@@ -349,6 +349,12 @@
 
 /* Begin PBXFileReference section */
 		21818E79825A01D2561E80D8 /* Pods-Almnabr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr.debug.xcconfig"; path = "Target Support Files/Pods-Almnabr/Pods-Almnabr.debug.xcconfig"; sourceTree = "<group>"; };
+		3F124EA828735D5F00D014EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HR.storyboard; sourceTree = "<group>"; };
+		3F124EAB28735D6200D014EA /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/HR.strings; sourceTree = "<group>"; };
+		3F124EAD28735D6C00D014EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Ticket.storyboard; sourceTree = "<group>"; };
+		3F124EB028735D7000D014EA /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Ticket.strings; sourceTree = "<group>"; };
+		3F124EB228735D7F00D014EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Transaction.storyboard; sourceTree = "<group>"; };
+		3F124EB528735D8400D014EA /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Transaction.strings; sourceTree = "<group>"; };
 		3F14366428489EB6008ABC19 /* Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Records.swift; sourceTree = "<group>"; };
 		3F14366528489EB6008ABC19 /* PermissionMentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionMentions.swift; sourceTree = "<group>"; };
 		3F14366628489EB6008ABC19 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
@@ -466,7 +472,6 @@
 		FA3D32AE27342E8000A5472A /* ViewLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewLanguage.swift; sourceTree = "<group>"; };
 		FA3D32B127343B5D00A5472A /* GeneralNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralNumberVC.swift; sourceTree = "<group>"; };
 		FA3D32B327343B8400A5472A /* ByPhases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ByPhases.swift; sourceTree = "<group>"; };
-		FA3D9D2D275D1D0000807BA7 /* Transaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Transaction.storyboard; sourceTree = "<group>"; };
 		FA400D462716F1030097C7D1 /* TestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		FA400D482718C61A0097C7D1 /* ServicesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServicesView.xib; sourceTree = "<group>"; };
 		FA400D4A2718C63A0097C7D1 /* ServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesView.swift; sourceTree = "<group>"; };
@@ -505,7 +510,6 @@
 		FA5C977428195F2500A2AA5A /* TaskHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHistoryVC.swift; sourceTree = "<group>"; };
 		FA5C97762819602400A2AA5A /* TaskHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHistoryCell.swift; sourceTree = "<group>"; };
 		FA5C97772819602400A2AA5A /* TaskHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskHistoryCell.xib; sourceTree = "<group>"; };
-		FA5C977A281A976500A2AA5A /* Ticket.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Ticket.storyboard; sourceTree = "<group>"; };
 		FA5CB0F827CFBA6E0023A372 /* RequirementsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementsVC.swift; sourceTree = "<group>"; };
 		FA5CB0FA27D020480023A372 /* LocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationVC.swift; sourceTree = "<group>"; };
 		FA5CB0FC27D028AD0023A372 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
@@ -642,7 +646,6 @@
 		FABDBA9F27F477D8003961FC /* ModulesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModulesVC.swift; sourceTree = "<group>"; };
 		FABDBAA127F477F4003961FC /* UserAttachmentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAttachmentsVC.swift; sourceTree = "<group>"; };
 		FABDBAA327F47806003961FC /* SignatureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureVC.swift; sourceTree = "<group>"; };
-		FABDBAA527F47B59003961FC /* HR.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HR.storyboard; sourceTree = "<group>"; };
 		FABF3630276AA06E0029810D /* NotesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesCell.swift; sourceTree = "<group>"; };
 		FABF3631276AA06F0029810D /* NotesCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesCell.xib; sourceTree = "<group>"; };
 		FABF6711275F886A00BB019A /* NotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesVC.swift; sourceTree = "<group>"; };
@@ -1131,9 +1134,9 @@
 				3FC43E042847FDCC002C3F58 /* HR */,
 				FA03243026FB9BFE00372EA6 /* LaunchScreen.storyboard */,
 				FA03242B26FB9BFA00372EA6 /* Main.storyboard */,
-				FA3D9D2D275D1D0000807BA7 /* Transaction.storyboard */,
-				FABDBAA527F47B59003961FC /* HR.storyboard */,
-				FA5C977A281A976500A2AA5A /* Ticket.storyboard */,
+				3F124EB328735D7F00D014EA /* Transaction.storyboard */,
+				3F124EA928735D5F00D014EA /* HR.storyboard */,
+				3F124EAE28735D6C00D014EA /* Ticket.storyboard */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -1627,7 +1630,7 @@
 				FA5D6D582767AE8A0088B206 /* TechnicalAssistantCell.xib in Resources */,
 				FACFBA44273AD24D007C248C /* ByPhasesCell.xib in Resources */,
 				FA82792927971A8B00CE2411 /* ViewLabelCell.xib in Resources */,
-				FA3D9D2E275D1D0000807BA7 /* Transaction.storyboard in Resources */,
+				3F124EB128735D7F00D014EA /* Transaction.storyboard in Resources */,
 				FA9E7D92270F409D003A1D16 /* CronTransactionCell.xib in Resources */,
 				FA0324CC26FBEC4300372EA6 /* TextFieldWithLabelView.xib in Resources */,
 				FA0324D226FC66A900372EA6 /* Localizable.strings in Resources */,
@@ -1662,7 +1665,7 @@
 				FAD531482770FE9600C8E2AD /* SaudiTVCell.xib in Resources */,
 				3FB03C8A2848AC1F003859E1 /* SettingViewController.xib in Resources */,
 				FAE13A4E27293C2D00509550 /* DroidKufi-Regular.ttf in Resources */,
-				FABDBAA627F47B59003961FC /* HR.storyboard in Resources */,
+				3F124EA728735D5F00D014EA /* HR.storyboard in Resources */,
 				FA530A41270CEC6D0071CDC8 /* CustomHeaderView.xib in Resources */,
 				FA7A93DD2801C64900EF6ECC /* profileAttachmentsTVCell.xib in Resources */,
 				3F87BCCC2848EB310031098B /* UpdateSettingsTableViewCell.xib in Resources */,
@@ -1683,7 +1686,7 @@
 				FA5C977328170FA200A2AA5A /* TaskTVCell.xib in Resources */,
 				FA78EA1427D2B01A0023E48D /* ProjectRequestTVCell.xib in Resources */,
 				FAAF205C27DA284900AD255B /* TeamUserTVCell.xib in Resources */,
-				FA5C977B281A976600A2AA5A /* Ticket.storyboard in Resources */,
+				3F124EAC28735D6C00D014EA /* Ticket.storyboard in Resources */,
 				FA9E7D8E270F39DC003A1D16 /* ApprovalTransactionCell.xib in Resources */,
 				FAC32FAD2707662C0046A0F6 /* DroidKufi-Bold.ttf in Resources */,
 				FA4A4C392803488700B9C658 /* ModulesTVCell.xib in Resources */,
@@ -2098,6 +2101,33 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		3F124EA928735D5F00D014EA /* HR.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F124EA828735D5F00D014EA /* Base */,
+				3F124EAB28735D6200D014EA /* ar */,
+			);
+			name = HR.storyboard;
+			sourceTree = "<group>";
+		};
+		3F124EAE28735D6C00D014EA /* Ticket.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F124EAD28735D6C00D014EA /* Base */,
+				3F124EB028735D7000D014EA /* ar */,
+			);
+			name = Ticket.storyboard;
+			sourceTree = "<group>";
+		};
+		3F124EB328735D7F00D014EA /* Transaction.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3F124EB228735D7F00D014EA /* Base */,
+				3F124EB528735D8400D014EA /* ar */,
+			);
+			name = Transaction.storyboard;
+			sourceTree = "<group>";
+		};
 		FA03242B26FB9BFA00372EA6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

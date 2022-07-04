@@ -506,6 +506,7 @@
         <!--Settings PermissionVC-->
         <scene sceneID="DoC-9w-one">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AyH-ux-yYE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="SettingsPermissionVC" id="4an-kX-vQp" customClass="SettingsPermissionVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H8b-qk-JiQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -655,7 +656,6 @@
                         <outlet property="settingsView" destination="D7s-EY-cLM" id="1i8-bP-AFW"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AyH-ux-yYE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="43" y="1670"/>
         </scene>

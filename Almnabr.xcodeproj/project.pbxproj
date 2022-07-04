@@ -348,6 +348,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		21818E79825A01D2561E80D8 /* Pods-Almnabr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr.debug.xcconfig"; path = "Target Support Files/Pods-Almnabr/Pods-Almnabr.debug.xcconfig"; sourceTree = "<group>"; };
 		3F14366428489EB6008ABC19 /* Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Records.swift; sourceTree = "<group>"; };
 		3F14366528489EB6008ABC19 /* PermissionMentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionMentions.swift; sourceTree = "<group>"; };
 		3F14366628489EB6008ABC19 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
@@ -396,9 +397,13 @@
 		3FF6EDB0284B6C220003E6F4 /* AddPermissionMentionsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPermissionMentionsVC.xib; sourceTree = "<group>"; };
 		3FF6EDB3284B72450003E6F4 /* UsersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionViewCell.swift; sourceTree = "<group>"; };
 		3FF6EDB4284B72450003E6F4 /* UsersCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UsersCollectionViewCell.xib; sourceTree = "<group>"; };
+		49EED8CFDA58CBC448613AE6 /* Pods-Almnabr-AlmnabrUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr-AlmnabrUITests.debug.xcconfig"; path = "Target Support Files/Pods-Almnabr-AlmnabrUITests/Pods-Almnabr-AlmnabrUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		54ED8B5C8A0DD317A35EA2FF /* Pods-Almnabr-AlmnabrUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr-AlmnabrUITests.release.xcconfig"; path = "Target Support Files/Pods-Almnabr-AlmnabrUITests/Pods-Almnabr-AlmnabrUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A0B486DA8E109C512A0BBA23 /* Pods_Almnabr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Almnabr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A15F32D7142EB97EEDE831E2 /* Pods_AlmnabrTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlmnabrTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADB1D7974D91E5EB2AC28FFD /* Pods-Almnabr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr.release.xcconfig"; path = "Target Support Files/Pods-Almnabr/Pods-Almnabr.release.xcconfig"; sourceTree = "<group>"; };
 		B38CC6A9089F6D0E16C87D80 /* Pods_Almnabr_AlmnabrUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Almnabr_AlmnabrUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7CBD5E570859DFAD2DCFE33 /* Pods-AlmnabrTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlmnabrTests.debug.xcconfig"; path = "Target Support Files/Pods-AlmnabrTests/Pods-AlmnabrTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA025FB227848FE500AB38C8 /* CustomLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoader.swift; sourceTree = "<group>"; };
 		FA025FB82785E73500AB38C8 /* View_notification.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View_notification.xib; sourceTree = "<group>"; };
 		FA025FBA2785E77800AB38C8 /* View_notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View_notification.swift; sourceTree = "<group>"; };
@@ -465,6 +470,7 @@
 		FA400D462716F1030097C7D1 /* TestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		FA400D482718C61A0097C7D1 /* ServicesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServicesView.xib; sourceTree = "<group>"; };
 		FA400D4A2718C63A0097C7D1 /* ServicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesView.swift; sourceTree = "<group>"; };
+		FA422E2B3FD6248670FDB3D9 /* Pods-AlmnabrTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlmnabrTests.release.xcconfig"; path = "Target Support Files/Pods-AlmnabrTests/Pods-AlmnabrTests.release.xcconfig"; sourceTree = "<group>"; };
 		FA44341227623F4500DF6A9B /* HistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryVC.swift; sourceTree = "<group>"; };
 		FA44341427623F8D00DF6A9B /* FormsAttachmentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormsAttachmentsVC.swift; sourceTree = "<group>"; };
 		FA44341627626BA200DF6A9B /* SelectesUnits&levelsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectesUnits&levelsVC.swift"; sourceTree = "<group>"; };
@@ -869,6 +875,7 @@
 				FA03244626FB9BFE00372EA6 /* AlmnabrUITests */,
 				FA03242326FB9BFA00372EA6 /* Products */,
 				6B94FB38ED641FF0540B3D73 /* Frameworks */,
+				FD7AF8AAEA86B5827AECC5B8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1492,6 +1499,20 @@
 			path = ProjectCell;
 			sourceTree = "<group>";
 		};
+		FD7AF8AAEA86B5827AECC5B8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				21818E79825A01D2561E80D8 /* Pods-Almnabr.debug.xcconfig */,
+				ADB1D7974D91E5EB2AC28FFD /* Pods-Almnabr.release.xcconfig */,
+				49EED8CFDA58CBC448613AE6 /* Pods-Almnabr-AlmnabrUITests.debug.xcconfig */,
+				54ED8B5C8A0DD317A35EA2FF /* Pods-Almnabr-AlmnabrUITests.release.xcconfig */,
+				E7CBD5E570859DFAD2DCFE33 /* Pods-AlmnabrTests.debug.xcconfig */,
+				FA422E2B3FD6248670FDB3D9 /* Pods-AlmnabrTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1503,6 +1524,7 @@
 				FA03241E26FB9BFA00372EA6 /* Sources */,
 				FA03241F26FB9BFA00372EA6 /* Frameworks */,
 				FA03242026FB9BFA00372EA6 /* Resources */,
+				2E1214234F4FEA85E2430835 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1540,6 +1562,7 @@
 				FA03243F26FB9BFE00372EA6 /* Sources */,
 				FA03244026FB9BFE00372EA6 /* Frameworks */,
 				FA03244126FB9BFE00372EA6 /* Resources */,
+				88804046246079D301AF8586 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1734,6 +1757,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		2E1214234F4FEA85E2430835 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Almnabr/Pods-Almnabr-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Almnabr/Pods-Almnabr-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Almnabr/Pods-Almnabr-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		86EE688164D85F9AAB01DB65 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1754,6 +1794,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		88804046246079D301AF8586 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Almnabr-AlmnabrUITests/Pods-Almnabr-AlmnabrUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Almnabr-AlmnabrUITests/Pods-Almnabr-AlmnabrUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Almnabr-AlmnabrUITests/Pods-Almnabr-AlmnabrUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D99F38E017F87F8279BD9862 /* [CP] Check Pods Manifest.lock */ = {
@@ -2193,6 +2250,7 @@
 		};
 		FA03244D26FB9BFF00372EA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21818E79825A01D2561E80D8 /* Pods-Almnabr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2221,6 +2279,7 @@
 		};
 		FA03244E26FB9BFF00372EA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADB1D7974D91E5EB2AC28FFD /* Pods-Almnabr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2248,6 +2307,7 @@
 		};
 		FA03245026FB9BFF00372EA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7CBD5E570859DFAD2DCFE33 /* Pods-AlmnabrTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2270,6 +2330,7 @@
 		};
 		FA03245126FB9BFF00372EA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FA422E2B3FD6248670FDB3D9 /* Pods-AlmnabrTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2292,6 +2353,7 @@
 		};
 		FA03245326FB9BFF00372EA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49EED8CFDA58CBC448613AE6 /* Pods-Almnabr-AlmnabrUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2312,6 +2374,7 @@
 		};
 		FA03245426FB9BFF00372EA6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 54ED8B5C8A0DD317A35EA2FF /* Pods-Almnabr-AlmnabrUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

@@ -906,7 +906,7 @@
 				FA03245A26FB9DF900372EA6 /* Views */,
 				FA03245726FB9D9200372EA6 /* HelperClasses */,
 				FA03245626FB9D6A00372EA6 /* ConnectionManager */,
-				FA3D9D2C275D1CDB00807BA7 /* MainView */,
+				FA3D9D2C275D1CDB00807BA7 /* Fonts */,
 				FA03242526FB9BFA00372EA6 /* AppDelegate.swift */,
 				FA03242726FB9BFA00372EA6 /* SceneDelegate.swift */,
 				FAA9C4CC27B32B51003C051E /* notification3.wav */,
@@ -1125,7 +1125,7 @@
 			name = PresentVC;
 			sourceTree = "<group>";
 		};
-		FA3D9D2C275D1CDB00807BA7 /* MainView */ = {
+		FA3D9D2C275D1CDB00807BA7 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
 				3FC43E042847FDCC002C3F58 /* HR */,
@@ -1135,7 +1135,6 @@
 				FABDBAA527F47B59003961FC /* HR.storyboard */,
 				FA5C977A281A976500A2AA5A /* Ticket.storyboard */,
 			);
-			name = MainView;
 			path = Fonts;
 			sourceTree = "<group>";
 		};
@@ -1509,7 +1508,6 @@
 				E7CBD5E570859DFAD2DCFE33 /* Pods-AlmnabrTests.debug.xcconfig */,
 				FA422E2B3FD6248670FDB3D9 /* Pods-AlmnabrTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};

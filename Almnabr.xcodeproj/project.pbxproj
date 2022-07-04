@@ -348,8 +348,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		27FAB09E5ED1020760FB3C99 /* Pods-Almnabr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr.debug.xcconfig"; path = "Target Support Files/Pods-Almnabr/Pods-Almnabr.debug.xcconfig"; sourceTree = "<group>"; };
-		31A0FBAD24F69227020130F8 /* Pods-AlmnabrTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlmnabrTests.debug.xcconfig"; path = "Target Support Files/Pods-AlmnabrTests/Pods-AlmnabrTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3F14366428489EB6008ABC19 /* Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Records.swift; sourceTree = "<group>"; };
 		3F14366528489EB6008ABC19 /* PermissionMentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionMentions.swift; sourceTree = "<group>"; };
 		3F14366628489EB6008ABC19 /* Page.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
@@ -398,13 +396,9 @@
 		3FF6EDB0284B6C220003E6F4 /* AddPermissionMentionsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddPermissionMentionsVC.xib; sourceTree = "<group>"; };
 		3FF6EDB3284B72450003E6F4 /* UsersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionViewCell.swift; sourceTree = "<group>"; };
 		3FF6EDB4284B72450003E6F4 /* UsersCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UsersCollectionViewCell.xib; sourceTree = "<group>"; };
-		5A11B9A3552F0EE60EA60D0A /* Pods-Almnabr-AlmnabrUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr-AlmnabrUITests.debug.xcconfig"; path = "Target Support Files/Pods-Almnabr-AlmnabrUITests/Pods-Almnabr-AlmnabrUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		7A8A5A0BAC6D52D4BFFA3D66 /* Pods-Almnabr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr.release.xcconfig"; path = "Target Support Files/Pods-Almnabr/Pods-Almnabr.release.xcconfig"; sourceTree = "<group>"; };
 		A0B486DA8E109C512A0BBA23 /* Pods_Almnabr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Almnabr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A15F32D7142EB97EEDE831E2 /* Pods_AlmnabrTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlmnabrTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B38CC6A9089F6D0E16C87D80 /* Pods_Almnabr_AlmnabrUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Almnabr_AlmnabrUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE7D0FFD0A07FCCE71F19A0A /* Pods-Almnabr-AlmnabrUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr-AlmnabrUITests.release.xcconfig"; path = "Target Support Files/Pods-Almnabr-AlmnabrUITests/Pods-Almnabr-AlmnabrUITests.release.xcconfig"; sourceTree = "<group>"; };
-		DFFC2D73D472F2D3719F93BC /* Pods-AlmnabrTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlmnabrTests.release.xcconfig"; path = "Target Support Files/Pods-AlmnabrTests/Pods-AlmnabrTests.release.xcconfig"; sourceTree = "<group>"; };
 		FA025FB227848FE500AB38C8 /* CustomLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoader.swift; sourceTree = "<group>"; };
 		FA025FB82785E73500AB38C8 /* View_notification.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View_notification.xib; sourceTree = "<group>"; };
 		FA025FBA2785E77800AB38C8 /* View_notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View_notification.swift; sourceTree = "<group>"; };
@@ -865,19 +859,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DE9AD7A6250022C721F09845 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				27FAB09E5ED1020760FB3C99 /* Pods-Almnabr.debug.xcconfig */,
-				7A8A5A0BAC6D52D4BFFA3D66 /* Pods-Almnabr.release.xcconfig */,
-				5A11B9A3552F0EE60EA60D0A /* Pods-Almnabr-AlmnabrUITests.debug.xcconfig */,
-				CE7D0FFD0A07FCCE71F19A0A /* Pods-Almnabr-AlmnabrUITests.release.xcconfig */,
-				31A0FBAD24F69227020130F8 /* Pods-AlmnabrTests.debug.xcconfig */,
-				DFFC2D73D472F2D3719F93BC /* Pods-AlmnabrTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		FA03241926FB9BF900372EA6 = {
 			isa = PBXGroup;
 			children = (
@@ -887,7 +868,6 @@
 				FA03243B26FB9BFE00372EA6 /* AlmnabrTests */,
 				FA03244626FB9BFE00372EA6 /* AlmnabrUITests */,
 				FA03242326FB9BFA00372EA6 /* Products */,
-				DE9AD7A6250022C721F09845 /* Pods */,
 				6B94FB38ED641FF0540B3D73 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -2213,7 +2193,6 @@
 		};
 		FA03244D26FB9BFF00372EA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 27FAB09E5ED1020760FB3C99 /* Pods-Almnabr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2242,7 +2221,6 @@
 		};
 		FA03244E26FB9BFF00372EA6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7A8A5A0BAC6D52D4BFFA3D66 /* Pods-Almnabr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -2270,7 +2248,6 @@
 		};
 		FA03245026FB9BFF00372EA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 31A0FBAD24F69227020130F8 /* Pods-AlmnabrTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2293,7 +2270,6 @@
 		};
 		FA03245126FB9BFF00372EA6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DFFC2D73D472F2D3719F93BC /* Pods-AlmnabrTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -2316,7 +2292,6 @@
 		};
 		FA03245326FB9BFF00372EA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A11B9A3552F0EE60EA60D0A /* Pods-Almnabr-AlmnabrUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -2337,7 +2312,6 @@
 		};
 		FA03245426FB9BFF00372EA6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE7D0FFD0A07FCCE71F19A0A /* Pods-Almnabr-AlmnabrUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

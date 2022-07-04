@@ -1,6 +1,0 @@
-framework module Pods_Almnabr {
-  umbrella header "Pods-Almnabr-umbrella.h"
-
-  export *
-  module * { export * }
-}

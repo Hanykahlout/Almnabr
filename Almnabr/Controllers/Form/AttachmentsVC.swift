@@ -9,7 +9,6 @@
 import UIKit
 import MobileCoreServices
 import DropDown
-import MOLH
 
 struct attachment {
     
@@ -261,7 +260,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         self.btnYes.image = UIImage(named: "uncheck")
         self.btnNo.image = UIImage(named: "check")
         
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         }

@@ -10,7 +10,6 @@ import UIKit
 import DPLocalization
 import FontAwesome_swift
 import DropDown
-import MOLH
 
 class TransactionsVC: UIViewController {
     
@@ -305,7 +304,7 @@ class TransactionsVC: UIViewController {
     }
     
     func menu_select(){
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{
@@ -314,7 +313,7 @@ class TransactionsVC: UIViewController {
         
     }
     @objc func buttonMenuAction(sender: UIButton!) {
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{

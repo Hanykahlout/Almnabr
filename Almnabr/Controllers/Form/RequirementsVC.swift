@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 import DropDown
 
 class RequirementsVC: UIViewController {
@@ -217,7 +216,7 @@ class RequirementsVC: UIViewController {
         ])
         
         
-        if MOLHLanguage.currentAppleLanguage() == "en" {
+        if L102Language.currentAppleLanguage() == "en" {
         
             self.tf_material_list.textAlignment = .left
             self.tf_supplier_list.textAlignment = .left
@@ -234,7 +233,7 @@ class RequirementsVC: UIViewController {
         self.btnNext.setTitle("Next".localized(), for: .normal)
         self.btnPrevious.setTitle("Previous".localized(), for: .normal)
         
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         }

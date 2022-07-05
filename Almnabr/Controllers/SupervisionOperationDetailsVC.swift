@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 
 class SupervisionOperationDetailsVC: UIViewController {
@@ -90,7 +89,7 @@ class SupervisionOperationDetailsVC: UIViewController {
     
     
     func menu_select(){
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{
@@ -116,12 +115,12 @@ class SupervisionOperationDetailsVC: UIViewController {
   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ChangePager",
-           let destinationVC = segue.destination as? MyPageViewController {
-            if let controller = self.parentPageViewController {
-           
-            }
-        }
+//        if segue.identifier == "ChangePager",
+//           let destinationVC = segue.destination as? MyPageViewController {
+//            if let controller = self.parentPageViewController {
+//
+//            }
+//        }
     }
     
     

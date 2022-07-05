@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   Almnabr
 
@@ -333,7 +333,6 @@
 "add users" = "add users";
 "Evaluation Result: " = "Evaluation Result: ";
 "Evaluation Status: " = "Evaluation Status: ";
-"Attachments" = "Attachments";
 
 "Title: " = "Title: ";
 "Result" =  "Result";
@@ -352,6 +351,9 @@
 "Specifications" = "Specifications";
 "My Transactions" = "My Transactions";
 "Done" = "Done";
+
+"Incoming" = "Incoming";
+"Outgoing" = "Outgoing";
 "Profile" = "Profile";
 "Settings" = "Settings";
 "Log out" = "Log out";
@@ -363,3 +365,76 @@
 "all_sent" = "All sent";
 
 "Tickets" = "All Ticket";
+"Add Settings" = "Add Settings";
+"Choose Range" = "Choose Range";
+"Success" = "Success";
+"ID Details" = "ID Details";
+"Contract Details" = "Contract Details";
+"Joining Details" = "Joining Details";
+"Job Details" = "Job Details";
+"Communications" = "Communications";
+"Contact Details" = "Contact Details";
+"Bank Details" = "Bank Details";
+"Education Details" = "Education Details";
+"Passport Details" = "Passport Details";
+"Insurance Details" = "Insurance Details";
+"Vacations" = "Vacations";
+"Notes" = "Notes";
+"Modules" = "Modules";
+"Financial Details" = "Financial Details";
+"Calendar View" = "Calendar View";
+"Full Time" = "Full Time";
+"Part Time" = "Part Time";
+"Contract" = "Contract";
+"Others" = "Others";
+"Age" = "Age";
+"Male" = "Male";
+"FeMale" = "FeMale";
+"Active" = "Active";
+"Inactive" = "Inactive";
+"Single" = "Single";
+"Married" = "Married";
+"Diversed" = "Diversed";
+"Others" = "Others";
+"Confirmation !!!" = "Confirmation !!!";
+"Are you sure !?" = "Are you sure !?";
+"Choose the type of connections you want to make " = "Choose the type of connections you want to make ";
+"Choose Date" = "Choose Date";
+"Choose Photo" = "Choose Photo";
+"Choose Pdf" = "Choose Pdf";
+"Action has been completed successfully !!!" = "Action has been completed successfully !!!";
+"Request Details" = "Request Details";
+"Description" = "Description";
+"Person Details" = "Person Details";
+"History" = "History";
+"Spouse" = "Spouse";
+"Son" = "Son";
+"Daugther" =  "Daugther";
+"Choose" = "Choose";
+"Public" = "Public";
+"Private" = "Private";
+"Take a photo from" = "Take a photo from" ;
+"Gallery" = "Gallery";
+"Camera" = "Camera";
+"Diploma" = "Diploma";
+"Bachelor Degree" = "Bachelor Degree";
+"Master Degree" = "Master Degree";
+"Doctorate" = "Doctorate";
+"Associate engineer" = "Associate engineer";
+"Professional engineer" = "Professional engineer";
+"Consultant engineer" = "Consultant engineer";
+"Other" = "Other";
+"Search By Branches" = "Search By Branches";
+"Groups" = "Groups";
+"Users" = "Users";
+"Bank Name" = "Bank Name";
+"Employee Title" = "Employee Title";
+"Job Positions" = "Job Positions";
+"Update Settings" = "Update Settings";
+"Add" = "Add";
+
+"Edit" = "Edit";
+"Upload Signature" = "Upload Signature";
+"Delete" = "Delete";
+"There Are No Data !!!" = "There Are No Data !!!";
+"Select File" = "Select File";

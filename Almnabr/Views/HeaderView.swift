@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import DPLocalization
-import MOLH
 
 var puplic_total :Int = 0
 var isFirstLunch :Bool = true
@@ -21,6 +20,7 @@ class HeaderView:  UIView {
     @IBOutlet weak var btnNotify: UIView!
     @IBOutlet weak var lblNotify: UILabel!
     
+    @IBOutlet weak var menuButton: UIButton!
     
     var btnAction : (()->())?
     var btnNotifyAction : (()->())?
@@ -29,7 +29,6 @@ class HeaderView:  UIView {
     
     var isLoad :Bool = false
     override func awakeFromNib() {
-        
         super.awakeFromNib()
         self.addShape()
         viewTheme.backgroundColor = .clear
@@ -37,7 +36,7 @@ class HeaderView:  UIView {
         update_Function()
        // if isFirstLunch == true {
             self.get_Notificaions_data()
-          
+       
        // }else{
 //            if HelperClassSwift.IsLoadTheme == false {
 //                self.get_theme()
@@ -46,8 +45,17 @@ class HeaderView:  UIView {
             //}
        // }
         
-        
+        if L102Language.currentAppleLanguage() == "ar"{
+            self.flipView(view: self)
+        }
     }
+
+
+    
+    private func flipView(view:UIView){
+        view.transform = .init(scaleX: -1.0, y: 1.0)
+    }
+    
     
     private func update_Function(){
         NotificationCenter.default.addObserver(forName: NSNotification.Name("update_Function"), object: nil, queue: .main) { notifi in

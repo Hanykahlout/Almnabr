@@ -9,7 +9,6 @@
 import UIKit
 import DPLocalization
 import FontAwesome_swift
-import MOLH
 
 var ProjectName:String?
 class SupervisionOperationVC: UIViewController {
@@ -49,8 +48,6 @@ class SupervisionOperationVC: UIViewController {
         
         configGUI()
         header.btnAction = menu_select
-       
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -105,7 +102,7 @@ class SupervisionOperationVC: UIViewController {
     
     
     func menu_select(){
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{
@@ -172,6 +169,7 @@ class SupervisionOperationVC: UIViewController {
     
     private func change_page() {
         NotificationCenter.default.post(name: NSNotification.Name("Change_Supervision"), object: SelectedIndex)
+        
     }
     
 }

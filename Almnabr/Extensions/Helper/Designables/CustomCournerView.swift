@@ -1,8 +1,9 @@
 //
-//  CustomCournerView.swift
-//  Aloo
+//  L102Localizer.swift
+//  Advertiser
 //
-//  Created by Hany Alkahlout on 23/09/2021.
+//  Created by HanyMac on 1/24/18.
+//  Copyright © 2018 Hany Alkahlout. All rights reserved.
 //
 
 import UIKit

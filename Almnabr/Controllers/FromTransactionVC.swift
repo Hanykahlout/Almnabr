@@ -15,7 +15,6 @@ import DPLocalization
 import FontAwesome_swift
 import DropDown
 import FAPanels
-import MOLH
 
 class FromTransactionVC: UIViewController {
      
@@ -242,7 +241,7 @@ class FromTransactionVC: UIViewController {
     func get_Template_name(){
         
         self.showLoadingActivity()
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         APIManager.sendRequestGetAuth(urlString: "p/get_templates_for_transactions?lang_key=\(language ?? "ar")&projects_work_area_id=\(projects_work_area_id)" ) { (response) in
             
             self.arr_Tempelate = []

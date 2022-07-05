@@ -11,10 +11,9 @@ import DropDown
 import DPLocalization
 import FAPanels
 import LocalAuthentication
-import MOLH
 
 class SignInVC: UIViewController {
-
+    
     //- MARK: Outlets
     @IBOutlet weak var txtControlEmailAdress: TextFieldWithLabelView!
     @IBOutlet weak var txtControlPassword: TextFieldWithLabelView!
@@ -25,7 +24,8 @@ class SignInVC: UIViewController {
     @IBOutlet weak var btncheck: UIButton!
     @IBOutlet weak var btnFinger: UIButton!
     
-
+    private let dropDown = DropDown()
+    
     var arr_lang = ["English".localized(),"Arabic".localized()]
     var IsCheck:Bool = false
     
@@ -41,7 +41,7 @@ class SignInVC: UIViewController {
             self.btnLogin.layer.shadowColor = "0D3768".getUIColor().cgColor
             self.btnLogin.layer.shadowOffset = CGSize()
             self.btnLogin.layer.shadowOpacity = 0.8
-          
+            
         }
     }
     
@@ -58,7 +58,7 @@ class SignInVC: UIViewController {
             self.btnLanguage.layer.shadowColor = "0D3768".getUIColor().cgColor
             self.btnLanguage.layer.shadowOffset = CGSize()
             self.btnLanguage.layer.shadowOpacity = 0.8
-          
+            
         }
     }
     //MARK: - UIView Life Cycle Method
@@ -77,16 +77,16 @@ class SignInVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = "FFFFFF".getUIColor()
         configGUI()
-        
+        setUpDropDown()
         
         for family: String in UIFont.familyNames {
-                            print("\(family)")
-                            for names: String in UIFont.fontNames(forFamilyName: family) {
-                                print("== \(names)")
-                            }
-                        }
+            print("\(family)")
+            for names: String in UIFont.fontNames(forFamilyName: family) {
+                print("== \(names)")
+            }
+        }
         
-       
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,59 +114,36 @@ class SignInVC: UIViewController {
         txtControlPassword.backgroundColor = .clear
         txtControlEmailAdress.backgroundColor = .clear
         txtControlEmailAdress.txtField.keyboardType = .emailAddress
-
+        
         btnForgotPassword.setUnderLine(stringValue: "btn_forget_password", withTextSize: 13)
         
         
         btnForgotPassword.setTitleColor("8B9194".getUIColor(), for: .normal)
-
+        
         btnForgotPassword.titleLabel?.font = .kufiRegularFont(ofSize: 15)
         if HelperClassSwift.IsFirstLunch == false && HelperClassSwift.IsLoggedOut == false{
             FingerLogin()
         }
         
         if  HelperClassSwift.IsLoggedOut == true{
-           
+            
             self.btnFinger.isHidden = false
-         
+            
         }
     }
     
-    func change_lang(lang:String){
-        if lang == "ar" {
-            txtControlEmailAdress.txtField.textAlignment = .right
-            txtControlPassword.txtField.textAlignment = .right
-            btnForgotPassword.contentHorizontalAlignment = .right
-            txtControlEmailAdress.txtField.placeholder = "اسم المستخدم"
-            txtControlPassword.txtField.placeholder = "كلمة المرور"
-            btnForgotPassword.setUnderLine(stringValue: "هل نسيت كلمة المرور", withTextSize: 13)
-            btnForgotPassword.setTitle( "هل نسيت كلمة المرور", for: .normal)
-            self.btnLanguage.setTitle("اللغة", for: .normal)
-            self.btnLogin.setTitle("تسجيل الدخول", for: .normal)
-        }else{
-            txtControlEmailAdress.txtField.textAlignment = .left
-            txtControlPassword.txtField.textAlignment = .left
-            btnForgotPassword.contentHorizontalAlignment = .left
-            txtControlEmailAdress.txtField.placeholder = "User Name"
-            txtControlPassword.txtField.placeholder = "Password"
-            btnForgotPassword.setTitle("Forgot password", for: .normal)
-            self.btnLanguage.setTitle("Language", for: .normal)
-            self.btnLogin.setTitle("Login", for: .normal)
-            btnForgotPassword.setUnderLine(stringValue: "Forgot password", withTextSize: 13)
-        }
-    }
-    
+  
     func reloadViewControllers() {
         
         if let lang = HelperClassSwift.getUserInformation(key: Constants.kAppLanguageSelect) {
             if lang == "ar" {
                 UIView.appearance().semanticContentAttribute = .forceRightToLeft
                 UISlider.appearance().semanticContentAttribute = .forceLeftToRight
-             //   changeLanguage(lang: "ar")
+                //   changeLanguage(lang: "ar")
             } else {
                 UIView.appearance().semanticContentAttribute = .forceLeftToRight
                 UISlider.appearance().semanticContentAttribute = .forceLeftToRight
-            // changeLanguage(lang: "en")
+                // changeLanguage(lang: "en")
             }
         }
     }
@@ -176,13 +153,13 @@ class SignInVC: UIViewController {
         UserDefaults.standard.set([lang], forKey: "AppleLanguages")
         //UserDefaults.standard.synchronize()
         guard let window = UIApplication.shared.keyWindow else {return}
-       
+        
         let vc : SignInVC = AppDelegate.mainSB.instanceVC()
         let rootNC = UINavigationController(rootViewController: vc)
         window.rootViewController = rootNC
         window.makeKeyAndVisible()
         self.dismiss(animated: true) {
-          
+            
         }
     }
     
@@ -197,14 +174,13 @@ class SignInVC: UIViewController {
         _ = rootController.center(nav).right(center).left(sideMenu)
         rootController.rightPanelPosition = .front
         rootController.leftPanelPosition = .front
-
         // rootController.configs.rightPanelWidth = (window?.frame.size.width)!
         let width = UIScreen.main.bounds.width - 80
         
         
         rootController.configs.leftPanelWidth = width
         rootController.configs.rightPanelWidth = width
-       
+        
         rootController.configs.maxAnimDuration = 0.3
         rootController.configs.canRightSwipe = false
         rootController.configs.canLeftSwipe = false
@@ -215,73 +191,74 @@ class SignInVC: UIViewController {
     }
     
     
-
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
     
- 
-
+    
+    
     
     
     func login(Username:String , Password:String){
-
-         showLoadingActivity()
+        
+        showLoadingActivity()
         //AppInstance.showLoader()
         var fcmToken = ""
         var language = ""
         
-    if let fcm_token = HelperClassSwift.getUserInformation(key: Constants.DEFINEFCMDEVICETOKEN){
-        fcmToken = fcm_token
-    }
-
-//        if let Language = dp_get_current_language() {
-//            language = Language
-//        }
-         
-        
-    let params = ["username" : Username,
-                  "password" : Password,
-                  "noti_registrationId": "\(Auth_User.FCMtoken)",
-                  "language": MOLHLanguage.currentAppleLanguage(),
-                  "platform":"ios"]
-
-    
-    
-    APIManager.postAnyData(queryString: "login", parameters: params ) { (responseObject, error) in
-        self.hideLoadingActivity()
-       // AppInstance.hideLoader()
-        self.btnLogin.isEnabled = true
-        self.btnLogin.isUserInteractionEnabled = true
-        if responseObject.error != nil && (responseObject.error?.count)! > 0 {
-            self.showAMessage(withTitle: "error".localized(), message: responseObject.error!, completion: {
-
-            })
-        } else if responseObject.error != nil && (responseObject.error?.count)! > 0 {
-            self.showAMessage(withTitle: "error".localized(), message: responseObject.error!, completion: {
-
-            })
-        }else if responseObject.user_data?.token != nil && (responseObject.user_data?.token?.count)! > 0 {
-            NewSuccessModel.saveLoginSuccessToken(userToken: (responseObject.user_data?.token!)!)
-            self.GoToHome()
-            Auth_User.user_id = responseObject.user_data?.user_id ?? "0"
-            Auth_User.user_type_id = responseObject.user_data?.user_type_id ?? "1"
-            HelperClassSwift.IsFirstLunch = false
-            HelperClassSwift.UserName = responseObject.user_data?.user_username ?? "0"
-            HelperClassSwift.UserPassword = Password
-
-       }
-        else if responseObject.message != nil && (responseObject.message?.count)! > 0 {
-            self.showAMessage(withTitle: "error".localized(), message: responseObject.message!, completion: {
-
-            })
-        } else {
-            self.showAMessage(withTitle: "error".localized(), message: "token_missing".localized(), completion: {
-
-            })
+        if let fcm_token = HelperClassSwift.getUserInformation(key: Constants.DEFINEFCMDEVICETOKEN){
+            fcmToken = fcm_token
         }
-    }
-
+        
+        //        if let Language = dp_get_current_language() {
+        //            language = Language
+        //        }
+        
+        
+        let params = ["username" : Username,
+                      "password" : Password,
+                      "noti_registrationId": "\(Auth_User.FCMtoken)",
+                      "language": L102Language.currentAppleLanguage(),
+                      "platform":"ios"]
+        
+        
+        
+        APIManager.postAnyData(queryString: "login", parameters: params ) { (responseObject, error) in
+            self.hideLoadingActivity()
+            // AppInstance.hideLoader()
+            self.btnLogin.isEnabled = true
+            self.btnLogin.isUserInteractionEnabled = true
+            if responseObject.error != nil && (responseObject.error?.count)! > 0 {
+                self.showAMessage(withTitle: "error".localized(), message: responseObject.error!, completion: {
+                    
+                })
+            } else if responseObject.error != nil && (responseObject.error?.count)! > 0 {
+                self.showAMessage(withTitle: "error".localized(), message: responseObject.error!, completion: {
+                    
+                })
+            }else if responseObject.user_data?.token != nil && (responseObject.user_data?.token?.count)! > 0 {
+                NewSuccessModel.saveLoginSuccessToken(userToken: (responseObject.user_data?.token!)!)
+                self.GoToHome()
+                Auth_User.user_id = responseObject.user_data?.user_id ?? "0"
+                Auth_User.user_type_id = responseObject.user_data?.user_type_id ?? "1"
+                HelperClassSwift.IsFirstLunch = false
+                HelperClassSwift.UserName = responseObject.user_data?.user_username ?? "0"
+                HelperClassSwift.UserPassword = Password
+                
+            }
+            
+            else if responseObject.message != nil && (responseObject.message?.count)! > 0 {
+                self.showAMessage(withTitle: "error".localized(), message: responseObject.message!, completion: {
+                    
+                })
+            } else {
+                self.showAMessage(withTitle: "error".localized(), message: "token_missing".localized(), completion: {
+                    
+                })
+            }
+        }
+        
     }
     
     
@@ -295,47 +272,79 @@ class SignInVC: UIViewController {
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason){ success, error in
                 
                 if success {
-
-                      // Move to the main thread because a state update triggers UI changes.
-                      DispatchQueue.main.async { [unowned self] in
+                    
+                    // Move to the main thread because a state update triggers UI changes.
+                    DispatchQueue.main.async { [unowned self] in
                         print("success")
                         self.login(Username: HelperClassSwift.UserName , Password: HelperClassSwift.UserPassword )
-                      }}
-               
+                    }}
+                
             }
         }else{
-           print("can not use ")
+            print("can not use ")
             self.showAMessage(withTitle: "Unavailabel", message: "You Can't use This Feature")
         }
     }
     
     
-    //change langugae using Molh Library
+
+    func change_language(selectedLang:String){
     
-    func change_language(){
         
-        guard let window = UIApplication.shared.keyWindow else { return }
         
+        //        if let window = (UIApplication.shared.delegate as? AppDelegate)?.window{
         self.showAMessage(withTitle: "Change language".localized(), message: "Restart app recommanded to change the language".localized(), completion:{
-            MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
-            MOLH.reset()
+            L102Language.changeLanguage(view: self, newLang: selectedLang, rootViewController: "SignInVC")
+            //            MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
+            //            MOLH.reset()
+            //
+            //            window.makeKeyAndVisible()
+            //            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromLeft, animations: {
+            //            }, completion: { completed in
+            //
+            //
+            ////                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+            ////                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+            ////
+            ////                    exit(EXIT_SUCCESS)
+            ////                })
+            //            })
             
-            window.makeKeyAndVisible()
-            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromLeft, animations: {
-            }, completion: { completed in
-                
-                
-                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                    
-                    exit(EXIT_SUCCESS)
-                })
-            })
-            
-            
+           
         })
+        //        }
         
+    }
+    
+    private func setUpDropDown(){
+        dropDown.anchorView = view
+        dropDown.backgroundColor = .white
+        dropDown.cornerRadius = 2.0
         
+        dropDown.dataSource = self.arr_lang
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            let selectedLang = index == 0 ? "en" : "ar"
+            self.change_language(selectedLang: selectedLang)
+            
+            //            if item == self.arr_lang[0] {
+            //                print(item)
+            //                HelperClassSwift.setUserInformation(value: "en", key: Constants.kAppLanguageSelect)
+            //                dp_set_current_language("en")
+            //
+            //                self.reloadViewControllers()
+            //
+            //            }else{
+            //                HelperClassSwift.setUserInformation(value: "ar", key: Constants.kAppLanguageSelect)
+            //                dp_set_current_language("ar")
+            //                change_lang(lang: "ar")
+            //                self.reloadViewControllers()
+            //            }
+            
+        }
+        dropDown.direction = .bottom
+        dropDown.anchorView = btnLanguage
+        dropDown.bottomOffset = CGPoint(x: 0, y: btnLanguage.bounds.height)
+        dropDown.width = btnLanguage.bounds.width
     }
     
     @IBAction func btnLogin_Click(_ sender: Any) {
@@ -347,39 +356,9 @@ class SignInVC: UIViewController {
         
     }
     
-
+    
     
     @IBAction func btnLanguage_Click(_ sender: Any) {
-        let dropDown = DropDown()
-        dropDown.anchorView = view
-        dropDown.backgroundColor = .white
-        dropDown.cornerRadius = 2.0
-  
-        dropDown.dataSource = self.arr_lang
-        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-           
-          self.change_language()
-            
-            
-            if item == self.arr_lang[0] {
-                print(item)
-                HelperClassSwift.setUserInformation(value: "en", key: Constants.kAppLanguageSelect)
-                dp_set_current_language("en")
-                change_lang(lang: "en")
-                self.reloadViewControllers()
-
-            }else{
-                HelperClassSwift.setUserInformation(value: "ar", key: Constants.kAppLanguageSelect)
-                dp_set_current_language("ar")
-                change_lang(lang: "ar")
-                self.reloadViewControllers()
-            }
-            
-        }
-        dropDown.direction = .bottom
-        dropDown.anchorView = btnLanguage
-        dropDown.bottomOffset = CGPoint(x: 0, y: btnLanguage.bounds.height)
-        dropDown.width = btnLanguage.bounds.width
         dropDown.show()
     }
     
@@ -392,19 +371,19 @@ class SignInVC: UIViewController {
     
     @IBAction func btnRememberMe_Click(_ sender: Any) {
         if IsCheck{
-        self.btnRememeberMe.setImage(UIImage(named: "square_uncheck"), for: .normal)
+            self.btnRememeberMe.setImage(UIImage(named: "square_uncheck"), for: .normal)
             self.IsCheck = false
-        
-    }else{
-        self.IsCheck = true
-        self.btnRememeberMe.setImage(UIImage(named: "square_check"), for: .normal)
-    }
+            
+        }else{
+            self.IsCheck = true
+            self.btnRememeberMe.setImage(UIImage(named: "square_check"), for: .normal)
+        }
     }
     
     
     
     @IBAction func btnFingerPrintSingnin_Click(_ sender: Any) {
         FingerLogin()
-
+        
     }
 }

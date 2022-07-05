@@ -11,7 +11,6 @@ import DPLocalization
 import FontAwesome_swift
 
 import AMPopTip
-import MOLH
 
 var StatusObject:StepStatusObj?
 var obj_transaction:Tcore?
@@ -287,7 +286,7 @@ class TransactionFormDetailsVC: UIViewController {
           spread: 0)
         pager_view.setRounded(20)
         
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
             self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         }
@@ -499,12 +498,12 @@ class TransactionFormDetailsVC: UIViewController {
         //self.btnNext.backgroundColor =  HelperClassSwift.acolor.getUIColor()
         //self.btnPrevious.backgroundColor =  HelperClassSwift.acolor.getUIColor()
        
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
-            self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
-            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+        if L102Language.currentAppleLanguage() == "ar" {
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.left"), for: .normal)
+            self.btnNext.setImage(UIImage(systemName: "arrow.right"), for: .normal)
         }else{
-            self.btnNext.setImage(UIImage(systemName: "arrow.left"), for: .normal)
-            self.btnPrevious.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+            self.btnNext.setImage(UIImage(systemName: "arrow.right"), for: .normal)
+            self.btnPrevious.setImage(UIImage(systemName: "arrow.left"), for: .normal)
         }
         self.lblValSelectedStep.text = "\(arr_step[SelectedIndex-1])"
         

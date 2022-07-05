@@ -9,7 +9,6 @@
 import UIKit
 import DPLocalization
 import DropDown
-import MOLH
 
 struct uintObj{
     var unit:String?
@@ -138,7 +137,7 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
 //            return
 //        }
         //let language = MOLH.currentAppleLanguage()
-       let lang =  MOLHLanguage.currentAppleLanguage()
+       let lang =  L102Language.currentAppleLanguage()
         self.showLoadingActivity()
         APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/get_work_levels_for_transaction?lang_key=\(lang)&projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=GN&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_nos=1" ) { (response) in
             

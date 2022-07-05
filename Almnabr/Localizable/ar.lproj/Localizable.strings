@@ -266,7 +266,7 @@
 
 "Waiting for : " = "بإنتظار :";
 
-"View" = "مشاهدة";
+"View" = "عرض";
 "View Time" = "مشاهدة الوقت";
 "Last View Time" = "وقت آخر مشاهدة";
 "Date & Time" = "التاريخ والوقت";
@@ -359,6 +359,8 @@
 "My Transactions" = "معاملاتي";
 
 "Done" = "اعتماد";
+"Incoming" = "واردة";
+"Outgoing" = "صادرة";
 "Profile" = "الملف الشخصي";
 "Settings" = "الاعدادات";
 "Log out" = "تسجيل خروج";
@@ -372,3 +374,79 @@
 
 
 "Tickets" = "قائمة المهام";
+"Add Settings" = "أضف الإعدادات";
+"Choose Range" = "اختر النطاق";
+"Success" = "نجحت العملية";
+"ID Details" = "تفاصيل الهوية";
+"Contract Details" = "تفاصيل العقد";
+"Joining Details" = "تفاصيل الانضمام";
+"Job Details" = "تفاصيل الوظيفة";
+"Communications" = "مجال الاتصالات";
+"Contact Details" = "بيانات المتصل";
+"Bank Details" = "التفاصيل المصرفية";
+"Education Details" = "تفاصيل التعليم";
+"Passport Details" = "تفاصيل جواز السفر";
+"Insurance Details" = "تفاصيل التأمين";
+"Vacations" = "الاجازات";
+"Notes" = "ملحوظات";
+"Attachments" = "المرفقات";
+"Modules" = "الوحدات";
+"Financial Details" = "التفاصيل المالية";
+"Calendar View" = "عرض التقويم";
+"Full Time" = "وقت كامل";
+"Part Time" = "دوام جزئى";
+"Contract" = "عقد";
+"Others" = "آخر";
+"Age" = "العمر";
+"Male" = "ذكر";
+"FeMale" = "أنثى";
+"Active" = "نشط";
+"Inactive" = "غير نشط";
+"Single" = "غير مرتبطة";
+"Married" = "متزوج";
+"Diversed" = "مُطلّق";
+"Confirmation !!!" = "تأكيد !!!";
+"Are you sure !?" = "هل أنت واثق !؟";
+"Choose the type of connections you want to make " = "اختر نوع الاتصالات التي تريد إجراؤها";
+
+"Choose Date" = "اختر موعدا";
+"Choose Photo" = "اختر الصورة";
+"Choose Pdf" = "اختر Pdf";
+"Action has been completed successfully !!!" = "اكتمل العمل بنجاح !!!";
+"Request Details" = "تفاصيل الطلب";
+"Description" = "وصف";
+"Person Details" = "تفاصيل الشخص";
+"History" = "سجل";
+"Spouse" = "زوج";
+"Son" = "ابن";
+"Daugther" =  "ابنة";
+
+"Choose" = "اختر";
+
+"Public" = "عام";
+"Private" = "خاص";
+"Take a photo from" = "التقط صورة من";
+"Gallery" = "معرض الصور";
+"Camera" = "كاميرا";
+"Diploma" = "دبلوم";
+"Bachelor Degree" = "درجة البكالوريوس";
+"Master Degree" = "درجة الماجستير";
+"Doctorate" = "دكتوراه";
+"Associate engineer" = "معاون مهندس";
+"Professional engineer" = "مهندس محترف";
+"Consultant engineer" = "مستشار مهندس";
+"Other" = "آخر";
+"Search By Branches" = "البحث عن طريق الفروع";
+"Groups" = "مجموعات";
+"Users" = "المستخدمون";
+"Bank Name" = "اسم البنك";
+"Employee Title" = "لقب الموظف";
+"Job Positions" = "المناصب الوظيفية";
+"Update Settings" = "تحديث الإعدادات";
+"Add" = "اضافة";
+"Edit" = "تعديل";
+"Upload Signature" = "تحميل التوقيع";
+"Delete" = "حذف";
+"There Are No Data !!!" = "لا توجد بيانات !!!";
+
+"Select File" = "اختر ملف";

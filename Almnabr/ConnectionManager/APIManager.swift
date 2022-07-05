@@ -9,7 +9,6 @@ import UIKit
 import Alamofire
 import AlamofireObjectMapper
 import DPLocalization
-import MOLH
 
 class APIManager: NSObject {
    
@@ -27,8 +26,6 @@ class APIManager: NSObject {
     
     static let serverURL = "https://nahidh.sa/backend"
 
-    
-    
     static func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {
@@ -231,7 +228,7 @@ class APIManager: NSObject {
     
     static func setHeaderInformation() -> HTTPHeaders {
         var headers: HTTPHeaders?
-        var language = MOLHLanguage.currentAppleLanguage()
+        var language = L102Language.currentAppleLanguage()
         if language.count == 0 {
             language = "en"
         }
@@ -246,7 +243,7 @@ class APIManager: NSObject {
     
     static func setMultipartHeaderInformation() -> HTTPHeaders {
         var headers: HTTPHeaders?
-        var language = MOLHLanguage.currentAppleLanguage()
+        var language = L102Language.currentAppleLanguage()
         if language.count == 0 {
             language = "en"
         }
@@ -470,7 +467,6 @@ class APIManager: NSObject {
         Alamofire.request( strURL , method: .get, parameters: nil,
                            encoding:  URLEncoding.default, headers: auth).responseJSON
             { response in
-                            
                             if(response.result.isSuccess)
                             {
                                 

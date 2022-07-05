@@ -8,7 +8,6 @@
 
 import Foundation
 import DPLocalization
-import MOLH
 
 extension Date {
     func asStringHHmmss() -> String {
@@ -74,7 +73,7 @@ extension Date {
         //dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = formatString
        
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             dateFormatter.locale = Locale(identifier: "ar_EG")
             //print("printar")
         } else {
@@ -163,7 +162,7 @@ extension Date {
         //dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         dateFormatter.dateFormat = "dd MMM yyyy   hh a"
         
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             dateFormatter.locale = Locale(identifier: "ar_EG")
             //print("printar")
         } else {
@@ -180,7 +179,7 @@ extension Date {
         let dateFormatter = DateFormatter()
         //dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             dateFormatter.locale = Locale(identifier: "ar_EG")
             //print("printar")
         } else {
@@ -416,11 +415,9 @@ extension String {
    
     
     func localized(withComment comment: String? = nil) -> String {
-       
+        
   
        return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
-   // }
-     // return LanguageManagerClass.setLocalizedText(self)
     }
     
     func getUIColor() -> UIColor {
@@ -717,7 +714,7 @@ extension String {
         
         dateFormatter1.dateFormat = "dd MMM yyyy   hh a" //Your date format
 
-        if MOLHLanguage.currentAppleLanguage()  == "ar" {
+        if L102Language.currentAppleLanguage()  == "ar" {
             dateFormatter1.locale = Locale(identifier: "ar_EG")
         } else {
             dateFormatter1.locale = Locale(identifier: "en_US")
@@ -739,7 +736,7 @@ extension String {
         
         let dateFormatter1 = DateFormatter()
         dateFormatter1.dateFormat = "dd MMM yyyy  hh a"
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             dateFormatter1.locale = Locale(identifier: "ar_EG")
            
         } else {
@@ -768,7 +765,7 @@ extension String {
         //dateFormatter1.amSymbol = "am"
         //dateFormatter1.pmSymbol = "pm"
         
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             dateFormatter1.locale = Locale(identifier: "ar_EG")
             print("printar")
         } else {

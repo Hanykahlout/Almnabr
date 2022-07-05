@@ -17,7 +17,8 @@ import ObjectMapper
 struct SearchBranchRecords : Mappable {
 	var value : String?
 	var label : String?
-
+    var flag : String?
+    
 	init?(map: Map) {
 
 	}
@@ -26,6 +27,7 @@ struct SearchBranchRecords : Mappable {
 
 		value <- map["value"]
 		label <- map["label"]
+        flag <- map["flag"]
 	}
 
 }

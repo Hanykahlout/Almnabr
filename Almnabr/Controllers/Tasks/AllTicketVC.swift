@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 class AllTicketVC: UIViewController {
 
@@ -188,7 +187,7 @@ class AllTicketVC: UIViewController {
     }
     
     func menu_select(){
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{

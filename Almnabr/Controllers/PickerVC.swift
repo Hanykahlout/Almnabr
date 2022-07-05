@@ -57,9 +57,6 @@ class PickerVC: UIViewController {
             delegate!(name, index)
             self.dismiss(animated: true, completion: nil)
         }
-       
-       
-       
     }
     
     @IBAction func btnCancel_Click(_ sender: UIButton) {

@@ -9,7 +9,6 @@
 import Foundation
 import ZVProgressHUD
 import DPLocalization
-import MOLH
 
 extension UIViewController {
     
@@ -58,6 +57,26 @@ extension UIViewController {
        
     }
     
+    func formatedDate(date:Date) ->String{
+        let dateFormater = DateFormatter()
+        dateFormater.locale = .init(identifier: "en")
+        dateFormater.dateFormat = "YYYY/MM/dd"
+        return dateFormater.string(from: date)
+    }
+    
+//    func formatedDate2(date:Date) ->String{
+//        let dateFormater = DateFormatter()
+//        dateFormater.locale = .init(identifier: "en")
+//        dateFormater.dateFormat = "E MMM MM yyyy hh:mm:ss ZZZZ (zzzz)"
+//        return dateFormater.string(from: date)
+//    }
+    
+    func formatedDate3(date:Date) ->String{
+        let dateFormater = DateFormatter()
+        dateFormater.locale = .init(identifier: "en")
+        dateFormater.dateFormat = "dd/MM/YYYY"
+        return dateFormater.string(from: date)
+    }
     
     
     func makeUserLogout() {
@@ -136,10 +155,7 @@ extension UIViewController {
     }
     
     func isArabicSelected() -> Bool {
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
-            return true
-        }
-        return false
+        return L102Language.currentAppleLanguage() == "ar"
     }
     
     

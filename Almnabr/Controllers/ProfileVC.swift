@@ -8,7 +8,6 @@
 
 import UIKit
 import Kingfisher
-import MOLH
 
 class ProfileVC: UIViewController {
 
@@ -72,7 +71,7 @@ class ProfileVC: UIViewController {
     
     
     func menu_select(){
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{

@@ -9,7 +9,6 @@
 import UIKit
 import DPLocalization
 import WebKit
-import MOLH
 import PassKit
 import CoreNFC
 import SocketIO
@@ -18,7 +17,7 @@ var userObj :UserObj?
 var arr_Menu : [MenuObj]?
 
 class HomeVC: UIViewController   {
-
+    
     @IBOutlet weak var viewTheme: UIView!
     @IBOutlet weak var btnMenu: UIView!
     @IBOutlet weak var webView: WKWebView!
@@ -34,7 +33,7 @@ class HomeVC: UIViewController   {
 //    Node.NAHIDH.Sa
     //"https://node.almnabr.com/"
     private var socket: SocketIOClient!
-
+    
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -50,24 +49,24 @@ class HomeVC: UIViewController   {
         print("XXX-TOKEN",token)
         self.manager.config = SocketIOClientConfiguration(
             arrayLiteral: .connectParams(["Authorization": "test"]),.secure(false) )
-       
+        
         let dict =  [ "token" : token]
-         manager.defaultSocket.connect(withPayload: dict)
-
+        manager.defaultSocket.connect(withPayload: dict)
+        
         let socket = self.manager.defaultSocket
-
+        
         self.manager.connectSocket(socket, withPayload:dict)
-
+        
         socket.on(clientEvent: .connect) {data, ack in
             print("socket connected")
         }
-
-        }
-       
-
-
+        
+    }
     
-
+    
+    
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -94,36 +93,36 @@ class HomeVC: UIViewController   {
                 }
             }
         }}
-
+    
     
     func menu_select(){
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         print("HHHHHI",language)
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{
             panel?.openLeft(animated: true)
         }
-  
+        
     }
     
     func Notification_select(){
         let vc:NotificationVC = AppDelegate.mainSB.instanceVC()
         self.navigationController?.pushViewController(vc, animated: true)
-
+        
     }
     
     
     @objc func buttonMenuAction(sender: UIButton!) {
-       
-        let language =  MOLHLanguage.currentAppleLanguage()
+        
+        let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{
             panel?.openLeft(animated: true)
         }
     }
-   
+    
     
     
 }

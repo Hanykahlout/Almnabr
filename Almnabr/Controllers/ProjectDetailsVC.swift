@@ -9,7 +9,6 @@
 import UIKit
 import DPLocalization
 import FontAwesome_swift
-import MOLH
 
 class ProjectDetailsVC: UIViewController {
     
@@ -472,7 +471,7 @@ class ProjectDetailsVC: UIViewController {
     
     
     func menu_select(){
-        let language =  MOLHLanguage.currentAppleLanguage()
+        let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
             panel?.openRight(animated: true)
         }else{

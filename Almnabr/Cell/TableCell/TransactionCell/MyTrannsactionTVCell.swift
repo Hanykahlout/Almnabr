@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import MOLH
 
 class MyTrannsactionTVCell: UITableViewCell {
 
@@ -35,7 +34,7 @@ class MyTrannsactionTVCell: UITableViewCell {
         viewBack.layer.shadowOffset = .zero
         viewBack.layer.shadowRadius = 4
         
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
+        if L102Language.currentAppleLanguage() == "ar" {
             lblNo.textAlignment = .right
             lblDesc.textAlignment = .right
             lblFrom.textAlignment = .right

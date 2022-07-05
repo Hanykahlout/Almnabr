@@ -67,7 +67,6 @@
 		3F397D8B2860CD4400A7DAB4 /* AttachmentTypeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D892860CD4400A7DAB4 /* AttachmentTypeResponse.swift */; };
 		3F3FEF282864735400F57578 /* CommunicationSubmitResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3FEF272864735400F57578 /* CommunicationSubmitResponse.swift */; };
 		3F432BA92871E9D7009289DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3F432BA82871E9D7009289DE /* .gitignore */; };
-		3F432BAB2871EB0C009289DE /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 3F432BAA2871EB0C009289DE /* .gitattributes */; };
 		3F43359D286393F7002C282C /* SearchUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F43359C286393F7002C282C /* SearchUserResponse.swift */; };
 		3F48C53C285883AF004D33F8 /* EmpViewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C538285883AE004D33F8 /* EmpViewResponse.swift */; };
 		3F48C53D285883AF004D33F8 /* EmpViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C539285883AE004D33F8 /* EmpViewData.swift */; };
@@ -155,6 +154,7 @@
 		3FC82A4C284CD863005BCB46 /* Edit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC82A48284CD863005BCB46 /* Edit.swift */; };
 		3FC82A4E284CD863005BCB46 /* AllEmployeeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC82A4A284CD863005BCB46 /* AllEmployeeResponse.swift */; };
 		3FC82A4F284CD863005BCB46 /* AllEmployeeRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC82A4B284CD863005BCB46 /* AllEmployeeRecords.swift */; };
+		3FD038CE28742E8A00BB13C7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038CD28742E8A00BB13C7 /* .gitignore */; };
 		3FD1C5FA284E383100A42DAA /* SelectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1C5F4284E383000A42DAA /* SelectionInfo.swift */; };
 		3FD1C5FB284E383100A42DAA /* FilterRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1C5F5284E383000A42DAA /* FilterRecords.swift */; };
 		3FD1C5FC284E383100A42DAA /* FilterGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1C5F6284E383000A42DAA /* FilterGetResponse.swift */; };
@@ -505,7 +505,6 @@
 		3F397D892860CD4400A7DAB4 /* AttachmentTypeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentTypeResponse.swift; sourceTree = "<group>"; };
 		3F3FEF272864735400F57578 /* CommunicationSubmitResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationSubmitResponse.swift; sourceTree = "<group>"; };
 		3F432BA82871E9D7009289DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		3F432BAA2871EB0C009289DE /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		3F43359C286393F7002C282C /* SearchUserResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserResponse.swift; sourceTree = "<group>"; };
 		3F48C538285883AE004D33F8 /* EmpViewResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpViewResponse.swift; sourceTree = "<group>"; };
 		3F48C539285883AE004D33F8 /* EmpViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpViewData.swift; sourceTree = "<group>"; };
@@ -609,6 +608,7 @@
 		3FC82A48284CD863005BCB46 /* Edit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edit.swift; sourceTree = "<group>"; };
 		3FC82A4A284CD863005BCB46 /* AllEmployeeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEmployeeResponse.swift; sourceTree = "<group>"; };
 		3FC82A4B284CD863005BCB46 /* AllEmployeeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEmployeeRecords.swift; sourceTree = "<group>"; };
+		3FD038CD28742E8A00BB13C7 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		3FD1C5F4284E383000A42DAA /* SelectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionInfo.swift; sourceTree = "<group>"; };
 		3FD1C5F5284E383000A42DAA /* FilterRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterRecords.swift; sourceTree = "<group>"; };
 		3FD1C5F6284E383000A42DAA /* FilterGetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterGetResponse.swift; sourceTree = "<group>"; };
@@ -1250,7 +1250,7 @@
 		FA03241926FB9BF900372EA6 = {
 			isa = PBXGroup;
 			children = (
-				3F432BAA2871EB0C009289DE /* .gitattributes */,
+				3FD038CD28742E8A00BB13C7 /* .gitignore */,
 				3F432BA82871E9D7009289DE /* .gitignore */,
 				FA03242426FB9BFA00372EA6 /* Almnabr */,
 				FA03243B26FB9BFE00372EA6 /* AlmnabrTests */,
@@ -2004,6 +2004,7 @@
 				FA530A45270CEFF10071CDC8 /* MyTransactionHeaderView.xib in Resources */,
 				FA400D492718C61A0097C7D1 /* ServicesView.xib in Resources */,
 				3F07C070286D8F9300C2CDF6 /* EducationTVCell.xib in Resources */,
+				3FD038CE28742E8A00BB13C7 /* .gitignore in Resources */,
 				3F9040F8286CB48F008D85B8 /* OutgoingHistoryTableViewCell.xib in Resources */,
 				FAAF206827DCEF9400AD255B /* Related formsTVCell.xib in Resources */,
 				FAC32FBC270AE8A80046A0F6 /* SubMenuTVCell.xib in Resources */,
@@ -2014,7 +2015,6 @@
 				FA9E7D88270E46AE003A1D16 /* GridCell.xib in Resources */,
 				FA18DB39274867EA004E64DD /* GoogleService-Info.plist in Resources */,
 				FAD531482770FE9600C8E2AD /* SaudiTVCell.xib in Resources */,
-				3F432BAB2871EB0C009289DE /* .gitattributes in Resources */,
 				3F9040C6286CB079008D85B8 /* EducationDetailsTableViewCell.xib in Resources */,
 				FAE13A4E27293C2D00509550 /* DroidKufi-Regular.ttf in Resources */,
 				3F9040D5286CB156008D85B8 /* NoteTableViewCell.xib in Resources */,

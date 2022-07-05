@@ -155,6 +155,150 @@
 		3FC82A4E284CD863005BCB46 /* AllEmployeeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC82A4A284CD863005BCB46 /* AllEmployeeResponse.swift */; };
 		3FC82A4F284CD863005BCB46 /* AllEmployeeRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC82A4B284CD863005BCB46 /* AllEmployeeRecords.swift */; };
 		3FD038CE28742E8A00BB13C7 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038CD28742E8A00BB13C7 /* .gitignore */; };
+		3FD038D52874377000BB13C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038D02874377000BB13C7 /* LaunchScreen.storyboard */; };
+		3FD039D2287437B000BB13C7 /* AllEmployeesVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038DD287437AF00BB13C7 /* AllEmployeesVC.strings */; };
+		3FD039D3287437B000BB13C7 /* AllEmployeesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038DF287437AF00BB13C7 /* AllEmployeesVC.xib */; };
+		3FD039D4287437B000BB13C7 /* FilterViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038E2287437AF00BB13C7 /* FilterViewController.strings */; };
+		3FD039D5287437B000BB13C7 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038E4287437AF00BB13C7 /* FilterViewController.xib */; };
+		3FD039D6287437B000BB13C7 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD038E6287437AF00BB13C7 /* FilterViewController.swift */; };
+		3FD039D7287437B000BB13C7 /* AllEmployeesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD038E8287437AF00BB13C7 /* AllEmployeesVC.swift */; };
+		3FD039D8287437B000BB13C7 /* ViewEmpLangVacationsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038EB287437AF00BB13C7 /* ViewEmpLangVacationsVC.xib */; };
+		3FD039D9287437B000BB13C7 /* ViewEmpLangVacationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD038EC287437AF00BB13C7 /* ViewEmpLangVacationsVC.swift */; };
+		3FD039DA287437B000BB13C7 /* ViewEmpBankDetailsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038EE287437AF00BB13C7 /* ViewEmpBankDetailsVC.strings */; };
+		3FD039DB287437B000BB13C7 /* ViewEmpBankDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038F0287437AF00BB13C7 /* ViewEmpBankDetailsVC.xib */; };
+		3FD039DC287437B000BB13C7 /* ViewEmpBankDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD038F2287437AF00BB13C7 /* ViewEmpBankDetailsVC.swift */; };
+		3FD039DD287437B000BB13C7 /* ViewEmpPassportDetailsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038F4287437AF00BB13C7 /* ViewEmpPassportDetailsVC.strings */; };
+		3FD039DE287437B000BB13C7 /* ViewEmpPassportDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD038F6287437AF00BB13C7 /* ViewEmpPassportDetailsVC.swift */; };
+		3FD039DF287437B000BB13C7 /* ViewEmpPassportDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038F7287437AF00BB13C7 /* ViewEmpPassportDetailsVC.xib */; };
+		3FD039E0287437B000BB13C7 /* OutgoingVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038FA287437AF00BB13C7 /* OutgoingVC.strings */; };
+		3FD039E1287437B000BB13C7 /* ViewEmpCommunicationsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038FC287437AF00BB13C7 /* ViewEmpCommunicationsVC.strings */; };
+		3FD039E2287437B000BB13C7 /* OutgoingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD038FE287437AF00BB13C7 /* OutgoingVC.swift */; };
+		3FD039E3287437B000BB13C7 /* ViewEmpCommunicationsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD038FF287437AF00BB13C7 /* ViewEmpCommunicationsVC.xib */; };
+		3FD039E4287437B000BB13C7 /* OutgoingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03901287437AF00BB13C7 /* OutgoingVC.xib */; };
+		3FD039E5287437B000BB13C7 /* PresonDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03904287437AF00BB13C7 /* PresonDetailsViewController.strings */; };
+		3FD039E6287437B000BB13C7 /* OutgoingAttachViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03906287437AF00BB13C7 /* OutgoingAttachViewController.strings */; };
+		3FD039E7287437B000BB13C7 /* RequestDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03908287437AF00BB13C7 /* RequestDetailsViewController.strings */; };
+		3FD039E8287437B000BB13C7 /* OngoingViewDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0390A287437AF00BB13C7 /* OngoingViewDetailsViewController.strings */; };
+		3FD039E9287437B000BB13C7 /* OutgoingHistoryViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0390C287437AF00BB13C7 /* OutgoingHistoryViewController.strings */; };
+		3FD039EA287437B000BB13C7 /* PresonDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0390E287437AF00BB13C7 /* PresonDetailsViewController.swift */; };
+		3FD039EB287437B000BB13C7 /* OutgoingHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0390F287437AF00BB13C7 /* OutgoingHistoryViewController.swift */; };
+		3FD039EC287437B000BB13C7 /* OutgoingHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03910287437AF00BB13C7 /* OutgoingHistoryViewController.xib */; };
+		3FD039ED287437B000BB13C7 /* PresonDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03912287437AF00BB13C7 /* PresonDetailsViewController.xib */; };
+		3FD039EE287437B000BB13C7 /* OngoingViewDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03914287437AF00BB13C7 /* OngoingViewDetailsViewController.xib */; };
+		3FD039EF287437B000BB13C7 /* OutgoingAttachViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03916287437AF00BB13C7 /* OutgoingAttachViewController.xib */; };
+		3FD039F0287437B000BB13C7 /* RequestDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03918287437AF00BB13C7 /* RequestDetailsViewController.xib */; };
+		3FD039F1287437B000BB13C7 /* OutgoingAttachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0391A287437AF00BB13C7 /* OutgoingAttachViewController.swift */; };
+		3FD039F2287437B000BB13C7 /* OngoingViewDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0391B287437AF00BB13C7 /* OngoingViewDetailsViewController.swift */; };
+		3FD039F3287437B000BB13C7 /* ViewOutgoingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0391C287437AF00BB13C7 /* ViewOutgoingViewController.swift */; };
+		3FD039F4287437B000BB13C7 /* ViewOutgoingPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0391D287437AF00BB13C7 /* ViewOutgoingPageVC.swift */; };
+		3FD039F5287437B000BB13C7 /* RequestDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0391E287437AF00BB13C7 /* RequestDetailsViewController.swift */; };
+		3FD039F6287437B000BB13C7 /* ViewEmpCommunicationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0391F287437AF00BB13C7 /* ViewEmpCommunicationsVC.swift */; };
+		3FD039F7287437B000BB13C7 /* ViewEmpNotesVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03921287437AF00BB13C7 /* ViewEmpNotesVC.strings */; };
+		3FD039F8287437B000BB13C7 /* AddNotesViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03923287437AF00BB13C7 /* AddNotesViewController.strings */; };
+		3FD039F9287437B000BB13C7 /* ViewEmpNotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03925287437AF00BB13C7 /* ViewEmpNotesVC.swift */; };
+		3FD039FA287437B000BB13C7 /* ViewEmpNotesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03926287437AF00BB13C7 /* ViewEmpNotesVC.xib */; };
+		3FD039FB287437B000BB13C7 /* AddNotesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03928287437AF00BB13C7 /* AddNotesViewController.xib */; };
+		3FD039FC287437B000BB13C7 /* AddNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0392A287437AF00BB13C7 /* AddNotesViewController.swift */; };
+		3FD039FD287437B000BB13C7 /* ViewEmpIDDetailsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0392C287437AF00BB13C7 /* ViewEmpIDDetailsVC.strings */; };
+		3FD039FE287437B000BB13C7 /* ViewEmpIDDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0392E287437AF00BB13C7 /* ViewEmpIDDetailsVC.xib */; };
+		3FD039FF287437B000BB13C7 /* ViewEmpIDDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03930287437AF00BB13C7 /* ViewEmpIDDetailsVC.swift */; };
+		3FD03A00287437B000BB13C7 /* UsersViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03932287437AF00BB13C7 /* UsersViewController.strings */; };
+		3FD03A01287437B000BB13C7 /* ViewEmpModulesVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03934287437AF00BB13C7 /* ViewEmpModulesVC.strings */; };
+		3FD03A02287437B000BB13C7 /* UsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03936287437AF00BB13C7 /* UsersViewController.swift */; };
+		3FD03A03287437B000BB13C7 /* UsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03937287437AF00BB13C7 /* UsersViewController.xib */; };
+		3FD03A04287437B000BB13C7 /* ViewEmpModulesVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03939287437AF00BB13C7 /* ViewEmpModulesVC.xib */; };
+		3FD03A05287437B000BB13C7 /* ViewEmpModulesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0393B287437AF00BB13C7 /* ViewEmpModulesVC.swift */; };
+		3FD03A06287437B000BB13C7 /* ViewEmpContractDetailsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0393D287437AF00BB13C7 /* ViewEmpContractDetailsVC.strings */; };
+		3FD03A07287437B000BB13C7 /* ViewEmpContractDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0393F287437AF00BB13C7 /* ViewEmpContractDetailsVC.swift */; };
+		3FD03A08287437B000BB13C7 /* ViewEmpContractDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03940287437AF00BB13C7 /* ViewEmpContractDetailsVC.xib */; };
+		3FD03A09287437B000BB13C7 /* ViewEmpJobDetailsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03943287437AF00BB13C7 /* ViewEmpJobDetailsVC.strings */; };
+		3FD03A0A287437B000BB13C7 /* AddJopDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03945287437AF00BB13C7 /* AddJopDetailsViewController.strings */; };
+		3FD03A0B287437B000BB13C7 /* ViewEmpJobDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03947287437B000BB13C7 /* ViewEmpJobDetailsVC.swift */; };
+		3FD03A0C287437B000BB13C7 /* AddJopDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03948287437B000BB13C7 /* AddJopDetailsViewController.swift */; };
+		3FD03A0D287437B000BB13C7 /* AddJopDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03949287437B000BB13C7 /* AddJopDetailsViewController.xib */; };
+		3FD03A0E287437B000BB13C7 /* ViewEmpJobDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0394B287437B000BB13C7 /* ViewEmpJobDetailsVC.xib */; };
+		3FD03A0F287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0394E287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.swift */; };
+		3FD03A10287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0394F287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.strings */; };
+		3FD03A11287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03951287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.xib */; };
+		3FD03A12287437B000BB13C7 /* ViewEmpAttachmentsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03954287437B000BB13C7 /* ViewEmpAttachmentsVC.strings */; };
+		3FD03A13287437B000BB13C7 /* ViewEmpAttachmentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03956287437B000BB13C7 /* ViewEmpAttachmentsVC.swift */; };
+		3FD03A14287437B000BB13C7 /* ViewEmpAttachmentsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03957287437B000BB13C7 /* ViewEmpAttachmentsVC.xib */; };
+		3FD03A15287437B000BB13C7 /* ViewEmpJoiningDetailsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0395A287437B000BB13C7 /* ViewEmpJoiningDetailsVC.strings */; };
+		3FD03A16287437B000BB13C7 /* ViewEmpJoiningDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0395C287437B000BB13C7 /* ViewEmpJoiningDetailsVC.swift */; };
+		3FD03A17287437B000BB13C7 /* ViewEmpJoiningDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0395D287437B000BB13C7 /* ViewEmpJoiningDetailsVC.xib */; };
+		3FD03A18287437B000BB13C7 /* AddEmpContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03960287437B000BB13C7 /* AddEmpContactViewController.swift */; };
+		3FD03A19287437B000BB13C7 /* ViewEmpContactDetailsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03961287437B000BB13C7 /* ViewEmpContactDetailsVC.strings */; };
+		3FD03A1A287437B000BB13C7 /* AddEmpContactViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03963287437B000BB13C7 /* AddEmpContactViewController.strings */; };
+		3FD03A1B287437B000BB13C7 /* ViewEmpContactDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03965287437B000BB13C7 /* ViewEmpContactDetailsVC.xib */; };
+		3FD03A1C287437B000BB13C7 /* AddEmpContactViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03967287437B000BB13C7 /* AddEmpContactViewController.xib */; };
+		3FD03A1D287437B000BB13C7 /* ViewEmpContactDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03969287437B000BB13C7 /* ViewEmpContactDetailsVC.swift */; };
+		3FD03A1E287437B000BB13C7 /* ViewEmployeeDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0396A287437B000BB13C7 /* ViewEmployeeDetailsVC.swift */; };
+		3FD03A1F287437B000BB13C7 /* UpdateInsuranceViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0396C287437B000BB13C7 /* UpdateInsuranceViewController.strings */; };
+		3FD03A20287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0396E287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.strings */; };
+		3FD03A21287437B000BB13C7 /* AddInsuranceViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03970287437B000BB13C7 /* AddInsuranceViewController.strings */; };
+		3FD03A22287437B000BB13C7 /* UpdateInsuranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03972287437B000BB13C7 /* UpdateInsuranceViewController.swift */; };
+		3FD03A23287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03973287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.xib */; };
+		3FD03A24287437B000BB13C7 /* AddInsuranceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03975287437B000BB13C7 /* AddInsuranceViewController.xib */; };
+		3FD03A25287437B000BB13C7 /* UpdateInsuranceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03977287437B000BB13C7 /* UpdateInsuranceViewController.xib */; };
+		3FD03A26287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03979287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.swift */; };
+		3FD03A27287437B000BB13C7 /* AddInsuranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0397A287437B000BB13C7 /* AddInsuranceViewController.swift */; };
+		3FD03A28287437B000BB13C7 /* ViewLangCalenderVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0397C287437B000BB13C7 /* ViewLangCalenderVC.xib */; };
+		3FD03A29287437B000BB13C7 /* ViewLangCalenderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0397E287437B000BB13C7 /* ViewLangCalenderVC.swift */; };
+		3FD03A2A287437B000BB13C7 /* AddEmpEduDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03980287437B000BB13C7 /* AddEmpEduDetailsViewController.strings */; };
+		3FD03A2B287437B000BB13C7 /* ViewEmpEducationDetailsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03982287437B000BB13C7 /* ViewEmpEducationDetailsVC.strings */; };
+		3FD03A2C287437B000BB13C7 /* AddAttachmentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03984287437B000BB13C7 /* AddAttachmentViewController.xib */; };
+		3FD03A2D287437B000BB13C7 /* ViewEmpEducationDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03985287437B000BB13C7 /* ViewEmpEducationDetailsVC.swift */; };
+		3FD03A2E287437B000BB13C7 /* ViewEmpEducationDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03986287437B000BB13C7 /* ViewEmpEducationDetailsVC.xib */; };
+		3FD03A2F287437B000BB13C7 /* AddEmpEduDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03988287437B000BB13C7 /* AddEmpEduDetailsViewController.xib */; };
+		3FD03A30287437B000BB13C7 /* AddAttachmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0398A287437B000BB13C7 /* AddAttachmentViewController.swift */; };
+		3FD03A31287437B000BB13C7 /* AddEmpEduDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0398B287437B000BB13C7 /* AddEmpEduDetailsViewController.swift */; };
+		3FD03A32287437B000BB13C7 /* ViewEmployeePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0398C287437B000BB13C7 /* ViewEmployeePageVC.swift */; };
+		3FD03A33287437B000BB13C7 /* EditEmployeePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0398E287437B000BB13C7 /* EditEmployeePageViewController.swift */; };
+		3FD03A34287437B000BB13C7 /* IDDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03990287437B000BB13C7 /* IDDetailsViewController.strings */; };
+		3FD03A35287437B000BB13C7 /* BankDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03992287437B000BB13C7 /* BankDetailsViewController.strings */; };
+		3FD03A36287437B000BB13C7 /* ContactDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03994287437B000BB13C7 /* ContactDetailsViewController.strings */; };
+		3FD03A37287437B000BB13C7 /* InsuranceDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03996287437B000BB13C7 /* InsuranceDetailsViewController.strings */; };
+		3FD03A38287437B000BB13C7 /* PassportDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03998287437B000BB13C7 /* PassportDetailsViewController.strings */; };
+		3FD03A39287437B000BB13C7 /* EducationDetailsViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD0399A287437B000BB13C7 /* EducationDetailsViewController.strings */; };
+		3FD03A3A287437B000BB13C7 /* BankDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0399C287437B000BB13C7 /* BankDetailsViewController.swift */; };
+		3FD03A3B287437B000BB13C7 /* ContactDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0399D287437B000BB13C7 /* ContactDetailsViewController.swift */; };
+		3FD03A3C287437B000BB13C7 /* PassportDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0399E287437B000BB13C7 /* PassportDetailsViewController.swift */; };
+		3FD03A3D287437B000BB13C7 /* InsuranceDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD0399F287437B000BB13C7 /* InsuranceDetailsViewController.swift */; };
+		3FD03A3E287437B000BB13C7 /* InsuranceDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039A0287437B000BB13C7 /* InsuranceDetailsViewController.xib */; };
+		3FD03A3F287437B000BB13C7 /* EducationDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039A2287437B000BB13C7 /* EducationDetailsViewController.xib */; };
+		3FD03A40287437B000BB13C7 /* ContactDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039A4287437B000BB13C7 /* ContactDetailsViewController.xib */; };
+		3FD03A41287437B000BB13C7 /* PassportDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039A6287437B000BB13C7 /* PassportDetailsViewController.xib */; };
+		3FD03A42287437B000BB13C7 /* BankDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039A8287437B000BB13C7 /* BankDetailsViewController.xib */; };
+		3FD03A43287437B000BB13C7 /* IDDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039AA287437B000BB13C7 /* IDDetailsViewController.xib */; };
+		3FD03A44287437B000BB13C7 /* EducationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039AC287437B000BB13C7 /* EducationDetailsViewController.swift */; };
+		3FD03A45287437B000BB13C7 /* IDDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039AD287437B000BB13C7 /* IDDetailsViewController.swift */; };
+		3FD03A46287437B000BB13C7 /* EditEmployeeDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039AE287437B000BB13C7 /* EditEmployeeDetailsVC.swift */; };
+		3FD03A47287437B000BB13C7 /* WebViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039B0287437B000BB13C7 /* WebViewViewController.xib */; };
+		3FD03A48287437B000BB13C7 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039B1287437B000BB13C7 /* WebViewViewController.swift */; };
+		3FD03A49287437B000BB13C7 /* SettingsPermissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039B3287437B000BB13C7 /* SettingsPermissionVC.swift */; };
+		3FD03A4A287437B000BB13C7 /* SettingViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039B5287437B000BB13C7 /* SettingViewController.strings */; };
+		3FD03A4B287437B000BB13C7 /* SettingsUpdateViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039B8287437B000BB13C7 /* SettingsUpdateViewController.strings */; };
+		3FD03A4C287437B000BB13C7 /* SettingsUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039BA287437B000BB13C7 /* SettingsUpdateViewController.xib */; };
+		3FD03A4D287437B000BB13C7 /* SettingsUpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039BC287437B000BB13C7 /* SettingsUpdateViewController.swift */; };
+		3FD03A4E287437B000BB13C7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039BD287437B000BB13C7 /* SettingViewController.swift */; };
+		3FD03A4F287437B000BB13C7 /* SettingsAlertViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039BF287437B000BB13C7 /* SettingsAlertViewController.strings */; };
+		3FD03A50287437B000BB13C7 /* SettingsAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039C1287437B000BB13C7 /* SettingsAlertViewController.xib */; };
+		3FD03A51287437B000BB13C7 /* SettingsAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039C3287437B000BB13C7 /* SettingsAlertViewController.swift */; };
+		3FD03A52287437B000BB13C7 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039C4287437B000BB13C7 /* SettingViewController.xib */; };
+		3FD03A53287437B000BB13C7 /* PermissionViewController.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039C7287437B000BB13C7 /* PermissionViewController.strings */; };
+		3FD03A54287437B000BB13C7 /* PermissionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039C9287437B000BB13C7 /* PermissionViewController.xib */; };
+		3FD03A55287437B000BB13C7 /* PermissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039CB287437B000BB13C7 /* PermissionViewController.swift */; };
+		3FD03A56287437B000BB13C7 /* AddPermissionMentionsVC.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039CD287437B000BB13C7 /* AddPermissionMentionsVC.strings */; };
+		3FD03A57287437B000BB13C7 /* AddPermissionMentionsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD039CF287437B000BB13C7 /* AddPermissionMentionsVC.xib */; };
+		3FD03A58287437B000BB13C7 /* AddPermissionMentionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039D1287437B000BB13C7 /* AddPermissionMentionsVC.swift */; };
+		3FD03A5B28743AE100BB13C7 /* CommentRepltTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03A5928743AE100BB13C7 /* CommentRepltTableViewCell.swift */; };
+		3FD03A5C28743AE100BB13C7 /* CommentRepltTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5A28743AE100BB13C7 /* CommentRepltTableViewCell.xib */; };
+		3FD03A5F28743CAA00BB13C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5D28743CA900BB13C7 /* GoogleService-Info.plist */; };
+		3FD03A6028743CAA00BB13C7 /* GoogleService-Infonahid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5E28743CA900BB13C7 /* GoogleService-Infonahid.plist */; };
+		3FD03A712874485800BB13C7 /* Ticket.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A732874485800BB13C7 /* Ticket.storyboard */; };
+		3FD03A76287448C900BB13C7 /* HR.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A78287448C900BB13C7 /* HR.storyboard */; };
+		3FD03A7B2874492000BB13C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A7D2874492000BB13C7 /* Main.storyboard */; };
+		3FD03A802874496900BB13C7 /* Transaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A822874496900BB13C7 /* Transaction.storyboard */; };
 		3FD1C5FA284E383100A42DAA /* SelectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1C5F4284E383000A42DAA /* SelectionInfo.swift */; };
 		3FD1C5FB284E383100A42DAA /* FilterRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1C5F5284E383000A42DAA /* FilterRecords.swift */; };
 		3FD1C5FC284E383100A42DAA /* FilterGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD1C5F6284E383000A42DAA /* FilterGetResponse.swift */; };
@@ -195,15 +339,12 @@
 		FA10D1A7275BBDB400F3716B /* TestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA10D1A6275BBDB300F3716B /* TestApi.swift */; };
 		FA10D1AC275BCA2600F3716B /* TransactionFormDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA10D1AB275BCA2600F3716B /* TransactionFormDetailsVC.swift */; };
 		FA180964270494AB00B493A7 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA180963270494AB00B493A7 /* AuthUser.swift */; };
-		FA18DB39274867EA004E64DD /* GoogleService-Infonahid.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA18DB38274867EA004E64DD /* GoogleService-Infonahid.plist */; };
 		FA1B281627AADC470066061F /* TechnicalAssitantCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1B281427AADC470066061F /* TechnicalAssitantCVCell.swift */; };
 		FA1B281727AADC470066061F /* TechnicalAssitantCVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA1B281527AADC470066061F /* TechnicalAssitantCVCell.xib */; };
 		FA1D64AB2774C5C900FA7735 /* SubFormVersionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1D64AA2774C5C900FA7735 /* SubFormVersionVC.swift */; };
 		FA1D64AF2777749D00FA7735 /* NotifiRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA1D64AE2777749B00FA7735 /* NotifiRoute.swift */; };
 		FA29703227431439000000F7 /* PDFViewrVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA29703127431439000000F7 /* PDFViewrVC.swift */; };
-		FA2C575E286CA6B900CE5C59 /* commentRepltTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA2C575C286CA6B900CE5C59 /* commentRepltTVCell.swift */; };
 		FA2C575F286CA6B900CE5C59 /* commentRepltTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA2C575D286CA6B900CE5C59 /* commentRepltTVCell.xib */; };
-		FA31D9532853B78000F9341E /* PagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA31D9522853B78000F9341E /* PagerVC.swift */; };
 		FA35CE49271CC88D00FF6AE4 /* SupervisionOperationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35CE48271CC88D00FF6AE4 /* SupervisionOperationVC.swift */; };
 		FA35CE4C271DCCF400FF6AE4 /* FromTransactionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35CE4B271DCCF400FF6AE4 /* FromTransactionVC.swift */; };
 		FA35CE4E271F572500FF6AE4 /* TeamUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA35CE4D271F572500FF6AE4 /* TeamUserVC.swift */; };
@@ -351,7 +492,6 @@
 		FAAF207027E75E6F00AD255B /* SimpleNoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAAF206E27E75E6E00AD255B /* SimpleNoteCell.xib */; };
 		FAB54E9B27EF2EE6003297E1 /* FormVersionTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB54E9927EF2EE6003297E1 /* FormVersionTVCell.swift */; };
 		FAB54E9C27EF2EE7003297E1 /* FormVersionTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAB54E9A27EF2EE6003297E1 /* FormVersionTVCell.xib */; };
-		FAB5FFC32853DA410050F880 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAB5FFC22853DA400050F880 /* GoogleService-Info.plist */; };
 		FABDBA8227F2F9DE003961FC /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDBA8127F2F9DD003961FC /* ProfileVC.swift */; };
 		FABDBA8427F3162F003961FC /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDBA8327F3162F003961FC /* CategoryCell.swift */; };
 		FABDBA8627F47624003961FC /* IdDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABDBA8527F47621003961FC /* IdDetailsVC.swift */; };
@@ -430,8 +570,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		27FAB09E5ED1020760FB3C99 /* Pods-Almnabr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr.debug.xcconfig"; path = "Target Support Files/Pods-Almnabr/Pods-Almnabr.debug.xcconfig"; sourceTree = "<group>"; };
-		31A0FBAD24F69227020130F8 /* Pods-AlmnabrTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlmnabrTests.debug.xcconfig"; path = "Target Support Files/Pods-AlmnabrTests/Pods-AlmnabrTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2AC8B25C23A0D1D0824A7936 /* Pods-Almnabr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr.debug.xcconfig"; path = "Target Support Files/Pods-Almnabr/Pods-Almnabr.debug.xcconfig"; sourceTree = "<group>"; };
 		3F05A9B72868AA2300D90CE7 /* PersonDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		3F07C053286D8D1C00C2CDF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/Settings2TableViewCell.xib; sourceTree = "<group>"; };
 		3F07C056286D8D1E00C2CDF6 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Settings2TableViewCell.strings; sourceTree = "<group>"; };
@@ -618,6 +757,155 @@
 		3FC82A4A284CD863005BCB46 /* AllEmployeeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEmployeeResponse.swift; sourceTree = "<group>"; };
 		3FC82A4B284CD863005BCB46 /* AllEmployeeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEmployeeRecords.swift; sourceTree = "<group>"; };
 		3FD038CD28742E8A00BB13C7 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		3FD038D02874377000BB13C7 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3FD038DE287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AllEmployeesVC.strings; sourceTree = "<group>"; };
+		3FD038E0287437AF00BB13C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AllEmployeesVC.xib; sourceTree = "<group>"; };
+		3FD038E3287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/FilterViewController.strings; sourceTree = "<group>"; };
+		3FD038E5287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/FilterViewController.xib; sourceTree = "<group>"; };
+		3FD038E6287437AF00BB13C7 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		3FD038E7287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AllEmployeesVC.xib; sourceTree = "<group>"; };
+		3FD038E8287437AF00BB13C7 /* AllEmployeesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEmployeesVC.swift; sourceTree = "<group>"; };
+		3FD038EB287437AF00BB13C7 /* ViewEmpLangVacationsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewEmpLangVacationsVC.xib; sourceTree = "<group>"; };
+		3FD038EC287437AF00BB13C7 /* ViewEmpLangVacationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpLangVacationsVC.swift; sourceTree = "<group>"; };
+		3FD038EF287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpBankDetailsVC.strings; sourceTree = "<group>"; };
+		3FD038F1287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpBankDetailsVC.xib; sourceTree = "<group>"; };
+		3FD038F2287437AF00BB13C7 /* ViewEmpBankDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpBankDetailsVC.swift; sourceTree = "<group>"; };
+		3FD038F5287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpPassportDetailsVC.strings; sourceTree = "<group>"; };
+		3FD038F6287437AF00BB13C7 /* ViewEmpPassportDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpPassportDetailsVC.swift; sourceTree = "<group>"; };
+		3FD038F8287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpPassportDetailsVC.xib; sourceTree = "<group>"; };
+		3FD038FB287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/OutgoingVC.strings; sourceTree = "<group>"; };
+		3FD038FD287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpCommunicationsVC.strings; sourceTree = "<group>"; };
+		3FD038FE287437AF00BB13C7 /* OutgoingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingVC.swift; sourceTree = "<group>"; };
+		3FD03900287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpCommunicationsVC.xib; sourceTree = "<group>"; };
+		3FD03902287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OutgoingVC.xib; sourceTree = "<group>"; };
+		3FD03905287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/PresonDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD03907287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/OutgoingAttachViewController.strings; sourceTree = "<group>"; };
+		3FD03909287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/RequestDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD0390B287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/OngoingViewDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD0390D287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/OutgoingHistoryViewController.strings; sourceTree = "<group>"; };
+		3FD0390E287437AF00BB13C7 /* PresonDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresonDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD0390F287437AF00BB13C7 /* OutgoingHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingHistoryViewController.swift; sourceTree = "<group>"; };
+		3FD03911287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OutgoingHistoryViewController.xib; sourceTree = "<group>"; };
+		3FD03913287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PresonDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD03915287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OngoingViewDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD03917287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OutgoingAttachViewController.xib; sourceTree = "<group>"; };
+		3FD03919287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RequestDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD0391A287437AF00BB13C7 /* OutgoingAttachViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutgoingAttachViewController.swift; sourceTree = "<group>"; };
+		3FD0391B287437AF00BB13C7 /* OngoingViewDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OngoingViewDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD0391C287437AF00BB13C7 /* ViewOutgoingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewOutgoingViewController.swift; sourceTree = "<group>"; };
+		3FD0391D287437AF00BB13C7 /* ViewOutgoingPageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewOutgoingPageVC.swift; sourceTree = "<group>"; };
+		3FD0391E287437AF00BB13C7 /* RequestDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD0391F287437AF00BB13C7 /* ViewEmpCommunicationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpCommunicationsVC.swift; sourceTree = "<group>"; };
+		3FD03922287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpNotesVC.strings; sourceTree = "<group>"; };
+		3FD03924287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AddNotesViewController.strings; sourceTree = "<group>"; };
+		3FD03925287437AF00BB13C7 /* ViewEmpNotesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpNotesVC.swift; sourceTree = "<group>"; };
+		3FD03927287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpNotesVC.xib; sourceTree = "<group>"; };
+		3FD03929287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddNotesViewController.xib; sourceTree = "<group>"; };
+		3FD0392A287437AF00BB13C7 /* AddNotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNotesViewController.swift; sourceTree = "<group>"; };
+		3FD0392D287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpIDDetailsVC.strings; sourceTree = "<group>"; };
+		3FD0392F287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpIDDetailsVC.xib; sourceTree = "<group>"; };
+		3FD03930287437AF00BB13C7 /* ViewEmpIDDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpIDDetailsVC.swift; sourceTree = "<group>"; };
+		3FD03933287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UsersViewController.strings; sourceTree = "<group>"; };
+		3FD03935287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpModulesVC.strings; sourceTree = "<group>"; };
+		3FD03936287437AF00BB13C7 /* UsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsersViewController.swift; sourceTree = "<group>"; };
+		3FD03938287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UsersViewController.xib; sourceTree = "<group>"; };
+		3FD0393A287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpModulesVC.xib; sourceTree = "<group>"; };
+		3FD0393B287437AF00BB13C7 /* ViewEmpModulesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpModulesVC.swift; sourceTree = "<group>"; };
+		3FD0393E287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpContractDetailsVC.strings; sourceTree = "<group>"; };
+		3FD0393F287437AF00BB13C7 /* ViewEmpContractDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpContractDetailsVC.swift; sourceTree = "<group>"; };
+		3FD03941287437AF00BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpContractDetailsVC.xib; sourceTree = "<group>"; };
+		3FD03944287437AF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpJobDetailsVC.strings; sourceTree = "<group>"; };
+		3FD03946287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AddJopDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD03947287437B000BB13C7 /* ViewEmpJobDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpJobDetailsVC.swift; sourceTree = "<group>"; };
+		3FD03948287437B000BB13C7 /* AddJopDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJopDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD0394A287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddJopDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD0394C287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpJobDetailsVC.xib; sourceTree = "<group>"; };
+		3FD0394E287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpLangFinanialDetailsVC.swift; sourceTree = "<group>"; };
+		3FD03950287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpLangFinanialDetailsVC.strings; sourceTree = "<group>"; };
+		3FD03952287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpLangFinanialDetailsVC.xib; sourceTree = "<group>"; };
+		3FD03955287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpAttachmentsVC.strings; sourceTree = "<group>"; };
+		3FD03956287437B000BB13C7 /* ViewEmpAttachmentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpAttachmentsVC.swift; sourceTree = "<group>"; };
+		3FD03958287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpAttachmentsVC.xib; sourceTree = "<group>"; };
+		3FD0395B287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpJoiningDetailsVC.strings; sourceTree = "<group>"; };
+		3FD0395C287437B000BB13C7 /* ViewEmpJoiningDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpJoiningDetailsVC.swift; sourceTree = "<group>"; };
+		3FD0395E287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpJoiningDetailsVC.xib; sourceTree = "<group>"; };
+		3FD03960287437B000BB13C7 /* AddEmpContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEmpContactViewController.swift; sourceTree = "<group>"; };
+		3FD03962287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpContactDetailsVC.strings; sourceTree = "<group>"; };
+		3FD03964287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AddEmpContactViewController.strings; sourceTree = "<group>"; };
+		3FD03966287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpContactDetailsVC.xib; sourceTree = "<group>"; };
+		3FD03968287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddEmpContactViewController.xib; sourceTree = "<group>"; };
+		3FD03969287437B000BB13C7 /* ViewEmpContactDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpContactDetailsVC.swift; sourceTree = "<group>"; };
+		3FD0396A287437B000BB13C7 /* ViewEmployeeDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmployeeDetailsVC.swift; sourceTree = "<group>"; };
+		3FD0396D287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/UpdateInsuranceViewController.strings; sourceTree = "<group>"; };
+		3FD0396F287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpInsuranceDetailsVC.strings; sourceTree = "<group>"; };
+		3FD03971287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AddInsuranceViewController.strings; sourceTree = "<group>"; };
+		3FD03972287437B000BB13C7 /* UpdateInsuranceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateInsuranceViewController.swift; sourceTree = "<group>"; };
+		3FD03974287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpInsuranceDetailsVC.xib; sourceTree = "<group>"; };
+		3FD03976287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddInsuranceViewController.xib; sourceTree = "<group>"; };
+		3FD03978287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/UpdateInsuranceViewController.xib; sourceTree = "<group>"; };
+		3FD03979287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpInsuranceDetailsVC.swift; sourceTree = "<group>"; };
+		3FD0397A287437B000BB13C7 /* AddInsuranceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddInsuranceViewController.swift; sourceTree = "<group>"; };
+		3FD0397D287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewLangCalenderVC.xib; sourceTree = "<group>"; };
+		3FD0397E287437B000BB13C7 /* ViewLangCalenderVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLangCalenderVC.swift; sourceTree = "<group>"; };
+		3FD03981287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AddEmpEduDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD03983287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ViewEmpEducationDetailsVC.strings; sourceTree = "<group>"; };
+		3FD03984287437B000BB13C7 /* AddAttachmentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAttachmentViewController.xib; sourceTree = "<group>"; };
+		3FD03985287437B000BB13C7 /* ViewEmpEducationDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmpEducationDetailsVC.swift; sourceTree = "<group>"; };
+		3FD03987287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ViewEmpEducationDetailsVC.xib; sourceTree = "<group>"; };
+		3FD03989287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddEmpEduDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD0398A287437B000BB13C7 /* AddAttachmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddAttachmentViewController.swift; sourceTree = "<group>"; };
+		3FD0398B287437B000BB13C7 /* AddEmpEduDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEmpEduDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD0398C287437B000BB13C7 /* ViewEmployeePageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEmployeePageVC.swift; sourceTree = "<group>"; };
+		3FD0398E287437B000BB13C7 /* EditEmployeePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEmployeePageViewController.swift; sourceTree = "<group>"; };
+		3FD03991287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/IDDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD03993287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/BankDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD03995287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/ContactDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD03997287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/InsuranceDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD03999287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/PassportDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD0399B287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/EducationDetailsViewController.strings; sourceTree = "<group>"; };
+		3FD0399C287437B000BB13C7 /* BankDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD0399D287437B000BB13C7 /* ContactDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD0399E287437B000BB13C7 /* PassportDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassportDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD0399F287437B000BB13C7 /* InsuranceDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsuranceDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD039A1287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/InsuranceDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD039A3287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/EducationDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD039A5287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ContactDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD039A7287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PassportDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD039A9287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/BankDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD039AB287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/IDDetailsViewController.xib; sourceTree = "<group>"; };
+		3FD039AC287437B000BB13C7 /* EducationDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EducationDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD039AD287437B000BB13C7 /* IDDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDDetailsViewController.swift; sourceTree = "<group>"; };
+		3FD039AE287437B000BB13C7 /* EditEmployeeDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditEmployeeDetailsVC.swift; sourceTree = "<group>"; };
+		3FD039B0287437B000BB13C7 /* WebViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewViewController.xib; sourceTree = "<group>"; };
+		3FD039B1287437B000BB13C7 /* WebViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
+		3FD039B3287437B000BB13C7 /* SettingsPermissionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPermissionVC.swift; sourceTree = "<group>"; };
+		3FD039B6287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/SettingViewController.strings; sourceTree = "<group>"; };
+		3FD039B9287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/SettingsUpdateViewController.strings; sourceTree = "<group>"; };
+		3FD039BB287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsUpdateViewController.xib; sourceTree = "<group>"; };
+		3FD039BC287437B000BB13C7 /* SettingsUpdateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsUpdateViewController.swift; sourceTree = "<group>"; };
+		3FD039BD287437B000BB13C7 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		3FD039C0287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/SettingsAlertViewController.strings; sourceTree = "<group>"; };
+		3FD039C2287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingsAlertViewController.xib; sourceTree = "<group>"; };
+		3FD039C3287437B000BB13C7 /* SettingsAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsAlertViewController.swift; sourceTree = "<group>"; };
+		3FD039C5287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingViewController.xib; sourceTree = "<group>"; };
+		3FD039C8287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/PermissionViewController.strings; sourceTree = "<group>"; };
+		3FD039CA287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PermissionViewController.xib; sourceTree = "<group>"; };
+		3FD039CB287437B000BB13C7 /* PermissionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionViewController.swift; sourceTree = "<group>"; };
+		3FD039CE287437B000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/AddPermissionMentionsVC.strings; sourceTree = "<group>"; };
+		3FD039D0287437B000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AddPermissionMentionsVC.xib; sourceTree = "<group>"; };
+		3FD039D1287437B000BB13C7 /* AddPermissionMentionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPermissionMentionsVC.swift; sourceTree = "<group>"; };
+		3FD03A5928743AE100BB13C7 /* CommentRepltTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepltTableViewCell.swift; sourceTree = "<group>"; };
+		3FD03A5A28743AE100BB13C7 /* CommentRepltTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentRepltTableViewCell.xib; sourceTree = "<group>"; };
+		3FD03A5D28743CA900BB13C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3FD03A5E28743CA900BB13C7 /* GoogleService-Infonahid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Infonahid.plist"; sourceTree = "<group>"; };
+		3FD03A722874485800BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Ticket.storyboard; sourceTree = "<group>"; };
+		3FD03A752874485B00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Ticket.strings; sourceTree = "<group>"; };
+		3FD03A77287448C900BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HR.storyboard; sourceTree = "<group>"; };
+		3FD03A7A287448CF00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/HR.strings; sourceTree = "<group>"; };
+		3FD03A7C2874492000BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3FD03A7F2874494400BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Main.strings; sourceTree = "<group>"; };
+		3FD03A812874496900BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Transaction.storyboard; sourceTree = "<group>"; };
+		3FD03A842874497000BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Transaction.strings; sourceTree = "<group>"; };
 		3FD1C5F4284E383000A42DAA /* SelectionInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionInfo.swift; sourceTree = "<group>"; };
 		3FD1C5F5284E383000A42DAA /* FilterRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterRecords.swift; sourceTree = "<group>"; };
 		3FD1C5F6284E383000A42DAA /* FilterGetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterGetResponse.swift; sourceTree = "<group>"; };
@@ -674,7 +962,6 @@
 		FA18095F2704695A00B493A7 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		FA180963270494AB00B493A7 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		FA1809652705006200B493A7 /* Almnabr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Almnabr.entitlements; sourceTree = "<group>"; };
-		FA18DB38274867EA004E64DD /* GoogleService-Infonahid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Infonahid.plist"; sourceTree = "<group>"; };
 		FA1B281427AADC470066061F /* TechnicalAssitantCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TechnicalAssitantCVCell.swift; sourceTree = "<group>"; };
 		FA1B281527AADC470066061F /* TechnicalAssitantCVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TechnicalAssitantCVCell.xib; sourceTree = "<group>"; };
 		FA1D64AA2774C5C900FA7735 /* SubFormVersionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubFormVersionVC.swift; sourceTree = "<group>"; };
@@ -830,7 +1117,6 @@
 		FAAF206E27E75E6E00AD255B /* SimpleNoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleNoteCell.xib; sourceTree = "<group>"; };
 		FAB54E9927EF2EE6003297E1 /* FormVersionTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormVersionTVCell.swift; sourceTree = "<group>"; };
 		FAB54E9A27EF2EE6003297E1 /* FormVersionTVCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FormVersionTVCell.xib; sourceTree = "<group>"; };
-		FAB5FFC22853DA400050F880 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FABDBA8127F2F9DD003961FC /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		FABDBA8327F3162F003961FC /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		FABDBA8527F47621003961FC /* IdDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdDetailsVC.swift; sourceTree = "<group>"; };
@@ -1182,6 +1468,401 @@
 			path = AllEmployeeModels;
 			sourceTree = "<group>";
 		};
+		3FD038CF2874377000BB13C7 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3FD038DA287437AF00BB13C7 /* HR */,
+				3FD038D02874377000BB13C7 /* LaunchScreen.storyboard */,
+				3FD03A7D2874492000BB13C7 /* Main.storyboard */,
+				3FD03A822874496900BB13C7 /* Transaction.storyboard */,
+				3FD03A78287448C900BB13C7 /* HR.storyboard */,
+				3FD03A732874485800BB13C7 /* Ticket.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3FD038DA287437AF00BB13C7 /* HR */ = {
+			isa = PBXGroup;
+			children = (
+				3FD038DB287437AF00BB13C7 /* AllEmployeesVC */,
+				3FD039B2287437B000BB13C7 /* SettingsPermissionVC */,
+			);
+			path = HR;
+			sourceTree = "<group>";
+		};
+		3FD038DB287437AF00BB13C7 /* AllEmployeesVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD038DC287437AF00BB13C7 /* AllEmployeesVC */,
+				3FD038E9287437AF00BB13C7 /* ViewEmployeeDetailsVC */,
+				3FD0398D287437B000BB13C7 /* EditEmployeeDetailsVC */,
+				3FD039AF287437B000BB13C7 /* WebViewVC */,
+			);
+			path = AllEmployeesVC;
+			sourceTree = "<group>";
+		};
+		3FD038DC287437AF00BB13C7 /* AllEmployeesVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD038DD287437AF00BB13C7 /* AllEmployeesVC.strings */,
+				3FD038DF287437AF00BB13C7 /* AllEmployeesVC.xib */,
+				3FD038E1287437AF00BB13C7 /* FilterVC */,
+				3FD038E8287437AF00BB13C7 /* AllEmployeesVC.swift */,
+			);
+			path = AllEmployeesVC;
+			sourceTree = "<group>";
+		};
+		3FD038E1287437AF00BB13C7 /* FilterVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD038E2287437AF00BB13C7 /* FilterViewController.strings */,
+				3FD038E4287437AF00BB13C7 /* FilterViewController.xib */,
+				3FD038E6287437AF00BB13C7 /* FilterViewController.swift */,
+			);
+			path = FilterVC;
+			sourceTree = "<group>";
+		};
+		3FD038E9287437AF00BB13C7 /* ViewEmployeeDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD0396A287437B000BB13C7 /* ViewEmployeeDetailsVC.swift */,
+				3FD0398C287437B000BB13C7 /* ViewEmployeePageVC.swift */,
+				3FD038EA287437AF00BB13C7 /* ViewEmpLangVacationsVC */,
+				3FD038ED287437AF00BB13C7 /* ViewEmpBankDetailsVC */,
+				3FD038F3287437AF00BB13C7 /* ViewEmpPassportDetailsVC */,
+				3FD038F9287437AF00BB13C7 /* ViewEmpCommunicationsVC */,
+				3FD03920287437AF00BB13C7 /* ViewEmpNotesVC */,
+				3FD0392B287437AF00BB13C7 /* ViewEmpIDDetailsVC */,
+				3FD03931287437AF00BB13C7 /* ViewEmpModulesVC */,
+				3FD0393C287437AF00BB13C7 /* ViewEmpContractDetailsVC */,
+				3FD03942287437AF00BB13C7 /* ViewEmpJobDetailsVC */,
+				3FD0394D287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC */,
+				3FD03953287437B000BB13C7 /* ViewEmpAttachmentsVC */,
+				3FD03959287437B000BB13C7 /* ViewEmpJoiningDetailsVC */,
+				3FD0395F287437B000BB13C7 /* ViewEmpContactDetailsVC */,
+				3FD0396B287437B000BB13C7 /* ViewEmpInsuranceDetailsVC */,
+				3FD0397B287437B000BB13C7 /* ViewLangCalenderVC */,
+				3FD0397F287437B000BB13C7 /* ViewEmpEducationDetailsVC */,
+			);
+			path = ViewEmployeeDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD038EA287437AF00BB13C7 /* ViewEmpLangVacationsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD038EB287437AF00BB13C7 /* ViewEmpLangVacationsVC.xib */,
+				3FD038EC287437AF00BB13C7 /* ViewEmpLangVacationsVC.swift */,
+			);
+			path = ViewEmpLangVacationsVC;
+			sourceTree = "<group>";
+		};
+		3FD038ED287437AF00BB13C7 /* ViewEmpBankDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD038EE287437AF00BB13C7 /* ViewEmpBankDetailsVC.strings */,
+				3FD038F0287437AF00BB13C7 /* ViewEmpBankDetailsVC.xib */,
+				3FD038F2287437AF00BB13C7 /* ViewEmpBankDetailsVC.swift */,
+			);
+			path = ViewEmpBankDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD038F3287437AF00BB13C7 /* ViewEmpPassportDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD038F4287437AF00BB13C7 /* ViewEmpPassportDetailsVC.strings */,
+				3FD038F6287437AF00BB13C7 /* ViewEmpPassportDetailsVC.swift */,
+				3FD038F7287437AF00BB13C7 /* ViewEmpPassportDetailsVC.xib */,
+			);
+			path = ViewEmpPassportDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD038F9287437AF00BB13C7 /* ViewEmpCommunicationsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD038FA287437AF00BB13C7 /* OutgoingVC.strings */,
+				3FD038FC287437AF00BB13C7 /* ViewEmpCommunicationsVC.strings */,
+				3FD038FE287437AF00BB13C7 /* OutgoingVC.swift */,
+				3FD038FF287437AF00BB13C7 /* ViewEmpCommunicationsVC.xib */,
+				3FD03901287437AF00BB13C7 /* OutgoingVC.xib */,
+				3FD03903287437AF00BB13C7 /* ViewOutgoingVCs */,
+				3FD0391F287437AF00BB13C7 /* ViewEmpCommunicationsVC.swift */,
+			);
+			path = ViewEmpCommunicationsVC;
+			sourceTree = "<group>";
+		};
+		3FD03903287437AF00BB13C7 /* ViewOutgoingVCs */ = {
+			isa = PBXGroup;
+			children = (
+				3FD03904287437AF00BB13C7 /* PresonDetailsViewController.strings */,
+				3FD03906287437AF00BB13C7 /* OutgoingAttachViewController.strings */,
+				3FD03908287437AF00BB13C7 /* RequestDetailsViewController.strings */,
+				3FD0390A287437AF00BB13C7 /* OngoingViewDetailsViewController.strings */,
+				3FD0390C287437AF00BB13C7 /* OutgoingHistoryViewController.strings */,
+				3FD0390E287437AF00BB13C7 /* PresonDetailsViewController.swift */,
+				3FD0390F287437AF00BB13C7 /* OutgoingHistoryViewController.swift */,
+				3FD03910287437AF00BB13C7 /* OutgoingHistoryViewController.xib */,
+				3FD03912287437AF00BB13C7 /* PresonDetailsViewController.xib */,
+				3FD03914287437AF00BB13C7 /* OngoingViewDetailsViewController.xib */,
+				3FD03916287437AF00BB13C7 /* OutgoingAttachViewController.xib */,
+				3FD03918287437AF00BB13C7 /* RequestDetailsViewController.xib */,
+				3FD0391A287437AF00BB13C7 /* OutgoingAttachViewController.swift */,
+				3FD0391B287437AF00BB13C7 /* OngoingViewDetailsViewController.swift */,
+				3FD0391C287437AF00BB13C7 /* ViewOutgoingViewController.swift */,
+				3FD0391D287437AF00BB13C7 /* ViewOutgoingPageVC.swift */,
+				3FD0391E287437AF00BB13C7 /* RequestDetailsViewController.swift */,
+			);
+			path = ViewOutgoingVCs;
+			sourceTree = "<group>";
+		};
+		3FD03920287437AF00BB13C7 /* ViewEmpNotesVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD03921287437AF00BB13C7 /* ViewEmpNotesVC.strings */,
+				3FD03923287437AF00BB13C7 /* AddNotesViewController.strings */,
+				3FD03925287437AF00BB13C7 /* ViewEmpNotesVC.swift */,
+				3FD03926287437AF00BB13C7 /* ViewEmpNotesVC.xib */,
+				3FD03928287437AF00BB13C7 /* AddNotesViewController.xib */,
+				3FD0392A287437AF00BB13C7 /* AddNotesViewController.swift */,
+			);
+			path = ViewEmpNotesVC;
+			sourceTree = "<group>";
+		};
+		3FD0392B287437AF00BB13C7 /* ViewEmpIDDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD0392C287437AF00BB13C7 /* ViewEmpIDDetailsVC.strings */,
+				3FD0392E287437AF00BB13C7 /* ViewEmpIDDetailsVC.xib */,
+				3FD03930287437AF00BB13C7 /* ViewEmpIDDetailsVC.swift */,
+			);
+			path = ViewEmpIDDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD03931287437AF00BB13C7 /* ViewEmpModulesVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD03932287437AF00BB13C7 /* UsersViewController.strings */,
+				3FD03934287437AF00BB13C7 /* ViewEmpModulesVC.strings */,
+				3FD03936287437AF00BB13C7 /* UsersViewController.swift */,
+				3FD03937287437AF00BB13C7 /* UsersViewController.xib */,
+				3FD03939287437AF00BB13C7 /* ViewEmpModulesVC.xib */,
+				3FD0393B287437AF00BB13C7 /* ViewEmpModulesVC.swift */,
+			);
+			path = ViewEmpModulesVC;
+			sourceTree = "<group>";
+		};
+		3FD0393C287437AF00BB13C7 /* ViewEmpContractDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD0393D287437AF00BB13C7 /* ViewEmpContractDetailsVC.strings */,
+				3FD0393F287437AF00BB13C7 /* ViewEmpContractDetailsVC.swift */,
+				3FD03940287437AF00BB13C7 /* ViewEmpContractDetailsVC.xib */,
+			);
+			path = ViewEmpContractDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD03942287437AF00BB13C7 /* ViewEmpJobDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD03943287437AF00BB13C7 /* ViewEmpJobDetailsVC.strings */,
+				3FD03945287437AF00BB13C7 /* AddJopDetailsViewController.strings */,
+				3FD03947287437B000BB13C7 /* ViewEmpJobDetailsVC.swift */,
+				3FD03948287437B000BB13C7 /* AddJopDetailsViewController.swift */,
+				3FD03949287437B000BB13C7 /* AddJopDetailsViewController.xib */,
+				3FD0394B287437B000BB13C7 /* ViewEmpJobDetailsVC.xib */,
+			);
+			path = ViewEmpJobDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD0394D287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD0394E287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.swift */,
+				3FD0394F287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.strings */,
+				3FD03951287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.xib */,
+			);
+			path = ViewEmpLangFinanialDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD03953287437B000BB13C7 /* ViewEmpAttachmentsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD03954287437B000BB13C7 /* ViewEmpAttachmentsVC.strings */,
+				3FD03956287437B000BB13C7 /* ViewEmpAttachmentsVC.swift */,
+				3FD03957287437B000BB13C7 /* ViewEmpAttachmentsVC.xib */,
+			);
+			path = ViewEmpAttachmentsVC;
+			sourceTree = "<group>";
+		};
+		3FD03959287437B000BB13C7 /* ViewEmpJoiningDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD0395A287437B000BB13C7 /* ViewEmpJoiningDetailsVC.strings */,
+				3FD0395C287437B000BB13C7 /* ViewEmpJoiningDetailsVC.swift */,
+				3FD0395D287437B000BB13C7 /* ViewEmpJoiningDetailsVC.xib */,
+			);
+			path = ViewEmpJoiningDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD0395F287437B000BB13C7 /* ViewEmpContactDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD03960287437B000BB13C7 /* AddEmpContactViewController.swift */,
+				3FD03961287437B000BB13C7 /* ViewEmpContactDetailsVC.strings */,
+				3FD03963287437B000BB13C7 /* AddEmpContactViewController.strings */,
+				3FD03965287437B000BB13C7 /* ViewEmpContactDetailsVC.xib */,
+				3FD03967287437B000BB13C7 /* AddEmpContactViewController.xib */,
+				3FD03969287437B000BB13C7 /* ViewEmpContactDetailsVC.swift */,
+			);
+			path = ViewEmpContactDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD0396B287437B000BB13C7 /* ViewEmpInsuranceDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD0396C287437B000BB13C7 /* UpdateInsuranceViewController.strings */,
+				3FD0396E287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.strings */,
+				3FD03970287437B000BB13C7 /* AddInsuranceViewController.strings */,
+				3FD03972287437B000BB13C7 /* UpdateInsuranceViewController.swift */,
+				3FD03973287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.xib */,
+				3FD03975287437B000BB13C7 /* AddInsuranceViewController.xib */,
+				3FD03977287437B000BB13C7 /* UpdateInsuranceViewController.xib */,
+				3FD03979287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.swift */,
+				3FD0397A287437B000BB13C7 /* AddInsuranceViewController.swift */,
+			);
+			path = ViewEmpInsuranceDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD0397B287437B000BB13C7 /* ViewLangCalenderVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD0397C287437B000BB13C7 /* ViewLangCalenderVC.xib */,
+				3FD0397E287437B000BB13C7 /* ViewLangCalenderVC.swift */,
+			);
+			path = ViewLangCalenderVC;
+			sourceTree = "<group>";
+		};
+		3FD0397F287437B000BB13C7 /* ViewEmpEducationDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD03980287437B000BB13C7 /* AddEmpEduDetailsViewController.strings */,
+				3FD03982287437B000BB13C7 /* ViewEmpEducationDetailsVC.strings */,
+				3FD03984287437B000BB13C7 /* AddAttachmentViewController.xib */,
+				3FD03985287437B000BB13C7 /* ViewEmpEducationDetailsVC.swift */,
+				3FD03986287437B000BB13C7 /* ViewEmpEducationDetailsVC.xib */,
+				3FD03988287437B000BB13C7 /* AddEmpEduDetailsViewController.xib */,
+				3FD0398A287437B000BB13C7 /* AddAttachmentViewController.swift */,
+				3FD0398B287437B000BB13C7 /* AddEmpEduDetailsViewController.swift */,
+			);
+			path = ViewEmpEducationDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD0398D287437B000BB13C7 /* EditEmployeeDetailsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD0398E287437B000BB13C7 /* EditEmployeePageViewController.swift */,
+				3FD0398F287437B000BB13C7 /* SectionsVCs */,
+				3FD039AE287437B000BB13C7 /* EditEmployeeDetailsVC.swift */,
+			);
+			path = EditEmployeeDetailsVC;
+			sourceTree = "<group>";
+		};
+		3FD0398F287437B000BB13C7 /* SectionsVCs */ = {
+			isa = PBXGroup;
+			children = (
+				3FD03990287437B000BB13C7 /* IDDetailsViewController.strings */,
+				3FD03992287437B000BB13C7 /* BankDetailsViewController.strings */,
+				3FD03994287437B000BB13C7 /* ContactDetailsViewController.strings */,
+				3FD03996287437B000BB13C7 /* InsuranceDetailsViewController.strings */,
+				3FD03998287437B000BB13C7 /* PassportDetailsViewController.strings */,
+				3FD0399A287437B000BB13C7 /* EducationDetailsViewController.strings */,
+				3FD0399C287437B000BB13C7 /* BankDetailsViewController.swift */,
+				3FD0399D287437B000BB13C7 /* ContactDetailsViewController.swift */,
+				3FD0399E287437B000BB13C7 /* PassportDetailsViewController.swift */,
+				3FD0399F287437B000BB13C7 /* InsuranceDetailsViewController.swift */,
+				3FD039A0287437B000BB13C7 /* InsuranceDetailsViewController.xib */,
+				3FD039A2287437B000BB13C7 /* EducationDetailsViewController.xib */,
+				3FD039A4287437B000BB13C7 /* ContactDetailsViewController.xib */,
+				3FD039A6287437B000BB13C7 /* PassportDetailsViewController.xib */,
+				3FD039A8287437B000BB13C7 /* BankDetailsViewController.xib */,
+				3FD039AA287437B000BB13C7 /* IDDetailsViewController.xib */,
+				3FD039AC287437B000BB13C7 /* EducationDetailsViewController.swift */,
+				3FD039AD287437B000BB13C7 /* IDDetailsViewController.swift */,
+			);
+			path = SectionsVCs;
+			sourceTree = "<group>";
+		};
+		3FD039AF287437B000BB13C7 /* WebViewVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD039B0287437B000BB13C7 /* WebViewViewController.xib */,
+				3FD039B1287437B000BB13C7 /* WebViewViewController.swift */,
+			);
+			path = WebViewVC;
+			sourceTree = "<group>";
+		};
+		3FD039B2287437B000BB13C7 /* SettingsPermissionVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD039B3287437B000BB13C7 /* SettingsPermissionVC.swift */,
+				3FD039B4287437B000BB13C7 /* SettingViewController */,
+				3FD039C6287437B000BB13C7 /* PermissionViewController */,
+			);
+			path = SettingsPermissionVC;
+			sourceTree = "<group>";
+		};
+		3FD039B4287437B000BB13C7 /* SettingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3FD039B5287437B000BB13C7 /* SettingViewController.strings */,
+				3FD039B7287437B000BB13C7 /* SettingsUpdateViewController */,
+				3FD039BD287437B000BB13C7 /* SettingViewController.swift */,
+				3FD039BE287437B000BB13C7 /* SettingsAlertViewController */,
+				3FD039C4287437B000BB13C7 /* SettingViewController.xib */,
+			);
+			path = SettingViewController;
+			sourceTree = "<group>";
+		};
+		3FD039B7287437B000BB13C7 /* SettingsUpdateViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3FD039B8287437B000BB13C7 /* SettingsUpdateViewController.strings */,
+				3FD039BA287437B000BB13C7 /* SettingsUpdateViewController.xib */,
+				3FD039BC287437B000BB13C7 /* SettingsUpdateViewController.swift */,
+			);
+			path = SettingsUpdateViewController;
+			sourceTree = "<group>";
+		};
+		3FD039BE287437B000BB13C7 /* SettingsAlertViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3FD039BF287437B000BB13C7 /* SettingsAlertViewController.strings */,
+				3FD039C1287437B000BB13C7 /* SettingsAlertViewController.xib */,
+				3FD039C3287437B000BB13C7 /* SettingsAlertViewController.swift */,
+			);
+			path = SettingsAlertViewController;
+			sourceTree = "<group>";
+		};
+		3FD039C6287437B000BB13C7 /* PermissionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3FD039C7287437B000BB13C7 /* PermissionViewController.strings */,
+				3FD039C9287437B000BB13C7 /* PermissionViewController.xib */,
+				3FD039CB287437B000BB13C7 /* PermissionViewController.swift */,
+				3FD039CC287437B000BB13C7 /* AddPermissionMentionsVC */,
+			);
+			path = PermissionViewController;
+			sourceTree = "<group>";
+		};
+		3FD039CC287437B000BB13C7 /* AddPermissionMentionsVC */ = {
+			isa = PBXGroup;
+			children = (
+				3FD039CD287437B000BB13C7 /* AddPermissionMentionsVC.strings */,
+				3FD039CF287437B000BB13C7 /* AddPermissionMentionsVC.xib */,
+				3FD039D1287437B000BB13C7 /* AddPermissionMentionsVC.swift */,
+			);
+			path = AddPermissionMentionsVC;
+			sourceTree = "<group>";
+		};
 		3FD1C5F2284E382500A42DAA /* FilterModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1294,13 +1975,14 @@
 				FA03245A26FB9DF900372EA6 /* Views */,
 				FA03245726FB9D9200372EA6 /* HelperClasses */,
 				FA03245626FB9D6A00372EA6 /* ConnectionManager */,
+				3FD038CF2874377000BB13C7 /* Storyboards */,
 				FA03242526FB9BFA00372EA6 /* AppDelegate.swift */,
 				FA03242726FB9BFA00372EA6 /* SceneDelegate.swift */,
 				FAA9C4CC27B32B51003C051E /* notification3.wav */,
 				FA03242E26FB9BFE00372EA6 /* Assets.xcassets */,
 				FA03243326FB9BFE00372EA6 /* Info.plist */,
-				FAB5FFC22853DA400050F880 /* GoogleService-Info.plist */,
-				FA18DB38274867EA004E64DD /* GoogleService-Infonahid.plist */,
+				3FD03A5D28743CA900BB13C7 /* GoogleService-Info.plist */,
+				3FD03A5E28743CA900BB13C7 /* GoogleService-Infonahid.plist */,
 				FAC32FAC2707662C0046A0F6 /* DroidKufi-Bold.ttf */,
 				FAE13A4D27293C2D00509550 /* DroidKufi-Regular.ttf */,
 				FA03245F26FB9E3F00372EA6 /* DroidKufi-Regular.ttf */,
@@ -1516,19 +2198,6 @@
 			name = PresentVC;
 			sourceTree = "<group>";
 		};
-		FA3D9D2C275D1CDB00807BA7 /* MainView */ = {
-			isa = PBXGroup;
-			children = (
-				3FC43E042847FDCC002C3F58 /* HR */,
-				FA03243026FB9BFE00372EA6 /* LaunchScreen.storyboard */,
-				FA03242B26FB9BFA00372EA6 /* Main.storyboard */,
-				3F124EB328735D7F00D014EA /* Transaction.storyboard */,
-				3F124EA928735D5F00D014EA /* HR.storyboard */,
-				3F124EAE28735D6C00D014EA /* Ticket.storyboard */,
-			);
-			path = MainView;
-			sourceTree = "<group>";
-		};
 		FA530A3A270CC0C20071CDC8 /* TransactionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1630,6 +2299,8 @@
 				FAF7623328300262000DEAFE /* CheckListCell.xib */,
 				FAF76236283051A5000DEAFE /* SubTaskTVCell.swift */,
 				FAF76237283051A5000DEAFE /* SubTaskTVCell.xib */,
+				3FD03A5928743AE100BB13C7 /* CommentRepltTableViewCell.swift */,
+				3FD03A5A28743AE100BB13C7 /* CommentRepltTableViewCell.xib */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -1894,12 +2565,12 @@
 		FD7AF8AAEA86B5827AECC5B8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				21818E79825A01D2561E80D8 /* Pods-Almnabr.debug.xcconfig */,
 				ADB1D7974D91E5EB2AC28FFD /* Pods-Almnabr.release.xcconfig */,
 				49EED8CFDA58CBC448613AE6 /* Pods-Almnabr-AlmnabrUITests.debug.xcconfig */,
 				54ED8B5C8A0DD317A35EA2FF /* Pods-Almnabr-AlmnabrUITests.release.xcconfig */,
 				E7CBD5E570859DFAD2DCFE33 /* Pods-AlmnabrTests.debug.xcconfig */,
 				FA422E2B3FD6248670FDB3D9 /* Pods-AlmnabrTests.release.xcconfig */,
+				2AC8B25C23A0D1D0824A7936 /* Pods-Almnabr.debug.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -2015,102 +2686,191 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FD03A47287437B000BB13C7 /* WebViewViewController.xib in Resources */,
+				3FD039D4287437B000BB13C7 /* FilterViewController.strings in Resources */,
 				3F432BA92871E9D7009289DE /* .gitignore in Resources */,
+				3FD03A53287437B000BB13C7 /* PermissionViewController.strings in Resources */,
+				3FD03A5C28743AE100BB13C7 /* CommentRepltTableViewCell.xib in Resources */,
+				3FD03A57287437B000BB13C7 /* AddPermissionMentionsVC.xib in Resources */,
 				FAAF206427DBDC8F00AD255B /* ByPhaseTVCell.xib in Resources */,
 				3F9040BC286CAFC5008D85B8 /* AddJopDetailsTableViewCell.xib in Resources */,
 				FAAF206C27DCFE0400AD255B /* RelatedFormTVCell.xib in Resources */,
+				3FD03A1F287437B000BB13C7 /* UpdateInsuranceViewController.strings in Resources */,
+				3FD03A2C287437B000BB13C7 /* AddAttachmentViewController.xib in Resources */,
 				3F07C0BB286D96F500C2CDF6 /* TechnicalAssistantCell.xib in Resources */,
 				FACFBA44273AD24D007C248C /* ByPhasesCell.xib in Resources */,
+				3FD039D2287437B000BB13C7 /* AllEmployeesVC.strings in Resources */,
 				FA82792927971A8B00CE2411 /* ViewLabelCell.xib in Resources */,
-				3F124EB128735D7F00D014EA /* Transaction.storyboard in Resources */,
+				3FD039D3287437B000BB13C7 /* AllEmployeesVC.xib in Resources */,
 				FA9E7D92270F409D003A1D16 /* CronTransactionCell.xib in Resources */,
 				FA0324CC26FBEC4300372EA6 /* TextFieldWithLabelView.xib in Resources */,
+				3FD03A4B287437B000BB13C7 /* SettingsUpdateViewController.strings in Resources */,
+				3FD038D52874377000BB13C7 /* LaunchScreen.storyboard in Resources */,
 				FA0324D226FC66A900372EA6 /* Localizable.strings in Resources */,
 				3F07C075286D8FC300C2CDF6 /* InsuranceTVCell.xib in Resources */,
+				3FD03A2B287437B000BB13C7 /* ViewEmpEducationDetailsVC.strings in Resources */,
 				FA7F941427D77AC100E03A34 /* MyTrannsactionTVCell.xib in Resources */,
+				3FD039D8287437B000BB13C7 /* ViewEmpLangVacationsVC.xib in Resources */,
+				3FD039E7287437B000BB13C7 /* RequestDetailsViewController.strings in Resources */,
+				3FD039E6287437B000BB13C7 /* OutgoingAttachViewController.strings in Resources */,
+				3FD03A1C287437B000BB13C7 /* AddEmpContactViewController.xib in Resources */,
+				3FD03A10287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.strings in Resources */,
 				FAA9C4CD27B32B52003C051E /* notification3.wav in Resources */,
 				FA1B281727AADC470066061F /* TechnicalAssitantCVCell.xib in Resources */,
 				3F9040F3286CB45F008D85B8 /* ViewAttachTableViewCell.xib in Resources */,
+				3FD03A4A287437B000BB13C7 /* SettingViewController.strings in Resources */,
+				3FD03A35287437B000BB13C7 /* BankDetailsViewController.strings in Resources */,
+				3FD03A36287437B000BB13C7 /* ContactDetailsViewController.strings in Resources */,
+				3FD03A12287437B000BB13C7 /* ViewEmpAttachmentsVC.strings in Resources */,
 				3F76506F2850917D00FB8A97 /* SectionCollectionViewCell.xib in Resources */,
 				FA7F941827D782E900E03A34 /* ApprovalTVCell.xib in Resources */,
 				3F07C0B6286D966400C2CDF6 /* NotificationCell.xib in Resources */,
+				3FD03A7B2874492000BB13C7 /* Main.storyboard in Resources */,
 				3F07C0A2286D93F700C2CDF6 /* ContactTVCell.xib in Resources */,
+				3FD03A11287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.xib in Resources */,
 				3F9040DF286CB1EF008D85B8 /* OutgoingAttachmentTableViewCell.xib in Resources */,
+				3FD03A3F287437B000BB13C7 /* EducationDetailsViewController.xib in Resources */,
+				3FD03A21287437B000BB13C7 /* AddInsuranceViewController.strings in Resources */,
+				3FD03A2F287437B000BB13C7 /* AddEmpEduDetailsViewController.xib in Resources */,
 				FA5C97792819602400A2AA5A /* TaskHistoryCell.xib in Resources */,
+				3FD03A2E287437B000BB13C7 /* ViewEmpEducationDetailsVC.xib in Resources */,
 				3F07C061286D8E3100C2CDF6 /* ContractTVCell.xib in Resources */,
 				3F07C06B286D8F2A00C2CDF6 /* CommunicationsTVCell.xib in Resources */,
+				3FD03A54287437B000BB13C7 /* PermissionViewController.xib in Resources */,
 				3F07C0C0286D971D00C2CDF6 /* NotesCell.xib in Resources */,
+				3FD039EC287437B000BB13C7 /* OutgoingHistoryViewController.xib in Resources */,
+				3FD03A42287437B000BB13C7 /* BankDetailsViewController.xib in Resources */,
+				3FD039D5287437B000BB13C7 /* FilterViewController.xib in Resources */,
 				FAF7623528300262000DEAFE /* CheckListCell.xib in Resources */,
+				3FD039ED287437B000BB13C7 /* PresonDetailsViewController.xib in Resources */,
+				3FD03A03287437B000BB13C7 /* UsersViewController.xib in Resources */,
 				FA658B26274404DA001FC641 /* AttachmentsCell.xib in Resources */,
+				3FD03A34287437B000BB13C7 /* IDDetailsViewController.strings in Resources */,
 				FA4975AC2793659600891C9F /* DropDownView.xib in Resources */,
+				3FD039DF287437B000BB13C7 /* ViewEmpPassportDetailsVC.xib in Resources */,
 				FA530A45270CEFF10071CDC8 /* MyTransactionHeaderView.xib in Resources */,
 				FA400D492718C61A0097C7D1 /* ServicesView.xib in Resources */,
 				3F07C070286D8F9300C2CDF6 /* EducationTVCell.xib in Resources */,
 				3FD038CE28742E8A00BB13C7 /* .gitignore in Resources */,
+				3FD03A25287437B000BB13C7 /* UpdateInsuranceViewController.xib in Resources */,
 				3F9040F8286CB48F008D85B8 /* OutgoingHistoryTableViewCell.xib in Resources */,
 				FAAF206827DCEF9400AD255B /* Related formsTVCell.xib in Resources */,
+				3FD03A01287437B000BB13C7 /* ViewEmpModulesVC.strings in Resources */,
 				FAC32FBC270AE8A80046A0F6 /* SubMenuTVCell.xib in Resources */,
 				FA95FD1B275EFFF600DE7854 /* no-permission.gif in Resources */,
 				3F07C0A7286D94B700C2CDF6 /* ProjectTVCell.xib in Resources */,
 				FA5C976D2816B01100A2AA5A /* TaskAttachmentCell.xib in Resources */,
+				3FD039EE287437B000BB13C7 /* OngoingViewDetailsViewController.xib in Resources */,
 				FAC788D427104436009AC355 /* HeaderView.xib in Resources */,
 				FA9E7D88270E46AE003A1D16 /* GridCell.xib in Resources */,
-				FA18DB39274867EA004E64DD /* GoogleService-Infonahid.plist in Resources */,
+				3FD039F8287437B000BB13C7 /* AddNotesViewController.strings in Resources */,
+				3FD039DD287437B000BB13C7 /* ViewEmpPassportDetailsVC.strings in Resources */,
+				3FD039E8287437B000BB13C7 /* OngoingViewDetailsViewController.strings in Resources */,
 				FAD531482770FE9600C8E2AD /* SaudiTVCell.xib in Resources */,
 				3F9040C6286CB079008D85B8 /* EducationDetailsTableViewCell.xib in Resources */,
 				FAE13A4E27293C2D00509550 /* DroidKufi-Regular.ttf in Resources */,
 				3F9040D5286CB156008D85B8 /* NoteTableViewCell.xib in Resources */,
+				3FD03A24287437B000BB13C7 /* AddInsuranceViewController.xib in Resources */,
 				FA530A41270CEC6D0071CDC8 /* CustomHeaderView.xib in Resources */,
 				3F07C084286D91EC00C2CDF6 /* profileAttachmentsTVCell.xib in Resources */,
 				3F07C057286D8D5E00C2CDF6 /* UpdateSettingsTableViewCell.xib in Resources */,
+				3FD03A00287437B000BB13C7 /* UsersViewController.strings in Resources */,
 				FA530A39270CC0B10071CDC8 /* TransactionApproveTVCell.xib in Resources */,
 				FAAF0C9427E8A3C10032C4AD /* SimpleSubProjectCell.xib in Resources */,
+				3FD039E5287437B000BB13C7 /* PresonDetailsViewController.strings in Resources */,
 				3F07C052286D8D1C00C2CDF6 /* Settings2TableViewCell.xib in Resources */,
+				3FD03A52287437B000BB13C7 /* SettingViewController.xib in Resources */,
+				3FD039E1287437B000BB13C7 /* ViewEmpCommunicationsVC.strings in Resources */,
+				3FD03A4C287437B000BB13C7 /* SettingsUpdateViewController.xib in Resources */,
+				3FD03A0A287437B000BB13C7 /* AddJopDetailsViewController.strings in Resources */,
+				3FD03A06287437B000BB13C7 /* ViewEmpContractDetailsVC.strings in Resources */,
+				3FD03A76287448C900BB13C7 /* HR.storyboard in Resources */,
 				FA03242F26FB9BFE00372EA6 /* Assets.xcassets in Resources */,
 				3F9040E9286CB269008D85B8 /* UserTableViewCell.xib in Resources */,
 				3F07C0AC286D952500C2CDF6 /* SubProjectTVCell.xib in Resources */,
 				FA3D32AB27342D6B00A5472A /* ViewLanguage.xib in Resources */,
+				3FD03A15287437B000BB13C7 /* ViewEmpJoiningDetailsVC.strings in Resources */,
 				FA8A75A7273DB1C1005A2F29 /* FormVersionCell.xib in Resources */,
+				3FD03A37287437B000BB13C7 /* InsuranceDetailsViewController.strings in Resources */,
+				3FD03A3E287437B000BB13C7 /* InsuranceDetailsViewController.xib in Resources */,
 				3F07C093286D92EA00C2CDF6 /* ModuleUserTVCell.xib in Resources */,
+				3FD03A2A287437B000BB13C7 /* AddEmpEduDetailsViewController.strings in Resources */,
 				FAF7623E28305594000DEAFE /* TaskUsersCVCell.xib in Resources */,
 				3F07C098286D932600C2CDF6 /* FormTransactionTVCell.xib in Resources */,
 				3F9040CB286CB0B3008D85B8 /* InsuranceDetailsTableViewCell.xib in Resources */,
 				FA9FB0A727163F0D0037871C /* ServicesCVCell.xib in Resources */,
 				FAF76239283051A5000DEAFE /* SubTaskTVCell.xib in Resources */,
 				3F07C07F286D918E00C2CDF6 /* ProfileNotesTVCell.xib in Resources */,
+				3FD039EF287437B000BB13C7 /* OutgoingAttachViewController.xib in Resources */,
 				FA5C977328170FA200A2AA5A /* TaskTVCell.xib in Resources */,
+				3FD03A5F28743CAA00BB13C7 /* GoogleService-Info.plist in Resources */,
 				3F9040D0286CB115008D85B8 /* AddInsuranceTableViewCell.xib in Resources */,
+				3FD039E3287437B000BB13C7 /* ViewEmpCommunicationsVC.xib in Resources */,
 				3F07C0B1286D963800C2CDF6 /* ProjectRequestTVCell.xib in Resources */,
+				3FD03A39287437B000BB13C7 /* EducationDetailsViewController.strings in Resources */,
 				3F07C09D286D935700C2CDF6 /* TeamUserTVCell.xib in Resources */,
 				FA9E7D8E270F39DC003A1D16 /* ApprovalTransactionCell.xib in Resources */,
+				3FD03A0D287437B000BB13C7 /* AddJopDetailsViewController.xib in Resources */,
 				FAC32FAD2707662C0046A0F6 /* DroidKufi-Bold.ttf in Resources */,
+				3FD03A712874485800BB13C7 /* Ticket.storyboard in Resources */,
 				3F07C089286D925F00C2CDF6 /* ModulesTVCell.xib in Resources */,
+				3FD039DA287437B000BB13C7 /* ViewEmpBankDetailsVC.strings in Resources */,
 				FAC32FB72708C91D0046A0F6 /* TransactionTVCell.xib in Resources */,
 				3F9040FD286CB4BF008D85B8 /* SettingsTableViewCell.xib in Resources */,
+				3FD03A09287437B000BB13C7 /* ViewEmpJobDetailsVC.strings in Resources */,
 				3F9040EE286CB295008D85B8 /* PersonDetailsTableViewCell.xib in Resources */,
 				FA530A3F270CCA9D0071CDC8 /* CornTransactionTVCell.xib in Resources */,
+				3FD03A04287437B000BB13C7 /* ViewEmpModulesVC.xib in Resources */,
 				FA2C575F286CA6B900CE5C59 /* commentRepltTVCell.xib in Resources */,
-				3FD038CA28742AE900BB13C7 /* .gitignore in Resources */,
 				FAB54E9C27EF2EE7003297E1 /* FormVersionTVCell.xib in Resources */,
+				3FD039E0287437B000BB13C7 /* OutgoingVC.strings in Resources */,
+				3FD03A4F287437B000BB13C7 /* SettingsAlertViewController.strings in Resources */,
+				3FD03A19287437B000BB13C7 /* ViewEmpContactDetailsVC.strings in Resources */,
 				FAF9D43F278DE050002D8AEF /* ProjectRequestCell.xib in Resources */,
 				3F07C08E286D92A900C2CDF6 /* ProfileContactTVCell.xib in Resources */,
+				3FD03A56287437B000BB13C7 /* AddPermissionMentionsVC.strings in Resources */,
+				3FD03A802874496900BB13C7 /* Transaction.storyboard in Resources */,
 				3F07C066286D8EAD00C2CDF6 /* JobDetailsTVCell.xib in Resources */,
+				3FD03A1B287437B000BB13C7 /* ViewEmpContactDetailsVC.xib in Resources */,
+				3FD03A20287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.strings in Resources */,
 				3FF6EDB6284B72450003E6F4 /* UsersCollectionViewCell.xib in Resources */,
 				3F07C07A286D911A00C2CDF6 /* VacationFormCell.xib in Resources */,
+				3FD039E9287437B000BB13C7 /* OutgoingHistoryViewController.strings in Resources */,
 				FAA88ED3282B0D730082432F /* TaskCommentCell.xib in Resources */,
 				FA5CB10327D0C6B90023A372 /* TextCVCell.xib in Resources */,
+				3FD039FA287437B000BB13C7 /* ViewEmpNotesVC.xib in Resources */,
+				3FD03A50287437B000BB13C7 /* SettingsAlertViewController.xib in Resources */,
+				3FD039FB287437B000BB13C7 /* AddNotesViewController.xib in Resources */,
+				3FD03A17287437B000BB13C7 /* ViewEmpJoiningDetailsVC.xib in Resources */,
 				FAD333A8271383090093175E /* ProjectCell.xib in Resources */,
+				3FD039DB287437B000BB13C7 /* ViewEmpBankDetailsVC.xib in Resources */,
+				3FD039F7287437B000BB13C7 /* ViewEmpNotesVC.strings in Resources */,
+				3FD03A23287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.xib in Resources */,
+				3FD03A0E287437B000BB13C7 /* ViewEmpJobDetailsVC.xib in Resources */,
 				FACFBA40273AD235007C248C /* GeneralNoCell.xib in Resources */,
+				3FD039FE287437B000BB13C7 /* ViewEmpIDDetailsVC.xib in Resources */,
 				3F9040C1286CB01D008D85B8 /* ContactDetailsTableViewCell.xib in Resources */,
 				3F9040B7286CAF85008D85B8 /* JopDetailsTableViewCell.xib in Resources */,
 				FA9768B527355A91000A3576 /* FromTransactionView.xib in Resources */,
 				FADC2FFD2826B68800921011 /* TaskUserTVCell.xib in Resources */,
+				3FD039E4287437B000BB13C7 /* OutgoingVC.xib in Resources */,
 				FA5CB0FF27D028AE0023A372 /* LabelCell.xib in Resources */,
+				3FD03A41287437B000BB13C7 /* PassportDetailsViewController.xib in Resources */,
 				FA025FB92785E73600AB38C8 /* View_notification.xib in Resources */,
 				3F9040E4286CB237008D85B8 /* ModulesTableViewCell.xib in Resources */,
+				3FD03A1A287437B000BB13C7 /* AddEmpContactViewController.strings in Resources */,
+				3FD03A28287437B000BB13C7 /* ViewLangCalenderVC.xib in Resources */,
+				3FD03A40287437B000BB13C7 /* ContactDetailsViewController.xib in Resources */,
+				3FD039F0287437B000BB13C7 /* RequestDetailsViewController.xib in Resources */,
+				3FD03A38287437B000BB13C7 /* PassportDetailsViewController.strings in Resources */,
+				3FD039FD287437B000BB13C7 /* ViewEmpIDDetailsVC.strings in Resources */,
+				3FD03A08287437B000BB13C7 /* ViewEmpContractDetailsVC.xib in Resources */,
 				3F9040B2286CAEEB008D85B8 /* EmployeeTableViewCell.xib in Resources */,
 				FAAF207027E75E6F00AD255B /* SimpleNoteCell.xib in Resources */,
+				3FD03A43287437B000BB13C7 /* IDDetailsViewController.xib in Resources */,
 				3F9040DA286CB182008D85B8 /* AttachmentTableViewCell.xib in Resources */,
+				3FD03A14287437B000BB13C7 /* ViewEmpAttachmentsVC.xib in Resources */,
+				3FD03A6028743CAA00BB13C7 /* GoogleService-Infonahid.plist in Resources */,
 				3F07C05C286D8D8600C2CDF6 /* TicketTVCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2211,23 +2971,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		88804046246079D301AF8586 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Almnabr-AlmnabrUITests/Pods-Almnabr-AlmnabrUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Almnabr-AlmnabrUITests/Pods-Almnabr-AlmnabrUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Almnabr-AlmnabrUITests/Pods-Almnabr-AlmnabrUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		D99F38E017F87F8279BD9862 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2271,10 +3014,14 @@
 				FA9768B227353DDD000A3576 /* CollectionViewCell.swift in Sources */,
 				FA9FB0A0271447EA0037871C /* ProjectDetailsVC.swift in Sources */,
 				FA8A75A6273DB1C1005A2F29 /* FormVersionCell.swift in Sources */,
+				3FD039F9287437B000BB13C7 /* ViewEmpNotesVC.swift in Sources */,
 				FA48C312286AF80B006B8130 /* AddPointVC.swift in Sources */,
+				3FD03A4D287437B000BB13C7 /* SettingsUpdateViewController.swift in Sources */,
 				FA1B281627AADC470066061F /* TechnicalAssitantCVCell.swift in Sources */,
+				3FD039D6287437B000BB13C7 /* FilterViewController.swift in Sources */,
 				3F05A9B92868AA2300D90CE7 /* PersonDetailsTableViewCell.swift in Sources */,
 				FA0324D926FE220C00372EA6 /* HomeVC.swift in Sources */,
+				3FD03A16287437B000BB13C7 /* ViewEmpJoiningDetailsVC.swift in Sources */,
 				FA0324BB26FBCBED00372EA6 /* Extensions.swift in Sources */,
 				3F48C53E285883AF004D33F8 /* Attachments.swift in Sources */,
 				FA1D64AF2777749D00FA7735 /* NotifiRoute.swift in Sources */,
@@ -2283,6 +3030,7 @@
 				FA03249526FBA38F00372EA6 /* HelperClassSwift.swift in Sources */,
 				FA78EA1027D284DA0023E48D /* SupervisionOperationDetailsVC.swift in Sources */,
 				FAF9D441278DEB70002D8AEF /* ProjectRequestVC.swift in Sources */,
+				3FD039F5287437B000BB13C7 /* RequestDetailsViewController.swift in Sources */,
 				3F524757284FCE8D0081EBC6 /* FilterInfo.swift in Sources */,
 				3F14366C28489EB6008ABC19 /* Page.swift in Sources */,
 				3FB305DC2868702500CAC16F /* Form_c2_data.swift in Sources */,
@@ -2298,6 +3046,8 @@
 				FA83CD7C282C248B008A6CE0 /* TaskUsersVC.swift in Sources */,
 				FABDBA8C27F47671003961FC /* CommunicationsVC.swift in Sources */,
 				3F943D6D284E5A9D0046BCCB /* FilterGetResponse2.swift in Sources */,
+				3FD039D7287437B000BB13C7 /* AllEmployeesVC.swift in Sources */,
+				3FD03A3C287437B000BB13C7 /* PassportDetailsViewController.swift in Sources */,
 				FABDBA8A27F47656003961FC /* JobDetailsVC.swift in Sources */,
 				3F0EC9FE2869F91300A06963 /* ViewAttachTableViewCell.swift in Sources */,
 				3F397D862860C1F000A7DAB4 /* AttachmentsGetREsponse.swift in Sources */,
@@ -2305,13 +3055,16 @@
 				3FB305D02868702500CAC16F /* Transactions_extra.swift in Sources */,
 				FA5D6D572767AE8A0088B206 /* TechnicalAssistantCell.swift in Sources */,
 				FA7A93C927FC689400EF6ECC /* EducationTVCell.swift in Sources */,
+				3FD03A02287437B000BB13C7 /* UsersViewController.swift in Sources */,
 				FA03242A26FB9BFA00372EA6 /* ViewController.swift in Sources */,
 				3F48C53F285883AF004D33F8 /* Profile_percentage.swift in Sources */,
 				3F1436962848A120008ABC19 /* UILabelDesignable.swift in Sources */,
+				3FD03A45287437B000BB13C7 /* IDDetailsViewController.swift in Sources */,
 				FA9DF8D72815979A0015D492 /* TicketCollectionViewController.swift in Sources */,
 				FAAF206727DCEF9400AD255B /* RelatedFormsTVCell.swift in Sources */,
 				FA9768B92735D71E000A3576 /* LanguageVC.swift in Sources */,
 				FA530A43270CEC810071CDC8 /* CustomHeaderView.swift in Sources */,
+				3FD03A31287437B000BB13C7 /* AddEmpEduDetailsViewController.swift in Sources */,
 				FADC2FFC2826B68800921011 /* TaskUserTVCell.swift in Sources */,
 				FAAF206F27E75E6F00AD255B /* SimpleNoteCell.swift in Sources */,
 				FA85D02928104DE70080A0EA /* TaskFilterVC.swift in Sources */,
@@ -2320,6 +3073,7 @@
 				3F14368C2848A120008ABC19 /* CustomCournerView.swift in Sources */,
 				3F48C53D285883AF004D33F8 /* EmpViewData.swift in Sources */,
 				3FB726C12864BF5500684C94 /* AllModulesResponse.swift in Sources */,
+				3FD039DE287437B000BB13C7 /* ViewEmpPassportDetailsVC.swift in Sources */,
 				FA95FD13275EFE6A00DE7854 /* OwnersRepresentativeVC.swift in Sources */,
 				3F3FEF282864735400F57578 /* CommunicationSubmitResponse.swift in Sources */,
 				FA0324C326FBD5D200372EA6 /* UIViewController.swift in Sources */,
@@ -2328,6 +3082,7 @@
 				3F2B2C1028524F5B00C33FAD /* EmployeeResponse.swift in Sources */,
 				FA7E99492732E8050038931D /* FormDetailsVC.swift in Sources */,
 				3F14368D2848A120008ABC19 /*  GraidentButton.swift in Sources */,
+				3FD03A2D287437B000BB13C7 /* ViewEmpEducationDetailsVC.swift in Sources */,
 				3F14368A2848A120008ABC19 /* UIViewCustomCornerRadius.swift in Sources */,
 				3F14366E28489EB6008ABC19 /* SearchBranchRecords.swift in Sources */,
 				FAD531472770FE9600C8E2AD /* SaudiTVCell.swift in Sources */,
@@ -2335,6 +3090,7 @@
 				3FB305D82868702500CAC16F /* transactions_personsRecords.swift in Sources */,
 				FA03242626FB9BFA00372EA6 /* AppDelegate.swift in Sources */,
 				FA8B953227F88D3F003F9D7B /* CommunicationsTVCell.swift in Sources */,
+				3FD03A26287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.swift in Sources */,
 				3FB726C02864BF5500684C94 /* AllModulesRecords.swift in Sources */,
 				FAAF205527DA121000AD255B /* FormTransactionTVCell.swift in Sources */,
 				FAD53143276D190500C8E2AD /* FormVersionsVC.swift in Sources */,
@@ -2343,7 +3099,10 @@
 				FAF7623128300174000DEAFE /* CheckListVC.swift in Sources */,
 				FABDBAA027F477D8003961FC /* ModulesVC.swift in Sources */,
 				3F1F94E2286C3D6E00E454BF /* L102Language.swift in Sources */,
+				3FD039F4287437B000BB13C7 /* ViewOutgoingPageVC.swift in Sources */,
+				3FD03A07287437B000BB13C7 /* ViewEmpContractDetailsVC.swift in Sources */,
 				FA5CB10527D0DF640023A372 /* ProjectDetailVC.swift in Sources */,
+				3FD03A3A287437B000BB13C7 /* BankDetailsViewController.swift in Sources */,
 				3FB305D42868702500CAC16F /* form_c2_filesRecords.swift in Sources */,
 				3F76506E2850917D00FB8A97 /* SectionCollectionViewCell.swift in Sources */,
 				FA3D32AF27342E8000A5472A /* ViewLanguage.swift in Sources */,
@@ -2351,9 +3110,12 @@
 				FA95FD19275EFEA400DE7854 /* TechinicalAssistantVC.swift in Sources */,
 				FAD333A7271383090093175E /* ProjectCell.swift in Sources */,
 				3F14366B28489EB6008ABC19 /* PermissionMentions.swift in Sources */,
+				3FD03A4E287437B000BB13C7 /* SettingViewController.swift in Sources */,
 				FA95FD0B275EFE1E00DE7854 /* ContractorTeamApprovalVC.swift in Sources */,
 				3F397D872860C1F000A7DAB4 /* AttachmentRecords.swift in Sources */,
+				3FD039FF287437B000BB13C7 /* ViewEmpIDDetailsVC.swift in Sources */,
 				FABDBA8827F4763D003961FC /* ContractDetailsVC.swift in Sources */,
+				3FD03A0C287437B000BB13C7 /* AddJopDetailsViewController.swift in Sources */,
 				FA48C310286A58C0006B8130 /* AddChecklistVC.swift in Sources */,
 				FA95FD15275EFE7C00DE7854 /* RecipientVerificationVC.swift in Sources */,
 				FA5CB10D27D2183F0023A372 /* Shaddow.swift in Sources */,
@@ -2362,6 +3124,7 @@
 				FABF6712275F886A00BB019A /* NotesVC.swift in Sources */,
 				FABDBA8E27F4768B003961FC /* ContactDetailsVC.swift in Sources */,
 				3FB305D52868702500CAC16F /* Transactions_records.swift in Sources */,
+				3FD03A44287437B000BB13C7 /* EducationDetailsViewController.swift in Sources */,
 				FAF76238283051A5000DEAFE /* SubTaskTVCell.swift in Sources */,
 				FA9768C1273691BE000A3576 /* MyPageViewController.swift in Sources */,
 				FA5C976F2816B40200A2AA5A /* TaskAttachmentVC.swift in Sources */,
@@ -2376,35 +3139,47 @@
 				3FB305D12868702500CAC16F /* Transactions_buttons.swift in Sources */,
 				FA1D64AB2774C5C900FA7735 /* SubFormVersionVC.swift in Sources */,
 				FA03249926FBA64800372EA6 /* ResponseModel.swift in Sources */,
+				3FD03A3B287437B000BB13C7 /* ContactDetailsViewController.swift in Sources */,
 				3FAF671D284CB8CD00BEF1D6 /* EmployeeTableViewCell.swift in Sources */,
 				3FAAB6432860937B007B9150 /* NoteRecords.swift in Sources */,
+				3FD03A49287437B000BB13C7 /* SettingsPermissionVC.swift in Sources */,
+				3FD03A22287437B000BB13C7 /* UpdateInsuranceViewController.swift in Sources */,
 				3FD3F55F2858C25A007CC5BB /* JopDetailsRecords.swift in Sources */,
 				3FB305D92868702500CAC16F /* Transactions_request.swift in Sources */,
 				3FB305DB2868702500CAC16F /* transactions_recordsRecords.swift in Sources */,
 				3FA8CB6D2848BCE200434CE4 /* SettingsDataRecords.swift in Sources */,
+				3FD03A58287437B000BB13C7 /* AddPermissionMentionsVC.swift in Sources */,
 				3FB305DA2868702500CAC16F /* Transactions_submitter.swift in Sources */,
 				FA78EA0E27D283790023E48D /* SupervisionPager.swift in Sources */,
+				3FD03A55287437B000BB13C7 /* PermissionViewController.swift in Sources */,
 				FA95FD17275EFE9100DE7854 /* SpecialApprovalVC.swift in Sources */,
 				FA4A4C382803488700B9C658 /* ModulesTVCell.swift in Sources */,
+				3FD039D9287437B000BB13C7 /* ViewEmpLangVacationsVC.swift in Sources */,
 				FABDBA8227F2F9DE003961FC /* ProfileVC.swift in Sources */,
+				3FD03A46287437B000BB13C7 /* EditEmployeeDetailsVC.swift in Sources */,
 				3FB305B028684C6A00CAC16F /* ModuleUersRecords.swift in Sources */,
 				FA7A93CF27FD87B000EF6ECC /* Model.swift in Sources */,
 				FAA88ECF282AD1F20082432F /* TaskDetailVC.swift in Sources */,
 				3F14366A28489EB6008ABC19 /* Records.swift in Sources */,
 				FA9E7D91270F409D003A1D16 /* CronTransactionCell.swift in Sources */,
 				FA35CE4C271DCCF400FF6AE4 /* FromTransactionVC.swift in Sources */,
+				3FD03A1D287437B000BB13C7 /* ViewEmpContactDetailsVC.swift in Sources */,
 				FACFBA43273AD24D007C248C /* ByPhasesCell.swift in Sources */,
 				3FA3386F2858A90E00194AC6 /* JopDetailsTableViewCell.swift in Sources */,
 				FA03242826FB9BFA00372EA6 /* SceneDelegate.swift in Sources */,
+				3FD039F2287437B000BB13C7 /* OngoingViewDetailsViewController.swift in Sources */,
 				3F9ADB01285F1C9B00D68791 /* InsuranceGetResponse.swift in Sources */,
 				FABDBA9427F476D1003961FC /* PassportDetailsVC.swift in Sources */,
 				FABDBA8627F47624003961FC /* IdDetailsVC.swift in Sources */,
+				3FD03A27287437B000BB13C7 /* AddInsuranceViewController.swift in Sources */,
 				3F48C53C285883AF004D33F8 /* EmpViewResponse.swift in Sources */,
 				FA5AC1162761187100E6C42D /* PersonDetailsVC.swift in Sources */,
 				3FB305CE2868702500CAC16F /* Form_c2_files.swift in Sources */,
 				FA400D472716F1030097C7D1 /* TestCell.swift in Sources */,
 				FA44341527623F8D00DF6A9B /* FormsAttachmentsVC.swift in Sources */,
 				FA5CB10727D112590023A372 /* unitCVCell.swift in Sources */,
+				3FD039EA287437B000BB13C7 /* PresonDetailsViewController.swift in Sources */,
+				3FD03A1E287437B000BB13C7 /* ViewEmployeeDetailsVC.swift in Sources */,
 				FA5C977528195F2500A2AA5A /* TaskHistoryVC.swift in Sources */,
 				FA9768BF2735D764000A3576 /* RelatedFormsVC.swift in Sources */,
 				FA85D020280D74900080A0EA /* AllTicketVC.swift in Sources */,
@@ -2421,7 +3196,6 @@
 				3FD3F55E2858C25A007CC5BB /* JopDetailsResponse.swift in Sources */,
 				FA8B952E27F779BF003F9D7B /* JobDetailsTVCell.swift in Sources */,
 				FA6B77C4286F01ED00A8EDC0 /* AddCommentVC.swift in Sources */,
-				3F87BCC72848D39C0031098B /* SettingsUpdateViewController.swift in Sources */,
 				FA85D02B281062C20080A0EA /* PickerVC.swift in Sources */,
 				FA0324C626FBDAC000372EA6 /* TextFieldWithLabelView.swift in Sources */,
 				FAF7623D28305594000DEAFE /* TaskUsersCVCell.swift in Sources */,
@@ -2431,6 +3205,7 @@
 				FA025FBB2785E77800AB38C8 /* View_notification.swift in Sources */,
 				FAC48D8E27947E17007F3EDF /* FilterVC.swift in Sources */,
 				FA530A38270CC0B10071CDC8 /* TransactionApproveTVCell.swift in Sources */,
+				3FD03A13287437B000BB13C7 /* ViewEmpAttachmentsVC.swift in Sources */,
 				FA7A93D82801BBCD00EF6ECC /* ProfileNotesTVCell.swift in Sources */,
 				FAA3A09B28083D3300B87DAD /* ModuleUserTVCell.swift in Sources */,
 				FA9768BD2735D74B000A3576 /* FormVersionVC.swift in Sources */,
@@ -2441,6 +3216,7 @@
 				FABDBAA427F47806003961FC /* SignatureVC.swift in Sources */,
 				FA3D32B427343B8400A5472A /* ByPhases.swift in Sources */,
 				FA7BD97E28270D8B00EF1020 /* AddTaskVC.swift in Sources */,
+				3FD039DC287437B000BB13C7 /* ViewEmpBankDetailsVC.swift in Sources */,
 				FAD0749C274D4C6C00B9C7B3 /* NotificationVC.swift in Sources */,
 				3F0ECA0A2869FD3200A06963 /* OutgoingHistoryTableViewCell.swift in Sources */,
 				FAAF205B27DA284900AD255B /* TeamUserTVCell.swift in Sources */,
@@ -2452,6 +3228,7 @@
 				FA0324DF2700747A00372EA6 /* ForgetPasswordVC.swift in Sources */,
 				FA7F941727D782E900E03A34 /* ApprovalTVCell.swift in Sources */,
 				FA7F941327D77AC100E03A34 /* MyTrannsactionTVCell.swift in Sources */,
+				3FD03A18287437B000BB13C7 /* AddEmpContactViewController.swift in Sources */,
 				3FD1C5FA284E383100A42DAA /* SelectionInfo.swift in Sources */,
 				FA530A47270CF00E0071CDC8 /* MyTransactionHeaderView.swift in Sources */,
 				FA29703227431439000000F7 /* PDFViewrVC.swift in Sources */,
@@ -2479,18 +3256,25 @@
 				3F9ADB00285F1C9B00D68791 /* InsuranceRecords.swift in Sources */,
 				FABDBA9227F476B8003961FC /* EducationDetailsVC.swift in Sources */,
 				3FC82A4C284CD863005BCB46 /* Edit.swift in Sources */,
+				3FD03A3D287437B000BB13C7 /* InsuranceDetailsViewController.swift in Sources */,
 				3FC82A4E284CD863005BCB46 /* AllEmployeeResponse.swift in Sources */,
+				3FD03A51287437B000BB13C7 /* SettingsAlertViewController.swift in Sources */,
 				FAA88ED2282B0D730082432F /* TaskCommentCell.swift in Sources */,
 				FABF3632276AA06F0029810D /* NotesCell.swift in Sources */,
 				FA443419276275EC00DF6A9B /* AuthorizedPositionsApprovalVC.swift in Sources */,
 				FA9DF8D9281597FA0015D492 /* TicketCollectionViewCell.swift in Sources */,
+				3FD03A0B287437B000BB13C7 /* ViewEmpJobDetailsVC.swift in Sources */,
+				3FD039EB287437B000BB13C7 /* OutgoingHistoryViewController.swift in Sources */,
+				3FD039F6287437B000BB13C7 /* ViewEmpCommunicationsVC.swift in Sources */,
 				3FB305D62868702500CAC16F /* Transactions_notes.swift in Sources */,
 				3F8D490E2858F9C500DCBC84 /* Licenses.swift in Sources */,
 				FA55637B279CA86800542310 /* SubFilterVC.swift in Sources */,
 				3F1436952848A120008ABC19 /* GraidentView.swift in Sources */,
 				3FF6EDA7284B4DE00003E6F4 /* UpdateSettingResponse.swift in Sources */,
+				3FD03A32287437B000BB13C7 /* ViewEmployeePageVC.swift in Sources */,
 				FA95FD11275EFE5900DE7854 /* ManagerApprovalVC.swift in Sources */,
 				FA9FB0AB2716C7FA0037871C /* SubProjectDetailsVC.swift in Sources */,
+				3FD03A48287437B000BB13C7 /* WebViewViewController.swift in Sources */,
 				FA530A3E270CCA9D0071CDC8 /* CornTransactionTVCell.swift in Sources */,
 				FAAB76E1270B96F200731505 /* CronTransactionVC.swift in Sources */,
 				FA10D1A7275BBDB400F3716B /* TestApi.swift in Sources */,
@@ -2503,6 +3287,8 @@
 				3FAAB63E28609025007B9150 /* NoteTableViewCell.swift in Sources */,
 				FAAF206327DBDC8E00AD255B /* ByPhaseTVCell.swift in Sources */,
 				3F1436942848A120008ABC19 /* UIButtonDesignable.swift in Sources */,
+				3FD039E2287437B000BB13C7 /* OutgoingVC.swift in Sources */,
+				3FD039FC287437B000BB13C7 /* AddNotesViewController.swift in Sources */,
 				FA6FAFFB2703231600A31D8E /* FontAwesome.swift in Sources */,
 				3FB03C8D2848B2F2003859E1 /* Settings2TableViewCell.swift in Sources */,
 				FA025FB327848FE500AB38C8 /* CustomLoader.swift in Sources */,
@@ -2529,24 +3315,32 @@
 				FAC32FBB270AE8A80046A0F6 /* SubMenuTVCell.swift in Sources */,
 				FABDBA9027F476A2003961FC /* BankDetailsVC.swift in Sources */,
 				3F87BCD1284903060031098B /* LicenceData.swift in Sources */,
+				3FD03A30287437B000BB13C7 /* AddAttachmentViewController.swift in Sources */,
 				FA4A4C3B2804865D00B9C658 /* AddSignatureVC.swift in Sources */,
 				FAAF206B27DCFE0400AD255B /* RelatedFormTVCell.swift in Sources */,
 				FADC2FF928245B5200921011 /* TicketDetailsVC.swift in Sources */,
+				3FD03A5B28743AE100BB13C7 /* CommentRepltTableViewCell.swift in Sources */,
 				FA78EA1327D2B01A0023E48D /* ProjectRequestTVCell.swift in Sources */,
+				3FD039F1287437B000BB13C7 /* OutgoingAttachViewController.swift in Sources */,
 				FAA3A09828083A6200B87DAD /* ModulesUserVC.swift in Sources */,
 				3FB305D22868702500CAC16F /* transactions_extraRecords.swift in Sources */,
 				FA7A93CD27FCD87B00EF6ECC /* InsuranceTVCell.swift in Sources */,
 				FA44341327623F4500DF6A9B /* HistoryVC.swift in Sources */,
+				3FD03A05287437B000BB13C7 /* ViewEmpModulesVC.swift in Sources */,
 				FA5C976C2816B01100A2AA5A /* TaskAttachmentCell.swift in Sources */,
+				3FD039F3287437B000BB13C7 /* ViewOutgoingViewController.swift in Sources */,
 				3FB305DE2868702500CAC16F /* Transactions_barcode_version.swift in Sources */,
 				3F2B2C1128524F5B00C33FAD /* EditBody.swift in Sources */,
 				3F935E55285A232A00D7B779 /* EducationRecord.swift in Sources */,
+				3FD03A0F287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.swift in Sources */,
 				FA9E7D84270E4620003A1D16 /* GridLayout.swift in Sources */,
+				3FD03A29287437B000BB13C7 /* ViewLangCalenderVC.swift in Sources */,
 				3F935E4F285A1F8800D7B779 /* EducationDetailsTableViewCell.swift in Sources */,
 				FABDBA9827F476FF003961FC /* VacationFormVC.swift in Sources */,
 				FAF7623428300262000DEAFE /* CheckListCell.swift in Sources */,
 				3F48C54128589439004D33F8 /* GetImageResponse.swift in Sources */,
 				3F1F94E1286C3D6E00E454BF /* L102Localizer.swift in Sources */,
+				3FD03A33287437B000BB13C7 /* EditEmployeePageViewController.swift in Sources */,
 				FAC32FB62708C91D0046A0F6 /* TransactionTVCell.swift in Sources */,
 				FA556379279C8B2D00542310 /* TemplateFilterVC.swift in Sources */,
 				FAAF205F27DB734900AD255B /* ContactTVCell.swift in Sources */,
@@ -2941,6 +3735,691 @@
 			name = SettingsTableViewCell.xib;
 			sourceTree = "<group>";
 		};
+		3FD038DD287437AF00BB13C7 /* AllEmployeesVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD038DE287437AF00BB13C7 /* ar */,
+			);
+			name = AllEmployeesVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD038DF287437AF00BB13C7 /* AllEmployeesVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD038E0287437AF00BB13C7 /* en */,
+				3FD038E7287437AF00BB13C7 /* Base */,
+			);
+			name = AllEmployeesVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD038E2287437AF00BB13C7 /* FilterViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD038E3287437AF00BB13C7 /* ar */,
+			);
+			name = FilterViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD038E4287437AF00BB13C7 /* FilterViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD038E5287437AF00BB13C7 /* Base */,
+			);
+			name = FilterViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD038EE287437AF00BB13C7 /* ViewEmpBankDetailsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD038EF287437AF00BB13C7 /* ar */,
+			);
+			name = ViewEmpBankDetailsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD038F0287437AF00BB13C7 /* ViewEmpBankDetailsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD038F1287437AF00BB13C7 /* Base */,
+			);
+			name = ViewEmpBankDetailsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD038F4287437AF00BB13C7 /* ViewEmpPassportDetailsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD038F5287437AF00BB13C7 /* ar */,
+			);
+			name = ViewEmpPassportDetailsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD038F7287437AF00BB13C7 /* ViewEmpPassportDetailsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD038F8287437AF00BB13C7 /* Base */,
+			);
+			name = ViewEmpPassportDetailsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD038FA287437AF00BB13C7 /* OutgoingVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD038FB287437AF00BB13C7 /* ar */,
+			);
+			name = OutgoingVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD038FC287437AF00BB13C7 /* ViewEmpCommunicationsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD038FD287437AF00BB13C7 /* ar */,
+			);
+			name = ViewEmpCommunicationsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD038FF287437AF00BB13C7 /* ViewEmpCommunicationsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03900287437AF00BB13C7 /* Base */,
+			);
+			name = ViewEmpCommunicationsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03901287437AF00BB13C7 /* OutgoingVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03902287437AF00BB13C7 /* Base */,
+			);
+			name = OutgoingVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03904287437AF00BB13C7 /* PresonDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03905287437AF00BB13C7 /* ar */,
+			);
+			name = PresonDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03906287437AF00BB13C7 /* OutgoingAttachViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03907287437AF00BB13C7 /* ar */,
+			);
+			name = OutgoingAttachViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03908287437AF00BB13C7 /* RequestDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03909287437AF00BB13C7 /* ar */,
+			);
+			name = RequestDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD0390A287437AF00BB13C7 /* OngoingViewDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0390B287437AF00BB13C7 /* ar */,
+			);
+			name = OngoingViewDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD0390C287437AF00BB13C7 /* OutgoingHistoryViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0390D287437AF00BB13C7 /* ar */,
+			);
+			name = OutgoingHistoryViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03910287437AF00BB13C7 /* OutgoingHistoryViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03911287437AF00BB13C7 /* Base */,
+			);
+			name = OutgoingHistoryViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD03912287437AF00BB13C7 /* PresonDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03913287437AF00BB13C7 /* Base */,
+			);
+			name = PresonDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD03914287437AF00BB13C7 /* OngoingViewDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03915287437AF00BB13C7 /* Base */,
+			);
+			name = OngoingViewDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD03916287437AF00BB13C7 /* OutgoingAttachViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03917287437AF00BB13C7 /* Base */,
+			);
+			name = OutgoingAttachViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD03918287437AF00BB13C7 /* RequestDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03919287437AF00BB13C7 /* Base */,
+			);
+			name = RequestDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD03921287437AF00BB13C7 /* ViewEmpNotesVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03922287437AF00BB13C7 /* ar */,
+			);
+			name = ViewEmpNotesVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD03923287437AF00BB13C7 /* AddNotesViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03924287437AF00BB13C7 /* ar */,
+			);
+			name = AddNotesViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03926287437AF00BB13C7 /* ViewEmpNotesVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03927287437AF00BB13C7 /* Base */,
+			);
+			name = ViewEmpNotesVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03928287437AF00BB13C7 /* AddNotesViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03929287437AF00BB13C7 /* Base */,
+			);
+			name = AddNotesViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD0392C287437AF00BB13C7 /* ViewEmpIDDetailsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0392D287437AF00BB13C7 /* ar */,
+			);
+			name = ViewEmpIDDetailsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD0392E287437AF00BB13C7 /* ViewEmpIDDetailsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0392F287437AF00BB13C7 /* Base */,
+			);
+			name = ViewEmpIDDetailsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03932287437AF00BB13C7 /* UsersViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03933287437AF00BB13C7 /* ar */,
+			);
+			name = UsersViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03934287437AF00BB13C7 /* ViewEmpModulesVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03935287437AF00BB13C7 /* ar */,
+			);
+			name = ViewEmpModulesVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD03937287437AF00BB13C7 /* UsersViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03938287437AF00BB13C7 /* Base */,
+			);
+			name = UsersViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD03939287437AF00BB13C7 /* ViewEmpModulesVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0393A287437AF00BB13C7 /* Base */,
+			);
+			name = ViewEmpModulesVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD0393D287437AF00BB13C7 /* ViewEmpContractDetailsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0393E287437AF00BB13C7 /* ar */,
+			);
+			name = ViewEmpContractDetailsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD03940287437AF00BB13C7 /* ViewEmpContractDetailsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03941287437AF00BB13C7 /* Base */,
+			);
+			name = ViewEmpContractDetailsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03943287437AF00BB13C7 /* ViewEmpJobDetailsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03944287437AF00BB13C7 /* ar */,
+			);
+			name = ViewEmpJobDetailsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD03945287437AF00BB13C7 /* AddJopDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03946287437B000BB13C7 /* ar */,
+			);
+			name = AddJopDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03949287437B000BB13C7 /* AddJopDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0394A287437B000BB13C7 /* Base */,
+			);
+			name = AddJopDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD0394B287437B000BB13C7 /* ViewEmpJobDetailsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0394C287437B000BB13C7 /* Base */,
+			);
+			name = ViewEmpJobDetailsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD0394F287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03950287437B000BB13C7 /* ar */,
+			);
+			name = ViewEmpLangFinanialDetailsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD03951287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03952287437B000BB13C7 /* Base */,
+			);
+			name = ViewEmpLangFinanialDetailsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03954287437B000BB13C7 /* ViewEmpAttachmentsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03955287437B000BB13C7 /* ar */,
+			);
+			name = ViewEmpAttachmentsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD03957287437B000BB13C7 /* ViewEmpAttachmentsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03958287437B000BB13C7 /* Base */,
+			);
+			name = ViewEmpAttachmentsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD0395A287437B000BB13C7 /* ViewEmpJoiningDetailsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0395B287437B000BB13C7 /* ar */,
+			);
+			name = ViewEmpJoiningDetailsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD0395D287437B000BB13C7 /* ViewEmpJoiningDetailsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0395E287437B000BB13C7 /* Base */,
+			);
+			name = ViewEmpJoiningDetailsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03961287437B000BB13C7 /* ViewEmpContactDetailsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03962287437B000BB13C7 /* ar */,
+			);
+			name = ViewEmpContactDetailsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD03963287437B000BB13C7 /* AddEmpContactViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03964287437B000BB13C7 /* ar */,
+			);
+			name = AddEmpContactViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03965287437B000BB13C7 /* ViewEmpContactDetailsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03966287437B000BB13C7 /* Base */,
+			);
+			name = ViewEmpContactDetailsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03967287437B000BB13C7 /* AddEmpContactViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03968287437B000BB13C7 /* Base */,
+			);
+			name = AddEmpContactViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD0396C287437B000BB13C7 /* UpdateInsuranceViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0396D287437B000BB13C7 /* ar */,
+			);
+			name = UpdateInsuranceViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD0396E287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0396F287437B000BB13C7 /* ar */,
+			);
+			name = ViewEmpInsuranceDetailsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD03970287437B000BB13C7 /* AddInsuranceViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03971287437B000BB13C7 /* ar */,
+			);
+			name = AddInsuranceViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03973287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03974287437B000BB13C7 /* Base */,
+			);
+			name = ViewEmpInsuranceDetailsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03975287437B000BB13C7 /* AddInsuranceViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03976287437B000BB13C7 /* Base */,
+			);
+			name = AddInsuranceViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD03977287437B000BB13C7 /* UpdateInsuranceViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03978287437B000BB13C7 /* Base */,
+			);
+			name = UpdateInsuranceViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD0397C287437B000BB13C7 /* ViewLangCalenderVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0397D287437B000BB13C7 /* Base */,
+			);
+			name = ViewLangCalenderVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03980287437B000BB13C7 /* AddEmpEduDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03981287437B000BB13C7 /* ar */,
+			);
+			name = AddEmpEduDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03982287437B000BB13C7 /* ViewEmpEducationDetailsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03983287437B000BB13C7 /* ar */,
+			);
+			name = ViewEmpEducationDetailsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD03986287437B000BB13C7 /* ViewEmpEducationDetailsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03987287437B000BB13C7 /* Base */,
+			);
+			name = ViewEmpEducationDetailsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03988287437B000BB13C7 /* AddEmpEduDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03989287437B000BB13C7 /* Base */,
+			);
+			name = AddEmpEduDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD03990287437B000BB13C7 /* IDDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03991287437B000BB13C7 /* ar */,
+			);
+			name = IDDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03992287437B000BB13C7 /* BankDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03993287437B000BB13C7 /* ar */,
+			);
+			name = BankDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03994287437B000BB13C7 /* ContactDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03995287437B000BB13C7 /* ar */,
+			);
+			name = ContactDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03996287437B000BB13C7 /* InsuranceDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03997287437B000BB13C7 /* ar */,
+			);
+			name = InsuranceDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD03998287437B000BB13C7 /* PassportDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03999287437B000BB13C7 /* ar */,
+			);
+			name = PassportDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD0399A287437B000BB13C7 /* EducationDetailsViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD0399B287437B000BB13C7 /* ar */,
+			);
+			name = EducationDetailsViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD039A0287437B000BB13C7 /* InsuranceDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039A1287437B000BB13C7 /* Base */,
+			);
+			name = InsuranceDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD039A2287437B000BB13C7 /* EducationDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039A3287437B000BB13C7 /* Base */,
+			);
+			name = EducationDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD039A4287437B000BB13C7 /* ContactDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039A5287437B000BB13C7 /* Base */,
+			);
+			name = ContactDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD039A6287437B000BB13C7 /* PassportDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039A7287437B000BB13C7 /* Base */,
+			);
+			name = PassportDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD039A8287437B000BB13C7 /* BankDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039A9287437B000BB13C7 /* Base */,
+			);
+			name = BankDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD039AA287437B000BB13C7 /* IDDetailsViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039AB287437B000BB13C7 /* Base */,
+			);
+			name = IDDetailsViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD039B5287437B000BB13C7 /* SettingViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039B6287437B000BB13C7 /* ar */,
+			);
+			name = SettingViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD039B8287437B000BB13C7 /* SettingsUpdateViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039B9287437B000BB13C7 /* ar */,
+			);
+			name = SettingsUpdateViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD039BA287437B000BB13C7 /* SettingsUpdateViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039BB287437B000BB13C7 /* Base */,
+			);
+			name = SettingsUpdateViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD039BF287437B000BB13C7 /* SettingsAlertViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039C0287437B000BB13C7 /* ar */,
+			);
+			name = SettingsAlertViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD039C1287437B000BB13C7 /* SettingsAlertViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039C2287437B000BB13C7 /* Base */,
+			);
+			name = SettingsAlertViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD039C4287437B000BB13C7 /* SettingViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039C5287437B000BB13C7 /* Base */,
+			);
+			name = SettingViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD039C7287437B000BB13C7 /* PermissionViewController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039C8287437B000BB13C7 /* ar */,
+			);
+			name = PermissionViewController.strings;
+			sourceTree = "<group>";
+		};
+		3FD039C9287437B000BB13C7 /* PermissionViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039CA287437B000BB13C7 /* Base */,
+			);
+			name = PermissionViewController.xib;
+			sourceTree = "<group>";
+		};
+		3FD039CD287437B000BB13C7 /* AddPermissionMentionsVC.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039CE287437B000BB13C7 /* ar */,
+			);
+			name = AddPermissionMentionsVC.strings;
+			sourceTree = "<group>";
+		};
+		3FD039CF287437B000BB13C7 /* AddPermissionMentionsVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD039D0287437B000BB13C7 /* Base */,
+			);
+			name = AddPermissionMentionsVC.xib;
+			sourceTree = "<group>";
+		};
+		3FD03A732874485800BB13C7 /* Ticket.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03A722874485800BB13C7 /* Base */,
+				3FD03A752874485B00BB13C7 /* ar */,
+			);
+			name = Ticket.storyboard;
+			sourceTree = "<group>";
+		};
+		3FD03A78287448C900BB13C7 /* HR.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03A77287448C900BB13C7 /* Base */,
+				3FD03A7A287448CF00BB13C7 /* ar */,
+			);
+			name = HR.storyboard;
+			sourceTree = "<group>";
+		};
+		3FD03A7D2874492000BB13C7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03A7C2874492000BB13C7 /* Base */,
+				3FD03A7F2874494400BB13C7 /* ar */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3FD03A822874496900BB13C7 /* Transaction.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3FD03A812874496900BB13C7 /* Base */,
+				3FD03A842874497000BB13C7 /* ar */,
+			);
+			name = Transaction.storyboard;
+			sourceTree = "<group>";
+		};
 		FA0324D426FC66A900372EA6 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3073,7 +4552,7 @@
 		};
 		FA03244D26FB9BFF00372EA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21818E79825A01D2561E80D8 /* Pods-Almnabr.debug.xcconfig */;
+			baseConfigurationReference = 2AC8B25C23A0D1D0824A7936 /* Pods-Almnabr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

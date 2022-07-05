@@ -51,8 +51,8 @@ class TaskCommentCell: UITableViewCell ,UITableViewDataSource,UITableViewDelegat
         replysTable.dataSource = self
         replysTable.delegate = self
         
-        let nib = UINib(nibName: "commentRepltTVCell", bundle: nil)
-        replysTable.register(nib, forCellReuseIdentifier: "commentRepltTVCell")
+        let nib = UINib(nibName: "CommentRepltTableViewCell", bundle: nil)
+        replysTable.register(nib, forCellReuseIdentifier: "CommentRepltTableViewCell")
 
         tableHeight.constant = CGFloat(arr_reply.count * 100 )
 
@@ -74,7 +74,7 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
 
 func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "commentRepltTVCell", for: indexPath) as! commentRepltTVCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "CommentRepltTableViewCell", for: indexPath) as! CommentRepltTableViewCell
     
     let obj = arr_reply[indexPath.item]
     cell.lblDate.text = obj.comment_date

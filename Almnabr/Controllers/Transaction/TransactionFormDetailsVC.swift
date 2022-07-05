@@ -187,7 +187,7 @@ class TransactionFormDetailsVC: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         scrollView.refreshControl = refreshControl
         
-        if MOLHLanguage.currentAppleLanguage() == "en" {
+        if L102Language.currentAppleLanguage() == "en" {
            
             lblRequestNumber.textAlignment = .right
             lblProjectTitle.textAlignment = .right

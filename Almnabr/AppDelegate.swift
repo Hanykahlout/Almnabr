@@ -53,21 +53,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         UINavigationBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().tintColor = .white
-        
-//        MOLH.setLanguageTo("en")
-        if MOLHLanguage.currentAppleLanguage() == "ar" {
-            
-            UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            UISlider.appearance().semanticContentAttribute = .forceLeftToRight
-            
-            
-        } else {
-            
-            UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            UISlider.appearance().semanticContentAttribute = .forceLeftToRight
-        }
-        
-       // let notificationContent = UNMutableNotificationContent()
+
+        // let notificationContent = UNMutableNotificationContent()
        // notificationContent.sound = UNNotificationSound(named: "notification3.wav")
         //notificationContent.sound = .default
         //UNNotificationSound(named: "notification3.wav")

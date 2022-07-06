@@ -133,6 +133,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
     }
+    
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         UserDefaults.standard.set(Date(), forKey: "LastOpened")
         
@@ -166,6 +168,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let elapsed = Calendar.current.dateComponents([.minute], from: lastOpened, to: Date())
         print(elapsed)
         HelperClassSwift.IsLoadTheme = false
+        
+        SocketIOController.shard.disconnect()
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
@@ -176,6 +180,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UserDefaults.standard.set(Date(), forKey: "LastOpened")
     }
 
+
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         guard let lastOpened = UserDefaults.standard.object(forKey: "LastOpened") as? Date else {
             return

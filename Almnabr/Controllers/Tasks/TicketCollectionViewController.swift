@@ -14,7 +14,7 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
     var arr_data:[TaskObj] = []
     var ticket_id:String = ""
     var isFromNotificaion:Bool = false
-   
+    
     var boards:[Board] = []
     
     var object:TicketObj?
@@ -71,7 +71,7 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         var arr_2:[TaskObj] = []
         var arr_3:[TaskObj] = []
         var arr_4:[TaskObj] = []
-      
+        
         for i in arr_data{
             switch i.task_status  {
             case "1":
@@ -90,10 +90,10 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         
         self.boards = [
             Board(title: "New", items: arr_1 ),
-             Board(title: "In Progress", items:  arr_2),
-             Board(title: "Confirm", items:  arr_3),
-             Board(title: "Done", items:  arr_4)
-         ]
+            Board(title: "In Progress", items:  arr_2),
+            Board(title: "Confirm", items:  arr_3),
+            Board(title: "Done", items:  arr_4)
+        ]
         self.collectionView.reloadData()
         
     }
@@ -111,8 +111,8 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
     }
     
     func setupAddButtonItem() {
-//        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped(_:)))
-//        navigationItem.rightBarButtonItem = addButtonItem
+        //        let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped(_:)))
+        //        navigationItem.rightBarButtonItem = addButtonItem
         let activityButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addListTapped(_:)))
         navigationItem.rightBarButtonItem = activityButtonItem
         let infoButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(addListTapped(_:)))
@@ -131,7 +131,7 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         navigationItem.rightBarButtonItems = [GroupButton, infoButton,attachButton]
         
         //info.circle.fill
-       // rectangle.grid.2x2
+        // rectangle.grid.2x2
         
     }
     
@@ -162,11 +162,11 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
                 
             }else{
                 self.hideLoadingActivity()
-              
+                
             }
         }
     }
- 
+    
     func change_status(task_id:String, status:String){
         
         self.showLoadingActivity()
@@ -174,32 +174,32 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         
         APIManager.sendRequestPostAuth(urlString: "tasks/change_status_task", parameters: param ) { (response) in
             self.hideLoadingActivity()
-           
+            
             let status = response["status"] as? Bool
             if status == true{
                 self.get_data()
-             
+                
             }else{
                 self.hideLoadingActivity()
-              
+                
             }
         }
     }
     
     
     
-        @objc func didTapGroupButton(sender: AnyObject){
-            let vc:TaskHistoryVC = AppDelegate.TicketSB.instanceVC()
-            vc.ticket_id =  object!.ticket_id
-            self.navigationController?.pushViewController(vc, animated: true)
-            
-        }
+    @objc func didTapGroupButton(sender: AnyObject){
+        let vc:TaskHistoryVC = AppDelegate.TicketSB.instanceVC()
+        vc.ticket_id =  object!.ticket_id
+        self.navigationController?.pushViewController(vc, animated: true)
         
-        @objc func didTapAttachmentButton(sender: AnyObject){
-            let vc:TaskAttachmentVC = AppDelegate.TicketSB.instanceVC()
-            vc.ticket_id =  object!.ticket_id
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+    }
+    
+    @objc func didTapAttachmentButton(sender: AnyObject){
+        let vc:TaskAttachmentVC = AppDelegate.TicketSB.instanceVC()
+        vc.ticket_id =  object!.ticket_id
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     @objc func didTapInfoButton(sender: AnyObject){
         let vc:TicketDetailsVC = AppDelegate.TicketSB.instanceVC()
@@ -208,14 +208,14 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-//    func setupRemoveBarButtonItem() {
-//        let button = UIButton(type: .system)
-//        button.setTitle("Delete", for: .normal)
-//        button.setTitleColor(.red, for: .normal)
-//        button.addInteraction(UIDropInteraction(delegate: self))
-//        let removeBarButtonItem = UIBarButtonItem(customView: button)
-//        navigationItem.leftBarButtonItem = removeBarButtonItem
-//    }
+    //    func setupRemoveBarButtonItem() {
+    //        let button = UIButton(type: .system)
+    //        button.setTitle("Delete", for: .normal)
+    //        button.setTitleColor(.red, for: .normal)
+    //        button.addInteraction(UIDropInteraction(delegate: self))
+    //        let removeBarButtonItem = UIBarButtonItem(customView: button)
+    //        navigationItem.leftBarButtonItem = removeBarButtonItem
+    //    }
     
     @objc func addListTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "Add List", message: nil, preferredStyle: .alert)
@@ -280,7 +280,7 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         
         cell.btnSelectAction = { task_id  in
             let vc:TaskDetailVC = AppDelegate.TicketSB.instanceVC()
-           // vc.object =  object
+            // vc.object =  object
             vc.task_id =  task_id
             vc.delegate = {
                 self.get_data()
@@ -292,14 +292,14 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         
         //  AddTaskVC
         
-         // vc.delegate = {params  in
-              
-  //            self.params = params
-  //            self.get_data(showLoading: true, loadOnly: true)
-          //}
-      
+        // vc.delegate = {params  in
         
-
+        //            self.params = params
+        //            self.get_data(showLoading: true, loadOnly: true)
+        //}
+        
+        
+        
         
         return cell
     }

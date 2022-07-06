@@ -10,13 +10,13 @@ import UIKit
 import MobileCoreServices
 
 class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDelegate {
-//    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-//        <#code#>
-//    }
-//
+    //    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+    //
+    //    }
+    //
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-    return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ -> UIMenu? in
-    return self.createContextMenu()
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ -> UIMenu? in
+            return self.createContextMenu()
         }
     }
     
@@ -41,13 +41,13 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
         self.layer.cornerRadius = 10.0
         
         //tableView.dragInteractionEnabled = true
-      //  tableView.dragDelegate = self
-       // tableView.dropDelegate = self
+        //  tableView.dragDelegate = self
+        // tableView.dropDelegate = self
         
         tableView.tableFooterView = UIView()
         let nib = UINib(nibName: "TaskTVCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TaskTVCell")
-     
+        
     }
     
     func setup(with data: Board) {
@@ -56,32 +56,32 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
     }
     
     
-   
+    
     
     @IBAction func addTapped(_ sender: Any) {
         btnAddTaskAction!()
-
         
-//        let alertController = UIAlertController(title: "Add Item", message: nil, preferredStyle: .alert)
-//        alertController.addTextField(configurationHandler: nil)
-//        alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: { (_) in
-//            guard let text = alertController.textFields?.first?.text, !text.isEmpty else {
-//                return
-//            }
-//
-//            guard let data = self.board else {
-//                return
-//            }
-//
-//            //data.items.append(text)
-//            let addedIndexPath = IndexPath(item: data.items.count - 1, section: 0)
-//
-//            self.tableView.insertRows(at: [addedIndexPath], with: .automatic)
-//            self.tableView.scrollToRow(at: addedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
-//        }))
-//
-//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//        parentVC?.present(alertController, animated: true, completion: nil)
+        
+        //        let alertController = UIAlertController(title: "Add Item", message: nil, preferredStyle: .alert)
+        //        alertController.addTextField(configurationHandler: nil)
+        //        alertController.addAction(UIAlertAction(title: "Add", style: .default, handler: { (_) in
+        //            guard let text = alertController.textFields?.first?.text, !text.isEmpty else {
+        //                return
+        //            }
+        //
+        //            guard let data = self.board else {
+        //                return
+        //            }
+        //
+        //            //data.items.append(text)
+        //            let addedIndexPath = IndexPath(item: data.items.count - 1, section: 0)
+        //
+        //            self.tableView.insertRows(at: [addedIndexPath], with: .automatic)
+        //            self.tableView.scrollToRow(at: addedIndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+        //        }))
+        //
+        //        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        //        parentVC?.present(alertController, animated: true, completion: nil)
     }
     
     func createContextMenu() -> UIMenu {
@@ -101,7 +101,7 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
     }
     
     func NewMenu() -> UIMenu {
-      
+        
         let in_progress = UIAction(title: "in progress") { _ in
             self.btnChangeStatusAction!(self.task_id, 2)
         }
@@ -115,7 +115,7 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
     }
     
     func in_progressMenu() -> UIMenu {
-      
+        
         let new = UIAction(title: "New") { _ in
             self.btnChangeStatusAction!(self.task_id, 1)
         }
@@ -129,7 +129,7 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
     }
     
     func ConfirmMenu() -> UIMenu {
-      
+        
         let new = UIAction(title: "New") { _ in
             self.btnChangeStatusAction!(self.task_id, 1)
         }
@@ -144,7 +144,7 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
     }
     
     func DoneMenu() -> UIMenu {
-      
+        
         let new = UIAction(title: "New") { _ in
             self.btnChangeStatusAction!(self.task_id, 1)
         }
@@ -159,7 +159,7 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
     
     
     
-   
+    
     
 }
 
@@ -241,7 +241,7 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
         
         let status_id = obj.task_status_done
         
-         
+        
         switch status_id {
         case "1":
             cell.btnStatus.backgroundColor = "#f12b54".getUIColor()
@@ -249,7 +249,7 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
             cell.btnStatus.backgroundColor = "#e3ac07".getUIColor()
         case "4":
             cell.btnStatus.backgroundColor = "#e3ac07".getUIColor()
-       
+            
         default:
             cell.btnStatus.backgroundColor = "#0079bf".getUIColor()
         }
@@ -281,8 +281,8 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
             default:
                 cell.btn_changeStatus.menu = self.createContextMenu()
             }
-         
-          //  let interaction = UIContextMenuInteraction(delegate: self)
+            
+            //  let interaction = UIContextMenuInteraction(delegate: self)
             //cell.btn_changeStatus.addInteraction(interaction)
         }
         
@@ -291,7 +291,7 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
         }
         if obj.is_can_view == true {
             cell.img_lock.isHidden = true
-          
+            
         }else{
             cell.img_lock.isHidden = false
             cell.viewBack.backgroundColor = .systemGray4

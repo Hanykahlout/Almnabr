@@ -28,12 +28,6 @@ class HomeVC: UIViewController   {
     var session: NFCNDEFReaderSession?
     var message:String = ""
     
-    private var manager = SocketManager(socketURL: URL(string:"https://node.almnabr.com/")!)
-   // var socket  = io.connect('https://node.almnabr.com', {secure: true, auth: {token: "توكن اليوزر هنا"}});
-//    Node.NAHIDH.Sa
-    //"https://node.almnabr.com/"
-    private var socket: SocketIOClient!
-    
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -42,30 +36,9 @@ class HomeVC: UIViewController   {
         header.btnAction = menu_select
         check_notifi()
         
-     
         self.lbl_allCopyRes.font = .kufiRegularFont(ofSize: 12)
         
-        let token =  "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
-        print("XXX-TOKEN",token)
-        self.manager.config = SocketIOClientConfiguration(
-            arrayLiteral: .connectParams(["Authorization": "test"]),.secure(false) )
-        
-        let dict =  [ "token" : token]
-        manager.defaultSocket.connect(withPayload: dict)
-        
-        let socket = self.manager.defaultSocket
-        
-        self.manager.connectSocket(socket, withPayload:dict)
-        
-        socket.on(clientEvent: .connect) {data, ack in
-            print("socket connected")
-        }
-        
     }
-    
-    
-    
-    
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,7 +65,8 @@ class HomeVC: UIViewController   {
                     }
                 }
             }
-        }}
+        }
+    }
     
     
     func menu_select(){
@@ -111,7 +85,6 @@ class HomeVC: UIViewController   {
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
-    
     
     @objc func buttonMenuAction(sender: UIButton!) {
         

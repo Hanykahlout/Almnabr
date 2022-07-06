@@ -9,7 +9,7 @@
 import UIKit
 
 class AllTicketVC: UIViewController {
-
+    
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var img_nodata: UIImageView!
     @IBOutlet weak var view_Add: UIView!
@@ -46,7 +46,7 @@ class AllTicketVC: UIViewController {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-      
+        
         header.btnAction = self.menu_select
     }
     
@@ -86,7 +86,7 @@ class AllTicketVC: UIViewController {
         self.params["end_date"] = ""
         self.params["ref_model"] = ""
         
-//        self.view_Search.setBorderGrayWidthCorner(1, 20)
+        //        self.view_Search.setBorderGrayWidthCorner(1, 20)
         self.view_Search.setBorderColorWidthCorner(1, 20, color: maincolor)
         
         self.view_Add.setBorderGrayWidthCorner(1, 20)
@@ -104,12 +104,12 @@ class AllTicketVC: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        self.lblMyTicket.text = "Tickets".localized() 
+        self.lblMyTicket.text = "Tickets".localized()
         
     }
-
-
-   
+    
+    
+    
     func get_data(showLoading: Bool, loadOnly: Bool){
         
         if showLoading {
@@ -165,25 +165,25 @@ class AllTicketVC: UIViewController {
     
     func get_Transaction_data(){
         
-//        if showLoading {
-            self.showLoadingActivity()
-//        }
+        //        if showLoading {
+        self.showLoadingActivity()
+        //        }
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         APIManager.sendRequestGetAuth(urlString: "tc/list/1/10?searchKey=&searchAdmin=0&searchByForm=&searchByModule=&searchByStatus=all_pending_need_action" ) { (response) in
-           
+            
             let status = response["status"] as? Bool
             let total = response["total"] as? Int
             if status == true{
                 self.total_records = total ?? 0
                 self.lblMyTransaction.text = "My Transactions".localized() + " (\(self.total_records))"
-                    self.hideLoadingActivity()
+                self.hideLoadingActivity()
             }else{
                 self.lblMyTransaction.text = "My Transactions".localized() + " (\(self.total_records))"
                 self.hideLoadingActivity()
                 
             }
         }
-            
+        
     }
     
     func menu_select(){
@@ -203,7 +203,7 @@ class AllTicketVC: UIViewController {
         
         APIManager.sendRequestPostAuth(urlString: "tasks/delete_ticket", parameters: param ) { (response) in
             self.hideLoadingActivity()
-           
+            
             let status = response["status"] as? Bool
             let message = response["message"] as? String
             if status == true{
@@ -213,11 +213,11 @@ class AllTicketVC: UIViewController {
                 })
             }else{
                 self.hideLoadingActivity()
-              
+                
             }
         }
     }
-
+    
     
     
     @IBAction func btnAddTicket_Click(_ sender: Any) {
@@ -228,7 +228,7 @@ class AllTicketVC: UIViewController {
         vc.strTitle = "Add Ticket".localized()
         self.navigationController?.pushViewController(vc, animated: true)
     }
-   
+    
     @IBAction func btnFilter_Click(_ sender: Any) {
         let vc:TaskFilterVC = AppDelegate.mainSB.instanceVC()
         vc.delegate = {params  in
@@ -249,109 +249,109 @@ class AllTicketVC: UIViewController {
 
 
 extension AllTicketVC: UITableViewDelegate , UITableViewDataSource{
-
-func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return arr_data.count
-}
-
-func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "TicketTVCell", for: indexPath) as! TicketTVCell
-    
-    let obj = arr_data[indexPath.item]
-    
-    let Type = "Type".localized() + ": \(obj.ticket_type_name)"
-    let Priority = "Priority".localized() + ": \(obj.important_name)"
-    let Status = "Status".localized() + ": \(obj.ticket_status_name)"
-    let Module = "Module".localized() + ": \(obj.ref_model)"
-    
-    cell.lblSubject.text = obj.ticket_titel
-    cell.lblDateCreated.text = obj.insert_date
-   
-    if obj.can_delete == false{
-        cell.btnDelete.isHidden = true
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arr_data.count
     }
     
-    if obj.can_edit == false{
-        cell.btnEdit.isHidden = true
-    }
-    
-    cell.btnEditAction = {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let vc:AddTicketVC = AppDelegate.TicketSB.instanceVC()
-        vc.delegate = {
-            self.get_data(showLoading: true, loadOnly: true)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TicketTVCell", for: indexPath) as! TicketTVCell
+        
+        let obj = arr_data[indexPath.item]
+        
+        let Type = "Type".localized() + ": \(obj.ticket_type_name)"
+        let Priority = "Priority".localized() + ": \(obj.important_name)"
+        let Status = "Status".localized() + ": \(obj.ticket_status_name)"
+        let Module = "Module".localized() + ": \(obj.ref_model)"
+        
+        cell.lblSubject.text = obj.ticket_titel
+        cell.lblDateCreated.text = obj.insert_date
+        
+        if obj.can_delete == false{
+            cell.btnDelete.isHidden = true
         }
-        vc.strTitle = "Edit Ticket".localized()
+        
+        if obj.can_edit == false{
+            cell.btnEdit.isHidden = true
+        }
+        
+        cell.btnEditAction = {
+            
+            let vc:AddTicketVC = AppDelegate.TicketSB.instanceVC()
+            vc.delegate = {
+                self.get_data(showLoading: true, loadOnly: true)
+            }
+            vc.strTitle = "Edit Ticket".localized()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+        cell.btnDeleteAction = {
+            print("deleted")
+            self.delete_ticket(ticket_id: obj.ticket_id)
+        }
+        
+        
+        let Typeattributed: NSAttributedString = Type.attributedStringWithColor(["Type".localized()], color: maincolor)
+        cell.lblType.attributedText = Typeattributed
+        
+        let Priorityattributed: NSAttributedString = Priority.attributedStringWithColor(["Priority".localized()], color: maincolor)
+        cell.lblpriority.attributedText = Priorityattributed
+        
+        let Statusattributed: NSAttributedString = Status.attributedStringWithColor(["Status".localized()], color: maincolor)
+        cell.lblStatus.attributedText = Statusattributed
+        
+        let Moduleattributed: NSAttributedString = Module.attributedStringWithColor(["Module".localized()], color: maincolor)
+        cell.lblModule.attributedText = Moduleattributed
+        return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let vc:TicketCollectionViewController = AppDelegate.TicketSB.instanceVC()
+        let obj = arr_data[indexPath.item]
+        vc.object = obj
+        vc.ticket_id = obj.ticket_id
+        //    vc.delegate = {params  in
+        //
+        //        self.params = params
+        //        self.get_data(showLoading: true, loadOnly: true)
+        //    }
         self.navigationController?.pushViewController(vc, animated: true)
+        
+        //                let obj = arr_data[indexPath.item]
+        //                let vc:ProjectDetailsVC = AppDelegate.mainSB.instanceVC()
+        //                vc.title =  self.title
+        //                vc.Object = obj
+        //                vc.MenuObj = self.MenuObj
+        //                vc.StrSubMenue =  self.StrSubMenue
+        //                vc.StrMenue = self.StrMenue
+        //        self.navigationController?.pushViewController(vc, animated: true)
+        //                _ =  panel?.center(vc)
     }
     
-    cell.btnDeleteAction = {
-        print("deleted")
-        self.delete_ticket(ticket_id: obj.ticket_id)
-    }
     
-        
-    let Typeattributed: NSAttributedString = Type.attributedStringWithColor(["Type".localized()], color: maincolor)
-    cell.lblType.attributedText = Typeattributed
-    
-    let Priorityattributed: NSAttributedString = Priority.attributedStringWithColor(["Priority".localized()], color: maincolor)
-    cell.lblpriority.attributedText = Priorityattributed
-     
-    let Statusattributed: NSAttributedString = Status.attributedStringWithColor(["Status".localized()], color: maincolor)
-    cell.lblStatus.attributedText = Statusattributed
-    
-    let Moduleattributed: NSAttributedString = Module.attributedStringWithColor(["Module".localized()], color: maincolor)
-    cell.lblModule.attributedText = Moduleattributed
-    return cell
-    
-}
-
-func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-    let vc:TicketCollectionViewController = AppDelegate.TicketSB.instanceVC()
-    let obj = arr_data[indexPath.item]
-    vc.object = obj
-    vc.ticket_id = obj.ticket_id
-//    vc.delegate = {params  in
-//        
-//        self.params = params
-//        self.get_data(showLoading: true, loadOnly: true)
-//    }
-    self.navigationController?.pushViewController(vc, animated: true)
-    
-    //                let obj = arr_data[indexPath.item]
-    //                let vc:ProjectDetailsVC = AppDelegate.mainSB.instanceVC()
-    //                vc.title =  self.title
-    //                vc.Object = obj
-    //                vc.MenuObj = self.MenuObj
-    //                vc.StrSubMenue =  self.StrSubMenue
-    //                vc.StrMenue = self.StrMenue
-    //        self.navigationController?.pushViewController(vc, animated: true)
-    //                _ =  panel?.center(vc)
-}
-
-
-func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    if tableView.tag == 0 {
-        
-        
-        print(indexPath.section)
-        if indexPath.row   == arr_data.count - 1  {
-            updateNextSet()
-            print("next step")
-
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if tableView.tag == 0 {
+            
+            
+            print(indexPath.section)
+            if indexPath.row   == arr_data.count - 1  {
+                updateNextSet()
+                print("next step")
+                
+            }
         }
     }
-}
-
-func updateNextSet(){
-    print("On Completetion")
-    if !allItemDownloaded {
-        pageNumber = pageNumber + 1
-        get_data(showLoading: false, loadOnly: true)
+    
+    func updateNextSet(){
+        print("On Completetion")
+        if !allItemDownloaded {
+            pageNumber = pageNumber + 1
+            get_data(showLoading: false, loadOnly: true)
+        }
     }
-}
 }
 
 

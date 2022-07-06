@@ -609,7 +609,7 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
             self.param["end_date"] = tfEndDate.text
             self.param["important_id"] =  self.important_id
             self.param["task_status_done"] = self.task_status
-         
+            self.param["reminder_date"] = ""
             
             
             var related_task = ""

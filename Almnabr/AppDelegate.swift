@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-//        UIApplication.shared.statusBarStyle = .darkContent
+        //        UIApplication.shared.statusBarStyle = .darkContent
         L102Localizer.DoTheMagic()
         AppInstance = self
         IQKeyboardManager.shared.enable = true
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         get_theme()
         
         //UIApplication.shared.applicationIconBadgeNumber = 0
-       //hideLoader()
+        //hideLoader()
         
         //Here we will hide back button title and change arrow to white color
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
@@ -53,15 +53,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         UINavigationBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().tintColor = .white
-
+        
         // let notificationContent = UNMutableNotificationContent()
-       // notificationContent.sound = UNNotificationSound(named: "notification3.wav")
+        // notificationContent.sound = UNNotificationSound(named: "notification3.wav")
         //notificationContent.sound = .default
         //UNNotificationSound(named: "notification3.wav")
-      //  notification.sound = UNNotificationSound(named: "notification3.wav")
+        //  notification.sound = UNNotificationSound(named: "notification3.wav")
         application.registerForRemoteNotifications()
-       
-
+        
+        
         Messaging.messaging().delegate = self
         
         let token = Messaging.messaging().fcmToken
@@ -76,14 +76,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     }
     
     
-//    func showLoader()
-//    {
-//        CustomLoader.sharedInstance.startAnimation()
-//    }
-//    func hideLoader()
-//    {
-//        CustomLoader.sharedInstance.stopAnimation()
-//    }
+    //    func showLoader()
+    //    {
+    //        CustomLoader.sharedInstance.startAnimation()
+    //    }
+    //    func hideLoader()
+    //    {
+    //        CustomLoader.sharedInstance.stopAnimation()
+    //    }
     
     func setupFirebaseMessaging(_ application: UIApplication) {
         
@@ -97,44 +97,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                 completionHandler: {_, _ in })
         } else {
             let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
         
         application.registerForRemoteNotifications()
     }
     
-//    func registerForPushNotifications() {
-//
-//        UNUserNotificationCenter.current().delegate = self
-//
-//
-//        UNUserNotificationCenter.current()
-//            .requestAuthorization(
-//                options: [.alert, .sound, .badge]) { [weak self] granted, _ in
-//                    print("Permission granted: \(granted)")
-//                    guard granted else { return }
-//                    self?.getNotificationSettings()
-//                }
-//        let content = UNMutableNotificationContent() // notification content object
-//        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "notification3.wav"))
-//
-//
-//        if #available(iOS 10.0, *) {
-//            // For iOS 10 display notification (sent via APNS)
-//            UNUserNotificationCenter.current().delegate = self
-//
-//            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//            UNUserNotificationCenter.current().requestAuthorization(
-//                options: authOptions,
-//                completionHandler: {_, _ in })
-//        } else {
-//            let settings: UIUserNotificationSettings =
-//            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-//            application.registerUserNotificationSettings(settings)
-//        }
-//
-//    }
+    //    func registerForPushNotifications() {
+    //
+    //        UNUserNotificationCenter.current().delegate = self
+    //
+    //
+    //        UNUserNotificationCenter.current()
+    //            .requestAuthorization(
+    //                options: [.alert, .sound, .badge]) { [weak self] granted, _ in
+    //                    print("Permission granted: \(granted)")
+    //                    guard granted else { return }
+    //                    self?.getNotificationSettings()
+    //                }
+    //        let content = UNMutableNotificationContent() // notification content object
+    //        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "notification3.wav"))
+    //
+    //
+    //        if #available(iOS 10.0, *) {
+    //            // For iOS 10 display notification (sent via APNS)
+    //            UNUserNotificationCenter.current().delegate = self
+    //
+    //            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+    //            UNUserNotificationCenter.current().requestAuthorization(
+    //                options: authOptions,
+    //                completionHandler: {_, _ in })
+    //        } else {
+    //            let settings: UIUserNotificationSettings =
+    //            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+    //            application.registerUserNotificationSettings(settings)
+    //        }
+    //
+    //    }
     
     
     
@@ -232,7 +232,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         
         // Print full message.
         print(userInfo)
-
+        
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
@@ -246,19 +246,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
             
             
             
-//            let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
-//            vc.str_url = "\(splitString[1])"
-//
-//            let page = UINavigationController.init(rootViewController: vc)
-//            //_ =  self.panel?.center(page)
-//            vc.switchRootViewController(rootViewController: page, animated: true, completion: nil)
+            //            let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+            //            vc.str_url = "\(splitString[1])"
+            //
+            //            let page = UINavigationController.init(rootViewController: vc)
+            //            //_ =  self.panel?.center(page)
+            //            vc.switchRootViewController(rootViewController: page, animated: true, completion: nil)
         }
-        
-        
-        
-        
+    
         completionHandler()
     }
+    
+    
     func application(_ application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
@@ -284,7 +283,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
-       
+        
     }
     
     func applicationWillTerminate(_ application: UIApplication) {

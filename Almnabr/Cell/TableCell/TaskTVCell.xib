@@ -57,7 +57,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-hu-UpY">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-hu-UpY">
                                 <rect key="frame" x="10" y="60" width="178.5" height="15"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3jt-gy-syd">
@@ -252,12 +252,12 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="checkmark.square" catalog="system" width="128" height="114"/>
-        <image name="gearshape" catalog="system" width="128" height="121"/>
-        <image name="lock.fill" catalog="system" width="128" height="128"/>
-        <image name="note.text" catalog="system" width="128" height="106"/>
-        <image name="point.3.filled.connected.trianglepath.dotted" catalog="system" width="128" height="96"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
+        <image name="checkmark.square" catalog="system" width="32" height="32"/>
+        <image name="gearshape" catalog="system" width="32" height="32"/>
+        <image name="lock.fill" catalog="system" width="32" height="32"/>
+        <image name="note.text" catalog="system" width="32" height="32"/>
+        <image name="point.3.filled.connected.trianglepath.dotted" catalog="system" width="32" height="32"/>
+        <image name="square.and.pencil" catalog="system" width="32" height="32"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

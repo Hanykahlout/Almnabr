@@ -74,6 +74,7 @@
 		3F48C53F285883AF004D33F8 /* Profile_percentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C53B285883AF004D33F8 /* Profile_percentage.swift */; };
 		3F48C54128589439004D33F8 /* GetImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C54028589439004D33F8 /* GetImageResponse.swift */; };
 		3F524757284FCE8D0081EBC6 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F524756284FCE8D0081EBC6 /* FilterInfo.swift */; };
+		3F645ADF2875D86E00720E76 /* SocketIOController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F645ADE2875D86E00720E76 /* SocketIOController.swift */; };
 		3F65AC60285099EA00035471 /* SectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65AC5F285099EA00035471 /* SectionInfo.swift */; };
 		3F76506E2850917D00FB8A97 /* SectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F76506C2850917D00FB8A97 /* SectionCollectionViewCell.swift */; };
 		3F76506F2850917D00FB8A97 /* SectionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F76506D2850917D00FB8A97 /* SectionCollectionViewCell.xib */; };
@@ -660,6 +661,7 @@
 		3F48C53B285883AF004D33F8 /* Profile_percentage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_percentage.swift; sourceTree = "<group>"; };
 		3F48C54028589439004D33F8 /* GetImageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImageResponse.swift; sourceTree = "<group>"; };
 		3F524756284FCE8D0081EBC6 /* FilterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInfo.swift; sourceTree = "<group>"; };
+		3F645ADE2875D86E00720E76 /* SocketIOController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOController.swift; sourceTree = "<group>"; };
 		3F65AC5F285099EA00035471 /* SectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfo.swift; sourceTree = "<group>"; };
 		3F76506C2850917D00FB8A97 /* SectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		3F76506D2850917D00FB8A97 /* SectionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SectionCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1315,6 +1317,14 @@
 			path = ViewEmpResponse;
 			sourceTree = "<group>";
 		};
+		3F645ADD2875D85100720E76 /* SocketIO */ = {
+			isa = PBXGroup;
+			children = (
+				3F645ADE2875D86E00720E76 /* SocketIOController.swift */,
+			);
+			path = SocketIO;
+			sourceTree = "<group>";
+		};
 		3F935E51285A231B00D7B779 /* Education Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -1961,6 +1971,7 @@
 		FA03242426FB9BFA00372EA6 /* Almnabr */ = {
 			isa = PBXGroup;
 			children = (
+				3F645ADD2875D85100720E76 /* SocketIO */,
 				FA95FD1A275EFFF400DE7854 /* no-permission.gif */,
 				FA1809652705006200B493A7 /* Almnabr.entitlements */,
 				FA1D64AC2777743800FA7735 /* Classes */,
@@ -3254,6 +3265,7 @@
 				FA9E7D8D270F39DC003A1D16 /* ApprovalTransactionCell.swift in Sources */,
 				3FAD7A252850F5E20063B15E /* BanksResponse.swift in Sources */,
 				3F9ADB00285F1C9B00D68791 /* InsuranceRecords.swift in Sources */,
+				3F645ADF2875D86E00720E76 /* SocketIOController.swift in Sources */,
 				FABDBA9227F476B8003961FC /* EducationDetailsVC.swift in Sources */,
 				3FC82A4C284CD863005BCB46 /* Edit.swift in Sources */,
 				3FD03A3D287437B000BB13C7 /* InsuranceDetailsViewController.swift in Sources */,
@@ -4561,7 +4573,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 19;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -4590,7 +4602,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 19;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

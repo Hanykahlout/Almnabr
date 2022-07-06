@@ -58,6 +58,9 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWD-Yi-moK">
                                 <rect key="frame" x="10" y="65" width="91" height="30.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="91" id="ct8-aK-10N"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -69,8 +72,8 @@
                             <constraint firstItem="Gzs-8O-bdd" firstAttribute="top" secondItem="Sg7-00-GPE" secondAttribute="top" constant="5" id="GWE-hl-kN0"/>
                             <constraint firstItem="WWD-Yi-moK" firstAttribute="leading" secondItem="Sg7-00-GPE" secondAttribute="leading" constant="10" id="NY9-cc-MOh"/>
                             <constraint firstAttribute="height" constant="102" id="QSc-9C-dJF"/>
+                            <constraint firstAttribute="trailing" secondItem="WWD-Yi-moK" secondAttribute="trailing" constant="10" id="WGb-nm-u3n"/>
                             <constraint firstItem="Gzs-8O-bdd" firstAttribute="centerX" secondItem="Sg7-00-GPE" secondAttribute="centerX" id="gji-Qo-lsO"/>
-                            <constraint firstAttribute="trailing" secondItem="WWD-Yi-moK" secondAttribute="trailing" constant="10" id="mRU-UC-ab8"/>
                             <constraint firstItem="WWD-Yi-moK" firstAttribute="top" secondItem="Gzs-8O-bdd" secondAttribute="bottom" constant="5" id="xhs-fT-tsh"/>
                         </constraints>
                     </view>
@@ -93,6 +96,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="building.2" catalog="system" width="128" height="106"/>
+        <image name="building.2" catalog="system" width="32" height="32"/>
     </resources>
 </document>

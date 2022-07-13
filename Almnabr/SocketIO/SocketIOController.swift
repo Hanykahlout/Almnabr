@@ -39,15 +39,13 @@ class SocketIOController{
             print("socket connected")
         }
         
-//        socket!.on("ticket_25_tasks_265") {data, ack in
-//            print("DATA-Result",data)
-//        }
-     
-        
-        
     }
     
-    
+    func taskHandler(ticketId:String,userID:String,callback:@escaping (_ data:[Any])->Void){
+        socket?.on("ticket_\(ticketId)_tasks_\(userID)") {data, ack in
+            callback(data)
+        }
+    }
     
     
     func disconnect(){

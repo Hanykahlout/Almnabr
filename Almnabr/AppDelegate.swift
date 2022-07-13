@@ -253,7 +253,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
             //            //_ =  self.panel?.center(page)
             //            vc.switchRootViewController(rootViewController: page, animated: true, completion: nil)
         }
-    
+        
         completionHandler()
     }
     

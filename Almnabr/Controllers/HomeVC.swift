@@ -31,7 +31,8 @@ class HomeVC: UIViewController   {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
+        SocketIOController.shard.connect()
+        print("ASDASDSA - TOKEN",NewSuccessModel.getLoginSuccessToken() ?? "nil")
         get_Userdata()
         header.btnAction = menu_select
         check_notifi()

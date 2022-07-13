@@ -14,6 +14,7 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
     var arr_data:[TaskObj] = []
     var ticket_id:String = ""
     var isFromNotificaion:Bool = false
+    private let status:[String:String] = ["1":"New","2":"In Progress","3":"Confirm","4":"Done"]
     
     var boards:[Board] = []
     
@@ -23,7 +24,6 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         super.viewDidLoad()
         
         set_data()
-        
         updateCollectionViewItem(with: view.bounds.size)
         if isFromNotificaion == true {
             get_data()
@@ -34,7 +34,65 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
             setupNavigationBar()
             configNavigation()
         }
+        addSocketObserver()
     }
+    
+    
+    private func addSocketObserver(){
+        SocketIOController.shard.taskHandler(ticketId: ticket_id, userID: Auth_User.user_id) { data in
+            print("Noooooooo")
+            print("Data - ",data)
+            
+            guard let data = data.first as? [String:Any] else { return }
+            guard let content = data["content"] as? [String:Any] else { return }
+            let index = Int(content["task_status"] as! String)! - 1
+            let obj =  TaskObj.init(content)
+            
+            if let type = data["type"] as? String{
+                switch type{
+                case "edit_task":
+                    self.boards[index].items.removeAll{$0.task_id == content["task_id"] as! String}
+                    self.boards[index].items.append(obj)
+                case "add_task":
+                    self.boards[index].items.append(obj)
+                case "delete_task":
+                    self.boards[index].items.removeAll{$0.task_id == String(content["task_id"] as! Int)}
+                case "change_status_task":
+                    var oldIndex:Int?
+                    for statusTable in self.boards{
+                        var isExist = false
+                        for index in 0..<statusTable.items.count{
+                            if statusTable.items[index].task_id == content["task_id"] as! String{
+                                isExist = true
+                                oldIndex = Int(statusTable.items[index].task_status)! - 1
+                                self.boards[oldIndex!].items.remove(at: index)
+                                break
+                            }
+                        }
+                        
+                        if(isExist){
+                            break
+                        }
+                    }
+                    if let oldIndex = oldIndex {
+                        let cell = self.collectionView.cellForItem(at: IndexPath(row: oldIndex, section: 0)) as! BoardCollectionViewCell
+                        cell.tableView.reloadData()
+                    }
+                    
+                    self.boards[index].items.append(obj)
+                default:
+                    break
+                }
+                
+                let cell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as! BoardCollectionViewCell
+                cell.tableView.reloadData()
+                
+            }
+            
+        }
+        
+    }
+    
     
     private func setupNavigationBar() {
         setupAddButtonItem()
@@ -342,4 +400,10 @@ class Board {
         self.title = title
         self.items = items
     }
+}
+
+
+struct TaskSocketResponse{
+    var content:TaskObj?
+    var type: String?
 }

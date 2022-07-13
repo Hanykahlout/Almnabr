@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -23,12 +24,12 @@
         <!--All TicketVC-->
         <scene sceneID="2fd-II-qg5">
             <objects>
-                <viewController storyboardIdentifier="AllTicketVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eny-Mb-URc" customClass="AllTicketVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllTicketVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eny-Mb-URc" customClass="AllTicketVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="weN-Vp-gVR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KtC-Xw-hu2" customClass="HeaderView" customModule="test" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KtC-Xw-hu2" customClass="HeaderView" customModule="Almnabr" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Td-wJ-6n0">
@@ -290,7 +291,7 @@
         <!--Add TicketVC-->
         <scene sceneID="8Zb-yk-B4w">
             <objects>
-                <viewController storyboardIdentifier="AddTicketVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ErZ-He-22i" customClass="AddTicketVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddTicketVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ErZ-He-22i" customClass="AddTicketVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jkQ-7m-lOY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -539,16 +540,16 @@
                                                                 <rect key="frame" x="0.0" y="362" width="374" height="30"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="1Kp-RJ-Sg7">
-                                                                        <rect key="frame" x="10" y="5" width="87" height="20"/>
+                                                                        <rect key="frame" x="10" y="5" width="86" height="20"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlI-0W-cuk">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="28.5" height="20"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="28" height="20"/>
                                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="15"/>
                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwV-X9-xv4">
-                                                                                <rect key="frame" x="58.5" y="0.0" width="28.5" height="20"/>
+                                                                                <rect key="frame" x="58" y="0.0" width="28" height="20"/>
                                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="15"/>
                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -556,7 +557,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgH-uY-KGr">
-                                                                        <rect key="frame" x="310.5" y="6.5" width="23.5" height="17.5"/>
+                                                                        <rect key="frame" x="309.5" y="1" width="24.5" height="28.5"/>
                                                                         <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="15"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -690,7 +691,7 @@
                                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                         </collectionViewFlowLayout>
                                                                         <cells>
-                                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="uas-jR-dAI" customClass="unitCVCell" customModule="test" customModuleProvider="target">
+                                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="uas-jR-dAI" customClass="unitCVCell" customModule="Almnabr" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="3.5" width="143" height="33"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eA8-1C-SkZ">
@@ -1175,7 +1176,7 @@
                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                 </collectionViewFlowLayout>
                                                                 <cells>
-                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="jD9-5t-wOY" customClass="unitCVCell" customModule="test" customModuleProvider="target">
+                                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="jD9-5t-wOY" customClass="unitCVCell" customModule="Almnabr" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="3.5" width="143" height="33"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="IXw-rr-6IA">
@@ -1632,7 +1633,7 @@
         <!--Ticket Collection View Controller-->
         <scene sceneID="Upu-Cv-ahJ">
             <objects>
-                <collectionViewController storyboardIdentifier="TicketCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wZb-aa-QPh" customClass="TicketCollectionViewController" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="TicketCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wZb-aa-QPh" customClass="TicketCollectionViewController" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="jvb-rh-yt4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1644,7 +1645,7 @@
                             <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="4Ab-Ae-6uW" customClass="BoardCollectionViewCell" customModule="test" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="4Ab-Ae-6uW" customClass="BoardCollectionViewCell" customModule="Almnabr" customModuleProvider="target">
                                 <rect key="frame" x="16" y="117" width="332" height="540"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1747,7 +1748,7 @@
         <!--Task HistoryVC-->
         <scene sceneID="nBk-WA-vVP">
             <objects>
-                <viewController storyboardIdentifier="TaskHistoryVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NCA-kd-6WA" customClass="TaskHistoryVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskHistoryVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="NCA-kd-6WA" customClass="TaskHistoryVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ayJ-T6-dVC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1791,7 +1792,7 @@
         <!--Task AttachmentVC-->
         <scene sceneID="OYe-2I-weP">
             <objects>
-                <viewController storyboardIdentifier="TaskAttachmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Tc-qM-ETI" customClass="TaskAttachmentVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskAttachmentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5Tc-qM-ETI" customClass="TaskAttachmentVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CtA-Ix-ria">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1874,7 +1875,7 @@
         <!--Ticket DetailsVC-->
         <scene sceneID="dbv-pr-0rI">
             <objects>
-                <viewController storyboardIdentifier="TicketDetailsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gbk-a8-op2" customClass="TicketDetailsVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TicketDetailsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Gbk-a8-op2" customClass="TicketDetailsVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="f2E-Yq-429">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2057,22 +2058,22 @@
                                                         <rect key="frame" x="0.0" y="365" width="394" height="30"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="utJ-w0-MoV">
-                                                                <rect key="frame" x="10" y="5" width="210.5" height="20"/>
+                                                                <rect key="frame" x="10" y="5" width="213.5" height="20"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C5w-lA-JvI">
-                                                                        <rect key="frame" x="0.0" y="2.5" width="25.5" height="15.5"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="25.5" height="20"/>
                                                                         <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="13"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huF-T9-w6a">
-                                                                        <rect key="frame" x="55" y="2.5" width="63.5" height="15.5"/>
+                                                                        <rect key="frame" x="55.5" y="0.0" width="64.5" height="20"/>
                                                                         <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="13"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMy-Io-Ki2">
-                                                                        <rect key="frame" x="147.5" y="2.5" width="63" height="15.5"/>
+                                                                        <rect key="frame" x="149.5" y="0.0" width="64" height="20"/>
                                                                         <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="13"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -2080,7 +2081,7 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSd-r3-X9p">
-                                                                <rect key="frame" x="316.5" y="7.5" width="37.5" height="15.5"/>
+                                                                <rect key="frame" x="317.5" y="2.5" width="36.5" height="25"/>
                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="13"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -2168,7 +2169,7 @@
         <!--Add TaskVC-->
         <scene sceneID="Sg0-nB-35D">
             <objects>
-                <viewController storyboardIdentifier="AddTaskVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AQ3-Qf-k8H" customClass="AddTaskVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddTaskVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AQ3-Qf-k8H" customClass="AddTaskVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fm3-eZ-LFm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="1200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2401,7 +2402,7 @@
                                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                         </collectionViewFlowLayout>
                                                                         <cells>
-                                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="anS-op-mdT" customClass="unitCVCell" customModule="test" customModuleProvider="target">
+                                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="anS-op-mdT" customClass="unitCVCell" customModule="Almnabr" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="3.5" width="143" height="33"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="SWX-ed-KCD">
@@ -2518,16 +2519,16 @@
                                                                 <rect key="frame" x="0.0" y="322" width="374" height="30"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="hTM-uJ-vfP">
-                                                                        <rect key="frame" x="10" y="5" width="87" height="20"/>
+                                                                        <rect key="frame" x="10" y="5" width="86" height="20"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="heF-tK-mMI">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="28.5" height="20"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="28" height="20"/>
                                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="15"/>
                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="odQ-Gj-0K9">
-                                                                                <rect key="frame" x="58.5" y="0.0" width="28.5" height="20"/>
+                                                                                <rect key="frame" x="58" y="0.0" width="28" height="20"/>
                                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="15"/>
                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -2535,7 +2536,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMs-uu-Ncu">
-                                                                        <rect key="frame" x="310.5" y="6.5" width="23.5" height="17.5"/>
+                                                                        <rect key="frame" x="309.5" y="1" width="24.5" height="28.5"/>
                                                                         <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="15"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -2669,7 +2670,7 @@
                                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                         </collectionViewFlowLayout>
                                                                         <cells>
-                                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="m5s-f2-1Vi" customClass="unitCVCell" customModule="test" customModuleProvider="target">
+                                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="m5s-f2-1Vi" customClass="unitCVCell" customModule="Almnabr" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="3.5" width="143" height="33"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="2xD-RN-d6h">
@@ -2952,7 +2953,7 @@
         <!--Task DetailVC-->
         <scene sceneID="fyu-bI-vS9">
             <objects>
-                <viewController storyboardIdentifier="TaskDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HDd-Oy-dLK" customClass="TaskDetailVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HDd-Oy-dLK" customClass="TaskDetailVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jL8-aF-bc8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3056,7 +3057,7 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </view>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Checklist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRX-nC-OvH">
-                                                                                                <rect key="frame" x="40" y="13" width="75" height="14"/>
+                                                                                                <rect key="frame" x="40" y="8.5" width="74.5" height="23"/>
                                                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="12"/>
                                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 <nil key="highlightedColor"/>
@@ -3115,7 +3116,7 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </view>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Attachments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNH-ue-Xz0">
-                                                                                                <rect key="frame" x="40" y="13" width="93.5" height="14"/>
+                                                                                                <rect key="frame" x="40" y="8.5" width="92.5" height="23"/>
                                                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="12"/>
                                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 <nil key="highlightedColor"/>
@@ -3181,7 +3182,7 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </view>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hT0-Cr-Oe8">
-                                                                                                <rect key="frame" x="40" y="13" width="51" height="14"/>
+                                                                                                <rect key="frame" x="40" y="8.5" width="50.5" height="23"/>
                                                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="12"/>
                                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 <nil key="highlightedColor"/>
@@ -3239,7 +3240,7 @@
                                                                                                 </userDefinedRuntimeAttributes>
                                                                                             </view>
                                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tiP-Ia-DvA">
-                                                                                                <rect key="frame" x="40" y="13" width="38" height="14"/>
+                                                                                                <rect key="frame" x="40" y="8.5" width="37.5" height="23"/>
                                                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="12"/>
                                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                 <nil key="highlightedColor"/>
@@ -3739,7 +3740,7 @@
         <!--Task UsersVC-->
         <scene sceneID="tPS-HG-t2D">
             <objects>
-                <viewController storyboardIdentifier="TaskUsersVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yg7-Xl-ABL" customClass="TaskUsersVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskUsersVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yg7-Xl-ABL" customClass="TaskUsersVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cyW-1G-JSm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3863,7 +3864,7 @@
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
                                                 <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="30c-rc-Hca" customClass="unitCVCell" customModule="test" customModuleProvider="target">
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="30c-rc-Hca" customClass="unitCVCell" customModule="Almnabr" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="3.5" width="143" height="33"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="fyu-nM-1hW">
@@ -3999,7 +4000,7 @@
         <!--Check ListVC-->
         <scene sceneID="QcK-JW-eWV">
             <objects>
-                <viewController storyboardIdentifier="CheckListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gdu-hz-mr4" customClass="CheckListVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CheckListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gdu-hz-mr4" customClass="CheckListVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4WN-s1-qT8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4043,7 +4044,7 @@
         <!--Sub Task ListVC-->
         <scene sceneID="rNi-Se-uFw">
             <objects>
-                <viewController storyboardIdentifier="SubTaskListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OZC-4v-JyY" customClass="SubTaskListVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SubTaskListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OZC-4v-JyY" customClass="SubTaskListVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TBb-82-yEl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4087,7 +4088,7 @@
         <!--Add ChecklistVC-->
         <scene sceneID="WVp-ed-lCr">
             <objects>
-                <viewController storyboardIdentifier="AddChecklistVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="krl-Nu-zWe" customClass="AddChecklistVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddChecklistVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="krl-Nu-zWe" customClass="AddChecklistVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hze-EE-VXh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4230,7 +4231,7 @@
         <!--Add PointVC-->
         <scene sceneID="jwQ-zL-OO1">
             <objects>
-                <viewController storyboardIdentifier="AddPointVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7kZ-Fx-rvA" customClass="AddPointVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPointVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7kZ-Fx-rvA" customClass="AddPointVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IVB-UX-5mW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4459,7 +4460,7 @@
                                                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                         </collectionViewFlowLayout>
                                                                         <cells>
-                                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="t0y-r8-eEU" customClass="unitCVCell" customModule="test" customModuleProvider="target">
+                                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="unitCVCell" id="t0y-r8-eEU" customClass="unitCVCell" customModule="Almnabr" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="3.5" width="143" height="33"/>
                                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xmB-zJ-5Hk">
@@ -4714,16 +4715,16 @@
                                                                 <rect key="frame" x="0.0" y="40" width="374" height="30"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="O5f-Bv-Fpe">
-                                                                        <rect key="frame" x="10" y="5" width="87" height="20"/>
+                                                                        <rect key="frame" x="10" y="5" width="86" height="20"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49g-GX-HmE">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="28.5" height="20"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="28" height="20"/>
                                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="15"/>
                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SZC-ZR-Pef">
-                                                                                <rect key="frame" x="58.5" y="0.0" width="28.5" height="20"/>
+                                                                                <rect key="frame" x="58" y="0.0" width="28" height="20"/>
                                                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="15"/>
                                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -4731,7 +4732,7 @@
                                                                         </subviews>
                                                                     </stackView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qje-nK-3FR">
-                                                                        <rect key="frame" x="310.5" y="6.5" width="23.5" height="17.5"/>
+                                                                        <rect key="frame" x="309.5" y="1" width="24.5" height="28.5"/>
                                                                         <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="15"/>
                                                                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -4829,6 +4830,7 @@
                     </view>
                     <connections>
                         <outlet property="Viewcollection_user" destination="hzN-H3-Kza" id="qxl-a7-4Br"/>
+                        <outlet property="btnAdd" destination="1ZH-YJ-SwL" id="o64-7N-UjS"/>
                         <outlet property="collection_user" destination="hRw-zt-R7R" id="OxB-h6-YR5"/>
                         <outlet property="imgUsers" destination="LSq-Xr-rAM" id="qyd-7o-LiO"/>
                         <outlet property="lblAttachments" destination="R7l-dm-Nok" id="zoW-TL-dYy"/>
@@ -4840,12 +4842,14 @@
                         <outlet property="table" destination="LmP-47-9IA" id="0fj-i1-Tbb"/>
                         <outlet property="tableHeight" destination="oEe-Q3-8GJ" id="X80-bA-S54"/>
                         <outlet property="tfEndDate" destination="Uy8-7o-edL" id="veG-hO-f9O"/>
+                        <outlet property="tfHours" destination="Xrh-l1-o6O" id="Dig-BV-Iww"/>
                         <outlet property="tfProgress" destination="1GH-c3-azP" id="O1K-bl-W1q"/>
                         <outlet property="tfStartDate" destination="z9y-6U-cE3" id="199-ck-HQc"/>
                         <outlet property="tfTitle" destination="Nhe-a2-ygG" id="Jpt-vv-Z4h"/>
                         <outlet property="tfUsers" destination="T48-gy-Y72" id="Pdg-Ef-yVB"/>
                         <outlet property="txtDetails" destination="gTS-bU-Dyz" id="3Ca-1c-YtB"/>
                         <outlet property="viewDetails" destination="25V-fk-nrk" id="2Pz-pA-8he"/>
+                        <outlet property="view_Hours" destination="zaK-s8-z0P" id="T8G-tp-Pdy"/>
                         <outlet property="view_Progress" destination="0zG-6j-nYL" id="Y31-hP-6s3"/>
                         <outlet property="view_title" destination="OZ9-Rc-6iU" id="zif-Q6-RuO"/>
                         <outlet property="view_users" destination="fxt-8s-SfG" id="9UM-sP-L3k"/>
@@ -4858,7 +4862,7 @@
         <!--Add CommentVC-->
         <scene sceneID="BER-Z9-VDv">
             <objects>
-                <viewController storyboardIdentifier="AddCommentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qvh-uC-TuX" customClass="AddCommentVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddCommentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qvh-uC-TuX" customClass="AddCommentVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7sS-LX-u0n">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5012,7 +5016,7 @@
         <!--ActivityVC-->
         <scene sceneID="1f4-EL-FC1">
             <objects>
-                <viewController storyboardIdentifier="ActivityVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wm3-Nq-Czb" customClass="ActivityVC" customModule="test" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ActivityVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="wm3-Nq-Czb" customClass="ActivityVC" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SF8-Vj-UTU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5038,10 +5042,10 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="b6Q-hS-kvV">
-                                                                <rect key="frame" x="35" y="5" width="40.5" height="40"/>
+                                                                <rect key="frame" x="35" y="5" width="47" height="40"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="السجلات" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rf1-tf-fpu">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="40.5" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="47" height="40"/>
                                                                         <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="13"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -5088,10 +5092,10 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="mcl-wr-T4I">
-                                                                <rect key="frame" x="35" y="5" width="41" height="40"/>
+                                                                <rect key="frame" x="35" y="5" width="40" height="40"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="activity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0n2-pM-x9N">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="41" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                                         <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="13"/>
                                                                         <color key="textColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                         <nil key="highlightedColor"/>
@@ -5325,28 +5329,28 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrowtriangle.down.fill" catalog="system" width="32" height="32"/>
+        <image name="arrowtriangle.down.fill" catalog="system" width="128" height="124"/>
         <image name="avatar" width="100" height="100"/>
-        <image name="calendar" catalog="system" width="32" height="32"/>
-        <image name="calendar.badge.clock.rtl" catalog="system" width="32" height="32"/>
-        <image name="checkmark.square" catalog="system" width="32" height="32"/>
-        <image name="chevron.down" catalog="system" width="32" height="32"/>
-        <image name="clock" catalog="system" width="32" height="32"/>
-        <image name="creditcard" catalog="system" width="32" height="32"/>
+        <image name="calendar" catalog="system" width="128" height="106"/>
+        <image name="calendar.badge.clock.rtl" catalog="system" width="128" height="108"/>
+        <image name="checkmark.square" catalog="system" width="128" height="114"/>
+        <image name="chevron.down" catalog="system" width="128" height="72"/>
+        <image name="clock" catalog="system" width="128" height="121"/>
+        <image name="creditcard" catalog="system" width="128" height="88"/>
         <image name="icon-filter" width="512" height="512"/>
         <image name="icon-no-notification" width="619" height="450"/>
         <image name="icon_empty" width="512" height="256"/>
-        <image name="lineweight" catalog="system" width="32" height="32"/>
+        <image name="lineweight" catalog="system" width="128" height="110"/>
         <image name="menu" width="512" height="512"/>
-        <image name="note.text" catalog="system" width="32" height="32"/>
-        <image name="paperclip" catalog="system" width="32" height="32"/>
-        <image name="percent" catalog="system" width="32" height="32"/>
-        <image name="person" catalog="system" width="32" height="32"/>
-        <image name="person.2" catalog="system" width="32" height="32"/>
-        <image name="plus" catalog="system" width="32" height="32"/>
-        <image name="plus.app.fill" catalog="system" width="32" height="32"/>
-        <image name="square.grid.2x2" catalog="system" width="32" height="32"/>
-        <image name="trash.circle" catalog="system" width="32" height="32"/>
+        <image name="note.text" catalog="system" width="128" height="106"/>
+        <image name="paperclip" catalog="system" width="121" height="128"/>
+        <image name="percent" catalog="system" width="128" height="121"/>
+        <image name="person" catalog="system" width="128" height="117"/>
+        <image name="person.2" catalog="system" width="128" height="81"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus.app.fill" catalog="system" width="128" height="114"/>
+        <image name="square.grid.2x2" catalog="system" width="128" height="114"/>
+        <image name="trash.circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

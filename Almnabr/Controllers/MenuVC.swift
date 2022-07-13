@@ -161,7 +161,7 @@ class MenuVC: UIViewController {
             isFirstLunch = true
             self.makeUserLogout()
             HelperClassSwift.IsLoggedOut = true
-           
+            SocketIOController.shard.disconnect()
             
         }))
         logoutAlert.addAction(UIAlertAction(title: "btn_no".localized(), style: .cancel, handler: { (action: UIAlertAction!) in
@@ -185,7 +185,31 @@ class MenuVC: UIViewController {
         userLogoutAlert()
     }
     
+    
+    @IBAction func linkDeviceAction(_ sender: Any) {
+        let vc = QRScannerViewController()
+        vc.delegate = self
+        let nav = UINavigationController(rootViewController: vc)
+        nav.isNavigationBarHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        print("FFFFFFFFF-111111")
+        
+        _ =  panel?.center(nav)
+        
+        
+    }
+        
 }
+
+extension MenuVC: QRCodeDelegate{
+    func sendCode(code: String) {
+        APIController.shard.sendQRCode(code: code) { data in }
+        backToDash()
+    }
+    
+}
+
+
 extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
     
     func numberOfSections(in tableView: UITableView) -> Int {

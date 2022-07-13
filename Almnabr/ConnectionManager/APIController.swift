@@ -945,10 +945,10 @@ class APIController{
             }
         }
     }
-
+    
     
     func getMyTransactionData(url:String,callback:@escaping(_ data:TransactionResponse)->Void){
-    
+        
         let strURL = "\(APIManager.serverURL)/\(url)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -962,6 +962,21 @@ class APIController{
             }
         }
     }
+    
+    func sendQRCode(code:String,callback:@escaping(_ data:EmployeeResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/auto_login"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .post , parameters: ["qrcode":code],headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : EmployeeResponse = Mapper<EmployeeResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
     
 }
 

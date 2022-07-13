@@ -56,6 +56,8 @@
 		3F1436942848A120008ABC19 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1436852848A120008ABC19 /* UIButtonDesignable.swift */; };
 		3F1436952848A120008ABC19 /* GraidentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1436862848A120008ABC19 /* GraidentView.swift */; };
 		3F1436962848A120008ABC19 /* UILabelDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1436872848A120008ABC19 /* UILabelDesignable.swift */; };
+		3F1F4048287E0F5900F919F0 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1F4046287E0F5900F919F0 /* QRScannerViewController.swift */; };
+		3F1F4049287E0F5900F919F0 /* QRScannerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F1F4047287E0F5900F919F0 /* QRScannerViewController.xib */; };
 		3F1F94E1286C3D6E00E454BF /* L102Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1F94DF286C3D6E00E454BF /* L102Localizer.swift */; };
 		3F1F94E2286C3D6E00E454BF /* L102Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1F94E0286C3D6E00E454BF /* L102Language.swift */; };
 		3F2B2C1028524F5B00C33FAD /* EmployeeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B2C0E28524F5A00C33FAD /* EmployeeResponse.swift */; };
@@ -294,8 +296,8 @@
 		3FD03A58287437B000BB13C7 /* AddPermissionMentionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039D1287437B000BB13C7 /* AddPermissionMentionsVC.swift */; };
 		3FD03A5B28743AE100BB13C7 /* CommentRepltTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03A5928743AE100BB13C7 /* CommentRepltTableViewCell.swift */; };
 		3FD03A5C28743AE100BB13C7 /* CommentRepltTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5A28743AE100BB13C7 /* CommentRepltTableViewCell.xib */; };
-		3FD03A5F28743CAA00BB13C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5D28743CA900BB13C7 /* GoogleService-Info.plist */; };
-		3FD03A6028743CAA00BB13C7 /* GoogleService-Infonahid.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5E28743CA900BB13C7 /* GoogleService-Infonahid.plist */; };
+		3FD03A5F28743CAA00BB13C7 /* GoogleService-Infoalmnaber.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5D28743CA900BB13C7 /* GoogleService-Infoalmnaber.plist */; };
+		3FD03A6028743CAA00BB13C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5E28743CA900BB13C7 /* GoogleService-Info.plist */; };
 		3FD03A712874485800BB13C7 /* Ticket.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A732874485800BB13C7 /* Ticket.storyboard */; };
 		3FD03A76287448C900BB13C7 /* HR.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A78287448C900BB13C7 /* HR.storyboard */; };
 		3FD03A7B2874492000BB13C7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A7D2874492000BB13C7 /* Main.storyboard */; };
@@ -643,6 +645,8 @@
 		3F1436852848A120008ABC19 /* UIButtonDesignable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonDesignable.swift; sourceTree = "<group>"; };
 		3F1436862848A120008ABC19 /* GraidentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraidentView.swift; sourceTree = "<group>"; };
 		3F1436872848A120008ABC19 /* UILabelDesignable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelDesignable.swift; sourceTree = "<group>"; };
+		3F1F4046287E0F5900F919F0 /* QRScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
+		3F1F4047287E0F5900F919F0 /* QRScannerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRScannerViewController.xib; sourceTree = "<group>"; };
 		3F1F94DF286C3D6E00E454BF /* L102Localizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L102Localizer.swift; sourceTree = "<group>"; };
 		3F1F94E0286C3D6E00E454BF /* L102Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = L102Language.swift; sourceTree = "<group>"; };
 		3F2B2C0E28524F5A00C33FAD /* EmployeeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmployeeResponse.swift; sourceTree = "<group>"; };
@@ -898,8 +902,8 @@
 		3FD039D1287437B000BB13C7 /* AddPermissionMentionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPermissionMentionsVC.swift; sourceTree = "<group>"; };
 		3FD03A5928743AE100BB13C7 /* CommentRepltTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepltTableViewCell.swift; sourceTree = "<group>"; };
 		3FD03A5A28743AE100BB13C7 /* CommentRepltTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentRepltTableViewCell.xib; sourceTree = "<group>"; };
-		3FD03A5D28743CA900BB13C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3FD03A5E28743CA900BB13C7 /* GoogleService-Infonahid.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Infonahid.plist"; sourceTree = "<group>"; };
+		3FD03A5D28743CA900BB13C7 /* GoogleService-Infoalmnaber.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Infoalmnaber.plist"; sourceTree = "<group>"; };
+		3FD03A5E28743CA900BB13C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FD03A722874485800BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Ticket.storyboard; sourceTree = "<group>"; };
 		3FD03A752874485B00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Ticket.strings; sourceTree = "<group>"; };
 		3FD03A77287448C900BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HR.storyboard; sourceTree = "<group>"; };
@@ -1269,6 +1273,15 @@
 			path = Designables;
 			sourceTree = "<group>";
 		};
+		3F1F4041287E0EBD00F919F0 /* QRCode */ = {
+			isa = PBXGroup;
+			children = (
+				3F1F4046287E0F5900F919F0 /* QRScannerViewController.swift */,
+				3F1F4047287E0F5900F919F0 /* QRScannerViewController.xib */,
+			);
+			path = QRCode;
+			sourceTree = "<group>";
+		};
 		3F1F94DE286C3D6E00E454BF /* Language */ = {
 			isa = PBXGroup;
 			children = (
@@ -1481,6 +1494,7 @@
 		3FD038CF2874377000BB13C7 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				3F1F4041287E0EBD00F919F0 /* QRCode */,
 				3FD038DA287437AF00BB13C7 /* HR */,
 				3FD038D02874377000BB13C7 /* LaunchScreen.storyboard */,
 				3FD03A7D2874492000BB13C7 /* Main.storyboard */,
@@ -1992,8 +2006,8 @@
 				FAA9C4CC27B32B51003C051E /* notification3.wav */,
 				FA03242E26FB9BFE00372EA6 /* Assets.xcassets */,
 				FA03243326FB9BFE00372EA6 /* Info.plist */,
-				3FD03A5D28743CA900BB13C7 /* GoogleService-Info.plist */,
-				3FD03A5E28743CA900BB13C7 /* GoogleService-Infonahid.plist */,
+				3FD03A5D28743CA900BB13C7 /* GoogleService-Infoalmnaber.plist */,
+				3FD03A5E28743CA900BB13C7 /* GoogleService-Info.plist */,
 				FAC32FAC2707662C0046A0F6 /* DroidKufi-Bold.ttf */,
 				FAE13A4D27293C2D00509550 /* DroidKufi-Regular.ttf */,
 				FA03245F26FB9E3F00372EA6 /* DroidKufi-Regular.ttf */,
@@ -2814,7 +2828,7 @@
 				3F07C07F286D918E00C2CDF6 /* ProfileNotesTVCell.xib in Resources */,
 				3FD039EF287437B000BB13C7 /* OutgoingAttachViewController.xib in Resources */,
 				FA5C977328170FA200A2AA5A /* TaskTVCell.xib in Resources */,
-				3FD03A5F28743CAA00BB13C7 /* GoogleService-Info.plist in Resources */,
+				3FD03A5F28743CAA00BB13C7 /* GoogleService-Infoalmnaber.plist in Resources */,
 				3F9040D0286CB115008D85B8 /* AddInsuranceTableViewCell.xib in Resources */,
 				3FD039E3287437B000BB13C7 /* ViewEmpCommunicationsVC.xib in Resources */,
 				3F07C0B1286D963800C2CDF6 /* ProjectRequestTVCell.xib in Resources */,
@@ -2843,6 +2857,7 @@
 				3FD03A802874496900BB13C7 /* Transaction.storyboard in Resources */,
 				3F07C066286D8EAD00C2CDF6 /* JobDetailsTVCell.xib in Resources */,
 				3FD03A1B287437B000BB13C7 /* ViewEmpContactDetailsVC.xib in Resources */,
+				3F1F4049287E0F5900F919F0 /* QRScannerViewController.xib in Resources */,
 				3FD03A20287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.strings in Resources */,
 				3FF6EDB6284B72450003E6F4 /* UsersCollectionViewCell.xib in Resources */,
 				3F07C07A286D911A00C2CDF6 /* VacationFormCell.xib in Resources */,
@@ -2881,7 +2896,7 @@
 				3FD03A43287437B000BB13C7 /* IDDetailsViewController.xib in Resources */,
 				3F9040DA286CB182008D85B8 /* AttachmentTableViewCell.xib in Resources */,
 				3FD03A14287437B000BB13C7 /* ViewEmpAttachmentsVC.xib in Resources */,
-				3FD03A6028743CAA00BB13C7 /* GoogleService-Infonahid.plist in Resources */,
+				3FD03A6028743CAA00BB13C7 /* GoogleService-Info.plist in Resources */,
 				3F07C05C286D8D8600C2CDF6 /* TicketTVCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3142,6 +3157,7 @@
 				FABDBA8427F3162F003961FC /* CategoryCell.swift in Sources */,
 				FA5CB0FB27D020490023A372 /* LocationVC.swift in Sources */,
 				FABDBAA227F477F4003961FC /* UserAttachmentsVC.swift in Sources */,
+				3F1F4048287E0F5900F919F0 /* QRScannerViewController.swift in Sources */,
 				FAF9D43E278DE050002D8AEF /* ProjectRequestCell.swift in Sources */,
 				FA5CB0F927CFBA6E0023A372 /* RequirementsVC.swift in Sources */,
 				3FAAB6442860937B007B9150 /* NotesGetResponse.swift in Sources */,
@@ -4572,7 +4588,7 @@
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -4601,7 +4617,7 @@
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 27;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

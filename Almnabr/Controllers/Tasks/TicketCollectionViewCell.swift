@@ -56,8 +56,6 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
     }
     
     
-    
-    
     @IBAction func addTapped(_ sender: Any) {
         btnAddTaskAction!()
         
@@ -289,13 +287,13 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
         if obj.is_can_edit == false {
             cell.btn_edit.isHidden = true
         }
-        if obj.is_can_view == true {
+//        if obj.is_can_view == true {
             cell.img_lock.isHidden = true
             
-        }else{
-            cell.img_lock.isHidden = false
-            cell.viewBack.backgroundColor = .systemGray4
-        }
+//        }else{
+//            cell.img_lock.isHidden = false
+//            cell.viewBack.backgroundColor = .systemGray4
+//        }
         
         return cell
     }

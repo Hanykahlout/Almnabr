@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>We need your permission to open your photo library so you can choose and add an image to the app</string>
-	<key>NSCameraUsageDescription</key>
-	<string>We need your permission to open the camera so you can choose and add an image to the app</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
@@ -39,8 +35,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>We need your permission to open the camera so you can choose and add an image to the app</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Please allow to sign  in with FaceId</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We need your permission to open your photo library so you can choose and add an image to the app</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>DroidKufi-Bold.ttf</string>

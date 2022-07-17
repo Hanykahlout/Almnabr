@@ -16,13 +16,13 @@ class APIManager: NSObject {
     //Almnabr.NAHIDH 1.1   16
     //socket --- https://node.nahidh.sa/
     //server url ---- "https://nahidh.sa/backend"
-    //Api key "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
+    //Api key "12345"
 
     //Mnaber
     //com.ERP.ALMNABR 1.0  3
     //socket --- "https://node.almnabr.com/"
     //server url ---- "https://erp.almnabr.com/backend"
-    //Api key "12345"
+    //Api key "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
     
     static let serverURL = "https://nahidh.sa/backend"
 
@@ -392,7 +392,7 @@ class APIManager: NSObject {
         let getApi = URL(string: urlStr)!
         
         
-        let auth = [ "X-API-KEY":"PCGYdyKBJFya8LMaFP6baRrraRpSFc",
+        let auth = [ "X-API-KEY":"12345",
                      "Content-Type":"application/x-www-form-urlencoded",
                      "authorization":
                                     "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"]
@@ -636,7 +636,7 @@ class APIManager: NSObject {
         let auth = [ "authorization":
                         "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
-        let strURL = "https://nahidh.sa/backend/form/FORM_WIR/cr/2/0"
+        let strURL = "\(serverURL)/form/FORM_WIR/cr/2/0"
         let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let getApi = URL(string: urlStr)!
         

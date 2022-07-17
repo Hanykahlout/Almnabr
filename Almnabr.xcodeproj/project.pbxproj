@@ -296,7 +296,7 @@
 		3FD03A58287437B000BB13C7 /* AddPermissionMentionsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD039D1287437B000BB13C7 /* AddPermissionMentionsVC.swift */; };
 		3FD03A5B28743AE100BB13C7 /* CommentRepltTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD03A5928743AE100BB13C7 /* CommentRepltTableViewCell.swift */; };
 		3FD03A5C28743AE100BB13C7 /* CommentRepltTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5A28743AE100BB13C7 /* CommentRepltTableViewCell.xib */; };
-		3FD03A5F28743CAA00BB13C7 /* GoogleService-Infoalmnaber.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5D28743CA900BB13C7 /* GoogleService-Infoalmnaber.plist */; };
+		3FD03A5F28743CAA00BB13C7 /* GoogleService-Infoalmnabr.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5D28743CA900BB13C7 /* GoogleService-Infoalmnabr.plist */; };
 		3FD03A6028743CAA00BB13C7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A5E28743CA900BB13C7 /* GoogleService-Info.plist */; };
 		3FD03A712874485800BB13C7 /* Ticket.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A732874485800BB13C7 /* Ticket.storyboard */; };
 		3FD03A76287448C900BB13C7 /* HR.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FD03A78287448C900BB13C7 /* HR.storyboard */; };
@@ -902,7 +902,7 @@
 		3FD039D1287437B000BB13C7 /* AddPermissionMentionsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPermissionMentionsVC.swift; sourceTree = "<group>"; };
 		3FD03A5928743AE100BB13C7 /* CommentRepltTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepltTableViewCell.swift; sourceTree = "<group>"; };
 		3FD03A5A28743AE100BB13C7 /* CommentRepltTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentRepltTableViewCell.xib; sourceTree = "<group>"; };
-		3FD03A5D28743CA900BB13C7 /* GoogleService-Infoalmnaber.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Infoalmnaber.plist"; sourceTree = "<group>"; };
+		3FD03A5D28743CA900BB13C7 /* GoogleService-Infoalmnabr.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Infoalmnabr.plist"; sourceTree = "<group>"; };
 		3FD03A5E28743CA900BB13C7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3FD03A722874485800BB13C7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Ticket.storyboard; sourceTree = "<group>"; };
 		3FD03A752874485B00BB13C7 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Ticket.strings; sourceTree = "<group>"; };
@@ -2006,7 +2006,7 @@
 				FAA9C4CC27B32B51003C051E /* notification3.wav */,
 				FA03242E26FB9BFE00372EA6 /* Assets.xcassets */,
 				FA03243326FB9BFE00372EA6 /* Info.plist */,
-				3FD03A5D28743CA900BB13C7 /* GoogleService-Infoalmnaber.plist */,
+				3FD03A5D28743CA900BB13C7 /* GoogleService-Infoalmnabr.plist */,
 				3FD03A5E28743CA900BB13C7 /* GoogleService-Info.plist */,
 				FAC32FAC2707662C0046A0F6 /* DroidKufi-Bold.ttf */,
 				FAE13A4D27293C2D00509550 /* DroidKufi-Regular.ttf */,
@@ -2828,7 +2828,7 @@
 				3F07C07F286D918E00C2CDF6 /* ProfileNotesTVCell.xib in Resources */,
 				3FD039EF287437B000BB13C7 /* OutgoingAttachViewController.xib in Resources */,
 				FA5C977328170FA200A2AA5A /* TaskTVCell.xib in Resources */,
-				3FD03A5F28743CAA00BB13C7 /* GoogleService-Infoalmnaber.plist in Resources */,
+				3FD03A5F28743CAA00BB13C7 /* GoogleService-Infoalmnabr.plist in Resources */,
 				3F9040D0286CB115008D85B8 /* AddInsuranceTableViewCell.xib in Resources */,
 				3FD039E3287437B000BB13C7 /* ViewEmpCommunicationsVC.xib in Resources */,
 				3F07C0B1286D963800C2CDF6 /* ProjectRequestTVCell.xib in Resources */,
@@ -4582,13 +4582,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2AC8B25C23A0D1D0824A7936 /* Pods-Almnabr.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -4611,13 +4611,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ADB1D7974D91E5EB2AC28FFD /* Pods-Almnabr.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 27;
+				CURRENT_PROJECT_VERSION = 26;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -30,7 +30,7 @@ target 'Almnabr' do
     pod "SwiftSignatureView"
     pod 'Fastis', '~> 1.0.0'
     pod 'Socket.IO-Client-Swift', '~> 16.0.1'
-    
+    pod 'SCLAlertView'
   target 'AlmnabrTests' do
     inherit! :search_paths
     # Pods for testing

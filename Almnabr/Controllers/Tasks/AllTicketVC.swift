@@ -37,8 +37,6 @@ class AllTicketVC: UIViewController {
         configNavigation()
         configGUI()
         get_data(showLoading: true, loadOnly: true)
-        
-        header.btnAction = self.menu_select
     }
     
     
@@ -91,8 +89,6 @@ class AllTicketVC: UIViewController {
         
         self.view_Add.setBorderGrayWidthCorner(1, 20)
         self.view_Filter.setBorderGrayWidthCorner(1, 20)
-        
-        header.btnAction = self.menu_select
         
         table.dataSource = self
         table.delegate = self

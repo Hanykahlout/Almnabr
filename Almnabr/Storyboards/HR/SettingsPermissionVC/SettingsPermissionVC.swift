@@ -10,7 +10,6 @@ import UIKit
 
 class SettingsPermissionVC: UIViewController {
     
-    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var permissionMentionsView: UIView!
     @IBOutlet weak var permissionMentionsLabel: UILabel!
     
@@ -18,6 +17,7 @@ class SettingsPermissionVC: UIViewController {
     @IBOutlet weak var settingsLabel: UILabel!
     
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var header: HeaderView!
     
     private var settingsVC:PermissionViewController!
     private var permissionVC:SettingViewController!
@@ -30,10 +30,19 @@ class SettingsPermissionVC: UIViewController {
     }
     
     
-    private func initlization(){
-        if L102Language.currentAppleLanguage() == "ar" {
-            backButton.transform = .init(rotationAngle: .pi)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        header.btnAction = {
+            let language =  L102Language.currentAppleLanguage()
+            if language == "ar"{
+                self.panel?.openRight(animated: true)
+            }else{
+                self.panel?.openLeft(animated: true)
+            }
         }
+    }
+    
+    private func initlization(){
         setUpViews()
     }
     
@@ -125,7 +134,7 @@ class SettingsPermissionVC: UIViewController {
     
     
     @IBAction func backAction(_ sender: Any) {
-        backToDash()
+//        backToDash()
     }
     
     

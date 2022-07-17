@@ -33,13 +33,15 @@ class NotifiRoute : NSObject {
     
     func menu_vc() -> UIViewController? {
         if let window = UIApplication.window {
-            if let menu = window.rootViewController as? FAPanelController {
-                if let nav = menu.children[2] as? UINavigationController {
-                    if let top = nav.topViewController {
-                        return top
+            if let menu = window.rootViewController as? UINavigationController {
+                if let _menu = menu.viewControllers.first as? FAPanelController{
+                    if let nav = _menu.children[2] as? UINavigationController {
+                        if let top = nav.topViewController {
+                            return top
+                        }
                     }
+                    return nil
                 }
-                return nil
             }
         }
         

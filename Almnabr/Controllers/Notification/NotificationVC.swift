@@ -60,7 +60,7 @@ class NotificationVC: UIViewController {
             self.update_Notification()
           //  self.navigationController?.popViewController(animated: true)
         }
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     // MARK: - Config Navigation

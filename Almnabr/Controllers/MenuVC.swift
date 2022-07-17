@@ -9,6 +9,7 @@
 import UIKit
 import FontAwesome_swift
 import FAPanels
+import SCLAlertView
 class MenuVC: UIViewController {
     
     @IBOutlet weak var imgUserProfile: UIImageView!
@@ -190,21 +191,25 @@ class MenuVC: UIViewController {
         let vc = QRScannerViewController()
         vc.delegate = self
         let nav = UINavigationController(rootViewController: vc)
-        nav.isNavigationBarHidden = true
-        nav.modalPresentationStyle = .fullScreen
-        print("FFFFFFFFF-111111")
-        
-        _ =  panel?.center(nav)
-        
-        
+        let navCenter =  panel?.center as? UINavigationController
+        navCenter?.present(nav, animated: true, completion: nil)
     }
-        
+    
 }
 
 extension MenuVC: QRCodeDelegate{
     func sendCode(code: String) {
-        APIController.shard.sendQRCode(code: code) { data in }
-        backToDash()
+        APIController.shard.sendQRCode(code: code) { data in
+            DispatchQueue.main.async {
+                let alert = SCLAlertView()
+                if let status = data.status,status{
+                    alert.showSuccess("Successfully Scanned".localized(), subTitle: "You can see your account logged in from the website.".localized())
+                }else{
+                    alert.showError("Failed Scanned".localized(), subTitle: "")
+                }
+            }
+        }
+        
     }
     
 }
@@ -293,7 +298,12 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
 
         let obj = arr_data[indexPath.section]
         obj.IsOpened = !obj.IsOpened
-        
+        if indexPath.section == 0{
+            let vc : HomeVC = AppDelegate.mainSB.instanceVC()
+            let nav = UINavigationController.init(rootViewController: vc)
+            _ =  panel?.center(nav)
+            return 
+        }
         if indexPath.row == 0 {
              
 //            if arr_data[indexPath.row].menu_id == "1" {
@@ -313,13 +323,15 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                 switch obj.menu[indexPath.row - 1].menu_id {
                 case "13":
                     
-                    guard let top_vc = HeaderView.shared.menu_vc() else { return }
                     guard didLoadHome else { return }
                     
                     let vc: TransactionsVC = AppDelegate.mainSB.instanceVC()
-                   
-                    top_vc.navigationController?.pushViewController(vc, animated: true)
-
+                    
+//                    top_vc.navigationController?.pushViewController(vc, animated: true)
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    
+                    _ =  panel?.center(nav)
                     
 //                    let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
 //                    self.navigationController?.pushViewController(vc, animated: true)
@@ -337,7 +349,9 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     vc.title =  obj.menu_name
                     vc.MenuObj = obj
                     vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
-                    _ =  panel?.center(vc)
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    _ =  panel?.center(nav)
                     
                 case "27":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
@@ -345,7 +359,9 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     vc.title =  obj.menu_name
                     vc.MenuObj = obj
                     vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
-                    _ =  panel?.center(vc)
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    _ =  panel?.center(nav)
                     
                 case "73":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
@@ -354,25 +370,28 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     vc.title =  obj.menu_name
                     vc.MenuObj = obj
                     vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
+                    nav.isNavigationBarHidden = true
                     _ =  panel?.center(nav)
+                    
                 case "94":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
                     let vc:AllTicketVC = AppDelegate.TicketSB.instanceVC()
                     let nav = UINavigationController.init(rootViewController: vc)
                     //vc.title =  obj.menu_name
                     //obj.menu[indexPath.row - 1].menu_name
-                    _ =  panel?.center(nav)
+                    nav.isNavigationBarHidden = true
+                      _ =  panel?.center(nav)
+                    
                 case "19":
                     let vc:SettingsPermissionVC = AppDelegate.HRSB.instanceVC()
                     let nav = UINavigationController(rootViewController: vc)
-                    
-                    nav.modalPresentationStyle = .fullScreen
+                    nav.isNavigationBarHidden = true
                     panel?.center(nav)
+                    
                 case "21":
                     let vc = AllEmployeesVC()
                     let nav = UINavigationController(rootViewController: vc)
-                    nav.setNavigationBarHidden(true, animated: true)
-                    nav.modalPresentationStyle = .fullScreen
+                    nav.isNavigationBarHidden = true
                     panel?.center(nav)
                     
                 default:
@@ -442,17 +461,4 @@ extension UILabel {
     self.text = "\(unicodeIcon)"
     self.sizeToFit()
   }
-}
-
-
-extension UIViewController{
-   func backToDash(){
-       let vc : HomeVC = AppDelegate.mainSB.instanceVC()
-       let nav = UINavigationController.init(rootViewController: vc)
-       if let delegate = UIApplication.shared.delegate as? AppDelegate{
-           if let window = delegate.window?.rootViewController as? FAPanelController{
-               window.center(nav)
-           }
-       }
-   }
 }

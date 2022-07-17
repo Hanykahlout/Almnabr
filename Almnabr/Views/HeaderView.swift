@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import DPLocalization
+import FAPanels
 
 var puplic_total :Int = 0
 var isFirstLunch :Bool = true
@@ -17,10 +18,6 @@ class HeaderView:  UIView {
     
     @IBOutlet weak var viewTheme: UIView!
     @IBOutlet weak var btnMenu: UIView!
-    @IBOutlet weak var btnNotify: UIView!
-    @IBOutlet weak var lblNotify: UILabel!
-    
-    @IBOutlet weak var menuButton: UIButton!
     
     var btnAction : (()->())?
     var btnNotifyAction : (()->())?
@@ -199,13 +196,14 @@ class HeaderView:  UIView {
     }
     
     @objc func buttonNotificationAction(sender: UIButton!) {
-        guard let top_vc = HeaderView.shared.menu_vc() else { return }
-        guard didLoadHome else { return }
-        
+//        guard let top_vc = HeaderView.shared.menu_vc() else { return }
+//        guard didLoadHome else { return }
+//
         let vc: NotificationVC = AppDelegate.mainSB.instanceVC()
-       
-        top_vc.navigationController?.pushViewController(vc, animated: true)
-
+//
+        let root = AppInstance.window!.rootViewController! as! FAPanelController
+        let nav = root.center! as! UINavigationController
+        nav.pushViewController(vc, animated: true)
        // btnNotifyAction?()
     }
     

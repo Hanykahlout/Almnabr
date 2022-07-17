@@ -13,7 +13,7 @@ class AllEmployeesVC: UIViewController {
 
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var header: HeaderView!
     
     private var data = [AllEmployeeRecords]()
     private var pageNumber = 1
@@ -27,9 +27,7 @@ class AllEmployeesVC: UIViewController {
     }
     
     private func initlization(){
-        if L102Language.currentAppleLanguage() == "ar" {
-            backButton.transform = .init(rotationAngle: .pi)
-        }
+        
         observeFilterAction()
         setUpTableView()
         setUpView()
@@ -38,7 +36,16 @@ class AllEmployeesVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getALLEmployees(isNewPage: false)
+        header.btnAction = {
+            let language =  L102Language.currentAppleLanguage()
+            if language == "ar"{
+                self.panel?.openRight(animated: true)
+            }else{
+                self.panel?.openLeft(animated: true)
+            }
+        }
     }
+    
     
     private func setUpView(){
         filterView.isUserInteractionEnabled = true
@@ -65,7 +72,8 @@ class AllEmployeesVC: UIViewController {
     
     
     @IBAction func backAction(_ sender: Any) {
-        backToDash()
+//        backToDash()
+        navigationController?.dismiss(animated: true)
     }
     
 }

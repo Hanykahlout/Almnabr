@@ -19,8 +19,6 @@ class TaskDetailVC: UIViewController {
     @IBOutlet weak var lbl_To: UITextField!
     @IBOutlet weak var lbl_desc: UILabel!
     @IBOutlet weak var lbl_percentage: UITextField!
-    @IBOutlet var tableHeight: NSLayoutConstraint!
-    @IBOutlet var scroll: UIScrollView!
     
     @IBOutlet weak var txt_comment: UITextView!
     @IBOutlet weak var tableChecklist: UITableView!
@@ -49,8 +47,7 @@ class TaskDetailVC: UIViewController {
         get_Chicklist_data()
         get_add_task()
         get_comment_tasks()
-        //        self.scroll.resizeScrollViewContentSize()
-        scroll.delegate  = self
+        setUpTableView()
         table_Activity.dataSource = self
         table_Activity.delegate = self
         let nib = UINib(nibName: "TaskCommentCell", bundle: nil)
@@ -59,8 +56,10 @@ class TaskDetailVC: UIViewController {
     
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
-        self.tableHeight?.constant = self.table_Activity.contentSize.height
-        self.scroll.contentSize = CGSize(width: self.scroll.contentSize.width, height: self.table_Activity.contentSize.height + 500)
+//        self.tableHeight?.constant = self.table_Activity.contentSize.height
+//        self.tableChecklistHeight.constant = self.tableChecklist.contentSize.height
+//        self.scroll.contentSize = CGSize(width: self.scroll.contentSize.width, height: self.table_Activity.contentSize.height + self.tableChecklist.contentSize.height + 500)
+        
         //        self.scroll.resiz
         //        let contentHeight = scroll.contentSize.height
         //        self.scroll.contentSize = contentHeight
@@ -124,6 +123,10 @@ class TaskDetailVC: UIViewController {
     
     
     @objc func didTapAddButton(sender: UIButton){
+        addCheckListItem()
+    }
+    
+    private func addCheckListItem(){
         let vc:AddChecklistVC  = AppDelegate.TicketSB.instanceVC()
         
         vc.isModalInPresentation = true
@@ -136,7 +139,6 @@ class TaskDetailVC: UIViewController {
         self.present(vc, animated: true, completion: nil)
         
     }
-    
     
     //MARK: - Config GUI
     //------------------------------------------------------
@@ -186,22 +188,25 @@ class TaskDetailVC: UIViewController {
         let param :[String:Any] = ["task_id" : task_id]
         
         APIManager.sendRequestPostAuth(urlString: "tasks/get_points_task_main", parameters: param ) { (response) in
-            self.arr_data.removeAll()
-            let status = response["status"] as? Bool
-            if status == true{
-                if  let records = response["data"] as? NSArray{
-                    for i in records {
-                        let dict = i as? [String:Any]
-                        let obj =  PointTaskObj.init(dict!)
-                        self.arr_data.append(obj)
+            DispatchQueue.main.async {
+                
+                self.arr_data.removeAll()
+                let status = response["status"] as? Bool
+                if status == true{
+                    if  let records = response["data"] as? NSArray{
+                        for i in records {
+                            let dict = i as? [String:Any]
+                            let obj =  PointTaskObj.init(dict!)
+                            self.arr_data.append(obj)
+                        }
+                        self.tableChecklistHeight.constant = CGFloat(self.arr_data.count * 100)
+                        self.tableChecklist.reloadData()
+                        self.hideLoadingActivity()
                     }
-                    self.tableChecklistHeight.constant = CGFloat(records.count) * 70
-                    self.tableChecklist.reloadData()
+                }else{
+                    self.tableChecklistHeight.constant = 0
                     self.hideLoadingActivity()
                 }
-                
-            }else{
-                self.hideLoadingActivity()
             }
         }
     }
@@ -250,6 +255,7 @@ class TaskDetailVC: UIViewController {
                         let obj =  CommentObj.init(dict!)
                         self.arr_comments.append(obj)
                     }
+                    
                     self.table_Activity.reloadData()
                     self.hideLoadingActivity()
                     
@@ -411,10 +417,11 @@ class TaskDetailVC: UIViewController {
     }
     
     @IBAction func btnCheckList_Click(_ sender: Any) {
-                let vc:CheckListVC = AppDelegate.TicketSB.instanceVC()
-                //        vc.is_from_task = true
-                vc.task_id = self.task_id
-                self.navigationController?.pushViewController(vc, animated: true)
+//        let vc:CheckListVC = AppDelegate.TicketSB.instanceVC()
+//        //        vc.is_from_task = true
+//        vc.task_id = self.task_id
+//        self.navigationController?.pushViewController(vc, animated: true)
+        addCheckListItem()
     }
     
     
@@ -469,38 +476,20 @@ class TaskDetailVC: UIViewController {
         
         APIManager.sendRequestPostAuth(urlString: "tasks/delete_task_point_main", parameters: param ) { (response) in
             self.hideLoadingActivity()
-           
+            
             let status = response["status"] as? Bool
             if status == true{
                 self.get_data()
-             
+                
             }else{
                 self.hideLoadingActivity()
-              
+                
             }
         }
     }
-
     
     
-    func change_task_point(point_id:String){
-        
-        self.showLoadingActivity()
-        let param :[String:Any] = ["point_id" : point_id]
-        
-        APIManager.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: param ) { (response) in
-            self.hideLoadingActivity()
-           
-            let status = response["status"] as? Bool
-            if status == true{
-                self.get_data()
-             
-            }else{
-                self.hideLoadingActivity()
-              
-            }
-        }
-    }
+    
     
     func CommentMenu() -> UIMenu {
         
@@ -541,7 +530,14 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: "CheckListCell", for: indexPath) as! CheckListCell
             
             let obj = arr_data[indexPath.item]
-            
+            cell.hideSelectedItems = obj.isUnselectedData
+            if cell.hideSelectedItems{
+                cell.viewItemsButton.tag = 0
+                cell.viewItemsButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+            }else{
+                cell.viewItemsButton.tag = 1
+                cell.viewItemsButton.setImage(UIImage(systemName: "eye"), for: .normal)
+            }
             cell.arr_data = obj.sub_checks
             cell.lblTitle.text = obj.title
             cell.lblPercent.text = obj.progres + "%"
@@ -582,10 +578,39 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             
-            
-            cell.btnCheckAction = { point_id in
-                self.change_task_point(point_id: point_id)
+            cell.viewSelectedItemsAction = {
+                
+                let obj = self.arr_data[indexPath.item]
+                if !obj.isHidden{
+                    self.tableChecklistHeight.constant -= CGFloat(cell.tableHeight.constant + 45)
+                    if cell.viewItemsButton.tag == 0 {
+                        // Show
+                        cell.viewItemsButton.tag = 1
+                        cell.viewItemsButton.setImage(UIImage(systemName: "eye"), for: .normal)
+                        cell.hideSelectedItems = false
+                        cell.tableHeight.constant = CGFloat(cell.arr_data.count * 51 )
+                        obj.isUnselectedData = false
+                        
+                    }else{
+                        // Hide
+                        cell.viewItemsButton.tag = 0
+                        cell.viewItemsButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
+                        cell.hideSelectedItems = true
+                        let numberOfUnselectedItems = cell.arr_data.filter({$0.is_done == "1"}).count
+                        cell.tableHeight.constant = CGFloat(numberOfUnselectedItems * 51 )
+                        obj.isUnselectedData = true
+                    }
+
+                    let unSelectedArr = cell.arr_data.filter({$0.is_done == "1"}).count
+                    let cellHeight = CGFloat(((cell.hideSelectedItems ? unSelectedArr : cell.arr_data.count) * 51) + 45)
+                    
+                    self.tableChecklistHeight.constant += cellHeight
+                    
+                    
+                    self.tableChecklist.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+                }
             }
+            
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCommentCell", for: indexPath) as! TaskCommentCell
@@ -642,8 +667,6 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                 self.present(vc, animated: true, completion: nil)
                 
             }
-            
-            
             return cell
         }
     }
@@ -663,18 +686,24 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == tableChecklist{
             
-            
-    //        guard let expandableItem = arr_data[indexPath.item] else {return}
-            
-            
+            //        guard let expandableItem = arr_data[indexPath.item] else {return}
             let obj = arr_data[indexPath.item]
             obj.isHidden = !(obj.isHidden )
+            let cell = tableChecklist.cellForRow(at: indexPath) as! CheckListCell
+            let unSelectedArr = cell.arr_data.filter({$0.is_done == "1"}).count
+            let cellHeight = CGFloat(((cell.hideSelectedItems ? unSelectedArr : cell.arr_data.count) * 51) + 45)
+            let tableHeight = tableChecklistHeight.constant
+            
+            tableChecklistHeight.constant = obj.isHidden ? tableHeight - cellHeight : tableHeight + cellHeight
+            
+            
             tableChecklist.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-    //        let vc:SubTaskListVC = AppDelegate.TicketSB.instanceVC()
-    //        vc.str_title = obj.title
-    //        vc.task_id = self.task_id
-    //        vc.arr_data = obj.sub_checks
-    //        self.navigationController?.pushViewController(vc, animated: true)
+           
+            //        let vc:SubTaskListVC = AppDelegate.TicketSB.instanceVC()
+            //        vc.str_title = obj.title
+            //        vc.task_id = self.task_id
+            //        vc.arr_data = obj.sub_checks
+            //        self.navigationController?.pushViewController(vc, animated: true)
             
         }else{
             let obj = arr_comments[indexPath.item]
@@ -785,6 +814,8 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
             
         }
     }
+    
+    
     
 }
 

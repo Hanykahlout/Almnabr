@@ -36,7 +36,8 @@ class SubTaskTVCell: UITableViewCell , UICollectionViewDataSource , UICollection
         
         let nib = UINib(nibName: "TaskUsersCVCell", bundle: nil)
         collection.register(nib, forCellWithReuseIdentifier: "TaskUsersCVCell")
-        
+        collection.delegate = self
+        collection.dataSource = self
         self.collection.reloadData()
         
     }

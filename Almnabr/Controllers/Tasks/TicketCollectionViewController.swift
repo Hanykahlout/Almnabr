@@ -25,23 +25,15 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         
         set_data()
         updateCollectionViewItem(with: view.bounds.size)
-        if isFromNotificaion == true {
-            get_data()
-            setupNavigationBar()
-            configNavigation()
-        }else{
-            get_data()
-            setupNavigationBar()
-            configNavigation()
-        }
+        get_data()
+        setupNavigationBar()
+        configNavigation()
         addSocketObserver()
     }
     
     
     private func addSocketObserver(){
         SocketIOController.shard.taskHandler(ticketId: ticket_id, userID: Auth_User.user_id) { data in
-            print("Noooooooo")
-            print("Data - ",data)
             
             guard let data = data.first as? [String:Any] else { return }
             guard let content = data["content"] as? [String:Any] else { return }

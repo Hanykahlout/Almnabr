@@ -169,6 +169,8 @@ class CheckListVC: UIViewController {
     }
     
     
+    
+    
 }
 
 
@@ -224,10 +226,6 @@ extension CheckListVC: UITableViewDelegate , UITableViewDataSource{
             self.navigationController?.pushViewController(vc, animated: true)
         }
         
-        
-        cell.btnCheckAction = { point_id in
-            self.change_task_point(point_id: point_id)
-        }
         return cell
         
     }

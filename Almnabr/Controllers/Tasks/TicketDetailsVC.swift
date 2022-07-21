@@ -9,7 +9,7 @@
 import UIKit
 
 class TicketDetailsVC: UIViewController {
-
+    
     @IBOutlet weak var table_user: UITableView!
     @IBOutlet weak var lbl_ticket: UILabel!
     @IBOutlet weak var lbl_title: UILabel!
@@ -33,14 +33,14 @@ class TicketDetailsVC: UIViewController {
         get_data()
         configNavigation()
         get_emp_in_ticket()
-//        setupAddButtonItem()
+        //        setupAddButtonItem()
         //TaskUserTVCell
     }
     
     
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
-//        self.tableHeight?.constant = self.table_user.contentSize.height
+        //        self.tableHeight?.constant = self.table_user.contentSize.height
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +48,7 @@ class TicketDetailsVC: UIViewController {
         // Hide the Navigation Bar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-   
+    
     
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -64,14 +64,14 @@ class TicketDetailsVC: UIViewController {
         self.view.backgroundColor = maincolor //F0F4F8
         //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
         navigationController?.navigationBar.barTintColor = maincolor
-       addNavigationBarTitle(navigationTitle: "Ticket Details".localized())
+        addNavigationBarTitle(navigationTitle: "Ticket Details".localized())
         UINavigationBar.appearance().backgroundColor = maincolor
         
         //square.and.pencil
     }
     
     func setupAddButtonItem() {
-       // let EditButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapEditButton(_:)))
+        // let EditButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapEditButton(_:)))
         
         
         let EditImage  = UIImage.fontAwesomeIcon(name: .penSquare , style: .solid, textColor:  .white, size: CGSize(width: 25, height: 25))
@@ -113,7 +113,7 @@ class TicketDetailsVC: UIViewController {
         let title_atr: NSAttributedString = title.attributedStringWithColor(["Title".localized(),"No.".localized()], color: maincolor)
         self.lbl_title.attributedText = title_atr
         self.lbl_title.font = .kufiRegularFont(ofSize: 14)
-       
+        
         let From = "From".localized() + ": \(object?.start_date ?? "---")"
         let From_atr: NSAttributedString = From.attributedStringWithColor(["From".localized()], color: maincolor)
         self.lbl_From.attributedText = From_atr
@@ -173,24 +173,24 @@ class TicketDetailsVC: UIViewController {
         let param:[String:Any] = ["ticket_id" : self.ticket_id]
         APIManager.sendRequestPostAuth(urlString: "tasks/get_ticket_row", parameters: param ) { (response) in
             self.hideLoadingActivity()
-           
-             let status = response["status"] as? Bool
-           
-             if status == true{
-                 
-                 if  let data = response["data"] as? [String:Any]{
-                     
-                     let obj =  TicketObj(data)
-                     self.object = obj
-                 }
-                 self.configGUI()
-                 self.hideLoadingActivity()
-                 
-             }else{
-                 self.hideLoadingActivity()
-             }
-         }
-     }
+            
+            let status = response["status"] as? Bool
+            
+            if status == true{
+                
+                if  let data = response["data"] as? [String:Any]{
+                    
+                    let obj =  TicketObj(data)
+                    self.object = obj
+                }
+                self.configGUI()
+                self.hideLoadingActivity()
+                
+            }else{
+                self.hideLoadingActivity()
+            }
+        }
+    }
     
     func get_emp_in_ticket(){
         
@@ -211,7 +211,7 @@ class TicketDetailsVC: UIViewController {
                         let obj =  HistoryObj.init(dict!)
                         self.arr_user.append(obj)
                     }
-                   
+                    
                     self.table_user.reloadData()
                     self.hideLoadingActivity()
                 }
@@ -230,25 +230,25 @@ class TicketDetailsVC: UIViewController {
         
         let param : [String:Any] = ["ticket_id" : self.ticket_id,
                                     "emp_id" : emp_id]
-       
+        
         APIManager.sendRequestPostAuth(urlString: "tasks/unfollow_emp_by_admin", parameters: param ) { (response) in
             self.hideLoadingActivity()
-           
+            
             let status = response["status"] as? Bool
             let message = response["message"] as? [String:Any]
             
             if status == true{
-                    if let message = message?["msg"] as? String {
-                        self.showAMessage(withTitle: "", message: message,  completion: {
-                            
-                            self.dismiss(animated: true)
-                        })
-                    }
+                if let message = message?["msg"] as? String {
+                    self.showAMessage(withTitle: "", message: message,  completion: {
+                        
+                        self.dismiss(animated: true)
+                    })
+                }
                 
             }else{
                 let error = response["error"] as? String ?? "something went wrong"
-                    self.showAMessage(withTitle: "error".localized(), message:  error)
-              
+                self.showAMessage(withTitle: "error".localized(), message:  error)
+                
             }
             self.hideLoadingActivity()
             
@@ -262,25 +262,25 @@ class TicketDetailsVC: UIViewController {
         
         let param : [String:Any] = ["ticket_id" : self.ticket_id,
                                     "emp_id" : emp_id]
-       
+        
         APIManager.sendRequestPostAuth(urlString: "tasks/prevent_unfollow", parameters: param ) { (response) in
             self.hideLoadingActivity()
-           
+            
             let status = response["status"] as? Bool
             let message = response["message"] as? [String:Any]
             
             if status == true{
-                    if let message = message?["msg"] as? String {
-                        self.showAMessage(withTitle: "", message: message,  completion: {
-                            
-                            self.dismiss(animated: true)
-                        })
-                    }
+                if let message = message?["msg"] as? String {
+                    self.showAMessage(withTitle: "", message: message,  completion: {
+                        
+                        self.dismiss(animated: true)
+                    })
+                }
                 
             }else{
                 let error = response["error"] as? String ?? "something went wrong"
-                    self.showAMessage(withTitle: "error".localized(), message:  error)
-              
+                self.showAMessage(withTitle: "error".localized(), message:  error)
+                
             }
             self.hideLoadingActivity()
             
@@ -294,47 +294,47 @@ class TicketDetailsVC: UIViewController {
     @IBAction func btnAddUser_Click(_ sender: Any) {
         
     }
-
+    
 }
 
 
 
 extension TicketDetailsVC: UITableViewDelegate , UITableViewDataSource{
-
-func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return arr_user.count
-}
-
-func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "TaskUserTVCell", for: indexPath) as! TaskUserTVCell
-    
-    let obj = arr_user[indexPath.item]
-    
- 
-    cell.lblUser.text = obj.emp_name
-    cell.lblFirstName.text = obj.firstname_english
-    cell.lblLastName.text = obj.lastname_english
-    
-    cell.btnLockAction = {
-        self.prevent_unfollow(emp_id: obj.emp_id)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return arr_user.count
     }
     
-    cell.btnUnfollowAction = {
-        self.unfollow_emp(emp_id: obj.emp_id)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TaskUserTVCell", for: indexPath) as! TaskUserTVCell
+        
+        let obj = arr_user[indexPath.item]
+        
+        
+        cell.lblUser.text = obj.emp_name
+        cell.lblFirstName.text = obj.firstname_english
+        cell.lblLastName.text = obj.lastname_english
+        
+        cell.btnLockAction = {
+            self.prevent_unfollow(emp_id: obj.emp_id)
+        }
+        
+        cell.btnUnfollowAction = {
+            self.unfollow_emp(emp_id: obj.emp_id)
+        }
+        
+        self.viewWillLayoutSubviews()
+        
+        return cell
+        
     }
-    
-    self.viewWillLayoutSubviews()
-    
-    return cell
-    
-}
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         self.viewWillLayoutSubviews()
     }
     
     
-
+    
 }
 

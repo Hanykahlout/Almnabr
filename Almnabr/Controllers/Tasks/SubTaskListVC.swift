@@ -89,11 +89,11 @@ class SubTaskListVC: UIViewController {
             let status = response["status"] as? Bool
             if status == true{
             }else{
-               } }
+            } }
         
         
     }
-
+    
     
     
 }
@@ -139,7 +139,7 @@ extension SubTaskListVC: UITableViewDelegate , UITableViewDataSource{
         }
         
         cell.btnCheckAction = {
-           
+            
             if obj.is_done == "2"{
                 print("not Check")
                 self.showLoadingActivity()
@@ -149,31 +149,39 @@ extension SubTaskListVC: UITableViewDelegate , UITableViewDataSource{
                     if status == true{
                         cell.btnCheck.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
                         obj.is_done = "1"
-                         self.hideLoadingActivity()
+                        self.hideLoadingActivity()
+                        
                     }else{
                         cell.btnCheck.setImage(UIImage(systemName: "square"), for: .normal)
                         self.hideLoadingActivity()
                         obj.is_done = "2"
-
-                       } }
+                        
+                    }
+                }
                 
                 
-               
+                
             }else{
                 print("Check")
                 self.showLoadingActivity()
                 APIManager.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: ["point_id" : point_id]  ) { (response) in
-                    let status = response["status"] as? Bool
-                    if status == true{
-                        cell.btnCheck.setImage(UIImage(systemName: "square"), for: .normal)
-                        obj.is_done = "2"
-                        self.hideLoadingActivity()
-                    }else{
-                        cell.btnCheck.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
-                        obj.is_done = "1"
-                         self.hideLoadingActivity()
-
-                       } }} }
+                    DispatchQueue.main.async {
+                        let status = response["status"] as? Bool
+                        if status == true{
+                            cell.btnCheck.setImage(UIImage(systemName: "square"), for: .normal)
+                            obj.is_done = "2"
+                            self.hideLoadingActivity()
+                        }else{
+                            cell.btnCheck.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
+                            obj.is_done = "1"
+                            self.hideLoadingActivity()
+                            
+                        }
+                    }
+                }
+            }
+            cell.collection.reloadData()
+        }
         
         cell.btnDeleteAction = {
             self.showLoadingActivity()
@@ -187,7 +195,7 @@ extension SubTaskListVC: UITableViewDelegate , UITableViewDataSource{
                 }else{
                     self.showAMessage(withTitle: "error", message: message ?? "try again")
                     self.hideLoadingActivity()
-                   } }
+                } }
             
             
             

@@ -17,6 +17,7 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var view_Status: UIView!
     @IBOutlet weak var view_collection: UIView!
     
+    @IBOutlet weak var statusView: UIView!
     @IBOutlet weak var lblLocation: UILabel!
     @IBOutlet weak var view_profile: UIView!
     
@@ -32,7 +33,7 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         get_profile()
         header.btnAction = self.menu_select
       
@@ -52,6 +53,7 @@ class ProfileVC: UIViewController {
             spread: 0)
         
         view_collection.setRounded(10)
+        
     }
     
 
@@ -77,8 +79,8 @@ class ProfileVC: UIViewController {
         }else{
             panel?.openLeft(animated: true)
         }
-        
     }
+
     
     func get_profile(){
         

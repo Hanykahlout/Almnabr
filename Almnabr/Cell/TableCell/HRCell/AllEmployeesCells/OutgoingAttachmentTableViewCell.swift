@@ -15,7 +15,7 @@ protocol OutgoingAttachmentCellDelegate{
 
 
 class OutgoingAttachmentTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var attachwithPdfButton: UIButton!
     @IBOutlet weak var officialPaperButton: UIButton!
     @IBOutlet weak var descriptionTextField: UITextField!
@@ -32,14 +32,25 @@ class OutgoingAttachmentTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        attachwithPdfStackView.isUserInteractionEnabled = true
+        officialPaperStackView.isUserInteractionEnabled = true
+        attachwithPdfStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(attachwithPdfStackViewAction)))
+        officialPaperStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(officialPaperStackViewAction)))
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
+    @objc private func attachwithPdfStackViewAction(){
+        attachwithPdfButton.isSelected = !attachwithPdfButton.isSelected
+    }
+    
+    @objc private func officialPaperStackViewAction(){
+        officialPaperButton.isSelected = !officialPaperButton.isSelected
+    }
     
     @IBAction func selectFileAction(_ sender: Any) {
         delegate?.selectFileAction(indexPath: indexPath)
@@ -47,15 +58,6 @@ class OutgoingAttachmentTableViewCell: UITableViewCell {
     
     @IBAction func deleteAction(_ sender: Any) {
         delegate?.deleteAction()
-    }
-    
-    
-    @IBAction func attachwithPdfAction(_ sender: Any) {
-        attachwithPdfButton.isSelected = !attachwithPdfButton.isSelected
-    }
-    
-    @IBAction func officialPaperAction(_ sender: Any) {
-        officialPaperButton.isSelected = !officialPaperButton.isSelected
     }
     
 }

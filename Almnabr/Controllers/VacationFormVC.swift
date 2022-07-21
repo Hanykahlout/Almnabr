@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SCLAlertView
 class VacationFormVC: UIViewController {
     
     @IBOutlet weak var lblLastJoiningDate: UILabel!
@@ -157,15 +157,15 @@ class VacationFormVC: UIViewController {
                 
             }else{
                 self.hideLoadingActivity()
-                self.showAMessage(withTitle: "error", message: error ?? "You don't have permission to access this area!", completion: {
-                    self.navigationController?.popViewController(animated: true)
-                })
             }
-            
-            
         }
     }
     
+    
+    @IBAction func addAction(_ sender: Any) {
+        
+        checkEmpContractStatus()
+    }
     
 }
 
@@ -253,3 +253,24 @@ extension VacationFormVC: UITableViewDelegate , UITableViewDataSource{
     }
 }
 
+// MARK: - API Handling
+extension VacationFormVC{
+    private func checkEmpContractStatus(){
+        showLoadingActivity()
+        APIController.shard.getEmpInfoForVaction(empNum: profile_obj?.employee_number ?? "") {  data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status,status{
+                    let vc =  AddVacationViewController()
+                    vc.empId = self.profile_obj?.employee_number ?? ""
+                    vc.contractInfo = data.result?.contract_vacation_info
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+            
+        }
+    }
+}

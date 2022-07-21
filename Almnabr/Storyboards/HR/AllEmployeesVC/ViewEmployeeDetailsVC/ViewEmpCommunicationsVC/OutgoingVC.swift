@@ -110,6 +110,7 @@ class OutgoingVC: UIViewController {
     private var currentIndexPath:IndexPath?
     private var selectedLang = ""
     private var selectedDatainAr = ""
+    private var cellHeight = 190
     var isIncoming = false
 
     var myTranstion:String?
@@ -133,7 +134,7 @@ class OutgoingVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        cellHeight = isIncoming ? 130 : 190
         signatureView.isHidden = isIncoming
         employeeNameAArrow.isHidden = isIncoming
         employeeNameBArrow.isHidden = isIncoming
@@ -449,7 +450,7 @@ class OutgoingVC: UIViewController {
     
     @IBAction func addAttachmentAction(_ sender: Any) {
         attachmentsCount += 1
-        attachmentsTableViewHeight.constant = CGFloat(attachmentsCount * 300)
+        attachmentsTableViewHeight.constant = CGFloat(attachmentsCount * cellHeight)
         attachmentsTableView.reloadData()
     }
     
@@ -546,7 +547,7 @@ extension OutgoingVC:UITableViewDelegate,UITableViewDataSource{
     private func setUpTableView(){
         attachmentsTableView.delegate = self
         attachmentsTableView.dataSource = self
-        attachmentsTableViewHeight.constant = CGFloat(attachmentsCount * 300)
+        attachmentsTableViewHeight.constant = CGFloat(attachmentsCount * cellHeight)
         attachmentsTableView.register(.init(nibName: "OutgoingAttachmentTableViewCell", bundle: nil), forCellReuseIdentifier: "OutgoingAttachmentTableViewCell")
     }
     
@@ -562,6 +563,11 @@ extension OutgoingVC:UITableViewDelegate,UITableViewDataSource{
         cell.delegate = self
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(cellHeight)
+    }
+    
 }
 
 extension OutgoingVC:OutgoingAttachmentCellDelegate{
@@ -580,7 +586,7 @@ extension OutgoingVC:OutgoingAttachmentCellDelegate{
     func deleteAction() {
         if attachmentsCount > 1{
             attachmentsCount -= 1
-            attachmentsTableViewHeight.constant = CGFloat(attachmentsCount * 300)
+            attachmentsTableViewHeight.constant = CGFloat(attachmentsCount * cellHeight)
             attachmentsTableView.reloadData()
         }
     }

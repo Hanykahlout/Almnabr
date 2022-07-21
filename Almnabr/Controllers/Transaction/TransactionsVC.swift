@@ -25,14 +25,21 @@ class TransactionsVC: UIViewController {
     @IBOutlet weak var tableHeightConstraint:NSLayoutConstraint!
     
     @IBOutlet weak var viewsearchAdmin: UIView!
+    
     @IBOutlet weak var viewsearchByModule: UIView!
+    
     @IBOutlet weak var viewsearchByForm: UIView!
+    
     @IBOutlet weak var viewsearchAllPending: UIView!
+    
     @IBOutlet weak var viewsearch: UIView!
     
     @IBOutlet weak var imgDropAdmin: UIImageView!
+    
     @IBOutlet weak var imgDropModule: UIImageView!
+    
     @IBOutlet weak var imgDropForm: UIImageView!
+    
     @IBOutlet weak var imgDropAllPending: UIImageView!
     
     @IBOutlet weak var imgnodata: UIImageView!
@@ -98,7 +105,7 @@ class TransactionsVC: UIViewController {
     func configNavigation() {
         
         _ = self.navigationController?.preferredStatusBarStyle
-        self.view.backgroundColor = maincolor //F0F4F8
+        
         //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
         navigationController?.navigationBar.barTintColor = maincolor
        addNavigationBarTitle(navigationTitle: "My Transactions".localized())
@@ -109,7 +116,7 @@ class TransactionsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         configGUI()
         get_Transaction_data(showLoading: true, loadOnly: true)
       
@@ -353,7 +360,6 @@ class TransactionsVC: UIViewController {
     
     
     @IBAction func btnSearchForm_Click(_ sender: Any) {
-        
         self.imgDropForm.image = dropUpmage
         
         let vc :PickerVC = AppDelegate.mainSB.instanceVC()

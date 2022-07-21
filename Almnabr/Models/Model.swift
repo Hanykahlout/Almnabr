@@ -2491,7 +2491,7 @@ class PointTaskObj {
     var user_add_id:String = ""
     var user_username:String = ""
     var isHidden:Bool = true
-    
+    var isUnselectedData = true
     
     init(_ Obj : [String:Any]) {
      

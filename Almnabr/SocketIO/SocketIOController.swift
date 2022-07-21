@@ -47,6 +47,10 @@ class SocketIOController{
         }
     }
     
+    func isConnected()->Bool{
+        print("socket connected",socket?.status.active ?? false)
+        return socket?.status.active ?? false
+    }
     
     func disconnect(){
         if let socket = socket {

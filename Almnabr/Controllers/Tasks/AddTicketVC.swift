@@ -817,7 +817,6 @@ extension AddTicketVC: UICollectionViewDataSource ,UICollectionViewDelegate , UI
             if self.arr_user.count == 0 {
                 self.Viewcollection_user.isHidden = true
             }
-            
         }
         
         return cell

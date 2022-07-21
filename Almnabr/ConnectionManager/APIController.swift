@@ -977,6 +977,102 @@ class APIController{
         }
     }
     
+    func getVactionTypes(empNum:String,callback:@escaping (_ response:VactionTypesResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/get_vacation_type/"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .post , parameters: ["employee_number:":empNum],headers:headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : VactionTypesResponse = Mapper<VactionTypesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+   
+    
+    func showSelectionVactionResult(empNum:String,vacation_type_id:String,beforeDate:String,afterDate:String,callback:@escaping(_ data:SelectionVactionResult)->Void){
+        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/check_vacation_for_employee"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param = ["employee_number":empNum,"vacation_type_id":vacation_type_id,"before_vacation_working_date_english":beforeDate,"after_vacation_working_date_english":afterDate]
+
+        print("ASDASDQf",param)
+        
+        Alamofire.request(strURL, method: .post , parameters:param ,headers:headers).validate().responseJSON { (response) in
+            
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SelectionVactionResult = Mapper<SelectionVactionResult>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func submitVaction(fileUrl:[URL],body:[String:Any],callback:@escaping(_ data:SubmitVactionResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/cr/0"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        let parameters:[String:Any] = body
+        
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            for index in 0..<fileUrl.count {
+                do{
+                    print("ASDQDSS","attachments[\(index)][file]")
+                    
+                    let data = try Data(contentsOf: fileUrl[index])
+                    multipartFormData.append(data, withName: "attachments[\(index)][file]", fileName: "\(Date.init().timeIntervalSince1970).\(fileUrl[index].pathExtension)", mimeType: fileUrl[index].mimeType())
+                }catch{
+                    
+                }
+            }
+
+            for (key, value) in parameters {
+                if let temp = value as? String {
+                    multipartFormData.append(temp.data(using: .utf8)!, withName: key)
+                }
+            }
+            
+        },
+                         to: URL(string: strURL)!, method: .post , headers: headers) { (result:SessionManager.MultipartFormDataEncodingResult) in
+            switch result{
+            case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
+                upload.responseJSON { (response:DataResponse<Any>) in
+                    if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                        if let parsedMapperString : SubmitVactionResponse = Mapper<SubmitVactionResponse>().map(JSONString:str){
+                            callback(parsedMapperString)
+                        }
+                    }
+                }
+            case .failure(let error):
+                print("Error:",error.localizedDescription)
+                break
+                
+            }
+        }
+    }
+    
+    func getEmpInfoForVaction(empNum:String,callback:@escaping(_ data:EmpInfoResposne)->Void){
+        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/get_employee_info"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param = ["employee_number":empNum]
+        
+        Alamofire.request(strURL, method: .post , parameters:param ,headers:headers).validate().responseJSON { (response) in
+            
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : EmpInfoResposne = Mapper<EmpInfoResposne>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
     
 }
 

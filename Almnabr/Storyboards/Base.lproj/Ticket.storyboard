@@ -1712,6 +1712,7 @@
                                     <constraint firstItem="ZLV-ls-eo4" firstAttribute="leading" secondItem="4Ab-Ae-6uW" secondAttribute="leading" id="MwL-pF-lc5"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="addView" destination="K4o-M3-Z5S" id="8oQ-d0-vXm"/>
                                     <outlet property="tableView" destination="ZLV-ls-eo4" id="tce-o8-cJz"/>
                                 </connections>
                             </collectionViewCell>

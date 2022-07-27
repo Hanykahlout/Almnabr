@@ -14,6 +14,8 @@ class HistoryVC: UIViewController {
     @IBOutlet weak var table: UITableView!
     
     var arr_data:[transactions_recordsObj] = []
+    var notesData:[NoteRecordResponse]?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,21 +69,35 @@ class HistoryVC: UIViewController {
 extension HistoryVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arr_data.count
+        return notesData == nil ? arr_data.count : notesData!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVCell", for: indexPath) as! TransactionTVCell
         
-        let obj = arr_data[indexPath.item]
-       
+
+
+        var no:String = ""
+        var Name:String = ""
+        var Notes:String = ""
+        var OnDate:String = ""
         
         
-        let no =  "#".localized() + "  \(indexPath.item + 1)"
-        let Name = "Name".localized() + "  \(obj.transactions_records_user_name )"
-        let Notes = "Notes".localized() + "  \(obj.transactions_records_note)"
-        let OnDate = "On Date".localized() + "  \(obj.transactions_records_datetime)"
+        if notesData == nil{
+            let obj = arr_data[indexPath.item]
+            no =  "#".localized() + "  \(indexPath.item + 1)"
+            Name = "Name".localized() + "  \(obj.transactions_records_user_name )"
+            Notes = "Notes".localized() + "  \(obj.transactions_records_note)"
+            OnDate = "On Date".localized() + "  \(obj.transactions_records_datetime)"
+        }else{
+            let obj = notesData![indexPath.item]
+            no =  "#".localized() + "  \(indexPath.item + 1)"
+            Name = "Name".localized() + "  \(obj.transactions_notes_user_name ?? "" )"
+            Notes = "Notes".localized() + "  \(obj.transactions_notes_text ?? "")"
+            OnDate = "On Date".localized() + "  \(obj.transactions_notes_datetime ?? "")"
+        }
+        
     
         cell.lbKeylNo.text = no
         cell.lblKeyDesc.text = Name

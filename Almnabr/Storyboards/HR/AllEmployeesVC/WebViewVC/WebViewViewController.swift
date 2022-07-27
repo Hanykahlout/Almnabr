@@ -22,7 +22,7 @@ class WebViewViewController: UIViewController {
         }
         if let data = data {
             if let fileData = Data(base64Encoded: data.base64 ?? ""){
-                webView.load(fileData, mimeType: data.content_type ?? "", characterEncodingName: "", baseURL: URL(string: "https://nahidh.sa/backend")!)
+                webView.load(fileData, mimeType: data.content_type ?? "", characterEncodingName: "", baseURL: URL(string: APIManager.serverURL)!)
             }
         }
     }

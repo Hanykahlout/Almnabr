@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SCLAlertView
 class TaskDetailVC: UIViewController {
     
     @IBOutlet weak var deleteButton: UIButton!
@@ -24,6 +24,7 @@ class TaskDetailVC: UIViewController {
     @IBOutlet weak var tableChecklist: UITableView!
     @IBOutlet weak var tableChecklistHeight: NSLayoutConstraint!
     
+    
     @IBOutlet weak var btnAdd_comment: UIView! {
         didSet {
             btnAdd_comment.isHidden = false
@@ -37,7 +38,7 @@ class TaskDetailVC: UIViewController {
     var arr_statusDone :[importantObj] = []
     var arr_comments :[CommentObj] = []
     var arr_data:[PointTaskObj] = []
-    
+    var canDelete = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -403,7 +404,11 @@ class TaskDetailVC: UIViewController {
     
     
     @IBAction func deleteAction(_ sender: Any) {
-        delete_task(task_id: self.task_id)
+        if canDelete {
+            delete_task(task_id: self.task_id)
+        }else{
+            SCLAlertView().showNotice("You do not have permissions to edit this task", subTitle: "")
+        }
     }
     
     

@@ -20,7 +20,7 @@ struct GetImageResponse : Mappable {
 	var _extension : String?
 	var content_type : String?
 	var size : String?
-
+    var error : String?
 	init?(map: Map) {
 
 	}
@@ -32,6 +32,7 @@ struct GetImageResponse : Mappable {
 		_extension <- map["extension"]
         content_type <- map["content-type"]
 		size <- map["size"]
+        error <- map["error"]
 	}
 
 }

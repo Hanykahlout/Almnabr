@@ -23,7 +23,8 @@ struct Finance : Mappable {
 	var credit_amount : Int?
 	var debit_amount : Int?
 	var finance_description : String?
-
+    var net_salary_amount: Double?
+    
 	init?(map: Map) {
 
 	}
@@ -38,6 +39,8 @@ struct Finance : Mappable {
 		credit_amount <- map["credit_amount"]
 		debit_amount <- map["debit_amount"]
 		finance_description <- map["finance_description"]
+        net_salary_amount <- map["net_salary_amount"]
+        
 	}
 
 }

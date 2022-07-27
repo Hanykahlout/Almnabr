@@ -14,6 +14,7 @@ class FormsAttachmentsVC: UIViewController {
     @IBOutlet weak var table: UITableView!
     
     var arr_data:[Configurations_AttachmentsObj] = []
+    var attachData:[FormHrv1AttachmentsRecords]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +70,7 @@ extension FormsAttachmentsVC: UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
       
-            return arr_data.count
+        return attachData == nil ? arr_data.count : attachData!.count
     
        
     }
@@ -78,16 +79,47 @@ extension FormsAttachmentsVC: UITableViewDelegate , UITableViewDataSource{
      
             let cell = tableView.dequeueReusableCell(withIdentifier: "FormVersionCell", for: indexPath) as! FormVersionCell
             
-            let obj = arr_data[indexPath.item]
+            
          
       
-        let Number = "#" + "  \(indexPath.item + 1)"
-        let AttachmentsTitle = "Attachments Title".localized() + "   \(obj.project_supervision_form_file_attach_title)"
-        let Writer = "Writer".localized() + "   \(obj.writer_name)"
-        let Date = "Date".localized() + "   \(obj.created_datetime)"
-        let FileSize = "File Size".localized() + "   \(obj.project_supervision_form_file_size)"
-        let AttachmentType = "Attachment Type".localized() + "   \(obj.project_supervision_form_file_attach_type_label)"
+        var Number:String = ""
+        var AttachmentsTitle:String = ""
+        var Writer:String = ""
+        var Date:String = ""
+        var FileSize:String = ""
+        var AttachmentType:String = ""
         
+        if attachData == nil{
+            let obj = arr_data[indexPath.item]
+            Number = "#" + "  \(indexPath.item + 1)"
+            AttachmentsTitle = "Attachments Title".localized() + "   \(obj.project_supervision_form_file_attach_title)"
+            Writer = "Writer".localized() + "   \(obj.writer_name)"
+            Date = "Date".localized() + "   \(obj.created_datetime)"
+            FileSize = "File Size".localized() + "   \(obj.project_supervision_form_file_size)"
+            AttachmentType = "Attachment Type".localized() + "   \(obj.project_supervision_form_file_attach_type_label)"
+            
+            if obj.project_supervision_form_file_path != "" {
+                cell.btnAction.isHidden = false
+            }else{
+                cell.btnAction.isHidden = true
+            }
+            
+        }else{
+            let obj = attachData![indexPath.item]
+            let isAr = L102Language.currentAppleLanguage() == "ar"
+            Number = "#" + "  \(indexPath.item + 1)"
+            AttachmentsTitle = "Attachments Title".localized() + "   \(isAr ? obj.file_name_ar ?? "" : obj.file_name_en ?? "")"
+            Writer = "Writer".localized() + "   \(obj.writer_name ?? "")"
+            Date = "Date".localized() + "   \(obj.created_datetime ?? "")"
+            FileSize = "File Size".localized() + "   \(obj.file_size ?? "")"
+            AttachmentType = "Attachment Type".localized() + "   \(obj.file_extension ?? "")"
+            if obj.link != "" {
+                cell.btnAction.isHidden = false
+            }else{
+                cell.btnAction.isHidden = true
+            }
+        }
+
         
         cell.lblNo.text = Number
         cell.lblUnit.text = AttachmentsTitle
@@ -100,14 +132,10 @@ extension FormsAttachmentsVC: UITableViewDelegate , UITableViewDataSource{
         
         cell.lblTransactionNo.isHidden = true
         
-        if obj.project_supervision_form_file_path != "" {
-            cell.btnAction.isHidden = false
-        }else{
-            cell.btnAction.isHidden = true
-        }
+     
        
-            let Numberattributed: NSAttributedString = Number.attributedStringWithColor(["#".localized()], color: maincolor)
-            cell.lblNo.attributedText = Numberattributed
+        let Numberattributed: NSAttributedString = Number.attributedStringWithColor(["#".localized()], color: maincolor)
+        cell.lblNo.attributedText = Numberattributed
         
         
         let AttachmentsTitleattributed: NSAttributedString = AttachmentsTitle.attributedStringWithColor(["Attachments Title".localized()], color: maincolor)

@@ -14,6 +14,7 @@ class PersonDetailsVC: UIViewController {
     @IBOutlet weak var table: UITableView!
     
     var arr_data:[transactions_personsObj] = []
+    var personalData:[TransactionsPersonsVactionData]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,34 +68,70 @@ class PersonDetailsVC: UIViewController {
 extension PersonDetailsVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arr_data.count
+        return personalData == nil ? arr_data.count : personalData!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVCell", for: indexPath) as! TransactionTVCell
-        
-        let obj = arr_data[indexPath.item]
        
-        let no =  "#".localized() + "  \(indexPath.item + 1)"
-        let Name = "Name".localized() + "  \(obj.first_name ) \(obj.last_name)"
-        let Type = "Type".localized() + "  \(obj.transaction_persons_type)"
-        let View = "View".localized()
-        let ViewTime = "View Time".localized() + "  \(obj.transactions_persons_view_datetime)"
-        let LastViewTime = "Last View Time".localized() + "  \(obj.transactions_persons_view_datetime_lastupdate)"
-        let step = "step".localized() + "  \(obj.transactions_persons_last_step)"
-        let DateTime = "Date & Time".localized() + "  \(obj.transactions_persons_action_datetime)"
+        var no:String = ""
+        var Name:String = ""
+        var Type:String = ""
+        var View:String = ""
+        var ViewTime:String = ""
+        var LastViewTime:String = ""
+        var step:String = ""
+        var DateTime:String = ""
         
-        cell.img_mark.isHidden = false
-        if obj.transactions_persons_view == "1" {
-            cell.img_mark.image = UIImage(systemName: "checkmark")
-            cell.img_mark.tintColor = "#4ca832".getUIColor()
+        
+        if let personalData = personalData{
+            
+            let obj = personalData[indexPath.item]
+            
+            no =  "#".localized() + "  \(indexPath.item + 1)"
+            Name = "Name".localized() + " \(obj.person_name ?? "") "
+            Type = "Type".localized() + "  \(obj.transaction_persons_type ?? "")"
+            View = "View".localized()
+            ViewTime = "View Time".localized() + "  \(obj.transactions_persons_view_datetime ?? "")"
+            LastViewTime = "Last View Time".localized() + "  \(obj.transactions_persons_view_datetime_lastupdate ?? "")"
+            step = "step".localized() + "  \(obj.transactions_persons_last_step ?? "")"
+            DateTime = "Date & Time".localized() + "  \(obj.transactions_persons_action_datetime ?? "")"
+            
+            cell.img_mark.isHidden = false
+            if obj.transactions_persons_view == "1" {
+                cell.img_mark.image = UIImage(systemName: "checkmark")
+                cell.img_mark.tintColor = "#4ca832".getUIColor()
+            }else{
+                cell.img_mark.tintColor = "#bf2a2a".getUIColor()
+                cell.img_mark.image = UIImage(systemName: "xmark")
+            }
+            
+            
         }else{
-            cell.img_mark.tintColor = "#bf2a2a".getUIColor()
-            cell.img_mark.image = UIImage(systemName: "xmark")
+            let obj = arr_data[indexPath.item]
+            
+            no =  "#".localized() + "  \(indexPath.item + 1)"
+            Name = "Name".localized() + "  \(obj.first_name ) \(obj.last_name)"
+            Type = "Type".localized() + "  \(obj.transaction_persons_type)"
+            View = "View".localized()
+            ViewTime = "View Time".localized() + "  \(obj.transactions_persons_view_datetime)"
+            LastViewTime = "Last View Time".localized() + "  \(obj.transactions_persons_view_datetime_lastupdate)"
+            step = "step".localized() + "  \(obj.transactions_persons_last_step)"
+            DateTime = "Date & Time".localized() + "  \(obj.transactions_persons_action_datetime)"
+            
+            cell.img_mark.isHidden = false
+            if obj.transactions_persons_view == "1" {
+                cell.img_mark.image = UIImage(systemName: "checkmark")
+                cell.img_mark.tintColor = "#4ca832".getUIColor()
+            }else{
+                cell.img_mark.tintColor = "#bf2a2a".getUIColor()
+                cell.img_mark.image = UIImage(systemName: "xmark")
+            }
+            
         }
-     
-    
+
+
         cell.lbKeylNo.text = no
         cell.lblKeyDesc.text = Name
         cell.lblKeyFrom.text = Type

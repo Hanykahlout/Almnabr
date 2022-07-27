@@ -954,6 +954,9 @@ class transactions_personsObj {
     var last_name :String = ""
     
     
+    
+    
+    
     init(_ Obj : [String:Any]) {
         
         self.signature = Obj["signature"] as? String ?? ""

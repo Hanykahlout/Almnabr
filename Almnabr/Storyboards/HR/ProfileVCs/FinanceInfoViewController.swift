@@ -12,6 +12,7 @@ class FinanceInfoViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var data = [Finance]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
@@ -23,8 +24,21 @@ class FinanceInfoViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = maincolor
         setUpTableView()
     }
+        
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        
+    }
 
+    
 }
 
 extension FinanceInfoViewController:UITableViewDelegate,UITableViewDataSource{

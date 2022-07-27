@@ -160,7 +160,7 @@ class TransactionsVC: UIViewController {
         self.lblsearchByForm.font = .kufiRegularFont(ofSize: 13)
         
         // for first puplish
-        self.viewsearchByForm.isUserInteractionEnabled = false
+        self.viewsearchByForm.isUserInteractionEnabled = true
         self.StrsearchByForm = "FORM_WIR"
         
         
@@ -524,11 +524,23 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         
         print("Selected rows after selection: ", tableView.indexPathsForSelectedRows?.count ?? 0)
         let obj = self.arr_data[indexPath.item]
+//        if  = "FORM_HRV1"
+        switch obj.transaction_key{
+        case "FORM_HRV1":
+            let vc = VactionViewController()
+            vc.data = obj
+            //vc.filePath = obj.url
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_WIR":
+            let vc : TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+            vc.Object = obj
+            //vc.filePath = obj.url
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
         
-        let vc : TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
-        vc.Object = obj
-        //vc.filePath = obj.url
-        self.navigationController?.pushViewController(vc, animated: true)
+        
         
     }
     

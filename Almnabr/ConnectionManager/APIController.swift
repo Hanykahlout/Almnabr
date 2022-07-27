@@ -1074,6 +1074,87 @@ class APIController{
         }
     }
     
+    func getVactionData(vactionId:String,callback:@escaping(_ data:VactionFromDataResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/vr/\(vactionId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        
+        Alamofire.request(strURL, method: .get , parameters:nil ,headers:headers).validate().responseJSON { (response) in
+            
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                print("asdasdasdsadas - Response -",str)
+                if let parsedMapperString : VactionFromDataResponse = Mapper<VactionFromDataResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func editUserStep(user_id:String,transaction_request_id:String,callback:@escaping(_ data:Edit)->Void){
+        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/asp"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param = [
+            "user_id": user_id,
+            "transaction_request_id": transaction_request_id
+        ]
+        
+        Alamofire.request(strURL, method: .post , parameters:param ,headers:headers).validate().responseJSON { (response) in
+            
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : Edit = Mapper<Edit>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func submitVactionApproval(transaction_request_id:String,approving_status:String,note:String,transactions_persons_action_code:String,callback:@escaping(_ data:Edit)->Void){
+        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/sr"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        
+        let param = [
+            "transaction_request_id": transaction_request_id,
+            "approving_status": approving_status,
+            "note": note,
+            "transactions_persons_action_code": transactions_persons_action_code
+        ]
+        
+        Alamofire.request(strURL, method: .post , parameters:param ,headers:headers).validate().responseJSON { (response) in
+            
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : Edit = Mapper<Edit>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getTicketRow(ticketId:String,callback:@escaping(_ data:TicketRowResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/get_ticket_row"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param = ["ticket_id": ticketId]
+        
+        Alamofire.request(strURL, method: .post , parameters:param ,headers:headers).validate().responseJSON { (response) in
+            
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                print("TRST",String(data: data, encoding: .utf8))
+                if let parsedMapperString : TicketRowResponse = Mapper<TicketRowResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
+    
+    
 }
 
 

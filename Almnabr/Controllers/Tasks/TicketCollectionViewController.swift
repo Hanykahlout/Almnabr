@@ -8,6 +8,7 @@
 
 import UIKit
 import MobileCoreServices
+import SCLAlertView
 
 class TicketCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
@@ -19,16 +20,29 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
     var boards:[Board] = []
     
     var object:TicketObj?
+    private var isAdd = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getTicketRowDate()
         set_data()
         updateCollectionViewItem(with: view.bounds.size)
         get_data()
         setupNavigationBar()
         configNavigation()
         addSocketObserver()
+    }
+    
+    
+
+    private func getTicketRowDate(){
+        APIController.shard.getTicketRow(ticketId: ticket_id) { data in
+            if let status = data.status,status{
+                self.isAdd = data.data?.canAddTask ?? false
+                print("ETTEETETETT1",self.isAdd)
+                self.collectionView.reloadData()
+            }
+        }
     }
     
     
@@ -41,7 +55,7 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
             let obj =  TaskObj.init(content)
             
             if let type = data["type"] as? String{
-                switch type{
+                switch type {
                 case "edit_task":
                     self.boards[index].items.removeAll{$0.task_id == content["task_id"] as! String}
                     self.boards[index].items.append(obj)
@@ -84,8 +98,7 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         }
         
     }
-    
-    
+
     private func setupNavigationBar() {
         setupAddButtonItem()
     }
@@ -94,6 +107,7 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
+        
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -185,6 +199,7 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         
     }
     
+    
     func get_data(){
         
         self.showLoadingActivity()
@@ -203,7 +218,6 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
                         self.arr_data.append(obj)
                     }
                     self.set_data()
-                    self.collectionView.reloadData()
                     self.hideLoadingActivity()
                     if self.isFromNotificaion == true {
                         self.configNavigation()
@@ -297,7 +311,8 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
         cell.setup(with: boards[indexPath.item])
         cell.parentVC = self
         cell.arr_task = self.arr_data
-        //let obj =
+        cell.addView.isHidden = !isAdd
+
         cell.btnAddTaskAction = {
             let vc:AddTaskVC = AppDelegate.TicketSB.instanceVC()
             vc.delegate = {
@@ -309,34 +324,46 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
             vc.strTitle = "Add Task".localized()
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        
+        
+        
+        
+        
         cell.btnEditTaskAction = { task_id , object in
-            let vc:AddTaskVC = AppDelegate.TicketSB.instanceVC()
-            vc.delegate = {
-                self.get_data()
+            if (self.object?.can_edit ?? false) {
+                let vc:AddTaskVC = AppDelegate.TicketSB.instanceVC()
+                vc.delegate = {
+                    self.get_data()
+                }
+                vc.isEdit = true
+                vc.task_id  = task_id
+                vc.object = object
+                vc.status = "\(indexPath.item + 1)"
+                vc.ticket_id = self.object?.ticket_id ?? "0"
+                vc.arr_related_task = self.arr_data
+                vc.strTitle = "Edit Task".localized()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else{
+                SCLAlertView().showNotice("You do not have permissions to edit this task", subTitle: "")
             }
-            vc.isEdit = true
-            vc.task_id  = task_id
-            vc.object = object
-            vc.status = "\(indexPath.item + 1)"
-            vc.ticket_id = self.object?.ticket_id ?? "0"
-            vc.arr_related_task = self.arr_data
-            vc.strTitle = "Edit Task".localized()
-            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         cell.btnChangeStatusAction = { task_id , status in
-            self.change_status(task_id: task_id, status: "\(status)")
+                self.change_status(task_id: task_id, status: "\(status)")
         }
         
         cell.btnSelectAction = { task_id  in
-            let vc:TaskDetailVC = AppDelegate.TicketSB.instanceVC()
-            // vc.object =  object
-            vc.task_id =  task_id
-            vc.delegate = {
-                self.get_data()
+            if (self.object?.can_view ?? false) {
+                let vc:TaskDetailVC = AppDelegate.TicketSB.instanceVC()
+                vc.task_id =  task_id
+                vc.canDelete = self.object?.can_delete ?? false
+                vc.delegate = {
+                    self.get_data()
+                }
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else{
+                SCLAlertView().showNotice("You do not have permissions to view this task", subTitle: "")
             }
-            
-            self.navigationController?.pushViewController(vc, animated: true)
         }
         
         

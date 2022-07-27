@@ -14,20 +14,19 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
     //
     //    }
     //
+    
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ -> UIMenu? in
             return self.createContextMenu()
         }
     }
     
-    
+    @IBOutlet weak var addView: UIView!
     @IBOutlet weak var tableView: UITableView!
     weak var parentVC: TicketCollectionViewController?
     var board: Board?
     var arr_task:[TaskObj] = []
-    
     var task_id:String = ""
-    
     var btnAddTaskAction : (()->())?
     var btnEditTaskAction : ((_ task_id: String , _ object :TaskObj) -> Void)?
     var btnChangeStatusAction : ((_ task_id: String ,_ status:Int) -> Void)?
@@ -47,7 +46,6 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
         tableView.tableFooterView = UIView()
         let nib = UINib(nibName: "TaskTVCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "TaskTVCell")
-        
     }
     
     func setup(with data: Board) {
@@ -256,6 +254,7 @@ extension BoardCollectionViewCell: UITableViewDataSource, UITableViewDelegate {
             self.btnEditTaskAction!(obj.task_id ,obj)
             
         }
+        
         if obj.total_points == "0" {
             cell.stack_totalPoints.isHidden = true
         }

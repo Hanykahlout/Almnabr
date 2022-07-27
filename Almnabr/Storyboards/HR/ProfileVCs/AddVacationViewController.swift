@@ -10,6 +10,8 @@ import UIKit
 import DropDown
 import Fastis
 import SCLAlertView
+import FAPanels
+
 class AddVacationViewController: UIViewController {
     //Hidden First
     @IBOutlet weak var afterSelectionStack: UIStackView!
@@ -470,12 +472,22 @@ extension AddVacationViewController{
                 self.hideLoadingActivity()
                 if let status = data.status,status{
                     SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
-                    self.navigationController?.popViewController(animated: true)
+
+                    let vc: TransactionsVC = AppDelegate.mainSB.instanceVC()
+                    let nav = UINavigationController(rootViewController: vc)
+                    let root = AppInstance.window?.rootViewController as? FAPanelController
+                    if let root = root{
+                        root.center(nav)
+                    }else{
+                        self.navigationController?.popViewController(animated: true)
+                    }
                 }else{
                     SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
                 }
             }
         }
+        
+        
     }
     
     

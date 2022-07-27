@@ -184,10 +184,6 @@ class TicketDetailsVC: UIViewController {
                     self.object = obj
                 }
                 self.configGUI()
-                self.hideLoadingActivity()
-                
-            }else{
-                self.hideLoadingActivity()
             }
         }
     }

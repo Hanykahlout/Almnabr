@@ -240,11 +240,14 @@ class SignInVC: UIViewController {
             }else if responseObject.user_data?.token != nil && (responseObject.user_data?.token?.count)! > 0 {
                 NewSuccessModel.saveLoginSuccessToken(userToken: (responseObject.user_data?.token!)!)
                 self.GoToHome()
+                print("QWERASF",responseObject.user_data?.user_id ?? "0")
                 Auth_User.user_id = responseObject.user_data?.user_id ?? "0"
                 Auth_User.user_type_id = responseObject.user_data?.user_type_id ?? "1"
                 HelperClassSwift.IsFirstLunch = false
                 HelperClassSwift.UserName = responseObject.user_data?.user_username ?? "0"
                 HelperClassSwift.UserPassword = Password
+                
+                
                 
             }
             

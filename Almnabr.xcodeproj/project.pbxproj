@@ -83,6 +83,8 @@
 		3F48C53F285883AF004D33F8 /* Profile_percentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C53B285883AF004D33F8 /* Profile_percentage.swift */; };
 		3F48C54128589439004D33F8 /* GetImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C54028589439004D33F8 /* GetImageResponse.swift */; };
 		3F524757284FCE8D0081EBC6 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F524756284FCE8D0081EBC6 /* FilterInfo.swift */; };
+		3F530834289287AB00AE7D2A /* SendSignInCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F530832289287AB00AE7D2A /* SendSignInCodeVC.swift */; };
+		3F530835289287AB00AE7D2A /* SendSignInCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F530833289287AB00AE7D2A /* SendSignInCodeVC.xib */; };
 		3F645ADF2875D86E00720E76 /* SocketIOController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F645ADE2875D86E00720E76 /* SocketIOController.swift */; };
 		3F65AC60285099EA00035471 /* SectionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F65AC5F285099EA00035471 /* SectionInfo.swift */; };
 		3F7462992886A30F00C19474 /* VactionTypesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F7462972886A30F00C19474 /* VactionTypesResponse.swift */; };
@@ -713,6 +715,8 @@
 		3F48C53B285883AF004D33F8 /* Profile_percentage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_percentage.swift; sourceTree = "<group>"; };
 		3F48C54028589439004D33F8 /* GetImageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImageResponse.swift; sourceTree = "<group>"; };
 		3F524756284FCE8D0081EBC6 /* FilterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInfo.swift; sourceTree = "<group>"; };
+		3F530832289287AB00AE7D2A /* SendSignInCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendSignInCodeVC.swift; sourceTree = "<group>"; };
+		3F530833289287AB00AE7D2A /* SendSignInCodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendSignInCodeVC.xib; sourceTree = "<group>"; };
 		3F645ADE2875D86E00720E76 /* SocketIOController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOController.swift; sourceTree = "<group>"; };
 		3F65AC5F285099EA00035471 /* SectionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionInfo.swift; sourceTree = "<group>"; };
 		3F7462972886A30F00C19474 /* VactionTypesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VactionTypesResponse.swift; sourceTree = "<group>"; };
@@ -1426,6 +1430,15 @@
 			path = ViewEmpResponse;
 			sourceTree = "<group>";
 		};
+		3F5308312892876400AE7D2A /* SendCodeVC */ = {
+			isa = PBXGroup;
+			children = (
+				3F530832289287AB00AE7D2A /* SendSignInCodeVC.swift */,
+				3F530833289287AB00AE7D2A /* SendSignInCodeVC.xib */,
+			);
+			path = SendCodeVC;
+			sourceTree = "<group>";
+		};
 		3F645ADD2875D85100720E76 /* SocketIO */ = {
 			isa = PBXGroup;
 			children = (
@@ -1643,6 +1656,7 @@
 		3FD038CF2874377000BB13C7 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				3F5308312892876400AE7D2A /* SendCodeVC */,
 				3F31ADEB288D36A500E2D8D6 /* Transaction_VactionsVC */,
 				3F1F4041287E0EBD00F919F0 /* QRCode */,
 				3FD038DA287437AF00BB13C7 /* HR */,
@@ -2894,6 +2908,7 @@
 				3FD03A4B287437B000BB13C7 /* SettingsUpdateViewController.strings in Resources */,
 				3FD038D52874377000BB13C7 /* LaunchScreen.storyboard in Resources */,
 				FA0324D226FC66A900372EA6 /* Localizable.strings in Resources */,
+				3F530835289287AB00AE7D2A /* SendSignInCodeVC.xib in Resources */,
 				3F07C075286D8FC300C2CDF6 /* InsuranceTVCell.xib in Resources */,
 				3FD03A2B287437B000BB13C7 /* ViewEmpEducationDetailsVC.strings in Resources */,
 				FA7F941427D77AC100E03A34 /* MyTrannsactionTVCell.xib in Resources */,
@@ -3273,6 +3288,7 @@
 				3F14368C2848A120008ABC19 /* CustomCournerView.swift in Sources */,
 				3F48C53D285883AF004D33F8 /* EmpViewData.swift in Sources */,
 				3FB726C12864BF5500684C94 /* AllModulesResponse.swift in Sources */,
+				3F530834289287AB00AE7D2A /* SendSignInCodeVC.swift in Sources */,
 				3FD039DE287437B000BB13C7 /* ViewEmpPassportDetailsVC.swift in Sources */,
 				FA95FD13275EFE6A00DE7854 /* OwnersRepresentativeVC.swift in Sources */,
 				3F3FEF282864735400F57578 /* CommunicationSubmitResponse.swift in Sources */,

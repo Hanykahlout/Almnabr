@@ -11,6 +11,7 @@ import DropDown
 import DPLocalization
 import FAPanels
 import LocalAuthentication
+import SCLAlertView
 
 class SignInVC: UIViewController {
     
@@ -350,12 +351,28 @@ class SignInVC: UIViewController {
         dropDown.width = btnLanguage.bounds.width
     }
     
+    
     @IBAction func btnLogin_Click(_ sender: Any) {
         
         self.view.endEditing(true)
-        btnLogin.isEnabled = false
-        btnLogin.isUserInteractionEnabled = false
-        login(Username: txtControlEmailAdress.txtField.text!, Password: txtControlPassword.txtField.text!)
+        showLoadingActivity()
+        APIController.shard.fetchSendCode(username: txtControlEmailAdress.txtField.text!, password: txtControlPassword.txtField.text!) { data in
+            self.hideLoadingActivity()
+            if let status = data.status,status{
+                let vc = SendSignInCodeVC()
+                vc.username = self.txtControlEmailAdress.txtField.text!
+                vc.password = self.txtControlPassword.txtField.text!
+                self.navigationController?.pushViewController(vc, animated: true)
+            }else{
+                if let _ = data.otp_need{
+                    self.login(Username: self.txtControlEmailAdress.txtField.text!, Password: self.txtControlPassword.txtField.text!)
+                }else{
+                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
+                }
+
+            }
+        }
+        
         
     }
     
@@ -364,6 +381,7 @@ class SignInVC: UIViewController {
     @IBAction func btnLanguage_Click(_ sender: Any) {
         dropDown.show()
     }
+    
     
     @IBAction func btnForgotPassword_Click(_ sender: Any) {
         let vc:ForgetPasswordVC = AppDelegate.mainSB.instanceVC()

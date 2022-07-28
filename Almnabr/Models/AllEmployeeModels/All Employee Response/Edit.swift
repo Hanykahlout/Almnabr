@@ -19,6 +19,8 @@ struct Edit : Mappable {
 	var msg : String?
     var status_code : Int?
     var error: String?
+    var otp_need: Int?
+    
     
 	init?(map: Map) {
 
@@ -30,6 +32,7 @@ struct Edit : Mappable {
 		msg <- map["msg"]
         status_code <- map["status_code"]
         error <- map["error"]
+        otp_need <- map["otp_need"]
 	}
 
 }

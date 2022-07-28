@@ -25,6 +25,7 @@ class APIManager: NSObject {
     //Api key "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
     
     static let serverURL = "https://erp.almnabr.com/backend"
+    static let api_key = "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
 
     static func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
@@ -333,7 +334,7 @@ class APIManager: NSObject {
         let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let getApi = URL(string: urlStr)!
         
-        let auth = [ "X-API-KEY": "PCGYdyKBJFya8LMaFP6baRrraRpSFc",
+        let auth = [ "X-API-KEY": APIManager.api_key,
                      "Content-Type":"application/x-www-form-urlencoded"]
         
        
@@ -392,7 +393,7 @@ class APIManager: NSObject {
         let getApi = URL(string: urlStr)!
         
         
-        let auth = [ "X-API-KEY":"PCGYdyKBJFya8LMaFP6baRrraRpSFc",
+        let auth = [ "X-API-KEY":APIManager.api_key,
                      "Content-Type":"application/x-www-form-urlencoded",
                      "authorization":
                                     "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"]

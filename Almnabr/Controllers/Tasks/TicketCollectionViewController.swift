@@ -48,7 +48,6 @@ class TicketCollectionViewController: UICollectionViewController, UICollectionVi
     
     private func addSocketObserver(){
         SocketIOController.shard.taskHandler(ticketId: ticket_id, userID: Auth_User.user_id) { data in
-            
             guard let data = data.first as? [String:Any] else { return }
             guard let content = data["content"] as? [String:Any] else { return }
             let index = Int(content["task_status"] as! String)! - 1

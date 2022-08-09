@@ -121,7 +121,7 @@ extension UIViewController {
     
     func addNavigationBarTitlee(navigationTitle: String) {
         let lblNavigationTile = UILabel(frame: CGRect(x: 0, y: 0, width: 120, height: 30))
-        lblNavigationTile.textAlignment = .justified
+        lblNavigationTile.textAlignment = .center
         //lblNavigationTile.backgroundColor = .clear
         lblNavigationTile.textColor = .white
         lblNavigationTile.font = .kufiRegularFont(ofSize: 15)

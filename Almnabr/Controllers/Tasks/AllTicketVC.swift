@@ -305,7 +305,7 @@ extension AllTicketVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let vc:TicketCollectionViewController = AppDelegate.TicketSB.instanceVC()
+        let vc:TicketViewController = AppDelegate.TicketSB.instanceVC()
         let obj = arr_data[indexPath.item]
         vc.object = obj
         vc.ticket_id = obj.ticket_id

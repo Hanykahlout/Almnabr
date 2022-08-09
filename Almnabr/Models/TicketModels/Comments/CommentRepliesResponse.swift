@@ -14,27 +14,32 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Edit : Mappable {
-	var status : Bool?
-    var message: String?
-	var msg : String?
-    var status_code : Int?
-    var error: String?
-    var otp_need: Int?
-    
-    
+struct CommentRepliesResponse : Mappable {
+	var path_file : String?
+	var userName : String?
+	var isAuthor : Bool?
+	var avatar : String?
+	var comment_date : String?
+	var comment_content : String?
+	var emp_id : String?
+	var history_id : String?
+	var files_reply : [String]?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		status <- map["status"]
-		msg <- map["msg"]
-        message <- map["message"]
-        status_code <- map["status_code"]
-        error <- map["error"]
-        otp_need <- map["otp_need"]
+		path_file <- map["path_file"]
+		userName <- map["userName"]
+		isAuthor <- map["isAuthor"]
+		avatar <- map["avatar"]
+		comment_date <- map["comment_date"]
+		comment_content <- map["comment_content"]
+		emp_id <- map["emp_id"]
+		history_id <- map["history_id"]
+		files_reply <- map["files_reply"]
 	}
 
 }

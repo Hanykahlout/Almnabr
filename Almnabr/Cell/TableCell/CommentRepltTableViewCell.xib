@@ -98,6 +98,9 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="XuE-ZS-4Ua"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -124,6 +127,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="deleteEditStackView" destination="aoz-xQ-kc0" id="oqN-z5-J9F"/>
                 <outlet property="imgUser" destination="PxH-oi-yev" id="oAF-ea-pM6"/>
                 <outlet property="lblComment" destination="Qvn-YW-ldX" id="Zvb-RC-LPC"/>
                 <outlet property="lblDate" destination="svD-s1-gf8" id="0WN-RD-vGy"/>

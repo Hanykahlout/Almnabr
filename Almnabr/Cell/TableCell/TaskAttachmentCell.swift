@@ -15,8 +15,9 @@ class TaskAttachmentCell: UITableViewCell {
     @IBOutlet weak var lblDate: UILabel!
     @IBOutlet weak var viewBack: UIView!
      
-    var btnDeleteAction : (()->())?
+    var btnDeleteAction : ((Int)->())?
     var btnDownloadAction : (()->())?
+    var index:Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,11 +32,13 @@ class TaskAttachmentCell: UITableViewCell {
     
     
     @IBAction func didReCancelButtonPressd(_ sender: Any) {
-        btnDeleteAction!()
+        if let index = index {
+            btnDeleteAction!(index)
+        }
     }
     
     @IBAction func didReDownloadButtonPressd(_ sender: Any) {
-//        btnDownloadAction!()
+        btnDownloadAction?()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

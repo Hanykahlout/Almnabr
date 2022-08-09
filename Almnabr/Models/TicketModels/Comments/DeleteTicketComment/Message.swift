@@ -14,15 +14,13 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Edit : Mappable {
-	var status : Bool?
-    var message: String?
+struct Message : Mappable {
+	var status : String?
 	var msg : String?
-    var status_code : Int?
-    var error: String?
-    var otp_need: Int?
-    
-    
+	var ref_id : String?
+	var parent_id : String?
+	var type_jaha : String?
+
 	init?(map: Map) {
 
 	}
@@ -31,10 +29,9 @@ struct Edit : Mappable {
 
 		status <- map["status"]
 		msg <- map["msg"]
-        message <- map["message"]
-        status_code <- map["status_code"]
-        error <- map["error"]
-        otp_need <- map["otp_need"]
+		ref_id <- map["ref_id"]
+		parent_id <- map["parent_id"]
+		type_jaha <- map["type_jaha"]
 	}
 
 }

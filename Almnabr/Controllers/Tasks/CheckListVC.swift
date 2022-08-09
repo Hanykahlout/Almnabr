@@ -195,17 +195,7 @@ extension CheckListVC: UITableViewDelegate , UITableViewDataSource{
         cell.Progress.progress = value / 100.0
         
         cell.dropView.isHidden = obj.isHidden
-        if obj.isHidden {
-            
-            let img  = UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .darkGray, size: CGSize(width: 15, height: 15))
-            
-            cell.dropImg.setImage(img, for: .normal)
-        }else{
-            
-            let img  = UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .darkGray, size: CGSize(width: 15, height: 15))
-            
-            cell.dropImg.setImage(img, for: .normal)
-        }
+      
         if Auth_User.user_id == obj.user_add_id {
             cell.deleteBtn.isHidden = false
         }else{

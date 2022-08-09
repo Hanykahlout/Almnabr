@@ -1145,7 +1145,6 @@ class APIController{
         Alamofire.request(strURL, method: .post , parameters:param ,headers:headers).validate().responseJSON { (response) in
             
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                print("TRST",String(data: data, encoding: .utf8))
                 if let parsedMapperString : TicketRowResponse = Mapper<TicketRowResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
@@ -1183,7 +1182,154 @@ class APIController{
         }
     }
 
+    func changeTicketStatus(status:String,ticketId:String,callback:@escaping (_ data:Edit)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/change_status_ticket"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        let param = [
+            "ticket_id": ticketId,
+            "status": status
+        ]
+        
+        Alamofire.request(strURL, method: .post ,parameters: param ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                
+                if let parsedMapperString : Edit = Mapper<Edit>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
+    
+    func getAllComments(type:String,ticketId:String,callback:@escaping (_ data:CommentsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/get_comments/asc"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        let param = [
+            "ticket_id": ticketId,
+            "type": type
+        ]
+        Alamofire.request(strURL, method: .post ,parameters: param ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : CommentsResponse = Mapper<CommentsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    
+    func addComment(comment:String,ticketId:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/add_comment"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        let param = [
+            "ticket_id": ticketId,
+            "notes": comment
+        ]
+        Alamofire.request(strURL, method: .post ,parameters: param ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AddTicketCommentResponse = Mapper<AddTicketCommentResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+   
+    
+    func editComment(note:String,comment_id:String,callback:@escaping (_ data:DeleteCommentResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/tasks/update_comment_reply"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        print("comment_id",comment_id)
+        print("notes",note)
+        let param = [
+            "comment_id": comment_id,
+            "notes": note
+        ]
+        
+        print("URL:", strURL)
+        print("headers",headers)
+        print("Body",param)
+        
+        Alamofire.request(strURL, method: .post ,parameters: param ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                print("ASDASD",str)
+                if let parsedMapperString : DeleteCommentResponse = Mapper<DeleteCommentResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func addCommentReply(ticketId:String,reply:String,comment_id:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/tasks/add_new_reply"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param = [
+            "ticket_id": ticketId,
+            "comment_id": comment_id,
+            "notes": reply
+        ]
+        
+        
+        Alamofire.request(strURL, method: .post ,parameters: param ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AddTicketCommentResponse = Mapper<AddTicketCommentResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func deleteCommentReply(comment_id:String,callback:@escaping (_ data:DeleteCommentResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/delete_comment_reply"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param = [
+            "comment_id": comment_id
+        ]
+        
+        
+        Alamofire.request(strURL, method: .post ,parameters: param ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : DeleteCommentResponse = Mapper<DeleteCommentResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+        
+    
+    func addTaskReplyToComment(taskId:String,reply:String,comment_id:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/tasks/add_reply_task"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param = [
+            "task_id": taskId,
+            "comment_id": comment_id,
+            "notes": reply
+        ]
+        
+        Alamofire.request(strURL, method: .post ,parameters: param ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AddTicketCommentResponse = Mapper<AddTicketCommentResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+ 
+    
+    
     
 }
-
-

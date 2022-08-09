@@ -16,7 +16,6 @@ class CheckListCell: UITableViewCell ,UITableViewDataSource,UITableViewDelegate{
     @IBOutlet weak var lblPercent: UILabel!
     @IBOutlet weak var Progress: UIProgressView!
     @IBOutlet weak var viewBack: UIView!
-    @IBOutlet weak var dropImg: UIButton!
     
     
     @IBOutlet weak var addItemBtn: UIButton!

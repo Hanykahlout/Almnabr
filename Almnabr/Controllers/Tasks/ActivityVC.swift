@@ -295,20 +295,9 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         cell.lblUserName.text = obj.emp_name
         cell.lblComment.text = obj.notes_history
         cell.setUpTable()
-        cell.btnView_reply.titleLabel?.font = .kufiRegularFont(ofSize: 11)
         cell.dropView.isHidden = obj.isHidden
-        if obj.isHidden {
-            cell.btnView_reply.setUnderLine(stringValue: "view replys", withTextSize: 12)
-        }else{
-            cell.btnView_reply.setUnderLine(stringValue: "Hide replys", withTextSize: 12)
-
-        }
-        if obj.reply.count == 0{
-            cell.btnView_reply.isHidden = true
-        }else{
-            cell.btnView_reply.isHidden = false
-        }
-        cell.btnViewReplyAction = {
+        
+        cell.btnViewReplyAction = { isHidden in
 //            let obj = arr_comments[indexPath.item]
             obj.isHidden = !(obj.isHidden )
             self.tableActivity.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
@@ -316,10 +305,13 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
         }
         
         self.viewWillLayoutSubviews()
-        cell.btnDeleteReplyAction = { comment_id in
+        
+        cell.btnDeleteReplyAction = { comment_id , index in
             self.delete_comment(comment_id: comment_id)
         }
-        cell.btnEditReplyAction = {  comment_id , comment  in
+        
+        
+        cell.btnEditReplyAction = {  comment_id , comment , replyIndex in
             
             let vc:AddCommentVC  = AppDelegate.TicketSB.instanceVC()
             

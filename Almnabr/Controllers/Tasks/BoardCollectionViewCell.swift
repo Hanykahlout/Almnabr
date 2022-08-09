@@ -23,7 +23,7 @@ class BoardCollectionViewCell: UICollectionViewCell, UIContextMenuInteractionDel
     
     @IBOutlet weak var addView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    weak var parentVC: TicketCollectionViewController?
+    weak var parentVC: TicketViewController?
     var board: Board?
     var arr_task:[TaskObj] = []
     var task_id:String = ""

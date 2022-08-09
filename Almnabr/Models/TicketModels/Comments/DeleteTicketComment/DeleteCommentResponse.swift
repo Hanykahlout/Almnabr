@@ -14,14 +14,10 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Edit : Mappable {
+struct DeleteCommentResponse : Mappable {
 	var status : Bool?
-    var message: String?
-	var msg : String?
-    var status_code : Int?
+	var message : Message?
     var error: String?
-    var otp_need: Int?
-    
     
 	init?(map: Map) {
 
@@ -30,11 +26,8 @@ struct Edit : Mappable {
 	mutating func mapping(map: Map) {
 
 		status <- map["status"]
-		msg <- map["msg"]
-        message <- map["message"]
-        status_code <- map["status_code"]
+		message <- map["message"]
         error <- map["error"]
-        otp_need <- map["otp_need"]
 	}
 
 }

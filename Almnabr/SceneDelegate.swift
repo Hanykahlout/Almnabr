@@ -12,6 +12,7 @@ import LocalAuthentication
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
+    
     func get_theme(){
         
         APIManager.sendRequestGetAuthTheme(urlString: "gettheme" ) { (response) in
@@ -27,10 +28,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 HelperClassSwift.acolor = "#1992bc"
                 HelperClassSwift.bcolor = "#000000"
             }
-            
-            
         }
     }
+    
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
@@ -40,19 +40,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             delegate.window = self.window
         }
         
-        get_theme()
+        //        get_theme()
         HelperClassSwift.IsLoggedOut = false
+        print("TESTING-1")
         if NewSuccessModel.getLoginSuccessToken() != nil {
+            print("TESTING0")
             CheckActiveTime()
             //NewSuccessModel.removeLoginSuccessToken()
         }else{
             GoToSignIn()
         }
         
-        
-        
-        
     }
+    
     
     func GoToHome(){
         
@@ -97,6 +97,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func CheckActiveTime(){
         
         guard let lastOpened = UserDefaults.standard.object(forKey: "LastOpened") as? Date else {
+            print("TESTING-2")
             GoToHome()
             return
         }
@@ -104,13 +105,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         print(elapsed)
         
         if elapsed.minute! > 30 {
-            
+            print("TESTING-3")
             let context = LAContext()
             var error: NSError? = nil
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
                 let reason = "Please authorize with touch id "
+                print("TESTING1")
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason){ success, error in
-                    
+                    print("TESTING2")
                     if success {
                         
                         // Move to the main thread because a state update triggers UI changes.
@@ -123,15 +125,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                 self.GoToSignIn()
                                 print("nil")
                             }
-                            
                         }
-                    
                 }
             }else{
-                print("can not use ")
+                GoToHome()
                 // Auth_User.topVC()!.showAMessage(withTitle: "Unavailabel", message: "You Can't use This Feature")
             }
         }else{
+            print("TESTING-4")
             GoToHome()
         }
         

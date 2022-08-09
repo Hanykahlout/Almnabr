@@ -129,9 +129,12 @@
 		3F977EFD2887F60F0062FA47 /* Employee_info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F977EF92887F60F0062FA47 /* Employee_info.swift */; };
 		3F977EFE2887F60F0062FA47 /* Contract_vacation_info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F977EFA2887F60F0062FA47 /* Contract_vacation_info.swift */; };
 		3F977EFF2887F60F0062FA47 /* EmpInfoResposne.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F977EFB2887F60F0062FA47 /* EmpInfoResposne.swift */; };
+		3F97CD99289A600400D6E8CC /* EditTicketCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F97CD97289A600400D6E8CC /* EditTicketCommentVC.swift */; };
+		3F97CD9A289A600400D6E8CC /* EditTicketCommentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F97CD98289A600400D6E8CC /* EditTicketCommentVC.xib */; };
 		3F9ADAFB285F143600D68791 /* InsuranceDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9ADAF9285F143600D68791 /* InsuranceDetailsTableViewCell.swift */; };
 		3F9ADB00285F1C9B00D68791 /* InsuranceRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9ADAFE285F1C9B00D68791 /* InsuranceRecords.swift */; };
 		3F9ADB01285F1C9B00D68791 /* InsuranceGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9ADAFF285F1C9B00D68791 /* InsuranceGetResponse.swift */; };
+		3F9B665128969679000B6336 /* TicketViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B665028969679000B6336 /* TicketViewController.swift */; };
 		3F9C9E812859D39900C5322B /* LicencesGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C9E802859D39900C5322B /* LicencesGetResponse.swift */; };
 		3F9C9E842859E62E00C5322B /* ContactDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C9E822859E62E00C5322B /* ContactDetailsTableViewCell.swift */; };
 		3F9C9E892859F1C200C5322B /* ContactRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9C9E872859F1C200C5322B /* ContactRecords.swift */; };
@@ -166,10 +169,15 @@
 		3FAAB63E28609025007B9150 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB63C28609024007B9150 /* NoteTableViewCell.swift */; };
 		3FAAB6432860937B007B9150 /* NoteRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB6412860937B007B9150 /* NoteRecords.swift */; };
 		3FAAB6442860937B007B9150 /* NotesGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB6422860937B007B9150 /* NotesGetResponse.swift */; };
+		3FAB09D02896E044004FAA61 /* CommentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB09CF2896E044004FAA61 /* CommentsViewController.swift */; };
 		3FAD7A232850D3660063B15E /* GroupNameResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD7A212850D3650063B15E /* GroupNameResponse.swift */; };
 		3FAD7A252850F5E20063B15E /* BanksResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAD7A242850F5E20063B15E /* BanksResponse.swift */; };
 		3FAF671D284CB8CD00BEF1D6 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAF671B284CB8CD00BEF1D6 /* EmployeeTableViewCell.swift */; };
 		3FB03C8D2848B2F2003859E1 /* Settings2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB03C8B2848B2F2003859E1 /* Settings2TableViewCell.swift */; };
+		3FB1C530289983C200E6EDB1 /* AddTicketCommentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB1C52E289983C200E6EDB1 /* AddTicketCommentResponse.swift */; };
+		3FB1C531289983C200E6EDB1 /* Return_row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB1C52F289983C200E6EDB1 /* Return_row.swift */; };
+		3FB1C5352899892700E6EDB1 /* DeleteCommentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB1C5332899892700E6EDB1 /* DeleteCommentResponse.swift */; };
+		3FB1C5362899892700E6EDB1 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB1C5342899892700E6EDB1 /* Message.swift */; };
 		3FB305AB2868447200CAC16F /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB305A92868447200CAC16F /* UserTableViewCell.swift */; };
 		3FB305AF28684C6A00CAC16F /* ModuleUersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB305AD28684C6A00CAC16F /* ModuleUersResponse.swift */; };
 		3FB305B028684C6A00CAC16F /* ModuleUersRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB305AE28684C6A00CAC16F /* ModuleUersRecords.swift */; };
@@ -350,6 +358,13 @@
 		3FD3F55E2858C25A007CC5BB /* JopDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3F55C2858C25A007CC5BB /* JopDetailsResponse.swift */; };
 		3FD3F55F2858C25A007CC5BB /* JopDetailsRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3F55D2858C25A007CC5BB /* JopDetailsRecords.swift */; };
 		3FD73DA8285F514600AC3507 /* AddInsuranceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD73DA6285F514600AC3507 /* AddInsuranceTableViewCell.swift */; };
+		3FF396822897BED800E1322D /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF396802897BED800E1322D /* CommentTableViewCell.swift */; };
+		3FF396832897BED800E1322D /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF396812897BED800E1322D /* CommentTableViewCell.xib */; };
+		3FF396862898228B00E1322D /* ReplyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF396842898228B00E1322D /* ReplyCommentTableViewCell.swift */; };
+		3FF396872898228B00E1322D /* ReplyCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF396852898228B00E1322D /* ReplyCommentTableViewCell.xib */; };
+		3FF3968C28995C3B00E1322D /* CommentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3968A28995C3B00E1322D /* CommentsResponse.swift */; };
+		3FF3968D28995C3B00E1322D /* CommentDataResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3968B28995C3B00E1322D /* CommentDataResponse.swift */; };
+		3FF3968F28995D7100E1322D /* CommentRepliesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF3968E28995D7100E1322D /* CommentRepliesResponse.swift */; };
 		3FF6EDA7284B4DE00003E6F4 /* UpdateSettingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6EDA6284B4DDF0003E6F4 /* UpdateSettingResponse.swift */; };
 		3FF6EDB5284B72450003E6F4 /* UsersCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF6EDB3284B72450003E6F4 /* UsersCollectionViewCell.swift */; };
 		3FF6EDB6284B72450003E6F4 /* UsersCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6EDB4284B72450003E6F4 /* UsersCollectionViewCell.xib */; };
@@ -777,9 +792,12 @@
 		3F977EF92887F60F0062FA47 /* Employee_info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Employee_info.swift; sourceTree = "<group>"; };
 		3F977EFA2887F60F0062FA47 /* Contract_vacation_info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contract_vacation_info.swift; sourceTree = "<group>"; };
 		3F977EFB2887F60F0062FA47 /* EmpInfoResposne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmpInfoResposne.swift; sourceTree = "<group>"; };
+		3F97CD97289A600400D6E8CC /* EditTicketCommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTicketCommentVC.swift; sourceTree = "<group>"; };
+		3F97CD98289A600400D6E8CC /* EditTicketCommentVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTicketCommentVC.xib; sourceTree = "<group>"; };
 		3F9ADAF9285F143600D68791 /* InsuranceDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsuranceDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		3F9ADAFE285F1C9B00D68791 /* InsuranceRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsuranceRecords.swift; sourceTree = "<group>"; };
 		3F9ADAFF285F1C9B00D68791 /* InsuranceGetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsuranceGetResponse.swift; sourceTree = "<group>"; };
+		3F9B665028969679000B6336 /* TicketViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketViewController.swift; sourceTree = "<group>"; };
 		3F9C9E802859D39900C5322B /* LicencesGetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicencesGetResponse.swift; sourceTree = "<group>"; };
 		3F9C9E822859E62E00C5322B /* ContactDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		3F9C9E872859F1C200C5322B /* ContactRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactRecords.swift; sourceTree = "<group>"; };
@@ -814,10 +832,15 @@
 		3FAAB63C28609024007B9150 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		3FAAB6412860937B007B9150 /* NoteRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteRecords.swift; sourceTree = "<group>"; };
 		3FAAB6422860937B007B9150 /* NotesGetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesGetResponse.swift; sourceTree = "<group>"; };
+		3FAB09CF2896E044004FAA61 /* CommentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewController.swift; sourceTree = "<group>"; };
 		3FAD7A212850D3650063B15E /* GroupNameResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupNameResponse.swift; sourceTree = "<group>"; };
 		3FAD7A242850F5E20063B15E /* BanksResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BanksResponse.swift; sourceTree = "<group>"; };
 		3FAF671B284CB8CD00BEF1D6 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
 		3FB03C8B2848B2F2003859E1 /* Settings2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings2TableViewCell.swift; sourceTree = "<group>"; };
+		3FB1C52E289983C200E6EDB1 /* AddTicketCommentResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTicketCommentResponse.swift; sourceTree = "<group>"; };
+		3FB1C52F289983C200E6EDB1 /* Return_row.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Return_row.swift; sourceTree = "<group>"; };
+		3FB1C5332899892700E6EDB1 /* DeleteCommentResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteCommentResponse.swift; sourceTree = "<group>"; };
+		3FB1C5342899892700E6EDB1 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3FB305A92868447200CAC16F /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		3FB305AD28684C6A00CAC16F /* ModuleUersResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleUersResponse.swift; sourceTree = "<group>"; };
 		3FB305AE28684C6A00CAC16F /* ModuleUersRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModuleUersRecords.swift; sourceTree = "<group>"; };
@@ -1003,6 +1026,13 @@
 		3FD3F55C2858C25A007CC5BB /* JopDetailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JopDetailsResponse.swift; sourceTree = "<group>"; };
 		3FD3F55D2858C25A007CC5BB /* JopDetailsRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JopDetailsRecords.swift; sourceTree = "<group>"; };
 		3FD73DA6285F514600AC3507 /* AddInsuranceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddInsuranceTableViewCell.swift; sourceTree = "<group>"; };
+		3FF396802897BED800E1322D /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		3FF396812897BED800E1322D /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
+		3FF396842898228B00E1322D /* ReplyCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCommentTableViewCell.swift; sourceTree = "<group>"; };
+		3FF396852898228B00E1322D /* ReplyCommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReplyCommentTableViewCell.xib; sourceTree = "<group>"; };
+		3FF3968A28995C3B00E1322D /* CommentsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsResponse.swift; sourceTree = "<group>"; };
+		3FF3968B28995C3B00E1322D /* CommentDataResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentDataResponse.swift; sourceTree = "<group>"; };
+		3FF3968E28995D7100E1322D /* CommentRepliesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentRepliesResponse.swift; sourceTree = "<group>"; };
 		3FF6EDA6284B4DDF0003E6F4 /* UpdateSettingResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateSettingResponse.swift; sourceTree = "<group>"; };
 		3FF6EDB3284B72450003E6F4 /* UsersCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersCollectionViewCell.swift; sourceTree = "<group>"; };
 		3FF6EDB4284B72450003E6F4 /* UsersCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UsersCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1484,6 +1514,15 @@
 			path = EmpInfoResponse;
 			sourceTree = "<group>";
 		};
+		3F97CD96289A5FE500D6E8CC /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				3F97CD97289A600400D6E8CC /* EditTicketCommentVC.swift */,
+				3F97CD98289A600400D6E8CC /* EditTicketCommentVC.xib */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
 		3F9ADAFD285F1C8F00D68791 /* Insurance Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -1599,6 +1638,24 @@
 			path = AllEmployeesCells;
 			sourceTree = "<group>";
 		};
+		3FB1C52D289983BB00E6EDB1 /* AddTicketComment */ = {
+			isa = PBXGroup;
+			children = (
+				3FB1C52E289983C200E6EDB1 /* AddTicketCommentResponse.swift */,
+				3FB1C52F289983C200E6EDB1 /* Return_row.swift */,
+			);
+			path = AddTicketComment;
+			sourceTree = "<group>";
+		};
+		3FB1C5322899891B00E6EDB1 /* DeleteTicketComment */ = {
+			isa = PBXGroup;
+			children = (
+				3FB1C5332899892700E6EDB1 /* DeleteCommentResponse.swift */,
+				3FB1C5342899892700E6EDB1 /* Message.swift */,
+			);
+			path = DeleteTicketComment;
+			sourceTree = "<group>";
+		};
 		3FB305BA2868700E00CAC16F /* ViewOutgoingModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1656,6 +1713,7 @@
 		3FD038CF2874377000BB13C7 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				3F97CD96289A5FE500D6E8CC /* Tasks */,
 				3F5308312892876400AE7D2A /* SendCodeVC */,
 				3F31ADEB288D36A500E2D8D6 /* Transaction_VactionsVC */,
 				3F1F4041287E0EBD00F919F0 /* QRCode */,
@@ -2111,6 +2169,26 @@
 			path = "All Employee Response";
 			sourceTree = "<group>";
 		};
+		3FF3968828995C2600E1322D /* TicketModels */ = {
+			isa = PBXGroup;
+			children = (
+				3FF3968928995C3100E1322D /* Comments */,
+			);
+			path = TicketModels;
+			sourceTree = "<group>";
+		};
+		3FF3968928995C3100E1322D /* Comments */ = {
+			isa = PBXGroup;
+			children = (
+				3FB1C5322899891B00E6EDB1 /* DeleteTicketComment */,
+				3FB1C52D289983BB00E6EDB1 /* AddTicketComment */,
+				3FF3968E28995D7100E1322D /* CommentRepliesResponse.swift */,
+				3FF3968B28995C3B00E1322D /* CommentDataResponse.swift */,
+				3FF3968A28995C3B00E1322D /* CommentsResponse.swift */,
+			);
+			path = Comments;
+			sourceTree = "<group>";
+		};
 		3FFC4D862885B23500233456 /* ProfileVCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -2254,6 +2332,7 @@
 		FA03245B26FB9E0300372EA6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3FF3968828995C2600E1322D /* TicketModels */,
 				3F7462962886A2FB00C19474 /* Vactions Models */,
 				3FD3F5612858C2A0007CC5BB /* EditEmpResponse */,
 				3F48C537285883A0004D33F8 /* ViewEmpResponse */,
@@ -2461,6 +2540,7 @@
 				FA85D026280E1D790080A0EA /* AddTicketVC.swift */,
 				FA85D02828104DE60080A0EA /* TaskFilterVC.swift */,
 				FA9DF8D62815979A0015D492 /* TicketCollectionViewController.swift */,
+				3F9B665028969679000B6336 /* TicketViewController.swift */,
 				FA9DF8D8281597FA0015D492 /* BoardCollectionViewCell.swift */,
 				FA5C976E2816B40200A2AA5A /* TaskAttachmentVC.swift */,
 				FA5C977428195F2500A2AA5A /* TaskHistoryVC.swift */,
@@ -2474,6 +2554,7 @@
 				FA48C311286AF80B006B8130 /* AddPointVC.swift */,
 				FA6B77C3286F01ED00A8EDC0 /* AddCommentVC.swift */,
 				FA6B77C5287049F800A8EDC0 /* ActivityVC.swift */,
+				3FAB09CF2896E044004FAA61 /* CommentsViewController.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -2501,6 +2582,10 @@
 				FAF76237283051A5000DEAFE /* SubTaskTVCell.xib */,
 				3FD03A5928743AE100BB13C7 /* CommentRepltTableViewCell.swift */,
 				3FD03A5A28743AE100BB13C7 /* CommentRepltTableViewCell.xib */,
+				3FF396802897BED800E1322D /* CommentTableViewCell.swift */,
+				3FF396812897BED800E1322D /* CommentTableViewCell.xib */,
+				3FF396842898228B00E1322D /* ReplyCommentTableViewCell.swift */,
+				3FF396852898228B00E1322D /* ReplyCommentTableViewCell.xib */,
 			);
 			name = Task;
 			sourceTree = "<group>";
@@ -2974,6 +3059,7 @@
 				3F9040D5286CB156008D85B8 /* NoteTableViewCell.xib in Resources */,
 				3FA9CFB8288D4F8600AD5BE3 /* VactionDetailsViewController.xib in Resources */,
 				3FD03A24287437B000BB13C7 /* AddInsuranceViewController.xib in Resources */,
+				3F97CD9A289A600400D6E8CC /* EditTicketCommentVC.xib in Resources */,
 				FA530A41270CEC6D0071CDC8 /* CustomHeaderView.xib in Resources */,
 				3F07C084286D91EC00C2CDF6 /* profileAttachmentsTVCell.xib in Resources */,
 				3F07C057286D8D5E00C2CDF6 /* UpdateSettingsTableViewCell.xib in Resources */,
@@ -3005,6 +3091,7 @@
 				FA9FB0A727163F0D0037871C /* ServicesCVCell.xib in Resources */,
 				FAF76239283051A5000DEAFE /* SubTaskTVCell.xib in Resources */,
 				3F07C07F286D918E00C2CDF6 /* ProfileNotesTVCell.xib in Resources */,
+				3FF396872898228B00E1322D /* ReplyCommentTableViewCell.xib in Resources */,
 				3FD039EF287437B000BB13C7 /* OutgoingAttachViewController.xib in Resources */,
 				FA5C977328170FA200A2AA5A /* TaskTVCell.xib in Resources */,
 				3FD03A5F28743CAA00BB13C7 /* GoogleService-Info.plist in Resources */,
@@ -3019,6 +3106,7 @@
 				3FD03A712874485800BB13C7 /* Ticket.storyboard in Resources */,
 				3F07C089286D925F00C2CDF6 /* ModulesTVCell.xib in Resources */,
 				3FD039DA287437B000BB13C7 /* ViewEmpBankDetailsVC.strings in Resources */,
+				3FF396832897BED800E1322D /* CommentTableViewCell.xib in Resources */,
 				FAC32FB72708C91D0046A0F6 /* TransactionTVCell.xib in Resources */,
 				3F9040FD286CB4BF008D85B8 /* SettingsTableViewCell.xib in Resources */,
 				3FD03A09287437B000BB13C7 /* ViewEmpJobDetailsVC.strings in Resources */,
@@ -3220,6 +3308,7 @@
 				FA85D024280D94500080A0EA /* TicketTVCell.swift in Sources */,
 				FAAB76DF270B96DB00731505 /* ApproveTransactionVC.swift in Sources */,
 				3FA8CB6C2848BCE200434CE4 /* SettingsData.swift in Sources */,
+				3FB1C5352899892700E6EDB1 /* DeleteCommentResponse.swift in Sources */,
 				FA9768B227353DDD000A3576 /* CollectionViewCell.swift in Sources */,
 				FA9FB0A0271447EA0037871C /* ProjectDetailsVC.swift in Sources */,
 				FA8A75A6273DB1C1005A2F29 /* FormVersionCell.swift in Sources */,
@@ -3234,6 +3323,7 @@
 				3F74629E2886BF9300C19474 /* Finance.swift in Sources */,
 				FA0324BB26FBCBED00372EA6 /* Extensions.swift in Sources */,
 				3F48C53E285883AF004D33F8 /* Attachments.swift in Sources */,
+				3F97CD99289A600400D6E8CC /* EditTicketCommentVC.swift in Sources */,
 				3FA9CFBB288D563100AD5BE3 /* VactionPageViewController.swift in Sources */,
 				FA1D64AF2777749D00FA7735 /* NotifiRoute.swift in Sources */,
 				3F935E54285A232A00D7B779 /* EducationGetResponse.swift in Sources */,
@@ -3291,6 +3381,7 @@
 				3F530834289287AB00AE7D2A /* SendSignInCodeVC.swift in Sources */,
 				3FD039DE287437B000BB13C7 /* ViewEmpPassportDetailsVC.swift in Sources */,
 				FA95FD13275EFE6A00DE7854 /* OwnersRepresentativeVC.swift in Sources */,
+				3F9B665128969679000B6336 /* TicketViewController.swift in Sources */,
 				3F3FEF282864735400F57578 /* CommunicationSubmitResponse.swift in Sources */,
 				FA0324C326FBD5D200372EA6 /* UIViewController.swift in Sources */,
 				3F7462A02886BF9300C19474 /* SelectionVactionResult.swift in Sources */,
@@ -3355,6 +3446,7 @@
 				3F1F4048287E0F5900F919F0 /* QRScannerViewController.swift in Sources */,
 				FAF9D43E278DE050002D8AEF /* ProjectRequestCell.swift in Sources */,
 				FA5CB0F927CFBA6E0023A372 /* RequirementsVC.swift in Sources */,
+				3FF3968F28995D7100E1322D /* CommentRepliesResponse.swift in Sources */,
 				3FAAB6442860937B007B9150 /* NotesGetResponse.swift in Sources */,
 				3FB726BC2864BAD500684C94 /* GetModulsResponse.swift in Sources */,
 				FA44341727626BA300DF6A9B /* SelectesUnits&levelsVC.swift in Sources */,
@@ -3364,6 +3456,7 @@
 				3FD03A3B287437B000BB13C7 /* ContactDetailsViewController.swift in Sources */,
 				3FAF671D284CB8CD00BEF1D6 /* EmployeeTableViewCell.swift in Sources */,
 				3FAAB6432860937B007B9150 /* NoteRecords.swift in Sources */,
+				3FF396862898228B00E1322D /* ReplyCommentTableViewCell.swift in Sources */,
 				3FD03A49287437B000BB13C7 /* SettingsPermissionVC.swift in Sources */,
 				3FD03A22287437B000BB13C7 /* UpdateInsuranceViewController.swift in Sources */,
 				3FD3F55F2858C25A007CC5BB /* JopDetailsRecords.swift in Sources */,
@@ -3406,6 +3499,7 @@
 				FA44341527623F8D00DF6A9B /* FormsAttachmentsVC.swift in Sources */,
 				FA5CB10727D112590023A372 /* unitCVCell.swift in Sources */,
 				3F74629A2886A30F00C19474 /* VactionTypesRecords.swift in Sources */,
+				3FB1C530289983C200E6EDB1 /* AddTicketCommentResponse.swift in Sources */,
 				3FD039EA287437B000BB13C7 /* PresonDetailsViewController.swift in Sources */,
 				3FD03A1E287437B000BB13C7 /* ViewEmployeeDetailsVC.swift in Sources */,
 				FA5C977528195F2500A2AA5A /* TaskHistoryVC.swift in Sources */,
@@ -3418,7 +3512,9 @@
 				3FB305CF2868702500CAC16F /* TransactionResponse.swift in Sources */,
 				FA95FD07275EFB6F00DE7854 /* TransactionFormPageaVC.swift in Sources */,
 				3F9C9E812859D39900C5322B /* LicencesGetResponse.swift in Sources */,
+				3FF396822897BED800E1322D /* CommentTableViewCell.swift in Sources */,
 				3F397D8B2860CD4400A7DAB4 /* AttachmentTypeResponse.swift in Sources */,
+				3FB1C5362899892700E6EDB1 /* Message.swift in Sources */,
 				3FAA84E3288E904D003A437E /* Transactions_buttonsVD.swift in Sources */,
 				FA5CB0FE27D028AE0023A372 /* LabelCell.swift in Sources */,
 				3F397D812860BE6300A7DAB4 /* AttachmentTableViewCell.swift in Sources */,
@@ -3456,6 +3552,7 @@
 				FA10D1AC275BCA2600F3716B /* TransactionFormDetailsVC.swift in Sources */,
 				FA4975B027936BFC00891C9F /* SortVC.swift in Sources */,
 				3F977EFC2887F60F0062FA47 /* EmpInfoResult.swift in Sources */,
+				3FAB09D02896E044004FAA61 /* CommentsViewController.swift in Sources */,
 				FA0647A52851DBD30049287B /* AddAttachmentsVC.swift in Sources */,
 				FA0324DF2700747A00372EA6 /* ForgetPasswordVC.swift in Sources */,
 				FA7F941727D782E900E03A34 /* ApprovalTVCell.swift in Sources */,
@@ -3486,12 +3583,14 @@
 				FA6B77C6287049F800A8EDC0 /* ActivityVC.swift in Sources */,
 				FA658B25274404DA001FC641 /* AttachmentsCell.swift in Sources */,
 				FA0324E1270113F300372EA6 /* MenuCell.swift in Sources */,
+				3FF3968C28995C3B00E1322D /* CommentsResponse.swift in Sources */,
 				FA9E7D8D270F39DC003A1D16 /* ApprovalTransactionCell.swift in Sources */,
 				3FAD7A252850F5E20063B15E /* BanksResponse.swift in Sources */,
 				3F9ADB00285F1C9B00D68791 /* InsuranceRecords.swift in Sources */,
 				3F645ADF2875D86E00720E76 /* SocketIOController.swift in Sources */,
 				3FAA84DA288E904D003A437E /* Form_hrv1_attachments.swift in Sources */,
 				FABDBA9227F476B8003961FC /* EducationDetailsVC.swift in Sources */,
+				3FB1C531289983C200E6EDB1 /* Return_row.swift in Sources */,
 				3FC82A4C284CD863005BCB46 /* Edit.swift in Sources */,
 				3FD03A3D287437B000BB13C7 /* InsuranceDetailsViewController.swift in Sources */,
 				3FC82A4E284CD863005BCB46 /* AllEmployeeResponse.swift in Sources */,
@@ -3582,6 +3681,7 @@
 				FA9E7D84270E4620003A1D16 /* GridLayout.swift in Sources */,
 				3FD03A29287437B000BB13C7 /* ViewLangCalenderVC.swift in Sources */,
 				3F935E4F285A1F8800D7B779 /* EducationDetailsTableViewCell.swift in Sources */,
+				3FF3968D28995C3B00E1322D /* CommentDataResponse.swift in Sources */,
 				FABDBA9827F476FF003961FC /* VacationFormVC.swift in Sources */,
 				3FAA84D8288E904D003A437E /* Transactions_personsVD.swift in Sources */,
 				FAF7623428300262000DEAFE /* CheckListCell.swift in Sources */,
@@ -4808,7 +4908,7 @@
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -4837,7 +4937,7 @@
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 28;
+				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

@@ -45,7 +45,7 @@ class AddPointVC: UIViewController, UINavigationControllerDelegate {
     @IBOutlet var Viewcollection_user: UIView!
     @IBOutlet var collection_user: UICollectionView!
     
-    
+    private let dropDown = DropDown()
     var delegate : (() -> Void)?
     var point_id:String = ""
     
@@ -80,7 +80,7 @@ class AddPointVC: UIViewController, UINavigationControllerDelegate {
         createDatePicker()
         createEndDatePicker()
         configNavigation()
-        
+        drop_userList()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -185,6 +185,8 @@ class AddPointVC: UIViewController, UINavigationControllerDelegate {
        
         table.isHidden = true
         
+        self.tfUsers.addTarget(self, action: #selector(userSearchAction), for: .editingChanged)
+        
     }
     
     func createDatePicker(){
@@ -199,6 +201,12 @@ class AddPointVC: UIViewController, UINavigationControllerDelegate {
         tfStartDate.inputAccessoryView = toolbar
         tfStartDate.inputView = datePicker
       }
+    
+    
+    
+    @objc private func userSearchAction(){
+        self.get_user(search_key: tfUsers.text!)
+    }
     
     
     @objc func donePressed(){
@@ -239,10 +247,9 @@ class AddPointVC: UIViewController, UINavigationControllerDelegate {
     
     func get_user(search_key:String){
 
-        var param :[String:Any] = [:]
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
-            
+        APIManager.searchForUser(search_Key: search_key ) { (response) in
+
             let status = response["status"] as? Bool
             if status == true{
                 self.arr_user = []
@@ -253,7 +260,17 @@ class AddPointVC: UIViewController, UINavigationControllerDelegate {
                         let obj = SupplierObj.init(dict!)
                         self.arr_user.append(obj)
                         self.arr_lbluser.append(obj.label)
-                        self.drop_userList()
+                        
+                        if self.arr_user.count == 0 {
+                            self.dropDown.dataSource = self.arr_NoData
+                            self.dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                        }else{
+                            self.dropDown.textColor = #colorLiteral(red: 0.1878142953, green: 0.1878142953, blue: 0.1878142953, alpha: 1)
+                            self.dropDown.dataSource = self.arr_lbluser
+                        }
+                        
+                        self.dropDown.show()
+                        
                         
                     }
                     self.hideLoadingActivity()
@@ -268,38 +285,25 @@ class AddPointVC: UIViewController, UINavigationControllerDelegate {
     
     
     func drop_userList(){
-        let dropDown = DropDown()
         
-            if self.arr_user.count == 0 {
-                dropDown.dataSource = self.arr_NoData
-                dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                   // self.imgDropMaterial.image = dropDownmage
+        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            if item == self.arr_lbluser[index] {
+                self.tfUsers.text = ""
+                let object =  self.arr_user[index]
+                let has_object = arr_selected_user.contains(where: { $0.label == item })
+                if has_object == false{
+                    self.arr_selected_user.append(object)
+                    self.Viewcollection_user.isHidden = false
+                    self.collection_user.reloadData()
                 }
-                dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-            }else{
-                
-                dropDown.textColor = #colorLiteral(red: 0.1878142953, green: 0.1878142953, blue: 0.1878142953, alpha: 1)
-                dropDown.dataSource = self.arr_lbluser
-                dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-                    
-                    if item == self.arr_lbluser[index] {
-                        let object =  self.arr_user[index]
-                        let has_object = arr_selected_user.contains(where: { $0.label == item })
-                        if has_object == false{
-                            self.arr_selected_user.append(object)
-                            self.Viewcollection_user.isHidden = false
-                            self.collection_user.reloadData()
-                        }
-                    }
-                    
-                }
-
             }
-            dropDown.direction = .bottom
-            dropDown.anchorView = view_users
-            dropDown.bottomOffset = CGPoint(x: 0, y: view_users.bounds.height)
-            dropDown.width = view_users.bounds.width
-            dropDown.show()
+                
+        }
+    
+        dropDown.direction = .bottom
+        dropDown.anchorView = view_users
+        dropDown.bottomOffset = CGPoint(x: 0, y: view_users.bounds.height)
+        dropDown.width = view_users.bounds.width
      
     }
    
@@ -322,7 +326,6 @@ class AddPointVC: UIViewController, UINavigationControllerDelegate {
              
             }else{
                 self.hideLoadingActivity()
-              
             }
         }
     }
@@ -562,6 +565,8 @@ extension AddPointVC: UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         self.viewWillLayoutSubviews()
     }
+    
+    
 }
 
 

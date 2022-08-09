@@ -323,7 +323,6 @@ extension TicketDetailsVC: UITableViewDelegate , UITableViewDataSource{
         self.viewWillLayoutSubviews()
         
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

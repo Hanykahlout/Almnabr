@@ -15,6 +15,7 @@ class CommentRepltTableViewCell: UITableViewCell {
     @IBOutlet weak var lblComment: UILabel!
     @IBOutlet weak var imgUser: UIImageView!
     @IBOutlet weak var viewBack: UIView!
+    @IBOutlet weak var deleteEditStackView: UIStackView!
     
     var btnEditAction : (()->())?
     var btnDeleteAction : (()->())?

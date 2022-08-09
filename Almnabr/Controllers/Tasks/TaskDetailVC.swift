@@ -35,6 +35,7 @@ class TaskDetailVC: UIViewController {
     var object:TaskObj?
     var delegate : (() -> Void)?
     var task_id:String = ""
+    var ticket_id:String = ""
     var arr_statusDone :[importantObj] = []
     var arr_comments :[CommentObj] = []
     var arr_data:[PointTaskObj] = []
@@ -44,6 +45,7 @@ class TaskDetailVC: UIViewController {
         super.viewDidLoad()
         setupAddBarButtonItem()
         configNavigation()
+        addSocketObservers()
         get_data()
         get_Chicklist_data()
         get_add_task()
@@ -53,22 +55,6 @@ class TaskDetailVC: UIViewController {
         table_Activity.delegate = self
         let nib = UINib(nibName: "TaskCommentCell", bundle: nil)
         table_Activity.register(nib, forCellReuseIdentifier: "TaskCommentCell")
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.updateViewConstraints()
-//        self.tableHeight?.constant = self.table_Activity.contentSize.height
-//        self.tableChecklistHeight.constant = self.tableChecklist.contentSize.height
-//        self.scroll.contentSize = CGSize(width: self.scroll.contentSize.width, height: self.table_Activity.contentSize.height + self.tableChecklist.contentSize.height + 500)
-        
-        //        self.scroll.resiz
-        //        let contentHeight = scroll.contentSize.height
-        //        self.scroll.contentSize = contentHeight
-        //        + 400
-        //        if arr_comments.count == 0 {
-        //            self.tableHeight?.constant = 412
-        //        }else{}
-        
     }
     
     
@@ -105,14 +91,7 @@ class TaskDetailVC: UIViewController {
         tableChecklist.register(nib, forCellReuseIdentifier: "CheckListCell")
     }
     
-    //    func setupAddButtonItem() {
-    //      let DeleteButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(didTapEditButton(_:)))
-    //
-    //        let EditButton   = UIBarButtonItem(image: EditImage,  style: .plain, target: self, action: #selector(didTapEditButton(sender:)))
-    //        navigationItem.rightBarButtonItems = [EditButton]
-    //
-    //
-    //    }
+    
     
     func setupAddBarButtonItem() {
         let button = UIButton(type: .system)
@@ -239,6 +218,7 @@ class TaskDetailVC: UIViewController {
         }
     }
     
+    
     func get_comment_tasks(){
         
         self.showLoadingActivity()
@@ -267,6 +247,7 @@ class TaskDetailVC: UIViewController {
         }
         
     }
+    
     
     func get_add_task(){
         
@@ -342,8 +323,7 @@ class TaskDetailVC: UIViewController {
     
     
     
-    func delete_comment(comment_id:String){
-        
+    func delete_comment(comment_id:String,commentIndex:Int,replyIndex:Int?){
         self.showLoadingActivity()
         let param :[String:Any] = ["comment_id" : comment_id]
         
@@ -351,55 +331,30 @@ class TaskDetailVC: UIViewController {
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
-            let message = response["message"] as? String
-            if status == true{
-                self.hideLoadingActivity()
-                self.showAMessage(withTitle: "", message: message ?? "Deletion process has been successful", completion: {
-                    self.get_comment_tasks()
-                })
-            }else{
-                self.hideLoadingActivity()
-                
+            if status == false || status == nil{
+                SCLAlertView().showError("Delete Failed", subTitle: response["error"] as? String ?? "")
             }
         }
     }
     
+    
     func Add_comment(title:String){
-        
+
         self.showLoadingActivity()
-        
         let param : [String:Any] = ["task_id" : self.task_id,
                                     "notes" : title]
         APIManager.sendRequestPostAuth(urlString: "tasks/add_comment_task", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
-            //            let message = response["message"] as? String
             
-            if status == true{
-                
-                self.get_comment_tasks()
-                self.txt_comment.text = "comment".localized()
-                //                if let return_row = response["return_row"] as? [String:Any]{
-                //                    let obj = CommentObj(return_row)
-                //                    self.arr_comments.append(obj)
-                //                    self.table_Activity.reloadData()
-                //                }
-                //                    self.showAMessage(withTitle: "", message: message,  completion: {
-                //                        self.delegate!()
-                //                        self.dismiss(animated: true)
-                //                    })
-                
+            if status == false || status == nil{
+                SCLAlertView().showError("error".localized(), subTitle: response["error"] as? String ?? "Something went wrong")
             }else{
-                if let message = response["message"] as? String {
-                    self.showAMessage(withTitle: "error".localized(), message:  message)
-                }else{
-                    self.showAMessage(withTitle: "error".localized(), message:  "something went wrong")
-                }
+                self.txt_comment.text = "comment".localized()
             }
-            self.hideLoadingActivity()
-            
         }
+        
     }
     
     
@@ -422,10 +377,6 @@ class TaskDetailVC: UIViewController {
     }
     
     @IBAction func btnCheckList_Click(_ sender: Any) {
-//        let vc:CheckListVC = AppDelegate.TicketSB.instanceVC()
-//        //        vc.is_from_task = true
-//        vc.task_id = self.task_id
-//        self.navigationController?.pushViewController(vc, animated: true)
         addCheckListItem()
     }
     
@@ -445,6 +396,7 @@ class TaskDetailVC: UIViewController {
     @IBAction func btnHistory_Click(_ sender: Any) {
         let vc:TaskHistoryVC = AppDelegate.TicketSB.instanceVC()
         vc.is_from_task = true
+        vc.ticket_id = ticket_id
         vc.task_id = self.task_id
         self.navigationController?.pushViewController(vc, animated: true)
         
@@ -510,14 +462,6 @@ class TaskDetailVC: UIViewController {
         return UIMenu(title: "", children: [Reply, Edit, Delete])
     }
     
-    func getTopMostViewController() -> UIViewController? {
-        var topMostViewController = UIApplication.shared.keyWindow?.rootViewController
-        while let presentedViewController = topMostViewController?.presentedViewController {
-            topMostViewController = presentedViewController
-        }
-        return topMostViewController
-    }
-    
 }
 
 
@@ -552,17 +496,7 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
             cell.Progress.progress = value / 100.0
             
             cell.dropView.isHidden = obj.isHidden
-            if obj.isHidden {
-                
-                let img  = UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .darkGray, size: CGSize(width: 15, height: 15))
-                
-                cell.dropImg.setImage(img, for: .normal)
-            }else{
-                
-                let img  = UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .darkGray, size: CGSize(width: 15, height: 15))
-                
-                cell.dropImg.setImage(img, for: .normal)
-            }
+            
             if Auth_User.user_id == obj.user_add_id {
                 cell.deleteBtn.isHidden = false
             }else{
@@ -605,7 +539,7 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                         cell.tableHeight.constant = CGFloat(numberOfUnselectedItems * 51 )
                         obj.isUnselectedData = true
                     }
-
+                    
                     let unSelectedArr = cell.arr_data.filter({$0.is_done == "1"}).count
                     let cellHeight = CGFloat(((cell.hideSelectedItems ? unSelectedArr : cell.arr_data.count) * 51) + 45)
                     
@@ -622,59 +556,67 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
             
             let obj = arr_comments[indexPath.item]
             cell.arr_reply = obj.reply
+            cell.dropView.isHidden = obj.isHidden
+            cell.replyView.isHidden = obj.isHiddenReply
+            
+            cell.repliesButton.isHidden = cell.arr_reply.isEmpty
+            cell.editButton.isHidden = obj.emp_id != Auth_User.user_id
+            cell.deleteButton.isHidden = obj.emp_id != Auth_User.user_id
+            
+            cell.comment_id = obj.history_id
             cell.lblDate.text = obj.insert_date
             cell.lblUserName.text = obj.emp_name
             cell.lblComment.text = obj.notes_history
             cell.setUpTable()
-            cell.btnView_reply.titleLabel?.font = .kufiRegularFont(ofSize: 11)
-            cell.dropView.isHidden = obj.isHidden
-            if obj.isHidden {
-                cell.btnView_reply.setUnderLine(stringValue: "view replys", withTextSize: 12)
-            }else{
-                cell.btnView_reply.setUnderLine(stringValue: "Hide replys", withTextSize: 12)
-                
-            }
-            if obj.reply.count == 0{
-                cell.btnView_reply.isHidden = true
-            }else{
-                cell.btnView_reply.isHidden = false
-            }
-            cell.btnViewReplyAction = {
-                //            let obj = arr_comments[indexPath.item]
-                obj.isHidden = !(obj.isHidden )
-                self.table_Activity.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-                
-            }
-            //    if obj.can_delete == false{
-            //        cell.btnDelete.isHidden = true
-            //    }
+            cell.editButton.setUnderLine(stringValue: "Edit", withTextSize: 12)
+            cell.deleteButton.setUnderLine(stringValue: "Delete", withTextSize: 12)
+            cell.replyButton.setUnderLine(stringValue: "Reply", withTextSize: 12)
             
-            //    if obj.can_edit == false{
-            //        cell.btnEdit.isHidden = true
-            //    }
+            if obj.isHidden {
+                cell.repliesButton.setUnderLine(stringValue: "view replys", withTextSize: 12)
+            }else{
+                cell.repliesButton.setUnderLine(stringValue: "Hide replys", withTextSize: 12)
+            }
+            
+            cell.btnAddReply = { comment_id , note in
+                self.addReplyToComment(commentId: comment_id, note: note, index: indexPath.row)
+            }
+            
+            cell.btnViewReplyAction = { isHidden in
+                obj.isHidden = isHidden
+                self.table_Activity.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: UITableView.RowAnimation.automatic)
+            }
+            
+            
+            cell.reloadReplyView = { isHidden  in
+                obj.isHiddenReply = isHidden
+                self.table_Activity.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
+            }
+                        
+            cell.btnDeleteReplyAction = { comment_id ,replyIndex in
+                self.delete_comment(comment_id: comment_id,commentIndex:indexPath.row,replyIndex:replyIndex)
+            }
+            
+            cell.btnEditReplyAction = {  comment_id , comment , replyIndex in
+                
+                let vc = EditTicketCommentVC()
+                vc.commentId = comment_id
+                vc.commentIndex = indexPath.row
+                vc.reply = comment
+                vc.replyIndex = replyIndex
+                vc.isReply = true
+                let nav = UINavigationController(rootViewController: vc)
+                nav.setNavigationBarHidden(true, animated: false)
+                nav.modalPresentationStyle = .overCurrentContext
+                self.navigationController?.present(nav, animated: true)
+            }
             
             self.viewWillLayoutSubviews()
-            cell.btnDeleteReplyAction = { comment_id in
-                self.delete_comment(comment_id: comment_id)
-            }
-            cell.btnEditReplyAction = {  comment_id , comment  in
-                
-                let vc:AddCommentVC  = AppDelegate.TicketSB.instanceVC()
-                
-                vc.isModalInPresentation = true
-                vc.modalPresentationStyle = .overFullScreen
-                vc.definesPresentationContext = true
-                vc.comment_id = comment_id
-                vc.comment =  comment
-                vc.delegate = {
-                    self.get_comment_tasks()
-                }
-                self.present(vc, animated: true, completion: nil)
-                
-            }
+            
             return cell
         }
     }
+    
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         self.viewWillLayoutSubviews()
@@ -688,10 +630,10 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
         }
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == tableChecklist{
-            
-            //        guard let expandableItem = arr_data[indexPath.item] else {return}
+
             let obj = arr_data[indexPath.item]
             obj.isHidden = !(obj.isHidden )
             let cell = tableChecklist.cellForRow(at: indexPath) as! CheckListCell
@@ -701,28 +643,10 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
             
             tableChecklistHeight.constant = obj.isHidden ? tableHeight - cellHeight : tableHeight + cellHeight
             
-            
             tableChecklist.reloadRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
-           
-            //        let vc:SubTaskListVC = AppDelegate.TicketSB.instanceVC()
-            //        vc.str_title = obj.title
-            //        vc.task_id = self.task_id
-            //        vc.arr_data = obj.sub_checks
-            //        self.navigationController?.pushViewController(vc, animated: true)
             
         }else{
             let obj = arr_comments[indexPath.item]
-            //        cell.btn_changeStatus.menu = self.DoneMenu()
-            //        cell.btn_changeStatus.showsMenuAsPrimaryAction = true
-            // create the alert
-            //                let alert = UIAlertController(title: "", message: "Choose Action", preferredStyle: UIAlertController.Style.alert)
-            //
-            //        // add the actions (buttons)
-            //        alert.addAction(UIAlertAction(title: "Reply", style: UIAlertAction.Style.default, handler: nil))
-            //        alert.addAction(UIAlertAction(title: "Edit", style: UIAlertAction.Style.default, handler: nil))
-            //        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: nil))
-            //        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-            
             
             // Create you actionsheet - preferredStyle: .actionSheet
             let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -736,7 +660,6 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                 vc.modalPresentationStyle = .overFullScreen
                 vc.definesPresentationContext = true
                 vc.comment_id = obj.history_id
-                //            vc.comment =  obj.notes_history
                 vc.header = "Add Reply".localized()
                 vc.title_str = "reply".localized()
                 vc.type = "reply"
@@ -747,6 +670,7 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                 self.present(vc, animated: true, completion: nil)
                 
             }
+            
             let EditAction = UIAlertAction(title: "Edit", style: .default) { (action) in
                 
                 let vc:AddCommentVC  = AppDelegate.TicketSB.instanceVC()
@@ -760,11 +684,11 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                     self.get_comment_tasks()
                 }
                 self.present(vc, animated: true, completion: nil)
-                
             }
             
+            
             let DeleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-                self.delete_comment(comment_id: obj.history_id)
+//                self.delete_comment(comment_id: obj.history_id,commentIndex: )
             }
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
@@ -790,37 +714,22 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                 top_vc.present(actionSheet, animated: true, completion: nil)
             })
             
-            //        guard didLoadHome else { return }
-            //
-            //        let vc: NotificationVC = AppDelegate.mainSB.instanceVC()
-            
-            //top_vc.navigationController?.pushViewController(vc, animated: true)
-            
-            
-            //     let alert = UIAlertController(title: " ", message: " ", preferredStyle: .alert)
-            //        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { action in
-            //            switch action.style{
-            //                case .default:
-            //                print("default")
-            //
-            //                case .cancel:
-            //                print("cancel")
-            //
-            //                case .destructive:
-            //                print("destructive")
-            //
-            //            @unknown default:
-            //                print("destructive")
-            //            }
-            //        }))
-            //        DispatchQueue.main.async(execute: {
-            //            self.present(alert, animated: true, completion: nil)
-            //   })
             
         }
     }
     
-    
+}
+
+extension TaskDetailVC{
+    private func addReplyToComment(commentId:String,note:String,index:Int){
+        showLoadingActivity()
+        APIController.shard.addTaskReplyToComment(taskId: task_id, reply: note, comment_id: commentId) { data in
+            self.hideLoadingActivity()
+            if data.status == nil || data.status == false{
+                SCLAlertView().showError("error".localized(), subTitle: data.error ?? "Something went wrong")
+            }
+        }
+    }
     
 }
 
@@ -850,6 +759,88 @@ extension TaskDetailVC: UITextViewDelegate {
     }
     
     
+}
+
+// MARK: - Socket Handling
+
+extension TaskDetailVC{
+    private func addSocketObservers(){
+        commentsSocket()
+        
+    }
+    
+    private func commentsSocket(){
+        SocketIOController.shard.commentsTaskHandler(ticketId: ticket_id , taskId: task_id, userID: Auth_User.user_id) { data in
+            guard let data = data.first as? [String:Any],
+                  let content = data["content"] as? [String:Any],
+                  let type = data["type"] as? String
+            else { return }
+            
+            switch type{
+            case "add_comment":
+                let obj = CommentObj.init(content)
+                self.arr_comments.append(obj)
+                self.table_Activity.insertRows(at: [IndexPath(row: self.arr_comments.count - 1, section: 0)], with: .automatic)
+            case "edit_comment":
+                let obj = CommentObj.init(content)
+                let index = self.arr_comments.firstIndex(where: {$0.history_id == obj.history_id})
+                if let index = index {
+                    self.arr_comments[index] = obj
+                    self.table_Activity.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+            case "delete_comment":
+                let obj = CommentObj.init(content)
+                let index = self.arr_comments.firstIndex(where: {$0.history_id == obj.history_id})
+                if let index = index {
+                    self.arr_comments.remove(at: index)
+                    self.table_Activity.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+            case "add_reply":
+                guard let comment_id = content["comment_id"] as? Int,
+                      let dic = content["reply"] as? [String:Any]
+                else { return }
+                
+                
+                let reply = ReplyObj.init(dic)
+                let index = self.arr_comments.firstIndex(where: {$0.history_id == String(comment_id)})
+                if let index = index {
+                    self.arr_comments[index].reply.append(reply)
+                    self.table_Activity.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+                
+            case "edit_reply":
+                guard let comment_id = content["comment_id"] as? String,
+                      let dic = content["reply"] as? [String:Any]
+                else { return }
+                
+                let reply = ReplyObj.init(dic)
+                let index = self.arr_comments.firstIndex(where: {$0.history_id == comment_id})
+                if let index = index {
+                    let replyIndex = self.arr_comments[index].reply.firstIndex(where: {$0.history_id == reply.history_id})
+                    if let replyIndex = replyIndex{
+                        self.arr_comments[index].reply[replyIndex] = reply
+                        self.table_Activity.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                    }
+                }
+                
+            case "delete_reply":
+                guard let comment_id = content["comment_id"] as? String,
+                      let reply_id = content["reply_id"] as? Int
+                else { return }
+                let index = self.arr_comments.firstIndex(where: {$0.history_id == comment_id})
+                if let index = index {
+                    let replyIndex = self.arr_comments[index].reply.firstIndex(where: {$0.history_id == String(reply_id)})
+                    if let replyIndex = replyIndex{
+                        self.arr_comments[index].reply.remove(at: replyIndex)
+                        self.table_Activity.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                    }
+                }
+            default:
+                break
+            }
+        }
+    }
+
 }
 
 

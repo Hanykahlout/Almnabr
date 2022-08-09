@@ -61,7 +61,6 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate , Att
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configGUI()
         
 //        if EvaluationDidReply {
 ////            self.showLoadingActivity()
@@ -101,84 +100,6 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate , Att
     override func viewWillLayoutSubviews() {
         super.updateViewConstraints()
         self.tableHeight?.constant = self.table.contentSize.height
-    }
-    
-    
-    //MARK: - Config GUI
-    //------------------------------------------------------
-    func configGUI() {
-        
-        print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\evaluation results")
-        icon_noPermission.no_permission()
-        
-        self.lbl_noPermission.text =  "You not have permission to access this step".localized()
-        self.lbl_noPermission.font = .kufiRegularFont(ofSize: 15)
-        self.lbl_noPermission.textColor =  "#333".getUIColor()
-        
-        
-        if StatusObject?.Evaluation_Result == false {
-            view_noPermission.isHidden = false
-            self.view_main.isHidden = true
-            
-        }else{
-            view_noPermission.isHidden = true
-            self.view_main.isHidden = false
-            self.get_notes()
-        }
-        
-        self.lbl_Title.text =  "Evaluation Result".localized()
-        self.lbl_Title.font = .kufiBoldFont(ofSize: 13)
-        self.lbl_Title.textColor =  maincolor
-        
-        self.lbl_Notes.text =  "Notes".localized()
-        self.lbl_Notes.font = .kufiRegularFont(ofSize: 13)
-        self.lbl_Notes.textColor =  maincolor
-        
-        self.lbl_No.text =  "#".localized()
-        self.lbl_No.font = .kufiBoldFont(ofSize: 13)
-        self.lbl_No.textColor =  maincolor
-        
-        
-        self.lbl_EvalTitle.text =  "Title".localized()
-        self.lbl_EvalTitle.font = .kufiBoldFont(ofSize: 13)
-        self.lbl_EvalTitle.textColor =  maincolor
-        
-        
-        self.lbl_Result.text =  "Result".localized()
-        self.lbl_Result.font = .kufiBoldFont(ofSize: 13)
-        self.lbl_Result.textColor =  maincolor
-        
-        
-        
-        self.lbl_EvaluationResult.text = "Evaluation Result".localized()
-        self.lbl_EvaluationResult.font = .kufiRegularFont(ofSize: 13)
-        self.lbl_EvaluationResult.textColor =  maincolor
-        
-        
-        self.lbl_EvaluationResultSelect.text = "Evaluation Result".localized()
-        self.lbl_EvaluationResultSelect.font = .kufiRegularFont(ofSize: 13)
-        self.lbl_EvaluationResultSelect.textColor =  maincolor
-        
-        
-        self.view_EvaluationResult.setBorderGray()
-        // self.view_EvaluationResult.backgroundColor = .gray
-       // self.view_main.setBorderGray()
-        
-        self.btn_cancel_Evaluation.isHidden = true
-        
-        self.btn_submit.setTitle("Submit".localized(), for: .normal)
-        self.btn_submit.backgroundColor =  "#1A3665".getUIColor()
-        self.btn_submit.setTitleColor(.white, for: .normal)
-        
-        self.imgDropEvaluation.image = dropDownmage
-        
-        table.dataSource = self
-        table.delegate = self
-        let nib = UINib(nibName: "NotesCell", bundle: nil)
-        table.register(nib, forCellReuseIdentifier: "NotesCell")
-        
-        imagePickerController.delegate = self
-        
     }
     
     
@@ -245,7 +166,6 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate , Att
                     
                     //                    self.configGUI()
                     //                    self.change_page(SelectedIndex:8)
-                    self.configGUI()
                     self.update_Config()
                 })
                 

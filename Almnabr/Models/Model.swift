@@ -2392,7 +2392,7 @@ class HistoryObj {
         self.profile_image_64 = Obj["profile_image_64"] as? String ?? ""
         self.label = Obj["label"] as? String ?? ""
         self.value = Obj["value"] as? String ?? ""
-      
+    
         
     }}
 
@@ -2410,15 +2410,18 @@ class CommentObj {
     var insert_date:String = ""
     var is_added_comment:Bool = false
     var notes_history:String = ""
-//    var reply:String = ""
     var reply_from_name:String = ""
     var ticket_id:String = ""
     var type:String = ""
     var user_add_id:String = ""
     var user_image:String = ""
     var user_image_64:String = ""
-    var isHidden :Bool = true
+    var isHidden = true
     var reply :[ReplyObj] = []
+    var isHiddenReply = true
+
+    
+    
     
     
     init(_ Obj : [String:Any]) {
@@ -2452,19 +2455,32 @@ class CommentObj {
 class ReplyObj {
 
     var avatar:String = ""
+    var avatar_64:String = ""
+    var emp_id:String = ""
+    var is_added_reply:String = ""
     var comment_content:String = ""
     var comment_date:String = ""
     var files_reply:String = ""
     var history_id:String = ""
     var isAuthor:String = ""
     var path_file:String = ""
+    var path:String = ""
     var userName:String = ""
-    
+    var notes_history = ""
+
     
     init(_ Obj : [String:Any]) {
   
         self.avatar = Obj["avatar"] as? String ?? ""
-     
+        self.avatar_64 = Obj["avatar_64"] as? String ?? ""
+        
+        self.emp_id = Obj["emp_id"] as? String ?? ""
+        self.is_added_reply = Obj["is_added_reply"] as? String ?? ""
+        self.path = Obj["path"] as? String ?? ""
+        self.avatar_64 = Obj["avatar_64"] as? String ?? ""
+        
+        
+        
         self.comment_content = Obj["comment_content"] as? String ?? ""
         self.comment_date = Obj["comment_date"] as? String ?? ""
         self.files_reply = Obj["files_reply"] as? String ?? ""
@@ -2472,6 +2488,18 @@ class ReplyObj {
         self.isAuthor = Obj["isAuthor"] as? String ?? ""
         self.path_file = Obj["path_file"] as? String ?? ""
         self.userName = Obj["userName"] as? String ?? ""
+    }
+    
+    init(_ return_row:Return_row){
+        self.avatar = return_row.avatar ?? ""
+        self.comment_content = return_row.comment_content ?? ""
+        self.comment_date = return_row.comment_date ?? ""
+        self.files_reply = return_row.files_reply ?? ""
+        self.history_id = return_row.history_id ?? ""
+        self.isAuthor = return_row.isAuthor ?? ""
+        self.path_file = return_row.path_file ?? ""
+        self.userName = return_row.userName ?? ""
+        self.notes_history = return_row.notes_history ?? ""
     }
     
 }

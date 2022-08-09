@@ -114,7 +114,7 @@ class SocketIOController{
     
     
     func isConnected()->Bool{
-        print("socket connected",socket?.status.active ?? false)
+        print("socket connected is connected",socket?.status.active ?? false)
         return socket?.status.active ?? false
     }
     

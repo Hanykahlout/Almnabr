@@ -42,6 +42,7 @@ class SocketIOController{
     
     func taskHandler(ticketId:String,userID:String,callback:@escaping (_ data:[Any])->Void){
         socket?.on("ticket_\(ticketId)_tasks_\(userID)") {data, ack in
+            print("ASDASDASDASD",data)
             callback(data)
         }
     }
@@ -117,11 +118,7 @@ class SocketIOController{
         print("socket connected is connected",socket?.status.active ?? false)
         return socket?.status.active ?? false
     }
-    
-    
-    
-    
-    
+
     func disconnect(){
         if let socket = socket {
             socket.disconnect()

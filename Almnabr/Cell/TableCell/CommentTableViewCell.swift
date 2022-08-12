@@ -14,7 +14,7 @@ protocol CommentTableViewCellDelegate{
     func deleteTicketCommentAction(comment_id:String)
     func reloadCommentReplyAction(replyIsHidden:Bool,index:Int)
     func reloadCommentHideShowTableView(replyIsHidden:Bool,index:Int)
-    func saveReplyComment(comment_id:String,replyText:String,index:Int)
+    func saveReplyComment(comment_id:String,replyText:String,index:Int,afterSuccess:@escaping ()->Void)
 }
 
 typealias CommentCellDelegate = CommentTableViewCellDelegate & UIViewController
@@ -32,6 +32,8 @@ class CommentTableViewCell: UITableViewCell {
     @IBOutlet weak var tableHeight: NSLayoutConstraint!
     @IBOutlet weak var replyView: UIView!
     @IBOutlet weak var replyTextView: UITextView!
+    @IBOutlet weak var notTypingCommentLabel: UILabel!
+    
     
     var delegate:CommentCellDelegate?
     
@@ -42,6 +44,7 @@ class CommentTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        replyTextView.delegate = self
         setUpTableView()
     }
     
@@ -52,9 +55,11 @@ class CommentTableViewCell: UITableViewCell {
     }
     
     
+    
     func setData(data:CommentDataResponse,index:Int){
         self.index = index
         self.data = data.reply ?? []
+        
         self.data = self.data.sorted(by: {$0.insert_date ?? "0" > $1.insert_date ?? "0"})
         self.id = data.history_id ?? ""
         
@@ -64,6 +69,7 @@ class CommentTableViewCell: UITableViewCell {
             self.tableView.isHidden = false
         }
         
+        self.repliesButton.isHidden = data.reply?.isEmpty ?? true
         self.replyView.isHidden = data.isHiddenReply
         self.tableView.reloadData()
         
@@ -71,9 +77,9 @@ class CommentTableViewCell: UITableViewCell {
         self.nameLabel.text = data.emp_name ?? ""
         self.commentLabel.text = data.notes_history ?? ""
         self.dateLabel.text = data.insert_date ?? ""
-        let is_add_comment = !(data.is_added_comment ?? false)
-        deleteButton.isHidden = is_add_comment
-        editButton.isHidden = is_add_comment
+        
+        deleteButton.isHidden = data.emp_id != Auth_User.user_id
+        editButton.isHidden = data.emp_id != Auth_User.user_id
     }
 
     
@@ -102,7 +108,11 @@ class CommentTableViewCell: UITableViewCell {
     
     
     @IBAction func saveAction(_ sender: Any) {
-        delegate?.saveReplyComment(comment_id: id, replyText: replyTextView.text!, index: index)
+        delegate?.saveReplyComment(comment_id: id, replyText: replyTextView.text!, index: index,afterSuccess: {
+            self.replyTextView.text = ""
+            self.replyTextView.endEditing(true)
+            self.notTypingCommentLabel.isHidden = false
+        })
     }
 
 }
@@ -127,4 +137,10 @@ extension CommentTableViewCell:UITableViewDelegate,UITableViewDataSource{
     }
     
 
+}
+
+extension CommentTableViewCell:UITextViewDelegate{
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        notTypingCommentLabel.isHidden = true
+    }
 }

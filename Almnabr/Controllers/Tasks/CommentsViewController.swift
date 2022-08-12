@@ -11,8 +11,8 @@ import SCLAlertView
 class CommentsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var notTypingCommentLabel: UILabel!
     
     var ticketId = ""
     private var data = [CommentDataResponse]()
@@ -25,6 +25,7 @@ class CommentsViewController: UIViewController {
     
     
     private func initlization(){
+        commentTextView.delegate = self
         addNavigationBarTitlee(navigationTitle: "Comments".localized())
         setUpTableView()
         addObserver()
@@ -111,7 +112,6 @@ extension CommentsViewController:UITableViewDelegate,UITableViewDataSource{
 // MARK: - Cell Delegate
 
 extension CommentsViewController:CommentTableViewCellDelegate{
-    
     func editTicketCommentAction(comment_id: String, commentText: String,index:Int) {
         let vc = EditTicketCommentVC()
         vc.commentId = comment_id
@@ -146,8 +146,8 @@ extension CommentsViewController:CommentTableViewCellDelegate{
     }
     
     
-    func saveReplyComment(comment_id: String, replyText: String, index: Int) {
-        self.addReplyToComment(reply: replyText, comment_Id: comment_id,index: index)
+    func saveReplyComment(comment_id: String, replyText: String, index: Int,afterSuccess: @escaping () -> Void) {
+        self.addReplyToComment(reply: replyText, comment_Id: comment_id,index: index,afterSuccess:afterSuccess)
     }
     
     
@@ -178,6 +178,9 @@ extension CommentsViewController{
         APIController.shard.addComment(comment: commentTextView.text!, ticketId: ticketId) { data in
             if let status = data.status,status{
                 self.commentTextView.text = ""
+                self.commentTextView.endEditing(true)
+                self.notTypingCommentLabel.isHidden = false
+                
             }else{
                 SCLAlertView().showError("error".localized(), subTitle: data.error ?? "Something went wrong")
             }
@@ -194,12 +197,14 @@ extension CommentsViewController{
     }
     
     
-    private func addReplyToComment(reply:String,comment_Id:String,index:Int){
+    private func addReplyToComment(reply:String,comment_Id:String,index:Int,afterSuccess:@escaping ()->Void){
         showLoadingActivity()
         APIController.shard.addCommentReply(ticketId: ticketId, reply: reply, comment_id: comment_Id) { data in
             self.hideLoadingActivity()
             if data.status == nil || data.status == false{
                 SCLAlertView().showError("error".localized(), subTitle: data.error ?? "Something went wrong")
+            }else{
+                afterSuccess()
             }
         }
     }
@@ -291,3 +296,9 @@ extension CommentsViewController{
     
 }
 
+
+extension CommentsViewController:UITextViewDelegate{
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        notTypingCommentLabel.isHidden = true
+    }
+}

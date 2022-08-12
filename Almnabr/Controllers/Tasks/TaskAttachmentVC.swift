@@ -129,7 +129,7 @@ class TaskAttachmentVC: UIViewController {
                 
                 self.arr_data.remove(at: index)
                 if self.arr_data.isEmpty{
-                        self.img_nodata.isHidden = false
+                    self.img_nodata.isHidden = false
                 }else{
                     self.img_nodata.isHidden = true
                 }
@@ -206,11 +206,14 @@ extension TaskAttachmentVC{
                 self.arr_data.insert(.init(content), at: 0)
             case "delete_attachment":
                 self.arr_data.removeAll(where: {$0.file_records_id == content["file_id"] as! String})
-                break
             default :
                 break
             }
+            
+            self.img_nodata.isHidden = !self.arr_data.isEmpty
             self.table.reloadData()
         }
     }
+    
+    
 }

@@ -1154,12 +1154,11 @@ class APIController{
     
     
     func fetchSendCode(username:String,password:String,callback:@escaping(_ data:Edit)->Void){
-        let strURL = "\(APIManager.serverURL)/user/get_code_options?username=\(username)&password=\(password)"
-        print("ASDADASqQQ",strURL)
+        var strURL = "\(APIManager.serverURL)/user/get_code_options?username=\(username)&password=\(password)"
+        strURL = strURL.replacingOccurrences(of: " ", with: "%20")
         Alamofire.request(strURL, method: .get,encoding: URLEncoding.httpBody,headers: ["X-API-KEY":APIManager.api_key]).validate().responseJSON { (response) in
             
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                print("ASDADASqQQ",str)
                 if let parsedMapperString : Edit = Mapper<Edit>().map(JSONString:str){
                     callback(parsedMapperString)
                 }

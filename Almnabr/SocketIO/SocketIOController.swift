@@ -40,9 +40,9 @@ class SocketIOController{
         }
     }
     
+    
     func taskHandler(ticketId:String,userID:String,callback:@escaping (_ data:[Any])->Void){
         socket?.on("ticket_\(ticketId)_tasks_\(userID)") {data, ack in
-            print("ASDASDASDASD",data)
             callback(data)
         }
     }
@@ -89,6 +89,7 @@ class SocketIOController{
     }
     
     func taskAttachmentsHandler(ticketId:String,taskId:String,userID:String,callback:@escaping (_ data:[Any])->Void){
+        print("The response is  \("ticket_\(ticketId)_task_\(taskId)_attachments_\(userID)")")
         socket?.on("ticket_\(ticketId)_task_\(taskId)_attachments_\(userID)") { data , ack in
             callback(data)
         }
@@ -115,7 +116,7 @@ class SocketIOController{
     
     
     func isConnected()->Bool{
-        print("socket connected is connected",socket?.status.active ?? false)
+        print("socket is connected:",socket?.status.active ?? false)
         return socket?.status.active ?? false
     }
 

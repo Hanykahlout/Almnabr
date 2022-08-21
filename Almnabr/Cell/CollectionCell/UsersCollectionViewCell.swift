@@ -42,6 +42,8 @@ class UsersCollectionViewCell: UICollectionViewCell {
         titleLabel.text = data.label
     }
     
+    
+    
     func setData(data:SearchBranchRecords,indexPath:IndexPath){
         self.indexPath = indexPath
         titleLabel.text = data.label

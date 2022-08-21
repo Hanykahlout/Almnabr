@@ -495,10 +495,10 @@ class APIManager: NSObject {
     static func sendRequestPostAuth(urlString:String ,parameters: Parameters, completion: @escaping (_ response : [String : Any] ) -> Void)
     {
         
-        print("PARAM",parameters)
         let strURL = "\(serverURL)/\(urlString)"
         let auth = [ "authorization":
                         "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
         Alamofire.request( strURL , method: .post, parameters: parameters,
                            encoding:  URLEncoding.default, headers: auth).responseJSON
         { response in
@@ -525,7 +525,6 @@ class APIManager: NSObject {
                 }
                 
             }
-            Auth_User.topVC()?.hideLoadingActivity()
         }}
     
     

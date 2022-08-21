@@ -353,9 +353,6 @@ class FilterViewController: UIViewController {
     }
     
     
-   
-    
-    
     @IBAction func lang_iqama_expiry_dateAction(_ sender: Any) {
         textFiledType = .lang_iqama
         fastisController.present(above: self)

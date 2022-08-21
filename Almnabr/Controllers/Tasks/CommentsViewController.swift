@@ -104,9 +104,6 @@ extension CommentsViewController:UITableViewDelegate,UITableViewDataSource{
         return cell
     }
     
-    
-    
-    
 }
 
 // MARK: - Cell Delegate
@@ -233,11 +230,12 @@ extension CommentsViewController{
                   let type = data["type"] as? String
             else { return }
             
-
-        switch type{
+            
+            switch type{
             case "add_comment":
                 self.data.insert(.init(content), at: 0)
                 self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+                
             case "edit_comment":
                 let index = self.data.firstIndex(where: {$0.history_id == content["history_id"] as? String})
                 let replies = self.data[index!].reply
@@ -281,13 +279,14 @@ extension CommentsViewController{
                     }
                     self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
                 }
-            
+                
             case "delete_reply":
                 let index = self.data.firstIndex(where: {$0.history_id == content["comment_id"] as? String})
                 if let index = index, let reply = content["reply"] as? [String:Any]{
                     self.data[index].reply?.removeAll(where:  {$0.history_id == reply["history_id"] as? String})
                     self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
                 }
+                
             default:
                 break
             }

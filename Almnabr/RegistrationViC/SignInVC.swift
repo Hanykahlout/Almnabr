@@ -367,10 +367,8 @@ class SignInVC: UIViewController {
                 }
             }
         }
-        
-        
+
     }
-    
     
     
     @IBAction func btnLanguage_Click(_ sender: Any) {

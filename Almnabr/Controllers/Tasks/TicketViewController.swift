@@ -12,8 +12,7 @@ import MobileCoreServices
 import SCLAlertView
 
 class TicketViewController: UIViewController {
-    
-    
+
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var statusView: UIView!
     
@@ -122,7 +121,6 @@ class TicketViewController: UIViewController {
             let index = Int(content["task_status"] as! String)! - 1
             let obj =  TaskObj.init(content)
             
-            print("Content",content)
             if let type = data["type"] as? String{
                 switch type {
                 case "edit_task":
@@ -153,6 +151,8 @@ class TicketViewController: UIViewController {
                         
                     }
                     
+                    
+                    NotificationCenter.default.post(name: .init(rawValue: "UpdateTaskStatus"), object: obj.status_done_name)
                     self.boards[index].items.append(obj)
                 default:
                     break
@@ -331,6 +331,7 @@ class TicketViewController: UIViewController {
     @objc func didTapAttachmentButton(sender: AnyObject){
         let vc:TaskAttachmentVC = AppDelegate.TicketSB.instanceVC()
         vc.ticket_id =  object!.ticket_id
+        vc.is_from_task = false
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -436,6 +437,7 @@ extension TicketViewController:UICollectionViewDelegate,UICollectionViewDataSour
                 vc.delegate = {
                     self.get_data()
                 }
+                
                 self.navigationController?.pushViewController(vc, animated: true)
             }else{
                 SCLAlertView().showNotice("You do not have permissions to view this task", subTitle: "")

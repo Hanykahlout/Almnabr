@@ -45,18 +45,25 @@ class TaskDetailVC: UIViewController {
         super.viewDidLoad()
         setupAddBarButtonItem()
         configNavigation()
-        addSocketObservers()
         get_data()
         get_Chicklist_data()
         get_add_task()
         get_comment_tasks()
         setUpTableView()
+        setUpObserver()
         table_Activity.dataSource = self
         table_Activity.delegate = self
         let nib = UINib(nibName: "TaskCommentCell", bundle: nil)
         table_Activity.register(nib, forCellReuseIdentifier: "TaskCommentCell")
+        addSocketObservers()
     }
     
+    private func setUpObserver(){
+        NotificationCenter.default.addObserver(forName: .init("UpdateTaskStatus"), object: nil, queue: .main) { notify in
+            guard let status = notify.object as? String else { return }
+            self.lbl_status_done.text = status
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -113,9 +120,6 @@ class TaskDetailVC: UIViewController {
         vc.modalPresentationStyle = .overFullScreen
         vc.definesPresentationContext = true
         vc.task_id = self.task_id
-        vc.delegate = {
-            self.get_Chicklist_data()
-        }
         self.present(vc, animated: true, completion: nil)
         
     }
@@ -286,14 +290,9 @@ class TaskDetailVC: UIViewController {
         APIManager.sendRequestPostAuth(urlString: "tasks/change_status_done", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
-            let status = response["status"] as? Bool
-            if status == true{
-                // self.get_data()
-                self.hideLoadingActivity()
-            }else{
-                self.hideLoadingActivity()
-                
-            }
+//            let status = response["status"] as? Bool
+            self.hideLoadingActivity()
+            
         }
     }
     
@@ -372,9 +371,19 @@ class TaskDetailVC: UIViewController {
         let vc:TaskAttachmentVC = AppDelegate.TicketSB.instanceVC()
         vc.is_from_task = true
         vc.arr_data = object?.files ?? []
-        self.navigationController?.pushViewController(vc, animated: true)
+        vc.ticket_id = ticket_id
+        vc.task_id = task_id
+        vc.updateArr = { isDelete , obj , index in
+            if isDelete{
+                self.object?.files.remove(at: index)
+            }else{
+                self.object?.files.insert(obj!, at: index)
+            }
+        }
         
+        self.navigationController?.pushViewController(vc, animated: true)
     }
+    
     
     @IBAction func btnCheckList_Click(_ sender: Any) {
         addCheckListItem()
@@ -435,12 +444,9 @@ class TaskDetailVC: UIViewController {
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
-            if status == true{
-                self.get_data()
-                
-            }else{
-                self.hideLoadingActivity()
-                
+            let error = response["error"] as? String
+            if status == false || status == nil{
+                SCLAlertView().showError("error".localized(), subTitle: error ?? "Something went wrong")
             }
         }
     }
@@ -766,7 +772,117 @@ extension TaskDetailVC: UITextViewDelegate {
 extension TaskDetailVC{
     private func addSocketObservers(){
         commentsSocket()
+        checkListSocket()
+        memberAndDateSocket()
+    }
+    
+    
+    private func memberAndDateSocket(){
+        SocketIOController.shard.taskMembersHandler(ticketId: ticket_id, taskId: task_id, userID: Auth_User.user_id) { data in
+            print("SADASDAS",data)
+        }
         
+        SocketIOController.shard.taskDateHandler(ticketId: ticket_id, taskId: task_id, userID: Auth_User.user_id) { data in
+            print("SADASDAS2",data)
+        }
+        
+        
+    }
+    
+    
+    
+    private func checkListSocket(){
+        SocketIOController.shard.taskCheckListsHandler(ticketId: ticket_id, taskId: task_id, userID: Auth_User.user_id) { data in
+            guard let data = data.first as? [String:Any],
+                  let content = data["content"] as? [String:Any],
+                  let type = data["type"] as? String
+            else { return }
+
+            switch type{
+            case "add_checklist":
+                let obj = PointTaskObj(content)
+                self.arr_data.insert(obj, at: 0)
+                self.tableChecklist.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+            
+            case "update_checklist":
+                let obj = PointTaskObj(content)
+                let index = self.arr_data.firstIndex(where: {$0.check_id == obj.check_id})
+                if let index = index {
+                    self.arr_data[index] = obj
+                    self.tableChecklist.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+                
+     
+            case "delete_checklist":
+                guard let check_id = content["check_id"] as? Int
+                else { return }
+                let index = self.arr_data.firstIndex(where: {$0.check_id == String(check_id)})
+                if let index = index {
+                    self.arr_data.remove(at: index)
+                    self.tableChecklist.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+                
+            case "add_checklist_item":
+                guard let check_id = content["check_id"] as? Int
+                else { return }
+                let index = self.arr_data.firstIndex(where: {$0.check_id == String(check_id)})
+                if let index = index , let check_item = content["check_item"] as? [String:Any]{
+                    let obj = SubCheckObj(check_item)
+                    self.arr_data[index].sub_checks.insert(obj, at: 0)
+                    if !self.arr_data[index].isHidden{
+                        self.tableChecklistHeight.constant += 45
+                    }
+                    self.tableChecklist.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+                
+            case "update_checklist_item":
+                guard let check_id = content["check_id"] as? Int
+                else { return }
+                
+                let index = self.arr_data.firstIndex(where: {$0.check_id == String(check_id)})
+                if let index = index , let check_item = content["check_item"] as? [String:Any]{
+                    let obj = SubCheckObj(check_item)
+                    let itemIndex = self.arr_data[index].sub_checks.firstIndex(where: {$0.check_id == obj.check_id})
+                    if let itemIndex = itemIndex {
+                        self.arr_data[index].sub_checks[itemIndex] = obj
+                        self.tableChecklist.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                    }
+                }
+                
+            case "delete_checklist_item":
+                guard let check_id = content["check_id"] as? String,
+                      let item_check_id = content["check_item_id"] as? Int
+                else { return }
+                
+                let index = self.arr_data.firstIndex(where: {$0.check_id == check_id})
+                if let index = index{
+                    let itemIndex = self.arr_data[index].sub_checks.firstIndex(where: {$0.check_id == String(item_check_id)})
+                    if let itemIndex = itemIndex {
+                        self.arr_data[index].sub_checks.remove(at: itemIndex)
+                        self.tableChecklist.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                    }
+                }                
+            case "change_progress":
+                guard let check_id = content["check_id"] as? String,
+                      let sub_check_id = content["sub_check_id"] as? Int,
+                      let new_status = content["new_status"] as? String
+                else { return }
+                
+                let index = self.arr_data.firstIndex(where: {$0.check_id == check_id})
+                if let index = index{
+                    let itemIndex = self.arr_data[index].sub_checks.firstIndex(where: {$0.check_id == String(sub_check_id)})
+                    if let itemIndex = itemIndex {
+                        self.arr_data[index].sub_checks[itemIndex].is_done = new_status
+                        self.tableChecklist.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                    }
+                }
+                
+                
+            default:
+                break
+            }
+            
+        }
     }
     
     private func commentsSocket(){

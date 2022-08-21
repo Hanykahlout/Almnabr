@@ -7,15 +7,19 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class TaskAttachmentVC: UIViewController {
     
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var img_nodata: UIImageView!
     
+    private var documentPickerController: UIDocumentPickerViewController!
     
     var arr_data:[DocumentObj] = []
+    var updateArr: ((_ isDelete:Bool,_ obj:DocumentObj?,_ index:Int)->Void)?
     var ticket_id:String = ""
+    var task_id = ""
     var is_from_task :Bool = false
     
     
@@ -25,9 +29,9 @@ class TaskAttachmentVC: UIViewController {
         configNavigation()
         configGUI()
         attachmentsObserver()
-        if is_from_task == true {
-            self.table.reloadData()
-            setupAddButtonItem()
+        setupAddButtonItem()
+
+        if is_from_task {
             if arr_data.count == 0 {
                 self.img_nodata.isHidden = false
             }else{
@@ -64,13 +68,32 @@ class TaskAttachmentVC: UIViewController {
         addNavigationBarTitle(navigationTitle: "Attachments".localized())
         UINavigationBar.appearance().backgroundColor = maincolor
     }
+    
+    
     func setupAddButtonItem() {
         let addButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped(_:)))
         navigationItem.rightBarButtonItem = addButtonItem
     }
     
     @objc func addTapped(_ sender: Any) {
-        
+        let alertVC = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        alertVC.addAction(.init(title: "Choose Photo".localized(), style: .default, handler: { action in
+            self.setImageBy(source: .photoLibrary)
+        }))
+        alertVC.addAction(.init(title: "Choose Pdf".localized(), style: .default, handler: { action in
+            self.selectAttachment()
+        }))
+
+        alertVC.addAction(.init(title: "Cancel", style: .cancel))
+
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+    private func selectAttachment(){
+        documentPickerController = UIDocumentPickerViewController(
+            forOpeningContentTypes: [.pdf])
+        documentPickerController.delegate = self
+        self.present(documentPickerController, animated: true, completion: nil)
     }
     
     
@@ -125,23 +148,10 @@ class TaskAttachmentVC: UIViewController {
         APIManager.sendRequestPostAuth(urlString: "tasks/delete_file_ticket", parameters: param ) { (response) in
             self.hideLoadingActivity()
             let status = response["status"] as? Bool
-            if status == true{
-                
-                self.arr_data.remove(at: index)
-                if self.arr_data.isEmpty{
-                    self.img_nodata.isHidden = false
-                }else{
-                    self.img_nodata.isHidden = true
-                }
-                
-                self.table.reloadData()
-                
-            }else{
+            if status == false{
                 self.showAMessage(withTitle: "error", message: "The attachment wasn't  deleted ")
             }
             
-            
-            // self.lblnodata.isHidden = false
         }
         
         
@@ -195,17 +205,30 @@ extension TaskAttachmentVC: UITableViewDelegate , UITableViewDataSource{
 
 // MARK: - Socket Handling
 extension TaskAttachmentVC{
+    
     private func attachmentsObserver(){
+        ticketAttachObserver()
+        taskAttchObserver()
+    }
+    
+    private func ticketAttachObserver(){
         SocketIOController.shard.attachHandler(ticketId: ticket_id, userID: Auth_User.user_id) { data in
             guard let data = data.first as? [String:Any],
                   let content = data["content"] as? [String:Any],
-                  let type = data["type"] as? String
+                  let type = data["type"] as? String,
+                  !self.is_from_task
             else { return }
             switch type{
             case "files_ticket":
-                self.arr_data.insert(.init(content), at: 0)
+                let obj = DocumentObj(content)
+                self.arr_data.insert(obj, at: 0)
+                
             case "delete_attachment":
-                self.arr_data.removeAll(where: {$0.file_records_id == content["file_id"] as! String})
+                let index = self.arr_data.firstIndex(where: {$0.file_records_id == content["file_id"] as! String})
+                if let index = index {
+                    self.arr_data.remove(at: index)
+                }
+                
             default :
                 break
             }
@@ -215,5 +238,99 @@ extension TaskAttachmentVC{
         }
     }
     
+    private func taskAttchObserver(){
+        
+        SocketIOController.shard.taskAttachmentsHandler(ticketId: ticket_id, taskId: task_id, userID: Auth_User.user_id){ data in
+            guard let data = data.first as? [String:Any],
+                  let content = data["content"] as? [String:Any],
+                  let type = data["type"] as? String,
+                  self.is_from_task
+            else { return }
+            switch type{
+            case "files_ticket":
+                let obj = DocumentObj(content)
+                self.arr_data.insert(obj, at: 0)
+                self.updateArr?(false,obj,0)
+            case "delete_attachment":
+                
+                
+                let index = self.arr_data.firstIndex(where: {$0.file_records_id == content["file_id"] as! String})
+                if let index = index {
+                    self.arr_data.remove(at: index)
+                    self.updateArr?(true,nil,index)
+                }
+                
+                
+            default :
+                break
+            }
+            
+            self.img_nodata.isHidden = !self.arr_data.isEmpty
+            self.table.reloadData()
+        }
+    }
+    
+    
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension TaskAttachmentVC : UIImagePickerControllerDelegate , UINavigationControllerDelegate{
+    private func setImageBy(source:UIImagePickerController.SourceType){
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = source
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let imgUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL
+        if let imgUrl = imgUrl{
+            uploadAttachData(url: imgUrl, attach_title: imgUrl.lastPathComponent)
+        }
+
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+
+// MARK: - UIDocumentPickerViewControllerDelegate
+extension TaskAttachmentVC:UIDocumentPickerDelegate{
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+        guard let myURL = urls.first else {
+            return
+        }
+        uploadAttachData(url: myURL, attach_title: myURL.lastPathComponent)
+    }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension TaskAttachmentVC{
+    
+    private func uploadAttachData(url:URL,attach_title:String){
+        let requestUrl = is_from_task ? "tasks/add_files_in_task" : "tasks/add_files_in_ticket"
+        
+        var parameters:[String:Any] = [
+            "attachments[0][attach_title]": attach_title
+        ]
+        
+        if is_from_task{
+            parameters["task_id"] = task_id
+        }else{
+            parameters["ticket_id"] = ticket_id
+        }
+        
+        showLoadingActivity()
+        APIController.shard.uploadAttachInTicket(url:requestUrl,parameters: parameters, fileUrl: url) { data in
+            self.hideLoadingActivity()
+            if data.status == nil || data.status == false{
+                SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknow error")
+            }
+        }
+        
+    }
     
 }

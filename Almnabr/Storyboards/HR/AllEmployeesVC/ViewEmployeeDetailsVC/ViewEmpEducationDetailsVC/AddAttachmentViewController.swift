@@ -162,6 +162,7 @@ class AddAttachmentViewController: UIViewController {
         }
         
         uploadAttachmentData(isUpdate:attachmentData != nil,body: param)
+        
     }
     
 }

@@ -10,7 +10,7 @@ import UIKit
 
 protocol OutgoingAttachmentCellDelegate{
     func deleteAction()
-    func selectFileAction(indexPath:IndexPath)
+    func selectFileAction(index:Int)
 }
 
 
@@ -21,13 +21,15 @@ class OutgoingAttachmentTableViewCell: UITableViewCell {
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var selectFileButton: UIButton!
     
+    @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var attachwithPdfStackView: UIStackView!
     @IBOutlet weak var officialPaperStackView: UIStackView!
     
     
     var delegate: (OutgoingAttachmentCellDelegate & UIViewController)?
-    var indexPath:IndexPath!
+    var index:Int?
     var fileUrl:URL?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,23 +40,30 @@ class OutgoingAttachmentTableViewCell: UITableViewCell {
         officialPaperStackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(officialPaperStackViewAction)))
     }
     
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
+    
     @objc private func attachwithPdfStackViewAction(){
         attachwithPdfButton.isSelected = !attachwithPdfButton.isSelected
     }
+    
     
     @objc private func officialPaperStackViewAction(){
         officialPaperButton.isSelected = !officialPaperButton.isSelected
     }
     
+    
     @IBAction func selectFileAction(_ sender: Any) {
-        delegate?.selectFileAction(indexPath: indexPath)
+        if let  index = index {
+            delegate?.selectFileAction(index: index)
+        }
     }
+    
     
     @IBAction func deleteAction(_ sender: Any) {
         delegate?.deleteAction()

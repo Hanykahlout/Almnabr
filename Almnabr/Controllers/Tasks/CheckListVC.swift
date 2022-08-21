@@ -58,9 +58,7 @@ class CheckListVC: UIViewController {
         vc.modalPresentationStyle = .overFullScreen
         vc.definesPresentationContext = true
         vc.task_id = self.task_id
-        vc.delegate = {
-            self.get_data()
-        }
+        
         self.present(vc, animated: true, completion: nil)
     }
     

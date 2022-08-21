@@ -9,7 +9,7 @@
 import UIKit
 
 class AddChecklistVC: UIViewController {
-
+    
     @IBOutlet weak var lblAddCheckList: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var tfTitle: UITextField!
@@ -17,12 +17,11 @@ class AddChecklistVC: UIViewController {
     @IBOutlet weak var btnAdd: UIButton!
     @IBOutlet weak var btnCancel: UIButton!
     
-    var delegate : (() -> Void)?
     var task_id:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configGUI()
         // Do any additional setup after loading the view.
     }
@@ -40,10 +39,7 @@ class AddChecklistVC: UIViewController {
         
         self.view_title.setBorderGray()
         
-//        self.tfUser.placeholder = "Add Users".localized()
         self.tfTitle.font = .kufiRegularFont(ofSize: 15)
-        
-//        self.tfUser.delegate = self
         
         self.btnAdd.setTitle("Add".localized(), for: .normal)
         self.btnAdd.backgroundColor =  maincolor
@@ -56,24 +52,23 @@ class AddChecklistVC: UIViewController {
         self.btnCancel.setTitleColor(.white, for: .normal)
         self.btnCancel.setRounded(10)
         self.btnCancel.titleLabel?.font = .kufiRegularFont(ofSize: 14)
+        
     }
-
+    
     
     func Add_title(title:String){
         
         self.showLoadingActivity()
-         
+        
         let param : [String:Any] = ["task_id" : self.task_id,
                                     "title" : title]
         APIManager.sendRequestPostAuth(urlString: "tasks/insert_task_points_main", parameters: param ) { (response) in
             self.hideLoadingActivity()
-            
-           
+            print("RESPIIII",response)
             let status = response["status"] as? Bool
             if status == true{
                 if let message = response["message"] as? String {
                     self.showAMessage(withTitle: "", message: message,  completion: {
-                        self.delegate!()
                         self.dismiss(animated: true)
                     })
                 }
@@ -83,12 +78,7 @@ class AddChecklistVC: UIViewController {
                 }else{
                     self.showAMessage(withTitle: "error".localized(), message:  "something went wrong")
                 }
-                self.hideLoadingActivity()
-               
             }
-            self.hideLoadingActivity()
-            
-            
         }
     }
     
@@ -96,13 +86,13 @@ class AddChecklistVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    
     @IBAction func btnSubmit_Click(_ sender: Any) {
         
         guard tfTitle.text != "" else {
             return self.showAMessage(withTitle: "", message: "Titlet Field Required!")
         }
         
-     
         self.Add_title(title: tfTitle.text!)
     }
 }

@@ -92,6 +92,7 @@ extension ViewEmpAttachmentsVC:UITableViewDelegate,UITableViewDataSource{
         tableView.dataSource = self
         tableView.register(.init(nibName: "AttachmentTableViewCell", bundle: nil), forCellReuseIdentifier: "AttachmentTableViewCell")
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }

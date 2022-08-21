@@ -990,7 +990,7 @@ class APIController{
             }
         }
     }
-   
+    
     
     func showSelectionVactionResult(empNum:String,vacation_type_id:String,beforeDate:String,afterDate:String,callback:@escaping(_ data:SelectionVactionResult)->Void){
         let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/check_vacation_for_employee"
@@ -998,7 +998,7 @@ class APIController{
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
         let param = ["employee_number":empNum,"vacation_type_id":vacation_type_id,"before_vacation_working_date_english":beforeDate,"after_vacation_working_date_english":afterDate]
-
+        
         print("ASDASDQf",param)
         
         Alamofire.request(strURL, method: .post , parameters:param ,headers:headers).validate().responseJSON { (response) in
@@ -1030,7 +1030,7 @@ class APIController{
                     
                 }
             }
-
+            
             for (key, value) in parameters {
                 if let temp = value as? String {
                     multipartFormData.append(temp.data(using: .utf8)!, withName: key)
@@ -1180,7 +1180,7 @@ class APIController{
             }
         }
     }
-
+    
     func changeTicketStatus(status:String,ticketId:String,callback:@escaping (_ data:Edit)->Void){
         let strURL = "\(APIManager.serverURL)/tasks/change_status_ticket"
         let headers = [ "authorization":
@@ -1217,7 +1217,7 @@ class APIController{
             }
         }
     }
-
+    
     
     func addComment(comment:String,ticketId:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
         let strURL = "\(APIManager.serverURL)/tasks/add_comment"
@@ -1236,7 +1236,7 @@ class APIController{
         }
     }
     
-   
+    
     
     func editComment(note:String,comment_id:String,callback:@escaping (_ data:DeleteCommentResponse)->Void){
         
@@ -1305,7 +1305,7 @@ class APIController{
             }
         }
     }
-        
+    
     
     func addTaskReplyToComment(taskId:String,reply:String,comment_id:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
         
@@ -1327,8 +1327,122 @@ class APIController{
             }
         }
     }
- 
     
+    
+    func uploadAttachInTicket(url:String,parameters:[String:Any],fileUrl:URL,callback:@escaping (_ data:UpdateSettingResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/\(url)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            do{
+                let data = try Data(contentsOf: fileUrl)
+                multipartFormData.append(data, withName: "attachments[0][file]", fileName: "\(Date.init().timeIntervalSince1970).\(fileUrl.pathExtension)", mimeType: fileUrl.mimeType())
+            }catch{
+                
+            }
+            
+            for (key, value) in parameters {
+                if let temp = value as? String {
+                    multipartFormData.append(temp.data(using: .utf8)!, withName: key)
+                }
+            }
+            
+        }, to: URL(string: strURL)!, method: .post , headers: headers) { (result:SessionManager.MultipartFormDataEncodingResult) in
+            switch result{
+            case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
+                upload.responseJSON { (response:DataResponse<Any>) in
+                    if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                        if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                            callback(parsedMapperString)
+                        }
+                    }
+                }
+            case .failure(let error):
+                print("Error:",error.localizedDescription)
+                break
+            }
+        }
+        
+    }
+    
+    func getDocuments(
+        document_branch:String,
+        document_number:String,
+        searchText:String,
+        pageNumber:String,
+        callback:@escaping (_ data:DocumentsResponse)->Void){
+            
+            let strURL = "\(APIManager.serverURL)/documents/get_data_documents/\(pageNumber)/10"
+            let headers = [ "authorization":
+                                "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+            let param:Parameters = ["document_name":searchText,
+                                    "document_branch": document_branch,
+                                    "document_number": document_number
+            ]
+            
+            Alamofire.request(strURL, method: .post ,parameters: param,headers: headers).validate().responseJSON { (response) in
+                if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                    if let parsedMapperString : DocumentsResponse = Mapper<DocumentsResponse>().map(JSONString:str){
+                        callback(parsedMapperString)
+                    }
+                }
+            }
+        }
+    
+    func updateDocumentStatus(documentId:String,status:String, callback:@escaping (_ data:DocumentsResponse)-> Void){
+        let strURL = "\(APIManager.serverURL)/documents/update_document_status"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param = [
+            "document_id":documentId,
+            "status":status,
+        ]
+        
+        Alamofire.request(strURL, method: .post ,parameters: param,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : DocumentsResponse = Mapper<DocumentsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func deleteDocument(documentId:String, callback:@escaping (_ data:DocumentsResponse)-> Void){
+        let strURL = "\(APIManager.serverURL)/documents/delete_decument/\(documentId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .post ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : DocumentsResponse = Mapper<DocumentsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func getDocAttchs(pageNumber:Int, document_id:String,callback:@escaping (_ data:DocAttachsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/documents/get_files_data_documents/\(pageNumber)/10"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        let param = ["document_id": document_id]
+        Alamofire.request(strURL, method: .post,parameters: param ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : DocAttachsResponse = Mapper<DocAttachsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    
+
     
     
 }

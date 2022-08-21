@@ -2505,8 +2505,10 @@ class ReplyObj {
 }
 
 class PointTaskObj {
-
+  
+    
     var check_id:String = ""
+    var char_item = ""
     var firstname_arabic:String = ""
     var firstname_english:String = ""
     var insert_date:String = ""
@@ -2523,6 +2525,11 @@ class PointTaskObj {
     var user_username:String = ""
     var isHidden:Bool = true
     var isUnselectedData = true
+    
+    
+    
+   
+    
     
     init(_ Obj : [String:Any]) {
      
@@ -2541,7 +2548,7 @@ class PointTaskObj {
         self.title = Obj["title"] as? String ?? ""
         self.user_add_id = Obj["user_add_id"] as? String ?? ""
         self.user_username = Obj["user_username"] as? String ?? ""
-        
+        self.char_item = Obj["char_item"] as? String ?? ""
         
         let sub_checks_arr   = Obj["sub_checks"] as? [[String:Any]] ?? []
         self.sub_checks     = sub_checks_arr.map{SubCheckObj.init($0)}

@@ -332,4 +332,3 @@ extension TicketDetailsVC: UITableViewDelegate , UITableViewDataSource{
     
     
 }
-

@@ -107,7 +107,7 @@ class OutgoingVC: UIViewController {
     private var dateController = FastisController(mode: .single)
     
     private var documentPickerController: UIDocumentPickerViewController!
-    private var currentIndexPath:IndexPath?
+    private var currentIndex:Int?
     private var selectedLang = ""
     private var selectedDatainAr = ""
     private var cellHeight = 190
@@ -559,7 +559,7 @@ extension OutgoingVC:UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "OutgoingAttachmentTableViewCell", for: indexPath) as! OutgoingAttachmentTableViewCell
         cell.attachwithPdfStackView.isHidden = isIncoming
         cell.officialPaperStackView.isHidden = isIncoming
-        cell.indexPath = indexPath
+        cell.index = indexPath.row
         cell.delegate = self
         return cell
     }
@@ -571,8 +571,8 @@ extension OutgoingVC:UITableViewDelegate,UITableViewDataSource{
 }
 
 extension OutgoingVC:OutgoingAttachmentCellDelegate{
-    func selectFileAction(indexPath:IndexPath) {
-        currentIndexPath = indexPath
+    func selectFileAction(index:Int) {
+        currentIndex = index
         let alertVC = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
         alertVC.addAction(.init(title: "Choose Photo".localized(), style: .default, handler: { action in
             self.setImageBy(source: .photoLibrary)
@@ -606,8 +606,8 @@ extension OutgoingVC:UIDocumentPickerDelegate{
         guard let myURL = urls.first else {
             return
         }
-        if let currentIndexPath = currentIndexPath{
-            let cell = attachmentsTableView.cellForRow(at: currentIndexPath) as! OutgoingAttachmentTableViewCell
+        if let currentIndex = currentIndex{
+            let cell = attachmentsTableView.cellForRow(at: IndexPath(row: currentIndex, section: 0)) as! OutgoingAttachmentTableViewCell
             cell.selectFileButton.setTitle(myURL.lastPathComponent , for: .normal)
             cell.fileUrl = myURL
         }
@@ -631,8 +631,8 @@ extension OutgoingVC : UIImagePickerControllerDelegate , UINavigationControllerD
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let imgUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL , let currentIndexPath = currentIndexPath{
-            let cell = attachmentsTableView.cellForRow(at: currentIndexPath) as! OutgoingAttachmentTableViewCell
+        if let imgUrl = info[UIImagePickerController.InfoKey.imageURL] as? URL , let currentIndex = currentIndex{
+            let cell = attachmentsTableView.cellForRow(at: IndexPath(row: currentIndex, section: 0)) as! OutgoingAttachmentTableViewCell
             cell.selectFileButton.setTitle(imgUrl.lastPathComponent, for: .normal)
             cell.fileUrl = imgUrl
         }

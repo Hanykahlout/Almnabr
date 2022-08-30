@@ -10,13 +10,13 @@ import UIKit
 
 class AddDocumentVC: UIViewController {
     
-    @IBOutlet weak var nameEnTextField: UITextField!
-    @IBOutlet weak var nameArTextField: UITextField!
-    @IBOutlet weak var typeTextField: UITextField!
-    @IBOutlet weak var branchTextField: UITextField!
-    @IBOutlet weak var issueDateTextField: UITextField!
-    @IBOutlet weak var idExpiryTextField: UITextField!
-    @IBOutlet weak var documentIdTextField: UITextField!
+    @IBOutlet weak var nameEnTextField: UITextView!
+    @IBOutlet weak var nameArTextField: UITextView!
+    @IBOutlet weak var typeTextField: UITextView!
+    @IBOutlet weak var branchTextField: UITextView!
+    @IBOutlet weak var issueDateTextField: UITextView!
+    @IBOutlet weak var idExpiryTextField: UITextView!
+    @IBOutlet weak var documentIdTextField: UITextView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var descriptionHintLabel: UILabel!
     @IBOutlet weak var attachTableView: UITableView!
@@ -45,18 +45,43 @@ class AddDocumentVC: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: true)
+        setUpFieldWithData()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    private func reloadTableViewHeight(){
         let isFromAdd = data == nil
-        nameEnTextField.isEnabled = isFromAdd
-        nameArTextField.isEnabled = isFromAdd
-        typeTextField.isEnabled = isFromAdd
-        branchTextField.isEnabled = isFromAdd
-        issueDateTextField.isEnabled = isFromAdd
-        idExpiryTextField.isEnabled = isFromAdd
-        documentIdTextField.isEnabled = isFromAdd
+        tableViewHeight.constant = CGFloat((isFromAdd ? 130 : 200) * counter)
+    }
+    
+    
+    private func setUpFieldWithData(){
+        let isFromAdd = data == nil
+        nameEnTextField.isEditable = isFromAdd
+        nameArTextField.isEditable = isFromAdd
+        typeTextField.isEditable = isFromAdd
+        branchTextField.isEditable = isFromAdd
+        issueDateTextField.isEditable = isFromAdd
+        idExpiryTextField.isEditable = isFromAdd
+        documentIdTextField.isEditable = isFromAdd
         descriptionTextView.isEditable = isFromAdd
+        nameEnTextField.backgroundColor = isFromAdd ? .clear : .systemGray6
+        nameArTextField.backgroundColor = isFromAdd ? .clear : .systemGray6
+        typeTextField.backgroundColor = isFromAdd ? .clear : .systemGray6
+        branchTextField.backgroundColor = isFromAdd ? .clear : .systemGray6
+        issueDateTextField.backgroundColor = isFromAdd ? .clear : .systemGray6
+        idExpiryTextField.backgroundColor = isFromAdd ? .clear : .systemGray6
+        documentIdTextField.backgroundColor = isFromAdd ? .clear : .systemGray6
+        descriptionTextView.backgroundColor = isFromAdd ? .clear : .systemGray6
         plusButton.isHidden = !isFromAdd
         addAttachsView.isHidden = !isFromAdd
         viewAttachView.isHidden = isFromAdd
+        
         
         if let data = data {
             nameEnTextField.text = data.document_name ?? ""
@@ -70,17 +95,6 @@ class AddDocumentVC: UIViewController {
             descriptionHintLabel.isHidden = !descriptionTextView.text.isEmpty
             
         }
-    }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    private func reloadTableViewHeight(){
-        let isFromAdd = data == nil
-        tableViewHeight.constant = CGFloat((isFromAdd ? 130 : 200) * counter)
     }
     
     @IBAction func addAttachAction(_ sender: Any) {

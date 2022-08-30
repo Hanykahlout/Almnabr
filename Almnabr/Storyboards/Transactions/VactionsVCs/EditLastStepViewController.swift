@@ -17,7 +17,7 @@ class EditLastStepViewController: UIViewController {
     private var resultData = [SearchBranchRecords]()
     private var selectedUser:SearchBranchRecords?
     var transactionRequestId:String?
-    
+    var isVaction = false
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -96,16 +96,16 @@ extension EditLastStepViewController{
         
         if let selectedUser = selectedUser, let transactionRequestId = transactionRequestId{
             showLoadingActivity()
-            APIController.shard.editUserStep(user_id: selectedUser.value ?? "", transaction_request_id: transactionRequestId) {
+            APIController.shard.editUserStep(formType: isVaction ? "FORM_HRV1" : "FORM_CT1" ,user_id: selectedUser.value ?? "", transaction_request_id: transactionRequestId) {
                 data in
                 DispatchQueue.main.async {
                     self.hideLoadingActivity()
                     if let status = data.status,status{
                         SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
-                        NotificationCenter.default.post(name: .init("ReloadVactionData"), object: nil)
+                        if self.isVaction { NotificationCenter.default.post(name: .init("ReloadVactionData"), object: nil) }
                         self.navigationController?.dismiss(animated: true)
                     }else{
-                        SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
+                        SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknow error...")
                     }
                 }
                 

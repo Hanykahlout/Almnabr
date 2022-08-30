@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,18 +16,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttachmentsCell" rowHeight="50" id="KGk-i7-Jjw" customClass="AttachmentsCell" customModule="Almnabr" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="AttachmentsCell" rowHeight="25" id="KGk-i7-Jjw" customClass="AttachmentsCell" customModule="Almnabr" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="321" height="61"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
+                <rect key="frame" x="0.0" y="0.0" width="321" height="61"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lY-Xx-P0u">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                        <rect key="frame" x="0.0" y="0.0" width="321" height="50"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Asw-ux-aSD">
-                                <rect key="frame" x="10" y="10" width="300" height="40"/>
+                                <rect key="frame" x="10" y="10" width="301" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n57-iX-x9f">
                                         <rect key="frame" x="0.0" y="8.5" width="7" height="23"/>
@@ -36,10 +36,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5R-cT-Ptc">
-                                        <rect key="frame" x="17" y="0.0" width="213" height="40"/>
+                                        <rect key="frame" x="17" y="0.0" width="214" height="40"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SBF-BK-HOI">
-                                                <rect key="frame" x="10" y="5" width="193" height="30"/>
+                                                <rect key="frame" x="10" y="5" width="194" height="30"/>
                                                 <color key="textColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="13"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -62,7 +62,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wlO-ed-63w">
-                                        <rect key="frame" x="250" y="10" width="20" height="20"/>
+                                        <rect key="frame" x="251" y="10" width="20" height="20"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="EiJ-bS-wvB"/>
@@ -81,7 +81,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAO-cF-0b4">
-                                        <rect key="frame" x="280" y="10" width="20" height="20"/>
+                                        <rect key="frame" x="281" y="10" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="n7x-zn-e1f"/>
                                             <constraint firstAttribute="width" constant="20" id="vO2-eS-MXp"/>
@@ -101,7 +101,7 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xCY-e0-kG0">
-                                <rect key="frame" x="0.0" y="60" width="320" height="1"/>
+                                <rect key="frame" x="0.0" y="60" width="321" height="1"/>
                                 <color key="backgroundColor" white="0.73386068280000005" alpha="0.53260481439999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="oG0-Wq-1ed"/>
@@ -135,7 +135,7 @@
                 <outlet property="tfTitle" destination="SBF-BK-HOI" id="I94-E6-jYc"/>
                 <outlet property="viewBack" destination="1lY-Xx-P0u" id="Dlw-NT-BIC"/>
             </connections>
-            <point key="canvasLocation" x="137.68115942028987" y="16.071428571428569"/>
+            <point key="canvasLocation" x="138.40579710144928" y="7.7008928571428568"/>
         </tableViewCell>
     </objects>
     <resources>

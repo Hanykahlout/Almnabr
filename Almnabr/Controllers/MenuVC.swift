@@ -326,22 +326,10 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     guard didLoadHome else { return }
                     
                     let vc: TransactionsVC = AppDelegate.mainSB.instanceVC()
-                    
-//                    top_vc.navigationController?.pushViewController(vc, animated: true)
+
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
-                    
                     _ =  panel?.center(nav)
-                    
-//                    let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
-//                    self.navigationController?.pushViewController(vc, animated: true)
-//                    cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
-//                    let vc:TransactionsVC = AppDelegate.mainSB.instanceVC()
-//                    let nav = UINavigationController.init(rootViewController: vc)
-//                    vc.title =  obj.menu_name
-//                    vc.MenuObj = obj
-//                    vc.StrSubMenue = obj.menu[indexPath.row - 1].menu_name
-//                    _ =  panel?.center(nav)
                     
                 case "69":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()

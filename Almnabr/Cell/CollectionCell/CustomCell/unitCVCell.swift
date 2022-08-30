@@ -12,6 +12,7 @@ class unitCVCell: UICollectionViewCell {
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var viewBack: UIView!
+    @IBOutlet weak var deleteButton: UIButton!
     
     
     var btnDeleteAction : (()->())?

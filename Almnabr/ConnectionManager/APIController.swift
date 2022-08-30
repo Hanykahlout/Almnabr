@@ -570,6 +570,7 @@ class APIController{
         }
     }
     
+    
     func deleteEmpEducation(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
         let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/EDUCATION/\(empId)/\(branchId)"
         let headers = [ "authorization":
@@ -1092,8 +1093,8 @@ class APIController{
     }
     
     
-    func editUserStep(user_id:String,transaction_request_id:String,callback:@escaping(_ data:Edit)->Void){
-        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/asp"
+    func editUserStep(formType:String,user_id:String,transaction_request_id:String,callback:@escaping(_ data:Edit)->Void){
+        let strURL = "\(APIManager.serverURL)/form/\(formType)/asp"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1112,8 +1113,8 @@ class APIController{
         }
     }
     
-    func submitVactionApproval(transaction_request_id:String,approving_status:String,note:String,transactions_persons_action_code:String,callback:@escaping(_ data:Edit)->Void){
-        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/sr"
+    func submitApproval(formType:String,transaction_request_id:String,approving_status:String,note:String,transactions_persons_action_code:String,callback:@escaping(_ data:Edit)->Void){
+        let strURL = "\(APIManager.serverURL)/form/\(formType)/sr"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1441,8 +1442,214 @@ class APIController{
     }
     
     
+    func getContractDetails(transactionId:String,callback:@escaping (_ data:NewContractDataResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/form/FORM_CT1/vr/\(transactionId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : NewContractDataResponse = Mapper<NewContractDataResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
     
+    func getSendCodeWays(callback:@escaping (_ data:SendCodeWaysResponse) -> Void){
+        
+        let strURL = "\(APIManager.serverURL)/tc/sender/select"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SendCodeWaysResponse = Mapper<SendCodeWaysResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    func sendCodeForApproval(body:[String:Any],callback:@escaping (_ data:SettingsData) -> Void){
+        
+        let strURL = "\(APIManager.serverURL)/tc/sender/send_code"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request(strURL, method: .post,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SettingsData = Mapper<SettingsData>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    func deleteItemCheckList(param:[String:Any],callback: @escaping (_ data:SettingsData)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/tasks/delete_task_point"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: param , headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                print("THE RESPONSE",str)
+                if let parsedMapperString : SettingsData = Mapper<SettingsData>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func updateChecklistItem(param:[String:Any],callback: @escaping (_ data:SettingsData)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/tasks/update_task_points_all"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: param , headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                print("THE RESPONSE",str)
+                if let parsedMapperString : SettingsData = Mapper<SettingsData>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getCheckListItemFiles(sub_point_id:String,callback: @escaping (_ data:CheckListItemFile)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/get_files_in_sub_points"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: ["sub_point_id":sub_point_id] , headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : CheckListItemFile = Mapper<CheckListItemFile>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func getTimeLineForCheckListItem(sub_point_id:String,callback: @escaping (_ data:CheckListItemHistory)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/get_logs_in_sub_points"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: ["sub_point_id":sub_point_id] , headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : CheckListItemHistory = Mapper<CheckListItemHistory>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
 
     
+    func getUsersForCheckListItem(sub_point_id:String,callback: @escaping (_ data:CheckListItemUsers)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/get_emp_in_sub_points"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: ["sub_point_id":sub_point_id] , headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : CheckListItemUsers = Mapper<CheckListItemUsers>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    
+    func updateCheckListTitle(pointId:String,title:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/update_task_point_main"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        let param = [
+            "point_id": pointId,
+            "title": title
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: param, headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AddTicketCommentResponse = Mapper<AddTicketCommentResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func addCheckListItem(url:String,filesUrl:[URL?],parameters:[String:Any],callback:@escaping (_ data:AddTicketCommentResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/\(url)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            do{
+                for i in 0..<filesUrl.count{
+                    guard let fileUrl = filesUrl[i] else {
+                        continue
+                    }
+
+                    let data = try Data(contentsOf: fileUrl)
+                    multipartFormData.append(data, withName: "attachments[\(i)][file]", fileName: "\(Date.init().timeIntervalSince1970).\(fileUrl.pathExtension)", mimeType: fileUrl.mimeType())
+                }
+            }catch{
+                
+            }
+            
+            for (key, value) in parameters {
+                if let temp = value as? String {
+                    multipartFormData.append(temp.data(using: .utf8)!, withName: key)
+                }
+            }
+            
+        }, to: URL(string: strURL)!, method: .post , headers: headers) { (result:SessionManager.MultipartFormDataEncodingResult) in
+            switch result{
+            case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
+                upload.responseJSON { (response:DataResponse<Any>) in
+                    if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                        
+                        if let parsedMapperString : AddTicketCommentResponse = Mapper<AddTicketCommentResponse>().map(JSONString:str){
+                            callback(parsedMapperString)
+                        }
+                    }
+                }
+            case .failure(let error):
+                print("Error:",error.localizedDescription)
+                break
+            }
+        }
+    }
+    
+    
+    func startEndCheckListItem(point_id:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/start_end_timer_check"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: ["point_id":point_id] , headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AddTicketCommentResponse = Mapper<AddTicketCommentResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
     
 }
+
+
+

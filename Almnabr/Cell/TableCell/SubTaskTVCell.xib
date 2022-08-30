@@ -26,20 +26,41 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ods-gg-Cy4">
                         <rect key="frame" x="10" y="10" width="300" height="31"/>
                         <subviews>
-                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hr0-Ra-jP8">
-                                <rect key="frame" x="251" y="5" width="44" height="22"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hr0-Ra-jP8">
+                                <rect key="frame" x="227" y="5" width="68" height="19"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xi8-Ju-Cgh">
-                                        <rect key="frame" x="0.0" y="0.0" width="19.5" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z72-oo-8Rd">
+                                        <rect key="frame" x="0.0" y="0.0" width="15.5" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="19" id="XEc-OK-U5x"/>
+                                            <constraint firstAttribute="width" constant="15.5" id="ZE0-m4-1QQ"/>
+                                        </constraints>
                                         <color key="tintColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="square.and.arrow.down" catalog="system"/>
+                                        <state key="normal" image="eye"/>
+                                        <connections>
+                                            <action selector="viewAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="n7F-mV-jRp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xi8-Ju-Cgh">
+                                        <rect key="frame" x="25.5" y="2" width="15.5" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="mqY-Ql-mpj"/>
+                                            <constraint firstAttribute="width" constant="15.5" id="xGC-l3-Cdq"/>
+                                        </constraints>
+                                        <color key="tintColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="editing"/>
                                         <connections>
                                             <action selector="didDownloadButtonPressd:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Gz1-LI-c83"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVq-DX-ccQ">
-                                        <rect key="frame" x="24.5" y="0.0" width="19.5" height="22"/>
+                                        <rect key="frame" x="51" y="0.0" width="17" height="19"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="19" id="axd-FB-ZF2"/>
+                                            <constraint firstAttribute="width" constant="17" id="zLQ-tn-382"/>
+                                        </constraints>
                                         <color key="tintColor" systemColor="systemRedColor"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" image="trash" catalog="system"/>
@@ -50,7 +71,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="BhD-ex-gdV">
-                                <rect key="frame" x="35" y="5" width="206" height="21"/>
+                                <rect key="frame" x="35" y="5" width="182" height="21"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="TNs-LV-wLd">
                                         <rect key="frame" x="0.0" y="0.0" width="32" height="21"/>
@@ -74,7 +95,7 @@
                                 </subviews>
                             </stackView>
                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="XNv-0Z-0gS">
-                                <rect key="frame" x="10" y="47" width="280" height="30"/>
+                                <rect key="frame" x="10" y="-1" width="280" height="30"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Egw-QO-KxV"/>
@@ -139,6 +160,7 @@
                 <outlet property="btnCheck" destination="h4t-8W-hl2" id="Z1K-RT-CeJ"/>
                 <outlet property="btnDownload" destination="xi8-Ju-Cgh" id="6yW-MW-rv6"/>
                 <outlet property="collection" destination="XNv-0Z-0gS" id="l08-mO-i1v"/>
+                <outlet property="deleteEditStackView" destination="hr0-Ra-jP8" id="HXC-NZ-EUy"/>
                 <outlet property="lblDate" destination="DMo-2i-iyB" id="rS9-8P-KnD"/>
                 <outlet property="lblTitle" destination="QCw-bt-e1Y" id="VFc-05-Tez"/>
                 <outlet property="viewBack" destination="Ods-gg-Cy4" id="aHC-Bs-Gox"/>
@@ -147,8 +169,9 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="editing" width="170.5" height="170.5"/>
+        <image name="eye" width="170.5" height="170.5"/>
         <image name="square" catalog="system" width="128" height="114"/>
-        <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

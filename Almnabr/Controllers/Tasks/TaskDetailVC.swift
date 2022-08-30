@@ -63,6 +63,22 @@ class TaskDetailVC: UIViewController {
             guard let status = notify.object as? String else { return }
             self.lbl_status_done.text = status
         }
+        
+        NotificationCenter.default.addObserver(forName: .init(rawValue: "UpdateCheckListItemData"), object: nil, queue: .main) { notify in
+            guard let data = notify.object as? SubCheckObj else { return }
+            let checkListIndex = self.arr_data.firstIndex(where: {$0.check_id == data.point_id})
+            if let checkListIndex = checkListIndex{
+                let index = self.arr_data[checkListIndex].sub_checks.firstIndex(where: {$0.check_id == data.check_id})
+                if let index = index {
+                    self.arr_data[checkListIndex].sub_checks[index] = data
+                    //                    self.tableChecklist.reloadRows(at: [IndexPath(row: checkListIndex, section: 0)], with: .automatic)
+                    
+                    let cell = self.tableChecklist.cellForRow(at: IndexPath(row: checkListIndex, section: 0)) as! CheckListCell
+                    cell.itemTable.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                }
+            }
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -290,7 +306,7 @@ class TaskDetailVC: UIViewController {
         APIManager.sendRequestPostAuth(urlString: "tasks/change_status_done", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
-//            let status = response["status"] as? Bool
+            //            let status = response["status"] as? Bool
             self.hideLoadingActivity()
             
         }
@@ -338,7 +354,7 @@ class TaskDetailVC: UIViewController {
     
     
     func Add_comment(title:String){
-
+        
         self.showLoadingActivity()
         let param : [String:Any] = ["task_id" : self.task_id,
                                     "notes" : title]
@@ -470,7 +486,6 @@ class TaskDetailVC: UIViewController {
     
 }
 
-
 extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -486,6 +501,7 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
             
             let obj = arr_data[indexPath.item]
             cell.hideSelectedItems = obj.isUnselectedData
+            
             if cell.hideSelectedItems{
                 cell.viewItemsButton.tag = 0
                 cell.viewItemsButton.setImage(UIImage(systemName: "eye.slash"), for: .normal)
@@ -493,8 +509,11 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                 cell.viewItemsButton.tag = 1
                 cell.viewItemsButton.setImage(UIImage(systemName: "eye"), for: .normal)
             }
+            
+            
+            cell.editTitleButton.isHidden = obj.user_add_id != Auth_User.user_id
             cell.arr_data = obj.sub_checks
-            cell.lblTitle.text = obj.title
+            cell.titleTextField.text = obj.title
             cell.lblPercent.text = obj.progres + "%"
             
             let value = Float(obj.progres) ?? 0.0
@@ -509,17 +528,57 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                 cell.deleteBtn.isHidden = true
             }
             
+            cell.btnStartEndTimer = {
+                self.showLoadingActivity()
+                APIController.shard.startEndCheckListItem(point_id: obj.check_id) { data in
+                    DispatchQueue.main.async {
+                        self.hideLoadingActivity()
+                        if let status = data.status , status{
+                            cell.successStartEndTimer()
+                            
+                        }
+                    }
+                }
+            }
+            
+            
             cell.btnDeleteAction = {
                 self.delete_item(point_id: obj.check_id)
+            }
+            
+            cell.btnEditItemAction = { data in
+                let vc:AddPointVC  = AppDelegate.TicketSB.instanceVC()
+                vc.data = data
+                vc.isView = false
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+            cell.btnViewItemAction = { data in
+                let vc:AddPointVC  = AppDelegate.TicketSB.instanceVC()
+                vc.data = data
+                vc.isView = true
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
+            cell.btnEditCheckListTitle = { title in
+                self.showLoadingActivity()
+                APIController.shard.updateCheckListTitle(pointId: obj.check_id, title: title) { data in
+                    DispatchQueue.main.async {
+                        self.hideLoadingActivity()
+                        if data.status == nil || data.status == false{
+                            SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknown error...")
+                        }else{
+                            self.arr_data[indexPath.row].title = title
+                        }
+                    }
+                }
             }
             
             cell.btnAddItemAction = {
                 
                 let vc:AddPointVC  = AppDelegate.TicketSB.instanceVC()
                 vc.point_id = obj.check_id
-                vc.delegate = {
-                    self.get_data()
-                }
+                vc.isView = false
                 self.navigationController?.pushViewController(vc, animated: true)
             }
             
@@ -598,7 +657,7 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                 obj.isHiddenReply = isHidden
                 self.table_Activity.reloadRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .automatic)
             }
-                        
+            
             cell.btnDeleteReplyAction = { comment_id ,replyIndex in
                 self.delete_comment(comment_id: comment_id,commentIndex:indexPath.row,replyIndex:replyIndex)
             }
@@ -639,7 +698,7 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == tableChecklist{
-
+            
             let obj = arr_data[indexPath.item]
             obj.isHidden = !(obj.isHidden )
             let cell = tableChecklist.cellForRow(at: indexPath) as! CheckListCell
@@ -694,7 +753,7 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
             
             
             let DeleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
-//                self.delete_comment(comment_id: obj.history_id,commentIndex: )
+                //                self.delete_comment(comment_id: obj.history_id,commentIndex: )
             }
             
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
@@ -743,7 +802,6 @@ extension TaskDetailVC{
 
 extension TaskDetailVC: UITextViewDelegate {
     
-    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if txt_comment.textColor == .lightGray {
             txt_comment.text = ""
@@ -752,6 +810,7 @@ extension TaskDetailVC: UITextViewDelegate {
             
         }
     }
+    
     
     func textViewDidEndEditing(_ textView: UITextView) {
         
@@ -764,55 +823,40 @@ extension TaskDetailVC: UITextViewDelegate {
         
     }
     
-    
 }
 
 // MARK: - Socket Handling
 
 extension TaskDetailVC{
+    
     private func addSocketObservers(){
         commentsSocket()
         checkListSocket()
-        memberAndDateSocket()
     }
-    
-    
-    private func memberAndDateSocket(){
-        SocketIOController.shard.taskMembersHandler(ticketId: ticket_id, taskId: task_id, userID: Auth_User.user_id) { data in
-            print("SADASDAS",data)
-        }
-        
-        SocketIOController.shard.taskDateHandler(ticketId: ticket_id, taskId: task_id, userID: Auth_User.user_id) { data in
-            print("SADASDAS2",data)
-        }
-        
-        
-    }
-    
-    
     
     private func checkListSocket(){
         SocketIOController.shard.taskCheckListsHandler(ticketId: ticket_id, taskId: task_id, userID: Auth_User.user_id) { data in
+            print("ASASASASSSS",data)
             guard let data = data.first as? [String:Any],
                   let content = data["content"] as? [String:Any],
                   let type = data["type"] as? String
             else { return }
-
+            
             switch type{
+                
             case "add_checklist":
                 let obj = PointTaskObj(content)
                 self.arr_data.insert(obj, at: 0)
                 self.tableChecklist.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-            
+                
             case "update_checklist":
                 let obj = PointTaskObj(content)
                 let index = self.arr_data.firstIndex(where: {$0.check_id == obj.check_id})
                 if let index = index {
-                    self.arr_data[index] = obj
+                    self.arr_data[index].title = obj.title
                     self.tableChecklist.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
                 }
                 
-     
             case "delete_checklist":
                 guard let check_id = content["check_id"] as? Int
                 else { return }
@@ -861,7 +905,7 @@ extension TaskDetailVC{
                         self.arr_data[index].sub_checks.remove(at: itemIndex)
                         self.tableChecklist.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
                     }
-                }                
+                }
             case "change_progress":
                 guard let check_id = content["check_id"] as? String,
                       let sub_check_id = content["sub_check_id"] as? Int,
@@ -884,6 +928,8 @@ extension TaskDetailVC{
             
         }
     }
+    
+    
     
     private func commentsSocket(){
         SocketIOController.shard.commentsTaskHandler(ticketId: ticket_id , taskId: task_id, userID: Auth_User.user_id) { data in
@@ -956,7 +1002,7 @@ extension TaskDetailVC{
             }
         }
     }
-
+    
 }
 
 

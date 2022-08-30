@@ -21,7 +21,8 @@ struct NoteRecordResponse : Mappable {
 	var transactions_notes_text : String?
 	var transactions_notes_datetime : String?
 	var transactions_notes_user_name : String?
-
+    
+    
 	init?(map: Map) {
 
 	}

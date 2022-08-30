@@ -185,7 +185,7 @@ extension CheckListVC: UITableViewDelegate , UITableViewDataSource{
         let obj = arr_data[indexPath.item]
         
         cell.arr_data = obj.sub_checks
-        cell.lblTitle.text = obj.title
+        cell.titleTextField.text = obj.title
         cell.lblPercent.text = obj.progres + "%"
         
         let value = Float(obj.progres) ?? 0.0
@@ -208,9 +208,6 @@ extension CheckListVC: UITableViewDelegate , UITableViewDataSource{
             
             let vc:AddPointVC  = AppDelegate.TicketSB.instanceVC()
             vc.point_id = obj.check_id
-            vc.delegate = {
-                self.get_data()
-            }
             self.navigationController?.pushViewController(vc, animated: true)
         }
         

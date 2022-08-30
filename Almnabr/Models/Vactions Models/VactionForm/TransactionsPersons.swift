@@ -14,7 +14,7 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct TransactionsPersonsVactionData : Mappable {
+struct TransactionsPersons : Mappable {
 	var transactions_persons_id : String?
 	var transaction_request_id : String?
 	var user_id : String?

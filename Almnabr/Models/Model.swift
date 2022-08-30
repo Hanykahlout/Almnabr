@@ -1478,14 +1478,10 @@ class SupplierObj {
     var value                  :String = ""
     
     init(_ Obj : [String:Any]) {
-        
-        
         self.label                   = Obj["label"] as? String ?? ""
         self.result                  = Obj["result"] as? String ?? ""
         self.transaction_request_id  = Obj["transaction_request_id"] as? String ?? ""
         self.value                   = Obj["value"] as? String ?? ""
-        
-        
     }}
 
 
@@ -2589,12 +2585,42 @@ class SubCheckObj {
     var secondname_english_comment :String = ""
     var secondname_english_end :String = ""
     var user_username :String = ""
+    var user_add_id: String = ""
+    var prg_done: String = ""
     var users :[ProfileObj] = []
     
+    var char_item: String = ""
+    var check_logs: String = ""
+    var end_date_timer: String = ""
+    var group_id: String = ""
+    var group_name: String = ""
+    var group_type_id: String = ""
+    var group_user_id: String = ""
+    var hours_between_dates: String = ""
+    var hours_by_manual: String = ""
+    var is_can_delete: String = ""
+    var is_can_edit: String = ""
+    var start_date: String = ""
+    var start_date_timer: String = ""
     
     
     init(_ Obj : [String:Any]) {
      
+        
+        self.char_item = Obj["char_item"] as? String ?? ""
+        self.check_logs = Obj["check_logs"] as? String ?? ""
+        self.end_date_timer = Obj["end_date_timer"] as? String ?? ""
+        self.group_id = Obj["group_id"] as? String ?? ""
+        self.group_name = Obj["group_name"] as? String ?? ""
+        self.group_type_id = Obj["group_type_id"] as? String ?? ""
+        self.group_user_id = Obj["group_user_id"] as? String ?? ""
+        self.hours_between_dates = Obj["hours_between_dates"] as? String ?? ""
+        self.hours_by_manual = Obj["hours_by_manual"] as? String ?? ""
+        self.is_can_delete = Obj["is_can_delete"] as? String ?? ""
+        self.is_can_edit = Obj["is_can_edit"] as? String ?? ""
+        self.start_date = Obj["start_date"] as? String ?? ""
+        self.start_date_timer = Obj["start_date_timer"] as? String ?? ""
+       
         
         self.check_id = Obj["check_id"] as? String ?? ""
         self.comment = Obj["comment"] as? String ?? ""
@@ -2626,10 +2652,10 @@ class SubCheckObj {
         self.secondname_english_comment = Obj["secondname_english_comment"] as? String ?? ""
         self.secondname_english_end = Obj["secondname_english_end"] as? String ?? ""
         self.user_username = Obj["user_username"] as? String ?? ""
-        
+        self.user_add_id = Obj["user_add_id"] as? String ?? ""
+        self.prg_done = Obj["prg_done"] as? String ?? ""
         let file_arr   = Obj["files"] as? [[String:Any]] ?? []
         self.files     = file_arr.map{DocumentObj.init($0)}
-        
         let user_arr   = Obj["users"] as? [[String:Any]] ?? []
         self.users     = user_arr.map{ProfileObj.init($0)}
         

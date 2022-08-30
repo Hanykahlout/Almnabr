@@ -4750,6 +4750,14 @@
             </objects>
             <point key="canvasLocation" x="-1355" y="1410"/>
         </scene>
+        <!--Contract Page View Controller-->
+        <scene sceneID="lBA-zJ-PgL">
+            <objects>
+                <pageViewController storyboardIdentifier="ContractPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="tpu-zB-33U" customClass="ContractPageViewController" customModule="Almnabr" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ak2-kz-ESn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-549" y="1454"/>
+        </scene>
         <!--Add AttachmentsVC-->
         <scene sceneID="qQl-2U-dni">
             <objects>
@@ -4926,20 +4934,20 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow.left" catalog="system" width="32" height="32"/>
-        <image name="arrow.right" catalog="system" width="32" height="32"/>
-        <image name="arrowtriangle.down.fill" catalog="system" width="32" height="32"/>
-        <image name="building.fill" catalog="system" width="32" height="32"/>
+        <image name="arrow.left" catalog="system" width="128" height="98"/>
+        <image name="arrow.right" catalog="system" width="128" height="98"/>
+        <image name="arrowtriangle.down.fill" catalog="system" width="128" height="124"/>
+        <image name="building.fill" catalog="system" width="108" height="128"/>
         <image name="check" width="24" height="24"/>
-        <image name="doc.text" catalog="system" width="32" height="32"/>
+        <image name="doc.text" catalog="system" width="115" height="128"/>
         <image name="logo" width="243.05000305175781" height="238.5"/>
-        <image name="macwindow.on.rectangle.rtl" catalog="system" width="32" height="32"/>
+        <image name="macwindow.on.rectangle.rtl" catalog="system" width="128" height="97"/>
         <image name="menu" width="512" height="512"/>
-        <image name="minus.square.fill" catalog="system" width="32" height="32"/>
-        <image name="plus.app.fill" catalog="system" width="32" height="32"/>
-        <image name="plus.square.fill" catalog="system" width="32" height="32"/>
-        <image name="square" catalog="system" width="32" height="32"/>
-        <image name="xmark.circle.fill" catalog="system" width="32" height="32"/>
+        <image name="minus.square.fill" catalog="system" width="128" height="114"/>
+        <image name="plus.app.fill" catalog="system" width="128" height="114"/>
+        <image name="plus.square.fill" catalog="system" width="128" height="114"/>
+        <image name="square" catalog="system" width="128" height="114"/>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

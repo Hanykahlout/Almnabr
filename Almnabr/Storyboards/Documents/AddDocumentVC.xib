@@ -19,17 +19,17 @@
             <connections>
                 <outlet property="addAttachsView" destination="Fih-lI-Bw6" id="abf-M8-HTe"/>
                 <outlet property="attachTableView" destination="qiZ-Ua-eET" id="TID-0g-K2E"/>
-                <outlet property="branchTextField" destination="Dku-HS-YLM" id="jNB-hX-Bz8"/>
+                <outlet property="branchTextField" destination="yZm-rA-pEe" id="8QL-t7-bW7"/>
                 <outlet property="descriptionHintLabel" destination="gZI-BA-AK6" id="BVk-xc-aBa"/>
                 <outlet property="descriptionTextView" destination="cfa-dX-Nik" id="uha-lP-66W"/>
-                <outlet property="documentIdTextField" destination="Y1Q-6n-kBy" id="u2v-9d-h9X"/>
-                <outlet property="idExpiryTextField" destination="7YT-0s-1uH" id="su0-Lu-bGr"/>
-                <outlet property="issueDateTextField" destination="5dc-lZ-brc" id="h3i-sV-p9I"/>
-                <outlet property="nameArTextField" destination="SDm-iS-k0G" id="J5l-DP-dXr"/>
-                <outlet property="nameEnTextField" destination="wZm-7g-vYJ" id="Hu6-Yd-tGJ"/>
+                <outlet property="documentIdTextField" destination="XHQ-ja-fzv" id="Pup-Sc-Eqi"/>
+                <outlet property="idExpiryTextField" destination="mfu-jo-bxv" id="18w-GF-NHC"/>
+                <outlet property="issueDateTextField" destination="pVw-Cz-Ygt" id="FM5-zv-ByG"/>
+                <outlet property="nameArTextField" destination="pVi-ia-ota" id="qKH-cf-pkr"/>
+                <outlet property="nameEnTextField" destination="en2-ar-rP8" id="e4T-tV-EV2"/>
                 <outlet property="plusButton" destination="MEv-KB-HtD" id="4Eh-Od-XKo"/>
                 <outlet property="tableViewHeight" destination="sga-VP-onT" id="moG-Oo-Id1"/>
-                <outlet property="typeTextField" destination="9aE-y9-Uah" id="wM4-Dx-Jaf"/>
+                <outlet property="typeTextField" destination="EXl-sC-uO0" id="CAT-OA-ZEM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewAttachView" destination="71e-dy-gW0" id="VPo-7u-UYM"/>
             </connections>
@@ -94,11 +94,24 @@
                                                                                         <constraint firstItem="N1h-H5-D1V" firstAttribute="top" secondItem="xmr-C8-kCu" secondAttribute="top" id="suE-We-WeT"/>
                                                                                     </constraints>
                                                                                 </view>
-                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name English" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wZm-7g-vYJ">
+                                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="en2-ar-rP8">
                                                                                     <rect key="frame" x="0.0" y="37" width="163" height="33"/>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                    <color key="textColor" systemColor="labelColor"/>
                                                                                     <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="14"/>
-                                                                                    <textInputTraits key="textInputTraits"/>
-                                                                                </textField>
+                                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="border_color">
+                                                                                            <color key="value" systemColor="systemGray5Color"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="border_width">
+                                                                                            <real key="value" value="1"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
+                                                                                            <real key="value" value="6"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </textView>
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
@@ -148,11 +161,24 @@
                                                                                         <constraint firstItem="RuB-cg-Giw" firstAttribute="top" secondItem="7NI-YR-zjE" secondAttribute="top" id="k2y-BS-lmk"/>
                                                                                     </constraints>
                                                                                 </view>
-                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name Arabic" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SDm-iS-k0G">
+                                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pVi-ia-ota">
                                                                                     <rect key="frame" x="0.0" y="37" width="163" height="33"/>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                    <color key="textColor" systemColor="labelColor"/>
                                                                                     <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="14"/>
-                                                                                    <textInputTraits key="textInputTraits"/>
-                                                                                </textField>
+                                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="border_color">
+                                                                                            <color key="value" systemColor="systemGray5Color"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="border_width">
+                                                                                            <real key="value" value="1"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
+                                                                                            <real key="value" value="6"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </textView>
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
@@ -207,11 +233,24 @@
                                                                                         <constraint firstItem="f1M-rO-1Bv" firstAttribute="leading" secondItem="gPS-f2-LKu" secondAttribute="leading" id="Zdo-Gr-j1E"/>
                                                                                     </constraints>
                                                                                 </view>
-                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9aE-y9-Uah">
+                                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="EXl-sC-uO0">
                                                                                     <rect key="frame" x="0.0" y="37" width="163" height="33"/>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                    <color key="textColor" systemColor="labelColor"/>
                                                                                     <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="14"/>
-                                                                                    <textInputTraits key="textInputTraits"/>
-                                                                                </textField>
+                                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="border_color">
+                                                                                            <color key="value" systemColor="systemGray5Color"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="border_width">
+                                                                                            <real key="value" value="1"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
+                                                                                            <real key="value" value="6"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </textView>
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
@@ -261,11 +300,24 @@
                                                                                         <constraint firstAttribute="bottom" secondItem="Ao9-wp-e33" secondAttribute="bottom" id="XsY-bz-VJX"/>
                                                                                     </constraints>
                                                                                 </view>
-                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Branch" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dku-HS-YLM">
+                                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yZm-rA-pEe">
                                                                                     <rect key="frame" x="0.0" y="37" width="163" height="33"/>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                    <color key="textColor" systemColor="labelColor"/>
                                                                                     <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="14"/>
-                                                                                    <textInputTraits key="textInputTraits"/>
-                                                                                </textField>
+                                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="border_color">
+                                                                                            <color key="value" systemColor="systemGray5Color"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="border_width">
+                                                                                            <real key="value" value="1"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
+                                                                                            <real key="value" value="6"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </textView>
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
@@ -320,11 +372,24 @@
                                                                                         <constraint firstAttribute="bottom" secondItem="lbt-q1-IIQ" secondAttribute="bottom" id="nnT-5u-Pu9"/>
                                                                                     </constraints>
                                                                                 </view>
-                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Issue Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dc-lZ-brc">
+                                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pVw-Cz-Ygt">
                                                                                     <rect key="frame" x="0.0" y="37" width="163" height="33"/>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                    <color key="textColor" systemColor="labelColor"/>
                                                                                     <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="14"/>
-                                                                                    <textInputTraits key="textInputTraits"/>
-                                                                                </textField>
+                                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="border_color">
+                                                                                            <color key="value" systemColor="systemGray5Color"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="border_width">
+                                                                                            <real key="value" value="1"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
+                                                                                            <real key="value" value="6"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </textView>
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
@@ -374,11 +439,24 @@
                                                                                         <constraint firstItem="gzz-aI-z7M" firstAttribute="leading" secondItem="M9t-fp-xZ9" secondAttribute="leading" id="d80-n8-YHJ"/>
                                                                                     </constraints>
                                                                                 </view>
-                                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="ID Expiry" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7YT-0s-1uH">
+                                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mfu-jo-bxv">
                                                                                     <rect key="frame" x="0.0" y="37" width="163" height="33"/>
+                                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                                    <color key="textColor" systemColor="labelColor"/>
                                                                                     <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="14"/>
-                                                                                    <textInputTraits key="textInputTraits"/>
-                                                                                </textField>
+                                                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                                    <userDefinedRuntimeAttributes>
+                                                                                        <userDefinedRuntimeAttribute type="color" keyPath="border_color">
+                                                                                            <color key="value" systemColor="systemGray5Color"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="border_width">
+                                                                                            <real key="value" value="1"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                        <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
+                                                                                            <real key="value" value="6"/>
+                                                                                        </userDefinedRuntimeAttribute>
+                                                                                    </userDefinedRuntimeAttributes>
+                                                                                </textView>
                                                                             </subviews>
                                                                         </stackView>
                                                                     </subviews>
@@ -430,11 +508,24 @@
                                                                                 <constraint firstAttribute="bottom" secondItem="jbw-Fc-DPx" secondAttribute="bottom" id="jaF-3K-NlQ"/>
                                                                             </constraints>
                                                                         </view>
-                                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Document No" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y1Q-6n-kBy">
+                                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="XHQ-ja-fzv">
                                                                             <rect key="frame" x="0.0" y="37" width="346" height="33"/>
+                                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                            <color key="textColor" systemColor="labelColor"/>
                                                                             <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="14"/>
-                                                                            <textInputTraits key="textInputTraits"/>
-                                                                        </textField>
+                                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="border_color">
+                                                                                    <color key="value" systemColor="systemGray5Color"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="border_width">
+                                                                                    <real key="value" value="1"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
+                                                                                    <real key="value" value="6"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
+                                                                        </textView>
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
@@ -16404,6 +16495,9 @@ AAAAAABWAAAAAAAAAAAAAAAAAA5hlg
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

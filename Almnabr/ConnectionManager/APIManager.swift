@@ -502,7 +502,7 @@ class APIManager: NSObject {
         Alamofire.request( strURL , method: .post, parameters: parameters,
                            encoding:  URLEncoding.default, headers: auth).responseJSON
         { response in
-
+            
             if(response.result.isSuccess)
             {
                 
@@ -602,7 +602,6 @@ class APIManager: NSObject {
                 default:
                     print("no data")
                     
-                    
                 }
             }
             
@@ -612,7 +611,7 @@ class APIManager: NSObject {
             switch result{
             case .success(let upload, _, _):
                 upload.responseJSON { response in
-                    print("Succesfully uploaded")
+                    print("Succesfully uploaded",response.result.value)
                     if let result = response.result.value as? NSDictionary {
                         //let data = result.value(forKey: "data") as? NSDictionary
                         completion(result as! [String : Any])
@@ -625,7 +624,7 @@ class APIManager: NSObject {
                     }
                 }
             case .failure(_):
-                completion(result as! [String : Any])
+                completion([:])
             }
         }
     }
@@ -877,9 +876,9 @@ class APIManager: NSObject {
         let param = [
             "search" : search_Key,
             "lang_key" : "en",
-            "user_type_id": Auth_User.user_id
+            "user_type_id": "1"
         ]
-
+        
         Alamofire.request( strURL , method: .get, parameters: param,
                            encoding:  URLEncoding.queryString, headers: auth).responseJSON
         { response in

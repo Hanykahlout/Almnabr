@@ -102,67 +102,7 @@ class TicketViewController: UIViewController {
         }
         
     }
-    
-    
-    private func addSocketObservers(){
-
-        SocketIOController.shard.ticketStatus(ticketId: ticket_id, userID: Auth_User.user_id) { data in
-            guard let data = data.first as? [String:Any] else { return }
-            guard let content = data["content"] as? [String:Any] else { return }
-            let status = content["ticket_status"] as? String ?? ""
-            DispatchQueue.main.async {
-                self.setTicketStatus(status: String(status))
-            }
-        }
-        
-        SocketIOController.shard.taskHandler(ticketId: ticket_id, userID: Auth_User.user_id) { data in
-            guard let data = data.first as? [String:Any] else { return }
-            guard let content = data["content"] as? [String:Any] else { return }
-            let index = Int(content["task_status"] as! String)! - 1
-            let obj =  TaskObj.init(content)
-            
-            if let type = data["type"] as? String{
-                switch type {
-                case "edit_task":
-                    self.boards[index].items.removeAll{$0.task_id == content["task_id"] as! String}
-                    self.boards[index].items.append(obj)
-                case "add_task":
-                    self.boards[index].items.append(obj)
-                case "delete_task":
-                    self.boards[index].items.removeAll{$0.task_id == String(content["task_id"] as! Int)}
-                case "change_status_task":
-                    var oldIndex:Int?
-                    for statusTable in self.boards{
-                        for index in 0..<statusTable.items.count{
-                            if statusTable.items[index].task_id == content["task_id"] as! String{
-                                oldIndex = Int(statusTable.items[index].task_status)! - 1
-                                self.boards[oldIndex!].items.remove(at: index)
-                                break
-                            }
-                        }
-                     
-                    }
-                    
-                    if let oldIndex = oldIndex {
-                        DispatchQueue.main.async {
-                            let cell = self.collectionView.cellForItem(at: IndexPath(row: oldIndex, section: 0)) as! BoardCollectionViewCell
-                            cell.tableView.reloadData()
-                        }
-                        
-                    }
-                    
-                    
-                    NotificationCenter.default.post(name: .init(rawValue: "UpdateTaskStatus"), object: obj.status_done_name)
-                    self.boards[index].items.append(obj)
-                default:
-                    break
-                }
-                
-                let cell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as! BoardCollectionViewCell
-                cell.tableView.reloadData()
-            }
-        }
-    }
+   
 
     
     private func setupNavigationBar() {
@@ -448,6 +388,72 @@ extension TicketViewController:UICollectionViewDelegate,UICollectionViewDataSour
     }
 }
 
+// MARK: - Socket IO Handling
+extension TicketViewController{
+    
+    private func addSocketObservers(){
+
+        SocketIOController.shard.ticketStatus(ticketId: ticket_id, userID: Auth_User.user_id) { data in
+            guard let data = data.first as? [String:Any] else { return }
+            guard let content = data["content"] as? [String:Any] else { return }
+            let status = content["ticket_status"] as? String ?? ""
+            DispatchQueue.main.async {
+                self.setTicketStatus(status: String(status))
+            }
+        }
+        
+        SocketIOController.shard.taskHandler(ticketId: ticket_id, userID: Auth_User.user_id) { data in
+            guard let data = data.first as? [String:Any] else { return }
+            guard let content = data["content"] as? [String:Any] else { return }
+            let index = Int(content["task_status"] as! String)! - 1
+            let obj =  TaskObj.init(content)
+            
+            if let type = data["type"] as? String{
+                switch type {
+                case "edit_task":
+                    self.boards[index].items.removeAll{$0.task_id == content["task_id"] as! String}
+                    self.boards[index].items.append(obj)
+                case "add_task":
+                    self.boards[index].items.append(obj)
+                case "delete_task":
+                    self.boards[index].items.removeAll{$0.task_id == String(content["task_id"] as! Int)}
+                case "change_status_task":
+                    var oldIndex:Int?
+                    for statusTable in self.boards{
+                        for index in 0..<statusTable.items.count{
+                            if statusTable.items[index].task_id == content["task_id"] as! String{
+                                oldIndex = Int(statusTable.items[index].task_status)! - 1
+                                self.boards[oldIndex!].items.remove(at: index)
+                                break
+                            }
+                        }
+                     
+                    }
+                    
+                    if let oldIndex = oldIndex {
+                        DispatchQueue.main.async {
+                            let cell = self.collectionView.cellForItem(at: IndexPath(row: oldIndex, section: 0)) as! BoardCollectionViewCell
+                            cell.tableView.reloadData()
+                        }
+                        
+                    }
+                    
+                    
+                    NotificationCenter.default.post(name: .init(rawValue: "UpdateTaskStatus"), object: obj.status_done_name)
+                    self.boards[index].items.append(obj)
+                default:
+                    break
+                }
+                
+                let cell = self.collectionView.cellForItem(at: IndexPath(row: index, section: 0)) as! BoardCollectionViewCell
+                cell.tableView.reloadData()
+            }
+        }
+    }
+}
+
+
+
 class Board {
     
     var title: String
@@ -464,3 +470,5 @@ struct TaskSocketResponse{
     var content:TaskObj?
     var type: String?
 }
+
+

@@ -46,10 +46,10 @@ class VactionViewController: UIViewController {
     private var completed = false
     private var last = false
     
-    private var presonalDetails:[TransactionsPersonsVactionData]?
-    private var persons: [TransactionsPersonsVactionData]?
+    private var presonalDetails:[TransactionsPersons]?
+    private var persons: [TransactionsPersons]?
     private var attachData: [FormHrv1AttachmentsRecords]?
-    private var requestWaitingPerson:TransactionsPersonsVactionData?
+    private var requestWaitingPerson:TransactionsPersons?
     private var notesData: [NoteRecordResponse]?
     
     
@@ -71,7 +71,7 @@ class VactionViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        addNavigationBarTitle(navigationTitle: "Vaction From".localized())
+        addNavigationBarTitle(navigationTitle: "Vaction Form".localized())
         navigationController?.setNavigationBarHidden(false, animated: true)
         getVactionData()
     }
@@ -280,7 +280,7 @@ class VactionViewController: UIViewController {
             stepsNumLabel.text = "step 7 of 7"
             stepsProgress.progress = 7.0/7.0
             selectedStepLabel.text = "Last Vacation Step"
-        
+            
         default:
             break
         }
@@ -334,6 +334,7 @@ class VactionViewController: UIViewController {
     
     @IBAction func editLastStepOpenedAction(_ sender: Any) {
         let vc = EditLastStepViewController()
+        vc.isVaction = true
         vc.transactionRequestId = data?.transaction_request_id ?? ""
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overCurrentContext
@@ -351,6 +352,7 @@ class VactionViewController: UIViewController {
 
 // MARK: - API Handlign
 extension VactionViewController{
+    
     
     private func getVactionData(){
         showLoadingActivity()
@@ -426,7 +428,7 @@ extension VactionViewController{
         let note = noteTextView.text!
         let transactions_persons_action_code = verficationCodeTextField.text!
         showLoadingActivity()
-        APIController.shard.submitVactionApproval(transaction_request_id: transaction_request_id, approving_status: approving_status, note: note, transactions_persons_action_code: transactions_persons_action_code) { data in
+        APIController.shard.submitApproval(formType:"FORM_HRV1",transaction_request_id: transaction_request_id, approving_status: approving_status, note: note, transactions_persons_action_code: transactions_persons_action_code) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status,status{
@@ -438,7 +440,7 @@ extension VactionViewController{
             }
         }
     }
-
+    
     
 }
 

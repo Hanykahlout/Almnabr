@@ -19,6 +19,7 @@ struct attachment {
     var type:String?
     var index:Int = 0
     var IsNew:Bool = false
+    var filePath = ""
 }
 
 struct notes {

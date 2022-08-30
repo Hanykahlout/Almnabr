@@ -18,6 +18,7 @@ struct SearchBranchRecords : Mappable {
 	var value : String?
 	var label : String?
     var flag : String?
+    var isSelected = false
     
 	init?(map: Map) {
 

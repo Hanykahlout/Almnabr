@@ -16,22 +16,26 @@ class TaskHistoryVC: UIViewController {
     
     
     var arr_data:[HistoryObj] = []
+    var data: [ListItemHistoryData]?
     var ticket_id:String = ""
     var task_id:String = ""
     var is_from_task :Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ticketStatckTimeLine()
         configNavigation()
         configGUI()
-        historySocket()
-        if is_from_task == true {
-            get_Task_data()
+        if data == nil{
+            historySocket()
+            ticketStatckTimeLine()
+            if is_from_task == true {
+                get_Task_data()
+            }else{
+                get_data()
+            }
         }else{
-            get_data()
+            img_nodata.isHidden = !data!.isEmpty
         }
-        
     }
     
 
@@ -151,20 +155,27 @@ class TaskHistoryVC: UIViewController {
 extension TaskHistoryVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arr_data.count
+        return data == nil ? arr_data.count : data!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TaskHistoryCell", for: indexPath) as! TaskHistoryCell
-        
-        let obj = arr_data[indexPath.item]
-        
-        
-        cell.lbl_emp_name.text = obj.emp_name
-        cell.lbl_title.text = obj.en_title
-        cell.lbl_insert_date.text = obj.insert_date
-        
+        if let data = data{
+            let obj = data[indexPath.row]
+            
+            cell.lbl_emp_name.text = obj.firstname_english ?? ""
+            cell.lbl_title.text = obj.notes ?? ""
+            cell.lbl_insert_date.text = obj.insert_date ?? ""
+            
+        }else{
+            let obj = arr_data[indexPath.item]
+            
+            
+            cell.lbl_emp_name.text = obj.emp_name
+            cell.lbl_title.text = obj.en_title
+            cell.lbl_insert_date.text = obj.insert_date
+        }
         return cell
         
     }

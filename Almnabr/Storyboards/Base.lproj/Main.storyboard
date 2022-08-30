@@ -6699,7 +6699,7 @@
                                                                                     <constraint firstAttribute="height" constant="40" id="eX1-Dk-epu"/>
                                                                                 </constraints>
                                                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qc7-8h-8AC">
-                                                                                    <size key="itemSize" width="142" height="30"/>
+                                                                                    <size key="itemSize" width="160" height="30"/>
                                                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -6767,6 +6767,7 @@
                                                                                         </collectionViewCellContentView>
                                                                                         <size key="customSize" width="160" height="30"/>
                                                                                         <connections>
+                                                                                            <outlet property="deleteButton" destination="T4K-Ny-C6k" id="NDt-6n-FjF"/>
                                                                                             <outlet property="lblTitle" destination="2qt-me-Sy3" id="Kre-et-8gV"/>
                                                                                             <outlet property="viewBack" destination="w6r-7B-9we" id="2md-ae-T40"/>
                                                                                         </connections>

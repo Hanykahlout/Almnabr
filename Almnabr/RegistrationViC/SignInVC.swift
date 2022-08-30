@@ -240,6 +240,7 @@ class SignInVC: UIViewController {
                 self.GoToHome()
                 Auth_User.user_id = responseObject.user_data?.user_id ?? "0"
                 Auth_User.user_type_id = responseObject.user_data?.user_type_id ?? "1"
+                Auth_User.isAdmin = responseObject.user_data?.is_admin ?? "0" == "1"
                 HelperClassSwift.IsFirstLunch = false
                 HelperClassSwift.UserName = responseObject.user_data?.user_username ?? "0"
                 HelperClassSwift.UserPassword = Password

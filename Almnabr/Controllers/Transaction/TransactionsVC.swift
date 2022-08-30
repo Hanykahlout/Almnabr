@@ -52,37 +52,32 @@ class TransactionsVC: UIViewController {
     @IBOutlet weak var view_FilterAdmin: UIView!
     
     
-    var StrTitle:String = ""
-    var StrSubMenue:String = "My Transactions"
-    var StrsearchByModule:String = ""
-    var StrsearchByForm:String = ""
-    var SearchKey:String = ""
-    var SearchAllpending:String = "all_pending"
-    var StrsearchByAdmin:Int = 1
-    var pageNumber = 1
-    var total:Int = 0
-    var allItemDownloaded = false
-    var MenuObj:MenuObj?
-    var SubMenuObj:MenuObj?
-    var arr_data:[Tcore] = []
-    var arr_module:[ModuleObj] = []
-    var arr_moduleLabel:[String] = []
-    var arr_form:[ModuleObj] = []
-    var arr_formeLabel:[String] = []
-    var arr_Admin:[String] = ["Admin".localized(),"Users".localized()]
-    var arr_Admin_localized:[String] = ["Admin","Users"]
-    var arr_AllPending:[String] = ["all_pending_need_action" , "all_pending","all_complete","all_sent"]
-    
-    var arr_AllPending_localized:[String] = ["all_pending_need_action".localized() , "all_pending".localized(),"all_complete".localized(),"all_sent".localized()]
-    var cellWidths: [CGFloat] = [1200]
-    var arr_NoData:[String] = ["No items found".localized()]
-    
-    
-    let fontStyle: FontAwesomeStyle = .solid
-    
-    let dropUpmage =  UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
-    
-    let dropDownmage =  UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
+    private var StrTitle:String = ""
+    private var StrSubMenue:String = "My Transactions"
+    private var StrsearchByModule:String = ""
+    private var StrsearchByForm:String = ""
+    private var SearchKey:String = ""
+    private var SearchAllpending:String = "all_pending"
+    private var StrsearchByAdmin:Int = 1
+    private var pageNumber = 1
+    private var total:Int = 0
+    private var allItemDownloaded = false
+    private var MenuObj:MenuObj?
+    private var SubMenuObj:MenuObj?
+    private var arr_data:[Tcore] = []
+    private var arr_module:[ModuleObj] = []
+    private var arr_moduleLabel:[String] = []
+    private var arr_form:[ModuleObj] = []
+    private var arr_formeLabel:[String] = []
+    private var arr_Admin:[String] = ["Admin".localized(),"Users".localized()]
+    private var arr_Admin_localized:[String] = ["Admin","Users"]
+    private var arr_AllPending:[String] = ["all_pending_need_action" , "all_pending","all_complete","all_sent"]
+    private var arr_AllPending_localized:[String] = ["all_pending_need_action".localized() , "all_pending".localized(),"all_complete".localized(),"all_sent".localized()]
+    private var cellWidths: [CGFloat] = [1200]
+    private var arr_NoData:[String] = ["No items found".localized()]
+    private let fontStyle: FontAwesomeStyle = .solid
+    private let dropUpmage =  UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
+    private let dropDownmage =  UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
     
     private let kCellheaderReuse : String = "MyTransactionHeaderView"
     
@@ -95,21 +90,21 @@ class TransactionsVC: UIViewController {
         get_module()
         get_forms()
         header.btnAction = self.menu_select
-        
+        configGUI()
+        get_Transaction_data(showLoading: true, loadOnly: true)
     }
     
     
     
     // MARK: - Config Navigation
-
+    
     func configNavigation() {
         
         _ = self.navigationController?.preferredStatusBarStyle
-        
-        //navigationController?.navigationBar.barTintColor = .buttonBackgroundColor()
         navigationController?.navigationBar.barTintColor = maincolor
-       addNavigationBarTitle(navigationTitle: "My Transactions".localized())
+        addNavigationBarTitle(navigationTitle: "My Transactions".localized())
         UINavigationBar.appearance().backgroundColor = maincolor
+
     }
     
     
@@ -117,10 +112,7 @@ class TransactionsVC: UIViewController {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        configGUI()
-        get_Transaction_data(showLoading: true, loadOnly: true)
-      
-        header.btnAction = self.menu_select
+        
     }
     
     
@@ -131,10 +123,10 @@ class TransactionsVC: UIViewController {
     }
     
     
-//        override func viewDidLayoutSubviews() {
-//            tableHeightConstraint.constant = table.contentSize.height
-//
-//        }
+    //        override func viewDidLayoutSubviews() {
+    //            tableHeightConstraint.constant = table.contentSize.height
+    //
+    //        }
     
     //MARK: - Config GUI
     //------------------------------------------------------
@@ -203,10 +195,10 @@ class TransactionsVC: UIViewController {
             self.showLoadingActivity()
         }
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
-
+        
         
         APIManager.sendRequestGetAuth(urlString: "/tc/list/\(pageNumber)/10?searchKey=\(search)&searchAdmin=\(StrsearchByAdmin)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)&searchByStatus=\(SearchAllpending)" ) { (response) in
-           
+            
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
             }
@@ -255,7 +247,7 @@ class TransactionsVC: UIViewController {
             
             
         }
-//        self.hideLoadingActivity()
+        //        self.hideLoadingActivity()
     }
     
     
@@ -328,7 +320,7 @@ class TransactionsVC: UIViewController {
         }
     }
     
-   
+    
     
     @IBAction func btnSearchAdmin_Click(_ sender: Any) {
         
@@ -350,8 +342,8 @@ class TransactionsVC: UIViewController {
                 self.imgDropAdmin.image = self.dropDownmage
                 self.get_Transaction_data(showLoading: true, loadOnly: true)
             }
-          
-           // self.sig_id = self.arr_sig_id[index].id
+            
+            // self.sig_id = self.arr_sig_id[index].id
         }
         self.present(vc, animated: true, completion: nil)
         
@@ -372,11 +364,11 @@ class TransactionsVC: UIViewController {
                 self.lblsearchByForm.text =  name
                 let i =  self.arr_form[index].value
                 self.StrsearchByForm = i
-               
+                
                 self.imgDropForm.image = self.dropDownmage
                 self.get_Transaction_data(showLoading: true, loadOnly: true)
             }
-          
+            
         }
         self.present(vc, animated: true, completion: nil)
         
@@ -402,7 +394,7 @@ class TransactionsVC: UIViewController {
             }
         }
         self.present(vc, animated: true, completion: nil)
-
+        
     }
     
     
@@ -442,7 +434,7 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         
         let obj = arr_data[indexPath.item]
         
-//        cell.viewBack.setBorderGray()
+        //        cell.viewBack.setBorderGray()
         
         let Id = "\(obj.transaction_request_id)"
         let Description = "Description".localized() + "  \(obj.transaction_request_description)"
@@ -460,7 +452,7 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         
         
         let maincolor = "#1A3665".getUIColor()
-       
+        
         cell.lblNo.text = Id
         
         let Descattribute: NSAttributedString = Description.attributedStringWithColor(["Description".localized()], color: maincolor)
@@ -497,7 +489,7 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         cell.lblStatus.attributedText = Statusattributed
         
         
-//        cell.viewBack.setcorner()
+        //        cell.viewBack.setcorner()
         
         
         return cell
@@ -521,10 +513,8 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         
-        
-        print("Selected rows after selection: ", tableView.indexPathsForSelectedRows?.count ?? 0)
         let obj = self.arr_data[indexPath.item]
-//        if  = "FORM_HRV1"
+        print("Selected rows after selection: ", obj.transaction_key)
         switch obj.transaction_key{
         case "FORM_HRV1":
             let vc = VactionViewController()
@@ -536,6 +526,11 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
             vc.Object = obj
             //vc.filePath = obj.url
             self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_CT1":
+            let vc = NewContractVC()
+            vc.data = obj
+            self.navigationController?.pushViewController(vc, animated: true)
+            
         default:
             break
         }
@@ -574,6 +569,3 @@ extension TransactionsVC:UISearchBarDelegate {
     
     
 }
-//tc/list/1/10?searchKey=&searchAdmin=1&searchByForm=FORM_WIR&searchByModule=&searchByStatus=all_pending
-
-//tc/list/1/10?searchKey=&searchAdmin=0&searchByModule=&searchByForm=FORM_WIR&searchByStatus=all_pending

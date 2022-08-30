@@ -754,6 +754,7 @@
                                                                                 </collectionViewCellContentView>
                                                                                 <size key="customSize" width="143" height="33"/>
                                                                                 <connections>
+                                                                                    <outlet property="deleteButton" destination="5D1-4r-3pr" id="7H1-hz-a0D"/>
                                                                                     <outlet property="lblTitle" destination="7RQ-lu-guF" id="GJE-qw-L5P"/>
                                                                                     <outlet property="viewBack" destination="CY8-lp-haU" id="DoX-iC-ONk"/>
                                                                                 </connections>
@@ -4242,22 +4243,17 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aQL-7u-gq8">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="787"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="cfD-RX-qGw">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checklist Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGC-Ww-Jqz">
                                                 <rect key="frame" x="10" y="10" width="394" height="30"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottomLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checklist Item" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGC-Ww-Jqz">
-                                                        <rect key="frame" x="0.0" y="0.0" width="394" height="30"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="30" id="dIl-8i-Q1o"/>
-                                                        </constraints>
-                                                        <fontDescription key="fontDescription" name="Damascus" family="Damascus" pointSize="14"/>
-                                                        <color key="textColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="dIl-8i-Q1o"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Damascus" family="Damascus" pointSize="14"/>
+                                                <color key="textColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="La2-sK-ZVC">
                                                 <rect key="frame" x="0.0" y="45" width="404" height="1"/>
                                                 <color key="backgroundColor" red="0.76862745099999996" green="0.76862745099999996" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -4524,6 +4520,7 @@
                                                                                 </collectionViewCellContentView>
                                                                                 <size key="customSize" width="143" height="33"/>
                                                                                 <connections>
+                                                                                    <outlet property="deleteButton" destination="qkL-YY-wXT" id="kAJ-D4-fJW"/>
                                                                                     <outlet property="lblTitle" destination="Jwy-6v-aOg" id="0nO-Oi-dBm"/>
                                                                                     <outlet property="viewBack" destination="n2P-rG-9z1" id="JAf-iA-BHp"/>
                                                                                 </connections>
@@ -4771,46 +4768,70 @@
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTQ-5O-GTH">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3uj-s0-Pmk">
                                                 <rect key="frame" x="20" y="717" width="374" height="40"/>
-                                                <color key="backgroundColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="Ud4-SR-Yjh"/>
-                                                </constraints>
-                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="Submit">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="20"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="btnSubmit_Click:" destination="7kZ-Fx-rvA" eventType="touchUpInside" id="CaQ-NN-gq2"/>
-                                                    <action selector="btnSubmit_Click:" destination="AQ3-Qf-k8H" eventType="touchUpInside" id="RRB-Wu-VY9"/>
-                                                </connections>
-                                            </button>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGG-fa-FNg">
+                                                        <rect key="frame" x="0.0" y="0.0" width="182" height="40"/>
+                                                        <color key="backgroundColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="SrO-Cj-z81"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="History">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="20"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="historyAction:" destination="7kZ-Fx-rvA" eventType="touchUpInside" id="Dc7-uP-xpr"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTQ-5O-GTH">
+                                                        <rect key="frame" x="192" y="0.0" width="182" height="40"/>
+                                                        <color key="backgroundColor" red="0.1019607843" green="0.21176470589999999" blue="0.39607843139999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="40" id="Ud4-SR-Yjh"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Submit">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="20"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <action selector="btnSubmit_Click:" destination="7kZ-Fx-rvA" eventType="touchUpInside" id="CaQ-NN-gq2"/>
+                                                            <action selector="btnSubmit_Click:" destination="AQ3-Qf-k8H" eventType="touchUpInside" id="RRB-Wu-VY9"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.90588235294117647" green="0.91764705882352937" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="xTQ-5O-GTH" firstAttribute="top" secondItem="wSZ-eu-fVL" secondAttribute="bottom" constant="40" id="1hi-lv-HDC"/>
-                                            <constraint firstItem="cfD-RX-qGw" firstAttribute="top" secondItem="aQL-7u-gq8" secondAttribute="top" constant="10" id="JOD-ha-zsU"/>
-                                            <constraint firstItem="xTQ-5O-GTH" firstAttribute="leading" secondItem="aQL-7u-gq8" secondAttribute="leading" constant="20" id="Kpk-pq-4HW"/>
+                                            <constraint firstItem="La2-sK-ZVC" firstAttribute="top" secondItem="QGC-Ww-Jqz" secondAttribute="bottom" constant="5" id="6Ce-9z-uAg"/>
                                             <constraint firstAttribute="trailing" secondItem="wSZ-eu-fVL" secondAttribute="trailing" constant="20" id="MEL-wv-O1k"/>
                                             <constraint firstAttribute="trailing" secondItem="La2-sK-ZVC" secondAttribute="trailing" constant="10" id="OvE-7N-aWk"/>
                                             <constraint firstItem="wSZ-eu-fVL" firstAttribute="leading" secondItem="aQL-7u-gq8" secondAttribute="leading" constant="20" id="QWa-x1-Whl"/>
+                                            <constraint firstItem="3uj-s0-Pmk" firstAttribute="top" secondItem="wSZ-eu-fVL" secondAttribute="bottom" constant="40" id="RrZ-dC-JfW"/>
                                             <constraint firstItem="La2-sK-ZVC" firstAttribute="leading" secondItem="aQL-7u-gq8" secondAttribute="leading" id="Rxu-cB-I3y"/>
-                                            <constraint firstAttribute="trailing" secondItem="xTQ-5O-GTH" secondAttribute="trailing" constant="20" id="Yr3-9W-5fJ"/>
-                                            <constraint firstItem="cfD-RX-qGw" firstAttribute="leading" secondItem="aQL-7u-gq8" secondAttribute="leading" constant="10" id="aEH-4L-M7l"/>
+                                            <constraint firstItem="QGC-Ww-Jqz" firstAttribute="top" secondItem="aQL-7u-gq8" secondAttribute="top" constant="10" id="WIZ-LN-gO3"/>
+                                            <constraint firstItem="QGC-Ww-Jqz" firstAttribute="leading" secondItem="aQL-7u-gq8" secondAttribute="leading" constant="10" id="WJZ-ZB-51d"/>
+                                            <constraint firstAttribute="trailing" secondItem="QGC-Ww-Jqz" secondAttribute="trailing" constant="10" id="Wx9-sS-eGo"/>
+                                            <constraint firstItem="3uj-s0-Pmk" firstAttribute="leading" secondItem="aQL-7u-gq8" secondAttribute="leading" constant="20" id="cu9-dU-sxx"/>
+                                            <constraint firstAttribute="bottom" secondItem="3uj-s0-Pmk" secondAttribute="bottom" constant="30" id="dcO-VU-eBJ"/>
                                             <constraint firstItem="wSZ-eu-fVL" firstAttribute="top" secondItem="La2-sK-ZVC" secondAttribute="bottom" constant="10" id="oRz-pu-d1r"/>
-                                            <constraint firstItem="La2-sK-ZVC" firstAttribute="top" secondItem="cfD-RX-qGw" secondAttribute="bottom" constant="5" id="pLC-td-a5O"/>
-                                            <constraint firstAttribute="bottom" secondItem="xTQ-5O-GTH" secondAttribute="bottom" constant="143" id="xXt-qz-iBj"/>
-                                            <constraint firstAttribute="trailing" secondItem="cfD-RX-qGw" secondAttribute="trailing" constant="10" id="zJE-Lg-A1C"/>
+                                            <constraint firstAttribute="trailing" secondItem="3uj-s0-Pmk" secondAttribute="trailing" constant="20" id="tg6-ar-e7K"/>
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <constraints>
                                     <constraint firstItem="aQL-7u-gq8" firstAttribute="width" secondItem="8rT-TQ-5pr" secondAttribute="width" id="6o1-1S-hpX"/>
                                     <constraint firstItem="aQL-7u-gq8" firstAttribute="top" secondItem="8rT-TQ-5pr" secondAttribute="top" id="Rs1-da-x8N"/>
@@ -4822,18 +4843,20 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3qQ-AS-SOi"/>
-                        <color key="backgroundColor" red="0.90588235294117647" green="0.91764705882352937" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" name="AppColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="8rT-TQ-5pr" secondAttribute="bottom" id="5le-G4-IzC"/>
-                            <constraint firstItem="8rT-TQ-5pr" firstAttribute="trailing" secondItem="3qQ-AS-SOi" secondAttribute="trailing" id="THm-NQ-fTJ"/>
-                            <constraint firstItem="8rT-TQ-5pr" firstAttribute="leading" secondItem="3qQ-AS-SOi" secondAttribute="leading" id="iCH-Ib-yiN"/>
-                            <constraint firstItem="8rT-TQ-5pr" firstAttribute="top" secondItem="3qQ-AS-SOi" secondAttribute="top" id="yAr-rw-nnA"/>
+                            <constraint firstItem="8rT-TQ-5pr" firstAttribute="leading" secondItem="3qQ-AS-SOi" secondAttribute="leading" id="Dkw-4J-imf"/>
+                            <constraint firstAttribute="bottom" secondItem="8rT-TQ-5pr" secondAttribute="bottom" id="HZS-pK-rRm"/>
+                            <constraint firstItem="8rT-TQ-5pr" firstAttribute="trailing" secondItem="3qQ-AS-SOi" secondAttribute="trailing" id="MSe-EV-gfo"/>
+                            <constraint firstItem="8rT-TQ-5pr" firstAttribute="top" secondItem="3qQ-AS-SOi" secondAttribute="top" id="vgL-wE-wXA"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="Viewcollection_user" destination="hzN-H3-Kza" id="qxl-a7-4Br"/>
+                        <outlet property="addAttachButton" destination="1ZH-YJ-SwL" id="0Sv-E6-XGP"/>
                         <outlet property="btnAdd" destination="1ZH-YJ-SwL" id="o64-7N-UjS"/>
                         <outlet property="collection_user" destination="hRw-zt-R7R" id="OxB-h6-YR5"/>
+                        <outlet property="historyButton" destination="lGG-fa-FNg" id="6Qx-2K-GTg"/>
                         <outlet property="imgUsers" destination="LSq-Xr-rAM" id="qyd-7o-LiO"/>
                         <outlet property="lblAttachments" destination="R7l-dm-Nok" id="zoW-TL-dYy"/>
                         <outlet property="lblCheckList" destination="QGC-Ww-Jqz" id="cy7-fi-lyA"/>
@@ -4841,6 +4864,7 @@
                         <outlet property="lblProgress" destination="eB6-UM-6gV" id="Ego-1S-qWE"/>
                         <outlet property="lblTitle" destination="hEC-fw-bfP" id="9dv-qA-apZ"/>
                         <outlet property="lblUsers" destination="7ya-Ys-n7g" id="tIv-3l-0Ja"/>
+                        <outlet property="submitButton" destination="xTQ-5O-GTH" id="hHr-97-a2h"/>
                         <outlet property="table" destination="LmP-47-9IA" id="0fj-i1-Tbb"/>
                         <outlet property="tableHeight" destination="oEe-Q3-8GJ" id="X80-bA-S54"/>
                         <outlet property="tfEndDate" destination="Uy8-7o-edL" id="veG-hO-f9O"/>
@@ -4850,6 +4874,7 @@
                         <outlet property="tfTitle" destination="Nhe-a2-ygG" id="Jpt-vv-Z4h"/>
                         <outlet property="tfUsers" destination="T48-gy-Y72" id="Pdg-Ef-yVB"/>
                         <outlet property="txtDetails" destination="gTS-bU-Dyz" id="3Ca-1c-YtB"/>
+                        <outlet property="usersTextFieldStackView" destination="zvF-Ns-alA" id="6ht-2I-Rg2"/>
                         <outlet property="viewDetails" destination="25V-fk-nrk" id="2Pz-pA-8he"/>
                         <outlet property="view_Hours" destination="zaK-s8-z0P" id="T8G-tp-Pdy"/>
                         <outlet property="view_Progress" destination="0zG-6j-nYL" id="Y31-hP-6s3"/>
@@ -4859,7 +4884,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYE-Ad-vHm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8838" y="1293"/>
+            <point key="canvasLocation" x="8837.68115942029" y="1292.4107142857142"/>
         </scene>
         <!--Add CommentVC-->
         <scene sceneID="BER-Z9-VDv">
@@ -5647,6 +5672,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

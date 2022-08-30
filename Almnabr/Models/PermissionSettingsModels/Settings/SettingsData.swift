@@ -20,6 +20,7 @@ struct SettingsData : Mappable {
 	var records : [SettingsDataRecords]?
 	var page : Page?
     var error : String?
+    var msg : String?
     
 	init?(map: Map) {
 
@@ -32,6 +33,7 @@ struct SettingsData : Mappable {
 		records <- map["records"]
 		page <- map["page"]
         error <- map["error"]
+        msg <- map["msg"]
 	}
 
 }

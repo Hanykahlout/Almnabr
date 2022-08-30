@@ -14,7 +14,7 @@ class PersonDetailsVC: UIViewController {
     @IBOutlet weak var table: UITableView!
     
     var arr_data:[transactions_personsObj] = []
-    var personalData:[TransactionsPersonsVactionData]?
+    var personalData:[TransactionsPersons]?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -15,6 +15,7 @@ import Foundation
 import ObjectMapper
 
 struct VactionFromDataResponse : Mappable {
+    
 	var status : Bool?
 	var transactions_request : TransactionsRequestVactionData?
 	var transactions_date : Transactions_dateVD?

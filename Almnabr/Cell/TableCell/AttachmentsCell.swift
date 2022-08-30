@@ -20,8 +20,8 @@ class AttachmentsCell: UITableViewCell {
     
     var btnDeleteAction : (()->())?
     var btnUploadAction : (()->())?
-    
     var btnEndEditingAction : (()->())?
+    
     
     
     @IBAction func didReCancelButtonPressd(_ sender: Any) {

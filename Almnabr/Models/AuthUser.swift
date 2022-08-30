@@ -36,6 +36,17 @@ struct Auth_User {
             ud.set(user_id, forKey: "user_id")
         }
     }
+    
+    static var isAdmin : Bool {
+        get {
+            let ud = UserDefaults.standard
+            return ud.value(forKey: "is_admin") as? Bool ?? false
+        }
+        set(isAdmin) {
+            let ud = UserDefaults.standard
+            ud.set(isAdmin, forKey: "is_admin")
+        }
+    }
 
     static var user_type_id : String {
         get {

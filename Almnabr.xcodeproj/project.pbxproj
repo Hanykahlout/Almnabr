@@ -5154,7 +5154,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2AC8B25C23A0D1D0824A7936 /* Pods-Almnabr.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
@@ -5169,7 +5169,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.5;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
+				PRODUCT_BUNDLE_IDENTIFIER = Almnabr.NAHIDH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Almnabr/ObjectiveC/Almnabr-Bridging-Header.h";
@@ -5183,7 +5183,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ADB1D7974D91E5EB2AC28FFD /* Pods-Almnabr.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon2;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Almnabr/Almnabr.entitlements;
@@ -5198,7 +5198,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.5;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
+				PRODUCT_BUNDLE_IDENTIFIER = Almnabr.NAHIDH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Almnabr/ObjectiveC/Almnabr-Bridging-Header.h";

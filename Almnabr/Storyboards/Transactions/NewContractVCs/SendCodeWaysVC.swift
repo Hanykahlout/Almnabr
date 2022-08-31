@@ -10,13 +10,13 @@ import UIKit
 import SCLAlertView
 
 class SendCodeWaysVC: UIViewController {
-
+    
     @IBOutlet weak var transactionDataLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var sendCodeButton: UIButton!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
-
+    
     private var data = [SearchBranchRecords]()
     private var ways = ["Whatsapp","Email","Mobile"]
     private var selectedItem:SearchBranchRecords?
@@ -33,7 +33,7 @@ class SendCodeWaysVC: UIViewController {
         transactionDataLabel.text = "# \(id) Edit Contract"
         getCodeWays()
     }
-
+    
     
     @IBAction func closeAction(_ sender: Any) {
         navigationController?.dismiss(animated: true)
@@ -104,14 +104,16 @@ extension SendCodeWaysVC{
             "do": "do",
             "transactions_persons_last_step": approvalStep ?? ""
         ]
-        
+        showLoadingActivity()
         APIController.shard.sendCodeForApproval(body: body) { data in
-            if let status = data.status , status{
-                SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
-            }else{
-                SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
-            }
             DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status , status{
+                    SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
+                }else{
+                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
+                }
+                
                 self.navigationController?.dismiss(animated: true)
             }
         }

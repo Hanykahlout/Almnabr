@@ -258,8 +258,7 @@ class TicketViewController: UIViewController {
             }
         }
     }
-    
-    
+
     
     @objc func didTapGroupButton(sender: AnyObject){
         let vc:TaskHistoryVC = AppDelegate.TicketSB.instanceVC()

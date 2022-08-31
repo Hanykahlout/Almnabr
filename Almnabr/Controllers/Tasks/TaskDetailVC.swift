@@ -182,195 +182,20 @@ class TaskDetailVC: UIViewController {
     }
     
     
-    func get_Chicklist_data(){
+    private func CommentMenu() -> UIMenu {
         
-        self.showLoadingActivity()
-        let param :[String:Any] = ["task_id" : task_id]
-        
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_points_task_main", parameters: param ) { (response) in
-            DispatchQueue.main.async {
-                
-                self.arr_data.removeAll()
-                let status = response["status"] as? Bool
-                if status == true{
-                    if  let records = response["data"] as? NSArray{
-                        for i in records {
-                            let dict = i as? [String:Any]
-                            let obj =  PointTaskObj.init(dict!)
-                            self.arr_data.append(obj)
-                        }
-                        self.tableChecklistHeight.constant = CGFloat(self.arr_data.count * 100)
-                        self.tableChecklist.reloadData()
-                        self.hideLoadingActivity()
-                    }
-                }else{
-                    self.tableChecklistHeight.constant = 0
-                    self.hideLoadingActivity()
-                }
-            }
+        let Reply = UIAction(title: "Reply") { _ in
+            // self.btnChangeStatusAction!(self.task_id, 1)
         }
+        let Edit = UIAction(title: "Edit") { _ in
+            //  self.btnChangeStatusAction!(self.task_id, 2)
+        }
+        let Delete = UIAction(title: "Delete") { _ in
+            // self.btnChangeStatusAction!(self.task_id, 3)
+        }
+        return UIMenu(title: "", children: [Reply, Edit, Delete])
     }
     
-    
-    func get_data(){
-        
-        self.showLoadingActivity()
-        
-        let param:[String:Any] = ["task_id" : self.task_id]
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_task_only", parameters: param ) { (response) in
-            self.hideLoadingActivity()
-            
-            let status = response["status"] as? Bool
-            
-            if status == true{
-                
-                if  let data = response["data"] as? [String:Any]{
-                    
-                    let obj =  TaskObj(data)
-                    self.object = obj
-                }
-                self.configGUI()
-                self.hideLoadingActivity()
-                
-            }else{
-                self.hideLoadingActivity()
-            }
-        }
-    }
-    
-    
-    func get_comment_tasks(){
-        
-        self.showLoadingActivity()
-        
-        let param:[String:Any] = ["task_id" : self.task_id]
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_comment_tasks", parameters: param ) { (response) in
-            self.hideLoadingActivity()
-            
-            let status = response["status"] as? Bool
-            self.arr_comments.removeAll()
-            if status == true{
-                if  let records = response["data"] as? NSArray{
-                    for i in records {
-                        let dict = i as? [String:Any]
-                        let obj =  CommentObj.init(dict!)
-                        self.arr_comments.append(obj)
-                    }
-                    
-                    self.table_Activity.reloadData()
-                    self.hideLoadingActivity()
-                    
-                }else{
-                    self.hideLoadingActivity()
-                }
-            }
-        }
-        
-    }
-    
-    
-    func get_add_task(){
-        
-        self.showLoadingActivity()
-        
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_add_task", parameters: [:] ) { (response) in
-            self.hideLoadingActivity()
-            let status = response["status"] as? Bool
-            
-            if status == true{
-                
-                if let data = response["data"] as? [String:Any] {
-                    
-                    
-                    if  let status_done = data["task_status_done"] as? NSArray{
-                        for i in status_done {
-                            let dict = i as? [String:Any]
-                            let obj = importantObj.init(dict!)
-                            self.arr_statusDone.append(obj)
-                        } }
-                    
-                }
-            }else{
-                self.hideLoadingActivity()
-            }
-            
-            
-        }
-    }
-    
-    func change_status(task_id:String, status:String){
-        
-        self.showLoadingActivity()
-        let param :[String:Any] = ["task_id" : task_id,"status":status]
-        
-        APIManager.sendRequestPostAuth(urlString: "tasks/change_status_done", parameters: param ) { (response) in
-            self.hideLoadingActivity()
-            
-            //            let status = response["status"] as? Bool
-            self.hideLoadingActivity()
-            
-        }
-    }
-    
-    
-    func delete_task(task_id:String){
-        
-        self.showLoadingActivity()
-        let param :[String:Any] = ["task_id" : task_id]
-        
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_task", parameters: param ) { (response) in
-            self.hideLoadingActivity()
-            
-            let status = response["status"] as? Bool
-            let message = response["message"] as? String
-            if status == true{
-                self.hideLoadingActivity()
-                self.showAMessage(withTitle: "", message: message ?? "Deletion process has been successful", completion: {
-                    self.delegate!()
-                    self.navigationController?.popViewController(animated: true)
-                })
-            }else{
-                self.hideLoadingActivity()
-                
-            }
-        }
-    }
-    
-    
-    
-    func delete_comment(comment_id:String,commentIndex:Int,replyIndex:Int?){
-        self.showLoadingActivity()
-        let param :[String:Any] = ["comment_id" : comment_id]
-        
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_comment_reply", parameters: param ) { (response) in
-            self.hideLoadingActivity()
-            
-            let status = response["status"] as? Bool
-            if status == false || status == nil{
-                SCLAlertView().showError("Delete Failed", subTitle: response["error"] as? String ?? "")
-            }
-        }
-    }
-    
-    
-    func Add_comment(title:String){
-        
-        self.showLoadingActivity()
-        let param : [String:Any] = ["task_id" : self.task_id,
-                                    "notes" : title]
-        APIManager.sendRequestPostAuth(urlString: "tasks/add_comment_task", parameters: param ) { (response) in
-            self.hideLoadingActivity()
-            
-            let status = response["status"] as? Bool
-            
-            if status == false || status == nil{
-                SCLAlertView().showError("error".localized(), subTitle: response["error"] as? String ?? "Something went wrong")
-            }else{
-                self.txt_comment.text = "comment".localized()
-            }
-        }
-        
-    }
     
     
     @IBAction func deleteAction(_ sender: Any) {
@@ -450,40 +275,6 @@ class TaskDetailVC: UIViewController {
         self.Add_comment(title: txt_comment.text!)
     }
     
-    
-    func delete_item(point_id:String){
-        
-        self.showLoadingActivity()
-        let param :[String:Any] = ["point_id" : point_id]
-        
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_task_point_main", parameters: param ) { (response) in
-            self.hideLoadingActivity()
-            
-            let status = response["status"] as? Bool
-            let error = response["error"] as? String
-            if status == false || status == nil{
-                SCLAlertView().showError("error".localized(), subTitle: error ?? "Something went wrong")
-            }
-        }
-    }
-    
-    
-    
-    
-    func CommentMenu() -> UIMenu {
-        
-        let Reply = UIAction(title: "Reply") { _ in
-            // self.btnChangeStatusAction!(self.task_id, 1)
-        }
-        let Edit = UIAction(title: "Edit") { _ in
-            //  self.btnChangeStatusAction!(self.task_id, 2)
-        }
-        let Delete = UIAction(title: "Delete") { _ in
-            // self.btnChangeStatusAction!(self.task_id, 3)
-        }
-        return UIMenu(title: "", children: [Reply, Edit, Delete])
-    }
-    
 }
 
 extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
@@ -494,6 +285,7 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
         }
         return arr_comments.count
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == tableChecklist{
@@ -535,7 +327,6 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
                         self.hideLoadingActivity()
                         if let status = data.status , status{
                             cell.successStartEndTimer()
-                            
                         }
                     }
                 }
@@ -785,20 +576,6 @@ extension TaskDetailVC: UITableViewDelegate , UITableViewDataSource{
     
 }
 
-extension TaskDetailVC{
-    private func addReplyToComment(commentId:String,note:String,index:Int){
-        showLoadingActivity()
-        APIController.shard.addTaskReplyToComment(taskId: task_id, reply: note, comment_id: commentId) { data in
-            self.hideLoadingActivity()
-            if data.status == nil || data.status == false{
-                SCLAlertView().showError("error".localized(), subTitle: data.error ?? "Something went wrong")
-            }
-        }
-    }
-    
-}
-
-
 
 extension TaskDetailVC: UITextViewDelegate {
     
@@ -824,6 +601,230 @@ extension TaskDetailVC: UITextViewDelegate {
     }
     
 }
+
+// MARK: - API Handling
+
+extension TaskDetailVC{
+    
+    private func addReplyToComment(commentId:String,note:String,index:Int){
+        showLoadingActivity()
+        APIController.shard.addTaskReplyToComment(taskId: task_id, reply: note, comment_id: commentId) { data in
+            self.hideLoadingActivity()
+            if data.status == nil || data.status == false{
+                SCLAlertView().showError("error".localized(), subTitle: data.error ?? "Something went wrong")
+            }
+        }
+    }
+    
+    private func get_Chicklist_data(){
+        
+        self.showLoadingActivity()
+        let param :[String:Any] = ["task_id" : task_id]
+        
+        APIManager.sendRequestPostAuth(urlString: "tasks/get_points_task_main", parameters: param ) { (response) in
+            DispatchQueue.main.async {
+                
+                self.arr_data.removeAll()
+                let status = response["status"] as? Bool
+                if status == true{
+                    if  let records = response["data"] as? NSArray{
+                        for i in records {
+                            let dict = i as? [String:Any]
+                            let obj =  PointTaskObj.init(dict!)
+                            self.arr_data.append(obj)
+                        }
+                        self.tableChecklistHeight.constant = CGFloat(self.arr_data.count * 100)
+                        self.tableChecklist.reloadData()
+                        self.hideLoadingActivity()
+                    }
+                }else{
+                    self.tableChecklistHeight.constant = 0
+                    self.hideLoadingActivity()
+                }
+            }
+        }
+    }
+    
+    
+    private func get_data(){
+        
+        self.showLoadingActivity()
+        
+        let param:[String:Any] = ["task_id" : self.task_id]
+        APIManager.sendRequestPostAuth(urlString: "tasks/get_task_only", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+            
+            let status = response["status"] as? Bool
+            
+            if status == true{
+                
+                if  let data = response["data"] as? [String:Any]{
+                    
+                    let obj =  TaskObj(data)
+                    self.object = obj
+                }
+                self.configGUI()
+                self.hideLoadingActivity()
+                
+            }else{
+                self.hideLoadingActivity()
+            }
+        }
+    }
+    
+    
+    private func get_comment_tasks(){
+        
+        self.showLoadingActivity()
+        
+        let param:[String:Any] = ["task_id" : self.task_id]
+        APIManager.sendRequestPostAuth(urlString: "tasks/get_comment_tasks", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+            
+            let status = response["status"] as? Bool
+            self.arr_comments.removeAll()
+            if status == true{
+                if  let records = response["data"] as? NSArray{
+                    for i in records {
+                        let dict = i as? [String:Any]
+                        let obj =  CommentObj.init(dict!)
+                        self.arr_comments.append(obj)
+                    }
+                    
+                    self.table_Activity.reloadData()
+                    self.hideLoadingActivity()
+                    
+                }else{
+                    self.hideLoadingActivity()
+                }
+            }
+        }
+        
+    }
+    
+    
+    private func get_add_task(){
+        
+        self.showLoadingActivity()
+        
+        APIManager.sendRequestPostAuth(urlString: "tasks/get_add_task", parameters: [:] ) { (response) in
+            self.hideLoadingActivity()
+            let status = response["status"] as? Bool
+            
+            if status == true{
+                
+                if let data = response["data"] as? [String:Any] {
+                    
+                    
+                    if  let status_done = data["task_status_done"] as? NSArray{
+                        for i in status_done {
+                            let dict = i as? [String:Any]
+                            let obj = importantObj.init(dict!)
+                            self.arr_statusDone.append(obj)
+                        } }
+                    
+                }
+            }else{
+                self.hideLoadingActivity()
+            }
+            
+            
+        }
+    }
+    
+    private func change_status(task_id:String, status:String){
+        
+        self.showLoadingActivity()
+        let param :[String:Any] = ["task_id" : task_id,"status":status]
+        
+        APIManager.sendRequestPostAuth(urlString: "tasks/change_status_done", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+            
+            //            let status = response["status"] as? Bool
+            self.hideLoadingActivity()
+            
+        }
+    }
+    
+    
+    private func delete_task(task_id:String){
+        
+        self.showLoadingActivity()
+        let param :[String:Any] = ["task_id" : task_id]
+        
+        APIManager.sendRequestPostAuth(urlString: "tasks/delete_task", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+            
+            let status = response["status"] as? Bool
+            let message = response["message"] as? String
+            if status == true{
+                self.hideLoadingActivity()
+                self.showAMessage(withTitle: "", message: message ?? "Deletion process has been successful", completion: {
+                    self.delegate!()
+                    self.navigationController?.popViewController(animated: true)
+                })
+            }else{
+                self.hideLoadingActivity()
+                
+            }
+        }
+    }
+    
+    
+    
+    private func delete_comment(comment_id:String,commentIndex:Int,replyIndex:Int?){
+        self.showLoadingActivity()
+        let param :[String:Any] = ["comment_id" : comment_id]
+        
+        APIManager.sendRequestPostAuth(urlString: "tasks/delete_comment_reply", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+            
+            let status = response["status"] as? Bool
+            if status == false || status == nil{
+                SCLAlertView().showError("Delete Failed", subTitle: response["error"] as? String ?? "")
+            }
+        }
+    }
+    
+    
+    private func Add_comment(title:String){
+        
+        self.showLoadingActivity()
+        let param : [String:Any] = ["task_id" : self.task_id,
+                                    "notes" : title]
+        APIManager.sendRequestPostAuth(urlString: "tasks/add_comment_task", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+            
+            let status = response["status"] as? Bool
+            
+            if status == false || status == nil{
+                SCLAlertView().showError("error".localized(), subTitle: response["error"] as? String ?? "Something went wrong")
+            }else{
+                self.txt_comment.text = "comment".localized()
+            }
+        }
+    }
+    
+    
+    
+    private func delete_item(point_id:String){
+        
+        self.showLoadingActivity()
+        let param :[String:Any] = ["point_id" : point_id]
+        
+        APIManager.sendRequestPostAuth(urlString: "tasks/delete_task_point_main", parameters: param ) { (response) in
+            self.hideLoadingActivity()
+            
+            let status = response["status"] as? Bool
+            let error = response["error"] as? String
+            if status == false || status == nil{
+                SCLAlertView().showError("error".localized(), subTitle: error ?? "Something went wrong")
+            }
+        }
+    }
+    
+}
+
 
 // MARK: - Socket Handling
 
@@ -1002,7 +1003,6 @@ extension TaskDetailVC{
             }
         }
     }
-    
 }
 
 

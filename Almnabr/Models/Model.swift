@@ -1686,6 +1686,9 @@ class ContractObj {
     var working_days_per_week :String = ""
     var working_hours_per_day :String = ""
     var writer :String = ""
+
+    
+    
     
     init(_ Obj : [String:Any]) {
         

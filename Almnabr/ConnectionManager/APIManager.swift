@@ -24,8 +24,8 @@ class APIManager: NSObject {
     //server url ---- "https://erp.almnabr.com/backend"
     //Api key "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
     
-    static let serverURL = "https://erp.almnabr.com/backend"
-    static let api_key = "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
+    static let serverURL = "https://nahidh.sa/backend"
+    static let api_key = "12345"
     
     static func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {

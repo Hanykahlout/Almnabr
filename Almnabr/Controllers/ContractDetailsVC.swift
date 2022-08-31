@@ -176,15 +176,16 @@ extension ContractDetailsVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//                let obj = arr_data[indexPath.item]
-//                let vc:ProjectDetailsVC = AppDelegate.mainSB.instanceVC()
-//                vc.title =  self.title
-//                vc.Object = obj
-//                vc.MenuObj = self.MenuObj
-//                vc.StrSubMenue =  self.StrSubMenue
-//                vc.StrMenue = self.StrMenue
-//        self.navigationController?.pushViewController(vc, animated: true)
-//                _ =  panel?.center(vc)
+        let vc = NewContractVC()
+        let obj = arr_data[indexPath.row]
+        print("SAAAAa",obj.transaction_request_id)
+        vc.data = Tcore([
+            "transaction_request_id" : obj.transaction_request_id,
+            "transaction_key": obj.transaction_key
+        ])
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        
     }
     
     

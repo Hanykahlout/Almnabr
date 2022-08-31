@@ -18,6 +18,7 @@ class EditLastStepViewController: UIViewController {
     private var selectedUser:SearchBranchRecords?
     var transactionRequestId:String?
     var isVaction = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,6 +27,11 @@ class EditLastStepViewController: UIViewController {
     
     private func initlization(){
         setUpDropDwonlist()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     private func setUpDropDwonlist(){
@@ -50,14 +56,11 @@ class EditLastStepViewController: UIViewController {
     }
     
     
-    
     @objc private func editTextFieldAction(){
         searchForUser()
-        
     }
+
     
-
-
     @IBAction func submitAction(_ sender: Any) {
         if let _ = selectedUser{
             submitUser()

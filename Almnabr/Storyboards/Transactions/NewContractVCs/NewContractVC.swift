@@ -32,8 +32,9 @@ class NewContractVC: UIViewController {
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var stepsProgress: UIProgressView!
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var finalResultView: UIView!
+    @IBOutlet weak var gifView: UIView!
     @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var approvalView: UIView!
     
     private var previewFileData:GetImageResponse?
@@ -59,7 +60,7 @@ class NewContractVC: UIViewController {
     
     
     private func initlization(){
-        editButton.isHidden = !Auth_User.isAdmin 
+        editButton.isHidden = !Auth_User.isAdmin
         approvalView.isHidden = true
         previewButton.isHidden = true
         setUpNav()
@@ -72,7 +73,6 @@ class NewContractVC: UIViewController {
             if let scrollView = self.pageController.containerVCs.first?.view.subviews.first as? UIScrollView{
                 self.mainViewHeight.constant = scrollView.contentSize.height
             }
-             
         }
     }
     
@@ -89,8 +89,6 @@ class NewContractVC: UIViewController {
             self.approveButton.isSelected = !self.rejectButton.isSelected
         }
     }
-    
-    
     
     
     private func setUpNav(){
@@ -117,6 +115,7 @@ class NewContractVC: UIViewController {
             break
         }
         
+        finalResultView.isHidden = approvalStep != "last" || progress != 6
         stepsNumberLabel.text = "step \(Int(progress)) of 6"
         if isWaitingThisUser{
             approvalView.isHidden = steps[Int(progress)] != approvalStep
@@ -142,10 +141,11 @@ class NewContractVC: UIViewController {
         mainView.bottomAnchor.constraint(equalTo: pageController.view.bottomAnchor, constant: 0).isActive = true
     }
     
+    
     @objc private func verificationCodeAction(){
         submitButton.isHidden = verificationCodeTextField.text!.isEmpty
     }
-        
+    
     
     @IBAction func pdfAction(_ sender: Any) {
         if let data = previewFileData {
@@ -237,11 +237,14 @@ extension NewContractVC {
         
         showLoadingActivity()
         APIController.shard.getContractDetails(transactionId: data?.transaction_request_id ?? "") { data in
-            self.hideLoadingActivity()
-            if let status =  data.status,status{
-                self.setRequestData(data: data)
-            }else{
-                SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status =  data.status,status{
+                    self.setRequestData(data: data)
+                }else{
+                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
         
@@ -258,6 +261,7 @@ extension NewContractVC {
         notesData = data.transactions_notes?.records ?? []
         getPrviewFile()
         pageController.setContractData(data: data.form_ct1_data,addtionalAllowances:data.form_ct1_data_additional_terms)
+        approvalStep = data.transactions_request?.transaction_request_last_step
         switch data.transactions_request?.transaction_request_last_step{
         case "CONFIGURATION":
             self.progress = 1
@@ -282,29 +286,27 @@ extension NewContractVC {
         }
         
         
-        
-        
-        self.setUpApprovalViewExistent(lastStepRequired:data.transactions_request?.transaction_request_last_step,data: data.transactions_persons)
+        self.setUpApprovalViewExistent(data: data.transactions_persons)
         
     }
-
     
-    private func setUpApprovalViewExistent(lastStepRequired:String?,data:Transactions_personsVD?){
-        
-        if let data = data ,let records = data.records{
+    
+    private func setUpApprovalViewExistent(data:Transactions_personsVD?){
+        if let data = data ,let records = data.records , let approvalStep = approvalStep{
             for record in records{
-                if lastStepRequired == record.transactions_persons_last_step{
+                if approvalStep == record.transactions_persons_last_step{
                     waitingUsers.append("\(waitingUsers.isEmpty ? "" : " - ")\(record.person_name ?? "")")
                 }
-                self.isWaitingThisUser = record.user_id == Auth_User.user_id
-                if isWaitingThisUser{
-                    approvalStep = lastStepRequired
-                    approvalView.isHidden = record.transactions_persons_last_step != lastStepRequired
+                
+                if record.user_id == Auth_User.user_id{
+                    self.isWaitingThisUser = record.transactions_persons_last_step == approvalStep
+                    approvalView.isHidden = record.transactions_persons_last_step != approvalStep
                 }
             }
         }
     }
-        
+    
+    
     private func getPrviewFile(){
         
         APIController.shard.getImage(url: "form/FORM_CT1/pr1/\(data?.transaction_request_id ?? "")") { [weak self] data in
@@ -314,6 +316,7 @@ extension NewContractVC {
             }
         }
     }
+    
     
     private func sendApproval(){
         showLoadingActivity()
@@ -328,6 +331,8 @@ extension NewContractVC {
             }
         }
     }
+    
+    
 }
 
 
@@ -341,3 +346,4 @@ extension NewContractVC:UITextViewDelegate,UITextFieldDelegate{
     }
     
 }
+

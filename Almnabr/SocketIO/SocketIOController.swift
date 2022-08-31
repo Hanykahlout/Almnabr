@@ -23,7 +23,7 @@ class SocketIOController{
     
     
     func connect(){
-        manager = SocketManager(socketURL: URL(string:"https://node.almnabr.com/")!)
+        manager = SocketManager(socketURL: URL(string:"https://node.nahidh.sa/")!)
         let token =  "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         self.manager.config = SocketIOClientConfiguration(
             arrayLiteral: .connectParams(["Authorization": "test"]),.secure(false) )

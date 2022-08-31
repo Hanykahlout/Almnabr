@@ -16,6 +16,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewEmpContractDetailsVC" customModule="Almnabr" customModuleProvider="target">
             <connections>
+                <outlet property="emptyDataImageView" destination="68c-pz-wLB" id="dcl-j6-Cjs"/>
+                <outlet property="searchTextField" destination="SPW-LM-w9P" id="WK0-ZP-2j8"/>
+                <outlet property="tableView" destination="IVs-oG-o2k" id="3iX-yd-RbK"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -37,30 +40,10 @@
                             <rect key="frame" x="10" y="0.0" width="372" height="45"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search...." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="SPW-LM-w9P">
-                                    <rect key="frame" x="0.0" y="0.0" width="327" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="372" height="45"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
-                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0xF-Yj-PFC">
-                                    <rect key="frame" x="327" y="0.0" width="45" height="45"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="0DT-Hc-j9z">
-                                            <rect key="frame" x="7.5" y="9.5" width="30" height="26"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="tintColor" red="0.054546527560000002" green="0.21474048500000001" blue="0.40836769340000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="30" id="N9R-Mr-UZ6"/>
-                                                <constraint firstAttribute="height" constant="30" id="tai-Sp-xoF"/>
-                                            </constraints>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.83505259399999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="45" id="GIL-K5-R6N"/>
-                                        <constraint firstItem="0DT-Hc-j9z" firstAttribute="centerY" secondItem="0xF-Yj-PFC" secondAttribute="centerY" id="nRp-5K-ndu"/>
-                                        <constraint firstItem="0DT-Hc-j9z" firstAttribute="centerX" secondItem="0xF-Yj-PFC" secondAttribute="centerX" id="zs3-mu-yMs"/>
-                                    </constraints>
-                                </view>
                             </subviews>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="HKj-uK-4vk"/>
@@ -80,21 +63,35 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="IVs-oG-o2k">
+                    <rect key="frame" x="0.0" y="139.5" width="414" height="722.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </tableView>
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_empty" translatesAutoresizingMaskIntoConstraints="NO" id="68c-pz-wLB">
+                    <rect key="frame" x="0.0" y="139.5" width="414" height="256"/>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IVs-oG-o2k" secondAttribute="trailing" id="7AM-hE-WVi"/>
+                <constraint firstItem="68c-pz-wLB" firstAttribute="trailing" secondItem="IVs-oG-o2k" secondAttribute="trailing" id="GI7-a0-gO0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="IVs-oG-o2k" secondAttribute="bottom" id="Hq7-9W-9wQ"/>
                 <constraint firstItem="Upg-Gg-xCr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="Ivx-ms-tdA"/>
+                <constraint firstItem="IVs-oG-o2k" firstAttribute="top" secondItem="BmW-ry-fcA" secondAttribute="bottom" constant="20" id="Jor-N5-16m"/>
+                <constraint firstItem="68c-pz-wLB" firstAttribute="leading" secondItem="IVs-oG-o2k" secondAttribute="leading" id="RDL-EI-Y7O"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="BmW-ry-fcA" secondAttribute="trailing" constant="16" id="Tuu-DI-Z6v"/>
                 <constraint firstItem="BmW-ry-fcA" firstAttribute="top" secondItem="Upg-Gg-xCr" secondAttribute="bottom" constant="20" id="gsT-9x-xCV"/>
                 <constraint firstItem="Upg-Gg-xCr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="p0y-ac-gHM"/>
+                <constraint firstItem="IVs-oG-o2k" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tup-Xc-13e"/>
+                <constraint firstItem="68c-pz-wLB" firstAttribute="top" secondItem="IVs-oG-o2k" secondAttribute="top" id="xJm-cx-EFa"/>
                 <constraint firstItem="BmW-ry-fcA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="ymi-gh-aBh"/>
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="99.776785714285708"/>
         </view>
     </objects>
     <resources>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="icon_empty" width="512" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

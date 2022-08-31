@@ -407,6 +407,8 @@
 		3FEAAE3D28B622D80093815D /* TransactionsContractRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEAAE2B28B622D80093815D /* TransactionsContractRequest.swift */; };
 		3FEB890328ABA1D4009CA353 /* DocumentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEB890128ABA1D3009CA353 /* DocumentData.swift */; };
 		3FEB890428ABA1D4009CA353 /* DocumentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEB890228ABA1D4009CA353 /* DocumentsResponse.swift */; };
+		3FF04B9B28BFB30B005B82DC /* ContractData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF04B9928BFB30B005B82DC /* ContractData.swift */; };
+		3FF04B9C28BFB30B005B82DC /* ContractsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF04B9A28BFB30B005B82DC /* ContractsResponse.swift */; };
 		3FF396822897BED800E1322D /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF396802897BED800E1322D /* CommentTableViewCell.swift */; };
 		3FF396832897BED800E1322D /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF396812897BED800E1322D /* CommentTableViewCell.xib */; };
 		3FF396862898228B00E1322D /* ReplyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF396842898228B00E1322D /* ReplyCommentTableViewCell.swift */; };
@@ -1124,6 +1126,8 @@
 		3FEAAE2B28B622D80093815D /* TransactionsContractRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionsContractRequest.swift; sourceTree = "<group>"; };
 		3FEB890128ABA1D3009CA353 /* DocumentData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentData.swift; sourceTree = "<group>"; };
 		3FEB890228ABA1D4009CA353 /* DocumentsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DocumentsResponse.swift; sourceTree = "<group>"; };
+		3FF04B9928BFB30B005B82DC /* ContractData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractData.swift; sourceTree = "<group>"; };
+		3FF04B9A28BFB30B005B82DC /* ContractsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractsResponse.swift; sourceTree = "<group>"; };
 		3FF396802897BED800E1322D /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		3FF396812897BED800E1322D /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		3FF396842898228B00E1322D /* ReplyCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -1593,7 +1597,6 @@
 		3F645ADD2875D85100720E76 /* SocketIO */ = {
 			isa = PBXGroup;
 			children = (
-				3F645ADE2875D86E00720E76 /* SocketIOController.swift */,
 			);
 			path = SocketIO;
 			sourceTree = "<group>";
@@ -2329,6 +2332,8 @@
 		3FEAAE1928B61A1B0093815D /* NewContractModels */ = {
 			isa = PBXGroup;
 			children = (
+				3FF04B9928BFB30B005B82DC /* ContractData.swift */,
+				3FF04B9A28BFB30B005B82DC /* ContractsResponse.swift */,
 				3F8403A328B7BB6800657C10 /* SendCodeWaysResponse.swift */,
 				3FEAAE2228B622D70093815D /* AdditionalTermsRecords.swift */,
 				3FEAAE2628B622D80093815D /* Form_ct1_data_additional_terms.swift */,
@@ -2432,6 +2437,7 @@
 		FA03242426FB9BFA00372EA6 /* Almnabr */ = {
 			isa = PBXGroup;
 			children = (
+				3F645ADE2875D86E00720E76 /* SocketIOController.swift */,
 				3F645ADD2875D85100720E76 /* SocketIO */,
 				FA95FD1A275EFFF400DE7854 /* no-permission.gif */,
 				FA1809652705006200B493A7 /* Almnabr.entitlements */,
@@ -3659,6 +3665,7 @@
 				FA95FD15275EFE7C00DE7854 /* RecipientVerificationVC.swift in Sources */,
 				FA5CB10D27D2183F0023A372 /* Shaddow.swift in Sources */,
 				3FEB890428ABA1D4009CA353 /* DocumentsResponse.swift in Sources */,
+				3FF04B9B28BFB30B005B82DC /* ContractData.swift in Sources */,
 				3F14368B2848A120008ABC19 /* BottomBorderTextField.swift in Sources */,
 				FA5C97782819602400A2AA5A /* TaskHistoryCell.swift in Sources */,
 				3F74629F2886BF9300C19474 /* ResultResponse.swift in Sources */,
@@ -3716,6 +3723,7 @@
 				FA35CE4C271DCCF400FF6AE4 /* FromTransactionVC.swift in Sources */,
 				3FD03A1D287437B000BB13C7 /* ViewEmpContactDetailsVC.swift in Sources */,
 				FACFBA43273AD24D007C248C /* ByPhasesCell.swift in Sources */,
+				3FF04B9C28BFB30B005B82DC /* ContractsResponse.swift in Sources */,
 				3FA3386F2858A90E00194AC6 /* JopDetailsTableViewCell.swift in Sources */,
 				FA03242826FB9BFA00372EA6 /* SceneDelegate.swift in Sources */,
 				3FD039F2287437B000BB13C7 /* OngoingViewDetailsViewController.swift in Sources */,
@@ -5168,7 +5176,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5197,7 +5205,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -1649,6 +1649,21 @@ class APIController{
         }
     }
     
+    func getHRContracts(pageNumber:String,searchKey:String,id:String,callback:@escaping (_ data:ContractsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/hrcontracts/\(pageNumber)/10?search_key=&id=\(id)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ContractsResponse = Mapper<ContractsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
 }
 
 

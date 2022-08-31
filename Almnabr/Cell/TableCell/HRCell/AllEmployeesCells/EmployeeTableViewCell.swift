@@ -43,12 +43,8 @@ class EmployeeTableViewCell: UITableViewCell {
         dropDown.anchorView = menuButton
         dropDown.dataSource = ["View".localized(),"Edit".localized(),"Upload Signature".localized(),"Delete".localized()]
         
-        if L102Language.currentAppleLanguage() == "ar"{
-            dropDown.bottomOffset = CGPoint(x: menuButton.frame.maxX , y:(dropDown.anchorView?.plainView.bounds.height)!)
-        }else{
-            dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
-        }
-        
+        dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        dropDown.width = contentView.bounds.width - 100
         dropDown.selectionAction = { (index: Int, item: String) in
             switch index{
             case 0:

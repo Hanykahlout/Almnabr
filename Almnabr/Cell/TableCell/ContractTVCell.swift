@@ -36,4 +36,16 @@ class ContractTVCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setData(data:ContractData){
+        
+        self.lblSubject.text = data.subject ?? ""
+        self.lblContractDate.text = "\(data.joining_date_english ?? "") - \(data.joining_date_arabic ?? "")"
+        self.lblWorkDomain.text = data.work_domain ?? ""
+        self.lblWorkLocation.text = data.work_location ?? ""
+        self.lblApprovedDate.text = "\(data.contract_approved_date_english ?? "") - \(data.contract_approved_date_arabic ?? "")"
+        self.lblWriter.text = data.writer ?? ""
+        self.viewStatus.backgroundColor = data.contract_status == "1" ? .green : .red
+        
+    }
+    
 }

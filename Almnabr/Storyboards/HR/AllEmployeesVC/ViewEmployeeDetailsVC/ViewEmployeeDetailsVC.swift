@@ -56,6 +56,7 @@ class ViewEmployeeDetailsVC: UIViewController {
     
     private func setUpPageViewController(){
         pageController = storyboard?.instantiateViewController(withIdentifier: "ViewEmployeePageVC") as? ViewEmployeePageVC
+        pageController.empID = empId
         addChild(pageController)
         pageController.didMove(toParent: self)
         
@@ -69,7 +70,10 @@ class ViewEmployeeDetailsVC: UIViewController {
         mainView.bottomAnchor.constraint(equalTo: pageController.view.bottomAnchor, constant: 0).isActive = true
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     
     private func setCollectionData(){
         data.append(.init(bgColor: UIColor(named: "AppColor")!, icon: UIImage(systemName: "person.fill")!, title: "ID Details".localized()))

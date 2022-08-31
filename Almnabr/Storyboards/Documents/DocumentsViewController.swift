@@ -227,6 +227,9 @@ extension DocumentsViewController:UITextFieldDelegate{
 // MARK: - API handling
 extension DocumentsViewController{
     private func getDocuments(isFromBottom:Bool){
+        if !isFromBottom {
+            currentPage = 1
+        }
         showLoadingActivity()
         APIController.shard.getDocuments(document_branch: document_branch, document_number: docNumberTextField.text!, searchText:searchTextField.text! , pageNumber: "\(currentPage)") { data in
             self.hideLoadingActivity()

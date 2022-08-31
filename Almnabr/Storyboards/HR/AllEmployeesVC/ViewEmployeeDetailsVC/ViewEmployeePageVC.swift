@@ -11,12 +11,13 @@ import UIKit
 class ViewEmployeePageVC: UIPageViewController {
     
     private var containerVCs = [UIViewController]()
-    
+    var empID = ""
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let idDetailsVC = ViewEmpIDDetailsVC()
         let contractDetailsVC = ViewEmpContractDetailsVC()
+        contractDetailsVC.id = empID
         let joiningDetailsVC = ViewEmpJoiningDetailsVC()
         let jobDetailsVC = ViewEmpJobDetailsVC()
         let communicationsVC = ViewEmpCommunicationsVC()

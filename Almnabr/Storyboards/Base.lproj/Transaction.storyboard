@@ -792,6 +792,7 @@
                         <outlet property="lblWaitingFor" destination="mLS-w4-74o" id="KuG-25-Fuf"/>
                         <outlet property="mainView" destination="aqM-mP-Z6J" id="5Of-6E-Ulb"/>
                         <outlet property="pager_view" destination="3ww-hL-bP1" id="HiA-Vl-vV0"/>
+                        <outlet property="pager_viewHeight" destination="tLB-PM-UjY" id="IlK-Q9-y0Y"/>
                         <outlet property="scrollView" destination="3PZ-Db-Lbt" id="UV3-kj-Maj"/>
                         <outlet property="slider" destination="uMV-ee-oK6" id="D83-rV-9ti"/>
                     </connections>

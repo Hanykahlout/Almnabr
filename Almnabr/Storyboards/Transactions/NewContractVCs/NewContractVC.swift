@@ -10,7 +10,7 @@ import UIKit
 import SCLAlertView
 
 class NewContractVC: UIViewController {
-    
+    @IBOutlet weak var previewLabel: UILabel!
     @IBOutlet weak var requestNoLabel: UILabel!
     @IBOutlet weak var requestNo2Label: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
@@ -69,11 +69,16 @@ class NewContractVC: UIViewController {
         self.noteTextView.delegate = self
         self.verificationCodeTextField.addTarget(self, action: #selector(verificationCodeAction), for: .editingChanged)
         getContractData()
-        NotificationCenter.default.addObserver(forName: .init(rawValue: "XXX"), object: nil, queue: .main) { _ in
+        NotificationCenter.default.addObserver(forName: .init(rawValue: "UpdatePageControllerHeight"), object: nil, queue: .main) { _ in
             if let scrollView = self.pageController.containerVCs.first?.view.subviews.first as? UIScrollView{
                 self.mainViewHeight.constant = scrollView.contentSize.height
             }
         }
+        
+        NotificationCenter.default.addObserver(forName: .init(rawValue: "ReloadNewContractData"), object: nil, queue: .main) { _ in
+            self.getContractData()
+        }
+        
     }
     
     
@@ -225,16 +230,14 @@ class NewContractVC: UIViewController {
         sendApproval()
     }
     
-    
 }
-
 
 // MARK: - API Handling
 
 extension NewContractVC {
     
     private func getContractData(){
-        
+
         showLoadingActivity()
         APIController.shard.getContractDetails(transactionId: data?.transaction_request_id ?? "") { data in
             DispatchQueue.main.async {
@@ -247,11 +250,11 @@ extension NewContractVC {
                 }
             }
         }
-        
     }
     
     
     private func setRequestData(data:NewContractDataResponse){
+        previewLabel.text = data.transactions_request?.transaction_request_last_step ?? "" == "completed" ? "View" : "Preview"
         requestNoLabel.text = data.transactions_request?.transaction_request_id ?? "----"
         requestNo2Label.text = data.transactions_request?.tbv_barcodeData ?? "----"
         statusLabel.text = data.transactions_request?.transaction_request_status ?? "----"
@@ -259,9 +262,9 @@ extension NewContractVC {
         createdDateLabel.text = data.transactions_request?.created_date ?? ""
         presonalDetails = data.transactions_persons?.records ?? []
         notesData = data.transactions_notes?.records ?? []
-        getPrviewFile()
         pageController.setContractData(data: data.form_ct1_data,addtionalAllowances:data.form_ct1_data_additional_terms)
         approvalStep = data.transactions_request?.transaction_request_last_step
+        getPrviewFile(base64: approvalStep == "completed" ? data.transactions_request?.view_link ?? "" : nil)
         switch data.transactions_request?.transaction_request_last_step{
         case "CONFIGURATION":
             self.progress = 1
@@ -281,14 +284,17 @@ extension NewContractVC {
         case "last":
             self.progress = 6
             lastStepOpendLabel.text = "last step"
+        case "completed":
+            self.progress = 6
+            lastStepOpendLabel.text = "Completed"
         default:
+            
             break
         }
         
-        
         self.setUpApprovalViewExistent(data: data.transactions_persons)
-        
     }
+
     
     
     private func setUpApprovalViewExistent(data:Transactions_personsVD?){
@@ -307,9 +313,15 @@ extension NewContractVC {
     }
     
     
-    private func getPrviewFile(){
-        
-        APIController.shard.getImage(url: "form/FORM_CT1/pr1/\(data?.transaction_request_id ?? "")") { [weak self] data in
+    private func getPrviewFile(base64:String?){
+        var url = ""
+        if let base64 = base64 {
+            url = base64
+        }else{
+            url = "form/FORM_CT1/pr1/\(data?.transaction_request_id ?? "")"
+        }
+        APIController.shard.getImage(url: url) { [weak self] data in
+            
             if let status = data.status ,status , let self = self{
                 self.previewButton.isHidden = false
                 self.previewFileData = data
@@ -346,4 +358,6 @@ extension NewContractVC:UITextViewDelegate,UITextFieldDelegate{
     }
     
 }
+
+
 

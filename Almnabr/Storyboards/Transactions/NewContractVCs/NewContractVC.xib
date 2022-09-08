@@ -36,6 +36,7 @@
                 <outlet property="noteLabel" destination="Q0p-sw-GN4" id="8Nf-Jx-Dti"/>
                 <outlet property="noteTextView" destination="LVg-P9-k6J" id="g9N-Oh-cq2"/>
                 <outlet property="previewButton" destination="eVh-ZV-pjT" id="qfB-nO-gV1"/>
+                <outlet property="previewLabel" destination="f8O-Xm-IQW" id="Khx-Pi-OhM"/>
                 <outlet property="rejectButton" destination="em7-nz-e47" id="j0k-YH-VaR"/>
                 <outlet property="rejectStackView" destination="gWC-uf-ymx" id="nbJ-wz-Ftt"/>
                 <outlet property="requestNo2Label" destination="ubZ-2L-vzh" id="yTd-BT-EhY"/>
@@ -316,7 +317,7 @@
                                                                     <rect key="frame" x="0.0" y="222" width="382" height="22"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="1QL-cA-8TF">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="266.5" height="22"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="207" height="22"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last Step Opened:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOF-78-M3D">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="105.5" height="22"/>
@@ -324,14 +325,14 @@
                                                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Direct Manager" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58P-bd-jcS">
-                                                                                    <rect key="frame" x="110.5" y="0.0" width="106" height="22"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-------" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58P-bd-jcS">
+                                                                                    <rect key="frame" x="110.5" y="0.0" width="46.5" height="22"/>
                                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                                     <color key="textColor" systemColor="systemGreenColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9sh-0h-qkD">
-                                                                                    <rect key="frame" x="221.5" y="0.0" width="20" height="22"/>
+                                                                                    <rect key="frame" x="162" y="0.0" width="20" height="22"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="20" id="9KZ-c4-r8Z"/>
                                                                                     </constraints>
@@ -343,7 +344,7 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qol-V5-i6b">
-                                                                                    <rect key="frame" x="246.5" y="0.0" width="20" height="22"/>
+                                                                                    <rect key="frame" x="187" y="0.0" width="20" height="22"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" constant="20" id="5Yg-zQ-tBJ"/>
                                                                                         <constraint firstAttribute="height" constant="22" id="NsV-NS-uwo"/>
@@ -821,12 +822,12 @@
         </view>
     </objects>
     <resources>
-        <image name="arrowtriangle.left.fill" catalog="system" width="32" height="32"/>
-        <image name="arrowtriangle.right.fill" catalog="system" width="32" height="32"/>
+        <image name="arrowtriangle.left.fill" catalog="system" width="128" height="113"/>
+        <image name="arrowtriangle.right.fill" catalog="system" width="128" height="113"/>
         <image name="check" width="24" height="24"/>
         <image name="icon-pdf" width="24" height="24"/>
-        <image name="info.circle" catalog="system" width="32" height="32"/>
-        <image name="pencil" catalog="system" width="32" height="32"/>
+        <image name="info.circle" catalog="system" width="128" height="121"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="uncheck" width="24" height="24"/>
         <namedColor name="AppColor">
             <color red="0.098039215686274508" green="0.21176470588235294" blue="0.396078431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

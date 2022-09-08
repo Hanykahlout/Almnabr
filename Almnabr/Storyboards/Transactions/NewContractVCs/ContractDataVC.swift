@@ -11,7 +11,6 @@ import UIKit
 class ContractDataVC: UIViewController {
 
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var typeLAbel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var fromOrganizationLabel: UILabel!
@@ -95,8 +94,7 @@ class ContractDataVC: UIViewController {
     
 
     @objc private func changePageControllerHeight(){
-        NotificationCenter.default.post(name: .init(rawValue: "XXX"), object: nil)
-        
+        NotificationCenter.default.post(name: .init(rawValue: "UpdatePageControllerHeight"), object: nil)
     }
     
 }

@@ -18,9 +18,8 @@ import UserNotifications
 import AVFAudio
 
 var AppInstance: AppDelegate!
+
 @main
-
-
 class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenterDelegate {
     
     var window: UIWindow?

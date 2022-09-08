@@ -208,6 +208,7 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
         
     }
     
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let obj = arr_data[indexPath.item]
@@ -222,20 +223,13 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
                     vc.IsFromNotification = true
                     self.navigationController?.pushViewController(vc, animated: true)
                     
-                }else if  ios.contains("tasks") {
-                    
-                    let vc = TicketViewController()
-                    
-                    //                    let vc:TicketCollectionViewController = AppDelegate.TicketSB.instanceVC()
-                    //                    let splitString = ios.components(separatedBy: "tasks/view/")
-                    //                    print("Part before space: \(splitString[1])")
-                    //                    vc.object?.ticket_id = splitString[1]
-                    //                    self.navigationController?.pushViewController(vc, animated: true)
+                }else if  ios.contains("task") {
+                    let vc:TaskDetailVC = AppDelegate.TicketSB.instanceVC()
+                    vc.task_id =  String(ios.split(separator: "/").last ?? "")
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
-                
             }
         }
-        
     }
     
     

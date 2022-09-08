@@ -35,7 +35,7 @@ class TransactionFormPageaVC: UIPageViewController {
         let page9: ManagerApprovalVC = AppDelegate.TransactionSB.instanceVC()
         let page10: OwnersRepresentativeVC = AppDelegate.TransactionSB.instanceVC()
         let page11: FinalResultVC = AppDelegate.TransactionSB.instanceVC()
-
+        
         
         pages.append(page1)
         pages.append(page2)

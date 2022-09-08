@@ -34,7 +34,7 @@ class SocketIOController{
         socket = self.manager.defaultSocket
         
         self.manager.connectSocket(socket!, withPayload:dict)
-        
+         
         socket!.on(clientEvent: .connect) {data, ack in
             print("socket connected")
         }

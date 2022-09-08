@@ -981,7 +981,7 @@ extension TransactionFormDetailsVC {
         vc_array.append(page9)
         vc_array.append(page10)
         vc_array.append(page11)
-//        SelectedIndex = SelectedIndex - 1
+
         let viewController = viewControllerAtIndex(SelectedIndex - 1)
         guard let vc = viewController else { return }
         print(vc)

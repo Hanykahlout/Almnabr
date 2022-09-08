@@ -58,6 +58,7 @@ class TaskDetailVC: UIViewController {
         addSocketObservers()
     }
     
+    
     private func setUpObserver(){
         NotificationCenter.default.addObserver(forName: .init("UpdateTaskStatus"), object: nil, queue: .main) { notify in
             guard let status = notify.object as? String else { return }
@@ -147,7 +148,7 @@ class TaskDetailVC: UIViewController {
         self.lbl_title.font = .kufiRegularFont(ofSize: 14)
         self.lbl_title.text = object?.title ?? "---"
         
-        let Status = "Status".localized() + ": \(object?.status_name ?? "---")        "
+        let Status = "Status".localized() + ": \(object?.status_name ?? "---")"
         
         let Status_atr: NSAttributedString = Status.attributedStringWithColor(["Status".localized()], color: maincolor)
         self.lbl_status.attributedText = Status_atr
@@ -616,6 +617,7 @@ extension TaskDetailVC{
         }
     }
     
+    
     private func get_Chicklist_data(){
         
         self.showLoadingActivity()
@@ -727,10 +729,9 @@ extension TaskDetailVC{
             }else{
                 self.hideLoadingActivity()
             }
-            
-            
         }
     }
+    
     
     private func change_status(task_id:String, status:String){
         
@@ -837,7 +838,8 @@ extension TaskDetailVC{
     
     private func checkListSocket(){
         SocketIOController.shard.taskCheckListsHandler(ticketId: ticket_id, taskId: task_id, userID: Auth_User.user_id) { data in
-            print("ASASASASSSS",data)
+            print("DATATTTTTAAAAAA",data)
+            
             guard let data = data.first as? [String:Any],
                   let content = data["content"] as? [String:Any],
                   let type = data["type"] as? String

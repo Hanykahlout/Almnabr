@@ -178,11 +178,11 @@ class HeaderView:  UIView {
                     HelperClassSwift.acolor = obj.acolor
                     HelperClassSwift.bcolor = obj.bcolor
                     HelperClassSwift.IsLoadTheme = true
-                   // self.addShape(acolor: obj.acolor, bcolor: obj.bcolor)
+                    // self.addShape(acolor: obj.acolor, bcolor: obj.bcolor)
                     
                 }
             }else{
-              //  self.addShape(acolor: "#1992bc", bcolor: "#000000")
+                //  self.addShape(acolor: "#1992bc", bcolor: "#000000")
                 
             }
             

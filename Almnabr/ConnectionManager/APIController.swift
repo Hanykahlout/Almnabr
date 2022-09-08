@@ -1649,6 +1649,7 @@ class APIController{
         }
     }
     
+    
     func getHRContracts(pageNumber:String,searchKey:String,id:String,callback:@escaping (_ data:ContractsResponse)->Void){
         let strURL = "\(APIManager.serverURL)/hrcontracts/\(pageNumber)/10?search_key=&id=\(id)"
         let headers = [ "authorization":

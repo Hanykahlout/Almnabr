@@ -10,7 +10,7 @@ import UIKit
 import DropDown
 import SCLAlertView
 class EditLastStepViewController: UIViewController {
-
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var arrowImageVeiw: UIImageView!
     private var dropDown = DropDown()
@@ -21,7 +21,7 @@ class EditLastStepViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         initlization()
     }
     
@@ -51,7 +51,7 @@ class EditLastStepViewController: UIViewController {
         dropDown.cancelAction = { [unowned self] in
             arrowImageVeiw.transform = .init(rotationAngle: 0)
         }
-            
+        
         nameTextField.addTarget(self, action: #selector(editTextFieldAction), for: .editingChanged)
     }
     
@@ -59,7 +59,7 @@ class EditLastStepViewController: UIViewController {
     @objc private func editTextFieldAction(){
         searchForUser()
     }
-
+    
     
     @IBAction func submitAction(_ sender: Any) {
         if let _ = selectedUser{
@@ -79,7 +79,7 @@ class EditLastStepViewController: UIViewController {
 // MARK: - API Handling
 
 extension EditLastStepViewController{
-
+    
     private func searchForUser(){
         APIController.shard.searchForUser(searchText: nameTextField.text!, lang: L102Language.currentAppleLanguage(), id: "1") { data in
             if let status = data.status, status{
@@ -105,13 +105,16 @@ extension EditLastStepViewController{
                     self.hideLoadingActivity()
                     if let status = data.status,status{
                         SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
-                        if self.isVaction { NotificationCenter.default.post(name: .init("ReloadVactionData"), object: nil) }
+                        if self.isVaction {
+                            NotificationCenter.default.post(name: .init("ReloadVactionData"), object: nil)
+                        } else{
+                             NotificationCenter.default.post(name: .init("ReloadNewContractData"), object: nil)
+                        }
                         self.navigationController?.dismiss(animated: true)
                     }else{
                         SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknow error...")
                     }
                 }
-                
             }
         }
     }

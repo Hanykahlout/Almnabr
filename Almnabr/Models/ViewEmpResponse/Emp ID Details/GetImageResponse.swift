@@ -21,6 +21,16 @@ struct GetImageResponse : Mappable {
 	var content_type : String?
 	var size : String?
     var error : String?
+    
+    
+    init(
+        status:Bool,
+        base64:String
+    ){
+        self.status = status
+        self.base64 = base64
+    }
+    
 	init?(map: Map) {
 
 	}
@@ -35,4 +45,5 @@ struct GetImageResponse : Mappable {
         error <- map["error"]
 	}
 
+    
 }

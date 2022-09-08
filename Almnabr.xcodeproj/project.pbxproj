@@ -1597,6 +1597,7 @@
 		3F645ADD2875D85100720E76 /* SocketIO */ = {
 			isa = PBXGroup;
 			children = (
+				3F645ADE2875D86E00720E76 /* SocketIOController.swift */,
 			);
 			path = SocketIO;
 			sourceTree = "<group>";
@@ -2437,7 +2438,6 @@
 		FA03242426FB9BFA00372EA6 /* Almnabr */ = {
 			isa = PBXGroup;
 			children = (
-				3F645ADE2875D86E00720E76 /* SocketIOController.swift */,
 				3F645ADD2875D85100720E76 /* SocketIO */,
 				FA95FD1A275EFFF400DE7854 /* no-permission.gif */,
 				FA1809652705006200B493A7 /* Almnabr.entitlements */,
@@ -5176,7 +5176,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.1;
+				MARKETING_VERSION = 1.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5205,7 +5205,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.1;
+				MARKETING_VERSION = 1.6.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

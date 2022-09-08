@@ -297,10 +297,9 @@ class TransactionsVC: UIViewController {
                     self.hideLoadingActivity()
                 }
             }
-            
-            
         }
     }
+    
     
     func menu_select(){
         let language =  L102Language.currentAppleLanguage()
@@ -534,10 +533,8 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         default:
             break
         }
-        
-        
-        
     }
+    
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension

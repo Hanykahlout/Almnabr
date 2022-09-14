@@ -74,6 +74,10 @@
 		3F2B2C1128524F5B00C33FAD /* EditBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2B2C0F28524F5B00C33FAD /* EditBody.swift */; };
 		3F31ADEE288D370700E2D8D6 /* VactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F31ADEC288D370700E2D8D6 /* VactionViewController.swift */; };
 		3F31ADEF288D370700E2D8D6 /* VactionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F31ADED288D370700E2D8D6 /* VactionViewController.xib */; };
+		3F33D12628CDDA8B006B7744 /* DashboardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D12228CDDA8B006B7744 /* DashboardResponse.swift */; };
+		3F33D12728CDDA8B006B7744 /* Employee_tasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D12328CDDA8B006B7744 /* Employee_tasks.swift */; };
+		3F33D12828CDDA8B006B7744 /* Extra_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D12428CDDA8B006B7744 /* Extra_data.swift */; };
+		3F33D12928CDDA8B006B7744 /* Dash_Employee_info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F33D12528CDDA8B006B7744 /* Dash_Employee_info.swift */; };
 		3F397D812860BE6300A7DAB4 /* AttachmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D7F2860BE6300A7DAB4 /* AttachmentTableViewCell.swift */; };
 		3F397D862860C1F000A7DAB4 /* AttachmentsGetREsponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D842860C1F000A7DAB4 /* AttachmentsGetREsponse.swift */; };
 		3F397D872860C1F000A7DAB4 /* AttachmentRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F397D852860C1F000A7DAB4 /* AttachmentRecords.swift */; };
@@ -772,6 +776,10 @@
 		3F2B2C0F28524F5B00C33FAD /* EditBody.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBody.swift; sourceTree = "<group>"; };
 		3F31ADEC288D370700E2D8D6 /* VactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VactionViewController.swift; sourceTree = "<group>"; };
 		3F31ADED288D370700E2D8D6 /* VactionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VactionViewController.xib; sourceTree = "<group>"; };
+		3F33D12228CDDA8B006B7744 /* DashboardResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardResponse.swift; sourceTree = "<group>"; };
+		3F33D12328CDDA8B006B7744 /* Employee_tasks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Employee_tasks.swift; sourceTree = "<group>"; };
+		3F33D12428CDDA8B006B7744 /* Extra_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extra_data.swift; sourceTree = "<group>"; };
+		3F33D12528CDDA8B006B7744 /* Dash_Employee_info.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dash_Employee_info.swift; sourceTree = "<group>"; };
 		3F397D7F2860BE6300A7DAB4 /* AttachmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentTableViewCell.swift; sourceTree = "<group>"; };
 		3F397D842860C1F000A7DAB4 /* AttachmentsGetREsponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentsGetREsponse.swift; sourceTree = "<group>"; };
 		3F397D852860C1F000A7DAB4 /* AttachmentRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentRecords.swift; sourceTree = "<group>"; };
@@ -1518,6 +1526,17 @@
 			path = Transactions;
 			sourceTree = "<group>";
 		};
+		3F33D12128CDDA7E006B7744 /* DashboardModels */ = {
+			isa = PBXGroup;
+			children = (
+				3F33D12228CDDA8B006B7744 /* DashboardResponse.swift */,
+				3F33D12528CDDA8B006B7744 /* Dash_Employee_info.swift */,
+				3F33D12328CDDA8B006B7744 /* Employee_tasks.swift */,
+				3F33D12428CDDA8B006B7744 /* Extra_data.swift */,
+			);
+			path = DashboardModels;
+			sourceTree = "<group>";
+		};
 		3F397D832860C16600A7DAB4 /* Attachments Details */ = {
 			isa = PBXGroup;
 			children = (
@@ -1714,6 +1733,41 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		3FA8EAD928CDEA960026DE44 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3FD038D02874377000BB13C7 /* LaunchScreen.storyboard */,
+				3FD03A7D2874492000BB13C7 /* Main.storyboard */,
+				3FD03A822874496900BB13C7 /* Transaction.storyboard */,
+				3FD03A78287448C900BB13C7 /* HR.storyboard */,
+				3FD03A732874485800BB13C7 /* Ticket.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3FA8EADA28CDEACE0026DE44 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				FA530A40270CEC6D0071CDC8 /* CustomHeaderView.xib */,
+				FA530A42270CEC810071CDC8 /* CustomHeaderView.swift */,
+				FA530A44270CEFF10071CDC8 /* MyTransactionHeaderView.xib */,
+				FA530A46270CF00E0071CDC8 /* MyTransactionHeaderView.swift */,
+				FAC788D327104436009AC355 /* HeaderView.xib */,
+				FAC788D527104448009AC355 /* HeaderView.swift */,
+				FA400D482718C61A0097C7D1 /* ServicesView.xib */,
+				FA400D4A2718C63A0097C7D1 /* ServicesView.swift */,
+				FA3D32AA27342D6B00A5472A /* ViewLanguage.xib */,
+				FA3D32AE27342E8000A5472A /* ViewLanguage.swift */,
+				FA9768B427355A91000A3576 /* FromTransactionView.xib */,
+				FA9768B627355AAA000A3576 /* FromTransactionView.swift */,
+				FA025FB82785E73500AB38C8 /* View_notification.xib */,
+				FA025FBA2785E77800AB38C8 /* View_notification.swift */,
+				FA4975AB2793659600891C9F /* DropDownView.xib */,
+				FA4975AD279365A900891C9F /* DropDownView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		3FAA84A9288E7EB3003A437E /* VactionForm */ = {
 			isa = PBXGroup;
 			children = (
@@ -1870,22 +1924,18 @@
 			path = AllEmployeeModels;
 			sourceTree = "<group>";
 		};
-		3FD038CF2874377000BB13C7 /* Storyboards */ = {
+		3FD038CF2874377000BB13C7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3FA8EADA28CDEACE0026DE44 /* CustomViews */,
 				3F677EC728AB7FAB000D6239 /* Documents */,
 				3F97CD96289A5FE500D6E8CC /* Tasks */,
 				3F5308312892876400AE7D2A /* SendCodeVC */,
 				3F31ADEB288D36A500E2D8D6 /* Transactions */,
 				3F1F4041287E0EBD00F919F0 /* QRCode */,
 				3FD038DA287437AF00BB13C7 /* HR */,
-				3FD038D02874377000BB13C7 /* LaunchScreen.storyboard */,
-				3FD03A7D2874492000BB13C7 /* Main.storyboard */,
-				3FD03A822874496900BB13C7 /* Transaction.storyboard */,
-				3FD03A78287448C900BB13C7 /* HR.storyboard */,
-				3FD03A732874485800BB13C7 /* Ticket.storyboard */,
 			);
-			path = Storyboards;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		3FD038DA287437AF00BB13C7 /* HR */ = {
@@ -2450,10 +2500,10 @@
 				FAC32FB12708C8BE0046A0F6 /* Cell */,
 				FA0324A426FBCB4000372EA6 /* Extensions */,
 				FA03245B26FB9E0300372EA6 /* Models */,
-				FA03245A26FB9DF900372EA6 /* Views */,
 				FA03245726FB9D9200372EA6 /* HelperClasses */,
 				FA03245626FB9D6A00372EA6 /* ConnectionManager */,
-				3FD038CF2874377000BB13C7 /* Storyboards */,
+				3FD038CF2874377000BB13C7 /* Views */,
+				3FA8EAD928CDEA960026DE44 /* Storyboards */,
 				FA03242526FB9BFA00372EA6 /* AppDelegate.swift */,
 				FA03242726FB9BFA00372EA6 /* SceneDelegate.swift */,
 				FAA9C4CC27B32B51003C051E /* notification3.wav */,
@@ -2506,32 +2556,10 @@
 			path = HelperClasses;
 			sourceTree = "<group>";
 		};
-		FA03245A26FB9DF900372EA6 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				FA530A40270CEC6D0071CDC8 /* CustomHeaderView.xib */,
-				FA530A42270CEC810071CDC8 /* CustomHeaderView.swift */,
-				FA530A44270CEFF10071CDC8 /* MyTransactionHeaderView.xib */,
-				FA530A46270CF00E0071CDC8 /* MyTransactionHeaderView.swift */,
-				FAC788D327104436009AC355 /* HeaderView.xib */,
-				FAC788D527104448009AC355 /* HeaderView.swift */,
-				FA400D482718C61A0097C7D1 /* ServicesView.xib */,
-				FA400D4A2718C63A0097C7D1 /* ServicesView.swift */,
-				FA3D32AA27342D6B00A5472A /* ViewLanguage.xib */,
-				FA3D32AE27342E8000A5472A /* ViewLanguage.swift */,
-				FA9768B427355A91000A3576 /* FromTransactionView.xib */,
-				FA9768B627355AAA000A3576 /* FromTransactionView.swift */,
-				FA025FB82785E73500AB38C8 /* View_notification.xib */,
-				FA025FBA2785E77800AB38C8 /* View_notification.swift */,
-				FA4975AB2793659600891C9F /* DropDownView.xib */,
-				FA4975AD279365A900891C9F /* DropDownView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		FA03245B26FB9E0300372EA6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3F33D12128CDDA7E006B7744 /* DashboardModels */,
 				3FEAAE1928B61A1B0093815D /* NewContractModels */,
 				3FEB890028ABA1C5009CA353 /* DocumentsModel */,
 				3FF3968828995C2600E1322D /* TicketModels */,
@@ -3587,6 +3615,7 @@
 				3FEAAE2D28B622D80093815D /* TransactionsContractNotes.swift in Sources */,
 				3FAA84DF288E904D003A437E /* FormHrv1VacationData.swift in Sources */,
 				FA03242A26FB9BFA00372EA6 /* ViewController.swift in Sources */,
+				3F33D12728CDDA8B006B7744 /* Employee_tasks.swift in Sources */,
 				3F48C53F285883AF004D33F8 /* Profile_percentage.swift in Sources */,
 				3F1436962848A120008ABC19 /* UILabelDesignable.swift in Sources */,
 				3FD03A45287437B000BB13C7 /* IDDetailsViewController.swift in Sources */,
@@ -3663,6 +3692,7 @@
 				3FD03A0C287437B000BB13C7 /* AddJopDetailsViewController.swift in Sources */,
 				FA48C310286A58C0006B8130 /* AddChecklistVC.swift in Sources */,
 				FA95FD15275EFE7C00DE7854 /* RecipientVerificationVC.swift in Sources */,
+				3F33D12928CDDA8B006B7744 /* Dash_Employee_info.swift in Sources */,
 				FA5CB10D27D2183F0023A372 /* Shaddow.swift in Sources */,
 				3FEB890428ABA1D4009CA353 /* DocumentsResponse.swift in Sources */,
 				3FF04B9B28BFB30B005B82DC /* ContractData.swift in Sources */,
@@ -3923,6 +3953,7 @@
 				FAAF206B27DCFE0400AD255B /* RelatedFormTVCell.swift in Sources */,
 				FADC2FF928245B5200921011 /* TicketDetailsVC.swift in Sources */,
 				3FEAAE3028B622D80093815D /* FormCT1DataRecord.swift in Sources */,
+				3F33D12828CDDA8B006B7744 /* Extra_data.swift in Sources */,
 				3FD03A5B28743AE100BB13C7 /* CommentRepltTableViewCell.swift in Sources */,
 				FA78EA1327D2B01A0023E48D /* ProjectRequestTVCell.swift in Sources */,
 				3FD039F1287437B000BB13C7 /* OutgoingAttachViewController.swift in Sources */,
@@ -3949,6 +3980,7 @@
 				3F48C54128589439004D33F8 /* GetImageResponse.swift in Sources */,
 				3F1F94E1286C3D6E00E454BF /* L102Localizer.swift in Sources */,
 				3FD03A33287437B000BB13C7 /* EditEmployeePageViewController.swift in Sources */,
+				3F33D12628CDDA8B006B7744 /* DashboardResponse.swift in Sources */,
 				FAC32FB62708C91D0046A0F6 /* TransactionTVCell.swift in Sources */,
 				FA556379279C8B2D00542310 /* TemplateFilterVC.swift in Sources */,
 				FAAF205F27DB734900AD255B /* ContactTVCell.swift in Sources */,
@@ -5171,6 +5203,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Almnabr;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5200,6 +5233,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Almnabr;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

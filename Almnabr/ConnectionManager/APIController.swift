@@ -1470,7 +1470,7 @@ class APIController{
             }
         }
     }
-
+    
     func sendCodeForApproval(body:[String:Any],callback:@escaping (_ data:SettingsData) -> Void){
         
         let strURL = "\(APIManager.serverURL)/tc/sender/send_code"
@@ -1485,7 +1485,7 @@ class APIController{
             }
         }
     }
-
+    
     func deleteItemCheckList(param:[String:Any],callback: @escaping (_ data:SettingsData)->Void){
         
         let strURL = "\(APIManager.serverURL)/tasks/delete_task_point"
@@ -1550,7 +1550,7 @@ class APIController{
             }
         }
     }
-
+    
     
     func getUsersForCheckListItem(sub_point_id:String,callback: @escaping (_ data:CheckListItemUsers)->Void){
         let strURL = "\(APIManager.serverURL)/tasks/get_emp_in_sub_points"
@@ -1601,7 +1601,7 @@ class APIController{
                     guard let fileUrl = filesUrl[i] else {
                         continue
                     }
-
+                    
                     let data = try Data(contentsOf: fileUrl)
                     multipartFormData.append(data, withName: "attachments[\(i)][file]", fileName: "\(Date.init().timeIntervalSince1970).\(fileUrl.pathExtension)", mimeType: fileUrl.mimeType())
                 }
@@ -1659,6 +1659,21 @@ class APIController{
         Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : ContractsResponse = Mapper<ContractsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getDashboardData(callback: @escaping (_ data:DashboardResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/dashboard/employee_dashboard/"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : DashboardResponse = Mapper<DashboardResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
             }

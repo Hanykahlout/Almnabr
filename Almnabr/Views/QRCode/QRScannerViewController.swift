@@ -2,12 +2,16 @@
 
 import AVFoundation
 import UIKit
+import FAPanels
+import SCLAlertView
+
 class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
     @IBOutlet weak var mainView: UIView!
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
-    var delegate:QRCodeDelegate?
+    var isFromWidget = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,14 +19,16 @@ class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjects
         _ = self.navigationController?.preferredStatusBarStyle
         view.backgroundColor = UIColor(hexString: "1A3665")
         navigationController?.navigationBar.tintColor = .white
+        
         let button = UIButton(type: .system)
         button.setTitle("Cancel".localized(), for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(cancelAction), for: .touchUpInside)
         navigationItem.leftBarButtonItem = .init(customView: button)
+        
         addNavigationBarTitle(navigationTitle: "Scan QR Code")
         
-//        UINavigationBar.appearance().backgroundColor = UIColor(hexString: "1A3665")
+        //        UINavigationBar.appearance().backgroundColor = UIColor(hexString: "1A3665")
         
         
         captureSession = AVCaptureSession()
@@ -59,8 +65,9 @@ class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjects
         previewLayer.frame = mainView.layer.bounds
         previewLayer.videoGravity = .resizeAspectFill
         mainView.layer.addSublayer(previewLayer)
-        
-        captureSession.startRunning()
+        DispatchQueue.global(qos:.background).async {
+            self.captureSession.startRunning()
+        }
     }
     
     func failed() {
@@ -73,13 +80,45 @@ class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjects
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
-        if (captureSession?.isRunning == false) {
-            captureSession.startRunning()
+        DispatchQueue.global(qos:.background).async {
+            if (self.captureSession?.isRunning == false) {
+                self.captureSession.startRunning()
+            }
         }
     }
     
     @objc private func cancelAction(){
-        navigationController?.dismiss(animated: true)
+        if !isFromWidget{
+            navigationController?.dismiss(animated: true)
+        }else{
+            let vc = AppDelegate.mainSB.instantiateViewController(withIdentifier: "HomeVC")
+            
+            let nav = UINavigationController.init(rootViewController: vc)
+            let sideMenu: MenuVC = AppDelegate.mainSB.instanceVC()
+            let rootController : FAPanelController = AppDelegate.mainSB.instanceVC()
+            let center : MenuVC = AppDelegate.mainSB.instanceVC()
+            
+            _ = rootController.center(nav).right(center).left(sideMenu)
+            rootController.rightPanelPosition = .front
+            rootController.leftPanelPosition = .front
+            
+            // rootController.configs.rightPanelWidth = (window?.frame.size.width)!
+            let width = UIScreen.main.bounds.width - 150
+            
+            
+            rootController.configs.leftPanelWidth = width
+            rootController.configs.rightPanelWidth = width
+            
+            rootController.configs.maxAnimDuration = 0.3
+            rootController.configs.canRightSwipe = true
+            rootController.configs.canLeftSwipe = true
+            rootController.configs.changeCenterPanelAnimated = false
+            if let window = self.view.window{
+                window.rootViewController = rootController
+                UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+            }
+            
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -104,9 +143,18 @@ class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjects
     }
     
     func found(code: String) {
-        if let delegate = delegate{
-            delegate.sendCode(code: code)
-        }
+       
+            APIController.shard.sendQRCode(code: code) { data in
+                DispatchQueue.main.async {
+                    let alert = SCLAlertView()
+                    if let status = data.status,status{
+                        alert.showSuccess("Successfully Scanned".localized(), subTitle: "You can see your account logged in from the website.".localized())
+                    }else{
+                        alert.showError("Failed Scanned".localized(), subTitle: "")
+                    }
+                }
+            }
+        
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -118,12 +166,4 @@ class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjects
     }
     
 }
-
-
-protocol QRCodeDelegate{
-    
-    func sendCode(code:String)
-    
-}
-
 

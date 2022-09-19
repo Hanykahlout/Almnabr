@@ -1680,6 +1680,32 @@ class APIController{
         }
     }
     
+    func getUserEmails(userID:String,token:String,callback:@escaping (_ response:EmailsResponse)->Void){
+        
+        
+        let strURL = "https://gmail.googleapis.com/gmail/v1/users/\(userID)/messages"
+        
+        let headers = [ "authorization":"Bearer \(token)"]
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : EmailsResponse = Mapper<EmailsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getEmailFor(userID:String,token:String,id: String,callback:@escaping (_ response:String)->Void){
+        let strURL = "https://gmail.googleapis.com/gmail/v1/users/\(userID)/messages/\(id)"
+        
+        let headers = [ "authorization":"Bearer \(token)"]
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                callback(str)
+            }
+        }
+    }
+    
 }
 
 

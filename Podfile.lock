@@ -4,6 +4,12 @@ PODS:
     - Alamofire (~> 4.1)
     - ObjectMapper (~> 3.3)
   - AMPopTip (4.7.0)
+  - AppAuth (1.6.0):
+    - AppAuth/Core (= 1.6.0)
+    - AppAuth/ExternalUserAgent (= 1.6.0)
+  - AppAuth/Core (1.6.0)
+  - AppAuth/ExternalUserAgent (1.6.0):
+    - AppAuth/Core
   - DPLocalization (1.13)
   - DropDown (2.3.13)
   - EzPopup (1.2.4)
@@ -85,6 +91,12 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
+  - GoogleSignIn (6.2.3):
+    - AppAuth (~> 1.5)
+    - GTMAppAuth (~> 1.3)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleSignInSwiftSupport (6.2.3):
+    - GoogleSignIn (~> 6.2)
   - GoogleUtilities/AppDelegateSwizzler (7.7.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
@@ -104,6 +116,10 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.7.0):
     - GoogleUtilities/Logger
+  - GTMAppAuth (1.3.1):
+    - AppAuth/Core (~> 1.6)
+    - GTMSessionFetcher/Core (< 3.0, >= 1.5)
+  - GTMSessionFetcher/Core (1.7.2)
   - IQKeyboardManagerSwift (6.5.9)
   - JTAppleCalendar (8.0.4)
   - Kingfisher (7.2.2)
@@ -138,6 +154,8 @@ DEPENDENCIES:
   - Firebase
   - FirebaseMessaging
   - FontAwesome.swift
+  - GoogleSignIn
+  - GoogleSignInSwiftSupport
   - IQKeyboardManagerSwift
   - Kingfisher (~> 7.0)
   - SCLAlertView
@@ -151,6 +169,7 @@ SPEC REPOS:
     - Alamofire
     - AlamofireObjectMapper
     - AMPopTip
+    - AppAuth
     - DPLocalization
     - DropDown
     - EzPopup
@@ -165,7 +184,11 @@ SPEC REPOS:
     - FontAwesome.swift
     - GoogleAppMeasurement
     - GoogleDataTransport
+    - GoogleSignIn
+    - GoogleSignInSwiftSupport
     - GoogleUtilities
+    - GTMAppAuth
+    - GTMSessionFetcher
     - IQKeyboardManagerSwift
     - JTAppleCalendar
     - Kingfisher
@@ -186,6 +209,7 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   AlamofireObjectMapper: 3395e698901d8b0e6f48b7d0c43bd47875325102
   AMPopTip: 373aa691af864708b520131e1a5a1647a8de7937
+  AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   DPLocalization: 00b71b9c4043f8eaeb41bedcf2c90d847adcd4d8
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   EzPopup: 37f2c40e8ce50412a269bfba365baa7085c28002
@@ -200,7 +224,11 @@ SPEC CHECKSUMS:
   FontAwesome.swift: 6b52cb7be66eacd28cbfaa0ca7ffd0de4a186a1d
   GoogleAppMeasurement: 4c19f031220c72464d460c9daa1fb5d1acce958e
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
+  GoogleSignIn: f4d3939cc0d9264d7509c4b9a924a6c987e30b54
+  GoogleSignInSwiftSupport: f76e00ac6ba4653af48372c765d45f327219b3ff
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1
+  GTMAppAuth: 0ff230db599948a9ad7470ca667337803b3fc4dd
+  GTMSessionFetcher: 5595ec75acf5be50814f81e9189490412bad82ba
   IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   JTAppleCalendar: f95b02c64f56d6f938fbf6582a04dcab9d709ebd
   Kingfisher: 184d4d1a8c36666e663caf8e08abe87898595c53
@@ -217,6 +245,6 @@ SPEC CHECKSUMS:
   ZVActivityIndicatorView: fea0b3a8d8e0f54a106db3c6d543f7d5444cd9ea
   ZVProgressHUD: dfa70d6d3a0ba98826f2fd9b73d2e2b01a69967e
 
-PODFILE CHECKSUM: 9edaa02444126569fa91e146b01bec786c6ab083
+PODFILE CHECKSUM: d3c5da34c21f3a978189d41ae87379ef5d457d97
 
 COCOAPODS: 1.11.3

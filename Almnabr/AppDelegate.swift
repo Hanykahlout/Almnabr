@@ -16,7 +16,7 @@ import FirebaseCore
 import Firebase
 import UserNotifications
 import AVFAudio
-
+import GoogleSignIn
 var AppInstance: AppDelegate!
 
 @main
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     let gcmMessageIDKey = "gcm.message_id"
     
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) async -> Bool {
         
         UIApplication.shared.statusBarStyle = .darkContent
         L102Localizer.DoTheMagic()
@@ -69,19 +69,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         setupFirebaseMessaging(application)
         
         //registerForPushNotifications()
-      
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+            if error != nil || user == nil {
+              // Show the app's signed-out state.
+            } else {
+              // Show the app's signed-in state.
+            }
+          }
+    
         return true
     }
-    
-    
-    //    func showLoader()
-    //    {
-    //        CustomLoader.sharedInstance.startAnimation()
-    //    }
-    //    func hideLoader()
-    //    {
-    //        CustomLoader.sharedInstance.stopAnimation()
-    //    }
     
     func setupFirebaseMessaging(_ application: UIApplication) {
         
@@ -101,38 +98,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         
         application.registerForRemoteNotifications()
     }
-    
-    //    func registerForPushNotifications() {
-    //
-    //        UNUserNotificationCenter.current().delegate = self
-    //
-    //
-    //        UNUserNotificationCenter.current()
-    //            .requestAuthorization(
-    //                options: [.alert, .sound, .badge]) { [weak self] granted, _ in
-    //                    print("Permission granted: \(granted)")
-    //                    guard granted else { return }
-    //                    self?.getNotificationSettings()
-    //                }
-    //        let content = UNMutableNotificationContent() // notification content object
-    //        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "notification3.wav"))
-    //
-    //
-    //        if #available(iOS 10.0, *) {
-    //            // For iOS 10 display notification (sent via APNS)
-    //            UNUserNotificationCenter.current().delegate = self
-    //
-    //            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-    //            UNUserNotificationCenter.current().requestAuthorization(
-    //                options: authOptions,
-    //                completionHandler: {_, _ in })
-    //        } else {
-    //            let settings: UIUserNotificationSettings =
-    //            UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-    //            application.registerUserNotificationSettings(settings)
-    //        }
-    //
-    //    }
     
     
     
@@ -177,6 +142,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
             
         }
     }
+    
+    func application(
+      _ app: UIApplication,
+      open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+    ) -> Bool {
+      var handled: Bool
+
+      handled = GIDSignIn.sharedInstance.handle(url)
+      if handled {
+        return true
+      }
+
+      // Handle other custom URL types.
+
+      // If not handled by this app, return false.
+      return false
+    }
+    
+    
     
     // MARK: UISceneSession Lifecycle
     

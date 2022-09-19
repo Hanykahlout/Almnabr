@@ -8,6 +8,8 @@
 import UIKit
 import FAPanels
 import LocalAuthentication
+import IQKeyboardManagerSwift
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -40,48 +42,71 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             delegate.window = self.window
         }
         
-        //        get_theme()
         HelperClassSwift.IsLoggedOut = false
-        print("TESTING-1")
-        if NewSuccessModel.getLoginSuccessToken() != nil {
-            print("TESTING0")
-            CheckActiveTime()
-            //NewSuccessModel.removeLoginSuccessToken()
-        }else{
-            GoToSignIn()
-        }
+        
+        maybeOpenedFromWidget(urlContexts: connectionOptions.urlContexts)
+        //NewSuccessModel.removeLoginSuccessToken()
+       
         
     }
     
     
-    func GoToHome(){
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         
-        let vc : HomeVC = AppDelegate.mainSB.instanceVC()
-        let nav = UINavigationController.init(rootViewController: vc)
-        let sideMenu: MenuVC = AppDelegate.mainSB.instanceVC()
-        let rootController : FAPanelController = AppDelegate.mainSB.instanceVC()
-        let center : MenuVC = AppDelegate.mainSB.instanceVC()
-        
-        _ = rootController.center(nav).right(center).left(sideMenu)
-        rootController.rightPanelPosition = .front
-        rootController.leftPanelPosition = .front
-        
-        // rootController.configs.rightPanelWidth = (window?.frame.size.width)!
-        let width = UIScreen.main.bounds.width - 150
-        
-        
-        rootController.configs.leftPanelWidth = width
-        rootController.configs.rightPanelWidth = width
-        
-        rootController.configs.maxAnimDuration = 0.3
-        rootController.configs.canRightSwipe = true
-        rootController.configs.canLeftSwipe = true
-        rootController.configs.changeCenterPanelAnimated = false
-        window?.rootViewController = rootController
-        UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
-        
-        
-        
+        maybeOpenedFromWidget(urlContexts: URLContexts)
+    }
+    
+    private func maybeOpenedFromWidget(urlContexts: Set<UIOpenURLContext>) {
+        IQKeyboardManager.shared.enable = true
+        if NewSuccessModel.getLoginSuccessToken() != nil {
+            if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "widget-deeplink" }) {
+                GoToHome(isFromWidget: true)
+            } else {
+                CheckActiveTime()
+            }
+        }else{
+            GoToSignIn()
+        }
+    }
+    
+    
+    func GoToHome(isFromWidget:Bool){
+       
+        if isFromWidget{
+            
+            let qrScannerVC = QRScannerViewController()
+            qrScannerVC.isFromWidget = true
+            let nav = UINavigationController.init(rootViewController: qrScannerVC)
+            window?.rootViewController = nav
+            UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+
+        }else{
+            var vc = AppDelegate.mainSB.instantiateViewController(withIdentifier: "HomeVC")
+            
+            let nav = UINavigationController.init(rootViewController: vc)
+            let sideMenu: MenuVC = AppDelegate.mainSB.instanceVC()
+            let rootController : FAPanelController = AppDelegate.mainSB.instanceVC()
+            let center : MenuVC = AppDelegate.mainSB.instanceVC()
+            
+            _ = rootController.center(nav).right(center).left(sideMenu)
+            rootController.rightPanelPosition = .front
+            rootController.leftPanelPosition = .front
+            
+            // rootController.configs.rightPanelWidth = (window?.frame.size.width)!
+            let width = UIScreen.main.bounds.width - 150
+            
+            
+            rootController.configs.leftPanelWidth = width
+            rootController.configs.rightPanelWidth = width
+            
+            rootController.configs.maxAnimDuration = 0.3
+            rootController.configs.canRightSwipe = true
+            rootController.configs.canLeftSwipe = true
+            rootController.configs.changeCenterPanelAnimated = false
+            window?.rootViewController = rootController
+            UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+            
+        }
     }
     
     func GoToSignIn(){
@@ -97,28 +122,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func CheckActiveTime(){
         
         guard let lastOpened = UserDefaults.standard.object(forKey: "LastOpened") as? Date else {
-            print("TESTING-2")
-            GoToHome()
+            GoToHome(isFromWidget: false)
             return
         }
         let elapsed = Calendar.current.dateComponents([.minute], from: lastOpened, to: Date())
         print(elapsed)
         
         if elapsed.minute! > 30 {
-            print("TESTING-3")
             let context = LAContext()
             var error: NSError? = nil
             if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error){
                 let reason = "Please authorize with touch id "
-                print("TESTING1")
                 context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason){ success, error in
-                    print("TESTING2")
                     if success {
                         
                         // Move to the main thread because a state update triggers UI changes.
                         DispatchQueue.main.async { [unowned self] in
                             print("success")
-                            GoToHome()
+                            GoToHome(isFromWidget: false)
                             //self.login(Username: HelperClassSwift.UserName , Password: HelperClassSwift.UserPassword )
                         }}else{
                             DispatchQueue.main.async { [unowned self] in
@@ -128,12 +149,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                         }
                 }
             }else{
-                GoToHome()
+                GoToHome(isFromWidget: false)
                 // Auth_User.topVC()!.showAMessage(withTitle: "Unavailabel", message: "You Can't use This Feature")
             }
         }else{
-            print("TESTING-4")
-            GoToHome()
+            GoToHome(isFromWidget: false)
         }
         
     }
@@ -155,16 +175,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
+        
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
+        
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
+        
         UserDefaults.standard.set(Date(), forKey: "LastOpened")
         guard let lastOpened = UserDefaults.standard.object(forKey: "LastOpened") as? Date else {
             return

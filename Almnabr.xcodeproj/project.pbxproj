@@ -427,6 +427,17 @@
 		3FFC4D8A2885B25F00233456 /* AddVacationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FFC4D882885B25E00233456 /* AddVacationViewController.xib */; };
 		404802CA5B161768D7EBBEE5 /* Pods_Almnabr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B486DA8E109C512A0BBA23 /* Pods_Almnabr.framework */; };
 		76A647EB99911B0AECE02DD8 /* Pods_AlmnabrTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A15F32D7142EB97EEDE831E2 /* Pods_AlmnabrTests.framework */; };
+		CE36EDCB28D385B8007EC835 /* EmailMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36EDC928D385B8007EC835 /* EmailMessages.swift */; };
+		CE36EDCC28D385B8007EC835 /* EmailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36EDCA28D385B8007EC835 /* EmailsResponse.swift */; };
+		CE434E1F28D20078007C0AF4 /* GmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE434E1D28D20078007C0AF4 /* GmailViewController.swift */; };
+		CE434E2028D20078007C0AF4 /* GmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE434E1E28D20078007C0AF4 /* GmailViewController.xib */; };
+		CEB0F23528D85BFF006DC4FD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */; };
+		CEB0F23728D85BFF006DC4FD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB0F23628D85BFF006DC4FD /* SwiftUI.framework */; };
+		CEB0F23A28D85BFF006DC4FD /* LinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0F23928D85BFF006DC4FD /* LinkDevice.swift */; };
+		CEB0F23D28D85C00006DC4FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB0F23C28D85C00006DC4FD /* Assets.xcassets */; };
+		CEB0F23F28D85C00006DC4FD /* LinkDevice.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CEB0F23B28D85BFF006DC4FD /* LinkDevice.intentdefinition */; };
+		CEB0F24028D85C00006DC4FD /* LinkDevice.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CEB0F23B28D85BFF006DC4FD /* LinkDevice.intentdefinition */; };
+		CEB0F24328D85C00006DC4FD /* LinkDeviceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CEB0F23328D85BFF006DC4FD /* LinkDeviceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FA025FB327848FE500AB38C8 /* CustomLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA025FB227848FE500AB38C8 /* CustomLoader.swift */; };
 		FA025FB92785E73600AB38C8 /* View_notification.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA025FB82785E73500AB38C8 /* View_notification.xib */; };
 		FA025FBB2785E77800AB38C8 /* View_notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA025FBA2785E77800AB38C8 /* View_notification.swift */; };
@@ -669,6 +680,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CEB0F24128D85C00006DC4FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FA03241A26FB9BF900372EA6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEB0F23228D85BFF006DC4FD;
+			remoteInfo = LinkDeviceExtension;
+		};
 		FA03243926FB9BFE00372EA6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FA03241A26FB9BF900372EA6 /* Project object */;
@@ -684,6 +702,20 @@
 			remoteInfo = Almnabr;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CEB0F24428D85C00006DC4FD /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CEB0F24328D85C00006DC4FD /* LinkDeviceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2AC8B25C23A0D1D0824A7936 /* Pods-Almnabr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr.debug.xcconfig"; path = "Target Support Files/Pods-Almnabr/Pods-Almnabr.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1154,6 +1186,17 @@
 		A15F32D7142EB97EEDE831E2 /* Pods_AlmnabrTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlmnabrTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB1D7974D91E5EB2AC28FFD /* Pods-Almnabr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr.release.xcconfig"; path = "Target Support Files/Pods-Almnabr/Pods-Almnabr.release.xcconfig"; sourceTree = "<group>"; };
 		B38CC6A9089F6D0E16C87D80 /* Pods_Almnabr_AlmnabrUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Almnabr_AlmnabrUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE36EDC928D385B8007EC835 /* EmailMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailMessages.swift; sourceTree = "<group>"; };
+		CE36EDCA28D385B8007EC835 /* EmailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailsResponse.swift; sourceTree = "<group>"; };
+		CE434E1D28D20078007C0AF4 /* GmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmailViewController.swift; sourceTree = "<group>"; };
+		CE434E1E28D20078007C0AF4 /* GmailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GmailViewController.xib; sourceTree = "<group>"; };
+		CEB0F23328D85BFF006DC4FD /* LinkDeviceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LinkDeviceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		CEB0F23628D85BFF006DC4FD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		CEB0F23928D85BFF006DC4FD /* LinkDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkDevice.swift; sourceTree = "<group>"; };
+		CEB0F23B28D85BFF006DC4FD /* LinkDevice.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = LinkDevice.intentdefinition; sourceTree = "<group>"; };
+		CEB0F23C28D85C00006DC4FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CEB0F23E28D85C00006DC4FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7CBD5E570859DFAD2DCFE33 /* Pods-AlmnabrTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlmnabrTests.debug.xcconfig"; path = "Target Support Files/Pods-AlmnabrTests/Pods-AlmnabrTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA025FB227848FE500AB38C8 /* CustomLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoader.swift; sourceTree = "<group>"; };
 		FA025FB82785E73500AB38C8 /* View_notification.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View_notification.xib; sourceTree = "<group>"; };
@@ -1411,6 +1454,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CEB0F23028D85BFF006DC4FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEB0F23728D85BFF006DC4FD /* SwiftUI.framework in Frameworks */,
+				CEB0F23528D85BFF006DC4FD /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA03241F26FB9BFA00372EA6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1927,6 +1979,7 @@
 		3FD038CF2874377000BB13C7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CE434E1C28D20040007C0AF4 /* GmailViews */,
 				3FA8EADA28CDEACE0026DE44 /* CustomViews */,
 				3F677EC728AB7FAB000D6239 /* Documents */,
 				3F97CD96289A5FE500D6E8CC /* Tasks */,
@@ -2458,8 +2511,39 @@
 				A0B486DA8E109C512A0BBA23 /* Pods_Almnabr.framework */,
 				B38CC6A9089F6D0E16C87D80 /* Pods_Almnabr_AlmnabrUITests.framework */,
 				A15F32D7142EB97EEDE831E2 /* Pods_AlmnabrTests.framework */,
+				CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */,
+				CEB0F23628D85BFF006DC4FD /* SwiftUI.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CE36EDC828D385AB007EC835 /* EmailsModels */ = {
+			isa = PBXGroup;
+			children = (
+				CE36EDC928D385B8007EC835 /* EmailMessages.swift */,
+				CE36EDCA28D385B8007EC835 /* EmailsResponse.swift */,
+			);
+			path = EmailsModels;
+			sourceTree = "<group>";
+		};
+		CE434E1C28D20040007C0AF4 /* GmailViews */ = {
+			isa = PBXGroup;
+			children = (
+				CE434E1D28D20078007C0AF4 /* GmailViewController.swift */,
+				CE434E1E28D20078007C0AF4 /* GmailViewController.xib */,
+			);
+			path = GmailViews;
+			sourceTree = "<group>";
+		};
+		CEB0F23828D85BFF006DC4FD /* LinkDevice */ = {
+			isa = PBXGroup;
+			children = (
+				CEB0F23928D85BFF006DC4FD /* LinkDevice.swift */,
+				CEB0F23B28D85BFF006DC4FD /* LinkDevice.intentdefinition */,
+				CEB0F23C28D85C00006DC4FD /* Assets.xcassets */,
+				CEB0F23E28D85C00006DC4FD /* Info.plist */,
+			);
+			path = LinkDevice;
 			sourceTree = "<group>";
 		};
 		FA03241926FB9BF900372EA6 = {
@@ -2469,6 +2553,7 @@
 				FA03242426FB9BFA00372EA6 /* Almnabr */,
 				FA03243B26FB9BFE00372EA6 /* AlmnabrTests */,
 				FA03244626FB9BFE00372EA6 /* AlmnabrUITests */,
+				CEB0F23828D85BFF006DC4FD /* LinkDevice */,
 				FA03242326FB9BFA00372EA6 /* Products */,
 				6B94FB38ED641FF0540B3D73 /* Frameworks */,
 				FD7AF8AAEA86B5827AECC5B8 /* Pods */,
@@ -2481,6 +2566,7 @@
 				FA03242226FB9BFA00372EA6 /* Almnabr.app */,
 				FA03243826FB9BFE00372EA6 /* AlmnabrTests.xctest */,
 				FA03244326FB9BFE00372EA6 /* AlmnabrUITests.xctest */,
+				CEB0F23328D85BFF006DC4FD /* LinkDeviceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2559,6 +2645,7 @@
 		FA03245B26FB9E0300372EA6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CE36EDC828D385AB007EC835 /* EmailsModels */,
 				3F33D12128CDDA7E006B7744 /* DashboardModels */,
 				3FEAAE1928B61A1B0093815D /* NewContractModels */,
 				3FEB890028ABA1C5009CA353 /* DocumentsModel */,
@@ -3102,6 +3189,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CEB0F23228D85BFF006DC4FD /* LinkDeviceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEB0F24728D85C00006DC4FD /* Build configuration list for PBXNativeTarget "LinkDeviceExtension" */;
+			buildPhases = (
+				CEB0F22F28D85BFF006DC4FD /* Sources */,
+				CEB0F23028D85BFF006DC4FD /* Frameworks */,
+				CEB0F23128D85BFF006DC4FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LinkDeviceExtension;
+			productName = LinkDeviceExtension;
+			productReference = CEB0F23328D85BFF006DC4FD /* LinkDeviceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		FA03242126FB9BFA00372EA6 /* Almnabr */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FA03244C26FB9BFF00372EA6 /* Build configuration list for PBXNativeTarget "Almnabr" */;
@@ -3111,12 +3215,16 @@
 				FA03241F26FB9BFA00372EA6 /* Frameworks */,
 				FA03242026FB9BFA00372EA6 /* Resources */,
 				26F76F4D26EC8355F8CCF8BF /* [CP] Embed Pods Frameworks */,
+				CEB0F24428D85C00006DC4FD /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CEB0F24228D85C00006DC4FD /* PBXTargetDependency */,
 			);
 			name = Almnabr;
+			packageProductDependencies = (
+			);
 			productName = Almnabr;
 			productReference = FA03242226FB9BFA00372EA6 /* Almnabr.app */;
 			productType = "com.apple.product-type.application";
@@ -3166,10 +3274,13 @@
 		FA03241A26FB9BF900372EA6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1250;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Samar Akkila";
 				TargetAttributes = {
+					CEB0F23228D85BFF006DC4FD = {
+						CreatedOnToolsVersion = 14.0;
+					};
 					FA03242126FB9BFA00372EA6 = {
 						CreatedOnToolsVersion = 12.5.1;
 						LastSwiftMigration = 1250;
@@ -3194,6 +3305,8 @@
 				ar,
 			);
 			mainGroup = FA03241926FB9BF900372EA6;
+			packageReferences = (
+			);
 			productRefGroup = FA03242326FB9BFA00372EA6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -3201,11 +3314,20 @@
 				FA03242126FB9BFA00372EA6 /* Almnabr */,
 				FA03243726FB9BFE00372EA6 /* AlmnabrTests */,
 				FA03244226FB9BFE00372EA6 /* AlmnabrUITests */,
+				CEB0F23228D85BFF006DC4FD /* LinkDeviceExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CEB0F23128D85BFF006DC4FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEB0F23D28D85C00006DC4FD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA03242026FB9BFA00372EA6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3361,6 +3483,7 @@
 				FA2C575F286CA6B900CE5C59 /* commentRepltTVCell.xib in Resources */,
 				FAB54E9C27EF2EE7003297E1 /* FormVersionTVCell.xib in Resources */,
 				3FD039E0287437B000BB13C7 /* OutgoingVC.strings in Resources */,
+				CE434E2028D20078007C0AF4 /* GmailViewController.xib in Resources */,
 				3FD03A4F287437B000BB13C7 /* SettingsAlertViewController.strings in Resources */,
 				3FD03A19287437B000BB13C7 /* ViewEmpContactDetailsVC.strings in Resources */,
 				3FAA84E9288EA04C003A437E /* EditLastStepViewController.xib in Resources */,
@@ -3540,6 +3663,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CEB0F22F28D85BFF006DC4FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEB0F23F28D85C00006DC4FD /* LinkDevice.intentdefinition in Sources */,
+				CEB0F23A28D85BFF006DC4FD /* LinkDevice.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FA03241E26FB9BFA00372EA6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3633,6 +3765,7 @@
 				3F48C53D285883AF004D33F8 /* EmpViewData.swift in Sources */,
 				3FB726C12864BF5500684C94 /* AllModulesResponse.swift in Sources */,
 				3F530834289287AB00AE7D2A /* SendSignInCodeVC.swift in Sources */,
+				CE36EDCC28D385B8007EC835 /* EmailsResponse.swift in Sources */,
 				3FD039DE287437B000BB13C7 /* ViewEmpPassportDetailsVC.swift in Sources */,
 				3F677ECA28AB7FCF000D6239 /* DocumentsViewController.swift in Sources */,
 				FA95FD13275EFE6A00DE7854 /* OwnersRepresentativeVC.swift in Sources */,
@@ -3678,10 +3811,12 @@
 				3F99B08528AE55170098F281 /* AddDocumentVC.swift in Sources */,
 				FA0324DD27005F1A00372EA6 /* SignInVC.swift in Sources */,
 				FA95FD19275EFEA400DE7854 /* TechinicalAssistantVC.swift in Sources */,
+				CE36EDCB28D385B8007EC835 /* EmailMessages.swift in Sources */,
 				3FEAAE3128B622D80093815D /* TransactionsContractRecords.swift in Sources */,
 				3FEAAE2C28B622D80093815D /* TransactionsContractDataRecord.swift in Sources */,
 				FAD333A7271383090093175E /* ProjectCell.swift in Sources */,
 				3F84039928B778E100657C10 /* ContractDataTableViewCell.swift in Sources */,
+				CEB0F24028D85C00006DC4FD /* LinkDevice.intentdefinition in Sources */,
 				3F14366B28489EB6008ABC19 /* PermissionMentions.swift in Sources */,
 				3FAA84E5288E904D003A437E /* Steps.swift in Sources */,
 				3FD03A4E287437B000BB13C7 /* SettingViewController.swift in Sources */,
@@ -3931,6 +4066,7 @@
 				3FAD7A232850D3660063B15E /* GroupNameResponse.swift in Sources */,
 				3F9C9E8A2859F1C200C5322B /* ContactGetResponse.swift in Sources */,
 				3FA5225D2858E2C6004F3C8E /* Joblists.swift in Sources */,
+				CE434E1F28D20078007C0AF4 /* GmailViewController.swift in Sources */,
 				3F1436912848A120008ABC19 /* RoundedTextField.swift in Sources */,
 				FA180964270494AB00B493A7 /* AuthUser.swift in Sources */,
 				3F1436892848A120008ABC19 /* UIViewCustomCornerRadiusWithGraidentView.swift in Sources */,
@@ -4011,6 +4147,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CEB0F24228D85C00006DC4FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEB0F23228D85BFF006DC4FD /* LinkDeviceExtension */;
+			targetProxy = CEB0F24128D85C00006DC4FD /* PBXContainerItemProxy */;
+		};
 		FA03243A26FB9BFE00372EA6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FA03242126FB9BFA00372EA6 /* Almnabr */;
@@ -5072,6 +5213,66 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CEB0F24528D85C00006DC4FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G6P7WD94KF;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LinkDevice/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LinkDevice;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Samar Akkila. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR.LinkDevice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CEB0F24628D85C00006DC4FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G6P7WD94KF;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LinkDevice/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LinkDevice;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Samar Akkila. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR.LinkDevice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		FA03244A26FB9BFF00372EA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -5194,6 +5395,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2AC8B25C23A0D1D0824A7936 /* Pods-Almnabr.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -5203,13 +5405,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Almnabr;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.3;
+				MARKETING_VERSION = 1.6.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5224,6 +5425,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = ADB1D7974D91E5EB2AC28FFD /* Pods-Almnabr.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
@@ -5233,13 +5435,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				INFOPLIST_FILE = Almnabr/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Almnabr;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.3;
+				MARKETING_VERSION = 1.6.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5340,6 +5541,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CEB0F24728D85C00006DC4FD /* Build configuration list for PBXNativeTarget "LinkDeviceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEB0F24528D85C00006DC4FD /* Debug */,
+				CEB0F24628D85C00006DC4FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FA03241D26FB9BF900372EA6 /* Build configuration list for PBXProject "Almnabr" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

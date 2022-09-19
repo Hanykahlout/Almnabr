@@ -68,17 +68,17 @@ class MenuVC: UIViewController {
         self.btnProfile.setTitle("Profile".localized(), for: .normal)
         
         
-//        let image =  UIImage.fontAwesomeIcon(name: .cog, style: self.fontStyle, textColor: .white, size: CGSize(width: 40, height: 40))
-//        self.btnSetting.setImage(image, for: .normal)
+        //        let image =  UIImage.fontAwesomeIcon(name: .cog, style: self.fontStyle, textColor: .white, size: CGSize(width: 40, height: 40))
+        //        self.btnSetting.setImage(image, for: .normal)
         
         self.btnSetting.setTitle("nav_settings".localized(), for: .normal)
-    
-    
-//        let userimage =  UIImage.fontAwesomeIcon(name: .userCircle, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
-//        self.btnProfile.setImage(userimage, for: .normal)
         
-//        let logoutimage =  UIImage.fontAwesomeIcon(name: .signOutAlt, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
-//        self.btnLogout.setImage(logoutimage, for: .normal)
+        
+        //        let userimage =  UIImage.fontAwesomeIcon(name: .userCircle, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
+        //        self.btnProfile.setImage(userimage, for: .normal)
+        
+        //        let logoutimage =  UIImage.fontAwesomeIcon(name: .signOutAlt, style: self.fontStyle, textColor: HelperClassSwift.bcolor.getUIColor(), size: CGSize(width: 40, height: 40))
+        //        self.btnLogout.setImage(logoutimage, for: .normal)
         self.btnLogout.setTitle("Log out".localized(), for: .normal)
         
     }
@@ -110,42 +110,42 @@ class MenuVC: UIViewController {
             }
         }}
     
-
+    
     func get_data(){
         
         self.showLoadingActivity()
-         APIManager.sendRequestGetAuth(urlString: "menu" ) { (response) in
-             let status = response["status"] as? Bool
-             if status == true{
-                 if  let records = response["records"] as? NSArray{
-                     
-                     for i in records {
-                         let dict = i as? [String:Any]
-                         let obj = MenuObj.init(dict!)
-                         self.arr_data.append(obj)
-                     }
+        APIManager.sendRequestGetAuth(urlString: "menu" ) { (response) in
+            let status = response["status"] as? Bool
+            if status == true{
+                if  let records = response["records"] as? NSArray{
                     
-//                     for obj in self.arr_menu {
-//                         switch obj.menu_id {
-//                         case "1":
-//                             self.arr_data.append(obj)
-//                         case "30":
-//                             self.arr_data.append(obj)
-//                             print(obj.menu_name)
-//                         case "12":
-//                             self.arr_data.append(obj)
-//                             print(obj.menu_name)
-//                         default:
-//                             print("no needed")
-//                         }
-//                     }
-                     
-                     self.tableview.reloadData()
-                     self.hideLoadingActivity()
-                 }
-             }
-         }
-     }
+                    for i in records {
+                        let dict = i as? [String:Any]
+                        let obj = MenuObj.init(dict!)
+                        self.arr_data.append(obj)
+                    }
+                    
+                    //                     for obj in self.arr_menu {
+                    //                         switch obj.menu_id {
+                    //                         case "1":
+                    //                             self.arr_data.append(obj)
+                    //                         case "30":
+                    //                             self.arr_data.append(obj)
+                    //                             print(obj.menu_name)
+                    //                         case "12":
+                    //                             self.arr_data.append(obj)
+                    //                             print(obj.menu_name)
+                    //                         default:
+                    //                             print("no needed")
+                    //                         }
+                    //                     }
+                    
+                    self.tableview.reloadData()
+                    self.hideLoadingActivity()
+                }
+            }
+        }
+    }
     
     
     
@@ -174,7 +174,7 @@ class MenuVC: UIViewController {
     
     
     @IBAction func didTapProfile(_ sender: AnyObject) {
-     
+        
         let vc:ProfileVC = AppDelegate.mainSB.instanceVC()
         let nav = UINavigationController.init(rootViewController: vc)
         _ =  panel?.center(nav)
@@ -182,35 +182,28 @@ class MenuVC: UIViewController {
     }
     
     @IBAction func didTapSignOut(_ sender: AnyObject) {
-     
+        
         userLogoutAlert()
     }
     
     
     @IBAction func linkDeviceAction(_ sender: Any) {
         let vc = QRScannerViewController()
-        vc.delegate = self
+        vc.isFromWidget = false
         let nav = UINavigationController(rootViewController: vc)
         let navCenter =  panel?.center as? UINavigationController
         navCenter?.present(nav, animated: true, completion: nil)
     }
     
-}
-
-extension MenuVC: QRCodeDelegate{
-    func sendCode(code: String) {
-        APIController.shard.sendQRCode(code: code) { data in
-            DispatchQueue.main.async {
-                let alert = SCLAlertView()
-                if let status = data.status,status{
-                    alert.showSuccess("Successfully Scanned".localized(), subTitle: "You can see your account logged in from the website.".localized())
-                }else{
-                    alert.showError("Failed Scanned".localized(), subTitle: "")
-                }
-            }
-        }
+    @IBAction func gmailAction(_ sender: Any) {
+        
+        let vc = GmailViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        nav.isNavigationBarHidden = true
+        _ =  panel?.center(nav)
         
     }
+    
     
 }
 

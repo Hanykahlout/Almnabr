@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GmailViewController" customModule="Almnabr" customModuleProvider="target">
+            <connections>
+                <outlet property="header" destination="YR7-OE-cO1" id="CrB-gg-Xnj"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YR7-OE-cO1" customClass="HeaderView" customModule="Almnabr" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="390" height="80"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="69J-dV-Pji">
+                            <rect key="frame" x="0.0" y="0.0" width="390" height="80"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gus-2R-i0l">
+                            <rect key="frame" x="20" y="50" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="o7t-n2-v0K"/>
+                                <constraint firstAttribute="width" constant="25" id="tXf-hy-rbC"/>
+                            </constraints>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" image="menu">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="btnMenu_Click:" destination="YR7-OE-cO1" eventType="touchUpInside" id="1RD-Ju-qn2"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="69J-dV-Pji" firstAttribute="top" secondItem="YR7-OE-cO1" secondAttribute="top" id="4R9-jX-kON"/>
+                        <constraint firstAttribute="bottom" secondItem="gus-2R-i0l" secondAttribute="bottom" constant="5" id="PE7-Zj-HUG"/>
+                        <constraint firstAttribute="height" constant="80" id="gao-Wf-65y"/>
+                        <constraint firstAttribute="bottom" secondItem="69J-dV-Pji" secondAttribute="bottom" id="gyE-6E-sch"/>
+                        <constraint firstItem="gus-2R-i0l" firstAttribute="leading" secondItem="YR7-OE-cO1" secondAttribute="leading" constant="20" id="jZ0-bd-4XM"/>
+                        <constraint firstItem="69J-dV-Pji" firstAttribute="leading" secondItem="YR7-OE-cO1" secondAttribute="leading" id="m2Y-JZ-CgT"/>
+                        <constraint firstAttribute="trailing" secondItem="69J-dV-Pji" secondAttribute="trailing" id="pNy-1W-623"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="btnMenu" destination="gus-2R-i0l" id="ob6-nt-BvD"/>
+                        <outlet property="viewTheme" destination="69J-dV-Pji" id="QQ3-uH-qEo"/>
+                    </connections>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.90608113999999995" green="0.91750472780000003" blue="0.92941385509999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="YR7-OE-cO1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="N2M-4c-2Rk"/>
+                <constraint firstAttribute="trailing" secondItem="YR7-OE-cO1" secondAttribute="trailing" id="Osa-Ky-x9V"/>
+                <constraint firstItem="YR7-OE-cO1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="egN-kj-dSa"/>
+            </constraints>
+            <point key="canvasLocation" x="130.76923076923077" y="-12.085308056872037"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="menu" width="512" height="512"/>
+    </resources>
+</document>

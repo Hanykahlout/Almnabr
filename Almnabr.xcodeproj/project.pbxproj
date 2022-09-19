@@ -431,13 +431,11 @@
 		CE36EDCC28D385B8007EC835 /* EmailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36EDCA28D385B8007EC835 /* EmailsResponse.swift */; };
 		CE434E1F28D20078007C0AF4 /* GmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE434E1D28D20078007C0AF4 /* GmailViewController.swift */; };
 		CE434E2028D20078007C0AF4 /* GmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE434E1E28D20078007C0AF4 /* GmailViewController.xib */; };
-		CEB0F23528D85BFF006DC4FD /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */; };
-		CEB0F23728D85BFF006DC4FD /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB0F23628D85BFF006DC4FD /* SwiftUI.framework */; };
-		CEB0F23A28D85BFF006DC4FD /* LinkDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB0F23928D85BFF006DC4FD /* LinkDevice.swift */; };
-		CEB0F23D28D85C00006DC4FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEB0F23C28D85C00006DC4FD /* Assets.xcassets */; };
-		CEB0F23F28D85C00006DC4FD /* LinkDevice.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CEB0F23B28D85BFF006DC4FD /* LinkDevice.intentdefinition */; };
-		CEB0F24028D85C00006DC4FD /* LinkDevice.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = CEB0F23B28D85BFF006DC4FD /* LinkDevice.intentdefinition */; };
-		CEB0F24328D85C00006DC4FD /* LinkDeviceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CEB0F23328D85BFF006DC4FD /* LinkDeviceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CE7DE7AD28D8FAEA00DC0CC3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */; };
+		CE7DE7AE28D8FAEA00DC0CC3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB0F23628D85BFF006DC4FD /* SwiftUI.framework */; };
+		CE7DE7B128D8FAEA00DC0CC3 /* LockScreenWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE7B028D8FAEA00DC0CC3 /* LockScreenWidget.swift */; };
+		CE7DE7B328D8FAEA00DC0CC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE7DE7B228D8FAEA00DC0CC3 /* Assets.xcassets */; };
+		CE7DE7B728D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CE7DE7AC28D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FA025FB327848FE500AB38C8 /* CustomLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA025FB227848FE500AB38C8 /* CustomLoader.swift */; };
 		FA025FB92785E73600AB38C8 /* View_notification.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA025FB82785E73500AB38C8 /* View_notification.xib */; };
 		FA025FBB2785E77800AB38C8 /* View_notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA025FBA2785E77800AB38C8 /* View_notification.swift */; };
@@ -680,12 +678,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CEB0F24128D85C00006DC4FD /* PBXContainerItemProxy */ = {
+		CE7DE7B528D8FAEA00DC0CC3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FA03241A26FB9BF900372EA6 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = CEB0F23228D85BFF006DC4FD;
-			remoteInfo = LinkDeviceExtension;
+			remoteGlobalIDString = CE7DE7AB28D8FAEA00DC0CC3;
+			remoteInfo = LockScreenWidgetExtension;
 		};
 		FA03243926FB9BFE00372EA6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -710,7 +708,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				CEB0F24328D85C00006DC4FD /* LinkDeviceExtension.appex in Embed Foundation Extensions */,
+				CE7DE7B728D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1190,13 +1188,12 @@
 		CE36EDCA28D385B8007EC835 /* EmailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailsResponse.swift; sourceTree = "<group>"; };
 		CE434E1D28D20078007C0AF4 /* GmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmailViewController.swift; sourceTree = "<group>"; };
 		CE434E1E28D20078007C0AF4 /* GmailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GmailViewController.xib; sourceTree = "<group>"; };
-		CEB0F23328D85BFF006DC4FD /* LinkDeviceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LinkDeviceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE7DE7AC28D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LockScreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE7DE7B028D8FAEA00DC0CC3 /* LockScreenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenWidget.swift; sourceTree = "<group>"; };
+		CE7DE7B228D8FAEA00DC0CC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE7DE7B428D8FAEA00DC0CC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		CEB0F23628D85BFF006DC4FD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		CEB0F23928D85BFF006DC4FD /* LinkDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkDevice.swift; sourceTree = "<group>"; };
-		CEB0F23B28D85BFF006DC4FD /* LinkDevice.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = LinkDevice.intentdefinition; sourceTree = "<group>"; };
-		CEB0F23C28D85C00006DC4FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CEB0F23E28D85C00006DC4FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7CBD5E570859DFAD2DCFE33 /* Pods-AlmnabrTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlmnabrTests.debug.xcconfig"; path = "Target Support Files/Pods-AlmnabrTests/Pods-AlmnabrTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FA025FB227848FE500AB38C8 /* CustomLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoader.swift; sourceTree = "<group>"; };
 		FA025FB82785E73500AB38C8 /* View_notification.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View_notification.xib; sourceTree = "<group>"; };
@@ -1454,12 +1451,12 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CEB0F23028D85BFF006DC4FD /* Frameworks */ = {
+		CE7DE7A928D8FAEA00DC0CC3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEB0F23728D85BFF006DC4FD /* SwiftUI.framework in Frameworks */,
-				CEB0F23528D85BFF006DC4FD /* WidgetKit.framework in Frameworks */,
+				CE7DE7AE28D8FAEA00DC0CC3 /* SwiftUI.framework in Frameworks */,
+				CE7DE7AD28D8FAEA00DC0CC3 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2535,15 +2532,14 @@
 			path = GmailViews;
 			sourceTree = "<group>";
 		};
-		CEB0F23828D85BFF006DC4FD /* LinkDevice */ = {
+		CE7DE7AF28D8FAEA00DC0CC3 /* LockScreenWidget */ = {
 			isa = PBXGroup;
 			children = (
-				CEB0F23928D85BFF006DC4FD /* LinkDevice.swift */,
-				CEB0F23B28D85BFF006DC4FD /* LinkDevice.intentdefinition */,
-				CEB0F23C28D85C00006DC4FD /* Assets.xcassets */,
-				CEB0F23E28D85C00006DC4FD /* Info.plist */,
+				CE7DE7B028D8FAEA00DC0CC3 /* LockScreenWidget.swift */,
+				CE7DE7B228D8FAEA00DC0CC3 /* Assets.xcassets */,
+				CE7DE7B428D8FAEA00DC0CC3 /* Info.plist */,
 			);
-			path = LinkDevice;
+			path = LockScreenWidget;
 			sourceTree = "<group>";
 		};
 		FA03241926FB9BF900372EA6 = {
@@ -2553,7 +2549,7 @@
 				FA03242426FB9BFA00372EA6 /* Almnabr */,
 				FA03243B26FB9BFE00372EA6 /* AlmnabrTests */,
 				FA03244626FB9BFE00372EA6 /* AlmnabrUITests */,
-				CEB0F23828D85BFF006DC4FD /* LinkDevice */,
+				CE7DE7AF28D8FAEA00DC0CC3 /* LockScreenWidget */,
 				FA03242326FB9BFA00372EA6 /* Products */,
 				6B94FB38ED641FF0540B3D73 /* Frameworks */,
 				FD7AF8AAEA86B5827AECC5B8 /* Pods */,
@@ -2566,7 +2562,7 @@
 				FA03242226FB9BFA00372EA6 /* Almnabr.app */,
 				FA03243826FB9BFE00372EA6 /* AlmnabrTests.xctest */,
 				FA03244326FB9BFE00372EA6 /* AlmnabrUITests.xctest */,
-				CEB0F23328D85BFF006DC4FD /* LinkDeviceExtension.appex */,
+				CE7DE7AC28D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3189,21 +3185,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CEB0F23228D85BFF006DC4FD /* LinkDeviceExtension */ = {
+		CE7DE7AB28D8FAEA00DC0CC3 /* LockScreenWidgetExtension */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CEB0F24728D85C00006DC4FD /* Build configuration list for PBXNativeTarget "LinkDeviceExtension" */;
+			buildConfigurationList = CE7DE7BA28D8FAEA00DC0CC3 /* Build configuration list for PBXNativeTarget "LockScreenWidgetExtension" */;
 			buildPhases = (
-				CEB0F22F28D85BFF006DC4FD /* Sources */,
-				CEB0F23028D85BFF006DC4FD /* Frameworks */,
-				CEB0F23128D85BFF006DC4FD /* Resources */,
+				CE7DE7A828D8FAEA00DC0CC3 /* Sources */,
+				CE7DE7A928D8FAEA00DC0CC3 /* Frameworks */,
+				CE7DE7AA28D8FAEA00DC0CC3 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = LinkDeviceExtension;
-			productName = LinkDeviceExtension;
-			productReference = CEB0F23328D85BFF006DC4FD /* LinkDeviceExtension.appex */;
+			name = LockScreenWidgetExtension;
+			productName = LockScreenWidgetExtension;
+			productReference = CE7DE7AC28D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		FA03242126FB9BFA00372EA6 /* Almnabr */ = {
@@ -3220,7 +3216,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				CEB0F24228D85C00006DC4FD /* PBXTargetDependency */,
+				CE7DE7B628D8FAEA00DC0CC3 /* PBXTargetDependency */,
 			);
 			name = Almnabr;
 			packageProductDependencies = (
@@ -3278,7 +3274,7 @@
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Samar Akkila";
 				TargetAttributes = {
-					CEB0F23228D85BFF006DC4FD = {
+					CE7DE7AB28D8FAEA00DC0CC3 = {
 						CreatedOnToolsVersion = 14.0;
 					};
 					FA03242126FB9BFA00372EA6 = {
@@ -3314,17 +3310,17 @@
 				FA03242126FB9BFA00372EA6 /* Almnabr */,
 				FA03243726FB9BFE00372EA6 /* AlmnabrTests */,
 				FA03244226FB9BFE00372EA6 /* AlmnabrUITests */,
-				CEB0F23228D85BFF006DC4FD /* LinkDeviceExtension */,
+				CE7DE7AB28D8FAEA00DC0CC3 /* LockScreenWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CEB0F23128D85BFF006DC4FD /* Resources */ = {
+		CE7DE7AA28D8FAEA00DC0CC3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEB0F23D28D85C00006DC4FD /* Assets.xcassets in Resources */,
+				CE7DE7B328D8FAEA00DC0CC3 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3663,12 +3659,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CEB0F22F28D85BFF006DC4FD /* Sources */ = {
+		CE7DE7A828D8FAEA00DC0CC3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEB0F23F28D85C00006DC4FD /* LinkDevice.intentdefinition in Sources */,
-				CEB0F23A28D85BFF006DC4FD /* LinkDevice.swift in Sources */,
+				CE7DE7B128D8FAEA00DC0CC3 /* LockScreenWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3816,7 +3811,6 @@
 				3FEAAE2C28B622D80093815D /* TransactionsContractDataRecord.swift in Sources */,
 				FAD333A7271383090093175E /* ProjectCell.swift in Sources */,
 				3F84039928B778E100657C10 /* ContractDataTableViewCell.swift in Sources */,
-				CEB0F24028D85C00006DC4FD /* LinkDevice.intentdefinition in Sources */,
 				3F14366B28489EB6008ABC19 /* PermissionMentions.swift in Sources */,
 				3FAA84E5288E904D003A437E /* Steps.swift in Sources */,
 				3FD03A4E287437B000BB13C7 /* SettingViewController.swift in Sources */,
@@ -4147,10 +4141,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CEB0F24228D85C00006DC4FD /* PBXTargetDependency */ = {
+		CE7DE7B628D8FAEA00DC0CC3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CEB0F23228D85BFF006DC4FD /* LinkDeviceExtension */;
-			targetProxy = CEB0F24128D85C00006DC4FD /* PBXContainerItemProxy */;
+			target = CE7DE7AB28D8FAEA00DC0CC3 /* LockScreenWidgetExtension */;
+			targetProxy = CE7DE7B528D8FAEA00DC0CC3 /* PBXContainerItemProxy */;
 		};
 		FA03243A26FB9BFE00372EA6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5213,7 +5207,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		CEB0F24528D85C00006DC4FD /* Debug */ = {
+		CE7DE7B828D8FAEA00DC0CC3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -5224,17 +5218,17 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LinkDevice/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LinkDevice;
+				INFOPLIST_FILE = LockScreenWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LockScreenWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Samar Akkila. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR.LinkDevice;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR.LockScreenWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -5243,7 +5237,7 @@
 			};
 			name = Debug;
 		};
-		CEB0F24628D85C00006DC4FD /* Release */ = {
+		CE7DE7B928D8FAEA00DC0CC3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -5254,17 +5248,17 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G6P7WD94KF;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LinkDevice/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = LinkDevice;
+				INFOPLIST_FILE = LockScreenWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LockScreenWidget;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2022 Samar Akkila. All rights reserved.";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR.LinkDevice;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR.LockScreenWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -5541,11 +5535,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CEB0F24728D85C00006DC4FD /* Build configuration list for PBXNativeTarget "LinkDeviceExtension" */ = {
+		CE7DE7BA28D8FAEA00DC0CC3 /* Build configuration list for PBXNativeTarget "LockScreenWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CEB0F24528D85C00006DC4FD /* Debug */,
-				CEB0F24628D85C00006DC4FD /* Release */,
+				CE7DE7B828D8FAEA00DC0CC3 /* Debug */,
+				CE7DE7B928D8FAEA00DC0CC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

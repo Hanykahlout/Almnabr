@@ -12,8 +12,8 @@ import WebKit
 import PassKit
 import CoreNFC
 import SocketIO
-import SwiftSMTP
 import SCLAlertView
+
 var userObj :UserObj?
 var arr_Menu : [MenuObj]?
 

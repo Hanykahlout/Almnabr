@@ -90,8 +90,8 @@ struct LinkDevice: Widget {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             LinkDeviceEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Almanbr QRCode Scanner")
+        .description("This widget scan qrcode from web.")
         .supportedFamilies([.systemSmall])
     }
 }

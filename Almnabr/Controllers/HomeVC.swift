@@ -60,7 +60,7 @@ class HomeVC: UIViewController   {
         
         self.lbl_allCopyRes.font = .kufiRegularFont(ofSize: 12)
 
-        
+    
     }
     
     

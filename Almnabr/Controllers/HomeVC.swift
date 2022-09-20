@@ -59,8 +59,6 @@ class HomeVC: UIViewController   {
         check_notifi()
         
         self.lbl_allCopyRes.font = .kufiRegularFont(ofSize: 12)
-
-    
     }
     
     

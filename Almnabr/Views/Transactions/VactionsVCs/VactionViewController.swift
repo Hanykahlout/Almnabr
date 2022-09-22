@@ -10,9 +10,8 @@ import UIKit
 import SCLAlertView
 
 class VactionViewController: UIViewController {
-    
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var mainViewHeight: NSLayoutConstraint!
+
+    @IBOutlet weak var previewPDFTitle: UILabel!
     @IBOutlet weak var requestNumLabel: UILabel!
     @IBOutlet weak var codeLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
@@ -35,26 +34,66 @@ class VactionViewController: UIViewController {
     @IBOutlet weak var personalDetailsButton: UIButton!
     @IBOutlet weak var historyButton: UIButton!
     
-    private var pageController:VactionPageViewController!
+    @IBOutlet weak var finalStepView: UIView!
     
-    private var ACCOUNT_TEAM = false
-    private var CONFIGURATION = false
-    private var DIRECT_MANAGER = true
-    private var EMPLOYEE = false
-    private var HUMAN_RESOURCE_MANAGER = false
-    private var HUMAN_RESOURCE_TEAM = false
-    private var completed = false
-    private var last = false
+    @IBOutlet weak var empNameLabel: UILabel!
+    
+    @IBOutlet weak var mobileNumberLabel: UILabel!
+    
+    @IBOutlet weak var jobTitleLabel: UILabel!
+    
+    @IBOutlet weak var branchLabel: UILabel!
+    @IBOutlet weak var joiningDateLabel: UILabel!
+    @IBOutlet weak var emailabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var daysLabel: UILabel!
+    @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var endDateLabel: UILabel!
+    @IBOutlet weak var afterVactionLabel: UILabel!
+    @IBOutlet weak var paidAmountLabel: UILabel!
+    @IBOutlet weak var directManagerLabel: UILabel!
+    @IBOutlet weak var financialButton: UIButton!
+    @IBOutlet weak var notePlacolderLabel: UILabel!
+    @IBOutlet weak var editButton: UIButton!
+    
     
     private var presonalDetails:[TransactionsPersons]?
     private var persons: [TransactionsPersons]?
     private var attachData: [FormHrv1AttachmentsRecords]?
-    private var requestWaitingPerson:TransactionsPersons?
     private var notesData: [NoteRecordResponse]?
+    private var financialData:[Finance]?
+    private var waitedProgressNumber:Float = -1.0
+    private var progress:Float = 1.0 {
+        didSet{
+            
+
+                self.requestApprovalView.isHidden = progress != waitedProgressNumber || !isWaitiedPerson
+            
+            stepsNumLabel.text = "step \(Int(progress)) of 7"
+            stepsProgress.progress = progress/7.0
+            switch progress{
+            case 1:
+                selectedStepLabel.text = "Configurations"
+            case 2:
+                selectedStepLabel.text = "Employee"
+            case 3:
+                selectedStepLabel.text = "Direct Manager"
+            case 4:
+                selectedStepLabel.text = "HR Team"
+            case 5:
+                selectedStepLabel.text = "Account team"
+            case 6:
+                selectedStepLabel.text = "HR Manager"
+            default:
+                selectedStepLabel.text = "Last Vacation Step"
+            }
+        }
+    }
+    private var waitiedPersons = ""
+    private var isWaitiedPerson = false
+    private var finalStepPreivewLink:String?
     
-    
-    var data:Tcore?
-    
+    var transaction_request_id = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
@@ -62,10 +101,12 @@ class VactionViewController: UIViewController {
     }
     
     private func initlization(){
-        setUpPageViewController()
+        
+        noteTextView.delegate = self
         addObserver()
         setUpSelectionRequestApproval()
         verficationCodeTextField.addTarget(self, action: #selector(verficationCodeTextFieldAction), for: .editingChanged)
+        getVactionData()
     }
     
     
@@ -73,7 +114,7 @@ class VactionViewController: UIViewController {
         super.viewWillAppear(animated)
         addNavigationBarTitle(navigationTitle: "Vaction Form".localized())
         navigationController?.setNavigationBarHidden(false, animated: true)
-        getVactionData()
+        
     }
     
     
@@ -90,11 +131,6 @@ class VactionViewController: UIViewController {
     
     
     private func addObserver(){
-        NotificationCenter.default.addObserver(forName: .init("ResetMainViewHeight"), object: nil, queue: .main) { notify in
-            guard let height = notify.object as? CGFloat else { return }
-            self.mainViewHeight.constant = height
-        }
-        
         NotificationCenter.default.addObserver(forName: .init("ReloadVactionData"), object: nil, queue: .main) { notify in
             self.getVactionData()
         }
@@ -128,170 +164,34 @@ class VactionViewController: UIViewController {
         self.rejectButton.isSelected = !self.approveButton.isSelected
     }
     
+    
     private func rejectButtonAction(){
         self.rejectButton.isSelected = !self.rejectButton.isSelected
         self.approveButton.isSelected = !self.rejectButton.isSelected
     }
     
     
-    private func setUpPageViewController(){
-        pageController =  AppDelegate.TransactionSB.instantiateViewController(withIdentifier: "VactionPageViewController") as? VactionPageViewController
-        
-        addChild(pageController)
-        pageController.didMove(toParent: self)
-        
-        pageController.view.translatesAutoresizingMaskIntoConstraints = false
-        
-        mainView.addSubview(pageController.view)
-        
-        mainView.leadingAnchor.constraint(equalTo: pageController.view.leadingAnchor, constant: 0).isActive = true
-        mainView.trailingAnchor.constraint(equalTo: pageController.view.trailingAnchor, constant: 0).isActive = true
-        mainView.topAnchor.constraint(equalTo: pageController.view.topAnchor, constant: 0).isActive = true
-        mainView.bottomAnchor.constraint(equalTo: pageController.view.bottomAnchor, constant: 0).isActive = true
-    }
-    
-    private func setSelectedStep(){
-        
-        var isRequestApproval = false
-        
-        if let persons = persons{
-            for person in persons{
-                if person.user_id == Auth_User.user_id {
-                    if person.transactions_persons_last_step == lastStepOpendLabel.text!{
-                        isRequestApproval = true
-                    }
-                }
-                if person.transactions_persons_view == "0"{
-                    requestWaitingPerson = person
-                }
-            }
-        }
-        
-        requestApprovalView.isHidden = !isRequestApproval
-        if let requestWaitingPerson = requestWaitingPerson{
-            switch requestWaitingPerson.transactions_persons_last_step{
-            case "CONFIGURATION":
-                stepsNumLabel.text = "step 1 of 7"
-                stepsProgress.progress = 1.0/7.0
-                selectedStepLabel.text = "Configurations"
-            case "EMPLOYEE":
-                stepsNumLabel.text = "step 2 of 7"
-                stepsProgress.progress = 2.0/7.0
-                selectedStepLabel.text = "Employee"
-            case "DIRECT_MANAGER":
-                stepsNumLabel.text = "step 3 of 7"
-                stepsProgress.progress = 3.0/7.0
-                selectedStepLabel.text = "Direct Manager"
-            case "HUMAN_RESOURCE_TEAM":
-                stepsNumLabel.text = "step 4 of 7"
-                stepsProgress.progress = 4.0/7.0
-                selectedStepLabel.text = "HR Team"
-            case "ACCOUNT_TEAM":
-                stepsNumLabel.text = "step 5 of 7"
-                stepsProgress.progress = 5.0/7.0
-                selectedStepLabel.text = "Account team"
-            case "HUMAN_RESOURCE_MANAGER":
-                stepsNumLabel.text = "step 6 of 7"
-                stepsProgress.progress = 6.0/7.0
-                selectedStepLabel.text = "HR Manager"
-            default:
-                stepsNumLabel.text = "step 7 of 7"
-                stepsProgress.progress = 7.0/7.0
-                selectedStepLabel.text = "Last Vacation Step"
-            }
-        }
-    }
-    
     
     @IBAction func beforeAction(_ sender: Any) {
-        
-        switch selectedStepLabel.text{
-        case "Configurations":
-            break
-        case "Employee":
-            stepsNumLabel.text = "step 1 of 7"
-            stepsProgress.progress = 1.0/7.0
-            selectedStepLabel.text = "Configurations"
-        case "Direct Manager":
-            
-            stepsNumLabel.text = "step 2 of 7"
-            stepsProgress.progress = 2.0/7.0
-            selectedStepLabel.text = "Employee"
-        case "HR Team":
-            
-            stepsNumLabel.text = "step 3 of 7"
-            stepsProgress.progress = 3.0/7.0
-            selectedStepLabel.text = "Direct Manager"
-        case "Account team":
-            
-            stepsNumLabel.text = "step 4 of 7"
-            stepsProgress.progress = 4.0/7.0
-            selectedStepLabel.text = "HR Team"
-        case "HR Manager":
-            
-            stepsNumLabel.text = "step 5 of 7"
-            stepsProgress.progress = 5.0/7.0
-            selectedStepLabel.text = "Account team"
-            
-        default:
-            stepsNumLabel.text = "step 6 of 7"
-            stepsProgress.progress = 6.0/7.0
-            selectedStepLabel.text = "HR Manager"
+        if progress > 1 {
+            progress -= 1
         }
-        
-        let index = pageController.currentIndex - 1
-        guard index >= 0 else { return }
-        pageController.currentIndex = index
-        pageController.changeVC(direction: .reverse)
-        
-        
     }
     
     
     @IBAction func forwardAction(_ sender: Any) {
-        switch selectedStepLabel.text{
-        case "Configurations":
-            stepsNumLabel.text = "step 2 of 7"
-            stepsProgress.progress = 2.0/7.0
-            selectedStepLabel.text = "Employee"
-            
-        case "Employee":
-            stepsNumLabel.text = "step 3 of 7"
-            stepsProgress.progress = 3.0/7.0
-            selectedStepLabel.text = "Direct Manager"
-            
-        case "Direct Manager":
-            stepsNumLabel.text = "step 4 of 7"
-            stepsProgress.progress = 4.0/7.0
-            selectedStepLabel.text = "HR Team"
-            
-        case "HR Team":
-            stepsNumLabel.text = "step 5 of 7"
-            stepsProgress.progress = 5.0/7.0
-            selectedStepLabel.text = "Account team"
-            
-        case "Account team":
-            stepsNumLabel.text = "step 6 of 7"
-            stepsProgress.progress = 6.0/7.0
-            selectedStepLabel.text = "HR Manager"
-            
-        case "HR Manager":
-            
-            stepsNumLabel.text = "step 7 of 7"
-            stepsProgress.progress = 7.0/7.0
-            selectedStepLabel.text = "Last Vacation Step"
-            
-        default:
-            break
+        if progress < 7 {
+            progress += 1
         }
-        
-        let index = pageController.currentIndex + 1
-        guard index < pageController.containerVCs.count  else { return }
-        pageController.currentIndex = index
-        pageController.changeVC(direction: .forward)
-        
-        
-        
+    }
+    
+    
+    @IBAction func financialDetailsAction(_ sender: Any) {
+        if let financialData = financialData {
+            let vc = FinanceInfoViewController()
+            vc.data = financialData
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     
@@ -319,6 +219,13 @@ class VactionViewController: UIViewController {
     
     
     @IBAction func sendCodeAction(_ sender: Any) {
+        let vc = SendCodeWaysVC()
+        vc.id = transaction_request_id
+        vc.approvalStep = self.lastStepOpendLabel.text!
+        let nav = UINavigationController(rootViewController: vc)
+        nav.setNavigationBarHidden(true, animated: false)
+        nav.modalPresentationStyle = .overCurrentContext
+        navigationController?.present(nav, animated: true)
     }
     
     
@@ -328,14 +235,18 @@ class VactionViewController: UIViewController {
     
     
     @IBAction func previewPdfAction(_ sender: Any) {
-        previewPDF()
+        if let finalStepPreivewLink = finalStepPreivewLink{
+            previewPDF(url: finalStepPreivewLink)
+        }else{
+            previewPDF(url:"form/FORM_HRV1/pr/\(transaction_request_id)")
+        }
     }
     
     
     @IBAction func editLastStepOpenedAction(_ sender: Any) {
         let vc = EditLastStepViewController()
         vc.isVaction = true
-        vc.transactionRequestId = data?.transaction_request_id ?? ""
+        vc.transactionRequestId = transaction_request_id
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overCurrentContext
         navigationController?.present(nav, animated: true)
@@ -343,9 +254,7 @@ class VactionViewController: UIViewController {
     
     
     @IBAction func infoLastStepAction(_ sender: Any) {
-        if let requestWaitingPerson = requestWaitingPerson {
-            SCLAlertView().showInfo("Waiting for: \(requestWaitingPerson.person_name ?? "")", subTitle: "")
-        }
+        SCLAlertView().showInfo("Waiting for: \(waitiedPersons)", subTitle: "")
     }
     
 }
@@ -353,43 +262,80 @@ class VactionViewController: UIViewController {
 // MARK: - API Handlign
 extension VactionViewController{
     
-    
     private func getVactionData(){
+        self.isWaitiedPerson = false
+        self.waitiedPersons = ""
         showLoadingActivity()
-        APIController.shard.getVactionData(vactionId: data?.transaction_request_id ?? "") { data in
+        APIController.shard.getVactionData(vactionId: transaction_request_id) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status,status{
+                    self.editButton.isHidden = !Auth_User.isAdmin
                     let transctionDataFirstRecord = data.transactions_date?.records?.first
                     self.requestNumLabel.text = transctionDataFirstRecord?.transaction_request_id ?? "----"
                     self.statusLabel.text =  transctionDataFirstRecord?.transaction_request_status ?? "----"
                     self.createdByLabel.text = data.transactions_request?.created_name ?? "----"
                     self.createdDateLabel.text = data.transactions_request?.created_date ?? "----"
                     self.lastStepOpendLabel.text = data.last_request_step ?? ""
-                    
-                    self.ACCOUNT_TEAM = data.steps?.aCCOUNT_TEAM ?? false
-                    self.CONFIGURATION = data.steps?.cONFIGURATION ?? false
-                    self.DIRECT_MANAGER = data.steps?.dIRECT_MANAGER ?? false
-                    self.EMPLOYEE = data.steps?.eMPLOYEE ?? false
-                    self.HUMAN_RESOURCE_MANAGER = data.steps?.hUMAN_RESOURCE_MANAGER ?? false
-                    self.HUMAN_RESOURCE_TEAM = data.steps?.hUMAN_RESOURCE_TEAM ?? false
-                    self.completed = data.steps?.completed ?? false
-                    self.last = data.steps?.last ?? false
                     self.presonalDetails = data.transactions_persons?.records
-                    self.pageController.setVactionDetailsData(data: data.form_hrv1_vacation_data?.records)
-                    
-                    
-                    self.nameOfRequestApprovalWritreLabel.text = data.last_request_step ?? ""
+                    self.setVactionDetailsData(data: data.form_hrv1_vacation_data?.records)
                     
                     self.persons = data.transactions_persons?.records
                     self.personalDetailsButton.isHidden = self.persons == nil
+                    
+                    if let persons = self.persons{
+                        for person in persons{
+                            if person.transactions_persons_last_step == self.lastStepOpendLabel.text! {
+                                if person.user_id == Auth_User.user_id {
+                                    self.isWaitiedPerson = true
+                                }
+                                    self.waitiedPersons += "\(person.person_name ?? "") -"
+                            }
+                        }
+                    }
+                    
+                    self.previewPDFTitle.text = "Preview"
+                    switch data.last_request_step ?? "" {
+                    case "CONFIGURATION":
+                        self.waitedProgressNumber = 1
+                        self.nameOfRequestApprovalWritreLabel.text = "Configuration"
+                        
+                    case "EMPLOYEE":
+                        self.waitedProgressNumber = 2
+                        self.nameOfRequestApprovalWritreLabel.text = "Employee"
+                        
+                    case "DIRECT_MANAGER":
+                        self.waitedProgressNumber = 3
+                        self.nameOfRequestApprovalWritreLabel.text = "Direct Manager"
+                        
+                    case "HUMAN_RESOURCE_TEAM":
+                        self.waitedProgressNumber = 4
+                        self.nameOfRequestApprovalWritreLabel.text = "Human Resource Team"
+                        
+                    case "ACCOUNT_TEAM":
+                        self.waitedProgressNumber = 5
+                        self.nameOfRequestApprovalWritreLabel.text = "Account Team"
+                    
+                    case "HUMAN_RESOURCE_MANAGER":
+                        self.waitedProgressNumber = 6
+                        self.nameOfRequestApprovalWritreLabel.text = "Human Resource Manager"
+                    
+                    default:
+                        self.previewPDFTitle.text = "View"
+                        self.finalStepPreivewLink = data.transactions_request?.view_link
+                        self.finalStepView.isHidden = false
+                        self.waitedProgressNumber = 7
+                        self.nameOfRequestApprovalWritreLabel.text = "last"
+                        
+                    }
+                    self.progress = self.waitedProgressNumber
+           
                     
                     self.attachData = data.form_hrv1_attachments?.records
                     self.attachButton.isHidden = self.attachData == nil
                     self.notesData = data.transactions_notes?.records
                     self.historyButton.isHidden = self.notesData == nil
-                    
-                    self.setSelectedStep()
+
                     
                 }else{
                     let alertVC = UIAlertController(title: "error".localized(), message: data.error ?? "", preferredStyle: .alert)
@@ -404,9 +350,45 @@ extension VactionViewController{
         }
     }
     
-    private func previewPDF(){
+    
+    private func getFinicalData(data:FormHrv1VacationData?){
         showLoadingActivity()
-        APIController.shard.getImage(url: "form/FORM_HRV1/pr/\(data?.transaction_request_id ?? "")") { data in
+        APIController.shard.showSelectionVactionResult(empNum: data?.employee_number ?? "" , vacation_type_id: data?.vacation_type_id ?? "", beforeDate: data?.before_vacation_working_date_english ?? "", afterDate: data?.after_vacation_working_date_english ?? "") { data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status,status{
+                    self.financialButton.isHidden = false
+                    self.financialData = data.result?.finance ?? []
+                }else{
+                    self.financialButton.isHidden = true
+                }
+            }
+        }
+    }
+    
+    
+    private func setVactionDetailsData(data:FormHrv1VacationData?){
+        empNameLabel.text = data?.employee_name ?? ""
+        mobileNumberLabel.text = data?.primary_mobile ?? ""
+        jobTitleLabel.text = data?.job_title ?? ""
+        branchLabel.text = data?.branch ?? ""
+        joiningDateLabel.text = "\(data?.joining_start_date_english ?? "") - \(data?.joining_start_date_arabic ?? "")"
+        emailabel.text = data?.primary_email ?? ""
+        typeLabel.text = data?.vacation_type ?? ""
+        daysLabel.text = data?.vacation_total_days ?? ""
+        startDateLabel.text = "\(data?.vacation_start_date_english ?? "") - \(data?.vacation_start_date_arabic ?? "")"
+        endDateLabel.text = "\(data?.vacation_end_date_english ?? "") - \(data?.vacation_end_date_arabic ?? "")"
+        afterVactionLabel.text = "\(data?.after_vacation_working_date_english ?? "") - \(data?.after_vacation_working_date_arabic ?? "")"
+        paidAmountLabel.text = data?.vacation_total_paid_amount ?? ""
+        directManagerLabel.text = data?.direct_manager_name ?? ""
+        getFinicalData(data: data)
+    }
+    
+    
+    private func previewPDF(url:String){
+        
+        showLoadingActivity()
+        APIController.shard.getImage(url: url) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status,status{
@@ -420,27 +402,38 @@ extension VactionViewController{
                 }
             }
         }
+        
     }
     
+    
     private func submitApprovalRequest(){
-        let transaction_request_id = data?.transaction_request_id ?? ""
+        
         let approving_status = approveButton.isSelected ? "Approve" : "Reject"
         let note = noteTextView.text!
         let transactions_persons_action_code = verficationCodeTextField.text!
         showLoadingActivity()
+     
         APIController.shard.submitApproval(formType:"FORM_HRV1",transaction_request_id: transaction_request_id, approving_status: approving_status, note: note, transactions_persons_action_code: transactions_persons_action_code) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status,status{
                     SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
-                    self.requestApprovalView.isHidden = true
+                    self.getVactionData()
+                    
                 }else{
                     SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
                 }
             }
         }
+        
     }
     
     
 }
 
+
+extension VactionViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        notePlacolderLabel.isHidden = true
+    }
+}

@@ -61,10 +61,11 @@ extension ViewEmpContractDetailsVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = NewContractVC()
         let obj = data[indexPath.row]
-        vc.data = .init(["transaction_request_id":obj.transaction_request_id ?? "","transaction_key": obj.transaction_key ?? ""])
+        vc.transaction_request_id = obj.transaction_request_id ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
 
 // API Handling
 extension ViewEmpContractDetailsVC{

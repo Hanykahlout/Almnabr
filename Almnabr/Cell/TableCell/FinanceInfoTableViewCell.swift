@@ -28,12 +28,12 @@ class FinanceInfoTableViewCell: UITableViewCell {
     }
     
     func setData(data:Finance){
-        paidDaysLabel.text = String(data.paid_days ?? 0)
-        unpaidDayLabel.text = String(data.unpaid_days ?? 0)
-        creditAmountLabel.text = String(data.credit_amount ?? 0)
-        debitAmountLabel.text = String(data.debit_amount ?? 0)
-        descriptionLabel.text = data.finance_description ?? ""
-        dateLabel.text = "\(data.finance_month ?? "") / \(data.finance_year ?? "")"
+        paidDaysLabel.text = String(data.paid_days ?? "--")
+        unpaidDayLabel.text = String(data.unpaid_days ?? "--")
+        creditAmountLabel.text = String(data.credit_amount ?? "--")
+        debitAmountLabel.text = String(data.debit_amount ?? "--")
+        descriptionLabel.text = data.finance_description ?? "--"
+        dateLabel.text = "\(data.finance_month ?? "--") / \(data.finance_year ?? "--")"
         
     }
     

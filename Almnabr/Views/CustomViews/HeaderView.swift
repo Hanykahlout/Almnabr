@@ -201,9 +201,12 @@ class HeaderView:  UIView {
 //
         let vc: NotificationVC = AppDelegate.mainSB.instanceVC()
 //
-        let root = AppInstance.window!.rootViewController! as! FAPanelController
-        let nav = root.center! as! UINavigationController
-        nav.pushViewController(vc, animated: true)
+        
+        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+        let root = appDelegate.window!.rootViewController as? FAPanelController,
+        let nav = root.center as? UINavigationController{
+            nav.pushViewController(vc, animated: true)
+        }
        // btnNotifyAction?()
     }
     

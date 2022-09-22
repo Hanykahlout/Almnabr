@@ -101,7 +101,6 @@ class VacationFormVC: UIViewController {
                 self.arr_data.removeAll()
             }
             let status = response["status"] as? Bool
-            let error = response["error"] as? String
             if loadOnly {
                 self.table.reloadData()
             }
@@ -218,16 +217,10 @@ extension VacationFormVC: UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //                let obj = arr_data[indexPath.item]
-        //                let vc:ProjectDetailsVC = AppDelegate.mainSB.instanceVC()
-        //                vc.title =  self.title
-        //                vc.Object = obj
-        //                vc.MenuObj = self.MenuObj
-        //                vc.StrSubMenue =  self.StrSubMenue
-        //                vc.StrMenue = self.StrMenue
-        //        self.navigationController?.pushViewController(vc, animated: true)
-        //                _ =  panel?.center(vc)
+        let vc = VactionViewController()
+//        vc.transaction_request_id = arr_data[indexPath.item].tra
+        self.navigationController?.pushViewController(vc, animated: true)
+      
     }
     
     

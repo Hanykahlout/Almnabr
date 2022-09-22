@@ -30,45 +30,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     static let TicketSB = UIStoryboard(name: "Ticket", bundle: nil)
     let gcmMessageIDKey = "gcm.message_id"
     
-    
-    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) async -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
-        UIApplication.shared.statusBarStyle = .darkContent
+//        UIApplication.shared.statusBarStyle = .darkContent
         L102Localizer.DoTheMagic()
         AppInstance = self
         IQKeyboardManager.shared.enable = true
-        
+
         FirebaseApp.configure()
         get_theme()
-        
+
         //UIApplication.shared.applicationIconBadgeNumber = 0
         //hideLoader()
-        
+
         //Here we will hide back button title and change arrow to white color
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .highlighted)
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000.0, vertical: 0.0), for: .default)
-        
+
         UINavigationBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().tintColor = .white
-        
+
         // let notificationContent = UNMutableNotificationContent()
         // notificationContent.sound = UNNotificationSound(named: "notification3.wav")
         //notificationContent.sound = .default
         //UNNotificationSound(named: "notification3.wav")
         //  notification.sound = UNNotificationSound(named: "notification3.wav")
         application.registerForRemoteNotifications()
-        
-        
+
+
         Messaging.messaging().delegate = self
-        
+
         let token = Messaging.messaging().fcmToken
         print("FCM token: \(token ?? "")")
-        
+
         setupFirebaseMessaging(application)
-        
-        //registerForPushNotifications()
+
+//        registerForPushNotifications()
         GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
             if error != nil || user == nil {
               // Show the app's signed-out state.
@@ -76,9 +75,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
               // Show the app's signed-in state.
             }
           }
-    
+
         return true
     }
+    
+    
     
     func setupFirebaseMessaging(_ application: UIApplication) {
         

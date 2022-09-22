@@ -27,6 +27,7 @@ class APIManager: NSObject {
     static let serverURL = "https://erp.almnabr.com/backend"
     static let api_key = "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
     
+    
     static func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {
@@ -714,7 +715,6 @@ class APIManager: NSObject {
         
         let strURL = "\(serverURL )/\(queryString)"
         
-        // let strURL = "https://nahidh.sa/backend/form/FORM_WIR/cr/2/0"
         let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let getApi = URL(string: urlStr)!
         
@@ -793,7 +793,6 @@ class APIManager: NSObject {
         
         let strURL = "\(serverURL )/\(queryString)"
         
-        // let strURL = "https://nahidh.sa/backend/form/FORM_WIR/cr/2/0"
         let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let getApi = URL(string: urlStr)!
         

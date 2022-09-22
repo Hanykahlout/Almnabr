@@ -287,36 +287,6 @@ class SignInVC: UIViewController {
         }
     }
     
-    
-
-    func change_language(selectedLang:String){
-    
-        
-        
-        //        if let window = (UIApplication.shared.delegate as? AppDelegate)?.window{
-        self.showAMessage(withTitle: "Change language".localized(), message: "Restart app recommanded to change the language".localized(), completion:{
-            L102Language.changeLanguage(view: self, newLang: selectedLang, rootViewController: "SignInVC")
-            //            MOLH.setLanguageTo(MOLHLanguage.currentAppleLanguage() == "en" ? "ar" : "en")
-            //            MOLH.reset()
-            //
-            //            window.makeKeyAndVisible()
-            //            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromLeft, animations: {
-            //            }, completion: { completed in
-            //
-            //
-            ////                UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
-            ////                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-            ////
-            ////                    exit(EXIT_SUCCESS)
-            ////                })
-            //            })
-            
-           
-        })
-        //        }
-        
-    }
-    
     private func setUpDropDown(){
         dropDown.anchorView = view
         dropDown.backgroundColor = .white
@@ -325,22 +295,7 @@ class SignInVC: UIViewController {
         dropDown.dataSource = self.arr_lang
         dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
             let selectedLang = index == 0 ? "en" : "ar"
-            self.change_language(selectedLang: selectedLang)
-            
-            //            if item == self.arr_lang[0] {
-            //                print(item)
-            //                HelperClassSwift.setUserInformation(value: "en", key: Constants.kAppLanguageSelect)
-            //                dp_set_current_language("en")
-            //
-            //                self.reloadViewControllers()
-            //
-            //            }else{
-            //                HelperClassSwift.setUserInformation(value: "ar", key: Constants.kAppLanguageSelect)
-            //                dp_set_current_language("ar")
-            //                change_lang(lang: "ar")
-            //                self.reloadViewControllers()
-            //            }
-            
+            L102Language.changeLanguage(view: self, newLang: selectedLang, rootViewController: "SignInVC")
         }
         dropDown.direction = .bottom
         dropDown.anchorView = btnLanguage

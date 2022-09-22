@@ -39,7 +39,7 @@ struct TransactionsRequestVactionData : Mappable {
 	var transaction_request_status : String?
 	var transaction_from_name : String?
 	var transaction_to_name : String?
-	var view_link : Bool?
+	var view_link : String?
 
 	init?(map: Map) {
 

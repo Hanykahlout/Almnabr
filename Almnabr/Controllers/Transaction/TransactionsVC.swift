@@ -517,8 +517,7 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         switch obj.transaction_key{
         case "FORM_HRV1":
             let vc = VactionViewController()
-            vc.data = obj
-            //vc.filePath = obj.url
+            vc.transaction_request_id = obj.transaction_request_id
             self.navigationController?.pushViewController(vc, animated: true)
         case "FORM_WIR":
             let vc : TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
@@ -527,9 +526,8 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
             self.navigationController?.pushViewController(vc, animated: true)
         case "FORM_CT1":
             let vc = NewContractVC()
-            vc.data = obj
+            vc.transaction_request_id = obj.transaction_request_id
             self.navigationController?.pushViewController(vc, animated: true)
-            
         default:
             break
         }

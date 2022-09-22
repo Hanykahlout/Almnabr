@@ -49,12 +49,13 @@ class NewContractVC: UIViewController {
             changeCurrentStep()
         }
     }
-    var data:Tcore?
+    var transaction_request_id = ""
     private var notesData: [NoteRecordResponse]?
     private var waitingUsers = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initlization()
     }
     
@@ -170,7 +171,7 @@ class NewContractVC: UIViewController {
     @IBAction func editAction(_ sender: Any) {
         let vc = EditLastStepViewController()
         vc.isVaction = false
-        vc.transactionRequestId = data?.transaction_request_id ?? ""
+        vc.transactionRequestId = transaction_request_id
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overCurrentContext
         navigationController?.present(nav, animated: true)
@@ -217,7 +218,7 @@ class NewContractVC: UIViewController {
     
     @IBAction func sendCodeAction(_ sender: Any) {
         let vc = SendCodeWaysVC()
-        vc.id = data?.transaction_request_id ?? ""
+        vc.id = transaction_request_id
         vc.approvalStep = approvalStep
         let nav = UINavigationController(rootViewController: vc)
         nav.setNavigationBarHidden(true, animated: false)
@@ -239,7 +240,7 @@ extension NewContractVC {
     private func getContractData(){
 
         showLoadingActivity()
-        APIController.shard.getContractDetails(transactionId: data?.transaction_request_id ?? "") { data in
+        APIController.shard.getContractDetails(transactionId: transaction_request_id ) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status =  data.status,status{
@@ -318,7 +319,7 @@ extension NewContractVC {
         if let base64 = base64 {
             url = base64
         }else{
-            url = "form/FORM_CT1/pr1/\(data?.transaction_request_id ?? "")"
+            url = "form/FORM_CT1/pr1/\(transaction_request_id)"
         }
         APIController.shard.getImage(url: url) { [weak self] data in
             
@@ -332,7 +333,7 @@ extension NewContractVC {
     
     private func sendApproval(){
         showLoadingActivity()
-        APIController.shard.submitApproval(formType: "FORM_CT1", transaction_request_id: data?.transaction_request_id ?? "", approving_status: approveButton.isSelected ? "Approve" : "Reject", note: noteTextView.text!, transactions_persons_action_code: verificationCodeTextField.text!) { data in
+        APIController.shard.submitApproval(formType: "FORM_CT1", transaction_request_id: transaction_request_id, approving_status: approveButton.isSelected ? "Approve" : "Reject", note: noteTextView.text!, transactions_persons_action_code: verificationCodeTextField.text!) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status ,status{

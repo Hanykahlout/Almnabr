@@ -178,9 +178,6 @@
 		3FA52FE628B65A6B00B42B58 /* ContractPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA52FE528B65A6B00B42B58 /* ContractPageViewController.swift */; };
 		3FA8CB6C2848BCE200434CE4 /* SettingsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8CB692848BCE200434CE4 /* SettingsData.swift */; };
 		3FA8CB6D2848BCE200434CE4 /* SettingsDataRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA8CB6A2848BCE200434CE4 /* SettingsDataRecords.swift */; };
-		3FA9CFB7288D4F8600AD5BE3 /* VactionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA9CFB5288D4F8600AD5BE3 /* VactionDetailsViewController.swift */; };
-		3FA9CFB8288D4F8600AD5BE3 /* VactionDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FA9CFB6288D4F8600AD5BE3 /* VactionDetailsViewController.xib */; };
-		3FA9CFBB288D563100AD5BE3 /* VactionPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA9CFB9288D563100AD5BE3 /* VactionPageViewController.swift */; };
 		3FAA84D5288E904D003A437E /* Transactions_barcode_versionVD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAA84C4288E904A003A437E /* Transactions_barcode_versionVD.swift */; };
 		3FAA84D6288E904D003A437E /* Transactions_submitterVD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAA84C5288E904A003A437E /* Transactions_submitterVD.swift */; };
 		3FAA84D7288E904D003A437E /* Transactions_notesVD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAA84C6288E904A003A437E /* Transactions_notesVD.swift */; };
@@ -926,9 +923,6 @@
 		3FA52FE528B65A6B00B42B58 /* ContractPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractPageViewController.swift; sourceTree = "<group>"; };
 		3FA8CB692848BCE200434CE4 /* SettingsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsData.swift; sourceTree = "<group>"; };
 		3FA8CB6A2848BCE200434CE4 /* SettingsDataRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDataRecords.swift; sourceTree = "<group>"; };
-		3FA9CFB5288D4F8600AD5BE3 /* VactionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VactionDetailsViewController.swift; sourceTree = "<group>"; };
-		3FA9CFB6288D4F8600AD5BE3 /* VactionDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VactionDetailsViewController.xib; sourceTree = "<group>"; };
-		3FA9CFB9288D563100AD5BE3 /* VactionPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VactionPageViewController.swift; sourceTree = "<group>"; };
 		3FAA84C4288E904A003A437E /* Transactions_barcode_versionVD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transactions_barcode_versionVD.swift; sourceTree = "<group>"; };
 		3FAA84C5288E904A003A437E /* Transactions_submitterVD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transactions_submitterVD.swift; sourceTree = "<group>"; };
 		3FAA84C6288E904A003A437E /* Transactions_notesVD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transactions_notesVD.swift; sourceTree = "<group>"; };
@@ -1639,9 +1633,6 @@
 			children = (
 				3F31ADEC288D370700E2D8D6 /* VactionViewController.swift */,
 				3F31ADED288D370700E2D8D6 /* VactionViewController.xib */,
-				3FA9CFB5288D4F8600AD5BE3 /* VactionDetailsViewController.swift */,
-				3FA9CFB6288D4F8600AD5BE3 /* VactionDetailsViewController.xib */,
-				3FA9CFB9288D563100AD5BE3 /* VactionPageViewController.swift */,
 				3FAA84E6288EA04C003A437E /* EditLastStepViewController.swift */,
 				3FAA84E7288EA04C003A437E /* EditLastStepViewController.xib */,
 			);
@@ -3419,7 +3410,6 @@
 				3F99B08628AE55170098F281 /* AddDocumentVC.xib in Resources */,
 				FAE13A4E27293C2D00509550 /* DroidKufi-Regular.ttf in Resources */,
 				3F9040D5286CB156008D85B8 /* NoteTableViewCell.xib in Resources */,
-				3FA9CFB8288D4F8600AD5BE3 /* VactionDetailsViewController.xib in Resources */,
 				3FD03A24287437B000BB13C7 /* AddInsuranceViewController.xib in Resources */,
 				3F97CD9A289A600400D6E8CC /* EditTicketCommentVC.xib in Resources */,
 				FA530A41270CEC6D0071CDC8 /* CustomHeaderView.xib in Resources */,
@@ -3701,7 +3691,6 @@
 				3F48C53E285883AF004D33F8 /* Attachments.swift in Sources */,
 				3FA52FE328B65A3900B42B58 /* ContractDataVC.swift in Sources */,
 				3F97CD99289A600400D6E8CC /* EditTicketCommentVC.swift in Sources */,
-				3FA9CFBB288D563100AD5BE3 /* VactionPageViewController.swift in Sources */,
 				FA1D64AF2777749D00FA7735 /* NotifiRoute.swift in Sources */,
 				3F935E54285A232A00D7B779 /* EducationGetResponse.swift in Sources */,
 				FA658B2827440829001FC641 /* AttachmentsVC.swift in Sources */,
@@ -3942,7 +3931,6 @@
 				3FB305AB2868447200CAC16F /* UserTableViewCell.swift in Sources */,
 				FAD07498274D4AD500B9C7B3 /* NotificationCell.swift in Sources */,
 				FA35CE4E271F572500FF6AE4 /* TeamUserVC.swift in Sources */,
-				3FA9CFB7288D4F8600AD5BE3 /* VactionDetailsViewController.swift in Sources */,
 				3F943D70284E5F940046BCCB /* FilterGetResponse3.swift in Sources */,
 				FABDBAA427F47806003961FC /* SignatureVC.swift in Sources */,
 				FA3D32B427343B8400A5472A /* ByPhases.swift in Sources */,
@@ -5404,7 +5392,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.4;
+				MARKETING_VERSION = 1.6.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5434,7 +5422,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6.4;
+				MARKETING_VERSION = 1.6.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

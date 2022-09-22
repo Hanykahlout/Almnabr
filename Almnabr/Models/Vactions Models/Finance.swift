@@ -18,12 +18,12 @@ struct Finance : Mappable {
 	var transaction_key : String?
 	var finance_year : String?
 	var finance_month : String?
-	var paid_days : Int?
-	var unpaid_days : Int?
-	var credit_amount : Int?
-	var debit_amount : Int?
+	var paid_days : String?
+	var unpaid_days : String?
+	var credit_amount : String?
+	var debit_amount : String?
 	var finance_description : String?
-    var net_salary_amount: Double?
+    var net_salary_amount: String?
     
 	init?(map: Map) {
 

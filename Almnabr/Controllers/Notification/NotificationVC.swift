@@ -216,12 +216,30 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
         if let ios = obj.extra_data["ios"] as? String {
             if ios != "" {
                 if ios.contains("transactions") {
-                    let splitString = ios.components(separatedBy: "ios/transactions")
-                    // let url = "\(splitString[1])"
-                    let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
-                    vc.str_url = "\(splitString[1])"
-                    vc.IsFromNotification = true
-                    self.navigationController?.pushViewController(vc, animated: true)
+                    let requestArr = ios.components(separatedBy: "/")
+                    if ios.contains("FORM_HRV1"){
+                        // Vaction Form
+                        if let last = requestArr.last {
+                            let vc = VactionViewController()
+                            vc.transaction_request_id = last
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }else if ios.contains("FORM_WIR"){
+                        // WIR Form
+                        let splitString = ios.components(separatedBy: "ios/transactions")
+                        let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+                        vc.str_url = "\(splitString[1])"
+                        vc.IsFromNotification = true
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }else if ios.contains("FORM_CT1"){
+                        // New Contract Form
+                        if let last = requestArr.last{
+                            let vc = NewContractVC()
+                            vc.transaction_request_id = last
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                    
                     
                 }else if  ios.contains("task") {
                     let vc:TaskDetailVC = AppDelegate.TicketSB.instanceVC()

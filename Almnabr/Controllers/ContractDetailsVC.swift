@@ -179,10 +179,7 @@ extension ContractDetailsVC: UITableViewDelegate , UITableViewDataSource{
         let vc = NewContractVC()
         let obj = arr_data[indexPath.row]
         print("SAAAAa",obj.transaction_request_id)
-        vc.data = Tcore([
-            "transaction_request_id" : obj.transaction_request_id,
-            "transaction_key": obj.transaction_key
-        ])
+        vc.transaction_request_id = obj.transaction_request_id ?? ""
         self.navigationController?.pushViewController(vc, animated: true)
         
         

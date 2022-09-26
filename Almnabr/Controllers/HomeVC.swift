@@ -117,9 +117,9 @@ class HomeVC: UIViewController   {
         }
     }
     
-    
-    
 }
+
+
 extension HomeVC {
     func check_notifi() {
         didLoadHome = true
@@ -128,6 +128,8 @@ extension HomeVC {
         }
     }
 }
+
+
 //MARK: - API Handling
 extension HomeVC{
     private func getDashboardData(){
@@ -161,3 +163,5 @@ extension HomeVC{
         }
     }
 }
+
+

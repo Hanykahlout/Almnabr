@@ -148,13 +148,54 @@ class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjects
                 DispatchQueue.main.async {
                     let alert = SCLAlertView()
                     if let status = data.status,status{
+                        let appearance = SCLAlertView.SCLAppearance(
+                            showCloseButton: false
+                        )
+                        let alert = SCLAlertView(appearance: appearance)
+                        
+                        alert.addButton("Ok".localized()) {
+                            self.goToDashboard()
+                        }
+                        
                         alert.showSuccess("Successfully Scanned".localized(), subTitle: "You can see your account logged in from the website.".localized())
+                        
+                        
                     }else{
                         alert.showError("Failed Scanned".localized(), subTitle: "")
                     }
                 }
             }
+    }
+    
+    
+    private func goToDashboard(){
+        let vc = AppDelegate.mainSB.instantiateViewController(withIdentifier: "HomeVC")
         
+        let nav = UINavigationController.init(rootViewController: vc)
+        let sideMenu: MenuVC = AppDelegate.mainSB.instanceVC()
+        let rootController : FAPanelController = AppDelegate.mainSB.instanceVC()
+        let center : MenuVC = AppDelegate.mainSB.instanceVC()
+        
+        _ = rootController.center(nav).right(center).left(sideMenu)
+        rootController.rightPanelPosition = .front
+        rootController.leftPanelPosition = .front
+        
+        // rootController.configs.rightPanelWidth = (window?.frame.size.width)!
+        let width = UIScreen.main.bounds.width - 150
+        
+        
+        rootController.configs.leftPanelWidth = width
+        rootController.configs.rightPanelWidth = width
+        
+        rootController.configs.maxAnimDuration = 0.3
+        rootController.configs.canRightSwipe = true
+        rootController.configs.canLeftSwipe = true
+        rootController.configs.changeCenterPanelAnimated = false
+        
+        guard let window = UIApplication.shared.windows.last else {return}
+
+        window.rootViewController = rootController
+        UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
     
     override var prefersStatusBarHidden: Bool {

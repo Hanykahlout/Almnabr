@@ -28,8 +28,6 @@ class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjects
         
         addNavigationBarTitle(navigationTitle: "Scan QR Code")
         
-        //        UINavigationBar.appearance().backgroundColor = UIColor(hexString: "1A3665")
-        
         
         captureSession = AVCaptureSession()
         
@@ -105,7 +103,6 @@ class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjects
             // rootController.configs.rightPanelWidth = (window?.frame.size.width)!
             let width = UIScreen.main.bounds.width - 150
             
-            
             rootController.configs.leftPanelWidth = width
             rootController.configs.rightPanelWidth = width
             
@@ -142,29 +139,30 @@ class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjects
         dismiss(animated: true)
     }
     
+    
     func found(code: String) {
-       
-            APIController.shard.sendQRCode(code: code) { data in
-                DispatchQueue.main.async {
-                    let alert = SCLAlertView()
-                    if let status = data.status,status{
-                        let appearance = SCLAlertView.SCLAppearance(
-                            showCloseButton: false
-                        )
-                        let alert = SCLAlertView(appearance: appearance)
-                        
-                        alert.addButton("Ok".localized()) {
-                            self.goToDashboard()
-                        }
-                        
-                        alert.showSuccess("Successfully Scanned".localized(), subTitle: "You can see your account logged in from the website.".localized())
-                        
-                        
-                    }else{
-                        alert.showError("Failed Scanned".localized(), subTitle: "")
+        
+        APIController.shard.sendQRCode(code: code) { data in
+            DispatchQueue.main.async {
+                let alert = SCLAlertView()
+                if let status = data.status,status{
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    
+                    let alert = SCLAlertView(appearance: appearance)
+                    
+                    alert.addButton("Ok".localized()) {
+                        self.goToDashboard()
                     }
+                    
+                    alert.showSuccess("Successfully Scanned".localized(), subTitle: "You can see your account logged in from the website.".localized())
+                    
+                }else{
+                    alert.showError("Failed Scanned".localized(), subTitle: "")
                 }
             }
+        }
     }
     
     
@@ -193,7 +191,7 @@ class QRScannerViewController:  UIViewController, AVCaptureMetadataOutputObjects
         rootController.configs.changeCenterPanelAnimated = false
         
         guard let window = UIApplication.shared.windows.last else {return}
-
+        
         window.rootViewController = rootController
         UIView.transition(with: window, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }

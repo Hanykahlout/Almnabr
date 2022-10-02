@@ -59,6 +59,7 @@ class HomeVC: UIViewController   {
         check_notifi()
         
         self.lbl_allCopyRes.font = .kufiRegularFont(ofSize: 12)
+        
     }
     
     
@@ -128,6 +129,7 @@ extension HomeVC {
         }
     }
 }
+
 
 
 //MARK: - API Handling

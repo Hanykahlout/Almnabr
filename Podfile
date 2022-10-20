@@ -33,6 +33,8 @@ target 'Almnabr' do
     pod 'SCLAlertView'
     pod 'GoogleSignIn'
     pod 'GoogleSignInSwiftSupport'
+    pod 'FSCalendar'
+    pod 'Charts'
     
   target 'AlmnabrTests' do
     inherit! :search_paths

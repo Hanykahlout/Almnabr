@@ -215,39 +215,58 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
         
         if let ios = obj.extra_data["ios"] as? String {
             if ios != "" {
-                if ios.contains("transactions") {
-                    let requestArr = ios.components(separatedBy: "/")
-                    if ios.contains("FORM_HRV1"){
-                        // Vaction Form
-                        if let last = requestArr.last {
-                            let vc = VactionViewController()
-                            vc.transaction_request_id = last
-                            self.navigationController?.pushViewController(vc, animated: true)
-                        }
-                    }else if ios.contains("FORM_WIR"){
-                        // WIR Form
-                        let splitString = ios.components(separatedBy: "ios/transactions")
-                        let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
-                        vc.str_url = "\(splitString[1])"
-                        vc.IsFromNotification = true
-                        self.navigationController?.pushViewController(vc, animated: true)
-                    }else if ios.contains("FORM_CT1"){
-                        // New Contract Form
-                        if let last = requestArr.last{
-                            let vc = NewContractVC()
-                            vc.transaction_request_id = last
-                            self.navigationController?.pushViewController(vc, animated: true)
+                if let typeUrl = obj.extra_data["typeUrl"] as? String,typeUrl == "pdf"{
+                    showLoadingActivity()
+                    APIController.shard.getImage(url: ios) { data in
+                        DispatchQueue.main.async {
+                            self.hideLoadingActivity()
+                            if let status = data.status,status{
+                                let vc = WebViewViewController()
+                                vc.data = data
+                                self.navigationController?.present(UINavigationController(rootViewController: vc), animated: true)
+                            }else{
+                                let alertVC = UIAlertController(title: "error".localized(), message: data.error ?? "", preferredStyle: .alert)
+                                alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel))
+                                self.present(alertVC, animated: true)
+                            }
                         }
                     }
-                    
-                    
-                }else if  ios.contains("task") {
-                    let vc:TaskDetailVC = AppDelegate.TicketSB.instanceVC()
-                    vc.task_id =  String(ios.split(separator: "/").last ?? "")
-                    self.navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    if ios.contains("transactions") {
+                        let requestArr = ios.components(separatedBy: "/")
+                        if ios.contains("FORM_HRV1"){
+                            // Vaction Form
+                            if let last = requestArr.last {
+                                let vc = VactionViewController()
+                                vc.transaction_request_id = last
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }else if ios.contains("FORM_WIR"){
+                            // WIR Form
+                            let splitString = ios.components(separatedBy: "ios/transactions")
+                            let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+                            vc.str_url = "\(splitString[1])"
+                            vc.IsFromNotification = true
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }else if ios.contains("FORM_CT1"){
+                            // New Contract Form
+                            if let last = requestArr.last{
+                                let vc = NewContractVC()
+                                vc.transaction_request_id = last
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }
+                        
+                    }else if  ios.contains("task") {
+                        let vc:TaskDetailVC = AppDelegate.TicketSB.instanceVC()
+                        vc.task_id =  String(ios.split(separator: "/").last ?? "")
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
                 }
             }
+            
         }
+        
     }
     
     

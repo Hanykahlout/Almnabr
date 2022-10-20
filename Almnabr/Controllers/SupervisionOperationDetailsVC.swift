@@ -182,10 +182,7 @@ extension SupervisionOperationDetailsVC: UICollectionViewDataSource ,UICollectio
             newIndex = 3
         default: break
         }
-        
-        
 
-        
         self.SelectedIndex = indexPath.item
         
         self.collection.reloadData()

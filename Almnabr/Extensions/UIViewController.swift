@@ -57,11 +57,11 @@ extension UIViewController {
        
     }
     
-    func formatedDate(date:Date) ->String{
+    func formatedDate(date:Date?) ->String{
         let dateFormater = DateFormatter()
         dateFormater.locale = .init(identifier: "en")
         dateFormater.dateFormat = "YYYY/MM/dd"
-        return dateFormater.string(from: date)
+        return date != nil ? dateFormater.string(from: date!) : ""
     }
     
     func getDateFromString(str:String) ->Date{

@@ -219,22 +219,53 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
-        
-        if let ios = userInfo["ios"] as? String {
-            let splitString = ios.components(separatedBy: "ios/transactions")
-            let url = "\(splitString[1])"
-            obj_TempNotifi = .init(url: url)
-            
-            NotifiRoute.shared.check_notifi()
-            
-            
-            
-            //            let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
-            //            vc.str_url = "\(splitString[1])"
-            //
-            //            let page = UINavigationController.init(rootViewController: vc)
-            //            //_ =  self.panel?.center(page)
-            //            vc.switchRootViewController(rootViewController: page, animated: true, completion: nil)
+        if let window = window{
+            if let ios = userInfo["ios"] as? String {
+                if ios != "" {
+                    if let typeUrl = userInfo["typeUrl"] as? String,typeUrl == "pdf"{
+                        APIController.shard.getImage(url: ios) { data in
+                            DispatchQueue.main.async {
+                                if let status = data.status,status{
+                                    let vc = WebViewViewController()
+                                    vc.data = data
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
+                            }
+                        }
+                    }else{
+                        if ios.contains("transactions") {
+                            let requestArr = ios.components(separatedBy: "/")
+                            if ios.contains("FORM_HRV1"){
+                                // Vaction Form
+                                if let last = requestArr.last {
+                                    let vc = VactionViewController()
+                                    vc.transaction_request_id = last
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
+                            }else if ios.contains("FORM_WIR"){
+                                // WIR Form
+                                let splitString = ios.components(separatedBy: "ios/transactions")
+                                let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+                                vc.str_url = "\(splitString[1])"
+                                vc.IsFromNotification = true
+                                window.rootViewController = UINavigationController(rootViewController: vc)
+                            }else if ios.contains("FORM_CT1"){
+                                // New Contract Form
+                                if let last = requestArr.last{
+                                    let vc = NewContractVC()
+                                    vc.transaction_request_id = last
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
+                            }
+                            
+                        }else if  ios.contains("task") {
+                            let vc:TaskDetailVC = AppDelegate.TicketSB.instanceVC()
+                            vc.task_id =  String(ios.split(separator: "/").last ?? "")
+                            window.rootViewController = UINavigationController(rootViewController: vc)
+                        }
+                    }
+                }
+            }
         }
         
         completionHandler()

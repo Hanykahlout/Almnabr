@@ -13,19 +13,26 @@ import PassKit
 import CoreNFC
 import SocketIO
 import SCLAlertView
+import FSCalendar
+import Charts
+import DropDown
 
 var userObj :UserObj?
 var arr_Menu : [MenuObj]?
 
 class HomeVC: UIViewController   {
     
-    @IBOutlet weak var viewTheme: UIView!
-    @IBOutlet weak var btnMenu: UIView!
-    @IBOutlet weak var webView: WKWebView!
-    @IBOutlet weak var header: HeaderView!
-    @IBOutlet weak var tf_message: UITextField!
-    @IBOutlet weak var lbl_allCopyRes: UILabel!
+    @IBOutlet weak var pieChartView: UIView!
+    @IBOutlet weak var combinedChartView: UIView!
     
+    @IBOutlet weak var projectRequestsStackView: UIStackView!
+    @IBOutlet weak var mainStackView: UIStackView!
+    
+    @IBOutlet weak var calenderView: FSCalendar!
+    
+    @IBOutlet weak var header: HeaderView!
+    
+    @IBOutlet weak var lbl_allCopyRes: UILabel!
     @IBOutlet weak var incompleteTasksLabel: UILabel!
     @IBOutlet weak var pendingTransactionLabel: UILabel!
     @IBOutlet weak var employeeNameLabel: UILabel!
@@ -46,20 +53,63 @@ class HomeVC: UIViewController   {
     @IBOutlet weak var remainingWorkingDaysLabel: UILabel!
     @IBOutlet weak var workingDaysPerYearLabel: UILabel!
     @IBOutlet weak var membershipExpiryDateEnglishLabel: UILabel!
+    @IBOutlet weak var totalZonesLabel: UILabel!
+    @IBOutlet weak var totalBlocksLabel: UILabel!
+    @IBOutlet weak var totalClustersLabel: UILabel!
+    @IBOutlet weak var totalUnitsLabel: UILabel!
+    @IBOutlet weak var fromDateLabel: UILabel!
+    @IBOutlet weak var toDateLabel: UILabel!
+    @IBOutlet weak var totalDaysLabel: UILabel!
+    @IBOutlet weak var elapsedDaysLabel: UILabel!
+    @IBOutlet weak var remainingDaysLabel: UILabel!
+    @IBOutlet weak var lateDaysLabel: UILabel!
+    @IBOutlet weak var emptyDataLabel: UILabel!
     
+    @IBOutlet weak var employeeInfoView: UIView!
+    
+    @IBOutlet weak var projectsWorkingAreaTextField: UITextField!
+    
+    
+    @IBOutlet weak var projectsWorkingAreaArrow: UIImageView!
+    
+    @IBOutlet weak var projectRequestsCollectionView: UICollectionView!
+    
+    
+    
+    private var average_done_days = ""
+    private var average_left_days = ""
+    private var average_late_days = ""
+    
+    private let pieChart = PieChartView()
+    private let combinedChart = CombinedChartView()
+    private let combinedChartData = CombinedChartData()
+    private var projectWorkingAreas = [ProjectWorkingAreaRecord]() {
+        didSet{
+            self.projectWorkingAreasDropDown.dataSource = projectWorkingAreas.map{$0.label ?? ""}
+        }
+    }
+    private let parties = ["Elapsed Days","Remaining Days","Late Days"]
+    private var data = [ProjectRequestRecord]()
+    private var projectWorkingAreasDropDown = DropDown()
+    private var totalPages : Int?
+    private var pageNumber = 1
+    
+    private var selecteFilterData:SelectedHomeFilterData? = .init()
+    private var selectedProjectWorkingArea = ""
     var session: NFCNDEFReaderSession?
     var message:String = ""
-    
+    private var progressPlanedRatioResult = [ProgressPlanedRatioResult]() {
+        didSet{
+            let chartData = generateChartData()
+            combinedChartData.barData = chartData.barData
+            combinedChartData.lineData = chartData.lineData
+            combinedChart.data = combinedChartData
+        }
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        SocketIOController.shard.connect()
-        get_Userdata()
-        header.btnAction = menu_select
-        check_notifi()
-        
-        self.lbl_allCopyRes.font = .kufiRegularFont(ofSize: 12)
-        
+        initlization()
     }
     
     
@@ -67,7 +117,278 @@ class HomeVC: UIViewController   {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        getDashboardData()
+        getProjectWorkingAreas()
+        if Auth_User.user_type_id == "1"{
+            getDashboardData()
+        }else{
+            employeeInfoView.isHidden = true
+        }
+        
+    }
+    
+    
+    private func initlization(){
+        setUpObserver()
+        setUpCollectionView()
+        setLayers()
+        SocketIOController.shard.connect()
+        get_Userdata()
+        header.btnAction = menu_select
+        self.lbl_allCopyRes.font = .kufiRegularFont(ofSize: 12)
+        setUpCalender()
+        setUpPieChart()
+        setUpCombinedChartView()
+        setUpDropDownList()
+        projectsWorkingAreaTextField.isUserInteractionEnabled = true
+        projectsWorkingAreaTextField.addTapGesture {
+            self.projectWorkingAreasDropDown.show()
+        }
+        projectRequestsStackView.isHidden = true
+        
+    }
+    
+    private func setUpObserver(){
+        NotificationCenter.default.addObserver(forName: .init("SubmitedFilter"), object: nil, queue: .main) { notify in
+            guard let obj = notify.object as? SelectedHomeFilterData else { return }
+            self.selecteFilterData = obj
+            self.getProjectRequestData(isFromLast: false)
+        }
+    }
+    
+    private func setLayers(){
+        
+        let layer = UICollectionViewFlowLayout()
+        layer.sectionInset = UIEdgeInsets(top: 0 , left: 10, bottom: 0, right: 10)
+        layer.minimumInteritemSpacing = 10
+        layer.minimumLineSpacing = 10
+        layer.scrollDirection = .horizontal
+        layer.invalidateLayout()
+        
+        layer.itemSize = CGSize(width: 300 , height: projectRequestsCollectionView.frame.size.height - 20)
+        projectRequestsCollectionView.setCollectionViewLayout(layer, animated: true)
+        
+    }
+    
+    private func setUpDropDownList(){
+        //        projectWorkingAreasDropDown
+        projectWorkingAreasDropDown.anchorView = projectsWorkingAreaTextField
+        projectWorkingAreasDropDown.bottomOffset = CGPoint(x: 0, y:(projectWorkingAreasDropDown.anchorView?.plainView.bounds.height)!)
+        
+        projectWorkingAreasDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            if !projectWorkingAreas.isEmpty{
+                projectsWorkingAreaArrow.transform = .init(rotationAngle: 0)
+                let objc = projectWorkingAreas[index]
+                self.projectsWorkingAreaTextField.text = objc.label
+                self.selectedProjectWorkingArea = objc.value ?? ""
+                
+                DispatchQueue.main.async {
+                    self.getProjectRequestsData()
+                    self.getProgressPlanedRatioData()
+                    self.getProjectRequestData(isFromLast: false)
+                }
+                
+            }
+        }
+        
+        projectWorkingAreasDropDown.cancelAction = { [unowned self] in
+            projectsWorkingAreaArrow.transform = .init(rotationAngle: .pi)
+        }
+        
+    }
+    
+    
+    private func setUpPieChart(){
+        pieChartView.addSubview(pieChart)
+        pieChart.translatesAutoresizingMaskIntoConstraints = false
+        pieChart.topAnchor.constraint(equalTo: pieChartView.topAnchor, constant: 0).isActive = true
+        pieChart.bottomAnchor.constraint(equalTo: pieChartView.bottomAnchor, constant: 0).isActive = true
+        pieChart.leadingAnchor.constraint(equalTo: pieChartView.leadingAnchor, constant: 0).isActive = true
+        pieChart.trailingAnchor.constraint(equalTo: pieChartView.trailingAnchor, constant: 0).isActive = true
+        
+    }
+    
+    private func setDataCount() -> PieChartData {
+        
+        var entries = [PieChartDataEntry]()
+        entries.append(.init(value: Double(average_done_days) ?? 0.0, label: "Elapsed Days"))
+        entries.append(.init(value: Double(average_left_days) ?? 0.0, label: "Remaining Days"))
+        entries.append(.init(value: Double(average_late_days) ?? 0.0, label: "Late Days"))
+        
+        let set = PieChartDataSet(entries: entries, label: "Project Duration")
+        set.drawIconsEnabled = false
+        set.sliceSpace = 2
+        
+        set.colors = [.green,.blue,.red]
+        
+        let data = PieChartData(dataSet: set)
+        
+        let pFormatter = NumberFormatter()
+        pFormatter.numberStyle = .percent
+        pFormatter.maximumFractionDigits = 1
+        pFormatter.multiplier = 1
+        pFormatter.percentSymbol = " %"
+        data.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
+        
+        data.setValueFont(.systemFont(ofSize: 11, weight: .light))
+        data.setValueTextColor(.black)
+        return data
+    }
+    
+    private func setUpCombinedChartView(){
+        combinedChartView.addSubview(combinedChart)
+        combinedChart.translatesAutoresizingMaskIntoConstraints = false
+        combinedChart.topAnchor.constraint(equalTo: combinedChartView.topAnchor, constant: 0).isActive = true
+        combinedChart.bottomAnchor.constraint(equalTo: combinedChartView.bottomAnchor, constant: 0).isActive = true
+        combinedChart.leadingAnchor.constraint(equalTo: combinedChartView.leadingAnchor, constant: 0).isActive = true
+        combinedChart.trailingAnchor.constraint(equalTo: combinedChartView.trailingAnchor, constant: 0).isActive = true
+        
+    }
+    
+    
+    func generateChartData() -> (barData:BarChartData,lineData:LineChartData) {
+        
+        let xAxis = combinedChart.xAxis
+        xAxis.labelPosition = .bottom
+        xAxis.labelFont = .systemFont(ofSize: 10)
+        xAxis.granularity = 1
+        xAxis.labelCount = 7
+        xAxis.valueFormatter = ChartBottomData(data: progressPlanedRatioResult)
+        
+        
+        let leftAxis = combinedChart.leftAxis
+        leftAxis.labelFont = .systemFont(ofSize: 10)
+        leftAxis.valueFormatter = ChartLeftData()
+        leftAxis.labelPosition = .outsideChart
+        leftAxis.spaceTop = 0.15
+        leftAxis.axisMinimum = 0
+        leftAxis.axisMaximum = 15
+        
+        let rightAxis = combinedChart.rightAxis
+        rightAxis.enabled = true
+        rightAxis.labelFont = .systemFont(ofSize: 10)
+        rightAxis.valueFormatter = ChartRightData()
+        rightAxis.spaceTop = 0.15
+        rightAxis.axisMinimum = 0
+        rightAxis.axisMaximum = 120
+        
+        
+        
+        
+        
+        var barEntries1 = [BarChartDataEntry]()
+        var barEntries2 = [BarChartDataEntry]()
+        var barEntries3 = [BarChartDataEntry]()
+        var lineEntries1 = [ChartDataEntry]()
+        var lineEntries2 = [ChartDataEntry]()
+        
+        for index in 0..<progressPlanedRatioResult.count{
+            let objc = progressPlanedRatioResult[index]
+            
+            barEntries1.append(.init(x: Double(index), y: Double(objc.monthly_actual_total ?? "0.0")!))
+            barEntries2.append(.init(x: Double(index), y: Double(objc.monthly_total_plan ?? "0.0")!))
+            barEntries3.append(.init(x: Double(index), y: objc.forecast_average ?? 0.0))
+            
+            let line1Val = (Double(objc.sum_total_plan ?? "0.0") ?? 0.0 + Double(objc.forecast_average ?? 0.0)) / 8
+            let line2Val = (Double(objc.sum_total_plan ?? "0.0") ?? 0.0) / 8
+            lineEntries1.append(ChartDataEntry(x: Double(index) , y:  line1Val ))
+            lineEntries2.append(ChartDataEntry(x: Double(index) , y:  line2Val ))
+        }
+        
+        
+        let lineSet1 = LineChartDataSet(entries: lineEntries1, label: "Cumulativa Plan")
+        lineSet1.setColor(.orange)
+        lineSet1.lineWidth = 1
+        lineSet1.setCircleColor(.orange)
+        lineSet1.circleRadius = 5
+        lineSet1.circleHoleRadius = 1
+        lineSet1.fillColor = .clear
+        lineSet1.mode = .cubicBezier
+        lineSet1.drawValuesEnabled = true
+        lineSet1.valueFont = .systemFont(ofSize: 10)
+        lineSet1.valueTextColor = .black
+        lineSet1.axisDependency = .left
+        
+        let lineSet2 = LineChartDataSet(entries: lineEntries2, label: "Forcast")
+        lineSet2.setColor(.orange)
+        lineSet2.lineWidth = 1
+        lineSet2.setCircleColor(.red)
+        lineSet2.circleRadius = 5
+        lineSet2.circleHoleRadius = 1
+        lineSet2.fillColor = .clear
+        lineSet2.mode = .cubicBezier
+        lineSet2.drawValuesEnabled = true
+        lineSet2.valueFont = .systemFont(ofSize: 10)
+        lineSet2.valueTextColor = .black
+        lineSet2.axisDependency = .left
+        
+        
+        let barSet1 = BarChartDataSet(entries: barEntries1, label: "Actual Monthly")
+        barSet1.setColor(UIColor(red: 60/255, green: 220/255, blue: 78/255, alpha: 1))
+        barSet1.valueTextColor = UIColor(red: 60/255, green: 220/255, blue: 78/255, alpha: 1)
+        barSet1.valueFont = .systemFont(ofSize: 10)
+        barSet1.axisDependency = .left
+        
+        let barSet2 = BarChartDataSet(entries: barEntries2, label: "Monthly Plan")
+        barSet2.setColor(.blue)
+        barSet2.valueTextColor = UIColor(red: 61/255, green: 165/255, blue: 255/255, alpha: 1)
+        barSet2.valueFont = .systemFont(ofSize: 10)
+        barSet2.axisDependency = .left
+        
+        
+        let barSet3 = BarChartDataSet(entries: barEntries3, label: "Forcast")
+        barSet3.setColor(.orange)
+        barSet3.valueTextColor = UIColor(red: 60/255, green: 220/255, blue: 78/255, alpha: 1)
+        barSet3.valueFont = .systemFont(ofSize: 10)
+        barSet3.axisDependency = .left
+        
+        let groupSpace = 0.06
+        let barSpace = 0.02 // x2 dataset
+        let barWidth = 0.45 // x2 dataset
+        // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
+        
+        let barChartData: BarChartData = [barSet1, barSet2, barSet3]
+        barChartData.barWidth = barWidth
+        
+        // make this BarData object grouped
+        barChartData.groupBars(fromX: 0, groupSpace: groupSpace, barSpace: barSpace)
+        let lineChartData = LineChartData(dataSets: [lineSet1,lineSet2])
+        
+        return (barChartData,lineChartData)
+    }
+    
+    
+    private func setUpCalender(){
+        if #available(iOS 16.0, *) {
+            calenderView.isHidden = true
+            let calendarView = UICalendarView()
+            calendarView.calendar = Calendar(identifier: .gregorian)
+            calendarView.locale = Locale(identifier: L102Language.currentAppleLanguage())
+            calendarView.fontDesign = .rounded
+            
+            
+            let dateSelection = UICalendarSelectionSingleDate(delegate: self)
+            let date = Date()
+            let year = Calendar.current.component(.year, from: date)
+            let month = Calendar.current.component(.month, from: date)
+            let day = Calendar.current.component(.day, from: date)
+            dateSelection.selectedDate = DateComponents(calendar: Calendar(identifier: .gregorian), year:year, month: month, day: day)
+            calendarView.selectionBehavior = dateSelection
+            
+            calendarView.backgroundColor = .white
+            calendarView.layer.cornerCurve = .continuous
+            calendarView.layer.cornerRadius = 10.0
+            calendarView.tintColor = UIColor(named: "AppColor")
+            calendarView.shadow_Color = UIColor(hexString: "000000")
+            calendarView.shadow_Offset = .init(width: 0, height: 2)
+            calendarView.shadow_Radius = 4
+            calendarView.shadow_Opacity = 0.4
+            
+            mainStackView.insertArrangedSubview(calendarView, at: 2)
+            
+        } else {
+            calenderView.isHidden = false
+            calenderView.delegate = self
+        }
     }
     
     
@@ -105,8 +426,8 @@ class HomeVC: UIViewController   {
     func Notification_select(){
         let vc:NotificationVC = AppDelegate.mainSB.instanceVC()
         self.navigationController?.pushViewController(vc, animated: true)
-        
     }
+    
     
     @objc func buttonMenuAction(sender: UIButton!) {
         
@@ -118,19 +439,116 @@ class HomeVC: UIViewController   {
         }
     }
     
+    @IBAction func topCountRequestsAction(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "TopCountRequestsViewController") as! TopCountRequestsViewController
+        vc.projects_work_area_id = selectedProjectWorkingArea
+        navigationController?.pushViewController(vc, animated: true)
+
+    }
+    
+    
+    @IBAction func usedUnusedReportAction(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "UsedUnusedReportViewController") as! UsedUnusedReportViewController
+        vc.projects_work_area_id = selectedProjectWorkingArea
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    @IBAction func createTransactionAction(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "CreateTransactionViewController") as! CreateTransactionViewController
+        vc.projects_work_area_id = selectedProjectWorkingArea
+        vc.projects_work_area_title = projectsWorkingAreaTextField.text!
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+    @IBAction func filterAction(_ sender: Any) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "HomeFilterViewController") as! HomeFilterViewController
+        vc.projects_work_area_id = self.selectedProjectWorkingArea
+        vc.selecteFilterData = self.selecteFilterData
+        navigationController?.pushViewController(vc, animated: true)
+        
+    }
+    
+}
+// MARK: - Set Up CollectionView Delegate and Data Source
+extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource{
+    private func setUpCollectionView(){
+        projectRequestsCollectionView.delegate = self
+        projectRequestsCollectionView.dataSource = self
+        projectRequestsCollectionView.register(.init(nibName: "ProjectRequestsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProjectRequestsCollectionViewCell")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return data.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProjectRequestsCollectionViewCell", for: indexPath) as! ProjectRequestsCollectionViewCell
+        cell.setData(data: data[indexPath.row])
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == data.count - 1 {
+            if let totalPages = totalPages{
+                if totalPages > pageNumber{
+                    pageNumber = pageNumber + 1
+                    getProjectRequestData(isFromLast: true)
+                }
+            }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let  objc = data[indexPath.row]
+        switch objc.transaction_key{
+        case "FORM_HRV1":
+            let vc = VactionViewController()
+            vc.transaction_request_id = objc.transaction_request_id ?? ""
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_WIR":
+            let vc : TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+            vc.Object = .init(["transaction_request_id": objc.transaction_request_id! , "transaction_key":objc.transaction_key!])
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_CT1":
+            let vc = NewContractVC()
+            vc.transaction_request_id = objc.transaction_request_id ?? ""
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
+    }
+    
 }
 
+// MARK: - Chart Delegate
+extension HomeVC:ChartViewDelegate{
+    
+    
+}
+// MARK: - Calendar Delegates
 
-extension HomeVC {
-    func check_notifi() {
-        didLoadHome = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            NotifiRoute.shared.check_notifi()
-        }
+extension HomeVC:UICalendarSelectionSingleDateDelegate{
+    @available(iOS 16.0, *)
+    func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
+        print("XXXXXX- Selected Date:", dateComponents ?? "No Date")
+        getActivityOnDate(date: dateComponents?.date ?? Date())
+    }
+    
+    
+    @available(iOS 16.0, *)
+    func dateSelection(_ selection: UICalendarSelectionSingleDate, canSelectDate dateComponents: DateComponents?) -> Bool {
+        return true
     }
 }
 
 
+extension HomeVC:FSCalendarDelegate{
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        print("FSCalendar - Selected Date:", date)
+    }
+}
 
 //MARK: - API Handling
 extension HomeVC{
@@ -150,20 +568,143 @@ extension HomeVC{
                 self.iqamaExpiryDateLabel.text = data.employee_info?.iqama_expiry_date_english ?? "----"
                 self.jobTitleLabel.text = data.employee_info?.job_title_iqama ?? "----"
                 self.nationalityLabel.text = data.employee_info?.nationality ?? "----"
-                self.balanceVocationPaidDaysLabel.text = data.extra_data?.balance_vocation_paid_days ?? "----"
+                self.balanceVocationPaidDaysLabel.text = data.extra_data?.vacation_paid_days ?? "----"
                 self.vacationDeservedPaidDaysLabel.text = data.extra_data?.vacation_deserved_paid_days ?? "----"
                 self.totalDetectionDaysLabel.text = data.extra_data?.total_detection_days ?? "----"
-                self.paidDaysLabel.text = data.extra_data?.paid_days ?? "----"
-                self.unpaidDaysLabel.text = data.extra_data?.unpaid_days ?? "----"
-                self.employeeAllContractWorkedDaysLabel.text = "\(data.extra_data?.employee_all_contract_worked_days ?? 0)"
+                self.paidDaysLabel.text = "\(data.extra_data?.total_paid_days ?? 0)"
+                self.unpaidDaysLabel.text = data.extra_data?.total_unpaid_days ?? "----"
+                self.employeeAllContractWorkedDaysLabel.text = "\(data.extra_data?.total_working_days ?? 0)"
                 self.employeeActiveContractTotalDaysLabel.text = "\(data.extra_data?.employee_active_contract_total_days ?? 0)"
-                self.remainingWorkingDaysLabel.text = "\(data.extra_data?.employee_remaining_working_days ?? 0)"
-                self.workingDaysPerYearLabel.text = "\(data.extra_data?.working_days_per_year ?? 0)"
+                self.remainingWorkingDaysLabel.text = "\(data.extra_data?.total_remaining_days ?? 0)"
+                self.workingDaysPerYearLabel.text = "\(data.extra_data?.working_days ?? 0)"
                 self.membershipExpiryDateEnglishLabel.text = "----"
                 
             }
         }
     }
+    
+    private func getActivityOnDate(date:Date){
+        APIController.shard.getActivityOnDate(date: date) { data in
+            
+        }
+    }
+    
+    private func getProjectWorkingAreas(){
+        APIController.shard.getProjectWorkingAreas { data in
+            if let status = data.status , status{
+                self.projectWorkingAreas = data.records ?? []
+            }
+        }
+    }
+    
+    private func getProjectRequestsData(){
+        showLoadingActivity()
+        APIController.shard.getProjectRequestsData(projects_work_area_id: selectedProjectWorkingArea ) { data in
+            self.hideLoadingActivity()
+            if let status = data.status , status{
+                let objc = data.result?.project_setting
+                self.average_done_days = objc?.average_done_days ?? ""
+                self.average_left_days = objc?.average_left_days ?? ""
+                self.average_late_days = String(objc?.late_days ?? 0)
+                self.totalZonesLabel.text = objc?.total_no_of_zones ?? "----"
+                self.totalBlocksLabel.text = objc?.total_no_of_blocks ?? "----"
+                self.totalClustersLabel.text = objc?.total_no_of_clusters ?? "----"
+                self.totalUnitsLabel.text = objc?.total_no_of_units ?? "----"
+                self.fromDateLabel.text = objc?.supervision_start_date ?? "----"
+                self.toDateLabel.text = objc?.supervision_expiry_date ?? "----"
+                self.totalDaysLabel.text = objc?.total_days ?? "----"
+                self.elapsedDaysLabel.text = objc?.done_days ?? "----"
+                self.remainingDaysLabel.text = objc?.left_days ?? "----"
+                self.lateDaysLabel.text = String(objc?.late_days ?? 0)
+                self.projectRequestsStackView.isHidden = false
+                self.pieChart.data = self.setDataCount()
+            }
+        }
+    }
+    
+    private func getProgressPlanedRatioData(){
+        showLoadingActivity()
+        APIController.shard.getProgressPlanedRatioData(projects_work_area_id: selectedProjectWorkingArea) { data in
+            self.hideLoadingActivity()
+            if let status = data.status , status{
+                self.progressPlanedRatioResult = data.result ?? []
+            }
+        }
+    }
+    
+    private func getProjectRequestData(isFromLast:Bool){
+        if !isFromLast{
+            pageNumber = 1
+        }
+        var selectedLevels = ""
+        var selectedResults = ""
+        
+        for index in 0..<(selecteFilterData?.selectedlevels.count ?? 0){
+            let level = selecteFilterData?.selectedlevels[index]
+            selectedLevels.append("\(level?.value ?? "")\(index != (selecteFilterData?.selectedlevels.count ?? 0) - 1 ? "," : "")")
+        }
+        
+        for index in 0..<(selecteFilterData?.selectedResult.count ?? 0){
+            let result = selecteFilterData?.selectedResult[index]
+            selectedResults.append("\(result ?? "")\(index != (selecteFilterData?.selectedResult.count ?? 0) - 1 ? "," : "")")
+        }
+        
+        
+        let body:[String:Any] = [
+            "filter[projects_work_area_id]": selectedProjectWorkingArea ,
+            "filter[template_id]": selecteFilterData?.selectedTemplate?.value ?? "" ,
+            "filter[group_type_id]": selecteFilterData?.selectedGroupType?.id ?? "" ,
+            "filter[group1_id]": selecteFilterData?.selectedDivision?.id ?? "" ,
+            "filter[group2_id]": selecteFilterData?.selectedChapter?.id ?? "" ,
+            "filter[zone_id]": selecteFilterData?.selectedZone?.phase_id ?? "" ,
+            "filter[block]": selecteFilterData?.selectedBlock?.phase_id ?? "" ,
+            "filter[cluster]": selecteFilterData?.selectedCluster?.phase_id ?? "" ,
+            "filter[transaction_start_date]": formatedDate(date: selecteFilterData?.selectedFromDate) ,
+            "filter[transaction_end_date]": formatedDate(date: selecteFilterData?.selectedToDate) ,
+            "filter[transaction_request_id]": selecteFilterData?.requestNumberTextField ?? "" ,
+            "filter[platform_code_system]": selecteFilterData?.platformCodeSystemTextField ?? ""  ,
+            "filter[phase_short_code]": selecteFilterData?.byPhasesTextField ?? "" ,
+            "filter[unit_id]": selecteFilterData?.generalNumberTextField ?? "" ,
+            "filter[level_key]": selectedLevels ,
+            "filter[barcode]": selecteFilterData?.barCodeTextField ?? "" ,
+            "filter[result_code]": selectedResults,
+            "filter[version]": selecteFilterData?.selectedStatus ?? "final_completed_versions",
+            "sort_by[barcode]": "" ,
+            "sort_by[transaction_request_id]": "" ,
+            "sort_by[template_id]": "" ,
+            "sort_by[zone]": "" ,
+            "sort_by[block]": "" ,
+            "sort_by[cluster]": "" ,
+            "sort_by[platform_code_system]": ""
+        ]
+        print(body)
+        
+        
+        
+        showLoadingActivity()
+        APIController.shard.getProjectRequestData(body: body, pageNumber: String(pageNumber)) { data in
+            self.hideLoadingActivity()
+            if let status = data.status , status{
+                self.totalPages = data.page?.total_pages
+                
+                if isFromLast{
+                    self.data.append(contentsOf: data.records ?? [])
+                }else{
+                    self.data = data.records ?? []
+                }
+                
+            }else{
+                self.data.removeAll()
+            }
+            DispatchQueue.main.async {
+                self.projectRequestsCollectionView.reloadData()
+                self.emptyDataLabel.isHidden = !self.data.isEmpty
+            }
+        }
+    }
+    
 }
+
+
 
 

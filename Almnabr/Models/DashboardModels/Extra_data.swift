@@ -20,13 +20,13 @@ struct Extra_data : Mappable {
 	var joining_id : String?
 	var contract_start_date : String?
 	var contract_end_date : String?
-	var employee_all_contract_worked_days : Int?
+	var total_working_days : Int?
 	var employee_active_contract_total_days : Int?
 	var employee_active_contract_worked_days : Int?
-	var employee_remaining_working_days : Int?
+	var total_remaining_days : Int?
 	var contract_yearly_paid_days : String?
 	var net_amount : String?
-	var working_days_per_year : Int?
+	var working_days : Int?
 	var per_day_salary : String?
 	var vacation_deserved_paid_days : String?
 	var total_detection_days : String?
@@ -37,9 +37,9 @@ struct Extra_data : Mappable {
 	var used_paid_vacation_days : String?
 	var used_unpaid_vacation_days : String?
 	var total_vacation_days_on_contract : Int?
-	var paid_days : String?
-	var unpaid_days : String?
-	var balance_vocation_paid_days : String?
+	var total_paid_days : Int?
+	var total_unpaid_days : String?
+	var vacation_paid_days : String?
 
 	init?(map: Map) {
 
@@ -52,13 +52,13 @@ struct Extra_data : Mappable {
 		joining_id <- map["joining_id"]
 		contract_start_date <- map["contract_start_date"]
 		contract_end_date <- map["contract_end_date"]
-		employee_all_contract_worked_days <- map["employee_all_contract_worked_days"]
+        total_working_days <- map["total_working_days"]
 		employee_active_contract_total_days <- map["employee_active_contract_total_days"]
 		employee_active_contract_worked_days <- map["employee_active_contract_worked_days"]
-		employee_remaining_working_days <- map["employee_remaining_working_days"]
+        total_remaining_days <- map["total_remaining_days"]
 		contract_yearly_paid_days <- map["contract_yearly_paid_days"]
 		net_amount <- map["net_amount"]
-		working_days_per_year <- map["working_days_per_year"]
+        working_days <- map["working_days"]
 		per_day_salary <- map["per_day_salary"]
 		vacation_deserved_paid_days <- map["vacation_deserved_paid_days"]
 		total_detection_days <- map["total_detection_days"]
@@ -69,9 +69,9 @@ struct Extra_data : Mappable {
 		used_paid_vacation_days <- map["used_paid_vacation_days"]
 		used_unpaid_vacation_days <- map["used_unpaid_vacation_days"]
 		total_vacation_days_on_contract <- map["total_vacation_days_on_contract"]
-		paid_days <- map["paid_days"]
-		unpaid_days <- map["unpaid_days"]
-		balance_vocation_paid_days <- map["balance_vocation_paid_days"]
+        total_paid_days <- map["total_paid_days"]
+        total_unpaid_days <- map["total_unpaid_days"]
+        vacation_paid_days <- map["vacation_paid_days"]
 	}
 
 }

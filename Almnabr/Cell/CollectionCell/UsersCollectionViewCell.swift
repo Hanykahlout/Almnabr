@@ -36,6 +36,16 @@ class UsersCollectionViewCell: UICollectionViewCell {
         // Initialization code
     }
     
+    func setData(indexPath:IndexPath,data:String){
+        self.indexPath = indexPath
+        titleLabel.text = data
+    }
+    
+    func setData(indexPath:IndexPath,data:GetGroupTypesRecord){
+        self.indexPath = indexPath
+        titleLabel.text = data.label ?? ""
+    }
+    
     func setData(index:Int,data:SearchBranchRecords,indexPath:IndexPath){
         self.index = index
         self.indexPath = indexPath

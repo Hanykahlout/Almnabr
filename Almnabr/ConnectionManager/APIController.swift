@@ -1680,33 +1680,292 @@ class APIController{
         }
     }
     
-    func getUserEmails(userID:String,token:String,callback:@escaping (_ response:EmailsResponse)->Void){
+    
+    func getTemplets(projects_work_area_id:String,callback: @escaping (_ data:GetTemplateResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/dashboard/get_templates?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
         
-        
-        let strURL = "https://gmail.googleapis.com/gmail/v1/users/\(userID)/messages"
-        
-        let headers = [ "authorization":"Bearer \(token)"]
-        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                if let parsedMapperString : EmailsResponse = Mapper<EmailsResponse>().map(JSONString:str){
+                if let parsedMapperString : GetTemplateResponse = Mapper<GetTemplateResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
             }
         }
     }
     
-    func getEmailFor(userID:String,token:String,id: String,callback:@escaping (_ response:String)->Void){
-        let strURL = "https://gmail.googleapis.com/gmail/v1/users/\(userID)/messages/\(id)"
+    func getGroupType(projects_work_area_id:String,templateId:String,callback: @escaping (_ data:GetGroupTypesResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/dashboard/get_types?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
         
-        let headers = [ "authorization":"Bearer \(token)"]
-        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                callback(str)
+                if let parsedMapperString : GetGroupTypesResponse = Mapper<GetGroupTypesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
             }
         }
     }
     
+    
+    func getGroup1(projects_work_area_id:String,templateId:String,typeCodeSystem:String,callback: @escaping (_ data:GetGroupTypesResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/dashboard/get_divisions?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)&type_code_system=\(typeCodeSystem)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : GetGroupTypesResponse = Mapper<GetGroupTypesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
+    
+    
+    func getGroup2(projects_work_area_id:String,templateId:String,typeCodeSystem:String,group1CodeSystem:String,callback: @escaping (_ data:GetGroupTypesResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/dashboard/get_group2?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)&type_code_system=\(typeCodeSystem)&group1_code_system=\(group1CodeSystem)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : GetGroupTypesResponse = Mapper<GetGroupTypesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getTemplatesResult(projects_work_area_id:String,search_key:String,templateId:String,typeCodeSystem:String,group1CodeSystem:String,group2CodeSystem:String,callback: @escaping (_ data:GetGroupTypesResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/dashboard/get_platforms?search_key=\(search_key)&lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&group1_code_system=\(group1CodeSystem)&type_code_system=\(typeCodeSystem)&group2_code_system=\(group2CodeSystem)&template_id=\(templateId)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : GetGroupTypesResponse = Mapper<GetGroupTypesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getActivityOnDate(date:Date,callback: @escaping (_ data:DateActivityResponse)->Void){
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .init(identifier: "en")
+        dateFormatter.dateFormat = "YYYY"
+        let year = dateFormatter.string(from: date)
+        dateFormatter.dateFormat = "MM"
+        let month = dateFormatter.string(from: date)
+        dateFormatter.dateFormat = "dd"
+        let day = dateFormatter.string(from: date)
+        
+        
+        let strURL = "\(APIManager.serverURL)/at/getnewreport/1/1000?from_year=\(year)&from_month=\(month)&from_day=\(day)&to_year=\(year)&to_month=\(month)&to_day=\(day)&employee_number[]=\(Auth_User.user_id)"
+
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : DateActivityResponse = Mapper<DateActivityResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getProjectWorkingAreas(callback: @escaping (_ data:ProjectWorkingAreaResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/dashboard/get_workarea?lang_key=en&wsearch_key=&projects_work_area_id="
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ProjectWorkingAreaResponse = Mapper<ProjectWorkingAreaResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getProjectRequestsData(projects_work_area_id:String,callback: @escaping (_ data:ProjectRequestsData) -> Void ){
+
+        let strURL = "\(APIManager.serverURL)/pr/dashboard_counts/1/1"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        let body = ["projects_work_area_id": projects_work_area_id]
+        
+        Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ProjectRequestsData = Mapper<ProjectRequestsData>().map(JSONString:str){
+                    
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getProgressPlanedRatioData(projects_work_area_id:String,callback: @escaping (_ data:ProgressPlanedRatioData) -> Void ){
+        let strURL = "\(APIManager.serverURL)/pr/plan_results/1/1"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        let body = ["projects_work_area_id": projects_work_area_id]
+        
+        Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ProgressPlanedRatioData = Mapper<ProgressPlanedRatioData>().map(JSONString:str){
+                    
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func getProjectRequestData(body:[String:Any],pageNumber:String,callback: @escaping (_ data:ProjectRequestData) -> Void ){
+        let strURL = "\(APIManager.serverURL)/pr/get_qtp_for_user/\(pageNumber)/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ProjectRequestData = Mapper<ProjectRequestData>().map(JSONString:str){
+                    
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getDivision(projects_work_area_id:String,templateId:String,required_type:String,group1:String,type:String,callback: @escaping (_ data:GetGroupTypesResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)&required_type=\(required_type)&group1=\(group1)&type=\(type)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : GetGroupTypesResponse = Mapper<GetGroupTypesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
+    
+
+    func getZones(phase_parent_id:String,projects_work_area_id:String,callback: @escaping (_ data:GetZonesResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/joYF29rbEi/\(projects_work_area_id)/\(projects_work_area_id)?phase_parent_id=\(phase_parent_id)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : GetZonesResponse = Mapper<GetZonesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    
+    func getLevelKeys(callback: @escaping (_ data:GetGroupTypesResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)/lpworklevel?lang_key=\(L102Language.currentAppleLanguage())"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : GetGroupTypesResponse = Mapper<GetGroupTypesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func getTopCountRequests(projects_work_area_id:String,limit:String,callback: @escaping (_ data:TopCountRequestsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/pr/get_top_count_requests"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        let body = [
+            "projects_work_area_id": projects_work_area_id,
+            "limit": limit
+        ]
+        
+        Alamofire.request(strURL, method: .post ,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : TopCountRequestsResponse = Mapper<TopCountRequestsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getUsedUnusedReport(body:[String:Any],limit:String,callback: @escaping (_ data:UsedUnusedReportResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/pr/get_used_unused_requests/1/\(limit)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post ,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UsedUnusedReportResponse = Mapper<UsedUnusedReportResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getLateContractCount(projects_work_area_id:String,callback: @escaping (_ data:LateContractResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/pr/get_count_wir_late_contractor"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post ,parameters: ["projects_work_area_id":projects_work_area_id],headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : LateContractResponse = Mapper<LateContractResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
 }
-
-
 

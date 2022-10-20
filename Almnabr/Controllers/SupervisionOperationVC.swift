@@ -155,17 +155,17 @@ class SupervisionOperationVC: UIViewController {
     
   
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Change_Supervision",
-           let destinationVC = segue.destination as? MyPageViewController {
-           // parentPageViewController.isPagingEnabled = false
-            //  destinationVC.numberToDisplay = counter
-            // destinationVC.displayPageForIndex(index: self.SelectedIndex)
-            if let controller = self.parentPageViewController {
-                //    controller.displayPageForIndex(index: self.SelectedIndex)
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "Change_Supervision",
+//           let destinationVC = segue.destination as? MyPageViewController {
+//           // parentPageViewController.isPagingEnabled = false
+//            //  destinationVC.numberToDisplay = counter
+//            // destinationVC.displayPageForIndex(index: self.SelectedIndex)
+//            if let controller = self.parentPageViewController {
+//                //    controller.displayPageForIndex(index: self.SelectedIndex)
+//            }
+//        }
+//    }
     
     private func change_page() {
         NotificationCenter.default.post(name: NSNotification.Name("Change_Supervision"), object: SelectedIndex)

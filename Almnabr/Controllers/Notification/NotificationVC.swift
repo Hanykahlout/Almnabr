@@ -215,7 +215,7 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
         
         if let ios = obj.extra_data["ios"] as? String {
             if ios != "" {
-                if let typeUrl = obj.extra_data["typeUrl"] as? String,typeUrl == "pdf"{
+                if let typeUrl = obj.extra_data["urlType"] as? String,typeUrl == "pdf"{
                     showLoadingActivity()
                     APIController.shard.getImage(url: ios) { data in
                         DispatchQueue.main.async {

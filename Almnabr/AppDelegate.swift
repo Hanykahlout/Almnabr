@@ -222,7 +222,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         if let window = window{
             if let ios = userInfo["ios"] as? String {
                 if ios != "" {
-                    if let typeUrl = userInfo["typeUrl"] as? String,typeUrl == "pdf"{
+                    if let typeUrl = userInfo["urlType"] as? String,typeUrl == "pdf"{
                         APIController.shard.getImage(url: ios) { data in
                             DispatchQueue.main.async {
                                 if let status = data.status,status{

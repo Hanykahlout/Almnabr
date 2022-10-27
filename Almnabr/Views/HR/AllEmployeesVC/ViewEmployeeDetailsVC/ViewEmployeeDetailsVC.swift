@@ -47,7 +47,6 @@ class ViewEmployeeDetailsVC: UIViewController {
     private func addObserver(){
         NotificationCenter.default.addObserver(forName: .init("ViewEmpPageControllerScrolled"), object: nil, queue: .main) { notify in
             guard let index = notify.object as? Int else { return }
-            print("ASDASDASD-Index",index)
             let lang = L102Language.currentAppleLanguage()
             self.goToSelectedCell(indexPath:  IndexPath(row: lang == "en" ? index : (self.data.count - 1) - index, section: 0))
         }
@@ -171,6 +170,7 @@ extension ViewEmployeeDetailsVC: UICollectionViewDelegate , UICollectionViewData
         
         collectionView.reloadData()
         collectionView.scrollToItem(at: indexPath, at: [.centeredHorizontally], animated: false)
+        
     }
     
 
@@ -188,6 +188,7 @@ extension ViewEmployeeDetailsVC{
                 ViewEmployeeDetailsVC.empData = data
                 DispatchQueue.main.async {
                     self.setUpPageViewController()
+                    self.collectionView.scrollToItem(at: .init(row: 0, section: 0), at: [.centeredHorizontally], animated: false)
                 }
             }
         }

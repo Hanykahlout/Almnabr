@@ -219,6 +219,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
+        
         if let window = window{
             if let ios = userInfo["ios"] as? String {
                 if ios != "" {

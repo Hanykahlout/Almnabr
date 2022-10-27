@@ -196,12 +196,12 @@ class MenuVC: UIViewController {
     }
     
     @IBAction func gmailAction(_ sender: Any) {
-        
-        let vc = GmailViewController()
+        let vc = storyboard?.instantiateViewController(withIdentifier: "GmailViewController") as! GmailViewController
         let nav = UINavigationController(rootViewController: vc)
         nav.isNavigationBarHidden = true
-        _ =  panel?.center(nav)
-        
+        nav.modalPresentationStyle = .fullScreen
+        let navCenter =  panel?.center as? UINavigationController
+        navCenter?.present(nav, animated: true, completion: nil)
     }
     
     
@@ -315,9 +315,7 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
             if arr_data[indexPath.section].menu.count > 0 {
                 switch obj.menu[indexPath.row - 1].menu_id {
                 case "13":
-                    
-                    guard didLoadHome else { return }
-                    
+                                        
                     let vc: TransactionsVC = AppDelegate.mainSB.instanceVC()
 
                     let nav = UINavigationController(rootViewController: vc)

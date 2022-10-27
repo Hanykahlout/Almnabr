@@ -64,19 +64,19 @@ extension UIViewController {
         return date != nil ? dateFormater.string(from: date!) : ""
     }
     
+    func formatedDate2(date:Date?) ->String{
+        let dateFormater = DateFormatter()
+        dateFormater.locale = .init(identifier: "en")
+        dateFormater.dateFormat = "EEEE, MMMM dd, YYYY"
+        return date != nil ? dateFormater.string(from: date!) : ""
+    }
+    
     func getDateFromString(str:String) ->Date{
         let dateFormater = DateFormatter()
         dateFormater.locale = .init(identifier: "en")
         dateFormater.dateFormat = "YYYY/MM/dd"
         return dateFormater.date(from: str) ?? Date()
     }
-    
-//    func formatedDate2(date:Date) ->String{
-//        let dateFormater = DateFormatter()
-//        dateFormater.locale = .init(identifier: "en")
-//        dateFormater.dateFormat = "E MMM MM yyyy hh:mm:ss ZZZZ (zzzz)"
-//        return dateFormater.string(from: date)
-//    }
     
     func formatedDate3(date:Date) ->String{
         let dateFormater = DateFormatter()

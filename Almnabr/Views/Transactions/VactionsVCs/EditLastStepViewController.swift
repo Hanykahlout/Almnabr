@@ -81,7 +81,7 @@ class EditLastStepViewController: UIViewController {
 extension EditLastStepViewController{
     
     private func searchForUser(){
-        APIController.shard.searchForUser(searchText: nameTextField.text!, lang: L102Language.currentAppleLanguage(), id: "1") { data in
+        APIController.shard.searchForUser(searchText: nameTextField.text!, lang: L102Language.currentAppleLanguage(), id: Auth_User.user_type_id) { data in
             if let status = data.status, status{
                 let list = data.list ?? []
                 self.resultData = list

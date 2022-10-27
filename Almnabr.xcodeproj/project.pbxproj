@@ -424,6 +424,16 @@
 		3FFC4D8A2885B25F00233456 /* AddVacationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FFC4D882885B25E00233456 /* AddVacationViewController.xib */; };
 		404802CA5B161768D7EBBEE5 /* Pods_Almnabr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0B486DA8E109C512A0BBA23 /* Pods_Almnabr.framework */; };
 		76A647EB99911B0AECE02DD8 /* Pods_AlmnabrTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A15F32D7142EB97EEDE831E2 /* Pods_AlmnabrTests.framework */; };
+		CE0FD9D7290581F800170382 /* CalenderActivityLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD9D3290581F800170382 /* CalenderActivityLog.swift */; };
+		CE0FD9D8290581F800170382 /* CalenderActivityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD9D4290581F800170382 /* CalenderActivityResponse.swift */; };
+		CE0FD9D9290581F800170382 /* CalenderActivityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD9D5290581F800170382 /* CalenderActivityData.swift */; };
+		CE0FD9DA290581F800170382 /* CalenderActivityValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD9D6290581F800170382 /* CalenderActivityValue.swift */; };
+		CE0FD9E52905A0EE00170382 /* Employee_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD9DC2905A0ED00170382 /* Employee_data.swift */; };
+		CE0FD9E62905A0EE00170382 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD9DD2905A0ED00170382 /* Report.swift */; };
+		CE0FD9E82905A0EE00170382 /* Record_missing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD9DF2905A0ED00170382 /* Record_missing.swift */; };
+		CE0FD9E92905A0EE00170382 /* No_settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD9E02905A0ED00170382 /* No_settings.swift */; };
+		CE2003B92906C81800B527BB /* CalenderActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2003B82906C81800B527BB /* CalenderActivityView.xib */; };
+		CE2003BB2906CB3D00B527BB /* CalenderActivityUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2003BA2906CB3D00B527BB /* CalenderActivityUIView.swift */; };
 		CE3244A228FC279A004DBADB /* ChartBottomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3244A128FC279A004DBADB /* ChartBottomData.swift */; };
 		CE3244A428FC33FB004DBADB /* ChartLeftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3244A328FC33FB004DBADB /* ChartLeftData.swift */; };
 		CE3244A628FC350C004DBADB /* ChartRightData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3244A528FC350C004DBADB /* ChartRightData.swift */; };
@@ -431,8 +441,6 @@
 		CE3244AA28FC789F004DBADB /* ProjectRequestsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3244A828FC789F004DBADB /* ProjectRequestsCollectionViewCell.xib */; };
 		CE36EDCB28D385B8007EC835 /* EmailMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36EDC928D385B8007EC835 /* EmailMessages.swift */; };
 		CE36EDCC28D385B8007EC835 /* EmailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE36EDCA28D385B8007EC835 /* EmailsResponse.swift */; };
-		CE434E1F28D20078007C0AF4 /* GmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE434E1D28D20078007C0AF4 /* GmailViewController.swift */; };
-		CE434E2028D20078007C0AF4 /* GmailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE434E1E28D20078007C0AF4 /* GmailViewController.xib */; };
 		CE54B2D128F5BC5400972D6D /* TopCountRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54B2D028F5BC5400972D6D /* TopCountRequestsViewController.swift */; };
 		CE54B2D328F5BC6C00972D6D /* UsedUnusedReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54B2D228F5BC6C00972D6D /* UsedUnusedReportViewController.swift */; };
 		CE54B2D628F5C55300972D6D /* TopCountRequestsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54B2D428F5C55300972D6D /* TopCountRequestsTableViewCell.swift */; };
@@ -455,11 +463,23 @@
 		CE5E030628F888D600007EAC /* ProjectRequestsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E030228F888D600007EAC /* ProjectRequestsData.swift */; };
 		CE5E030728F888D600007EAC /* ProjectRequestsSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E030328F888D600007EAC /* ProjectRequestsSetting.swift */; };
 		CE5E030828F888D600007EAC /* ProjectRequestsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E030428F888D600007EAC /* ProjectRequestsResult.swift */; };
+		CE7BB37B2909786D00BEE4C4 /* CalendarActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB3792909786D00BEE4C4 /* CalendarActivityTableViewCell.swift */; };
+		CE7BB37C2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB37A2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib */; };
 		CE7DE7AD28D8FAEA00DC0CC3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */; };
 		CE7DE7AE28D8FAEA00DC0CC3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB0F23628D85BFF006DC4FD /* SwiftUI.framework */; };
 		CE7DE7B128D8FAEA00DC0CC3 /* LockScreenWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7DE7B028D8FAEA00DC0CC3 /* LockScreenWidget.swift */; };
 		CE7DE7B328D8FAEA00DC0CC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE7DE7B228D8FAEA00DC0CC3 /* Assets.xcassets */; };
 		CE7DE7B728D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = CE7DE7AC28D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CE85717B2908010300293977 /* GmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85717A2908010300293977 /* GmailViewController.swift */; };
+		CE85717E2908022300293977 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85717D2908022300293977 /* SideMenuViewController.swift */; };
+		CE857180290809FE00293977 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85717F290809FE00293977 /* SideMenuTableViewCell.swift */; };
+		CE85718229081CAA00293977 /* InboxMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718129081CAA00293977 /* InboxMailViewController.swift */; };
+		CE85718429081D2C00293977 /* StarredMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718329081D2C00293977 /* StarredMailViewController.swift */; };
+		CE85718829081D5200293977 /* SentMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718729081D5200293977 /* SentMailViewController.swift */; };
+		CE85718A29081D6200293977 /* DraftsMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718929081D6200293977 /* DraftsMailViewController.swift */; };
+		CE85718C29081D7200293977 /* TrashMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718B29081D7200293977 /* TrashMailViewController.swift */; };
+		CE85718E29081FF000293977 /* MailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718D29081FF000293977 /* MailPageViewController.swift */; };
+		CE8571902908239000293977 /* SpamMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718F2908239000293977 /* SpamMailViewController.swift */; };
 		CEB1D42528F6D5E5007D2A8A /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1D42428F6D5E5007D2A8A /* CustomCollectionViewLayout.swift */; };
 		CEB1D42828F6D6A4007D2A8A /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1D42628F6D6A4007D2A8A /* ContentCollectionViewCell.swift */; };
 		CEB1D42928F6D6A4007D2A8A /* ContentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB1D42728F6D6A4007D2A8A /* ContentCollectionViewCell.xib */; };
@@ -471,6 +491,18 @@
 		CEBAC55E28FEAF0000324458 /* ProjectRequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBAC55C28FEAF0000324458 /* ProjectRequestData.swift */; };
 		CEBDF43928F9DCFC0094247E /* ProgressPlanedRatioData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDF43728F9DCFC0094247E /* ProgressPlanedRatioData.swift */; };
 		CEBDF43A28F9DCFC0094247E /* ProgressPlanedRatioResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDF43828F9DCFC0094247E /* ProgressPlanedRatioResult.swift */; };
+		CED47F53290A890400C6F840 /* ViolationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED47F51290A890300C6F840 /* ViolationsResponse.swift */; };
+		CED47F54290A890400C6F840 /* ViolationRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED47F52290A890400C6F840 /* ViolationRecords.swift */; };
+		CED47F57290A959E00C6F840 /* CreateViolationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED47F55290A959E00C6F840 /* CreateViolationViewController.swift */; };
+		CED47F58290A959E00C6F840 /* CreateViolationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED47F56290A959E00C6F840 /* CreateViolationViewController.xib */; };
+		CED47F5C290AD51700C6F840 /* WeekRatioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED47F5A290AD51700C6F840 /* WeekRatioViewController.swift */; };
+		CED47F5D290AD51700C6F840 /* WeekRatioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED47F5B290AD51700C6F840 /* WeekRatioViewController.xib */; };
+		CED47F60290AD74900C6F840 /* WeekRatioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED47F5E290AD74900C6F840 /* WeekRatioTableViewCell.swift */; };
+		CED47F61290AD74900C6F840 /* WeekRatioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED47F5F290AD74900C6F840 /* WeekRatioTableViewCell.xib */; };
+		CED47F64290ADA6A00C6F840 /* RatioWeekResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED47F62290ADA6A00C6F840 /* RatioWeekResponse.swift */; };
+		CED47F65290ADA6A00C6F840 /* RatioWeekData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED47F63290ADA6A00C6F840 /* RatioWeekData.swift */; };
+		CED47F68290ADF0500C6F840 /* MonthRatioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED47F66290ADF0500C6F840 /* MonthRatioViewController.swift */; };
+		CED47F69290ADF0500C6F840 /* MonthRatioViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CED47F67290ADF0500C6F840 /* MonthRatioViewController.xib */; };
 		CEE5713C2901622100B599EE /* LateContractResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5713A2901622100B599EE /* LateContractResponse.swift */; };
 		CEE5713D2901622100B599EE /* LateContractData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE5713B2901622100B599EE /* LateContractData.swift */; };
 		CEE57BD028F756F700CA16D8 /* SelectTemplete1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE57BCE28F756F700CA16D8 /* SelectTemplete1ViewController.swift */; };
@@ -1228,6 +1260,16 @@
 		A15F32D7142EB97EEDE831E2 /* Pods_AlmnabrTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AlmnabrTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADB1D7974D91E5EB2AC28FFD /* Pods-Almnabr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Almnabr.release.xcconfig"; path = "Target Support Files/Pods-Almnabr/Pods-Almnabr.release.xcconfig"; sourceTree = "<group>"; };
 		B38CC6A9089F6D0E16C87D80 /* Pods_Almnabr_AlmnabrUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Almnabr_AlmnabrUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE0FD9D3290581F800170382 /* CalenderActivityLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderActivityLog.swift; sourceTree = "<group>"; };
+		CE0FD9D4290581F800170382 /* CalenderActivityResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderActivityResponse.swift; sourceTree = "<group>"; };
+		CE0FD9D5290581F800170382 /* CalenderActivityData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderActivityData.swift; sourceTree = "<group>"; };
+		CE0FD9D6290581F800170382 /* CalenderActivityValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderActivityValue.swift; sourceTree = "<group>"; };
+		CE0FD9DC2905A0ED00170382 /* Employee_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Employee_data.swift; sourceTree = "<group>"; };
+		CE0FD9DD2905A0ED00170382 /* Report.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
+		CE0FD9DF2905A0ED00170382 /* Record_missing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record_missing.swift; sourceTree = "<group>"; };
+		CE0FD9E02905A0ED00170382 /* No_settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = No_settings.swift; sourceTree = "<group>"; };
+		CE2003B82906C81800B527BB /* CalenderActivityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalenderActivityView.xib; sourceTree = "<group>"; };
+		CE2003BA2906CB3D00B527BB /* CalenderActivityUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderActivityUIView.swift; sourceTree = "<group>"; };
 		CE3244A128FC279A004DBADB /* ChartBottomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBottomData.swift; sourceTree = "<group>"; };
 		CE3244A328FC33FB004DBADB /* ChartLeftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLeftData.swift; sourceTree = "<group>"; };
 		CE3244A528FC350C004DBADB /* ChartRightData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRightData.swift; sourceTree = "<group>"; };
@@ -1235,8 +1277,6 @@
 		CE3244A828FC789F004DBADB /* ProjectRequestsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectRequestsCollectionViewCell.xib; sourceTree = "<group>"; };
 		CE36EDC928D385B8007EC835 /* EmailMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailMessages.swift; sourceTree = "<group>"; };
 		CE36EDCA28D385B8007EC835 /* EmailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailsResponse.swift; sourceTree = "<group>"; };
-		CE434E1D28D20078007C0AF4 /* GmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmailViewController.swift; sourceTree = "<group>"; };
-		CE434E1E28D20078007C0AF4 /* GmailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GmailViewController.xib; sourceTree = "<group>"; };
 		CE54B2D028F5BC5400972D6D /* TopCountRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCountRequestsViewController.swift; sourceTree = "<group>"; };
 		CE54B2D228F5BC6C00972D6D /* UsedUnusedReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsedUnusedReportViewController.swift; sourceTree = "<group>"; };
 		CE54B2D428F5C55300972D6D /* TopCountRequestsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCountRequestsTableViewCell.swift; sourceTree = "<group>"; };
@@ -1259,10 +1299,22 @@
 		CE5E030228F888D600007EAC /* ProjectRequestsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRequestsData.swift; sourceTree = "<group>"; };
 		CE5E030328F888D600007EAC /* ProjectRequestsSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRequestsSetting.swift; sourceTree = "<group>"; };
 		CE5E030428F888D600007EAC /* ProjectRequestsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRequestsResult.swift; sourceTree = "<group>"; };
+		CE7BB3792909786D00BEE4C4 /* CalendarActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarActivityTableViewCell.swift; sourceTree = "<group>"; };
+		CE7BB37A2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarActivityTableViewCell.xib; sourceTree = "<group>"; };
 		CE7DE7AC28D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LockScreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE7DE7B028D8FAEA00DC0CC3 /* LockScreenWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockScreenWidget.swift; sourceTree = "<group>"; };
 		CE7DE7B228D8FAEA00DC0CC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE7DE7B428D8FAEA00DC0CC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE85717A2908010300293977 /* GmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmailViewController.swift; sourceTree = "<group>"; };
+		CE85717D2908022300293977 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		CE85717F290809FE00293977 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
+		CE85718129081CAA00293977 /* InboxMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InboxMailViewController.swift; sourceTree = "<group>"; };
+		CE85718329081D2C00293977 /* StarredMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarredMailViewController.swift; sourceTree = "<group>"; };
+		CE85718729081D5200293977 /* SentMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentMailViewController.swift; sourceTree = "<group>"; };
+		CE85718929081D6200293977 /* DraftsMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftsMailViewController.swift; sourceTree = "<group>"; };
+		CE85718B29081D7200293977 /* TrashMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashMailViewController.swift; sourceTree = "<group>"; };
+		CE85718D29081FF000293977 /* MailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailPageViewController.swift; sourceTree = "<group>"; };
+		CE85718F2908239000293977 /* SpamMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamMailViewController.swift; sourceTree = "<group>"; };
 		CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		CEB0F23628D85BFF006DC4FD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		CEB1D42428F6D5E5007D2A8A /* CustomCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -1276,6 +1328,18 @@
 		CEBAC55C28FEAF0000324458 /* ProjectRequestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRequestData.swift; sourceTree = "<group>"; };
 		CEBDF43728F9DCFC0094247E /* ProgressPlanedRatioData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressPlanedRatioData.swift; sourceTree = "<group>"; };
 		CEBDF43828F9DCFC0094247E /* ProgressPlanedRatioResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressPlanedRatioResult.swift; sourceTree = "<group>"; };
+		CED47F51290A890300C6F840 /* ViolationsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViolationsResponse.swift; sourceTree = "<group>"; };
+		CED47F52290A890400C6F840 /* ViolationRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViolationRecords.swift; sourceTree = "<group>"; };
+		CED47F55290A959E00C6F840 /* CreateViolationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViolationViewController.swift; sourceTree = "<group>"; };
+		CED47F56290A959E00C6F840 /* CreateViolationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateViolationViewController.xib; sourceTree = "<group>"; };
+		CED47F5A290AD51700C6F840 /* WeekRatioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekRatioViewController.swift; sourceTree = "<group>"; };
+		CED47F5B290AD51700C6F840 /* WeekRatioViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekRatioViewController.xib; sourceTree = "<group>"; };
+		CED47F5E290AD74900C6F840 /* WeekRatioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekRatioTableViewCell.swift; sourceTree = "<group>"; };
+		CED47F5F290AD74900C6F840 /* WeekRatioTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekRatioTableViewCell.xib; sourceTree = "<group>"; };
+		CED47F62290ADA6A00C6F840 /* RatioWeekResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatioWeekResponse.swift; sourceTree = "<group>"; };
+		CED47F63290ADA6A00C6F840 /* RatioWeekData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatioWeekData.swift; sourceTree = "<group>"; };
+		CED47F66290ADF0500C6F840 /* MonthRatioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthRatioViewController.swift; sourceTree = "<group>"; };
+		CED47F67290ADF0500C6F840 /* MonthRatioViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MonthRatioViewController.xib; sourceTree = "<group>"; };
 		CEE5713A2901622100B599EE /* LateContractResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LateContractResponse.swift; sourceTree = "<group>"; };
 		CEE5713B2901622100B599EE /* LateContractData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LateContractData.swift; sourceTree = "<group>"; };
 		CEE57BCE28F756F700CA16D8 /* SelectTemplete1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTemplete1ViewController.swift; sourceTree = "<group>"; };
@@ -1904,6 +1968,8 @@
 				FA025FBA2785E77800AB38C8 /* View_notification.swift */,
 				FA4975AB2793659600891C9F /* DropDownView.xib */,
 				FA4975AD279365A900891C9F /* DropDownView.swift */,
+				CE2003B82906C81800B527BB /* CalenderActivityView.xib */,
+				CE2003BA2906CB3D00B527BB /* CalenderActivityUIView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -2068,7 +2134,6 @@
 			isa = PBXGroup;
 			children = (
 				CEE57BCD28F756CA00CA16D8 /* HomeVC */,
-				CE434E1C28D20040007C0AF4 /* GmailViews */,
 				3FA8EADA28CDEACE0026DE44 /* CustomViews */,
 				3F677EC728AB7FAB000D6239 /* Documents */,
 				3F97CD96289A5FE500D6E8CC /* Tasks */,
@@ -2615,15 +2680,6 @@
 			path = EmailsModels;
 			sourceTree = "<group>";
 		};
-		CE434E1C28D20040007C0AF4 /* GmailViews */ = {
-			isa = PBXGroup;
-			children = (
-				CE434E1D28D20078007C0AF4 /* GmailViewController.swift */,
-				CE434E1E28D20078007C0AF4 /* GmailViewController.xib */,
-			);
-			path = GmailViews;
-			sourceTree = "<group>";
-		};
 		CE54B2CF28F5BC3900972D6D /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2644,6 +2700,14 @@
 			isa = PBXGroup;
 			children = (
 				CE5E02F028F8274800007EAC /* GetTemplateRecord.swift */,
+				CE0FD9D5290581F800170382 /* CalenderActivityData.swift */,
+				CE0FD9D4290581F800170382 /* CalenderActivityResponse.swift */,
+				CE0FD9D6290581F800170382 /* CalenderActivityValue.swift */,
+				CE0FD9D3290581F800170382 /* CalenderActivityLog.swift */,
+				CE0FD9DC2905A0ED00170382 /* Employee_data.swift */,
+				CE0FD9E02905A0ED00170382 /* No_settings.swift */,
+				CE0FD9DF2905A0ED00170382 /* Record_missing.swift */,
+				CE0FD9DD2905A0ED00170382 /* Report.swift */,
 				CE5E02EF28F8274800007EAC /* GetTemplateResponse.swift */,
 				CE5E02F328F828CB00007EAC /* GetGroupTypesRecord.swift */,
 				CE5E02F428F828CB00007EAC /* GetGroupTypesResponse.swift */,
@@ -2673,6 +2737,10 @@
 				CEFE3B8C2900634700119A55 /* UsedUnusedReportTotals.swift */,
 				CEE5713B2901622100B599EE /* LateContractData.swift */,
 				CEE5713A2901622100B599EE /* LateContractResponse.swift */,
+				CED47F52290A890400C6F840 /* ViolationRecords.swift */,
+				CED47F51290A890300C6F840 /* ViolationsResponse.swift */,
+				CED47F63290ADA6A00C6F840 /* RatioWeekData.swift */,
+				CED47F62290ADA6A00C6F840 /* RatioWeekResponse.swift */,
 			);
 			path = HomeModels;
 			sourceTree = "<group>";
@@ -2687,6 +2755,30 @@
 			path = LockScreenWidget;
 			sourceTree = "<group>";
 		};
+		CE857179290800F600293977 /* GmailVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE85717C290801F700293977 /* SideMenu */,
+				CE85717A2908010300293977 /* GmailViewController.swift */,
+				CE85718D29081FF000293977 /* MailPageViewController.swift */,
+			);
+			name = GmailVC;
+			sourceTree = "<group>";
+		};
+		CE85717C290801F700293977 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				CE85717D2908022300293977 /* SideMenuViewController.swift */,
+				CE85718129081CAA00293977 /* InboxMailViewController.swift */,
+				CE85718329081D2C00293977 /* StarredMailViewController.swift */,
+				CE85718929081D6200293977 /* DraftsMailViewController.swift */,
+				CE85718729081D5200293977 /* SentMailViewController.swift */,
+				CE85718B29081D7200293977 /* TrashMailViewController.swift */,
+				CE85718F2908239000293977 /* SpamMailViewController.swift */,
+			);
+			name = SideMenu;
+			sourceTree = "<group>";
+		};
 		CEE57BCD28F756CA00CA16D8 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2694,6 +2786,12 @@
 				CEE57BCF28F756F700CA16D8 /* SelectTemplete1ViewController.xib */,
 				CEE57BD228F759FE00CA16D8 /* SelectTemplete2ViewController.swift */,
 				CEE57BD328F759FE00CA16D8 /* SelectTemplete2ViewController.xib */,
+				CED47F55290A959E00C6F840 /* CreateViolationViewController.swift */,
+				CED47F56290A959E00C6F840 /* CreateViolationViewController.xib */,
+				CED47F5A290AD51700C6F840 /* WeekRatioViewController.swift */,
+				CED47F5B290AD51700C6F840 /* WeekRatioViewController.xib */,
+				CED47F66290ADF0500C6F840 /* MonthRatioViewController.swift */,
+				CED47F67290ADF0500C6F840 /* MonthRatioViewController.xib */,
 			);
 			path = HomeVC;
 			sourceTree = "<group>";
@@ -2976,6 +3074,7 @@
 		FA7BD97F282931CE00EF1020 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				CE857179290800F600293977 /* GmailVC */,
 				CE54B2CF28F5BC3900972D6D /* HomeVC */,
 				FA85D02A281062C20080A0EA /* PickerVC.swift */,
 				FA0324DA26FE221F00372EA6 /* MenuVC.swift */,
@@ -3192,6 +3291,11 @@
 				3F8403A028B7B50E00657C10 /* CodeTypeTableViewCell.xib */,
 				CE54B2D428F5C55300972D6D /* TopCountRequestsTableViewCell.swift */,
 				CE54B2D528F5C55300972D6D /* TopCountRequestsTableViewCell.xib */,
+				CE85717F290809FE00293977 /* SideMenuTableViewCell.swift */,
+				CE7BB3792909786D00BEE4C4 /* CalendarActivityTableViewCell.swift */,
+				CE7BB37A2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib */,
+				CED47F5E290AD74900C6F840 /* WeekRatioTableViewCell.swift */,
+				CED47F5F290AD74900C6F840 /* WeekRatioTableViewCell.xib */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -3526,6 +3630,7 @@
 				3F84039A28B778E100657C10 /* ContractDataTableViewCell.xib in Resources */,
 				3FD03A1C287437B000BB13C7 /* AddEmpContactViewController.xib in Resources */,
 				3FD03A10287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.strings in Resources */,
+				CE2003B92906C81800B527BB /* CalenderActivityView.xib in Resources */,
 				FAA9C4CD27B32B52003C051E /* notification3.wav in Resources */,
 				FA1B281727AADC470066061F /* TechnicalAssitantCVCell.xib in Resources */,
 				3F9040F3286CB45F008D85B8 /* ViewAttachTableViewCell.xib in Resources */,
@@ -3535,6 +3640,7 @@
 				CEE57BD528F759FE00CA16D8 /* SelectTemplete2ViewController.xib in Resources */,
 				3FD03A12287437B000BB13C7 /* ViewEmpAttachmentsVC.strings in Resources */,
 				3F76506F2850917D00FB8A97 /* SectionCollectionViewCell.xib in Resources */,
+				CE7BB37C2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib in Resources */,
 				FA7F941827D782E900E03A34 /* ApprovalTVCell.xib in Resources */,
 				3F07C0B6286D966400C2CDF6 /* NotificationCell.xib in Resources */,
 				3FD03A7B2874492000BB13C7 /* Main.storyboard in Resources */,
@@ -3544,6 +3650,7 @@
 				3F9040DF286CB1EF008D85B8 /* OutgoingAttachmentTableViewCell.xib in Resources */,
 				3FD03A3F287437B000BB13C7 /* EducationDetailsViewController.xib in Resources */,
 				3FD03A21287437B000BB13C7 /* AddInsuranceViewController.strings in Resources */,
+				CED47F69290ADF0500C6F840 /* MonthRatioViewController.xib in Resources */,
 				3FD03A2F287437B000BB13C7 /* AddEmpEduDetailsViewController.xib in Resources */,
 				FA5C97792819602400A2AA5A /* TaskHistoryCell.xib in Resources */,
 				3F677ECB28AB7FCF000D6239 /* DocumentsViewController.xib in Resources */,
@@ -3552,6 +3659,7 @@
 				3F07C06B286D8F2A00C2CDF6 /* CommunicationsTVCell.xib in Resources */,
 				3FD03A54287437B000BB13C7 /* PermissionViewController.xib in Resources */,
 				3F07C0C0286D971D00C2CDF6 /* NotesCell.xib in Resources */,
+				CED47F5D290AD51700C6F840 /* WeekRatioViewController.xib in Resources */,
 				3FD039EC287437B000BB13C7 /* OutgoingHistoryViewController.xib in Resources */,
 				3FD03A42287437B000BB13C7 /* BankDetailsViewController.xib in Resources */,
 				3FD039D5287437B000BB13C7 /* FilterViewController.xib in Resources */,
@@ -3583,6 +3691,7 @@
 				3FD039E8287437B000BB13C7 /* OngoingViewDetailsViewController.strings in Resources */,
 				FAD531482770FE9600C8E2AD /* SaudiTVCell.xib in Resources */,
 				3F9040C6286CB079008D85B8 /* EducationDetailsTableViewCell.xib in Resources */,
+				CED47F58290A959E00C6F840 /* CreateViolationViewController.xib in Resources */,
 				3F99B08628AE55170098F281 /* AddDocumentVC.xib in Resources */,
 				FAE13A4E27293C2D00509550 /* DroidKufi-Regular.ttf in Resources */,
 				3F9040D5286CB156008D85B8 /* NoteTableViewCell.xib in Resources */,
@@ -3618,6 +3727,7 @@
 				3F9040CB286CB0B3008D85B8 /* InsuranceDetailsTableViewCell.xib in Resources */,
 				FA9FB0A727163F0D0037871C /* ServicesCVCell.xib in Resources */,
 				FAF76239283051A5000DEAFE /* SubTaskTVCell.xib in Resources */,
+				CED47F61290AD74900C6F840 /* WeekRatioTableViewCell.xib in Resources */,
 				3F07C07F286D918E00C2CDF6 /* ProfileNotesTVCell.xib in Resources */,
 				3FF396872898228B00E1322D /* ReplyCommentTableViewCell.xib in Resources */,
 				3FD039EF287437B000BB13C7 /* OutgoingAttachViewController.xib in Resources */,
@@ -3645,7 +3755,6 @@
 				FA2C575F286CA6B900CE5C59 /* commentRepltTVCell.xib in Resources */,
 				FAB54E9C27EF2EE7003297E1 /* FormVersionTVCell.xib in Resources */,
 				3FD039E0287437B000BB13C7 /* OutgoingVC.strings in Resources */,
-				CE434E2028D20078007C0AF4 /* GmailViewController.xib in Resources */,
 				3FD03A4F287437B000BB13C7 /* SettingsAlertViewController.strings in Resources */,
 				3FD03A19287437B000BB13C7 /* ViewEmpContactDetailsVC.strings in Resources */,
 				3FAA84E9288EA04C003A437E /* EditLastStepViewController.xib in Resources */,
@@ -3846,7 +3955,9 @@
 				3FEAAE3D28B622D80093815D /* TransactionsContractRequest.swift in Sources */,
 				CE5E02F228F8274800007EAC /* GetTemplateRecord.swift in Sources */,
 				3FD73DA8285F514600AC3507 /* AddInsuranceTableViewCell.swift in Sources */,
+				CE857180290809FE00293977 /* SideMenuTableViewCell.swift in Sources */,
 				FA0324C826FBE2C900372EA6 /* NewSuccessModel.swift in Sources */,
+				CE2003BB2906CB3D00B527BB /* CalenderActivityUIView.swift in Sources */,
 				FAF7624028306133000DEAFE /* SubTaskListVC.swift in Sources */,
 				3FD1C5FB284E383100A42DAA /* FilterRecords.swift in Sources */,
 				CEE57BD428F759FE00CA16D8 /* SelectTemplete2ViewController.swift in Sources */,
@@ -3854,10 +3965,12 @@
 				3FA5225C2858E2C6004F3C8E /* JobListResponse.swift in Sources */,
 				FA85D024280D94500080A0EA /* TicketTVCell.swift in Sources */,
 				FAAB76DF270B96DB00731505 /* ApproveTransactionVC.swift in Sources */,
+				CE85718A29081D6200293977 /* DraftsMailViewController.swift in Sources */,
 				3FA8CB6C2848BCE200434CE4 /* SettingsData.swift in Sources */,
 				3FB1C5352899892700E6EDB1 /* DeleteCommentResponse.swift in Sources */,
 				FA9768B227353DDD000A3576 /* CollectionViewCell.swift in Sources */,
 				FA9FB0A0271447EA0037871C /* ProjectDetailsVC.swift in Sources */,
+				CE0FD9E92905A0EE00170382 /* No_settings.swift in Sources */,
 				FA8A75A6273DB1C1005A2F29 /* FormVersionCell.swift in Sources */,
 				3FD039F9287437B000BB13C7 /* ViewEmpNotesVC.swift in Sources */,
 				FA48C312286AF80B006B8130 /* AddPointVC.swift in Sources */,
@@ -3927,6 +4040,7 @@
 				FA9DF8D72815979A0015D492 /* TicketCollectionViewController.swift in Sources */,
 				FAAF206727DCEF9400AD255B /* RelatedFormsTVCell.swift in Sources */,
 				CE5E030528F888D600007EAC /* Wir_data.swift in Sources */,
+				CE85717E2908022300293977 /* SideMenuViewController.swift in Sources */,
 				FA9768B92735D71E000A3576 /* LanguageVC.swift in Sources */,
 				CEBAC55D28FEAF0000324458 /* ProjectRequestRecord.swift in Sources */,
 				FA530A43270CEC810071CDC8 /* CustomHeaderView.swift in Sources */,
@@ -3941,6 +4055,7 @@
 				3F48C53D285883AF004D33F8 /* EmpViewData.swift in Sources */,
 				3FB726C12864BF5500684C94 /* AllModulesResponse.swift in Sources */,
 				CE5E02FA28F8491900007EAC /* DateActivityData.swift in Sources */,
+				CE0FD9E62905A0EE00170382 /* Report.swift in Sources */,
 				3F530834289287AB00AE7D2A /* SendSignInCodeVC.swift in Sources */,
 				CEB1D42D28F6DC0A007D2A8A /* HomeFilterViewController.swift in Sources */,
 				CE36EDCC28D385B8007EC835 /* EmailsResponse.swift in Sources */,
@@ -3957,6 +4072,7 @@
 				3F2B2C1028524F5B00C33FAD /* EmployeeResponse.swift in Sources */,
 				FA7E99492732E8050038931D /* FormDetailsVC.swift in Sources */,
 				CEBDF43A28F9DCFC0094247E /* ProgressPlanedRatioResult.swift in Sources */,
+				CED47F68290ADF0500C6F840 /* MonthRatioViewController.swift in Sources */,
 				3F14368D2848A120008ABC19 /*  GraidentButton.swift in Sources */,
 				3FAA84DD288E904D003A437E /* TransactionsRequestVactionData.swift in Sources */,
 				CE5E030028F84F1300007EAC /* ProjectWorkingAreaRecord.swift in Sources */,
@@ -3989,6 +4105,7 @@
 				FA5CB10527D0DF640023A372 /* ProjectDetailVC.swift in Sources */,
 				CE5E02FB28F8491900007EAC /* Log.swift in Sources */,
 				3FD03A3A287437B000BB13C7 /* BankDetailsViewController.swift in Sources */,
+				CE0FD9E82905A0EE00170382 /* Record_missing.swift in Sources */,
 				3FB305D42868702500CAC16F /* form_c2_filesRecords.swift in Sources */,
 				3F76506E2850917D00FB8A97 /* SectionCollectionViewCell.swift in Sources */,
 				FA3D32AF27342E8000A5472A /* ViewLanguage.swift in Sources */,
@@ -4004,9 +4121,12 @@
 				CEBAC55E28FEAF0000324458 /* ProjectRequestData.swift in Sources */,
 				3FAA84E5288E904D003A437E /* Steps.swift in Sources */,
 				3FD03A4E287437B000BB13C7 /* SettingViewController.swift in Sources */,
+				CE0FD9D7290581F800170382 /* CalenderActivityLog.swift in Sources */,
 				FA95FD0B275EFE1E00DE7854 /* ContractorTeamApprovalVC.swift in Sources */,
 				3F397D872860C1F000A7DAB4 /* AttachmentRecords.swift in Sources */,
 				3FD039FF287437B000BB13C7 /* ViewEmpIDDetailsVC.swift in Sources */,
+				CED47F5C290AD51700C6F840 /* WeekRatioViewController.swift in Sources */,
+				CED47F60290AD74900C6F840 /* WeekRatioTableViewCell.swift in Sources */,
 				FABDBA8827F4763D003961FC /* ContractDetailsVC.swift in Sources */,
 				3FD03A0C287437B000BB13C7 /* AddJopDetailsViewController.swift in Sources */,
 				FA48C310286A58C0006B8130 /* AddChecklistVC.swift in Sources */,
@@ -4030,9 +4150,11 @@
 				FA5CB0FB27D020490023A372 /* LocationVC.swift in Sources */,
 				FABDBAA227F477F4003961FC /* UserAttachmentsVC.swift in Sources */,
 				3F1F4048287E0F5900F919F0 /* QRScannerViewController.swift in Sources */,
+				CE0FD9DA290581F800170382 /* CalenderActivityValue.swift in Sources */,
 				FAF9D43E278DE050002D8AEF /* ProjectRequestCell.swift in Sources */,
 				3F8403A128B7B50E00657C10 /* CodeTypeTableViewCell.swift in Sources */,
 				FA5CB0F927CFBA6E0023A372 /* RequirementsVC.swift in Sources */,
+				CE85718C29081D7200293977 /* TrashMailViewController.swift in Sources */,
 				3FF3968F28995D7100E1322D /* CommentRepliesResponse.swift in Sources */,
 				3FEAAE3928B622D80093815D /* TransactionsContractDate.swift in Sources */,
 				3FAAB6442860937B007B9150 /* NotesGetResponse.swift in Sources */,
@@ -4052,6 +4174,7 @@
 				CE5E030828F888D600007EAC /* ProjectRequestsResult.swift in Sources */,
 				3FD03A49287437B000BB13C7 /* SettingsPermissionVC.swift in Sources */,
 				3FD03A22287437B000BB13C7 /* UpdateInsuranceViewController.swift in Sources */,
+				CE85718829081D5200293977 /* SentMailViewController.swift in Sources */,
 				3FD3F55F2858C25A007CC5BB /* JopDetailsRecords.swift in Sources */,
 				3F29C8FF2886FDD80011AF97 /* FinanceInfoTableViewCell.swift in Sources */,
 				3FB305D92868702500CAC16F /* Transactions_request.swift in Sources */,
@@ -4061,6 +4184,7 @@
 				CE5E02F528F828CB00007EAC /* GetGroupTypesRecord.swift in Sources */,
 				3FD03A58287437B000BB13C7 /* AddPermissionMentionsVC.swift in Sources */,
 				3FB305DA2868702500CAC16F /* Transactions_submitter.swift in Sources */,
+				CE85718429081D2C00293977 /* StarredMailViewController.swift in Sources */,
 				FA78EA0E27D283790023E48D /* SupervisionPager.swift in Sources */,
 				3FD03A55287437B000BB13C7 /* PermissionViewController.swift in Sources */,
 				FA95FD17275EFE9100DE7854 /* SpecialApprovalVC.swift in Sources */,
@@ -4087,6 +4211,7 @@
 				FABDBA8627F47624003961FC /* IdDetailsVC.swift in Sources */,
 				3FD03A27287437B000BB13C7 /* AddInsuranceViewController.swift in Sources */,
 				3F48C53C285883AF004D33F8 /* EmpViewResponse.swift in Sources */,
+				CE7BB37B2909786D00BEE4C4 /* CalendarActivityTableViewCell.swift in Sources */,
 				FA5AC1162761187100E6C42D /* PersonDetailsVC.swift in Sources */,
 				CE58A5F728FF065B0078F721 /* TopCountRequestsRecords.swift in Sources */,
 				3FAA84DB288E904D003A437E /* Form_hrv1_vacation_dataVD.swift in Sources */,
@@ -4098,6 +4223,7 @@
 				3F74629A2886A30F00C19474 /* VactionTypesRecords.swift in Sources */,
 				3FB1C530289983C200E6EDB1 /* AddTicketCommentResponse.swift in Sources */,
 				3FD039EA287437B000BB13C7 /* PresonDetailsViewController.swift in Sources */,
+				CED47F53290A890400C6F840 /* ViolationsResponse.swift in Sources */,
 				3FD03A1E287437B000BB13C7 /* ViewEmployeeDetailsVC.swift in Sources */,
 				FA5C977528195F2500A2AA5A /* TaskHistoryVC.swift in Sources */,
 				FA9768BF2735D764000A3576 /* RelatedFormsVC.swift in Sources */,
@@ -4156,6 +4282,7 @@
 				FA4975B027936BFC00891C9F /* SortVC.swift in Sources */,
 				3FEAAE3328B622D80093815D /* Form_ct1_data.swift in Sources */,
 				3F159CAD28AE9454002824BE /* DocAttachViewController.swift in Sources */,
+				CE8571902908239000293977 /* SpamMailViewController.swift in Sources */,
 				3F977EFC2887F60F0062FA47 /* EmpInfoResult.swift in Sources */,
 				3FAB09D02896E044004FAA61 /* CommentsViewController.swift in Sources */,
 				3FA52FE628B65A6B00B42B58 /* ContractPageViewController.swift in Sources */,
@@ -4171,6 +4298,7 @@
 				3F977EF42887EA6D0062FA47 /* SubmitVactionResponse.swift in Sources */,
 				FA29703227431439000000F7 /* PDFViewrVC.swift in Sources */,
 				CE3244A928FC789F004DBADB /* ProjectRequestsCollectionViewCell.swift in Sources */,
+				CED47F64290ADA6A00C6F840 /* RatioWeekResponse.swift in Sources */,
 				FAC788D627104448009AC355 /* HeaderView.swift in Sources */,
 				3F84039D28B7B00D00657C10 /* SendCodeWaysVC.swift in Sources */,
 				FA0324CA26FBE3EE00372EA6 /* NewUserInfoModel.swift in Sources */,
@@ -4197,8 +4325,10 @@
 				FA658B25274404DA001FC641 /* AttachmentsCell.swift in Sources */,
 				FA0324E1270113F300372EA6 /* MenuCell.swift in Sources */,
 				3FF3968C28995C3B00E1322D /* CommentsResponse.swift in Sources */,
+				CE0FD9E52905A0EE00170382 /* Employee_data.swift in Sources */,
 				FA9E7D8D270F39DC003A1D16 /* ApprovalTransactionCell.swift in Sources */,
 				3FAD7A252850F5E20063B15E /* BanksResponse.swift in Sources */,
+				CED47F57290A959E00C6F840 /* CreateViolationViewController.swift in Sources */,
 				3F9ADB00285F1C9B00D68791 /* InsuranceRecords.swift in Sources */,
 				3F645ADF2875D86E00720E76 /* SocketIOController.swift in Sources */,
 				3FAA84DA288E904D003A437E /* Form_hrv1_attachments.swift in Sources */,
@@ -4216,6 +4346,7 @@
 				FA443419276275EC00DF6A9B /* AuthorizedPositionsApprovalVC.swift in Sources */,
 				FA9DF8D9281597FA0015D492 /* BoardCollectionViewCell.swift in Sources */,
 				3FD03A0B287437B000BB13C7 /* ViewEmpJobDetailsVC.swift in Sources */,
+				CED47F65290ADA6A00C6F840 /* RatioWeekData.swift in Sources */,
 				3FD039EB287437B000BB13C7 /* OutgoingHistoryViewController.swift in Sources */,
 				3FAA84DE288E904D003A437E /* TransactionsPersons.swift in Sources */,
 				3FD039F6287437B000BB13C7 /* ViewEmpCommunicationsVC.swift in Sources */,
@@ -4223,15 +4354,18 @@
 				3FA2080328AE7D7500845910 /* DocAttachTableViewCell.swift in Sources */,
 				3F977EFE2887F60F0062FA47 /* Contract_vacation_info.swift in Sources */,
 				3F8D490E2858F9C500DCBC84 /* Licenses.swift in Sources */,
+				CE0FD9D9290581F800170382 /* CalenderActivityData.swift in Sources */,
 				3F29C8FB2886FC530011AF97 /* FinanceInfoViewController.swift in Sources */,
 				FA55637B279CA86800542310 /* SubFilterVC.swift in Sources */,
 				3F1436952848A120008ABC19 /* GraidentView.swift in Sources */,
 				3FF6EDA7284B4DE00003E6F4 /* UpdateSettingResponse.swift in Sources */,
+				CE85718229081CAA00293977 /* InboxMailViewController.swift in Sources */,
 				3FD03A32287437B000BB13C7 /* ViewEmployeePageVC.swift in Sources */,
 				3F9D67B328BB6F2F0035FE59 /* ListItemHistoryData.swift in Sources */,
 				FA95FD11275EFE5900DE7854 /* ManagerApprovalVC.swift in Sources */,
 				FA9FB0AB2716C7FA0037871C /* SubProjectDetailsVC.swift in Sources */,
 				3FD03A48287437B000BB13C7 /* WebViewViewController.swift in Sources */,
+				CE85718E29081FF000293977 /* MailPageViewController.swift in Sources */,
 				3FEAAE3B28B622D80093815D /* TransactionsContractBarcodeVersion.swift in Sources */,
 				FA530A3E270CCA9D0071CDC8 /* CornTransactionTVCell.swift in Sources */,
 				3F9D67B628BB8D1A0035FE59 /* CheckListItemUsersData.swift in Sources */,
@@ -4267,10 +4401,10 @@
 				CEFE3B8E2900634700119A55 /* UsedUnusedReportRecords.swift in Sources */,
 				3F9C9E8A2859F1C200C5322B /* ContactGetResponse.swift in Sources */,
 				3FA5225D2858E2C6004F3C8E /* Joblists.swift in Sources */,
-				CE434E1F28D20078007C0AF4 /* GmailViewController.swift in Sources */,
 				3F1436912848A120008ABC19 /* RoundedTextField.swift in Sources */,
 				CE5E030728F888D600007EAC /* ProjectRequestsSetting.swift in Sources */,
 				FA180964270494AB00B493A7 /* AuthUser.swift in Sources */,
+				CE0FD9D8290581F800170382 /* CalenderActivityResponse.swift in Sources */,
 				3F1436892848A120008ABC19 /* UIViewCustomCornerRadiusWithGraidentView.swift in Sources */,
 				3FAA84D5288E904D003A437E /* Transactions_barcode_versionVD.swift in Sources */,
 				FA5C977228170FA200A2AA5A /* TaskTVCell.swift in Sources */,
@@ -4283,6 +4417,7 @@
 				FACFBA3F273AD235007C248C /* GeneralNoCell.swift in Sources */,
 				3FEAAE3C28B622D80093815D /* TransactionsContractButtons.swift in Sources */,
 				FAC32FBB270AE8A80046A0F6 /* SubMenuTVCell.swift in Sources */,
+				CED47F54290A890400C6F840 /* ViolationRecords.swift in Sources */,
 				FABDBA9027F476A2003961FC /* BankDetailsVC.swift in Sources */,
 				3FEAAE3828B622D80093815D /* Form_ct1_data_additional_terms.swift in Sources */,
 				3F87BCD1284903060031098B /* LicenceData.swift in Sources */,
@@ -4314,6 +4449,7 @@
 				3FD03A29287437B000BB13C7 /* ViewLangCalenderVC.swift in Sources */,
 				3F935E4F285A1F8800D7B779 /* EducationDetailsTableViewCell.swift in Sources */,
 				3FF3968D28995C3B00E1322D /* CommentDataResponse.swift in Sources */,
+				CE85717B2908010300293977 /* GmailViewController.swift in Sources */,
 				FABDBA9827F476FF003961FC /* VacationFormVC.swift in Sources */,
 				3FAA84D8288E904D003A437E /* Transactions_personsVD.swift in Sources */,
 				CEFE3B922900634700119A55 /* UsedUnusedReportResponse.swift in Sources */,

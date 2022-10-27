@@ -49,8 +49,6 @@ class ViewEmployeePageVC: UIPageViewController {
         containerVCs.append(langFinanialDetailsVC)
         containerVCs.append(langCalenderVC)
 
-        delegate = self
-        dataSource = self
         if let firstVC = containerVCs.first{
             setViewControllers([firstVC], direction: .forward, animated: true)
         }
@@ -61,30 +59,4 @@ class ViewEmployeePageVC: UIPageViewController {
         setViewControllers([containerVCs[index]], direction: direction, animated: true)
     }
 
-}
-
-extension ViewEmployeePageVC: UIPageViewControllerDelegate , UIPageViewControllerDataSource{
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let currentIndex = containerVCs.firstIndex(of: viewController) else{
-            return nil
-        }
-        let index = currentIndex - 1
-        guard index >= 0 else { return nil }
-        NotificationCenter.default.post(name: .init(rawValue: "ViewEmpPageControllerScrolled"), object: index)
-        return containerVCs[index]
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let currentIndex = containerVCs.firstIndex(of: viewController) else{
-            return nil
-        }
-        
-        let index = currentIndex + 1
-
-        guard index < containerVCs.count  else { return nil }
-        NotificationCenter.default.post(name: .init(rawValue: "ViewEmpPageControllerScrolled"), object: index)
-        return containerVCs[index]
-    }
-    
-    
 }

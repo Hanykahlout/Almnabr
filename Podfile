@@ -24,6 +24,7 @@ target 'Almnabr' do
 
     pod 'AMPopTip'
 
+    pod 'SideMenu'
     
     pod 'Kingfisher', '~> 7.0'
 

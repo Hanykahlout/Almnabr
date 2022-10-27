@@ -1774,7 +1774,7 @@ class APIController{
         
         
         let strURL = "\(APIManager.serverURL)/at/getnewreport/1/1000?from_year=\(year)&from_month=\(month)&from_day=\(day)&to_year=\(year)&to_month=\(month)&to_day=\(day)&employee_number[]=\(Auth_User.user_id)"
-
+        
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1806,7 +1806,7 @@ class APIController{
     }
     
     func getProjectRequestsData(projects_work_area_id:String,callback: @escaping (_ data:ProjectRequestsData) -> Void ){
-
+        
         let strURL = "\(APIManager.serverURL)/pr/dashboard_counts/1/1"
         
         let headers = [ "authorization":
@@ -1878,7 +1878,7 @@ class APIController{
         
     }
     
-
+    
     func getZones(phase_parent_id:String,projects_work_area_id:String,callback: @escaping (_ data:GetZonesResponse)->Void){
         
         let strURL = "\(APIManager.serverURL)/joYF29rbEi/\(projects_work_area_id)/\(projects_work_area_id)?phase_parent_id=\(phase_parent_id)"
@@ -1895,7 +1895,7 @@ class APIController{
             }
         }
     }
-
+    
     
     func getLevelKeys(callback: @escaping (_ data:GetGroupTypesResponse)->Void){
         
@@ -1966,6 +1966,121 @@ class APIController{
         }
     }
     
+    func getCalenderData(param:[String:Any],callback: @escaping (_ data:CalenderActivityResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/at/getnewreport/1/1000"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+       
+        Alamofire.request(strURL, method: .get ,parameters: param,encoding: URLEncoding.queryString,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                print("Calender Response",str)
+                if let parsedMapperString : CalenderActivityResponse = Mapper<CalenderActivityResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
     
+    
+
+    
+    
+    func getViolations(param:[String:Any],callback: @escaping (_ data:ViolationsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/at/getViolations/1/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+       
+        Alamofire.request(strURL, method: .get ,parameters: param,encoding: URLEncoding.queryString,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ViolationsResponse = Mapper<ViolationsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func createViolation(body:[String:Any],callback: @escaping (_ data:ViolationsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/form/FORM_VOL1/amv/"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+       
+        Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ViolationsResponse = Mapper<ViolationsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func cancelViolation(body:[String:Any],callback: @escaping (_ data:ViolationsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/form/FORM_VOL1/cancelViolation/"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+       
+        Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ViolationsResponse = Mapper<ViolationsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func openDetailsViolation(body:[String:Any],callback: @escaping (_ data:ViolationsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/at/attendance_detaile"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+       
+        Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ViolationsResponse = Mapper<ViolationsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func ratioWeekViolation(body:[String:Any],callback: @escaping (_ data:RatioWeekResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/at/ratio_week"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+       
+        Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : RatioWeekResponse = Mapper<RatioWeekResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    func ratioMonthViolation(body:[String:Any],callback: @escaping (_ data:RatioWeekResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/at/ratio_month"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+       
+        Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : RatioWeekResponse = Mapper<RatioWeekResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
 }
 

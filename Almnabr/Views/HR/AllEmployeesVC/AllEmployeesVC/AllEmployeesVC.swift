@@ -72,7 +72,6 @@ class AllEmployeesVC: UIViewController {
     
     
     @IBAction func backAction(_ sender: Any) {
-//        backToDash()
         navigationController?.dismiss(animated: true)
     }
     

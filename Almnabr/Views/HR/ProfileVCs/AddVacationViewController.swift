@@ -363,7 +363,7 @@ extension AddVacationViewController : UIImagePickerControllerDelegate , UINaviga
 
 extension AddVacationViewController{
     private func searchForUser(){
-        APIController.shard.searchForUser(searchText: directManagerTextField.text!, lang: L102Language.currentAppleLanguage(), id: "1") { data in
+        APIController.shard.searchForUser(searchText: directManagerTextField.text!, lang: L102Language.currentAppleLanguage(), id: Auth_User.user_type_id) { data in
             DispatchQueue.main.async {
                 if let status = data.status,status{
                     

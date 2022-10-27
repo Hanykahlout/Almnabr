@@ -28,6 +28,7 @@ class APIManager: NSObject {
     static let api_key = "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
     
     
+    
     static func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {

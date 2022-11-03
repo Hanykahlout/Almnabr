@@ -20,15 +20,15 @@ extension UsersCollectionViewCellDelegate{
     func removeAction(type:CollectionType,indexPath:IndexPath){}
 }
 
-typealias UsersDelegate = UIViewController & UsersCollectionViewCellDelegate
+typealias UsersDelegate = UIResponder & UsersCollectionViewCellDelegate
 
 class UsersCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     
     weak var delegate:UsersDelegate?
-    private var indexPath:IndexPath!
-    private var index:Int?
+    var indexPath:IndexPath!
+    var index:Int?
     var type:CollectionType?
     
     override func awakeFromNib() {

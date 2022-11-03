@@ -28,7 +28,7 @@ class HomeVC: UIViewController   {
     @IBOutlet weak var projectRequestsStackView: UIStackView!
     @IBOutlet weak var mainStackView: UIStackView!
     
-    @IBOutlet weak var calenderView: FSCalendar!
+    
     
     @IBOutlet weak var header: HeaderView!
     
@@ -69,9 +69,23 @@ class HomeVC: UIViewController   {
     @IBOutlet weak var projectsWorkingAreaArrow: UIImageView!
     @IBOutlet weak var projectRequestsCollectionView: UICollectionView!
 
-    @IBOutlet weak var selectedDateActivitiesView: UIView!
-    @IBOutlet weak var avtivitiesStackView: UIStackView!
-    @IBOutlet weak var selectedDateLabel: UILabel!
+    
+    
+    @IBOutlet weak var employeeInfoHeaderStackView: UIStackView!
+    
+    @IBOutlet weak var employeeInfoContentStackView: UIStackView!
+    
+    @IBOutlet weak var employeeInfoArrow: UIImageView!
+    
+    @IBOutlet weak var projectRequestsArrow: UIImageView!
+    
+    @IBOutlet weak var projectRequestsContentStackView: UIStackView!
+    
+    
+    @IBOutlet weak var projectRequestsView: UIView!
+    
+    @IBOutlet weak var projectRequestsHeaderStackView: UIStackView!
+    
     
     private var fromYear = ""
     private var fromMonth = ""
@@ -79,7 +93,7 @@ class HomeVC: UIViewController   {
     private var average_done_days = ""
     private var average_left_days = ""
     private var average_late_days = ""
-    private var calenderData = [CalenderActivityLog]()
+    
     private let pieChart = PieChartView()
     private let combinedChart = CombinedChartView()
     private let combinedChartData = CombinedChartData()
@@ -98,6 +112,7 @@ class HomeVC: UIViewController   {
     private var selectedProjectWorkingArea = ""
     var session: NFCNDEFReaderSession?
     var message:String = ""
+    private let calenderView = CalenderView(frame: .init())
     private var progressPlanedRatioResult = [ProgressPlanedRatioResult]() {
         didSet{
             let chartData = generateChartData()
@@ -124,10 +139,25 @@ class HomeVC: UIViewController   {
             employeeInfoView.isHidden = true
         }
         
+        
+        
+        calenderView.getCalenderData()
+        
+    
+        
+        employeeInfoContentStackView.isHidden = false
+        employeeInfoArrow.transform = .init(rotationAngle: .pi)
+        
+        projectRequestsContentStackView.isHidden = true
+        projectRequestsArrow.transform = .init(rotationAngle: 0)
+        projectsWorkingAreaArrow.isHidden = true
+        
+        
     }
     
     
     private func initlization(){
+        addCalenderView()
         setUpObserver()
         setUpCollectionView()
         setLayers()
@@ -135,7 +165,6 @@ class HomeVC: UIViewController   {
         get_Userdata()
         header.btnAction = menu_select
         lbl_allCopyRes.font = .kufiRegularFont(ofSize: 12)
-        setUpCalender()
         setUpPieChart()
         setUpCombinedChartView()
         setUpDropDownList()
@@ -143,9 +172,40 @@ class HomeVC: UIViewController   {
         projectsWorkingAreaTextField.addTapGesture {
             self.projectWorkingAreasDropDown.show()
         }
+        
+        employeeInfoHeaderStackView.isUserInteractionEnabled = true
+        employeeInfoHeaderStackView.addTapGesture {
+            self.openEmployeeInfoView()
+            self.openProjectRequestsView()
+        }
+        
+        
+        projectRequestsHeaderStackView.isUserInteractionEnabled = true
+        projectRequestsHeaderStackView.addTapGesture {
+            self.openProjectRequestsView()
+            self.openEmployeeInfoView()
+        }
+        
         projectRequestsStackView.isHidden = true
     }
-     
+    
+    private func addCalenderView(){
+        calenderView.isForAllEmployee = false
+        calenderView.delegate = self
+        employeeInfoContentStackView.addArrangedSubview(calenderView)
+    }
+    
+    
+    private func openEmployeeInfoView(){
+        self.employeeInfoContentStackView.isHidden = !self.employeeInfoContentStackView.isHidden
+        self.employeeInfoArrow.transform = .init(rotationAngle: self.employeeInfoContentStackView.isHidden ? 0 : .pi)
+    }
+    
+    private func openProjectRequestsView(){
+        self.projectRequestsContentStackView.isHidden = !self.projectRequestsContentStackView.isHidden
+        self.projectRequestsArrow.transform = .init(rotationAngle: self.projectRequestsContentStackView.isHidden ? 0 : .pi)
+        self.projectsWorkingAreaArrow.isHidden = self.projectRequestsContentStackView.isHidden
+    }
     
     private func setUpObserver(){
         NotificationCenter.default.addObserver(forName: .init("SubmitedFilter"), object: nil, queue: .main) { notify in
@@ -354,25 +414,6 @@ class HomeVC: UIViewController   {
         return (barChartData,lineChartData)
     }
     
-    private func getYearAndMonth(from date:Date) -> (year:String,month:String){
-        let dateFormater = DateFormatter()
-        dateFormater.locale = .init(identifier: "en")
-        dateFormater.dateFormat = "YYYY"
-        let fromYear = dateFormater.string(from: date)
-        dateFormater.dateFormat = "MM"
-        let fromMonth = dateFormater.string(from: date)
-        
-        return (year:fromYear , month:fromMonth)
-    }
-    
-    
-    private func setUpCalender(){
-        calenderView.isHidden = false
-        calenderView.delegate = self
-        calenderView.locale = .init(identifier: "en")
-        getCalenderData(date: Date())
-    }
-    
     private func menu_select(){
         let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
@@ -441,15 +482,18 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource{
         projectRequestsCollectionView.register(.init(nibName: "ProjectRequestsCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProjectRequestsCollectionViewCell")
     }
     
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProjectRequestsCollectionViewCell", for: indexPath) as! ProjectRequestsCollectionViewCell
         cell.setData(data: data[indexPath.row])
         return cell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == data.count - 1 {
@@ -461,6 +505,7 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource{
             }
         }
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let  objc = data[indexPath.row]
@@ -482,231 +527,12 @@ extension HomeVC:UICollectionViewDelegate,UICollectionViewDataSource{
         }
     }
     
+    
 }
 
-extension HomeVC:FSCalendarDelegate,FSCalendarDelegateAppearance{
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let fetchedData = ifThereActivities(on: date)
-        self.selectedDateActivitiesView.isHidden = !fetchedData.isThereAnyData
-        if fetchedData.isThereAnyData{
-            var index = avtivitiesStackView.arrangedSubviews.count - 1
-            while index >= 0{
-                if index == 0{
-                    index = -1
-                    continue
-                }
-                avtivitiesStackView.arrangedSubviews[index].removeFromSuperview()
-                index -= 1
-            }
-            
-            if !(fetchedData.data?.no_settings?.isEmpty ?? true){
-                let activityView = CalenderActivityUIView(frame: .init())
-                activityView.mainView.backgroundColor = UIColor(hexString: "#A6D5FA")
-                let data = fetchedData.data?.no_settings ?? []
-                activityView.titleLabel.text = "(\(data.count)) No Settings"
-                activityView.tableViewHeight.constant = CGFloat(data.count * 200)
-                activityView.data = data
-                
-                activityView.creatViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:true,empNumber: empNumber, date: date)
-                }
-                
-                activityView.cancelViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:false,empNumber: empNumber, date: date)
-                }
-                
-                activityView.openDetailsViolationAction = { userId in
-                    self.openDetailsViolation(date: self.formatedDate(date: date), userId: userId)
-                }
-                
-                activityView.weekRatioViolationAction = { empNum in
-                    self.weekRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNum)
-                }
-                
-                activityView.monthRatioViolationAction = { empNumber , empName in
-                    self.monthRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNumber, empName: empName)
-                }
-                avtivitiesStackView.addArrangedSubview(activityView)
-            }
-            
-            if !(fetchedData.data?.full_time?.isEmpty ?? true){
-                let activityView = CalenderActivityUIView(frame: .init())
-                activityView.mainView.backgroundColor = UIColor(hexString: "#A6FAB8")
-                let data = fetchedData.data?.full_time ?? []
-                activityView.titleLabel.text = "(\(data.count)) Full Time"
-                activityView.tableViewHeight.constant = CGFloat(data.count * 200)
-                activityView.data = data
-                
-                activityView.creatViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:true,empNumber: empNumber, date: date)
-                }
-                
-                activityView.cancelViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:false,empNumber: empNumber, date: date)
-                }
-                
-                activityView.openDetailsViolationAction = { userId in
-                    self.openDetailsViolation(date: self.formatedDate(date: date), userId: userId)
-                }
-                
-                activityView.weekRatioViolationAction = { empNum in
-                    self.weekRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNum)
-                }
-                
-                activityView.monthRatioViolationAction = { empNumber , empName in
-                    self.monthRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNumber, empName: empName)
-                }
-                avtivitiesStackView.addArrangedSubview(activityView)
-            }
-            
-            
-            if !(fetchedData.data?.absent?.isEmpty ?? true){
-                let activityView = CalenderActivityUIView(frame: .init())
-                activityView.mainView.backgroundColor = UIColor(hexString: "#F5E5C6")
-                let data = fetchedData.data?.absent ?? []
-                activityView.titleLabel.text = "(\(data.count)) Absent"
-                activityView.tableViewHeight.constant = CGFloat(data.count * 200)
-                activityView.data = data
-                
-                activityView.creatViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:true,empNumber: empNumber, date: date)
-                }
-                
-                activityView.cancelViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:false,empNumber: empNumber, date: date)
-                }
-                
-                
-                activityView.openDetailsViolationAction = { userId in
-                    self.openDetailsViolation(date: self.formatedDate(date: date), userId: userId)
-                }
-                
-                activityView.weekRatioViolationAction = { empNum in
-                    self.weekRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNum)
-                }
-                
-                activityView.monthRatioViolationAction = { empNumber , empName in
-                    self.monthRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNumber, empName: empName)
-                }
-                avtivitiesStackView.addArrangedSubview(activityView)
-            }
-            
-            if !(fetchedData.data?.record_missing?.isEmpty ?? true){
-                let activityView = CalenderActivityUIView(frame: .init())
-                activityView.mainView.backgroundColor = UIColor(hexString: "#E6E4FB")
-                let data = fetchedData.data?.record_missing ?? []
-                activityView.titleLabel.text = "(\(data.count)) Record Missing"
-                activityView.tableViewHeight.constant = CGFloat(data.count * 200)
-                activityView.data = data
-                
-                activityView.creatViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:true,empNumber: empNumber, date: date)
-                }
-               
-                activityView.cancelViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:false,empNumber: empNumber, date: date)
-                }
-                
-                
-                activityView.openDetailsViolationAction = { userId in
-                    self.openDetailsViolation(date: self.formatedDate(date: date), userId: userId)
-                }
-                
-                activityView.weekRatioViolationAction = { empNum in
-                    self.weekRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNum)
-                }
-                
-                activityView.monthRatioViolationAction = { empNumber , empName in
-                    self.monthRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNumber, empName: empName)
-                }
-                avtivitiesStackView.addArrangedSubview(activityView)
-            }
-            
-            
-            if !(fetchedData.data?.ok?.isEmpty ?? true){
-                let activityView = CalenderActivityUIView(frame: .init())
-                activityView.mainView.backgroundColor = UIColor(hexString: "#DEEDCB")
-                let data = fetchedData.data?.ok ?? []
-                activityView.titleLabel.text = "(\(data.count)) Ok"
-                activityView.tableViewHeight.constant = CGFloat(data.count * 200)
-                activityView.data = data
-                activityView.creatViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:true,empNumber: empNumber, date: date)
-                }
-               
-                activityView.cancelViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:false,empNumber: empNumber, date: date)
-                }
-                
-                
-                activityView.openDetailsViolationAction = { userId in
-                    self.openDetailsViolation(date: self.formatedDate(date: date), userId: userId)
-                }
-                
-                activityView.weekRatioViolationAction = { empNum in
-                    self.weekRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNum)
-                }
-                
-                activityView.monthRatioViolationAction = { empNumber , empName in
-                    self.monthRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNumber, empName: empName)
-                }
-                avtivitiesStackView.addArrangedSubview(activityView)
-            }
-            
-            
-            if !(fetchedData.data?.not_ok?.isEmpty ?? true){
-                let activityView = CalenderActivityUIView(frame: .init())
-                activityView.mainView.backgroundColor = UIColor(hexString: "#FAC8C9")
-                let data = fetchedData.data?.not_ok ?? []
-                activityView.titleLabel.text = "(\(data.count)) Not Ok"
-                activityView.tableViewHeight.constant = CGFloat(data.count * 200)
-                activityView.data = data
-                
-                activityView.creatViolationAction = { empNumber in
-                    self.violationAction(isCreate:true,empNumber: empNumber, date: date)
-                }
-                
-                activityView.cancelViolationAction = { empNumber in
-                    
-                    self.violationAction(isCreate:false,empNumber: empNumber, date: date)
-                }
-                
-                activityView.openDetailsViolationAction = { userId in
-                    self.openDetailsViolation(date: self.formatedDate(date: date), userId: userId)
-                }
-                
-                activityView.weekRatioViolationAction = { empNum in
-                    self.weekRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNum)
-                }
-
-                activityView.monthRatioViolationAction = { empNumber , empName in
-                    self.monthRatioViolationAction(date: self.formatedDate(date: date), empNumber: empNumber, empName: empName)
-                }
-                
-                avtivitiesStackView.addArrangedSubview(activityView)
-            }
-            
-            self.selectedDateLabel.text = !self.selectedDateActivitiesView.isHidden ? formatedDate2(date: date) : "----"
-        }
-    }
-    
-    
-    private func violationAction(isCreate:Bool,empNumber:String,date:Date){
-        let dateData = getTheCurrentAndNextDateString(form: date)
-        self.getViolations(isCreate:isCreate,empNumber:empNumber,fromYear: dateData.currentYear, fromMonth: dateData.currentMonth, fromDay: dateData.currentDay, toYear: dateData.nextYear, toMonth: dateData.nextMonth, toDay: dateData.nextDay)
-    }
-    
-    private func weekRatioViolationAction(date:String,empNumber:String){
+//MARK: - Calender View Delegate
+extension HomeVC: UICalenderViewDelegate{
+    func weekRatioViolationAction(date:String,empNumber:String){
         let vc = WeekRatioViewController()
         vc.empNumber = empNumber
         vc.date = date
@@ -716,7 +542,7 @@ extension HomeVC:FSCalendarDelegate,FSCalendarDelegateAppearance{
         self.navigationController?.present(nav, animated: true)
     }
     
-    private func monthRatioViolationAction(date:String,empNumber:String,empName:String){
+    func monthRatioViolationAction(date:String,empNumber:String,empName:String){
         let vc = MonthRatioViewController()
         vc.empName = empName
         vc.empNumber = empNumber
@@ -726,63 +552,17 @@ extension HomeVC:FSCalendarDelegate,FSCalendarDelegateAppearance{
         nav.setNavigationBarHidden(true, animated: false)
         self.navigationController?.present(nav, animated: true)
     }
-    
-    
-    
-    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
-        if formatedDate(date: date) == formatedDate(date: Date()){
-            return maincolor
-        }
-        if ifThereActivities(on:date).isThereAnyData {
-            return .systemPink
-        }
-        return .clear
+    func goToCreateViolationVC(isCreate:Bool,data:[ViolationRecords]){
+        let vc = CreateViolationViewController()
+        vc.isCreate = isCreate
+        vc.data = data
+        let nav = UINavigationController(rootViewController: vc)
+        nav.setNavigationBarHidden(true, animated: false)
+        nav.modalPresentationStyle = .overCurrentContext
+        self.navigationController?.present(nav, animated: true)
     }
-    
-    
-    private func ifThereActivities(on date:Date) -> (isThereAnyData:Bool,data:CalenderActivityValue?){
-        let currentDate = calenderData.filter{$0.date == formatedDate(date: date)}.first
-        if let currentDate = currentDate {
-            let dateActivities = currentDate.value
-            if !(dateActivities?.no_settings?.isEmpty ?? true) ||
-                !(dateActivities?.full_time?.isEmpty ?? true) ||
-                !(dateActivities?.absent?.isEmpty ?? true) ||
-                !(dateActivities?.record_missing?.isEmpty ?? true) ||
-                !(dateActivities?.ok?.isEmpty ?? true) ||
-                !(dateActivities?.not_ok?.isEmpty ?? true){
-                return (isThereAnyData:true,data:dateActivities)
-            }
-        }
-        return (isThereAnyData:false,data:nil)
-    }
-    
-    
-    private func getTheCurrentAndNextDateString(form date:Date) -> (currentYear:String,currentMonth:String,currentDay:String,nextYear:String,nextMonth:String,nextDay:String){
-        let nextDate = Calendar.current.date(byAdding: .day, value: 1, to: date)!
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = .init(identifier: "en")
-        dateFormatter.dateFormat = "dd"
-        let currentDay = dateFormatter.string(from: date)
-        let nextDay = dateFormatter.string(from: nextDate)
-        
-        dateFormatter.dateFormat = "MM"
-        let currentMonth = dateFormatter.string(from: date)
-        let nextMonth = dateFormatter.string(from: nextDate)
-        
-        dateFormatter.dateFormat = "YYYY"
-        let currentYear = dateFormatter.string(from: date)
-        let nextYear = dateFormatter.string(from: nextDate)
-        
-        return (currentYear,currentMonth,currentDay,nextYear,nextMonth,nextDay)
-    }
-    
-    
-    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        getCalenderData(date: calendar.currentPage)
-    }
-    
-    
 }
+
 
 //MARK: - API Handling
 extension HomeVC{
@@ -951,77 +731,6 @@ extension HomeVC{
             DispatchQueue.main.async {
                 self.projectRequestsCollectionView.reloadData()
                 self.emptyDataLabel.isHidden = !self.data.isEmpty
-            }
-        }
-    }
-    
-    
-    private func getCalenderData(date:Date){
-        let data = getYearAndMonth(from: date)
-        let fromYear = data.year
-        let fromMonth = data.month
-        
-        let param:[String:Any] = ["from_year": fromYear,
-                                  "from_month": fromMonth,
-                                  "from_day":"01",
-                                  "to_year": fromYear,
-                                  "to_month": fromMonth,
-                                  "to_day":"31",
-                                  //                                  "employee_number[]":Auth_User.user_id,
-                                  "type": 1
-        ]
-        
-        
-        APIController.shard.getCalenderData(param: param) { data in
-            if let status = data.status , status{
-                self.calenderData = data.data?.log ?? []
-                self.calenderView.reloadData()
-                
-            }
-        }
-    }
-    
-    private func getViolations(isCreate:Bool,empNumber:String,fromYear:String,fromMonth:String,fromDay:String,toYear:String,toMonth:String,toDay:String){
-        let param:[String:Any] = ["from_year": fromYear,
-                                  "from_month": fromMonth,
-                                  "from_day": fromDay,
-                                  "to_year": fromYear,
-                                  "to_month": fromMonth,
-                                  "to_day":toDay,
-                                  "employee_number[]": empNumber
-        ]
-        showLoadingActivity()
-        APIController.shard.getViolations(param: param) { data in
-            self.hideLoadingActivity()
-            if let status = data.status , status {
-                DispatchQueue.main.async {
-                    let vc = CreateViolationViewController()
-                    vc.isCreate = isCreate
-                    vc.data = data.records ?? []
-                    let nav = UINavigationController(rootViewController: vc)
-                    nav.setNavigationBarHidden(true, animated: false)
-                    nav.modalPresentationStyle = .overCurrentContext
-                    self.navigationController?.present(nav, animated: true)
-                }
-            }else{
-                SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
-            }
-            
-        }
-    }
-    
-    private func openDetailsViolation(date:String,userId:String){
-        let body = [
-            "date": date,
-            "user_id": userId
-        ]
-        showLoadingActivity()
-        APIController.shard.openDetailsViolation(body: body) { data in
-            self.hideLoadingActivity()
-            if let status = data.status , status{
-                // Some thing here
-            }else{
-                SCLAlertView().showError("error".localized(), subTitle: data.msg ?? "")
             }
         }
     }

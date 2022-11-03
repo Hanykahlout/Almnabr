@@ -14,20 +14,26 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct SearchBranch : Mappable {
-	var status : Bool?
-	var records : [SearchBranchRecords]?
-	var mention_allow : Bool?
-    var error : String?
+struct MailData : Mappable {
+	var uid : Int?
+	var subject : String?
+	var date : String?
+	var from : MailFrom?
+	var message : String?
+	var attachments : [AttachmentsMail]?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
-        error <- map["error"]
-		status <- map["status"]
-		records <- map["records"]
-		mention_allow <- map["mention_allow"]
+
+		uid <- map["uid"]
+		subject <- map["subject"]
+		date <- map["date"]
+		from <- map["from"]
+		message <- map["message"]
+		attachments <- map["attachments"]
 	}
 
 }

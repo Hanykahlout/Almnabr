@@ -204,7 +204,6 @@ class MenuVC: UIViewController {
         navCenter?.present(nav, animated: true, completion: nil)
     }
     
-    
 }
 
 
@@ -377,6 +376,11 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     panel?.center(nav)
+                case "95":
+                    let vc:AttendanceViewController = AppDelegate.HRSB.instanceVC()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
                 default:
                     print(" no menu id ")
                 }
@@ -406,31 +410,6 @@ extension String {
     }
 }
 
-
-class FontAwesomeConverter {
-    public static func image(fromChar iconCode: String,
-                         color: UIColor) -> UIImage {
-    let label = UILabel(frame: .zero)
-    label.textColor = color
-    label.font = UIFont.fontAwesome(ofSize: 20, style: .solid)
-
-        if let int32 = UInt32(hexString: iconCode), let unicode = UnicodeScalar(int32) {
-            let unicode = Character(unicode)
-           // return unicode
-        }
-        
-//    let iconDecimal = Int(iconCode, radix: 16)!
-//    let unicodeIcon = Character(UnicodeScalar(iconDecimal)!)
-//    label.text = "\(unicodeIcon)"
-//    label.sizeToFit()
-
-    let renderer = UIGraphicsImageRenderer(size: label.frame.size)
-    let image = renderer.image(actions: { context in
-        label.layer.render(in: context.cgContext)
-    })
-    return image
-   }
- }
 
 extension UILabel {
 // MARK:  set center alignment

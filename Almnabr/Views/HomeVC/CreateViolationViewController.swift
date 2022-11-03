@@ -50,19 +50,23 @@ class CreateViolationViewController: UIViewController {
         //        usersDropDown
         usersDropDown.anchorView = userTextField
         usersDropDown.bottomOffset = CGPoint(x: 0, y:(usersDropDown.anchorView?.plainView.bounds.height)!)
-        usersDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-            if !users.isEmpty{
-                usersArrow.transform = .init(rotationAngle: 0)
-                let objc = users[index]
-                self.userTextField.text = ""
-                self.userTextField.placeholder = objc.label
-                self.selectedUser = objc
-                
+        usersDropDown.selectionAction = { (index: Int, item: String) in
+            DispatchQueue.main.async {
+                if !self.users.isEmpty{
+                    self.usersArrow.transform = .init(rotationAngle: 0)
+                    let objc = self.users[index]
+                    self.userTextField.text = ""
+                    self.userTextField.placeholder = objc.label
+                    self.selectedUser = objc
+                    
+                }
             }
         }
         
-        usersDropDown.cancelAction = { [unowned self] in
-            usersArrow.transform = .init(rotationAngle: .pi)
+        usersDropDown.cancelAction = {
+            DispatchQueue.main.async {
+                self.usersArrow.transform = .init(rotationAngle: .pi)
+            }
         }
     }
     

@@ -26,6 +26,7 @@ class GmailViewController: UIViewController {
         setUpPageViewController()
     }
   
+    
     private func setUpPageViewController(){
         pageController = storyboard?.instantiateViewController(withIdentifier: "MailPageViewController") as? MailPageViewController
         
@@ -41,7 +42,6 @@ class GmailViewController: UIViewController {
         mainView.topAnchor.constraint(equalTo: pageController.view.topAnchor, constant: 0).isActive = true
         mainView.bottomAnchor.constraint(equalTo: pageController.view.bottomAnchor, constant: 0).isActive = true
     }
-    
     
     
     @IBAction func sideMenuAction(_ sender: Any) {

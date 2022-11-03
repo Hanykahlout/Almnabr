@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     
      func goToScreens() {
         if NewSuccessModel.getLoginSuccessToken() == nil {
-            guard let window = UIApplication.shared.keyWindow else {return}
+            guard let window = UIApplication.shared.windows.first else {return}
            
             let vc : SignInVC = AppDelegate.mainSB.instanceVC()
             let rootNC = UINavigationController(rootViewController: vc)

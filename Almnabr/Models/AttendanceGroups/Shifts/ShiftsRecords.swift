@@ -14,20 +14,30 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct SearchBranch : Mappable {
-	var status : Bool?
-	var records : [SearchBranchRecords]?
-	var mention_allow : Bool?
-    var error : String?
+struct ShiftsRecords : Mappable {
+	var shift_id : String?
+	var shift_title_english : String?
+	var shift_title_arabic : String?
+	var created_by : String?
+	var created_date_time : String?
+	var updated_date_time : String?
+	var writer : String?
+	var groups : [ShiftsGroups]?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
-        error <- map["error"]
-		status <- map["status"]
-		records <- map["records"]
-		mention_allow <- map["mention_allow"]
+
+		shift_id <- map["shift_id"]
+		shift_title_english <- map["shift_title_english"]
+		shift_title_arabic <- map["shift_title_arabic"]
+		created_by <- map["created_by"]
+		created_date_time <- map["created_date_time"]
+		updated_date_time <- map["updated_date_time"]
+		writer <- map["writer"]
+		groups <- map["groups"]
 	}
 
 }

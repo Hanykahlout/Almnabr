@@ -14,10 +14,9 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct EmailsResponse : Mappable {
-	var messages : [EmailMessages]?
-	var nextPageToken : String?
-	var resultSizeEstimate : Int?
+struct MailInboxResponse : Mappable {
+	var status : Bool?
+	var data : [MailData]?
 
 	init?(map: Map) {
 
@@ -25,9 +24,8 @@ struct EmailsResponse : Mappable {
 
 	mutating func mapping(map: Map) {
 
-		messages <- map["messages"]
-		nextPageToken <- map["nextPageToken"]
-		resultSizeEstimate <- map["resultSizeEstimate"]
+		status <- map["status"]
+		data <- map["data"]
 	}
 
 }

@@ -1972,7 +1972,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .get ,parameters: param,encoding: URLEncoding.queryString,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 print("Calender Response",str)
@@ -1984,7 +1984,7 @@ class APIController{
     }
     
     
-
+    
     
     
     func getViolations(param:[String:Any],callback: @escaping (_ data:ViolationsResponse)->Void){
@@ -1993,7 +1993,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .get ,parameters: param,encoding: URLEncoding.queryString,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : ViolationsResponse = Mapper<ViolationsResponse>().map(JSONString:str){
@@ -2009,7 +2009,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : ViolationsResponse = Mapper<ViolationsResponse>().map(JSONString:str){
@@ -2025,7 +2025,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : ViolationsResponse = Mapper<ViolationsResponse>().map(JSONString:str){
@@ -2041,7 +2041,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : ViolationsResponse = Mapper<ViolationsResponse>().map(JSONString:str){
@@ -2057,7 +2057,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : RatioWeekResponse = Mapper<RatioWeekResponse>().map(JSONString:str){
@@ -2066,14 +2066,14 @@ class APIController{
             }
         }
     }
-
+    
     func ratioMonthViolation(body:[String:Any],callback: @escaping (_ data:RatioWeekResponse)->Void){
         let strURL = "\(APIManager.serverURL)/at/ratio_month"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : RatioWeekResponse = Mapper<RatioWeekResponse>().map(JSONString:str){
@@ -2082,5 +2082,199 @@ class APIController{
             }
         }
     }
+    
+    func getMailsInbox(callback: @escaping (_ data:MailInboxResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/tasks/view_email_for_mobile_api"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post , headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : MailInboxResponse = Mapper<MailInboxResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getAttendanceGroups(pageNumber:String,callback: @escaping (_ data:GetAttendanceGroupsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/at/get_groups/\(pageNumber)/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get , headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : GetAttendanceGroupsResponse = Mapper<GetAttendanceGroupsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getUpdateAttendanceGroupsData(groupId:String,callback: @escaping (_ data:GetAttendanceGroupsResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/at/get_groups/1/10?search_key=&group_id=\(groupId)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get , headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : GetAttendanceGroupsResponse = Mapper<GetAttendanceGroupsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func updateAttendanceGroupsData(url:String,body:[String:Any],callback: @escaping (_ data:UpdateSettingResponse)->Void){
+        let strURL = "\(APIManager.serverURL)\(url)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func deleteAttendanceGroupsData(groupId:String,callback: @escaping (_ data:UpdateSettingResponse)->Void){
+        let strURL = "\(APIManager.serverURL)/at/delete_groups"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post ,parameters: ["key_ids[]":groupId] ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func updateStatusAttendance(status:String,
+                                userId:String,
+                                date:String,
+                                callback: @escaping (_ data:UpdateSettingResponse)->Void
+    ){
+        let strURL = "\(APIManager.serverURL)/at/update_employee_status"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        let body:[String:Any] = [
+            "state":status,
+            "user_id":userId,
+            "date":date
+        ]
+        
+        Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func getShiftsAttendance(pageNumber:String,
+                                callback: @escaping (_ data:GetShiftsResponse)->Void
+    ){
+        let strURL = "\(APIManager.serverURL)/at/get_shifts/\(pageNumber)/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : GetShiftsResponse = Mapper<GetShiftsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func getShiftsGroups(callback: @escaping (_ data:SearchBranch)->Void){
+        let strURL = "\(APIManager.serverURL)/at/groups?lang_key=\(L102Language.currentAppleLanguage())"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+
+    }
+    
+    func createShiftGroups(url:String,body:[String:Any],callback: @escaping (_ data:UpdateSettingResponse)->Void){
+        
+        let strURL = "\(APIManager.serverURL)\(url)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+       
+        Alamofire.request(strURL, method: .post, parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func deleteShiftGroups(deleteId:String,callback: @escaping (_ data:UpdateSettingResponse)->Void){
+
+        let strURL = "\(APIManager.serverURL)/at/delete_shifts"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+       
+        Alamofire.request(strURL, method: .post, parameters: ["key_ids[]":deleteId] ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+
+    
+    func getDateString(with string:String)-> String?{
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = .init(identifier: "en")
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ssaa"
+        let date = dateFormatter.date(from: string)
+        dateFormatter.dateFormat = "h:mm aa"
+        if let date = date{
+            return dateFormatter.string(from: date)
+        }
+        return nil
+    }
+    
+    
+    
 }
 

@@ -14,9 +14,10 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct EmailMessages : Mappable {
-	var id : String?
-	var threadId : String?
+struct AttachmentsMail : Mappable {
+	var part : String?
+	var file : String?
+	var encoding : Int?
 
 	init?(map: Map) {
 
@@ -24,8 +25,9 @@ struct EmailMessages : Mappable {
 
 	mutating func mapping(map: Map) {
 
-		id <- map["id"]
-		threadId <- map["threadId"]
+		part <- map["part"]
+		file <- map["file"]
+		encoding <- map["encoding"]
 	}
 
 }

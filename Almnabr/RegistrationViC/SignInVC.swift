@@ -305,7 +305,6 @@ class SignInVC: UIViewController {
     
     
     @IBAction func btnLogin_Click(_ sender: Any) {
-        
         self.view.endEditing(true)
         showLoadingActivity()
         APIController.shard.fetchSendCode(username: txtControlEmailAdress.txtField.text!, password: txtControlPassword.txtField.text!) { data in

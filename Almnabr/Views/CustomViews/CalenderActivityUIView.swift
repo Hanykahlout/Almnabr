@@ -8,10 +8,8 @@
 
 import UIKit
 
-@IBDesignable
 class CalenderActivityUIView: UIView {
     
-    @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var titleArrow: UIImageView!
@@ -38,7 +36,7 @@ class CalenderActivityUIView: UIView {
         Bundle.main.loadNibNamed("CalenderActivityView", owner: self, options: nil)
         contentView.fixInView(self)
         setUpTableView()
-        mainView.addTapGesture {
+        contentView.addTapGesture {
             self.tableView.isHidden = !self.tableView.isHidden
             self.titleArrow.transform = .init(rotationAngle: self.tableView.isHidden == true ? 0 : .pi)
         }

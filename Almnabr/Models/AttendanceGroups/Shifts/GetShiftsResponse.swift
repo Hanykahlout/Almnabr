@@ -14,20 +14,25 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct SearchBranch : Mappable {
+struct GetShiftsResponse : Mappable {
 	var status : Bool?
-	var records : [SearchBranchRecords]?
-	var mention_allow : Bool?
-    var error : String?
+	var total : Int?
+	var records : [ShiftsRecords]?
+	var page : Page?
+	var holidays : Bool?
+    var error: String?
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
-        error <- map["error"]
+
 		status <- map["status"]
+		total <- map["total"]
 		records <- map["records"]
-		mention_allow <- map["mention_allow"]
+		page <- map["page"]
+		holidays <- map["holidays"]
+        error <- map["error"]
 	}
 
 }

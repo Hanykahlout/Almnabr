@@ -206,6 +206,8 @@ class HomeFilterViewController: UIViewController {
         fastisController.present(above: self)
     }
     
+    
+    
     private func setUpNotificationCenterObserver(){
         
         NotificationCenter.default.addObserver(forName: .init("TemplateFilter1"), object: nil, queue: .main) { notify in
@@ -440,8 +442,8 @@ extension HomeFilterViewController: UICollectionViewDelegate,UICollectionViewDat
         resultCollectionView.delegate = self
         resultCollectionView.dataSource = self
         resultCollectionView.register(.init(nibName: "UsersCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "UsersCollectionViewCell")
-        
     }
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == levelKeyCollectionView{
@@ -467,7 +469,6 @@ extension HomeFilterViewController: UICollectionViewDelegate,UICollectionViewDat
         cell.setData(indexPath: indexPath, data: selecteFilterData!.selectedResult[indexPath.row])
         return cell
     }
-    
     
 }
 // MARK: - CollectionViewCell Delegate

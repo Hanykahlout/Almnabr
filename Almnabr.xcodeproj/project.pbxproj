@@ -464,6 +464,8 @@
 		CE5FD6BC290E858300031270 /* AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FD6BB290E858300031270 /* AttendanceViewController.swift */; };
 		CE5FD6C0290E861700031270 /* AttendanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FD6BE290E861700031270 /* AttendanceTableViewCell.swift */; };
 		CE5FD6C1290E861700031270 /* AttendanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5FD6BF290E861700031270 /* AttendanceTableViewCell.xib */; };
+		CE6ABE39291C05EA00CFEA36 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6ABE37291C05EA00CFEA36 /* ChangePasswordViewController.swift */; };
+		CE6ABE3A291C05EA00CFEA36 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6ABE38291C05EA00CFEA36 /* ChangePasswordViewController.xib */; };
 		CE7BB37B2909786D00BEE4C4 /* CalendarActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB3792909786D00BEE4C4 /* CalendarActivityTableViewCell.swift */; };
 		CE7BB37C2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB37A2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib */; };
 		CE7DE7AD28D8FAEA00DC0CC3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */; };
@@ -483,6 +485,10 @@
 		CE8571902908239000293977 /* SpamMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718F2908239000293977 /* SpamMailViewController.swift */; };
 		CE8FE7282913E6450022DD51 /* UpdateShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FE7262913E6450022DD51 /* UpdateShiftViewController.swift */; };
 		CE8FE7292913E6450022DD51 /* UpdateShiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8FE7272913E6450022DD51 /* UpdateShiftViewController.xib */; };
+		CEA3A085291A945000F79E3C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3A083291A945000F79E3C /* SettingsViewController.swift */; };
+		CEA3A086291A945000F79E3C /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA3A084291A945000F79E3C /* SettingsViewController.xib */; };
+		CEA3A08A291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3A088291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift */; };
+		CEA3A08B291A9BDC00F79E3C /* MenuSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA3A089291A9BDC00F79E3C /* MenuSettingsTableViewCell.xib */; };
 		CEB1D42528F6D5E5007D2A8A /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1D42428F6D5E5007D2A8A /* CustomCollectionViewLayout.swift */; };
 		CEB1D42828F6D6A4007D2A8A /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB1D42628F6D6A4007D2A8A /* ContentCollectionViewCell.swift */; };
 		CEB1D42928F6D6A4007D2A8A /* ContentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB1D42728F6D6A4007D2A8A /* ContentCollectionViewCell.xib */; };
@@ -1329,6 +1335,8 @@
 		CE5FD6BB290E858300031270 /* AttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceViewController.swift; sourceTree = "<group>"; };
 		CE5FD6BE290E861700031270 /* AttendanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceTableViewCell.swift; sourceTree = "<group>"; };
 		CE5FD6BF290E861700031270 /* AttendanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceTableViewCell.xib; sourceTree = "<group>"; };
+		CE6ABE37291C05EA00CFEA36 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		CE6ABE38291C05EA00CFEA36 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		CE7BB3792909786D00BEE4C4 /* CalendarActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarActivityTableViewCell.swift; sourceTree = "<group>"; };
 		CE7BB37A2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarActivityTableViewCell.xib; sourceTree = "<group>"; };
 		CE7DE7AC28D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LockScreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1347,6 +1355,10 @@
 		CE85718F2908239000293977 /* SpamMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamMailViewController.swift; sourceTree = "<group>"; };
 		CE8FE7262913E6450022DD51 /* UpdateShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateShiftViewController.swift; sourceTree = "<group>"; };
 		CE8FE7272913E6450022DD51 /* UpdateShiftViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdateShiftViewController.xib; sourceTree = "<group>"; };
+		CEA3A083291A945000F79E3C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		CEA3A084291A945000F79E3C /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		CEA3A088291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSettingsTableViewCell.swift; sourceTree = "<group>"; };
+		CEA3A089291A9BDC00F79E3C /* MenuSettingsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		CEB0F23628D85BFF006DC4FD /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		CEB1D42428F6D5E5007D2A8A /* CustomCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -2195,6 +2207,7 @@
 		3FD038CF2874377000BB13C7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CEA3A082291A8B7600F79E3C /* MenuVC */,
 				CEBAAA4629128AFF0066B818 /* AttendanceGroups */,
 				CEE57BCD28F756CA00CA16D8 /* HomeVC */,
 				3FA8EADA28CDEACE0026DE44 /* CustomViews */,
@@ -2830,6 +2843,25 @@
 			path = Attendance;
 			sourceTree = "<group>";
 		};
+		CE6ABE35291C05BD00CFEA36 /* SettingsVCs */ = {
+			isa = PBXGroup;
+			children = (
+				CE6ABE36291C05CE00CFEA36 /* ChangePasswordVC */,
+				CEA3A083291A945000F79E3C /* SettingsViewController.swift */,
+				CEA3A084291A945000F79E3C /* SettingsViewController.xib */,
+			);
+			path = SettingsVCs;
+			sourceTree = "<group>";
+		};
+		CE6ABE36291C05CE00CFEA36 /* ChangePasswordVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE6ABE37291C05EA00CFEA36 /* ChangePasswordViewController.swift */,
+				CE6ABE38291C05EA00CFEA36 /* ChangePasswordViewController.xib */,
+			);
+			path = ChangePasswordVC;
+			sourceTree = "<group>";
+		};
 		CE7DE7AF28D8FAEA00DC0CC3 /* LockScreenWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -2863,6 +2895,23 @@
 				CE85718F2908239000293977 /* SpamMailViewController.swift */,
 			);
 			name = SideMenu;
+			sourceTree = "<group>";
+		};
+		CEA3A082291A8B7600F79E3C /* MenuVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE6ABE35291C05BD00CFEA36 /* SettingsVCs */,
+			);
+			path = MenuVC;
+			sourceTree = "<group>";
+		};
+		CEA3A087291A9BB400F79E3C /* MenuSettingsCell */ = {
+			isa = PBXGroup;
+			children = (
+				CEA3A088291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift */,
+				CEA3A089291A9BDC00F79E3C /* MenuSettingsTableViewCell.xib */,
+			);
+			path = MenuSettingsCell;
 			sourceTree = "<group>";
 		};
 		CEBAAA4629128AFF0066B818 /* AttendanceGroups */ = {
@@ -3403,6 +3452,7 @@
 		FAC32FB22708C8CB0046A0F6 /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
+				CEA3A087291A9BB400F79E3C /* MenuSettingsCell */,
 				CECED94C291033A60000716E /* MailCells */,
 				CE5FD6BD290E860B00031270 /* Attendance */,
 				3F677ECC28AB90D6000D6239 /* Documents */,
@@ -3811,6 +3861,7 @@
 				3FD039DF287437B000BB13C7 /* ViewEmpPassportDetailsVC.xib in Resources */,
 				FA530A45270CEFF10071CDC8 /* MyTransactionHeaderView.xib in Resources */,
 				FA400D492718C61A0097C7D1 /* ServicesView.xib in Resources */,
+				CEA3A086291A945000F79E3C /* SettingsViewController.xib in Resources */,
 				3F07C070286D8F9300C2CDF6 /* EducationTVCell.xib in Resources */,
 				3FC9E91528914BBC000B2644 /* .gitignore in Resources */,
 				3FD03A25287437B000BB13C7 /* UpdateInsuranceViewController.xib in Resources */,
@@ -3911,6 +3962,7 @@
 				3FF6EDB6284B72450003E6F4 /* UsersCollectionViewCell.xib in Resources */,
 				3F07C07A286D911A00C2CDF6 /* VacationFormCell.xib in Resources */,
 				3FD039E9287437B000BB13C7 /* OutgoingHistoryViewController.strings in Resources */,
+				CE6ABE3A291C05EA00CFEA36 /* ChangePasswordViewController.xib in Resources */,
 				FAA88ED3282B0D730082432F /* TaskCommentCell.xib in Resources */,
 				FA5CB10327D0C6B90023A372 /* TextCVCell.xib in Resources */,
 				3FD039FA287437B000BB13C7 /* ViewEmpNotesVC.xib in Resources */,
@@ -3938,6 +3990,7 @@
 				FA025FB92785E73600AB38C8 /* View_notification.xib in Resources */,
 				3F9040E4286CB237008D85B8 /* ModulesTableViewCell.xib in Resources */,
 				3FD03A1A287437B000BB13C7 /* AddEmpContactViewController.strings in Resources */,
+				CEA3A08B291A9BDC00F79E3C /* MenuSettingsTableViewCell.xib in Resources */,
 				3FD03A28287437B000BB13C7 /* ViewLangCalenderVC.xib in Resources */,
 				3FD03A40287437B000BB13C7 /* ContactDetailsViewController.xib in Resources */,
 				3FD039F0287437B000BB13C7 /* RequestDetailsViewController.xib in Resources */,
@@ -4187,6 +4240,7 @@
 				3FD03A45287437B000BB13C7 /* IDDetailsViewController.swift in Sources */,
 				FA9DF8D72815979A0015D492 /* TicketCollectionViewController.swift in Sources */,
 				FAAF206727DCEF9400AD255B /* RelatedFormsTVCell.swift in Sources */,
+				CE6ABE39291C05EA00CFEA36 /* ChangePasswordViewController.swift in Sources */,
 				CE5E030528F888D600007EAC /* Wir_data.swift in Sources */,
 				CE85717E2908022300293977 /* SideMenuViewController.swift in Sources */,
 				CE5FD6BC290E858300031270 /* AttendanceViewController.swift in Sources */,
@@ -4459,6 +4513,7 @@
 				FAC788D627104448009AC355 /* HeaderView.swift in Sources */,
 				3F84039D28B7B00D00657C10 /* SendCodeWaysVC.swift in Sources */,
 				FA0324CA26FBE3EE00372EA6 /* NewUserInfoModel.swift in Sources */,
+				CEA3A085291A945000F79E3C /* SettingsViewController.swift in Sources */,
 				CE5E030628F888D600007EAC /* ProjectRequestsData.swift in Sources */,
 				3F87BCD0284903060031098B /* EditingData.swift in Sources */,
 				FA4975AE279365A900891C9F /* DropDownView.swift in Sources */,
@@ -4599,6 +4654,7 @@
 				FA7A93CD27FCD87B00EF6ECC /* InsuranceTVCell.swift in Sources */,
 				FA44341327623F4500DF6A9B /* HistoryVC.swift in Sources */,
 				CEB1D43428F6E622007D2A8A /* CreateTransactionTableViewCell.swift in Sources */,
+				CEA3A08A291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift in Sources */,
 				3FD03A05287437B000BB13C7 /* ViewEmpModulesVC.swift in Sources */,
 				FA5C976C2816B01100A2AA5A /* TaskAttachmentCell.swift in Sources */,
 				3FD039F3287437B000BB13C7 /* ViewOutgoingViewController.swift in Sources */,
@@ -5916,7 +5972,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.0;
+				MARKETING_VERSION = 14.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5946,7 +6002,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.0;
+				MARKETING_VERSION = 14.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

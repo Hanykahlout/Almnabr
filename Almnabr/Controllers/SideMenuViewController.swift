@@ -56,10 +56,6 @@ class SideMenuViewController: UIViewController {
         }
     }
     
-    
-    
-    
-    
 }
 // MARK: - Table View Delegate And DataSource
 extension SideMenuViewController: UITableViewDelegate , UITableViewDataSource{

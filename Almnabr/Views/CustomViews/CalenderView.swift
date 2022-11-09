@@ -316,7 +316,7 @@ extension CalenderView:FSCalendarDelegate,FSCalendarDelegateAppearance{
             return maincolor
         }
         if ifThereActivities(on:date).isThereAnyData {
-            return .systemPink
+            return .yellow
         }
         return .clear
     }

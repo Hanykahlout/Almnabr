@@ -2084,13 +2084,13 @@ class APIController{
     }
     
     func getMailsInbox(callback: @escaping (_ data:MailInboxResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/view_email_for_mobile_api"
+        let strURL = "\(APIManager.serverURL)/users/email/mailbox"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
         
-        Alamofire.request(strURL, method: .post , headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(strURL, method: .get , headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : MailInboxResponse = Mapper<MailInboxResponse>().map(JSONString:str){
                     callback(parsedMapperString)
@@ -2260,7 +2260,23 @@ class APIController{
         }
     }
     
+    func changePassword(body:[String:Any],callback: @escaping (_ data:UpdateSettingResponse)->Void){
 
+        let strURL = "\(APIManager.serverURL)/cpassword"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+       
+        Alamofire.request(strURL, method: .post, parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
     
     func getDateString(with string:String)-> String?{
         let dateFormatter = DateFormatter()

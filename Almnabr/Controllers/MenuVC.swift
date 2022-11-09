@@ -21,6 +21,7 @@ class MenuVC: UIViewController {
     @IBOutlet weak var btnSetting: UIButton!
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var viewTheme: UIView!
+    @IBOutlet weak var settingsTapStackView: UIStackView!
     
     private var arr_data : [MenuObj] = []
     private var arr_menu : [MenuObj] = []
@@ -40,6 +41,15 @@ class MenuVC: UIViewController {
             get_Userdata()
         }
         
+        
+        settingsTapStackView.isUserInteractionEnabled = true
+        settingsTapStackView.addTapGesture {
+            let vc = SettingsViewController()
+            let nav = UINavigationController(rootViewController: vc)
+            nav.isNavigationBarHidden = true
+            self.panel?.center(nav)
+        }
+
     }
     
     func setup_data(){

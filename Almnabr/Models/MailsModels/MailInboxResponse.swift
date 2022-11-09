@@ -17,8 +17,9 @@ import ObjectMapper
 struct MailInboxResponse : Mappable {
 	var status : Bool?
 	var data : [MailData]?
-
-	init?(map: Map) {
+    var error: String?
+	
+    init?(map: Map) {
 
 	}
 
@@ -26,6 +27,8 @@ struct MailInboxResponse : Mappable {
 
 		status <- map["status"]
 		data <- map["data"]
+        error <- map["error"]
+        
 	}
 
 }

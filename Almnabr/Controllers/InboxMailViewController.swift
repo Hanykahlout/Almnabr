@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SCLAlertView
 class InboxMailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -71,8 +71,12 @@ extension InboxMailViewController{
                     self.data = data.data ?? []
                     self.tableView.reloadData()
                 }
+            }else{
+                SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknown error")
             }
         }
     }
 }
+
+
 

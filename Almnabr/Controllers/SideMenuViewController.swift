@@ -38,6 +38,12 @@ class SideMenuViewController: UIViewController {
         setUpTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        nameLabel.text = userObj?.user_username ?? "-----"
+        emailLabel.text = userObj?.user_email ?? "-----"
+    }
+    
     private func setTableData(){
         data.append((title:"Inbox",icon:UIImage(named: "email 1")!))
         data.append((title:"Starred",icon:UIImage(systemName: "star.fill")!))

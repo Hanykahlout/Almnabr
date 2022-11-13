@@ -212,10 +212,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
-        
+        APIController.shard.inboxsTimer?.invalidate()
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
     }
+    
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         
@@ -228,10 +229,54 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         HelperClassSwift.IsLoadTheme = false
         
         SocketIOController.shard.disconnect()
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
+        observeInboxsLocalNotification()
+        
     }
+    
+    private func observeInboxsLocalNotification(){
+        APIController.shard.startInboxsTimer { data in
+            if let status = data.status,status{
+                if let lastInboxDate = UserDefaults.standard.string(forKey: "LastInboxDate"){
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ssa"
+                    dateFormatter.locale = .init(identifier: "en")
+                    let lastDate = dateFormatter.date(from: lastInboxDate)
+                    if let lastDate = lastDate,let data = data.data{
+                        for mail in data{
+                            let mailDate = dateFormatter.date(from: mail.date ?? "")
+                            if let mailDate = mailDate, mailDate > lastDate{
+                                UserDefaults.standard.set(mail.date ?? "", forKey: "LastInboxDate")
+                                self.showLocalInboxNotification(title: mail.from?.name ?? "-----" , body: mail.subject ?? "-----")
+                            }else{
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    private func showLocalInboxNotification(title:String,body:String){
+        let center = UNUserNotificationCenter.current()
+        
+        center.requestAuthorization(options:[.alert,.sound]) { granted, error in
+            
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.title = title
+        content.body = body
+        
+        let dateComponents = Calendar.current.dateComponents([.year,.month,.day,.hour,.month,.second], from: Date())
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+        
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        center.add(request)
+    }
+    
     
     
     func applicationWillResignActive(_ application: UIApplication) {

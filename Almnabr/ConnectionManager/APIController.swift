@@ -17,7 +17,8 @@ class APIController{
         let apiController = APIController()
         return apiController
     }()
-    
+    var inboxsTimer: Timer?
+
     
     private init(){}
     
@@ -2083,15 +2084,25 @@ class APIController{
         }
     }
     
-    func getMailsInbox(callback: @escaping (_ data:MailInboxResponse)->Void){
+    
+    func startInboxsTimer(callback: @escaping (_ data:MailInboxResponse)->Void){
         let strURL = "\(APIManager.serverURL)/users/email/mailbox"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
         
+        inboxsTimer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true, block: { timer in
+            self.getMailsInbox(strURL: strURL, headers: headers, callback: callback)
+        })
+        getMailsInbox(strURL: strURL, headers: headers, callback: callback)
+    }
+    
+    private func getMailsInbox(strURL:String,headers:HTTPHeaders,callback: @escaping (_ data:MailInboxResponse)->Void){
+        print("Timer TEST",inboxsTimer?.timeInterval ?? "----")
         Alamofire.request(strURL, method: .get , headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                
                 if let parsedMapperString : MailInboxResponse = Mapper<MailInboxResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }

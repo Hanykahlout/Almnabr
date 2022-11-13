@@ -11,6 +11,7 @@ import SCLAlertView
 class InboxMailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    private var inboxsTimer: Timer?
     
     private var data = [MailData]()
     
@@ -29,6 +30,10 @@ class InboxMailViewController: UIViewController {
         getInbox()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        APIController.shard.inboxsTimer?.invalidate()
+    }
     
 }
 
@@ -64,10 +69,11 @@ extension InboxMailViewController: UITableViewDelegate,UITableViewDataSource{
 extension InboxMailViewController{
     private func getInbox(){
         showLoadingActivity()
-        APIController.shard.getMailsInbox { data in
+        APIController.shard.startInboxsTimer { data in
             self.hideLoadingActivity()
             if let status = data.status , status{
                 DispatchQueue.main.async {
+                    UserDefaults.standard.set(data.data?.first?.date ?? "", forKey: "LastInboxDate")
                     self.data = data.data ?? []
                     self.tableView.reloadData()
                 }

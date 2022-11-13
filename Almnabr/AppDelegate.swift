@@ -266,6 +266,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                         }
                     }
                 }
+            }else{
+                let vc:GmailViewController = AppDelegate.mainSB.instanceVC()
+                window.rootViewController = UINavigationController(rootViewController: vc)
             }
         }
         

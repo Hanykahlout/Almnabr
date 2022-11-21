@@ -266,7 +266,7 @@ class RequirementsVC: UIViewController {
         self.params["request"] = "SUPPLIER"
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/material_suppliers?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=1\(ProjectObj.template_platform_code_system)&page_no=1&page_size=10&template_id=\(ProjectObj.template_id)&request=SUPPLIER" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/material_suppliers?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=1\(ProjectObj.template_platform_code_system)&page_no=1&page_size=10&template_id=\(ProjectObj.template_id)&request=SUPPLIER" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
@@ -294,7 +294,7 @@ class RequirementsVC: UIViewController {
      self.params["request"] = "MATERIAL"
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/material_suppliers?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=1\(ProjectObj.template_platform_code_system)&page_no=1&page_size=10&template_id=\(ProjectObj.template_id)&request=MATERIAL" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/material_suppliers?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=1\(ProjectObj.template_platform_code_system)&page_no=1&page_size=10&template_id=\(ProjectObj.template_id)&request=MATERIAL" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
@@ -322,7 +322,7 @@ class RequirementsVC: UIViewController {
      self.params["list_type"] = "get_bill_quantites"
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/bill_quantities_material_suppliers?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=1\(ProjectObj.template_platform_code_system)&page_no=1&page_size=10&template_id=\(ProjectObj.template_id)&list_type=get_bill_quantites" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/bill_quantities_material_suppliers?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=1\(ProjectObj.template_platform_code_system)&page_no=1&page_size=10&template_id=\(ProjectObj.template_id)&list_type=get_bill_quantites" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
@@ -350,7 +350,7 @@ class RequirementsVC: UIViewController {
      self.params["list_type"] = "material_lists"
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/bill_quantities_material_suppliers?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=1\(ProjectObj.template_platform_code_system)&page_no=1&page_size=10&template_id=\(ProjectObj.template_id)&list_type=material_lists" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/bill_quantities_material_suppliers?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=1\(ProjectObj.template_platform_code_system)&page_no=1&page_size=10&template_id=\(ProjectObj.template_id)&list_type=material_lists" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
@@ -382,7 +382,7 @@ class RequirementsVC: UIViewController {
         param["list_type"] = "supplier_lists"
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/bill_quantities_material_suppliers?lang_key=en&list_type=supplier_lists&search_key=\(search_key)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/bill_quantities_material_suppliers?lang_key=en&list_type=supplier_lists&search_key=\(search_key)" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
@@ -411,7 +411,7 @@ class RequirementsVC: UIViewController {
   
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/bill_quantities?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=1\(ProjectObj.template_platform_code_system)&page_no=1&page_size=10&template_id=\(ProjectObj.template_id)&request=MATERIAL" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/bill_quantities?lang_key=en&projects_work_area_id=\(ProjectObj.projects_work_area_id)&platform_code_system=1\(ProjectObj.template_platform_code_system)&page_no=1&page_size=10&template_id=\(ProjectObj.template_id)&request=MATERIAL" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
@@ -592,7 +592,7 @@ class RequirementsVC: UIViewController {
         
             self.showLoadingActivity()
       
-        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/2/0", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/cr/2/0", parameters: self.params ) { (response) in
             
             self.hideLoadingActivity()
            

@@ -427,7 +427,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
         
      
         
-        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/get_default_attachments", parameters: params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/get_default_attachments", parameters: params ) { (response) in
             self.hideLoadingActivity()
            
             
@@ -546,7 +546,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
                     formUrl =  "/form/FORM_\(self.template_platform_group_type_code_system)/cr/3/\(transaction_id)"
                 }
                 
-                APIManager.func_Upload(queryString: formUrl, arr_file, param: self.parm ) { (respnse ) in
+        APIController.shard.func_Upload(queryString: formUrl, arr_file, param: self.parm ) { (respnse ) in
                     
                     let status = respnse["status"] as? Bool
                     let errors = respnse["error"] as? String
@@ -582,7 +582,7 @@ class AttachmentsVC: UIViewController ,UINavigationControllerDelegate{
     func get_ContractorTeamUsers(){
       
        self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "/form/FORM_\(self.template_platform_group_type_code_system)/contractor_users?lang_key=\(StrLanguage)&projects_work_area_id=\(self.projects_work_area_id))&user_position=\(self.user_position)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "/form/FORM_\(self.template_platform_group_type_code_system)/contractor_users?lang_key=\(StrLanguage)&projects_work_area_id=\(self.projects_work_area_id))&user_position=\(self.user_position)" ) { (response) in
             
             
             let status = response["status"] as? Bool

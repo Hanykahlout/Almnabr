@@ -155,7 +155,7 @@ class LanguageVC: UIViewController {
     func get_Lang(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "tc/tlanguages" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/tlanguages" ) { (response) in
             
             
             let status = response["status"] as? Bool

@@ -94,7 +94,7 @@ class VacationFormVC: UIViewController {
         self.params["employee_number"] = profile_obj?.employee_number
     
         
-        APIManager.sendRequestPostAuth(urlString: "human_resources/get_employee_vacation_history/\(pageNumber)/10", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "human_resources/get_employee_vacation_history/\(pageNumber)/10", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
             
             if self.pageNumber == 1 {

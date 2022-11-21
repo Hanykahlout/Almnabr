@@ -156,7 +156,7 @@ class FromTransactionView: UIView {
         }
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
-        APIManager.sendRequestGetAuth(urlString: "p/formstransactions/\(projects_profile_id)/\(pageNumber)/10?searchKey=\(search)&projects_profile_id=\(projects_profile_id)&platform_group1_code_system=\(StrsearchGroup1Code)&platform_group_type_code_system=\(StrsearchGroupTypeCode)&platform_group2_code_system=\(StrsearchGroup2)&template_id=\(StrsearchByTempelateCode)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "p/formstransactions/\(projects_profile_id)/\(pageNumber)/10?searchKey=\(search)&projects_profile_id=\(projects_profile_id)&platform_group1_code_system=\(StrsearchGroup1Code)&platform_group_type_code_system=\(StrsearchGroupTypeCode)&platform_group2_code_system=\(StrsearchGroup2)&template_id=\(StrsearchByTempelateCode)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
@@ -214,7 +214,7 @@ class FromTransactionView: UIView {
         
         self.showLoadingActivity()
         let language = L102Language.currentAppleLanguage()
-        APIManager.sendRequestGetAuth(urlString: "p/get_templates_for_transactions?lang_key=\(language ?? "ar")&projects_work_area_id=\(projects_work_area_id)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "p/get_templates_for_transactions?lang_key=\(language ?? "ar")&projects_work_area_id=\(projects_work_area_id)" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -241,7 +241,7 @@ class FromTransactionView: UIView {
     func get_Group_Type(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "lpgtype" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "lpgtype" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -268,7 +268,7 @@ class FromTransactionView: UIView {
     func get_Group1(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "lpgone" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "lpgone" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -296,7 +296,7 @@ class FromTransactionView: UIView {
         
         self.arr_Group2Label = []
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "lpgtwo?platform_group1_code_system=\(StrsearchGroup1Code)&platform_group_type_code_system=\(StrsearchGroupTypeCode)&template_id=\(StrsearchByTempelateCode)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "lpgtwo?platform_group1_code_system=\(StrsearchGroup1Code)&platform_group_type_code_system=\(StrsearchGroupTypeCode)&template_id=\(StrsearchByTempelateCode)" ) { (response) in
             
             
             let status = response["status"] as? Bool

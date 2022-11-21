@@ -9,9 +9,26 @@
 import UIKit
 import ObjectMapper
 import Alamofire
+import AlamofireObjectMapper
 
 
 class APIController{
+        
+    //Nahid
+    //Almnabr.NAHIDH 1.1   16
+    //socket --- https://node.nahidh.sa/
+    //server url ---- "https://nahidh.sa/backend"
+    //Api key "12345"
+    
+    //Almnabr
+    //com.ERP.ALMNABR 1.0  3
+    //socket --- "https://node.almnabr.com/"
+    //server url ---- "https://erp.almnabr.com/backend"
+    //Api key "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
+    
+    let serverURL = "https://erp.almnabr.com/backend"
+    private let api_key = "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
+
     
     public static var shard:APIController = {
         let apiController = APIController()
@@ -19,13 +36,795 @@ class APIController{
     }()
     var inboxsTimer: Timer?
 
-    
     private init(){}
+    
+    
+    func convertToDictionary(text: String) -> [String: Any]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return nil
+    }
+    
+    
+    func convertToArrayDictionary(text: String) -> [[String: Any]]? {
+        if let data = text.data(using: .utf8) {
+            do {
+                return try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]]
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return nil
+    }
+    
+    
+    
+    //MARK: - get data with param
+    //-----------------------------------------------------
+    
+    func getDataParamAPI(queryString: String, isArrayReturn: Bool, param: Parameters, keyValue: String, completionHandler: @escaping (_ responseString: Dictionary<String, Any>,_ error: Error?) -> Void) {
+        let strURL = "\(serverURL )/\(queryString)"
+        let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let getApi = URL(string: urlStr)!
+        print(getApi)
+        
+        let manager = Alamofire.SessionManager.default
+        manager.session.configuration.timeoutIntervalForRequest = 120
+        
+        manager.request(getApi, method: .get, parameters: param, encoding: URLEncoding.default, headers: setHeaderInformation()).responseString{ [self] (response) in
+            switch response.result{
+            case .failure(let error):
+                print("Error : \(error.localizedDescription)" )
+                print("\(getApi) API fail issue")
+                let answer = "static_error_api_wrong_json".localized()
+                let errorString = #"{"message":"The given data was invalid.","errors":{"unknown":["\#(answer)"]}}"#
+                let dict = convertToDictionary(text: errorString)
+                completionHandler(dict!, nil)
+                break
+            case .success(_):
+                if let responseModelObject = response.result.value {
+                    if let responseStatus = response.response?.statusCode {
+                        if responseStatus == 403 {
+                            let dict = convertToDictionary(text: "\(responseModelObject)")
+                            if dict != nil {
+                                let answer = dict!["message"]!
+                                let errorString = #"{"message":"The given data was invalid.","errors":{"unknown":["\#(answer)"]}}"#
+                                let dict = convertToDictionary(text: errorString)
+                                completionHandler(dict!, nil)
+                            } else {
+                                let answer = "static_error_404".localized()
+                                let errorString = #"{"message":"The given data was invalid.","errors":{"unknown":["\#(answer)"]}}"#
+                                let dict = convertToDictionary(text: errorString)
+                                completionHandler(dict!, nil)
+                            }
+                            
+                        } else if responseStatus == 404 {
+                            let answer = "static_error_404".localized()
+                            let errorString = #"{"message":"The given data was invalid.","errors":{"unknown":["\#(answer)"]}}"#
+                            let dict = convertToDictionary(text: errorString)
+                            completionHandler(dict!, nil)
+                        } else if responseStatus > 400 && responseStatus < 500 && responseStatus != 422 {
+                            let answer = "static_error_unautorized".localized()
+                            let errorString = #"{"message":"Unauthenticated.","unautorized":{"unautorized":["\#(answer)"]}}"#
+                            let dict = convertToDictionary(text: errorString)
+                            completionHandler(dict!, nil)
+                            
+                        } else {
+                            //print("\(responseModelObject)login  available")
+                            if isArrayReturn {
+                                if let arrayDict = convertToArrayDictionary(text: "\(responseModelObject)") {
+                                    let dict = [keyValue : arrayDict]
+                                    completionHandler(dict as Dictionary<String, Any>, nil)
+                                } else {
+                                    completionHandler(["" : ""], nil)
+                                }
+                            } else {
+                                print(getApi)
+                                if let dict = convertToDictionary(text: "\(responseModelObject)") {
+                                    completionHandler(dict, nil)
+                                } else {
+                                    completionHandler(["" : ""], nil)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    print("\(queryString) API has issue with response")
+                    let answer = "static_error_unknown".localized()
+                    let errorString = #"{"message":"The given data was invalid.","errors":{"unknown":["\#(answer)"]}}"#
+                    let dict = convertToDictionary(text: errorString)
+                    completionHandler(dict!, nil)
+                }
+                
+                break
+            }
+        }
+    }
+    
+    
+    func getDataAPI(queryString: String, isArrayReturn: Bool, keyValue: String, completionHandler: @escaping (_ responseString: Dictionary<String, Any>,_ error: Error?) -> Void) {
+        let strURL = "\(serverURL )/\(queryString)"
+        let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let getApi = URL(string: urlStr)!
+        print(getApi)
+        let params = ["":""]
+        
+        let manager = Alamofire.SessionManager.default
+        manager.session.configuration.timeoutIntervalForRequest = 120
+        
+        manager.request(getApi, method: .get, parameters: params, encoding: URLEncoding.default, headers: setHeaderInformation()).responseString{ [self] (response) in
+            switch response.result{
+            case .failure(let error):
+                print("Error : \(error.localizedDescription)" )
+                print("\(getApi) API fail issue")
+                let answer = "static_error_api_wrong_json".localized()
+                let errorString = #"{"message":"The given data was invalid.","errors":{"unknown":["\#(answer)"]}}"#
+                let dict = convertToDictionary(text: errorString)
+                completionHandler(dict!, nil)
+                break
+            case .success(_):
+                if let responseModelObject = response.result.value {
+                    if let responseStatus = response.response?.statusCode {
+                        if responseStatus == 403 {
+                            let dict = convertToDictionary(text: "\(responseModelObject)")
+                            if dict != nil {
+                                let answer = dict!["message"]!
+                                let errorString = #"{"message":"The given data was invalid.","errors":{"unknown":["\#(answer)"]}}"#
+                                let dict = convertToDictionary(text: errorString)
+                                completionHandler(dict!, nil)
+                            } else {
+                                let answer = "static_error_404".localized()
+                                let errorString = #"{"message":"The given data was invalid.","errors":{"unknown":["\#(answer)"]}}"#
+                                let dict = convertToDictionary(text: errorString)
+                                completionHandler(dict!, nil)
+                            }
+                            
+                        } else if responseStatus == 404 {
+                            let answer = "static_error_404".localized()
+                            let errorString = #"{"message":"The given data was invalid.","errors":{"unknown":["\#(answer)"]}}"#
+                            let dict = convertToDictionary(text: errorString)
+                            completionHandler(dict!, nil)
+                        } else if responseStatus > 400 && responseStatus < 500 && responseStatus != 422 {
+                            let answer = "static_error_unautorized".localized()
+                            let errorString = #"{"message":"Unauthenticated.","unautorized":{"unautorized":["\#(answer)"]}}"#
+                            let dict = convertToDictionary(text: errorString)
+                            completionHandler(dict!, nil)
+                            
+                        } else {
+                            //print("\(responseModelObject)login  available")
+                            if isArrayReturn {
+                                if let arrayDict = convertToArrayDictionary(text: "\(responseModelObject)") {
+                                    let dict = [keyValue : arrayDict]
+                                    completionHandler(dict as Dictionary<String, Any>, nil)
+                                } else {
+                                    completionHandler(["" : ""], nil)
+                                }
+                            } else {
+                                print(getApi)
+                                if let dict = convertToDictionary(text: "\(responseModelObject)") {
+                                    completionHandler(dict, nil)
+                                } else {
+                                    completionHandler(["" : ""], nil)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    print("\(queryString) API has issue with response")
+                    let answer = "static_error_unknown".localized()
+                    let errorString = #"{"message":"The given data was invalid.","errors":{"unknown":["\#(answer)"]}}"#
+                    let dict = convertToDictionary(text: errorString)
+                    completionHandler(dict!, nil)
+                }
+                
+                break
+            }
+        }
+        
+        
+    }
+    
+    
+    func setHeaderInformation() -> HTTPHeaders {
+        var headers: HTTPHeaders?
+        var language = L102Language.currentAppleLanguage()
+        if language.count == 0 {
+            language = "en"
+        }
+        headers = [
+            //"Content-Type" : "multipart/form-data",
+            "Accept": "application/json",
+            "Authorization": "Bearer \(Constants.token_api)",
+            "lang": language
+        ]
+        return headers!
+    }
+    
+    func setMultipartHeaderInformation() -> HTTPHeaders {
+        var headers: HTTPHeaders?
+        var language = L102Language.currentAppleLanguage()
+        if language.count == 0 {
+            language = "en"
+        }
+        
+        headers = [
+            "Content-Type" : "multipart/form-data",
+            "Authorization": "Bearer \(Constants.token_api)",
+            "Accept": "application/json",
+            "lang": language
+        ]
+        
+        return headers!
+    }
+    
+    func postAnyDataJawab(queryString: String, parameters: Parameters, completionHandler: @escaping (_ responseObject: ResponseModel,_ error: Error?) -> Void) {
+        
+        let urlStr : String = queryString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let getApi = URL(string: urlStr)!
+        
+        Alamofire.request(getApi, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseObject { (response: DataResponse<ResponseModel>) in
+            if(response.result.isSuccess){
+                print(response.result.value as Any)
+                let someString = String(data: response.data!, encoding: .utf8)
+                print(someString!)
+                
+                if let sString = someString {
+                    if sString == "Successfully added" {
+                        let responseErrorData = ResponseModel(JSON: ["status":true, "message":"\(sString)"])
+                        completionHandler(responseErrorData!, nil)
+                    } else if let responseModelObject = response.result.value{
+                        responseModelObject.status = true
+                        completionHandler(responseModelObject, nil)
+                    } else {
+                        let responseErrorData = ResponseModel(JSON: ["status":false, "message":"\(sString)"])
+                        completionHandler(responseErrorData!, nil)
+                    }
+                } else if let responseModelObject = response.result.value{
+                    responseModelObject.status = true
+                    completionHandler(responseModelObject, nil)
+                } else {
+                    let responseErrorData = ResponseModel(JSON: ["status":false, "message":"Json object error from server"])
+                    completionHandler(responseErrorData!, nil)
+                }
+            }else {
+                let someString = String(data: response.data!, encoding: .utf8)
+                print(someString!)
+                if let sString = someString {
+                    if sString == "Successfully added" || sString == "\"Successfully added\""{
+                        let responseErrorData = ResponseModel(JSON: ["status":true, "message":"\(sString)"])
+                        completionHandler(responseErrorData!, nil)
+                    } else {
+                        let responseErrorData = ResponseModel(JSON: ["status":false, "message":"Error from Server"])
+                        completionHandler(responseErrorData!, nil)
+                        
+                    }
+                } else {
+                    let responseErrorData = ResponseModel(JSON: ["status":false, "message":"Error from Server"])
+                    completionHandler(responseErrorData!, nil)
+                    
+                }
+            }
+        }
+    }
+    
+    
+    
+    func postAnyData(queryString: String, parameters: Parameters, completionHandler: @escaping (_ responseObject: ResponseModel,_ error: Error?) -> Void) {
+        
+        let strURL = "\(serverURL )/\(queryString)"
+        let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let getApi = URL(string: urlStr)!
+        
+        let auth = [ "X-API-KEY": api_key,
+                     "Content-Type":"application/x-www-form-urlencoded"]
+        
+        
+        //        let auth = [ "X-API-KEY":"12345",
+        //                     "Content-Type":"application/x-www-form-urlencoded"]
+        Alamofire.request(getApi, method: .post, parameters: parameters, encoding:  URLEncoding.default, headers: auth).responseObject { (response: DataResponse<ResponseModel>) in
+            if(response.result.isSuccess){
+                print(response.result.value as Any)
+                let someString = String(data: response.data!, encoding: .utf8)
+                print(someString!)
+                
+                if let sString = someString {
+                    if sString == "Successfully added" {
+                        let responseErrorData = ResponseModel(JSON: ["status":true, "message":"\(sString)"])
+                        completionHandler(responseErrorData!, nil)
+                    } else if let responseModelObject = response.result.value{
+                        responseModelObject.status = true
+                        completionHandler(responseModelObject, nil)
+                    } else {
+                        let responseErrorData = ResponseModel(JSON: ["status":false, "message":"\(sString)"])
+                        completionHandler(responseErrorData!, nil)
+                    }
+                } else if let responseModelObject = response.result.value{
+                    responseModelObject.status = true
+                    completionHandler(responseModelObject, nil)
+                } else {
+                    let responseErrorData = ResponseModel(JSON: ["status":false, "message":"Json object error from server"])
+                    completionHandler(responseErrorData!, nil)
+                }
+            }else {
+                let someString = String(data: response.data!, encoding: .utf8)
+                print(someString!)
+                if let sString = someString {
+                    if sString == "Successfully added" || sString == "\"Successfully added\""{
+                        let responseErrorData = ResponseModel(JSON: ["status":true, "message":"\(sString)"])
+                        completionHandler(responseErrorData!, nil)
+                    } else {
+                        let responseErrorData = ResponseModel(JSON: ["status":false, "message":"Error from Server"])
+                        completionHandler(responseErrorData!, nil)
+                        
+                    }
+                } else {
+                    let responseErrorData = ResponseModel(JSON: ["status":false, "message":"Error from Server"])
+                    completionHandler(responseErrorData!, nil)
+                    
+                }
+            }
+        }
+    }
+    
+    
+    func postAnyDataHeader(queryString: String, parameters: Parameters, completionHandler: @escaping (_ responseObject: ResponseModel,_ error: Error?) -> Void) {
+        
+        let strURL = "\(serverURL )/\(queryString)"
+        let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let getApi = URL(string: urlStr)!
+        
+        
+        let auth = [ "X-API-KEY":api_key,
+                     "Content-Type":"application/x-www-form-urlencoded",
+                     "authorization":
+                        "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"]
+        Alamofire.request(getApi, method: .post, parameters: parameters, encoding:  URLEncoding.default, headers: auth).responseObject { (response: DataResponse<ResponseModel>) in
+            if(response.result.isSuccess){
+                print(response.result.value as Any)
+                let someString = String(data: response.data!, encoding: .utf8)
+                print(someString!)
+                
+                if let sString = someString {
+                    if sString == "Successfully added" {
+                        let responseErrorData = ResponseModel(JSON: ["status":true, "message":"\(sString)"])
+                        completionHandler(responseErrorData!, nil)
+                    } else if let responseModelObject = response.result.value{
+                        responseModelObject.status = true
+                        completionHandler(responseModelObject, nil)
+                    } else {
+                        let responseErrorData = ResponseModel(JSON: ["status":false, "message":"\(sString)"])
+                        completionHandler(responseErrorData!, nil)
+                    }
+                } else if let responseModelObject = response.result.value{
+                    responseModelObject.status = true
+                    completionHandler(responseModelObject, nil)
+                } else {
+                    let responseErrorData = ResponseModel(JSON: ["status":false, "message":"Json object error from server"])
+                    completionHandler(responseErrorData!, nil)
+                }
+            }else {
+                let someString = String(data: response.data!, encoding: .utf8)
+                print(someString!)
+                if let sString = someString {
+                    if sString == "Successfully added" || sString == "\"Successfully added\""{
+                        let responseErrorData = ResponseModel(JSON: ["status":true, "message":"\(sString)"])
+                        completionHandler(responseErrorData!, nil)
+                    } else {
+                        let responseErrorData = ResponseModel(JSON: ["status":false, "message":"Error from Server"])
+                        completionHandler(responseErrorData!, nil)
+                        
+                    }
+                } else {
+                    let responseErrorData = ResponseModel(JSON: ["status":false, "message":"Error from Server"])
+                    completionHandler(responseErrorData!, nil)
+                    
+                }
+            }
+        }
+    }
+    
+    
+    func makeUserLogout() {
+        if NewSuccessModel.getLoginSuccessToken() != nil {
+            
+            UIApplication.shared.applicationIconBadgeNumber = 0
+            NewSuccessModel.removeLoginSuccessToken()
+            
+            guard let window = UIApplication.shared.windows.first else {return}
+            
+            let vc : SignInVC = AppDelegate.mainSB.instanceVC()
+            let rootNC = UINavigationController(rootViewController: vc)
+            window.rootViewController = rootNC
+            window.makeKeyAndVisible()
+            
+        }
+    }
+    
+    func sendRequestGetAuth(urlString:String , completion: @escaping (_ response : [String : Any] ) -> Void)
+    {
+        
+        let strURL = "\(serverURL )/\(urlString)"
+        let auth = [ "authorization":
+                        "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        Alamofire.request( strURL , method: .get, parameters: nil,
+                           encoding:  URLEncoding.default, headers: auth).responseJSON
+        { response in
+            if(response.result.isSuccess)
+            {
+                
+                if   let resp = response.result.value as? NSDictionary {
+                    let status = resp.value(forKey: "status") as? Bool
+                    let error = resp.value(forKey: "error") as? String
+                    
+                    if status == false {
+                        if error == "Token incorrect!" || error == "Signature verification failed"{
+                            self.makeUserLogout()
+                        }else{
+                            completion(resp as! [String : Any])
+                        }
+                        
+                    }else{
+                        completion(resp as! [String : Any])
+                    }
+                    
+                }
+                
+            }
+        }
+    }
+    
+    
+    func sendRequestPostAuth(urlString:String ,parameters: Parameters, completion: @escaping (_ response : [String : Any] ) -> Void)
+    {
+        
+        let strURL = "\(serverURL)/\(urlString)"
+        let auth = [ "authorization":
+                        "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        Alamofire.request( strURL , method: .post, parameters: parameters,
+                           encoding:  URLEncoding.default, headers: auth).responseJSON
+        { response in
+            
+            if(response.result.isSuccess)
+            {
+                
+                if   let resp = response.result.value as? NSDictionary {
+                    let status = resp.value(forKey: "status") as? Bool
+                    let error = resp.value(forKey: "error") as? String
+                    
+                    if status == false {
+                        if error == "Token incorrect!" || error == "Signature verification failed"{
+                            self.makeUserLogout()
+                            
+                        }else{
+                            completion(resp as! [String : Any])
+                        }
+                        
+                    }else{
+                        completion(resp as! [String : Any])
+                    }
+                    
+                }
+                
+            }
+        }}
+    
+    
+    func sendRequestGetAuthTheme(urlString:String , completion: @escaping (_ response : [String : Any] ) -> Void)
+    {
+        
+        let strURL = "\(serverURL )/\(urlString)"
+        let auth = [ "authorization":
+                        "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        Alamofire.request( strURL , method: .get, parameters: nil,
+                           encoding:  URLEncoding.default, headers: auth).responseJSON
+        { response in
+            
+            if(response.result.isSuccess)
+            {
+                
+                if   let resp = response.result.value as? NSDictionary {
+                    _ = resp.value(forKey: "status") as? Bool
+                    completion(resp as! [String : Any])
+                    
+                    
+                }
+                
+            }}}
+    
+    
+    func func_Upload(queryString:String , _ arr_attach: [attachment] , param:[String:String],completion: @escaping (_ response : [String : Any])->Void)
+    {
+        
+        let auth = [ "authorization":
+                        "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let strURL = "\(serverURL )/\(queryString)"
+        
+        let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let getApi = URL(string: urlStr)!
+        
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            let myId = Date().millisecondsSince1970
+            
+            
+            
+            for (key, value) in param {
+                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+            
+            for i in arr_attach {
+                
+                switch i.type {
+                case "img":
+                    
+                    let data = i.img!.jpegData(compressionQuality: 0.4)
+                    if let imageData = data{
+                        multipartFormData.append(imageData,
+                                                 withName: "attachments[\(i.index)][file]",
+                                                 fileName: "\(myId).jpg",
+                                                 mimeType: "image/jpeg")
+                        
+                    }
+                    
+                case "file":
+                    if i.IsNew == false && i.url != nil{
+                        do {
+                            let file = try Data(contentsOf: i.url!)
+                            
+                            multipartFormData.append( file as Data, withName: "attachments[0][file]", fileName: "\(myId)", mimeType: "text/plain")
+                        } catch {
+                            debugPrint("Couldn't get Data from URL: \(String(describing: i.url)): \(error)")
+                        }
+                    }
+                    
+                    
+                    
+                default:
+                    print("no data")
+                    
+                }
+            }
+            
+            
+            
+        }, usingThreshold: UInt64.init(), to: getApi, method: .post, headers: auth) { (result) in
+            switch result{
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    print("Succesfully uploaded",response.result.value ?? "No Value")
+                    if let result = response.result.value as? NSDictionary {
+                        //let data = result.value(forKey: "data") as? NSDictionary
+                        completion(result as! [String : Any])
+                    }else {
+                        print(result)
+                        Auth_User.topVC()?.hideLoadingActivity()
+                        
+                        completion( ["Status" : false])
+                        
+                    }
+                }
+            case .failure(_):
+                completion([:])
+            }
+        }
+    }
+    
+    func func_UploadTechnical(queryString:String , _ arr_attach: [Technical_Assistants] , param:[String:String],completion: @escaping (_ response : [String : Any])->Void)
+    {
+        
+        let auth = [ "authorization":
+                        "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let strURL = "\(serverURL )/\(queryString)"
+        
+        let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let getApi = URL(string: urlStr)!
+        
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            let myId = Date().millisecondsSince1970
+            
+            
+            
+            for (key, value) in param {
+                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+            
+            for i in arr_attach {
+                
+                switch i.type {
+                case "img":
+                    let data = i.img!.jpegData(compressionQuality: 0.4)
+                    if let imageData = data{
+                        multipartFormData.append(imageData,
+                                                 withName: "Technical_Assistants_Evaluation[\(i.index)][attachments][0][file]",
+                                                 fileName: "\(myId).jpg",
+                                                 mimeType: "image/jpeg")
+                        
+                    }
+                    
+                case "file":
+                    if i.IsNew == false && i.url != nil{
+                        do {
+                            let file = try Data(contentsOf: i.url!)
+                            
+                            multipartFormData.append( file as Data, withName: "Technical_Assistants_Evaluation[\(i.index)][attachments][0][file]", fileName: "\(myId)", mimeType: "text/plain")
+                        } catch {
+                            debugPrint("Couldn't get Data from URL: \(String(describing: i.url)): \(error)")
+                        }
+                    }
+                    
+                    
+                    
+                default:
+                    print("no data")
+                    
+                    
+                }
+            }
+            
+            
+            
+        }, usingThreshold: UInt64.init(), to: getApi, method: .post, headers: auth) { (result) in
+            switch result{
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    print("Succesfully uploaded")
+                    if let result = response.result.value as? NSDictionary {
+                        //let data = result.value(forKey: "data") as? NSDictionary
+                        completion(result as! [String : Any])
+                    }else {
+                        print(result)
+                        // completion(result as! [String : Any])
+                        
+                    }
+                }
+            case .failure(_):
+//                completion(result as? [String : Any] ?? [:])
+                break
+            }
+        }
+    }
+    
+    
+    
+    func func_UploadEvalution(queryString:String , _ arr_attach: [AttachNotes] , param:[String:String],completion: @escaping (_ response : [String : Any])->Void)
+    {
+        
+        let auth = [ "authorization":
+                        "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let strURL = "\(serverURL )/\(queryString)"
+        
+        let urlStr : String = strURL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let getApi = URL(string: urlStr)!
+        
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            let myId = Date().millisecondsSince1970
+            
+            
+            
+            for (key, value) in param {
+                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+            
+            for item in arr_attach {
+                
+                for i in item.arr {
+                    
+                    switch i.type {
+                    case "img":
+                        let data = i.img!.jpegData(compressionQuality: 0.4)
+                        if let imageData = data{
+                            multipartFormData.append(imageData,
+                                                     withName: "Evaludation_Result[\(item.index)][attachments][\(i.index)][file]",
+                                                     fileName: "\(myId).jpg",
+                                                     mimeType: "image/jpeg")
+                            
+                        }
+                    case "file":
+                        if i.IsNew == false && i.url != nil{
+                            do {
+                                let file = try Data(contentsOf: i.url!)
+                                
+                                multipartFormData.append( file as Data, withName: "Evaludation_Result[\(item.index)][attachments][\(i.index)][file]", fileName: "\(myId)", mimeType: "text/plain")
+                            } catch {
+                                debugPrint("Couldn't get Data from URL: \(String(describing: i.url)): \(error)")
+                            }
+                        }
+                    default:
+                        print("no data")
+                        
+                        
+                    }
+                }
+                
+            }
+            
+            
+            
+            
+        }, usingThreshold: UInt64.init(), to: getApi, method: .post, headers: auth) { (result) in
+            switch result{
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    print("Succesfully uploaded")
+                    if let result = response.result.value as? NSDictionary {
+                        //let data = result.value(forKey: "data") as? NSDictionary
+                        completion(result as! [String : Any])
+                    }else {
+                        print(result)
+                        // completion(result as! [String : Any])
+                        
+                    }
+                }
+            case .failure(_):
+//                completion(result as? [String : Any] ?? [:])
+                break
+            }
+        }
+    }
+    
+    
+    
+    func searchForUser(search_Key:String , completion: @escaping (_ response : [String : Any] ) -> Void)
+    {
+        
+        let strURL = "\(serverURL)/tc/getformuserslist"
+        
+        let auth = [ "authorization":
+                        "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        
+        let param = [
+            "search" : search_Key,
+            "lang_key" : "en",
+            "user_type_id": "1"
+        ]
+        
+        Alamofire.request( strURL , method: .get, parameters: param,
+                           encoding:  URLEncoding.queryString, headers: auth).responseJSON
+        { response in
+            
+            if(response.result.isSuccess)
+            {
+                
+                if   let resp = response.result.value as? NSDictionary {
+                    let status = resp.value(forKey: "status") as? Bool
+                    let error = resp.value(forKey: "error") as? String
+                    
+                    if status == false {
+                        if error == "Token incorrect!" || error == "Signature verification failed"{
+                            self.makeUserLogout()
+                            
+                        }else{
+                            completion(resp as! [String : Any])
+                        }
+                        
+                    }else{
+                        completion(resp as! [String : Any])
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     
     
     func getPermissionMentionsData(pageNumber:String,searchBranchId:String,groupId:String,userId:String,callback:@escaping(_ data:PermissionMentions)->Void){
         
-        let strURL = "\(APIManager.serverURL)/human_resources/get_permission_mentions/\(pageNumber)/10"
+        let strURL = "\(serverURL)/human_resources/get_permission_mentions/\(pageNumber)/10"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let parameters = ["search[branch_id]":searchBranchId,"search[group_key]":groupId,"search[user_id]":userId]
@@ -44,7 +843,7 @@ class APIController{
     
     func getSearchBranchMenu(callback:@escaping(_ data:SearchBranch)->Void){
         
-        let strURL = "\(APIManager.serverURL)/human_resources/get_branches"
+        let strURL = "\(serverURL)/human_resources/get_branches"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         print("Token",NewSuccessModel.getLoginSuccessToken() ?? "nil")
@@ -59,7 +858,7 @@ class APIController{
     
     func getGroupsMenu(callback:@escaping(_ data:SearchBranch)->Void){
         
-        let strURL = "\(APIManager.serverURL)/human_resources/get_groups"
+        let strURL = "\(serverURL)/human_resources/get_groups"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -74,7 +873,7 @@ class APIController{
     
     func getUsersMenu(callback:@escaping(_ data:SearchBranch)->Void){
         
-        let strURL = "\(APIManager.serverURL)/human_resources/get_users/0"
+        let strURL = "\(serverURL)/human_resources/get_users/0"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -89,7 +888,7 @@ class APIController{
     
     func getSettingsData(pageNumber:String,searchType:String,searchKey:String,callback:@escaping(_ data:SettingsData)->Void){
         
-        let strURL = "\(APIManager.serverURL)/human_resources/getsettings/\(pageNumber)/10"
+        let strURL = "\(serverURL)/human_resources/getsettings/\(pageNumber)/10"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -103,7 +902,7 @@ class APIController{
     }
     
     func getEditingData(setting_id:String,callback:@escaping(_ data:EditingData)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/edit_settings"
+        let strURL = "\(serverURL)/human_resources/edit_settings"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -117,7 +916,7 @@ class APIController{
     }
     
     func updateSettingsData(body:[String:Any],callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/update_settings"
+        let strURL = "\(serverURL)/human_resources/update_settings"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -132,7 +931,7 @@ class APIController{
     
     
     func addSettingsData(body:[String:Any],callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/save_settings"
+        let strURL = "\(serverURL)/human_resources/save_settings"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -147,7 +946,7 @@ class APIController{
     
     
     func addPermissionMentionsData(branch_id:String,group_id:String,users_id:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/savehrpermissions"
+        let strURL = "\(serverURL)/human_resources/savehrpermissions"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let body = ["branch_id": branch_id,
@@ -163,7 +962,7 @@ class APIController{
     }
     
     func deletePermissionMentionsData(id:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/delete_permits"
+        let strURL = "\(serverURL)/human_resources/delete_permits"
         let headers = [ "Authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")",
                         "Content-Type": "application/x-www-form-urlencoded" ]
@@ -181,7 +980,7 @@ class APIController{
     
     
     func deleteSettingsData(id:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/delete_settings"
+        let strURL = "\(serverURL)/human_resources/delete_settings"
         let headers = [ "Authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")",
                         "Content-Type": "application/x-www-form-urlencoded" ]
@@ -198,7 +997,7 @@ class APIController{
     }
     
     func getAllEmployees(pageNumber:String,body:[String:Any],callback:@escaping(_ data:AllEmployeeResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/employees_report/\(pageNumber)/10"
+        let strURL = "\(serverURL)/human_resources/employees_report/\(pageNumber)/10"
         let headers = [ "Authorization":"\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"]
         print("ksfhlashfls-BODY",body)
         Alamofire.request(strURL, method: .post , parameters:body ,headers:headers).validate().responseJSON { (response) in
@@ -214,7 +1013,7 @@ class APIController{
     
     func deleteEmployee(id:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/81f5cc8c046c6d1c66fa3424783873db/MAIN"
+        let strURL = "\(serverURL)/81f5cc8c046c6d1c66fa3424783873db/MAIN"
         let headers = [ "Authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ,
                         "Accept-Encoding": "gzip","Content-Type:":"text/plain"]
@@ -232,7 +1031,7 @@ class APIController{
     }
     
     func getFilterData(callback:@escaping(_ data:FilterGetResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/get_advanced_search_meta_data"
+        let strURL = "\(serverURL)/human_resources/get_advanced_search_meta_data"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -246,7 +1045,7 @@ class APIController{
     }
     
     func getFilterData2(callback:@escaping(_ data:FilterGetResponse2)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/branches/human_resources_view"
+        let strURL = "\(serverURL)/human_resources/branches/human_resources_view"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -260,7 +1059,7 @@ class APIController{
     }
     
     func getFilterData3(callback:@escaping(_ data:FilterGetResponse3)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/get_project_subjects"
+        let strURL = "\(serverURL)/human_resources/get_project_subjects"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -275,7 +1074,7 @@ class APIController{
     
     func getDropDownData(callback:@escaping(_ data:FilterGetResponse2)->Void){
         
-        let strURL = "\(APIManager.serverURL)/human_resources/branches/human_resources_edit"
+        let strURL = "\(serverURL)/human_resources/branches/human_resources_edit"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -290,7 +1089,7 @@ class APIController{
     
     
     func getGroupNameEnglish(callback:@escaping(_ data:GroupNameResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/grouplists"
+        let strURL = "\(serverURL)/human_resources/grouplists"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -304,7 +1103,7 @@ class APIController{
     }
     
     func getBankData(callback:@escaping(_ data:BanksResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/getbanks"
+        let strURL = "\(serverURL)/human_resources/getbanks"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -321,7 +1120,7 @@ class APIController{
     
     
     func getEmployeeData(empID:String,callback:@escaping(_ data:EmployeeResponse)->Void){
-        let strUrl = "\(APIManager.serverURL)/human_resources/get_employee_details/\(empID)/1"
+        let strUrl = "\(serverURL)/human_resources/get_employee_details/\(empID)/1"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -336,7 +1135,7 @@ class APIController{
     
     
     func updateEmployeeDetails(empImage:UIImage?,empID:String,body:EditBody,callback:@escaping(_ data:Edit)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/update_employee_details/\(empID)"
+        let strURL = "\(serverURL)/human_resources/update_employee_details/\(empID)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let parameters:[String:Any] = body.toDict()
@@ -373,8 +1172,8 @@ class APIController{
         }
     }
     
-    func getEmployeeViewData(empId:String,callback:@escaping(_ data:EmpViewResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/get_myview_data/\(empId)/1"
+    func getEmployeeViewData(empId:String,branchId:String,callback:@escaping(_ data:EmpViewResponse)->Void){
+        let strURL = "\(serverURL)/human_resources/get_myview_data/\(empId)/\(branchId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -389,7 +1188,7 @@ class APIController{
     
     
     func getImage(url:String,callback:@escaping(_ data:GetImageResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/\(url)"
+        let strURL = "\(serverURL)/\(url)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         Alamofire.request(strURL, method: .get , parameters:nil,headers:headers).validate().responseJSON { (response) in
@@ -403,7 +1202,7 @@ class APIController{
     
     
     func getJopDetails(pageNumber:Int,branchId:String,id:String,searchKey:String,callback:@escaping(_ data:JopDetailsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/positions/\(pageNumber)/10"
+        let strURL = "\(serverURL)/positions/\(pageNumber)/10"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -418,7 +1217,7 @@ class APIController{
     }
     
     func deleteJopDetails(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/POSITION/\(empId)/\(branchId)"
+        let strURL = "\(serverURL)/01f5086b879a62a05da4094dac203558/POSITION/\(empId)/\(branchId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -433,7 +1232,7 @@ class APIController{
     }
     
     func getJopList(callback:@escaping(_ data:JobListResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/joblists"
+        let strURL = "\(serverURL)/human_resources/joblists"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -449,7 +1248,7 @@ class APIController{
     
     func getNeededLicenes(setting_Id:String,callback:@escaping(_ data:JobListResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/signup/get_needed_licences/\(setting_Id)/null"
+        let strURL = "\(serverURL)/signup/get_needed_licences/\(setting_Id)/null"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -464,7 +1263,7 @@ class APIController{
     
     func addPositionOrEducation(url:String,body:[String:Any],callback:@escaping(_ data:UpdateSettingResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/\(url)"
+        let strURL = "\(serverURL)/\(url)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -480,7 +1279,7 @@ class APIController{
     
     
     func getDataForUpdateJopDetails(branchId:String,id:String,positionID:String,callback:@escaping(_ data:JopDetailsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/positions/1/1"
+        let strURL = "\(serverURL)/positions/1/1"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -497,7 +1296,7 @@ class APIController{
     
     
     func getAllContactDetails(pageNumber:String,searchKey:String,branch_id:String,id:String,employee_id_number:String,callback:@escaping(_ data:ContactGetResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/get_employee_contacts/\(pageNumber)/10"
+        let strURL = "\(serverURL)/human_resources/get_employee_contacts/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -513,7 +1312,7 @@ class APIController{
     }
     
     func deleteEmpContact(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/CONTACT/\(empId)/\(branchId)"
+        let strURL = "\(serverURL)/01f5086b879a62a05da4094dac203558/CONTACT/\(empId)/\(branchId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -528,7 +1327,7 @@ class APIController{
     }
     
     func addContact(url:String,contact_id:String,contact_person_name:String,contact_mobile_number:String,contact_email_address:String,contact_address_text:String,branch_id:String,empId:String,employee_id_number:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/human_resources/\(url)"
+        let strURL = "\(serverURL)/human_resources/\(url)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -556,7 +1355,7 @@ class APIController{
     
     
     func getAllEducationDetails(pageNumber:String,searchKey:String,branch_id:String,id:String,employee_id_number:String,callback:@escaping(_ data:EducationGetResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/get_my_educations/\(pageNumber)/10"
+        let strURL = "\(serverURL)/get_my_educations/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -573,7 +1372,7 @@ class APIController{
     
     
     func deleteEmpEducation(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/EDUCATION/\(empId)/\(branchId)"
+        let strURL = "\(serverURL)/01f5086b879a62a05da4094dac203558/EDUCATION/\(empId)/\(branchId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -589,7 +1388,7 @@ class APIController{
     
     func getVisibiltyData(callback:@escaping(_ data:SearchBranch)->Void){
         
-        let strURL = "\(APIManager.serverURL)/lflevel"
+        let strURL = "\(serverURL)/lflevel"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -605,7 +1404,7 @@ class APIController{
     
     func updateAttachmentData(body:[String:Any],callback:@escaping(_ data:UpdateSettingResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/hr_update_filename"
+        let strURL = "\(serverURL)/hr_update_filename"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -621,7 +1420,7 @@ class APIController{
     
     func uploadAttachmentData(fileUrl:URL?,body:[String:Any],callback:@escaping(_ data:UpdateSettingResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/hr_upload_attachments"
+        let strURL = "\(serverURL)/hr_upload_attachments"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let parameters:[String:Any] = body
@@ -662,7 +1461,7 @@ class APIController{
     }
     
     func getAttachmentPreview(filePath:String,callback:@escaping(_ data:GetImageResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/\(filePath)"
+        let strURL = "\(serverURL)/\(filePath)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -678,7 +1477,7 @@ class APIController{
     
     func getInsuranceData(pageNumber:String,empId:String,empIdNumber:String,branchId:String,searchKey:String,searchStatus:String,callback:@escaping(_ data:InsuranceGetResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/hr_insurance_dependents/\(pageNumber)/10"
+        let strURL = "\(serverURL)/hr_insurance_dependents/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -700,7 +1499,7 @@ class APIController{
     
     
     func deleteInsuranceDetails(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/INSURANCE/\(empId)/\(branchId)"
+        let strURL = "\(serverURL)/01f5086b879a62a05da4094dac203558/INSURANCE/\(empId)/\(branchId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -716,7 +1515,7 @@ class APIController{
     
     
     func updateInsuranceDetails(body:[String:Any],callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/hr_update_insurance"
+        let strURL = "\(serverURL)/hr_update_insurance"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -730,7 +1529,7 @@ class APIController{
     }
     
     func addInsuranceDetails(body:[String:Any],callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/hr_create_insurance"
+        let strURL = "\(serverURL)/hr_create_insurance"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -744,7 +1543,7 @@ class APIController{
     }
     
     func getAllNotes(pageNumber:String,empId:String,branchId:String,searchKey:String,searchStatus:String,callback:@escaping(_ data:NotesGetResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/hr_notes/\(pageNumber)/10"
+        let strURL = "\(serverURL)/hr_notes/\(pageNumber)/10"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let param:Parameters = ["id": empId,
@@ -761,7 +1560,7 @@ class APIController{
     }
     
     func deleteNote(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/NOTE/\(empId)/\(branchId)"
+        let strURL = "\(serverURL)/01f5086b879a62a05da4094dac203558/NOTE/\(empId)/\(branchId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -778,7 +1577,7 @@ class APIController{
     
     func addNote(note_id:String?,description:String,reminderStatusSelection:String,reminderDate:String,statusSelection:String,linkListSelection:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/\(note_id == nil ? "hr_create_notes" : "hr_update_notes")"
+        let strURL = "\(serverURL)/\(note_id == nil ? "hr_create_notes" : "hr_update_notes")"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -805,7 +1604,7 @@ class APIController{
     
     
     func getAllAttachments(pageNumber:String,empId:String,branchId:String,searchKey:String,attachmentType:String,callback:@escaping(_ data:AttachmentsGetREsponse)->Void){
-        let strURL = "\(APIManager.serverURL)/attachments_for_employee/\(pageNumber)/10"
+        let strURL = "\(serverURL)/attachments_for_employee/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -824,7 +1623,7 @@ class APIController{
     }
     
     func deleteAttachment(key_id:String,branchId:String,empId:String,callback:@escaping(_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/01f5086b879a62a05da4094dac203558/ATTACHMENT/\(empId)/\(branchId)"
+        let strURL = "\(serverURL)/01f5086b879a62a05da4094dac203558/ATTACHMENT/\(empId)/\(branchId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -839,7 +1638,7 @@ class APIController{
     }
     
     func getAttachmentTypes(callback:@escaping(_ data:AttachmentTypeResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/module_attach_types/?module_name=human_resources"
+        let strURL = "\(serverURL)/module_attach_types/?module_name=human_resources"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -853,7 +1652,7 @@ class APIController{
     }
     
     func searchForUser(searchText:String,lang:String,id:String,callback:@escaping(_ data:SearchUserResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/tc/getformuserslist?search=\(searchText)&lang_key=\(lang)&user_type_id=\(id)"
+        let strURL = "\(serverURL)/tc/getformuserslist?search=\(searchText)&lang_key=\(lang)&user_type_id=\(id)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -868,7 +1667,7 @@ class APIController{
     
     
     func submitCommunicationDetails(isIncoming:Bool,files:[String:URL],body:[String:Any],callback:@escaping(_ data:CommunicationSubmitResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/form/\(isIncoming ? "FORM_C2" : "FORM_C1")/cr/0"
+        let strURL = "\(serverURL)/form/\(isIncoming ? "FORM_C2" : "FORM_C1")/cr/0"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         Alamofire.upload(multipartFormData: { multipartFormData in
@@ -905,7 +1704,7 @@ class APIController{
     }
     
     func getModulesFilter(callback:@escaping(_ data:GetModulsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/module"
+        let strURL = "\(serverURL)/module"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -920,7 +1719,7 @@ class APIController{
     
     
     func getModules(pageNumber:String,searchKey:String,module_name:String,empId:String,callback:@escaping(_ data:AllModulesResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/employeemodules/\(pageNumber)/10?search_key=\(searchKey)&module_name=\(module_name)&id=\(empId)"
+        let strURL = "\(serverURL)/employeemodules/\(pageNumber)/10?search_key=\(searchKey)&module_name=\(module_name)&id=\(empId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -935,7 +1734,7 @@ class APIController{
     
     func getModuleUers(body:[String:Any],callback:@escaping(_ data:ModuleUersResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/moduleusers"
+        let strURL = "\(serverURL)/moduleusers"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -951,7 +1750,7 @@ class APIController{
     
     func getMyTransactionData(url:String,callback:@escaping(_ data:TransactionResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/\(url)"
+        let strURL = "\(serverURL)/\(url)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -966,7 +1765,7 @@ class APIController{
     }
     
     func sendQRCode(code:String,callback:@escaping(_ data:EmployeeResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/auto_login"
+        let strURL = "\(serverURL)/auto_login"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -980,7 +1779,7 @@ class APIController{
     }
     
     func getVactionTypes(empNum:String,callback:@escaping (_ response:VactionTypesResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/get_vacation_type/"
+        let strURL = "\(serverURL)/form/FORM_HRV1/get_vacation_type/"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -995,7 +1794,7 @@ class APIController{
     
     
     func showSelectionVactionResult(empNum:String,vacation_type_id:String,beforeDate:String,afterDate:String,callback:@escaping(_ data:SelectionVactionResult)->Void){
-        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/check_vacation_for_employee"
+        let strURL = "\(serverURL)/form/FORM_HRV1/check_vacation_for_employee"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1016,7 +1815,7 @@ class APIController{
     
     func submitVaction(fileUrl:[URL],body:[String:Any],callback:@escaping(_ data:SubmitVactionResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/cr/0"
+        let strURL = "\(serverURL)/form/FORM_HRV1/cr/0"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let parameters:[String:Any] = body
@@ -1059,7 +1858,7 @@ class APIController{
     }
     
     func getEmpInfoForVaction(empNum:String,callback:@escaping(_ data:EmpInfoResposne)->Void){
-        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/get_employee_info"
+        let strURL = "\(serverURL)/form/FORM_HRV1/get_employee_info"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
@@ -1077,7 +1876,7 @@ class APIController{
     }
     
     func getVactionData(vactionId:String,callback:@escaping(_ data:VactionFromDataResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/form/FORM_HRV1/vr/\(vactionId)"
+        let strURL = "\(serverURL)/form/FORM_HRV1/vr/\(vactionId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1087,7 +1886,11 @@ class APIController{
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 print("asdasdasdsadas - Response -",str)
                 if let parsedMapperString : VactionFromDataResponse = Mapper<VactionFromDataResponse>().map(JSONString:str){
-                    callback(parsedMapperString)
+                    if parsedMapperString.error == "Token incorrect!" || parsedMapperString.error == "Signature verification failed"{
+                        self.makeUserLogout()
+                    }else{
+                        callback(parsedMapperString)
+                    }
                 }
             }
         }
@@ -1095,7 +1898,7 @@ class APIController{
     
     
     func editUserStep(formType:String,user_id:String,transaction_request_id:String,callback:@escaping(_ data:Edit)->Void){
-        let strURL = "\(APIManager.serverURL)/form/\(formType)/asp"
+        let strURL = "\(serverURL)/form/\(formType)/asp"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1115,7 +1918,7 @@ class APIController{
     }
     
     func submitApproval(formType:String,transaction_request_id:String,approving_status:String,note:String,transactions_persons_action_code:String,callback:@escaping(_ data:Edit)->Void){
-        let strURL = "\(APIManager.serverURL)/form/\(formType)/sr"
+        let strURL = "\(serverURL)/form/\(formType)/sr"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1138,7 +1941,7 @@ class APIController{
     }
     
     func getTicketRow(ticketId:String,callback:@escaping(_ data:TicketRowResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/get_ticket_row"
+        let strURL = "\(serverURL)/tasks/get_ticket_row"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1156,9 +1959,9 @@ class APIController{
     
     
     func fetchSendCode(username:String,password:String,callback:@escaping(_ data:Edit)->Void){
-        var strURL = "\(APIManager.serverURL)/user/get_code_options?username=\(username)&password=\(password)"
+        var strURL = "\(serverURL)/user/get_code_options?username=\(username)&password=\(password)"
         strURL = strURL.replacingOccurrences(of: " ", with: "%20")
-        Alamofire.request(strURL, method: .get,encoding: URLEncoding.httpBody,headers: ["X-API-KEY":APIManager.api_key]).validate().responseJSON { (response) in
+        Alamofire.request(strURL, method: .get,encoding: URLEncoding.httpBody,headers: ["X-API-KEY":api_key]).validate().responseJSON { (response) in
             
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : Edit = Mapper<Edit>().map(JSONString:str){
@@ -1170,10 +1973,10 @@ class APIController{
     
     
     func sendCode(username:String,password:String,senderType:String,callback:@escaping(_ data:Edit)->Void){
-        let strURL = "\(APIManager.serverURL)/user/send_otp_code?username=\(username)&sender_type=\(senderType)&password=\(password)"
+        let strURL = "\(serverURL)/user/send_otp_code?username=\(username)&sender_type=\(senderType)&password=\(password)"
         
         
-        Alamofire.request(strURL, method: .get ,headers: ["X-API-KEY":APIManager.api_key]).validate().responseJSON { (response) in
+        Alamofire.request(strURL, method: .get ,headers: ["X-API-KEY":api_key]).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 
                 if let parsedMapperString : Edit = Mapper<Edit>().map(JSONString:str){
@@ -1184,7 +1987,7 @@ class APIController{
     }
     
     func changeTicketStatus(status:String,ticketId:String,callback:@escaping (_ data:Edit)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/change_status_ticket"
+        let strURL = "\(serverURL)/tasks/change_status_ticket"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let param = [
@@ -1204,7 +2007,7 @@ class APIController{
     }
     
     func getAllComments(type:String,ticketId:String,callback:@escaping (_ data:CommentsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/get_comments/asc"
+        let strURL = "\(serverURL)/tasks/get_comments/asc"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let param = [
@@ -1222,7 +2025,7 @@ class APIController{
     
     
     func addComment(comment:String,ticketId:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/add_comment"
+        let strURL = "\(serverURL)/tasks/add_comment"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let param = [
@@ -1242,7 +2045,7 @@ class APIController{
     
     func editComment(note:String,comment_id:String,callback:@escaping (_ data:DeleteCommentResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/tasks/update_comment_reply"
+        let strURL = "\(serverURL)/tasks/update_comment_reply"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         print("comment_id",comment_id)
@@ -1269,7 +2072,7 @@ class APIController{
     
     func addCommentReply(ticketId:String,reply:String,comment_id:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/tasks/add_new_reply"
+        let strURL = "\(serverURL)/tasks/add_new_reply"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1290,7 +2093,7 @@ class APIController{
     }
     
     func deleteCommentReply(comment_id:String,callback:@escaping (_ data:DeleteCommentResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/delete_comment_reply"
+        let strURL = "\(serverURL)/tasks/delete_comment_reply"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1311,7 +2114,7 @@ class APIController{
     
     func addTaskReplyToComment(taskId:String,reply:String,comment_id:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/tasks/add_reply_task"
+        let strURL = "\(serverURL)/tasks/add_reply_task"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1333,7 +2136,7 @@ class APIController{
     
     func uploadAttachInTicket(url:String,parameters:[String:Any],fileUrl:URL,callback:@escaping (_ data:UpdateSettingResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/\(url)"
+        let strURL = "\(serverURL)/\(url)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1377,7 +2180,7 @@ class APIController{
         pageNumber:String,
         callback:@escaping (_ data:DocumentsResponse)->Void){
             
-            let strURL = "\(APIManager.serverURL)/documents/get_data_documents/\(pageNumber)/10"
+            let strURL = "\(serverURL)/documents/get_data_documents/\(pageNumber)/10"
             let headers = [ "authorization":
                                 "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
             let param:Parameters = ["document_name":searchText,
@@ -1395,7 +2198,7 @@ class APIController{
         }
     
     func updateDocumentStatus(documentId:String,status:String, callback:@escaping (_ data:DocumentsResponse)-> Void){
-        let strURL = "\(APIManager.serverURL)/documents/update_document_status"
+        let strURL = "\(serverURL)/documents/update_document_status"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1414,7 +2217,7 @@ class APIController{
     }
     
     func deleteDocument(documentId:String, callback:@escaping (_ data:DocumentsResponse)-> Void){
-        let strURL = "\(APIManager.serverURL)/documents/delete_decument/\(documentId)"
+        let strURL = "\(serverURL)/documents/delete_decument/\(documentId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1429,7 +2232,7 @@ class APIController{
     
     
     func getDocAttchs(pageNumber:Int, document_id:String,callback:@escaping (_ data:DocAttachsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/documents/get_files_data_documents/\(pageNumber)/10"
+        let strURL = "\(serverURL)/documents/get_files_data_documents/\(pageNumber)/10"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         let param = ["document_id": document_id]
@@ -1445,21 +2248,45 @@ class APIController{
     
     func getContractDetails(transactionId:String,callback:@escaping (_ data:NewContractDataResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/form/FORM_CT1/vr/\(transactionId)"
+        let strURL = "\(serverURL)/form/FORM_CT1/vr/\(transactionId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : NewContractDataResponse = Mapper<NewContractDataResponse>().map(JSONString:str){
-                    callback(parsedMapperString)
+                    if parsedMapperString.error == "Token incorrect!" || parsedMapperString.error == "Signature verification failed"{
+                        self.makeUserLogout()
+                    }else{
+                        callback(parsedMapperString)
+                    }
                 }
             }
         }
     }
     
+    func getLoanFormData(transactionId:String,callback:@escaping (_ data:LoanFormResponse)->Void){
+        
+        let strURL = "\(serverURL)/form/FORM_HRLN1/vr/\(transactionId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : LoanFormResponse = Mapper<LoanFormResponse>().map(JSONString:str){
+                    if parsedMapperString.error == "Token incorrect!" || parsedMapperString.error == "Signature verification failed"{
+                        self.makeUserLogout()
+                    }else{
+                        callback(parsedMapperString)
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
     func getSendCodeWays(callback:@escaping (_ data:SendCodeWaysResponse) -> Void){
         
-        let strURL = "\(APIManager.serverURL)/tc/sender/select"
+        let strURL = "\(serverURL)/tc/sender/select"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1474,7 +2301,7 @@ class APIController{
     
     func sendCodeForApproval(body:[String:Any],callback:@escaping (_ data:SettingsData) -> Void){
         
-        let strURL = "\(APIManager.serverURL)/tc/sender/send_code"
+        let strURL = "\(serverURL)/tc/sender/send_code"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1489,7 +2316,7 @@ class APIController{
     
     func deleteItemCheckList(param:[String:Any],callback: @escaping (_ data:SettingsData)->Void){
         
-        let strURL = "\(APIManager.serverURL)/tasks/delete_task_point"
+        let strURL = "\(serverURL)/tasks/delete_task_point"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1506,7 +2333,7 @@ class APIController{
     
     func updateChecklistItem(param:[String:Any],callback: @escaping (_ data:SettingsData)->Void){
         
-        let strURL = "\(APIManager.serverURL)/tasks/update_task_points_all"
+        let strURL = "\(serverURL)/tasks/update_task_points_all"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1522,7 +2349,7 @@ class APIController{
     }
     
     func getCheckListItemFiles(sub_point_id:String,callback: @escaping (_ data:CheckListItemFile)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/get_files_in_sub_points"
+        let strURL = "\(serverURL)/tasks/get_files_in_sub_points"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1538,7 +2365,7 @@ class APIController{
     
     
     func getTimeLineForCheckListItem(sub_point_id:String,callback: @escaping (_ data:CheckListItemHistory)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/get_logs_in_sub_points"
+        let strURL = "\(serverURL)/tasks/get_logs_in_sub_points"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1554,7 +2381,7 @@ class APIController{
     
     
     func getUsersForCheckListItem(sub_point_id:String,callback: @escaping (_ data:CheckListItemUsers)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/get_emp_in_sub_points"
+        let strURL = "\(serverURL)/tasks/get_emp_in_sub_points"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1571,7 +2398,7 @@ class APIController{
     
     
     func updateCheckListTitle(pointId:String,title:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/update_task_point_main"
+        let strURL = "\(serverURL)/tasks/update_task_point_main"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1592,7 +2419,7 @@ class APIController{
     
     
     func addCheckListItem(url:String,filesUrl:[URL?],parameters:[String:Any],callback:@escaping (_ data:AddTicketCommentResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/\(url)"
+        let strURL = "\(serverURL)/\(url)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
         
@@ -1636,7 +2463,7 @@ class APIController{
     
     
     func startEndCheckListItem(point_id:String,callback:@escaping (_ data:AddTicketCommentResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/tasks/start_end_timer_check"
+        let strURL = "\(serverURL)/tasks/start_end_timer_check"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1652,7 +2479,7 @@ class APIController{
     
     
     func getHRContracts(pageNumber:String,searchKey:String,id:String,callback:@escaping (_ data:ContractsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/hrcontracts/\(pageNumber)/10?search_key=&id=\(id)"
+        let strURL = "\(serverURL)/hrcontracts/\(pageNumber)/10?search_key=&id=\(id)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1660,14 +2487,16 @@ class APIController{
         Alamofire.request(strURL, method: .get, headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : ContractsResponse = Mapper<ContractsResponse>().map(JSONString:str){
+                    
                     callback(parsedMapperString)
                 }
             }
         }
     }
     
+    
     func getDashboardData(callback: @escaping (_ data:DashboardResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/dashboard/employee_dashboard/"
+        let strURL = "\(serverURL)/dashboard/employee_dashboard/"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1683,7 +2512,7 @@ class APIController{
     
     
     func getTemplets(projects_work_area_id:String,callback: @escaping (_ data:GetTemplateResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/dashboard/get_templates?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)"
+        let strURL = "\(serverURL)/dashboard/get_templates?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1698,7 +2527,7 @@ class APIController{
     }
     
     func getGroupType(projects_work_area_id:String,templateId:String,callback: @escaping (_ data:GetGroupTypesResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/dashboard/get_types?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)"
+        let strURL = "\(serverURL)/dashboard/get_types?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -1714,7 +2543,7 @@ class APIController{
     
     
     func getGroup1(projects_work_area_id:String,templateId:String,typeCodeSystem:String,callback: @escaping (_ data:GetGroupTypesResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/dashboard/get_divisions?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)&type_code_system=\(typeCodeSystem)"
+        let strURL = "\(serverURL)/dashboard/get_divisions?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)&type_code_system=\(typeCodeSystem)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1732,7 +2561,7 @@ class APIController{
     
     
     func getGroup2(projects_work_area_id:String,templateId:String,typeCodeSystem:String,group1CodeSystem:String,callback: @escaping (_ data:GetGroupTypesResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/dashboard/get_group2?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)&type_code_system=\(typeCodeSystem)&group1_code_system=\(group1CodeSystem)"
+        let strURL = "\(serverURL)/dashboard/get_group2?lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)&type_code_system=\(typeCodeSystem)&group1_code_system=\(group1CodeSystem)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1748,7 +2577,7 @@ class APIController{
     }
     
     func getTemplatesResult(projects_work_area_id:String,search_key:String,templateId:String,typeCodeSystem:String,group1CodeSystem:String,group2CodeSystem:String,callback: @escaping (_ data:GetGroupTypesResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/dashboard/get_platforms?search_key=\(search_key)&lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&group1_code_system=\(group1CodeSystem)&type_code_system=\(typeCodeSystem)&group2_code_system=\(group2CodeSystem)&template_id=\(templateId)"
+        let strURL = "\(serverURL)/dashboard/get_platforms?search_key=\(search_key)&lang_key=\(L102Language.currentAppleLanguage())&projects_work_area_id=\(projects_work_area_id)&group1_code_system=\(group1CodeSystem)&type_code_system=\(typeCodeSystem)&group2_code_system=\(group2CodeSystem)&template_id=\(templateId)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1774,7 +2603,7 @@ class APIController{
         let day = dateFormatter.string(from: date)
         
         
-        let strURL = "\(APIManager.serverURL)/at/getnewreport/1/1000?from_year=\(year)&from_month=\(month)&from_day=\(day)&to_year=\(year)&to_month=\(month)&to_day=\(day)&employee_number[]=\(Auth_User.user_id)"
+        let strURL = "\(serverURL)/at/getnewreport/1/1000?from_year=\(year)&from_month=\(month)&from_day=\(day)&to_year=\(year)&to_month=\(month)&to_day=\(day)&employee_number[]=\(Auth_User.user_id)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1791,7 +2620,7 @@ class APIController{
     
     func getProjectWorkingAreas(callback: @escaping (_ data:ProjectWorkingAreaResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/dashboard/get_workarea?lang_key=en&wsearch_key=&projects_work_area_id="
+        let strURL = "\(serverURL)/dashboard/get_workarea?lang_key=en&wsearch_key=&projects_work_area_id="
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1808,7 +2637,7 @@ class APIController{
     
     func getProjectRequestsData(projects_work_area_id:String,callback: @escaping (_ data:ProjectRequestsData) -> Void ){
         
-        let strURL = "\(APIManager.serverURL)/pr/dashboard_counts/1/1"
+        let strURL = "\(serverURL)/pr/dashboard_counts/1/1"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1826,7 +2655,7 @@ class APIController{
     }
     
     func getProgressPlanedRatioData(projects_work_area_id:String,callback: @escaping (_ data:ProgressPlanedRatioData) -> Void ){
-        let strURL = "\(APIManager.serverURL)/pr/plan_results/1/1"
+        let strURL = "\(serverURL)/pr/plan_results/1/1"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1845,7 +2674,7 @@ class APIController{
     
     
     func getProjectRequestData(body:[String:Any],pageNumber:String,callback: @escaping (_ data:ProjectRequestData) -> Void ){
-        let strURL = "\(APIManager.serverURL)/pr/get_qtp_for_user/\(pageNumber)/10"
+        let strURL = "\(serverURL)/pr/get_qtp_for_user/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1863,7 +2692,7 @@ class APIController{
     
     func getDivision(projects_work_area_id:String,templateId:String,required_type:String,group1:String,type:String,callback: @escaping (_ data:GetGroupTypesResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)&required_type=\(required_type)&group1=\(group1)&type=\(type)"
+        let strURL = "\(serverURL)/pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(templateId)&required_type=\(required_type)&group1=\(group1)&type=\(type)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1882,7 +2711,7 @@ class APIController{
     
     func getZones(phase_parent_id:String,projects_work_area_id:String,callback: @escaping (_ data:GetZonesResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/joYF29rbEi/\(projects_work_area_id)/\(projects_work_area_id)?phase_parent_id=\(phase_parent_id)"
+        let strURL = "\(serverURL)/joYF29rbEi/\(projects_work_area_id)/\(projects_work_area_id)?phase_parent_id=\(phase_parent_id)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1900,7 +2729,7 @@ class APIController{
     
     func getLevelKeys(callback: @escaping (_ data:GetGroupTypesResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)/lpworklevel?lang_key=\(L102Language.currentAppleLanguage())"
+        let strURL = "\(serverURL)/lpworklevel?lang_key=\(L102Language.currentAppleLanguage())"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1916,7 +2745,7 @@ class APIController{
     
     
     func getTopCountRequests(projects_work_area_id:String,limit:String,callback: @escaping (_ data:TopCountRequestsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/pr/get_top_count_requests"
+        let strURL = "\(serverURL)/pr/get_top_count_requests"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1936,7 +2765,7 @@ class APIController{
     }
     
     func getUsedUnusedReport(body:[String:Any],limit:String,callback: @escaping (_ data:UsedUnusedReportResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/pr/get_used_unused_requests/1/\(limit)"
+        let strURL = "\(serverURL)/pr/get_used_unused_requests/1/\(limit)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1952,7 +2781,7 @@ class APIController{
     }
     
     func getLateContractCount(projects_work_area_id:String,callback: @escaping (_ data:LateContractResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/pr/get_count_wir_late_contractor"
+        let strURL = "\(serverURL)/pr/get_count_wir_late_contractor"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1968,7 +2797,7 @@ class APIController{
     }
     
     func getCalenderData(param:[String:Any],callback: @escaping (_ data:CalenderActivityResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/at/getnewreport/1/1000"
+        let strURL = "\(serverURL)/at/getnewreport/1/1000"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -1989,7 +2818,7 @@ class APIController{
     
     
     func getViolations(param:[String:Any],callback: @escaping (_ data:ViolationsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/at/getViolations/1/10"
+        let strURL = "\(serverURL)/at/getViolations/1/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2005,7 +2834,7 @@ class APIController{
     }
     
     func createViolation(body:[String:Any],callback: @escaping (_ data:ViolationsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/form/FORM_VOL1/amv/"
+        let strURL = "\(serverURL)/form/FORM_VOL1/amv/"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2021,7 +2850,7 @@ class APIController{
     }
     
     func cancelViolation(body:[String:Any],callback: @escaping (_ data:ViolationsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/form/FORM_VOL1/cancelViolation/"
+        let strURL = "\(serverURL)/form/FORM_VOL1/cancelViolation/"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2037,7 +2866,7 @@ class APIController{
     }
     
     func openDetailsViolation(body:[String:Any],callback: @escaping (_ data:ViolationsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/at/attendance_detaile"
+        let strURL = "\(serverURL)/at/attendance_detaile"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2053,7 +2882,7 @@ class APIController{
     }
     
     func ratioWeekViolation(body:[String:Any],callback: @escaping (_ data:RatioWeekResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/at/ratio_week"
+        let strURL = "\(serverURL)/at/ratio_week"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2069,7 +2898,7 @@ class APIController{
     }
     
     func ratioMonthViolation(body:[String:Any],callback: @escaping (_ data:RatioWeekResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/at/ratio_month"
+        let strURL = "\(serverURL)/at/ratio_month"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2086,7 +2915,7 @@ class APIController{
     
     
     func startInboxsTimer(callback: @escaping (_ data:MailInboxResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/users/email/mailbox"
+        let strURL = "\(serverURL)/users/email/mailbox"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2104,14 +2933,18 @@ class APIController{
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 
                 if let parsedMapperString : MailInboxResponse = Mapper<MailInboxResponse>().map(JSONString:str){
-                    callback(parsedMapperString)
+                    if parsedMapperString.error == "Token incorrect!" || parsedMapperString.error == "Signature verification failed"{
+                        self.makeUserLogout()
+                    }else{
+                        callback(parsedMapperString)
+                    }
                 }
             }
         }
     }
     
     func getAttendanceGroups(pageNumber:String,callback: @escaping (_ data:GetAttendanceGroupsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/at/get_groups/\(pageNumber)/10"
+        let strURL = "\(serverURL)/at/get_groups/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2127,7 +2960,7 @@ class APIController{
     }
     
     func getUpdateAttendanceGroupsData(groupId:String,callback: @escaping (_ data:GetAttendanceGroupsResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/at/get_groups/1/10?search_key=&group_id=\(groupId)"
+        let strURL = "\(serverURL)/at/get_groups/1/10?search_key=&group_id=\(groupId)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2143,7 +2976,7 @@ class APIController{
     }
     
     func updateAttendanceGroupsData(url:String,body:[String:Any],callback: @escaping (_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)\(url)"
+        let strURL = "\(serverURL)\(url)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2159,7 +2992,7 @@ class APIController{
     }
     
     func deleteAttendanceGroupsData(groupId:String,callback: @escaping (_ data:UpdateSettingResponse)->Void){
-        let strURL = "\(APIManager.serverURL)/at/delete_groups"
+        let strURL = "\(serverURL)/at/delete_groups"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2179,7 +3012,7 @@ class APIController{
                                 date:String,
                                 callback: @escaping (_ data:UpdateSettingResponse)->Void
     ){
-        let strURL = "\(APIManager.serverURL)/at/update_employee_status"
+        let strURL = "\(serverURL)/at/update_employee_status"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2203,7 +3036,7 @@ class APIController{
     func getShiftsAttendance(pageNumber:String,
                                 callback: @escaping (_ data:GetShiftsResponse)->Void
     ){
-        let strURL = "\(APIManager.serverURL)/at/get_shifts/\(pageNumber)/10"
+        let strURL = "\(serverURL)/at/get_shifts/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2221,7 +3054,7 @@ class APIController{
     
     
     func getShiftsGroups(callback: @escaping (_ data:SearchBranch)->Void){
-        let strURL = "\(APIManager.serverURL)/at/groups?lang_key=\(L102Language.currentAppleLanguage())"
+        let strURL = "\(serverURL)/at/groups?lang_key=\(L102Language.currentAppleLanguage())"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2239,7 +3072,7 @@ class APIController{
     
     func createShiftGroups(url:String,body:[String:Any],callback: @escaping (_ data:UpdateSettingResponse)->Void){
         
-        let strURL = "\(APIManager.serverURL)\(url)"
+        let strURL = "\(serverURL)\(url)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2256,7 +3089,7 @@ class APIController{
     
     func deleteShiftGroups(deleteId:String,callback: @escaping (_ data:UpdateSettingResponse)->Void){
 
-        let strURL = "\(APIManager.serverURL)/at/delete_shifts"
+        let strURL = "\(serverURL)/at/delete_shifts"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2273,7 +3106,7 @@ class APIController{
     
     func changePassword(body:[String:Any],callback: @escaping (_ data:UpdateSettingResponse)->Void){
 
-        let strURL = "\(APIManager.serverURL)/cpassword"
+        let strURL = "\(serverURL)/cpassword"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -2288,6 +3121,46 @@ class APIController{
             }
         }
     }
+    
+    
+    func getJoiningDetails(pageNumber:String,empNum:String,callback: @escaping (_ data:JoiningDetailsResponse)->Void){
+
+        let strURL = "\(serverURL)/human_resources/get_employee_joining_history/\(pageNumber)/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+       
+        Alamofire.request(strURL, method: .post, parameters: ["employee_number":empNum] ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : JoiningDetailsResponse = Mapper<JoiningDetailsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getJobDetails(pageNumber:String,branch_id:String,empNum:String,searchKey:String,callback: @escaping (_ data:JobDetailsResponse)->Void){
+
+        let strURL = "\(serverURL)/positions/\(pageNumber)/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        let body = ["branch_id":branch_id , "id": empNum, "searchKey": searchKey]
+        
+        Alamofire.request(strURL, method: .post, parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : JobDetailsResponse = Mapper<JobDetailsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
+    
     
     func getDateString(with string:String)-> String?{
         let dateFormatter = DateFormatter()

@@ -99,7 +99,7 @@ class CheckListVC: UIViewController {
         self.showLoadingActivity()
         let param :[String:Any] = ["task_id" : task_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_points_task_main", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_points_task_main", parameters: param ) { (response) in
             self.arr_data.removeAll()
             let status = response["status"] as? Bool
             if status == true{
@@ -131,7 +131,7 @@ class CheckListVC: UIViewController {
         self.showLoadingActivity()
         let param :[String:Any] = ["point_id" : point_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_task_point_main", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/delete_task_point_main", parameters: param ) { (response) in
             self.hideLoadingActivity()
            
             let status = response["status"] as? Bool
@@ -152,7 +152,7 @@ class CheckListVC: UIViewController {
         self.showLoadingActivity()
         let param :[String:Any] = ["point_id" : point_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: param ) { (response) in
             self.hideLoadingActivity()
            
             let status = response["status"] as? Bool

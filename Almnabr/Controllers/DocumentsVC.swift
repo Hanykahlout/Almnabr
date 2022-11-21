@@ -158,7 +158,7 @@ class DocumentsVC: UIViewController {
         
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
-        APIManager.sendRequestGetAuth(urlString: "gnN4Pp81e9/\(projects_profile_id)/\(projects_supervision_id)/\(pageNumber)/10?searchKey=\(search)&documents_file_status=\(StrActive)&document_type=\(StrDocumentType)&item_document_type=\(StrDivision)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "gnN4Pp81e9/\(projects_profile_id)/\(projects_supervision_id)/\(pageNumber)/10?searchKey=\(search)&documents_file_status=\(StrActive)&document_type=\(StrDocumentType)&item_document_type=\(StrDivision)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
@@ -243,7 +243,7 @@ class DocumentsVC: UIViewController {
     func get_DocumentType(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "ZyYkGcK85IUr/DCT01" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "ZyYkGcK85IUr/DCT01" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -270,7 +270,7 @@ class DocumentsVC: UIViewController {
     func get_Division(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "ZyYkGcK85IUr/ID001" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "ZyYkGcK85IUr/ID001" ) { (response) in
             
             
             let status = response["status"] as? Bool

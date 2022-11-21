@@ -104,7 +104,7 @@ class CommunicationsVC: UIViewController {
         
         
                                        
-      APIManager.sendRequestPostAuth(urlString: "ccustom/human_resources_list", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "ccustom/human_resources_list", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
             
             if self.pageNumber == 1 {

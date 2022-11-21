@@ -156,7 +156,7 @@ class TaskFilterVC: UIViewController {
         self.showLoadingActivity()
         
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_add", parameters: [:] ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_add", parameters: [:] ) { (response) in
             self.hideLoadingActivity()
             
            
@@ -215,7 +215,7 @@ class TaskFilterVC: UIViewController {
 
         var param :[String:Any] = [:]
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{

@@ -222,7 +222,7 @@ class SignInVC: UIViewController {
         
         
         
-        APIManager.postAnyData(queryString: "login", parameters: params ) { (responseObject, error) in
+        APIController.shard.postAnyData(queryString: "login", parameters: params ) { (responseObject, error) in
             self.hideLoadingActivity()
             // AppInstance.hideLoader()
             self.btnLogin.isEnabled = true

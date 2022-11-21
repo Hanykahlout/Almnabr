@@ -181,7 +181,7 @@ class FromTransactionVC: UIViewController {
         }
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
-        APIManager.sendRequestGetAuth(urlString:   "p/formstransactions/\(projects_profile_id)/\(pageNumber)/10?search_key=\(search)&projects_profile_id=\(projects_profile_id)&platform_group1_code_system=\(StrsearchGroup1Code)&platform_group_type_code_system=\(StrsearchGroupTypeCode)&platform_group2_code_system=\(StrsearchGroup2)&template_id=\(StrsearchByTempelateCode)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString:   "p/formstransactions/\(projects_profile_id)/\(pageNumber)/10?search_key=\(search)&projects_profile_id=\(projects_profile_id)&platform_group1_code_system=\(StrsearchGroup1Code)&platform_group_type_code_system=\(StrsearchGroupTypeCode)&platform_group2_code_system=\(StrsearchGroup2)&template_id=\(StrsearchByTempelateCode)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
@@ -242,7 +242,7 @@ class FromTransactionVC: UIViewController {
         
         self.showLoadingActivity()
         let language =  L102Language.currentAppleLanguage()
-        APIManager.sendRequestGetAuth(urlString: "p/get_templates_for_transactions?lang_key=\(language ?? "ar")&projects_work_area_id=\(projects_work_area_id)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "p/get_templates_for_transactions?lang_key=\(language ?? "ar")&projects_work_area_id=\(projects_work_area_id)" ) { (response) in
             
             self.arr_Tempelate = []
             self.arr_TempelateLabel = []
@@ -271,7 +271,7 @@ class FromTransactionVC: UIViewController {
         
         //pforms/get_group1_type_group2?projects_work_area_id=1&template_id=1&required_type=type&group1=2&type=
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(StrsearchByTempelateCode)&required_type=type&group1=\(self.StrsearchGroup1Code)&type=" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(StrsearchByTempelateCode)&required_type=type&group1=\(self.StrsearchGroup1Code)&type=" ) { (response) in
             
             self.arr_GroupType = []
             self.arr_GroupTypeLabel = []
@@ -301,7 +301,7 @@ class FromTransactionVC: UIViewController {
         
         //pforms/get_group1_type_group2?projects_work_area_id=1&template_id=1&required_type=group1&group1=&type=
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(StrsearchByTempelateCode)&required_type=group1&group1=&type=" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(StrsearchByTempelateCode)&required_type=group1&group1=&type=" ) { (response) in
             
             self.arr_Group1 = []
             self.arr_Group1Label = []
@@ -333,7 +333,7 @@ class FromTransactionVC: UIViewController {
         //https://nahidh.sa/backend/pforms/get_group1_type_group2?projects_work_area_id=1&template_id=1&required_type=group2&group1=2&type=WIR
         self.arr_Group2Label = []
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(StrsearchByTempelateCode)&required_type=group2&group1=\(self.StrsearchGroup1Code)&type=\(self.StrsearchGroupTypeCode)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(StrsearchByTempelateCode)&required_type=group2&group1=\(self.StrsearchGroup1Code)&type=\(self.StrsearchGroupTypeCode)" ) { (response) in
             
             self.arr_Group2 = []
             self.arr_Group2Label = []

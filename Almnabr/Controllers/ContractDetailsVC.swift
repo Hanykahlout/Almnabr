@@ -77,7 +77,7 @@ class ContractDetailsVC: UIViewController {
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         //get_profile_contract_lists/1/10?search_key=&id=7
         
-        APIManager.sendRequestGetAuth(urlString: "get_profile_contract_lists/\(pageNumber)/10?search_key=\(search)&id=\(profile_obj?.employee_number ?? "0")" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "get_profile_contract_lists/\(pageNumber)/10?search_key=\(search)&id=\(profile_obj?.employee_number ?? "0")" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()

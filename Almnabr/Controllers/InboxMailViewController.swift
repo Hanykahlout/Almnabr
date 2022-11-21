@@ -23,12 +23,9 @@ class InboxMailViewController: UIViewController {
     
     private func initialization(){
         setUpTableView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         getInbox()
     }
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -83,6 +80,7 @@ extension InboxMailViewController{
         }
     }
 }
+
 
 
 

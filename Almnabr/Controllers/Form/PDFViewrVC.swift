@@ -32,7 +32,7 @@ class PDFViewrVC: UIViewController, CAAnimationDelegate {
     func get_PDF(url:String){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: url ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: url ) { (response) in
             
             
             let status = response["status"] as? Bool

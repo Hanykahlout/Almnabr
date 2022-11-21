@@ -119,7 +119,7 @@ class ContactsVC: UIViewController {
         }
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
-        APIManager.sendRequestGetAuth(urlString: "ckhGSW9rIyAlGX6/\(projects_profile_id)/\(projects_supervision_id)/\(pageNumber)/10?searchKey=\(search)&contacts_type=\(StrContact)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "ckhGSW9rIyAlGX6/\(projects_profile_id)/\(projects_supervision_id)/\(pageNumber)/10?searchKey=\(search)&contacts_type=\(StrContact)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()

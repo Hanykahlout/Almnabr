@@ -214,7 +214,7 @@ class TicketViewController: UIViewController {
         self.showLoadingActivity()
         let param :[String:Any] = ["ticket_id" : self.ticket_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_tasks", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_tasks", parameters: param ) { (response) in
             self.hideLoadingActivity()
             self.arr_data = []
             let status = response["status"] as? Bool
@@ -245,7 +245,7 @@ class TicketViewController: UIViewController {
         self.showLoadingActivity()
         let param :[String:Any] = ["task_id" : task_id,"status":status]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/change_status_task", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/change_status_task", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool

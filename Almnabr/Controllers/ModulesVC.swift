@@ -100,7 +100,7 @@ class ModulesVC: UIViewController {
         }
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
 
-        APIManager.sendRequestGetAuth(urlString: "mymodules/\(pageNumber)/10?search_key=\(search)&module_name=\(SearchFilter)&id=\(profile_obj?.employee_number ?? "7")" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "mymodules/\(pageNumber)/10?search_key=\(search)&module_name=\(SearchFilter)&id=\(profile_obj?.employee_number ?? "7")" ) { (response) in
         self.hideLoadingActivity()
             
             if self.pageNumber == 1 {
@@ -150,7 +150,7 @@ class ModulesVC: UIViewController {
     func get_module(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestPostAuth(urlString: "module", parameters: [:]) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "module", parameters: [:]) { (response) in
        // sendRequestGetAuth(urlString: "module" ) { (response) in
             
             

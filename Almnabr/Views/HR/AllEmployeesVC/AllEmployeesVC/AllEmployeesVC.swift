@@ -111,9 +111,10 @@ extension AllEmployeesVC:UITableViewDelegate,UITableViewDataSource{
 // MARK: - Cell Delegate
 
 extension AllEmployeesVC:EmployeeTableViewCellDelegate{
-    func goToViewVC(empID: String, empImage: String) {
+    func goToViewVC(empID: String, branchId:String, empImage: String) {
         let vc:ViewEmployeeDetailsVC = AppDelegate.HRSB.instanceVC()
         vc.empId = empID
+        vc.branchId = branchId
         vc.empImageString = empImage
         navigationController?.pushViewController(vc, animated: true)
     }

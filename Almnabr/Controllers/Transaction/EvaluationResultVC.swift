@@ -152,7 +152,7 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate , Att
             
         }
         
-        APIManager.func_UploadEvalution(queryString: "form/\(obj_transaction?.transaction_key ?? " ")/Evaluation_Result/1",arr_attachments, param: params ) { (response) in
+        APIController.shard.func_UploadEvalution(queryString: "form/\(obj_transaction?.transaction_key ?? " ")/Evaluation_Result/1",arr_attachments, param: params ) { (response) in
             self.hideLoadingActivity()
             
             
@@ -186,7 +186,7 @@ class EvaluationResultVC: UIViewController, UINavigationControllerDelegate , Att
         self.showLoadingActivity()
         
         let params = ["transaction_request_id" : obj_transaction?.transaction_request_id ?? "0"]
-        APIManager.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Evaluation_Result/0", parameters: params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Evaluation_Result/0", parameters: params ) { (response) in
             self.hideLoadingActivity()
             
             

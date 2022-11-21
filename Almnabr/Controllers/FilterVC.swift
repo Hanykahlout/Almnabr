@@ -393,7 +393,7 @@ class FilterVC: UIViewController , UITextFieldDelegate ,FilterDelegate , SubFilt
         self.showLoadingActivity()
         
         
-        APIManager.sendRequestGetAuth(urlString: "pr/get_filter_details?filter_id=\(filter_id)") { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "pr/get_filter_details?filter_id=\(filter_id)") { (response) in
             self.hideLoadingActivity()
           
             let status = response["status"] as? Bool
@@ -423,7 +423,7 @@ class FilterVC: UIViewController , UITextFieldDelegate ,FilterDelegate , SubFilt
         
         self.showLoadingActivity()
         
-        APIManager.sendRequestGetAuth(urlString: "pr/get_filter_list?filter_key=FP1&projects_work_area_id=\(projects_work_area_id)") { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "pr/get_filter_list?filter_key=FP1&projects_work_area_id=\(projects_work_area_id)") { (response) in
             self.hideLoadingActivity()
           
             let status = response["status"] as? Bool
@@ -455,7 +455,7 @@ class FilterVC: UIViewController , UITextFieldDelegate ,FilterDelegate , SubFilt
         
         let language = L102Language.currentAppleLanguage()
         
-        APIManager.sendRequestGetAuth(urlString: "lpworklevel?lang_key=\(language)") { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "lpworklevel?lang_key=\(language)") { (response) in
             self.hideLoadingActivity()
           
             let status = response["status"] as? Bool
@@ -966,7 +966,7 @@ class FilterVC: UIViewController , UITextFieldDelegate ,FilterDelegate , SubFilt
         self.param["filter_key"] = "FP1"
         self.param["projects_work_area_id"] = projects_work_area_id
        
-          APIManager.sendRequestPostAuth(urlString: "pr/craete_update_filter", parameters: self.param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "pr/craete_update_filter", parameters: self.param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool

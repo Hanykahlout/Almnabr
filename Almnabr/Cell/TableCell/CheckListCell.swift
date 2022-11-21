@@ -164,7 +164,7 @@ class CheckListCell: UITableViewCell ,UITableViewDataSource,UITableViewDelegate{
             self.showLoadingActivity()
             let param :[String:Any] = ["point_id" : obj.check_id]
             
-            APIManager.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: param ) { (response) in
+            APIController.shard.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: param ) { (response) in
                 self.hideLoadingActivity()
                 
                 let status = response["status"] as? Bool

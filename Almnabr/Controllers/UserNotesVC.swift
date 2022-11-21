@@ -85,7 +85,7 @@ func get_data(showLoading: Bool, loadOnly: Bool){
     self.params["search_status"] = ""
  
     
-    APIManager.sendRequestPostAuth(urlString: "get_my_notes/\(pageNumber)/10", parameters: self.params ) { (response) in
+    APIController.shard.sendRequestPostAuth(urlString: "get_my_notes/\(pageNumber)/10", parameters: self.params ) { (response) in
         self.hideLoadingActivity()
         
         if self.pageNumber == 1 {

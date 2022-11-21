@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func get_theme(){
         
-        APIManager.sendRequestGetAuthTheme(urlString: "gettheme" ) { (response) in
+        APIController.shard.sendRequestGetAuthTheme(urlString: "gettheme" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{

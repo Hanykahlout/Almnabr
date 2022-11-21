@@ -46,6 +46,7 @@ class TransactionsVC: UIViewController {
     
     
     @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var searchTextField: TextFieldWithPadding!
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -57,8 +58,8 @@ class TransactionsVC: UIViewController {
     private var StrsearchByModule:String = ""
     private var StrsearchByForm:String = ""
     private var SearchKey:String = ""
-    private var SearchAllpending:String = "all_pending"
-    private var StrsearchByAdmin:Int = 1
+    private var SearchAllpending:String = "all_pending_need_action"
+    private var StrsearchByAdmin:Int = 0
     private var pageNumber = 1
     private var total:Int = 0
     private var allItemDownloaded = false
@@ -80,6 +81,7 @@ class TransactionsVC: UIViewController {
     private let dropDownmage =  UIImage.fontAwesomeIcon(name: .chevronDown , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
     
     private let kCellheaderReuse : String = "MyTransactionHeaderView"
+    private let refreshControl = UIRefreshControl()
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +93,8 @@ class TransactionsVC: UIViewController {
         get_forms()
         header.btnAction = self.menu_select
         configGUI()
-        get_Transaction_data(showLoading: true, loadOnly: true)
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        searchTextField.addTarget(self, action: #selector(searchAction), for: .editingChanged)
     }
     
     
@@ -147,17 +150,17 @@ class TransactionsVC: UIViewController {
         
         
         self.viewsearchByForm.setBorderGrayWidthCorner(1, 20)
-        self.lblsearchByForm.text = "WIR"
+        self.lblsearchByForm.text = "Search By Form"
         //"txt_searchByForm".localized()
         self.lblsearchByForm.font = .kufiRegularFont(ofSize: 13)
         
         // for first puplish
         self.viewsearchByForm.isUserInteractionEnabled = true
-        self.StrsearchByForm = "FORM_WIR"
+        self.StrsearchByForm = ""
         
         
         self.viewsearchAdmin.setBorderGrayWidthCorner(1, 20)
-        self.lblsearchAdmin.text =  "txt_searchAdmin".localized()
+        self.lblsearchAdmin.text =  "Users".localized()
         self.lblsearchAdmin.font = .kufiRegularFont(ofSize: 13)
         
         self.viewsearchByModule.setBorderGrayWidthCorner(1, 20)
@@ -173,6 +176,7 @@ class TransactionsVC: UIViewController {
         
         table.dataSource = self
         table.delegate = self
+        table.refreshControl = refreshControl
         let nib = UINib(nibName: "MyTrannsactionTVCell", bundle: nil)
         table.register(nib, forCellReuseIdentifier: "MyTrannsactionTVCell")
         
@@ -188,16 +192,15 @@ class TransactionsVC: UIViewController {
     
     
     
-    
     func get_Transaction_data(showLoading: Bool, loadOnly: Bool){
         
         if showLoading {
             self.showLoadingActivity()
         }
-        let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
+        let search:String = searchTextField.text!.replacingOccurrences(of: " ", with: "%20").trim()
         
         
-        APIManager.sendRequestGetAuth(urlString: "/tc/list/\(pageNumber)/10?searchKey=\(search)&searchAdmin=\(StrsearchByAdmin)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)&searchByStatus=\(SearchAllpending)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "/tc/list/\(pageNumber)/10?searchKey=\(search)&searchAdmin=\(StrsearchByAdmin)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)&searchByStatus=\(SearchAllpending)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
@@ -235,26 +238,29 @@ class TransactionsVC: UIViewController {
                     }
                     self.table.isHidden = false
                     self.table.reloadData()
-                    self.hideLoadingActivity()
+                    
                 }
-                
-            }else{
-                self.table.isHidden = true
-                self.imgnodata.isHidden = false
-                self.hideLoadingActivity()
                 
             }
             
+            self.imgnodata.isHidden = !self.arr_data.isEmpty
+            self.hideLoadingActivity()
+            if self.refreshControl.isRefreshing{
+                self.refreshControl.endRefreshing()
+            }
             
         }
-        //        self.hideLoadingActivity()
+                
     }
     
-    
     func get_module(){
+        self.arr_module.removeAll()
+        self.arr_module.append(.init([:]))
+        self.arr_moduleLabel.removeAll()
+        self.arr_moduleLabel.append("Search By Module")
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "tc/getmodulesmydoclist" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/getmodulesmydoclist" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -277,9 +283,12 @@ class TransactionsVC: UIViewController {
     
     
     func get_forms(){
-        
+        self.arr_form.removeAll()
+        self.arr_formeLabel.removeAll()
+        self.arr_formeLabel.append("Search By Form")
+        self.arr_form.append(.init([:]))
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "tc/gettcmydoclist" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/gettcmydoclist" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -310,6 +319,19 @@ class TransactionsVC: UIViewController {
         }
         
     }
+    
+    @objc func refresh(){
+        get_Transaction_data(showLoading: true, loadOnly: true)
+    }
+    
+    @objc func searchAction(){
+        if !arr_data.isEmpty{
+            table.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+        }
+        get_Transaction_data(showLoading: true, loadOnly: true)
+    }
+    
+    
     @objc func buttonMenuAction(sender: UIButton!) {
         let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
@@ -361,13 +383,13 @@ class TransactionsVC: UIViewController {
         vc.delegate = {name , index in
             if name == self.arr_formeLabel[index] {
                 self.lblsearchByForm.text =  name
-                let i =  self.arr_form[index].value
+                let i = self.arr_form[index].value
                 self.StrsearchByForm = i
                 
                 self.imgDropForm.image = self.dropDownmage
                 self.get_Transaction_data(showLoading: true, loadOnly: true)
             }
-            
+
         }
         self.present(vc, animated: true, completion: nil)
         
@@ -441,7 +463,7 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         let to = "To".localized() + ":  \(obj.transaction_to_name)"
         let barcode = "  \(obj.barcode)"
         //"Barcode".localized() +
-        let type = "Type".localized() + ":  \(obj.transactions_type_name)"
+        let type = "Type".localized() + ":  \(obj.transactions_type_name )"
         let Module = "Module".localized() + ":  \(obj.module_name)"
         let Form = "Form".localized() + ":  \(obj.transactions_name)"
         let writer = "By".localized() + ":  \(obj.transaction_request_user_name_writer)"
@@ -509,7 +531,7 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
     }
     
     
-    
+        
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         
         let obj = self.arr_data[indexPath.item]
@@ -527,6 +549,10 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         case "FORM_CT1":
             let vc = NewContractVC()
             vc.transaction_request_id = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_HRLN1":
+            let vc = LoanViewController()
+            vc.transactionId = obj.transaction_request_id
             self.navigationController?.pushViewController(vc, animated: true)
         default:
             break

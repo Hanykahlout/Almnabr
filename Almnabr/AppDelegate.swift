@@ -126,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     
     func get_theme(){
         
-        APIManager.sendRequestGetAuthTheme(urlString: "gettheme" ) { (response) in
+        APIController.shard.sendRequestGetAuthTheme(urlString: "gettheme" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{

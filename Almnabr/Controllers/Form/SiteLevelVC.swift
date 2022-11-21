@@ -329,7 +329,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         //        }
         
         // self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/get_work_levels_for_transaction?projects_work_area_id=\( self.projects_work_area_id)&platform_code_system=\( self.template_platform_code_system)&transaction_separation=0&template_id=\(self.template_id)&lang_key=en&work_site=ALL" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/get_work_levels_for_transaction?projects_work_area_id=\( self.projects_work_area_id)&platform_code_system=\( self.template_platform_code_system)&transaction_separation=0&template_id=\(self.template_id)&lang_key=en&work_site=ALL" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -360,7 +360,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
     func validate_work_levels(value:String){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/validate_work_levels?projects_work_area_id=\( self.projects_work_area_id)&platform_code_system=\( self.template_platform_code_system)&work_site=ALL&transaction_separation=0&work_site_type=ALL&template_id=1&work_levels=\(value)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/validate_work_levels?projects_work_area_id=\( self.projects_work_area_id)&platform_code_system=\( self.template_platform_code_system)&work_site=ALL&transaction_separation=0&work_site_type=ALL&template_id=1&work_levels=\(value)" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -425,7 +425,7 @@ class SiteLevelVC: UIViewController , ByPhasesDelegate ,GeneralDelegate{
         
         
         
-        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/cr/1/\(transaction_id)", parameters: params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/cr/1/\(transaction_id)", parameters: params ) { (response) in
             self.hideLoadingActivity()
             
             

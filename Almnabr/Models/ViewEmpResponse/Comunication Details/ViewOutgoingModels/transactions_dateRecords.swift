@@ -25,7 +25,7 @@ struct transactions_dateRecords : Mappable {
 	var transactions_date_days_of_delay : String?
 	var transactions_date_status : String?
 	var transaction_request_status : String?
-
+   
 	init?(map: Map) {
 
 	}

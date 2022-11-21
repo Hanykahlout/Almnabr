@@ -247,7 +247,7 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
      
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/customer_users?lang_key=en&user_position=CST001,CSM001&projects_work_area_id=\(obj_FormWir?.projects_work_area_id ?? "1")" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/customer_users?lang_key=en&user_position=CST001,CSM001&projects_work_area_id=\(obj_FormWir?.projects_work_area_id ?? "1")" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -284,7 +284,7 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
                           "customer_representative_type":self.customer_representative_type,
                           "owner_users" : owner_users,
                           "transactions_persons_action_code" : "501658"]
-            APIManager.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Manager_Approval/0", parameters: params ) { (response) in
+            APIController.shard.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Manager_Approval/0", parameters: params ) { (response) in
                 self.hideLoadingActivity()
                
                 
@@ -355,7 +355,7 @@ class ManagerApprovalVC: UIViewController, UINavigationControllerDelegate {
         
         showLoadingActivity()
         
-        APIManager.func_Upload(queryString: "/form/\(obj_transaction?.transaction_key ?? " ")/Manager_Approval/0", arr_file, param: self.param ) { (respnse ) in
+        APIController.shard.func_Upload(queryString: "/form/\(obj_transaction?.transaction_key ?? " ")/Manager_Approval/0", arr_file, param: self.param ) { (respnse ) in
             
             let status = respnse["status"] as? Bool
             let msg = respnse["msg"] as? String

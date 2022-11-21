@@ -38,7 +38,8 @@ struct transactions_personsRecords : Mappable {
 	var transactions_persons_action_status : String?
 	var transactions_persons_last_step : String?
 	var person_name : String?
-
+    
+    
 	init?(map: Map) {
 
 	}

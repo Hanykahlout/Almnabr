@@ -27,12 +27,11 @@ class PersonDetailsTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setData(data:transactions_personsRecords){
+    func setData(data:TransactionsPersons){
         nameLAbel.text = data.person_name ?? ""
         typeLabel.text = data.transaction_persons_type ?? ""
         viewCheckImageView.tintColor = data.transactions_persons_view == "1" ? .green : .gray
         viewTimeLabel.text = data.transactions_persons_view_datetime ?? ""
-//        lastViewTimeLable.text  =
         actionCheckImageView.tintColor = data.transactions_persons_action_status == "1" ? .green : .gray
         
     }

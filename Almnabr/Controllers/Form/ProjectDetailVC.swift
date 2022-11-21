@@ -154,7 +154,7 @@ class ProjectDetailVC: UIViewController {
         let param = ["projects_work_area_id" : ProjectObj?.projects_work_area_id ?? "1",
                      "platform_code_system" : ProjectObj?.template_platform_code_system ?? "2.WIR.1.1",
                      "template_id" : ProjectObj?.template_id ?? "1"] as [String :Any]
-        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(ProjectObj?.template_platform_group_type_code_system ?? "WIR")/cr/0/0",parameters: param) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "form/FORM_\(ProjectObj?.template_platform_group_type_code_system ?? "WIR")/cr/0/0",parameters: param) { (response) in
             //,Parameters : param
             let status = response["status"] as? Bool
             if status == true{

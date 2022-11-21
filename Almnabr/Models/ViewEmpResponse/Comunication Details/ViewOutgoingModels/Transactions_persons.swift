@@ -16,7 +16,7 @@ import ObjectMapper
 
 struct Transactions_persons : Mappable {
 	var status : Bool?
-	var records : [transactions_personsRecords]?
+	var records : [TransactionsPersons]?
 
 	init?(map: Map) {
 

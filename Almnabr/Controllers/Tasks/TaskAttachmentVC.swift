@@ -113,7 +113,7 @@ class TaskAttachmentVC: UIViewController {
         
         self.showLoadingActivity()
         let param :[String:Any] = ["ticket_id" : ticket_id]
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_files_in_ticket", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_files_in_ticket", parameters: param ) { (response) in
             self.arr_data.removeAll()
             let status = response["status"] as? Bool
             if status == true{
@@ -145,7 +145,7 @@ class TaskAttachmentVC: UIViewController {
         
         self.showLoadingActivity()
         let param :[String:Any] = ["file_id" : id]
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_file_ticket", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/delete_file_ticket", parameters: param ) { (response) in
             self.hideLoadingActivity()
             let status = response["status"] as? Bool
             if status == false{

@@ -20,6 +20,7 @@ class ViewEmployeeDetailsVC: UIViewController {
     @IBOutlet weak var forwordImageView: UIImageView!
     @IBOutlet weak var reverseImageView: UIImageView!
     var empId = ""
+    var branchId = ""
     private var selectedIndex = 0
     public static var empData = EmpViewResponse()
     
@@ -75,29 +76,20 @@ class ViewEmployeeDetailsVC: UIViewController {
     }
     
     private func setCollectionData(){
+        
         data.append(.init(bgColor: UIColor(named: "AppColor")!, icon: UIImage(systemName: "person.fill")!, title: "ID Details".localized()))
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "doc.on.doc")!, title: "Other Details".localized()))
         
         data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "doc.on.doc")!, title: "Contract Details".localized()))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "doc.on.doc")!, title: "Joining Details".localized()))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "bag.fill")!, title: "Job Details".localized()))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "link.circle.fill")!, title: "Communications".localized()))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.2.fill")!, title: "Contact Details".localized()))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "building.columns.fill")!, title: "Bank Details".localized()))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "book.closed.fill")!, title: "Education Details".localized()))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "airplane")!, title: "Passport Details".localized()))
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "building.2")!, title: "Insurance Details".localized()))
+        
+        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "bag.fill")!, title: "Documents".localized()))
+        
         data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.text.rectangle.fill")!, title: "Vacations".localized()))
-        
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "note.text")!, title: "Notes".localized()))
-        
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(named: "attach-icon")!, title: "Attachments".localized()))
         
         data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "person.text.rectangle.fill")!, title: "Modules".localized()))
         
         data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "dollarsign.circle.fill")!, title: "Financial Details".localized()))
         
-        data.append(.init(bgColor: UIColor.black, icon: UIImage(systemName: "calendar")!, title: "Calendar View".localized()))
-
     }
     
     
@@ -182,7 +174,7 @@ extension ViewEmployeeDetailsVC{
     
     private func getEmployeeViewData(){
         showLoadingActivity()
-        APIController.shard.getEmployeeViewData(empId: empId) { data in
+        APIController.shard.getEmployeeViewData(empId: empId,branchId: branchId) { data in
             self.hideLoadingActivity()
             if let status = data.status,status{
                 ViewEmployeeDetailsVC.empData = data
@@ -193,4 +185,6 @@ extension ViewEmployeeDetailsVC{
             }
         }
     }
+    
+    
 }

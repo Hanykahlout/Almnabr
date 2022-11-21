@@ -12,7 +12,7 @@ class OutgoingHistoryViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageLabel: UILabel!
-    private var data = [transactions_recordsRecords]()
+    private var data = [TransactionsContractRecord]()
     override func viewDidLoad() {
         super.viewDidLoad()
         initlziation()

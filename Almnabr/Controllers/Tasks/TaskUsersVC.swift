@@ -73,7 +73,7 @@ class TaskUsersVC: UIViewController {
     func get_users(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_emp_in_task", parameters: ["task_id":self.task_id] ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_emp_in_task", parameters: ["task_id":self.task_id] ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -105,7 +105,7 @@ class TaskUsersVC: UIViewController {
         var param :[String:Any] = [:]
         self.showLoadingActivity()
 //        tasks/emp_in_ticket
-        APIManager.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
@@ -195,7 +195,7 @@ class TaskUsersVC: UIViewController {
         let param:[String:Any] = ["task_id" : self.task_id,
                                   "emp_id" : Ids]
         
-        APIManager.sendRequestPostAuth(urlString: Url, parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: Url, parameters: param ) { (response) in
             
             
             let status = response["status"] as? Bool

@@ -158,7 +158,7 @@ class ApproveTransactionVC: UIViewController {
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
         // &searchByModule=&searchByForm=&searchByTypeOfApproval=
-        APIManager.sendRequestGetAuth(urlString: "tc/myapprovaldoclist/1/10?searchKey=\(search)&searchByTypeOfApproval=\(searchByTypeOfApproval)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/myapprovaldoclist/1/10?searchKey=\(search)&searchByTypeOfApproval=\(searchByTypeOfApproval)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
@@ -208,7 +208,7 @@ class ApproveTransactionVC: UIViewController {
     func get_module(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "tc/getmodulesmydoclist" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/getmodulesmydoclist" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -235,7 +235,7 @@ class ApproveTransactionVC: UIViewController {
     func get_forms(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "tc/gettcmydoclist" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/gettcmydoclist" ) { (response) in
             
             
             let status = response["status"] as? Bool

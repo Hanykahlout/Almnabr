@@ -171,7 +171,7 @@ class TicketDetailsVC: UIViewController {
         self.showLoadingActivity()
         
         let param:[String:Any] = ["ticket_id" : self.ticket_id]
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_ticket_row", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_ticket_row", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -193,7 +193,7 @@ class TicketDetailsVC: UIViewController {
         self.showLoadingActivity()
         
         let param:[String:Any] = ["ticket_id" : self.ticket_id]
-        APIManager.sendRequestPostAuth(urlString: "tasks/emp_in_ticket", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/emp_in_ticket", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -227,7 +227,7 @@ class TicketDetailsVC: UIViewController {
         let param : [String:Any] = ["ticket_id" : self.ticket_id,
                                     "emp_id" : emp_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/unfollow_emp_by_admin", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/unfollow_emp_by_admin", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -259,7 +259,7 @@ class TicketDetailsVC: UIViewController {
         let param : [String:Any] = ["ticket_id" : self.ticket_id,
                                     "emp_id" : emp_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/prevent_unfollow", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/prevent_unfollow", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool

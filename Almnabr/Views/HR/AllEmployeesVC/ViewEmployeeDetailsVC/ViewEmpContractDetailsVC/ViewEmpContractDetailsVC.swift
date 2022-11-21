@@ -26,10 +26,23 @@ class ViewEmpContractDetailsVC: UIViewController {
         initlization()
     }
     
-    private func initlization(){
-        setUpTableView()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addNavigationBarTitle(navigationTitle: "Contract Details")
+        navigationController?.setNavigationBarHidden(false, animated: true)
         getContracts(isFromBottom: false)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    private func initlization(){
+        setUpTableView()
+    }
+    
+    
     
 }
 

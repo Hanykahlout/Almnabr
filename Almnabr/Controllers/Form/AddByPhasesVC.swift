@@ -214,7 +214,7 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
 //        }
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=Z&work_site_zones=&work_site_blocks=&work_site_clusters=&search_key=" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=Z&work_site_zones=&work_site_blocks=&work_site_clusters=&search_key=" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -245,7 +245,7 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
 //        }
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=B&work_site_zones=\(zone)&work_site_blocks=&work_site_clusters=&search_key=" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=B&work_site_zones=\(zone)&work_site_blocks=&work_site_clusters=&search_key=" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -277,7 +277,7 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
         
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=C&work_site_zones=\(zone)&work_site_blocks=\(Blocks)&work_site_clusters=&search_key=" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=C&work_site_zones=\(zone)&work_site_blocks=\(Blocks)&work_site_clusters=&search_key=" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -310,7 +310,7 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
     func get_Unit(zone:String,Blocks:String,cluster:String){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=U&work_site_zones=\(zone)&work_site_blocks=\(Blocks)&work_site_clusters=\(cluster)&search_key="  ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=U&work_site_zones=\(zone)&work_site_blocks=\(Blocks)&work_site_clusters=\(cluster)&search_key="  ) { (response) in
            
             let status = response["status"] as? Bool
             if status == true{
@@ -339,7 +339,7 @@ class AddByPhasesVC: UIViewController , UITextFieldDelegate{
 //        }
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/get_work_levels_for_transaction?lang_key=en&projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_nos=324" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_WIR/get_work_levels_for_transaction?lang_key=en&projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=IM&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_nos=324" ) { (response) in
             
             
             let status = response["status"] as? Bool

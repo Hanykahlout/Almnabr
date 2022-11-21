@@ -307,7 +307,7 @@ class ProjectDetailsVC: UIViewController {
         
         let search:String = ProjectSearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
-        APIManager.sendRequestGetAuth(urlString: "xZLCctvSvZ9DGb8/\(Object!.projects_profile_id)/\(self.pageNumber)/10?search_key=\(search)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "xZLCctvSvZ9DGb8/\(Object!.projects_profile_id)/\(self.pageNumber)/10?search_key=\(search)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_Projectdata.removeAll()
@@ -365,7 +365,7 @@ class ProjectDetailsVC: UIViewController {
         
         let search:String = QuotationSearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
-        APIManager.sendRequestGetAuth(urlString: "squotest/\(Object!.projects_profile_id)/1/10?search_key=\(search)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "squotest/\(Object!.projects_profile_id)/1/10?search_key=\(search)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
@@ -423,7 +423,7 @@ class ProjectDetailsVC: UIViewController {
         
         self.showLoadingActivity()
         
-        APIManager.sendRequestGetAuth(urlString: "TEd1bgyHSC0GPcq/\(Object!.projects_profile_id)") { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "TEd1bgyHSC0GPcq/\(Object!.projects_profile_id)") { (response) in
             
             
             let status = response["status"] as? Bool

@@ -82,7 +82,7 @@ class NotificationVC: UIViewController {
             self.showLoadingActivity()
         }
 
-        APIManager.sendRequestGetAuth(urlString: "notification/get_noti_list?page=\(pageNumber)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "notification/get_noti_list?page=\(pageNumber)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
@@ -140,7 +140,7 @@ class NotificationVC: UIViewController {
         
         
         
-        APIManager.sendRequestGetAuth(urlString: "notification/delete_noti?noty_messages_id=\(message_id)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "notification/delete_noti?noty_messages_id=\(message_id)" ) { (response) in
             
             
             let status = response["status"] as? Bool

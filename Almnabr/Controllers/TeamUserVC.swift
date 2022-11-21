@@ -128,7 +128,7 @@ class TeamUserVC: UIViewController {
         }
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
-        APIManager.sendRequestGetAuth(urlString: "PMypAe3X1IuW3jx/\(projects_profile_id)/\(projects_work_area_id)/\(pageNumber)/10?searchKey=\(search)&positions=\(StrPosition)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "PMypAe3X1IuW3jx/\(projects_profile_id)/\(projects_work_area_id)/\(pageNumber)/10?searchKey=\(search)&positions=\(StrPosition)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
@@ -182,7 +182,7 @@ class TeamUserVC: UIViewController {
     func get_Position(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "/366484fd45" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "/366484fd45" ) { (response) in
             
             
             let status = response["status"] as? Bool

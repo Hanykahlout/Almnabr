@@ -171,7 +171,7 @@ class RelatedFormsVC: UIViewController {
         }
         
         
-        APIManager.sendRequestPostAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/cr/1/\(transaction_id)", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "form/FORM_\(self.template_platform_group_type_code_system)/cr/1/\(transaction_id)", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
            
             

@@ -163,7 +163,7 @@ extension SendSignInCodeVC{
         
         
         
-        APIManager.postAnyData(queryString: "login", parameters: params ) { (responseObject, error) in
+        APIController.shard.postAnyData(queryString: "login", parameters: params ) { (responseObject, error) in
             self.hideLoadingActivity()
             
             if responseObject.error != nil && (responseObject.error?.count)! > 0 {

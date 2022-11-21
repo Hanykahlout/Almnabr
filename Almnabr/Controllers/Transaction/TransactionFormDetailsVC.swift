@@ -175,9 +175,7 @@ class TransactionFormDetailsVC: UIViewController {
         
         self.mainView.isHidden = true
         self.pager_view.isHidden = true
-        
-//        self.arr_waitingFor = []
-        
+                
         get_Request()
        
         configNavigation()
@@ -250,18 +248,13 @@ class TransactionFormDetailsVC: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "FormDetailsPager",
-           let destinationVC = segue.destination as? TransactionFormPageaVC {
+        if segue.identifier == "FormDetailsPager", let _ = segue.destination as? TransactionFormPageaVC {
             IsTransaction = true
             if let controller = self.parentPageVC {
                 controller.displayPageForIndex(index: self.SelectedIndex)
             }
         }
     }
-
-  
-   
-
     
     //MARK: - Config GUI
     //------------------------------------------------------
@@ -452,7 +445,7 @@ class TransactionFormDetailsVC: UIViewController {
         let index_ =  StatusObject?.to_array.firstIndex(where: {$0 == true})
         
        
-        let status = StatusObject?.to_array[ index_ ?? 0]
+//        let status = StatusObject?.to_array[ index_ ?? 0]
         self.btnLastValStepOpened.titleLabel?.font = .kufiRegularFont(ofSize: 13)
      
         if transaction_status != ""{
@@ -543,9 +536,9 @@ class TransactionFormDetailsVC: UIViewController {
             self.str_url = self.Form
         }
        
-        APIManager.sendRequestGetAuth(urlString: self.str_url) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: self.str_url) { (response) in
              
-            let error = response["error"] as? String
+//            let error = response["error"] as? String
              let status = response["status"] as? Bool
              if status == true{
                  

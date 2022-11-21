@@ -61,7 +61,7 @@ class SignatureVC: UIViewController {
         
        // (self.profile_obj?.employee_id_number!)! + "M" + self.profile_obj!.user_id
 
-        APIManager.sendRequestGetAuth(urlString: "viewsmark/\(mark)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "viewsmark/\(mark)" ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -82,7 +82,7 @@ class SignatureVC: UIViewController {
         self.showLoadingActivity()
         let mark = "\(self.profile_obj?.employee_id_number ?? "0")S\(self.profile_obj!.user_id)"
         
-        APIManager.sendRequestGetAuth(urlString: "viewsmark/\(mark)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "viewsmark/\(mark)" ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool

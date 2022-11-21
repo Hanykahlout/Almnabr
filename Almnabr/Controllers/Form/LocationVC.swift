@@ -104,7 +104,7 @@ class LocationVC: UIViewController  {
 
     
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/get_work_levels_for_transaction?projects_work_area_id=\( ProjectObj.projects_work_area_id)&platform_code_system=\( ProjectObj.template_platform_code_system)&template_id=\(ProjectObj.template_id)&lang_key=en" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/get_work_levels_for_transaction?projects_work_area_id=\( ProjectObj.projects_work_area_id)&platform_code_system=\( ProjectObj.template_platform_code_system)&template_id=\(ProjectObj.template_id)&lang_key=en" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
@@ -131,7 +131,7 @@ class LocationVC: UIViewController  {
 
         self.showLoadingActivity()
         
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/search_units_by_phases_general_no?projects_work_area_id=\( ProjectObj.projects_work_area_id)&platform_code_system=\( ProjectObj.template_platform_code_system)&template_id=\(ProjectObj.template_id)&lang_key=en" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_\(ProjectObj.template_platform_group_type_code_system)/search_units_by_phases_general_no?projects_work_area_id=\( ProjectObj.projects_work_area_id)&platform_code_system=\( ProjectObj.template_platform_code_system)&template_id=\(ProjectObj.template_id)&lang_key=en" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{

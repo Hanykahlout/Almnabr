@@ -62,7 +62,7 @@ class AddChecklistVC: UIViewController {
         
         let param : [String:Any] = ["task_id" : self.task_id,
                                     "title" : title]
-        APIManager.sendRequestPostAuth(urlString: "tasks/insert_task_points_main", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/insert_task_points_main", parameters: param ) { (response) in
             self.hideLoadingActivity()
             print("RESPIIII",response)
             let status = response["status"] as? Bool

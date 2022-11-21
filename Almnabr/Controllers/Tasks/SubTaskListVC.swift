@@ -85,7 +85,7 @@ class SubTaskListVC: UIViewController {
     }
     
     func delete_task_point(point_id:String ){
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_task_point", parameters: ["point_id" : point_id]  ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/delete_task_point", parameters: ["point_id" : point_id]  ) { (response) in
             let status = response["status"] as? Bool
             if status == true{
             }else{
@@ -144,7 +144,7 @@ extension SubTaskListVC: UITableViewDelegate , UITableViewDataSource{
                 print("not Check")
                 self.showLoadingActivity()
                 
-                APIManager.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: ["point_id" : point_id]  ) { (response) in
+                APIController.shard.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: ["point_id" : point_id]  ) { (response) in
                     let status = response["status"] as? Bool
                     if status == true{
                         cell.btnCheck.setImage(UIImage(systemName: "checkmark.square.fill"), for: .normal)
@@ -164,7 +164,7 @@ extension SubTaskListVC: UITableViewDelegate , UITableViewDataSource{
             }else{
                 print("Check")
                 self.showLoadingActivity()
-                APIManager.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: ["point_id" : point_id]  ) { (response) in
+                APIController.shard.sendRequestPostAuth(urlString: "tasks/change_task_point", parameters: ["point_id" : point_id]  ) { (response) in
                     DispatchQueue.main.async {
                         let status = response["status"] as? Bool
                         if status == true{
@@ -185,7 +185,7 @@ extension SubTaskListVC: UITableViewDelegate , UITableViewDataSource{
         
         cell.btnDeleteAction = {
             self.showLoadingActivity()
-            APIManager.sendRequestPostAuth(urlString: "tasks/delete_task_point", parameters: ["point_id" : point_id]  ) { (response) in
+            APIController.shard.sendRequestPostAuth(urlString: "tasks/delete_task_point", parameters: ["point_id" : point_id]  ) { (response) in
                 let status = response["status"] as? Bool
                 let message = response["message"] as? String
                 if status == true{

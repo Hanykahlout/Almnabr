@@ -659,7 +659,7 @@ extension AddPointVC{
     
     private func searchInUser(search_key:String){
         self.showLoadingActivity()
-        APIManager.searchForUser(search_Key: search_key ) { (response) in
+        APIController.shard.searchForUser(search_Key: search_key ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{

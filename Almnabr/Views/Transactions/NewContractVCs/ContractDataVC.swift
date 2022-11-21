@@ -10,7 +10,6 @@ import UIKit
 
 class ContractDataVC: UIViewController {
 
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var typeLAbel: UILabel!
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var fromOrganizationLabel: UILabel!
@@ -86,7 +85,6 @@ class ContractDataVC: UIViewController {
         if let addtionalAllowances = addtionalAllowances{
             addtionalAllowancesData = addtionalAllowances.records ?? []
             self.tableView.reloadData()
-            self.tableViewHeight.constant = self.tableView.contentSize.height
         }
         
         Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(changePageControllerHeight), userInfo: nil, repeats: false)

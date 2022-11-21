@@ -107,7 +107,7 @@ class CronTransactionVC: UIViewController {
         if showLoading {
             self.showLoadingActivity()
         }
-        APIManager.sendRequestGetAuth(urlString: "/tc/cronjoblist" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "/tc/cronjoblist" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()

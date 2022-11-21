@@ -101,7 +101,7 @@ class SpecialApprovalVC: UIViewController {
             let params = ["transaction_request_id" : obj_transaction?.transaction_request_id ?? "0",
                           "notes":self.txt_notes.text ?? ""]
             
-            APIManager.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Special_Approval/0", parameters: params ) { (response) in
+            APIController.shard.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Special_Approval/0", parameters: params ) { (response) in
                 self.hideLoadingActivity()
                
                 

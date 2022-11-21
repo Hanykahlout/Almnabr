@@ -84,7 +84,7 @@ class SubFormVersionVC: UIViewController {
         
         self.showLoadingActivity()
     
-        APIManager.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/cr/3/\(obj_transaction?.transaction_request_id ?? "0")", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/cr/3/\(obj_transaction?.transaction_request_id ?? "0")", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
            
             

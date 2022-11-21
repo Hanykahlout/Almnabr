@@ -20,7 +20,7 @@ class OutgoingHistoryTableViewCell: UITableViewCell {
         
     }
     
-    func setData(data:transactions_recordsRecords){
+    func setData(data:TransactionsContractRecord){
         nameLAbel.text = data.transactions_records_user_name ?? ""
         notesLabel.text = data.transactions_records_note ?? ""
         onDateLabel.text = data.transactions_records_datetime ?? ""

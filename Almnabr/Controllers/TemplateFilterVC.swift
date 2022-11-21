@@ -161,7 +161,7 @@ class TemplateFilterVC: UIViewController {
         self.showLoadingActivity()
         
         let url = "joYF29rbEi/1/1?phase_parent_id=0"
-        APIManager.sendRequestGetAuth(urlString: url) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: url) { (response) in
             self.hideLoadingActivity()
           
             let status = response["status"] as? Bool
@@ -189,7 +189,7 @@ class TemplateFilterVC: UIViewController {
         self.showLoadingActivity()
         
         let url = "joYF29rbEi/1/1?phase_parent_id=\(zoneId)"
-        APIManager.sendRequestGetAuth(urlString: url) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: url) { (response) in
             self.hideLoadingActivity()
           
             let status = response["status"] as? Bool
@@ -217,7 +217,7 @@ class TemplateFilterVC: UIViewController {
         self.showLoadingActivity()
         
         let url = "joYF29rbEi/1/1?phase_parent_id=\(blockId)"
-        APIManager.sendRequestGetAuth(urlString: url) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: url) { (response) in
             self.hideLoadingActivity()
           
             let status = response["status"] as? Bool

@@ -154,7 +154,7 @@ class AllPrpjectsVC: UIViewController {
         
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
-        APIManager.sendRequestGetAuth(urlString: "MRpWxXzlMesi27d/1/10?branch_id=\(StrsearchByBranch)&search_services=\(StrsearchByServices)&search_key=\(search)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "MRpWxXzlMesi27d/1/10?branch_id=\(StrsearchByBranch)&search_services=\(StrsearchByServices)&search_key=\(search)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
@@ -202,7 +202,7 @@ class AllPrpjectsVC: UIViewController {
     func get_Services(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "aB8Vlmue0xVSv8O/projects_view" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "aB8Vlmue0xVSv8O/projects_view" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -229,7 +229,7 @@ class AllPrpjectsVC: UIViewController {
     func get_Branch(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "tc/tbranches" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/tbranches" ) { (response) in
             
             
             let status = response["status"] as? Bool

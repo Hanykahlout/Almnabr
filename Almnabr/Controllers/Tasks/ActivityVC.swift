@@ -106,7 +106,7 @@ class ActivityVC: UIViewController {
         self.showLoadingActivity()
         let param :[String:Any] = ["ticket_id" : ticket_id,
                                    "type" : "1"]
-        APIManager.sendRequestPostAuth(urlString: "tasks/time_line/desc", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/time_line/desc", parameters: param ) { (response) in
             self.arr_data.removeAll()
             let status = response["status"] as? Bool
             if status == true{
@@ -139,7 +139,7 @@ class ActivityVC: UIViewController {
         self.showLoadingActivity()
         let param :[String:Any] = ["task_id" : task_id,
                                    "type" : "2"]
-        APIManager.sendRequestPostAuth(urlString: "tasks/time_line_task/desc", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/time_line_task/desc", parameters: param ) { (response) in
             self.arr_data.removeAll()
             let status = response["status"] as? Bool
             if status == true{
@@ -170,7 +170,7 @@ class ActivityVC: UIViewController {
         self.showLoadingActivity()
         
         let param:[String:Any] = ["task_id" : self.task_id]
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_comment_tasks", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_comment_tasks", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -198,7 +198,7 @@ class ActivityVC: UIViewController {
         self.showLoadingActivity()
         let param :[String:Any] = ["comment_id" : comment_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_comment_reply", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/delete_comment_reply", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool

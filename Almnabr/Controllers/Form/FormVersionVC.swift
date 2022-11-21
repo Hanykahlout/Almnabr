@@ -141,7 +141,7 @@ class FormVersionVC: UIViewController {
         }else{
             Formurl = "form/FORM_\(self.template_platform_group_type_code_system)/cr/3/\(transaction_id)"
         }
-        APIManager.sendRequestPostAuth(urlString: Formurl, parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: Formurl, parameters: self.params ) { (response) in
             self.hideLoadingActivity()
             
             

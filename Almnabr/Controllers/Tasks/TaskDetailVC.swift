@@ -623,7 +623,7 @@ extension TaskDetailVC{
         self.showLoadingActivity()
         let param :[String:Any] = ["task_id" : task_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_points_task_main", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_points_task_main", parameters: param ) { (response) in
             DispatchQueue.main.async {
                 
                 self.arr_data.removeAll()
@@ -653,7 +653,7 @@ extension TaskDetailVC{
         self.showLoadingActivity()
         
         let param:[String:Any] = ["task_id" : self.task_id]
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_task_only", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_task_only", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -680,7 +680,7 @@ extension TaskDetailVC{
         self.showLoadingActivity()
         
         let param:[String:Any] = ["task_id" : self.task_id]
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_comment_tasks", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_comment_tasks", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -709,7 +709,7 @@ extension TaskDetailVC{
         
         self.showLoadingActivity()
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_add_task", parameters: [:] ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_add_task", parameters: [:] ) { (response) in
             self.hideLoadingActivity()
             let status = response["status"] as? Bool
             
@@ -738,7 +738,7 @@ extension TaskDetailVC{
         self.showLoadingActivity()
         let param :[String:Any] = ["task_id" : task_id,"status":status]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/change_status_done", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/change_status_done", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             //            let status = response["status"] as? Bool
@@ -753,7 +753,7 @@ extension TaskDetailVC{
         self.showLoadingActivity()
         let param :[String:Any] = ["task_id" : task_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_task", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/delete_task", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -777,7 +777,7 @@ extension TaskDetailVC{
         self.showLoadingActivity()
         let param :[String:Any] = ["comment_id" : comment_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_comment_reply", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/delete_comment_reply", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -793,7 +793,7 @@ extension TaskDetailVC{
         self.showLoadingActivity()
         let param : [String:Any] = ["task_id" : self.task_id,
                                     "notes" : title]
-        APIManager.sendRequestPostAuth(urlString: "tasks/add_comment_task", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/add_comment_task", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -813,7 +813,7 @@ extension TaskDetailVC{
         self.showLoadingActivity()
         let param :[String:Any] = ["point_id" : point_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_task_point_main", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/delete_task_point_main", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool

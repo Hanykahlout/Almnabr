@@ -98,7 +98,7 @@ class MenuVC: UIViewController {
     func get_Userdata(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "user?user_id=\(Auth_User.user_id)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "user?user_id=\(Auth_User.user_id)" ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -124,7 +124,7 @@ class MenuVC: UIViewController {
     func get_data(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "menu" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "menu" ) { (response) in
             let status = response["status"] as? Bool
             if status == true{
                 if  let records = response["records"] as? NSArray{

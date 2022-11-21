@@ -113,7 +113,7 @@ class AllTicketVC: UIViewController {
         }
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_data_ticket/\(pageNumber)/10", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_data_ticket/\(pageNumber)/10", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
             
             
@@ -165,7 +165,7 @@ class AllTicketVC: UIViewController {
         self.showLoadingActivity()
         //        }
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
-        APIManager.sendRequestGetAuth(urlString: "tc/list/1/10?searchKey=&searchAdmin=0&searchByForm=&searchByModule=&searchByStatus=all_pending_need_action" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/list/1/10?searchKey=&searchAdmin=0&searchByForm=&searchByModule=&searchByStatus=all_pending_need_action" ) { (response) in
             
             let status = response["status"] as? Bool
             let total = response["total"] as? Int
@@ -197,7 +197,7 @@ class AllTicketVC: UIViewController {
         self.showLoadingActivity()
         let param :[String:Any] = ["ticket_id" : ticket_id]
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/delete_ticket", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/delete_ticket", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool

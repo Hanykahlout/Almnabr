@@ -178,7 +178,7 @@ class SubFilterVC: UIViewController {
         let language = L102Language.currentAppleLanguage()
         
         let url = "p/get_templates_for_transactions?lang_key=\(language)&projects_work_area_id=\(projects_work_area_id)"
-        APIManager.sendRequestGetAuth(urlString: url) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: url) { (response) in
             self.hideLoadingActivity()
           
             let status = response["status"] as? Bool
@@ -206,7 +206,7 @@ class SubFilterVC: UIViewController {
         self.showLoadingActivity()
         
         let url = "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(tempId)&required_type=group1&group1=&type="
-        APIManager.sendRequestGetAuth(urlString: url) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: url) { (response) in
             self.hideLoadingActivity()
           
             let status = response["status"] as? Bool
@@ -234,7 +234,7 @@ class SubFilterVC: UIViewController {
         
         
         let url = "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(TempleteID)&required_type=type&group1=\(divisionId)&type="
-        APIManager.sendRequestGetAuth(urlString: url) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: url) { (response) in
             self.hideLoadingActivity()
           
             let status = response["status"] as? Bool
@@ -262,7 +262,7 @@ class SubFilterVC: UIViewController {
         self.showLoadingActivity()
         
         let url = "pforms/get_group1_type_group2?projects_work_area_id=\(projects_work_area_id)&template_id=\(TempleteID)&required_type=group2&group1=\(DivisionId)&type=\(self.GroupTypeValue)"
-        APIManager.sendRequestGetAuth(urlString: url) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: url) { (response) in
             self.hideLoadingActivity()
           
             let status = response["status"] as? Bool

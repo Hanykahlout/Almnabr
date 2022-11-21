@@ -304,7 +304,7 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
         self.showLoadingActivity()
         
         
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_add", parameters: [:] ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_add", parameters: [:] ) { (response) in
             self.hideLoadingActivity()
             
             
@@ -390,7 +390,7 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
         
         var param :[String:Any] = [:]
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
@@ -534,7 +534,7 @@ class AddTicketVC: UIViewController, UINavigationControllerDelegate {
             self.param["ticket_id"] = self.ticket_id
         }
         
-        APIManager.func_Upload(queryString: Url, arr_Attachments, param: self.param ) { (respnse ) in
+        APIController.shard.func_Upload(queryString: Url, arr_Attachments, param: self.param ) { (respnse ) in
             
             let status = respnse["status"] as? Bool
             let errors = respnse["error"] as? String

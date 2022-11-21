@@ -126,7 +126,7 @@ class ContractorManagerApprovalVC: UIViewController {
                          
                           "contractor_rejected_notes":self.txt_notes.text ?? ""]
             
-            APIManager.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Contractor_Manager_Approval/0", parameters: params ) { (response) in
+            APIController.shard.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Contractor_Manager_Approval/0", parameters: params ) { (response) in
                 self.hideLoadingActivity()
                
                 

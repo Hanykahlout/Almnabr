@@ -88,7 +88,7 @@ class ModulesUserVC: UIViewController {
         
             self.showLoadingActivity()
        
-        APIManager.sendRequestPostAuth(urlString: "moduleusers", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "moduleusers", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool

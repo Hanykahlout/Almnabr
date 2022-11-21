@@ -131,7 +131,7 @@ class OwnersRepresentativeVC: UIViewController, UINavigationControllerDelegate {
         
         showLoadingActivity()
         
-        APIManager.func_Upload(queryString: "/form/\(obj_transaction?.transaction_key ?? " ")/Owners_Representative/0", arr_file, param: self.parm ) { (respnse ) in
+        APIController.shard.func_Upload(queryString: "/form/\(obj_transaction?.transaction_key ?? " ")/Owners_Representative/0", arr_file, param: self.parm ) { (respnse ) in
             
             let status = respnse["status"] as? Bool
             let msg = respnse["msg"] as? String

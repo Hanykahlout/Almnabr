@@ -342,7 +342,7 @@ class TechinicalAssistantVC: UIViewController, UINavigationControllerDelegate {
         
         let params = ["transaction_request_id" : obj_transaction?.transaction_request_id ?? "0"]
         
-        APIManager.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Techinical_Assistant/0", parameters: params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/Techinical_Assistant/0", parameters: params ) { (response) in
             self.hideLoadingActivity()
             
             
@@ -378,7 +378,7 @@ class TechinicalAssistantVC: UIViewController, UINavigationControllerDelegate {
     func get_special_approver_users(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/special_approver_users?search_key=&lang_key=en&projects_work_area_id=\(obj_FormWir?.projects_work_area_id ?? "1")&method=list" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/\(obj_transaction?.transaction_key ?? " ")/special_approver_users?search_key=&lang_key=en&projects_work_area_id=\(obj_FormWir?.projects_work_area_id ?? "1")&method=list" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -451,7 +451,7 @@ class TechinicalAssistantVC: UIViewController, UINavigationControllerDelegate {
         
         showLoadingActivity()
         
-        APIManager.func_UploadTechnical(queryString: "form/\(obj_transaction?.transaction_key ?? " ")/Techinical_Assistant/1", arr_Technical_Assistants, param: params ) { (respnse ) in
+        APIController.shard.func_UploadTechnical(queryString: "form/\(obj_transaction?.transaction_key ?? " ")/Techinical_Assistant/1", arr_Technical_Assistants, param: params ) { (respnse ) in
             
             let status = respnse["status"] as? Bool
             let errors = respnse["error"] as? String

@@ -62,7 +62,7 @@ class HeaderView:  UIView {
     
     func get_Notificaions_data(){
         
-        APIManager.sendRequestGetAuth(urlString: "notification/get_noti_list?page=1" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "notification/get_noti_list?page=1" ) { (response) in
             
             let status = response["status"] as? Bool
             var total = response["total"] as? Int
@@ -169,7 +169,7 @@ class HeaderView:  UIView {
     
     
     func get_theme(){
-        APIManager.sendRequestGetAuthTheme(urlString: "gettheme" ) { (response) in
+        APIController.shard.sendRequestGetAuthTheme(urlString: "gettheme" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{

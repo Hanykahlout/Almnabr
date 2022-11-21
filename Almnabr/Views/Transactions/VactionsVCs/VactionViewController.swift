@@ -60,7 +60,7 @@ class VactionViewController: UIViewController {
     private var presonalDetails:[TransactionsPersons]?
     private var persons: [TransactionsPersons]?
     private var attachData: [FormHrv1AttachmentsRecords]?
-    private var notesData: [NoteRecordResponse]?
+    private var recordsData: [TransactionsContractRecord]?
     private var financialData:[Finance]?
     private var waitedProgressNumber:Float = -1.0
     private var progress:Float = 1.0 {
@@ -204,7 +204,7 @@ class VactionViewController: UIViewController {
     
     @IBAction func historyAction(_ sender: Any) {
         let vc:HistoryVC = AppDelegate.TransactionSB.instanceVC()
-        vc.notesData = notesData
+        vc.recordsData = recordsData
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -245,7 +245,7 @@ class VactionViewController: UIViewController {
     
     @IBAction func editLastStepOpenedAction(_ sender: Any) {
         let vc = EditLastStepViewController()
-        vc.isVaction = true
+        vc.formStr = ""
         vc.transactionRequestId = transaction_request_id
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overCurrentContext
@@ -333,8 +333,8 @@ extension VactionViewController{
                     
                     self.attachData = data.form_hrv1_attachments?.records
                     self.attachButton.isHidden = self.attachData == nil
-                    self.notesData = data.transactions_notes?.records
-                    self.historyButton.isHidden = self.notesData == nil
+                    self.recordsData = data.transactions_records?.records
+                    self.historyButton.isHidden = self.recordsData == nil
 
                     
                 }else{

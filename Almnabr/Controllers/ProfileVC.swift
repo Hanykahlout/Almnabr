@@ -53,7 +53,7 @@ class ProfileVC: UIViewController {
             spread: 0)
         
         view_collection.setRounded(10)
-        
+        collection_category.register(.init(nibName: "ProfileCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ProfileCollectionViewCell")
     }
     
     
@@ -85,7 +85,7 @@ class ProfileVC: UIViewController {
     func get_profile(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "profile" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "profile" ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -107,19 +107,15 @@ class ProfileVC: UIViewController {
                     }
                     
                     
-                    let url = URL(string: APIManager.serverURL + profile.profile_image)
+                    let url = URL(string: APIController.shard.serverURL + profile.profile_image)
                     // imageView.kf.setImage(with: url)
                     print(url)
                     
                     // self.imgProfile.kf.setImage(with: url)
                 }
             }
-            
-            
-            
         }
     }
-    
     
 }
 
@@ -133,7 +129,7 @@ extension ProfileVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProfileCollectionViewCell", for: indexPath) as! ProfileCollectionViewCell
         
         let item = arr_category[indexPath.item]
         
@@ -142,10 +138,6 @@ extension ProfileVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
         cell.lblTitle.text = item
         cell.img_Category.image = UIImage(systemName: arr_img[indexPath.item])
         cell.img_Category.tintColor = maincolor
-        //            cell.view_img.setBorderGrayWidth(3)
-        //            cell.view_img.setRounded()
-        
-        
         
         return cell
     }

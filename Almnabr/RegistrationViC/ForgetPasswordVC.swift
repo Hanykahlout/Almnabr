@@ -164,7 +164,7 @@ class ForgetPasswordVC: UIViewController {
         
         
         
-        APIManager.postAnyData(queryString: "fpassword/en", parameters: params ) { (responseObject, error) in
+        APIController.shard.postAnyData(queryString: "fpassword/en", parameters: params ) { (responseObject, error) in
             self.hideLoadingActivity()
             self.btnLogin.isEnabled = true
             self.btnLogin.isUserInteractionEnabled = true

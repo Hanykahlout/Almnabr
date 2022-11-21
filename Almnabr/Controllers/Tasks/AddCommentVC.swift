@@ -71,7 +71,7 @@ class AddCommentVC: UIViewController {
         self.showLoadingActivity()
 //
        
-        APIManager.sendRequestPostAuth(urlString: "tasks/\(strUrl)", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/\(strUrl)", parameters: param ) { (response) in
             self.hideLoadingActivity()
            
             let status = response["status"] as? Bool

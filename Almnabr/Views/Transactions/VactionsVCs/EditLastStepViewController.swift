@@ -17,7 +17,7 @@ class EditLastStepViewController: UIViewController {
     private var resultData = [SearchBranchRecords]()
     private var selectedUser:SearchBranchRecords?
     var transactionRequestId:String?
-    var isVaction = false
+    var formStr = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,16 +99,21 @@ extension EditLastStepViewController{
         
         if let selectedUser = selectedUser, let transactionRequestId = transactionRequestId{
             showLoadingActivity()
-            APIController.shard.editUserStep(formType: isVaction ? "FORM_HRV1" : "FORM_CT1" ,user_id: selectedUser.value ?? "", transaction_request_id: transactionRequestId) {
+            APIController.shard.editUserStep(formType: formStr , user_id: selectedUser.value ?? "", transaction_request_id: transactionRequestId) {
                 data in
                 DispatchQueue.main.async {
                     self.hideLoadingActivity()
                     if let status = data.status,status{
                         SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
-                        if self.isVaction {
+                        switch self.formStr{
+                        case "FORM_HRV1":
                             NotificationCenter.default.post(name: .init("ReloadVactionData"), object: nil)
-                        } else{
-                             NotificationCenter.default.post(name: .init("ReloadNewContractData"), object: nil)
+                        case "FORM_CT1":
+                            NotificationCenter.default.post(name: .init("ReloadNewContractData"), object: nil)
+                        case "FORM_HRLN1":
+                            NotificationCenter.default.post(name: .init("ReloadLoanData"), object: nil)
+                        default:
+                            break
                         }
                         self.navigationController?.dismiss(animated: true)
                     }else{

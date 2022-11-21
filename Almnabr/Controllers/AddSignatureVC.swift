@@ -124,7 +124,7 @@ class AddSignatureVC: UIViewController, YPSignatureDelegate {
    
    
         self.showLoadingActivity()
-        APIManager.sendRequestPostAuth(urlString: "signup/send_verify_code/", parameters: param) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "signup/send_verify_code/", parameters: param) { (response) in
          
             let status = response["status"] as? Bool
             if status == true{
@@ -164,7 +164,7 @@ class AddSignatureVC: UIViewController, YPSignatureDelegate {
    
        
         self.showLoadingActivity()
-        APIManager.sendRequestPostAuth(urlString: "submit_signature", parameters: param) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "submit_signature", parameters: param) { (response) in
          
             let status = response["status"] as? Bool
             if status == true{

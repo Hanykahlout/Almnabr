@@ -139,7 +139,7 @@ class ProjectRequestVC: UIViewController , filterDelegate {
         
         self.params["projects_supervision_id"] = projects_supervision_id
         
-        APIManager.sendRequestPostAuth(urlString: "pr/qtp/1/pages/\(pageNumber)/10", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "pr/qtp/1/pages/\(pageNumber)/10", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
             
             

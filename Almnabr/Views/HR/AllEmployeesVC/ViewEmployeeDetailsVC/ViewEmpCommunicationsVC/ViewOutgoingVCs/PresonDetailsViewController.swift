@@ -11,7 +11,7 @@ import UIKit
 class PresonDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    private var data = [transactions_personsRecords]()
+    private var data = [TransactionsPersons]()
     
     override func viewDidLoad() {
         super.viewDidLoad()

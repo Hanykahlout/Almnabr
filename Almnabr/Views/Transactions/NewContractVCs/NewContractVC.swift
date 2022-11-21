@@ -49,8 +49,9 @@ class NewContractVC: UIViewController {
             changeCurrentStep()
         }
     }
+    
     var transaction_request_id = ""
-    private var notesData: [NoteRecordResponse]?
+    private var recordsData: [TransactionsContractRecord]?
     private var waitingUsers = ""
     
     override func viewDidLoad() {
@@ -59,7 +60,16 @@ class NewContractVC: UIViewController {
         initlization()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        addNavigationBarTitle(navigationTitle: "New Contract Form")
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
     private func initlization(){
         editButton.isHidden = !Auth_User.isAdmin
         approvalView.isHidden = true
@@ -170,7 +180,7 @@ class NewContractVC: UIViewController {
     
     @IBAction func editAction(_ sender: Any) {
         let vc = EditLastStepViewController()
-        vc.isVaction = false
+        vc.formStr = "FORM_CT1"
         vc.transactionRequestId = transaction_request_id
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .overCurrentContext
@@ -181,13 +191,14 @@ class NewContractVC: UIViewController {
     
     @IBAction func historyAction(_ sender: Any) {
         let vc:HistoryVC = AppDelegate.TransactionSB.instanceVC()
-        vc.notesData = notesData
+        vc.recordsData = recordsData
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
     @IBAction func personalDetailsAction(_ sender: Any) {
         let vc:PersonDetailsVC = AppDelegate.TransactionSB.instanceVC()
+        
         vc.personalData = self.presonalDetails
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -238,7 +249,7 @@ class NewContractVC: UIViewController {
 extension NewContractVC {
     
     private func getContractData(){
-
+        waitingUsers = ""
         showLoadingActivity()
         APIController.shard.getContractDetails(transactionId: transaction_request_id ) { data in
             DispatchQueue.main.async {
@@ -262,7 +273,8 @@ extension NewContractVC {
         createdByLabel.text = data.transactions_request?.created_name ?? ""
         createdDateLabel.text = data.transactions_request?.created_date ?? ""
         presonalDetails = data.transactions_persons?.records ?? []
-        notesData = data.transactions_notes?.records ?? []
+        recordsData = data.transactions_records?.records ?? []
+        
         pageController.setContractData(data: data.form_ct1_data,addtionalAllowances:data.form_ct1_data_additional_terms)
         approvalStep = data.transactions_request?.transaction_request_last_step
         getPrviewFile(base64: approvalStep == "completed" ? data.transactions_request?.view_link ?? "" : nil)

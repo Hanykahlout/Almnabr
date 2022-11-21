@@ -12,7 +12,7 @@ import DropDown
 protocol EmployeeTableViewCellDelegate{
     func deleteAction(id:String,indexPath:IndexPath)
     func goToEdiVC(empID:String,empImage:String)
-    func goToViewVC(empID:String,empImage:String)
+    func goToViewVC(empID:String,branchId:String,empImage:String)
 }
 
 typealias EmployeeDelegate = UIViewController & EmployeeTableViewCellDelegate
@@ -48,7 +48,7 @@ class EmployeeTableViewCell: UITableViewCell {
         dropDown.selectionAction = { (index: Int, item: String) in
             switch index{
             case 0:
-                self.delegate?.goToViewVC(empID: self.data.employee_number ?? "",empImage: self.data.profile_image ?? "")
+                self.delegate?.goToViewVC(empID: self.data.employee_number ?? "",branchId: self.data.branch_id ?? "",empImage: self.data.profile_image ?? "")
                 break
             case 1:
                 self.delegate?.goToEdiVC(empID: self.data.employee_number ?? "",empImage: self.data.profile_image ?? "")

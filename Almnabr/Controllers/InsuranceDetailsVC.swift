@@ -124,7 +124,7 @@ class InsuranceDetailsVC: UIViewController {
         self.params["searchStatus"] = SearchFilter
         
                                        
-      APIManager.sendRequestPostAuth(urlString: "my_dependents/\(pageNumber)/10", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "my_dependents/\(pageNumber)/10", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
             
             if self.pageNumber == 1 {

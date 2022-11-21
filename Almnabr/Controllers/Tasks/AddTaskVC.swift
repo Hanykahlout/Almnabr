@@ -249,7 +249,7 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
         self.showLoadingActivity()
         
         let param:[String:Any] = ["task_id" : self.task_id]
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_task_only", parameters: param ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_task_only", parameters: param ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -274,7 +274,7 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
     func get_users(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_emp_in_task", parameters: ["task_id":self.task_id] ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_emp_in_task", parameters: ["task_id":self.task_id] ) { (response) in
             self.hideLoadingActivity()
             
             let status = response["status"] as? Bool
@@ -331,7 +331,7 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
         
         self.showLoadingActivity()
          
-        APIManager.sendRequestPostAuth(urlString: "tasks/get_add", parameters: [:] ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "tasks/get_add", parameters: [:] ) { (response) in
             self.hideLoadingActivity()
             
            
@@ -420,7 +420,7 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
 
         var param :[String:Any] = [:]
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "tc/getformuserslist?search=\(search_key)&lang_key=en&user_type_id=\(Auth_User.user_type_id)" ) { (response) in
             
             let status = response["status"] as? Bool
             if status == true{
@@ -558,7 +558,7 @@ class AddTaskVC: UIViewController, UINavigationControllerDelegate {
             self.param["task_id"] = self.task_id
         }
         
-                APIManager.func_Upload(queryString: Url, arr_Attachments, param: self.param ) { (respnse ) in
+        APIController.shard.func_Upload(queryString: Url, arr_Attachments, param: self.param ) { (respnse ) in
                     
                     let status = respnse["status"] as? Bool
                     let errors = respnse["error"] as? String

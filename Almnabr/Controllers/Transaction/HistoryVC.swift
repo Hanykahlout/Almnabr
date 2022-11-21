@@ -14,7 +14,7 @@ class HistoryVC: UIViewController {
     @IBOutlet weak var table: UITableView!
     
     var arr_data:[transactions_recordsObj] = []
-    var notesData:[NoteRecordResponse]?
+    var recordsData:[TransactionsContractRecord]?
     
     
     override func viewDidLoad() {
@@ -69,7 +69,7 @@ class HistoryVC: UIViewController {
 extension HistoryVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return notesData == nil ? arr_data.count : notesData!.count
+        return recordsData == nil ? arr_data.count : recordsData!.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,18 +84,18 @@ extension HistoryVC: UITableViewDelegate , UITableViewDataSource{
         var OnDate:String = ""
         
         
-        if notesData == nil{
+        if recordsData == nil{
             let obj = arr_data[indexPath.item]
             no =  "#".localized() + "  \(indexPath.item + 1)"
             Name = "Name".localized() + "  \(obj.transactions_records_user_name )"
             Notes = "Notes".localized() + "  \(obj.transactions_records_note)"
             OnDate = "On Date".localized() + "  \(obj.transactions_records_datetime)"
         }else{
-            let obj = notesData![indexPath.item]
+            let obj = recordsData![indexPath.item]
             no =  "#".localized() + "  \(indexPath.item + 1)"
-            Name = "Name".localized() + "  \(obj.transactions_notes_user_name ?? "" )"
-            Notes = "Notes".localized() + "  \(obj.transactions_notes_text ?? "")"
-            OnDate = "On Date".localized() + "  \(obj.transactions_notes_datetime ?? "")"
+            Name = "Name".localized() + "  \(obj.transactions_records_user_name ?? "" )"
+            Notes = "Notes".localized() + "  \(obj.transactions_records_note ?? "")"
+            OnDate = "On Date".localized() + "  \(obj.transactions_records_datetime ?? "")"
         }
         
     

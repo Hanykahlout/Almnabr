@@ -139,7 +139,7 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
         //let language = MOLH.currentAppleLanguage()
        let lang =  L102Language.currentAppleLanguage()
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/get_work_levels_for_transaction?lang_key=\(lang)&projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=GN&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_nos=1" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_WIR/get_work_levels_for_transaction?lang_key=\(lang)&projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=GN&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_nos=1" ) { (response) in
             
             
             let status = response["status"] as? Bool
@@ -174,7 +174,7 @@ class AddGeneralNoVC: UIViewController , UITextFieldDelegate{
 //            return
 //        }
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=GN&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=G&work_site_zones=&work_site_blocks=&work_site_clusters=&search_key=\(searchTxt)" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "form/FORM_WIR/search_units_by_phases_general_no?projects_work_area_id=\(self.projects_work_area_id)&platform_code_system=\(self.template_platform_code_system)&work_site=GN&transaction_separation=\(transaction_separation)&template_id=\(self.template_id)&work_site_type=G&work_site_zones=&work_site_blocks=&work_site_clusters=&search_key=\(searchTxt)" ) { (response) in
             
             
             let status = response["status"] as? Bool

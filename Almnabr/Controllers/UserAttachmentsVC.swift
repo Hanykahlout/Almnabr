@@ -104,7 +104,7 @@ class UserAttachmentsVC: UIViewController {
         self.params["attachmentType"] = SearchFilter
 
         
-        APIManager.sendRequestPostAuth(urlString: "my_attachments/\(pageNumber)/10", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "my_attachments/\(pageNumber)/10", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
             
             if self.pageNumber == 1 {
@@ -155,7 +155,7 @@ class UserAttachmentsVC: UIViewController {
     func get_level(){
         
         self.showLoadingActivity()
-        APIManager.sendRequestGetAuth(urlString: "module_attach_types/?module_name=human_resources" ) { (response) in
+        APIController.shard.sendRequestGetAuth(urlString: "module_attach_types/?module_name=human_resources" ) { (response) in
             
             
             let status = response["status"] as? Bool

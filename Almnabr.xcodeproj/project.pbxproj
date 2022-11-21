@@ -450,6 +450,7 @@
 		CE3244A628FC350C004DBADB /* ChartRightData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3244A528FC350C004DBADB /* ChartRightData.swift */; };
 		CE3244A928FC789F004DBADB /* ProjectRequestsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3244A728FC789F004DBADB /* ProjectRequestsCollectionViewCell.swift */; };
 		CE3244AA28FC789F004DBADB /* ProjectRequestsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE3244A828FC789F004DBADB /* ProjectRequestsCollectionViewCell.xib */; };
+		CE3E8339292BAF1F009919C1 /* no-permission2.gif in Resources */ = {isa = PBXBuildFile; fileRef = CE3E8338292BAF1F009919C1 /* no-permission2.gif */; };
 		CE4B41A0292A40CF00641357 /* LoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4B419E292A40CF00641357 /* LoanViewController.swift */; };
 		CE4B41A1292A40CF00641357 /* LoanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE4B419F292A40CF00641357 /* LoanViewController.xib */; };
 		CE54B2D128F5BC5400972D6D /* TopCountRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE54B2D028F5BC5400972D6D /* TopCountRequestsViewController.swift */; };
@@ -498,7 +499,6 @@
 		CE8571902908239000293977 /* SpamMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718F2908239000293977 /* SpamMailViewController.swift */; };
 		CE8FE7282913E6450022DD51 /* UpdateShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FE7262913E6450022DD51 /* UpdateShiftViewController.swift */; };
 		CE8FE7292913E6450022DD51 /* UpdateShiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8FE7272913E6450022DD51 /* UpdateShiftViewController.xib */; };
-		CEA272B8292B81700018402D /* no-permission2.gif in Resources */ = {isa = PBXBuildFile; fileRef = CEA272B7292B81700018402D /* no-permission2.gif */; };
 		CEA3A085291A945000F79E3C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3A083291A945000F79E3C /* SettingsViewController.swift */; };
 		CEA3A086291A945000F79E3C /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA3A084291A945000F79E3C /* SettingsViewController.xib */; };
 		CEA3A08A291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3A088291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift */; };
@@ -1344,6 +1344,7 @@
 		CE3244A528FC350C004DBADB /* ChartRightData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRightData.swift; sourceTree = "<group>"; };
 		CE3244A728FC789F004DBADB /* ProjectRequestsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRequestsCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE3244A828FC789F004DBADB /* ProjectRequestsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectRequestsCollectionViewCell.xib; sourceTree = "<group>"; };
+		CE3E8338292BAF1F009919C1 /* no-permission2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "no-permission2.gif"; sourceTree = "<group>"; };
 		CE4B419E292A40CF00641357 /* LoanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanViewController.swift; sourceTree = "<group>"; };
 		CE4B419F292A40CF00641357 /* LoanViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoanViewController.xib; sourceTree = "<group>"; };
 		CE54B2D028F5BC5400972D6D /* TopCountRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopCountRequestsViewController.swift; sourceTree = "<group>"; };
@@ -1391,7 +1392,6 @@
 		CE85718F2908239000293977 /* SpamMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamMailViewController.swift; sourceTree = "<group>"; };
 		CE8FE7262913E6450022DD51 /* UpdateShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateShiftViewController.swift; sourceTree = "<group>"; };
 		CE8FE7272913E6450022DD51 /* UpdateShiftViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdateShiftViewController.xib; sourceTree = "<group>"; };
-		CEA272B7292B81700018402D /* no-permission2.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "no-permission2.gif"; path = "../../../no-permission2.gif"; sourceTree = "<group>"; };
 		CEA3A083291A945000F79E3C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CEA3A084291A945000F79E3C /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		CEA3A088291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -3131,7 +3131,7 @@
 				FA03242726FB9BFA00372EA6 /* SceneDelegate.swift */,
 				FAA9C4CC27B32B51003C051E /* notification3.wav */,
 				FA03242E26FB9BFE00372EA6 /* Assets.xcassets */,
-				CEA272B7292B81700018402D /* no-permission2.gif */,
+				CE3E8338292BAF1F009919C1 /* no-permission2.gif */,
 				FA03243326FB9BFE00372EA6 /* Info.plist */,
 				3FD03A5D28743CA900BB13C7 /* GoogleService-Info.plist */,
 				3FD03A5E28743CA900BB13C7 /* GoogleService-Info-nahidh.plist */,
@@ -4111,7 +4111,6 @@
 				3FD03A28287437B000BB13C7 /* ViewLangCalenderVC.xib in Resources */,
 				3FD03A40287437B000BB13C7 /* ContactDetailsViewController.xib in Resources */,
 				3FD039F0287437B000BB13C7 /* RequestDetailsViewController.xib in Resources */,
-				CEA272B8292B81700018402D /* no-permission2.gif in Resources */,
 				3FD03A38287437B000BB13C7 /* PassportDetailsViewController.strings in Resources */,
 				3FD039FD287437B000BB13C7 /* ViewEmpIDDetailsVC.strings in Resources */,
 				3FD03A08287437B000BB13C7 /* ViewEmpContractDetailsVC.xib in Resources */,
@@ -4119,6 +4118,7 @@
 				FAAF207027E75E6F00AD255B /* SimpleNoteCell.xib in Resources */,
 				CEB1D43528F6E622007D2A8A /* CreateTransactionTableViewCell.xib in Resources */,
 				3FD03A43287437B000BB13C7 /* IDDetailsViewController.xib in Resources */,
+				CE3E8339292BAF1F009919C1 /* no-permission2.gif in Resources */,
 				CE3244AA28FC789F004DBADB /* ProjectRequestsCollectionViewCell.xib in Resources */,
 				3F9040DA286CB182008D85B8 /* AttachmentTableViewCell.xib in Resources */,
 				CEE57BD128F756F700CA16D8 /* SelectTemplete1ViewController.xib in Resources */,

@@ -91,8 +91,6 @@
 		3F48C53F285883AF004D33F8 /* Profile_percentage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C53B285883AF004D33F8 /* Profile_percentage.swift */; };
 		3F48C54128589439004D33F8 /* GetImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48C54028589439004D33F8 /* GetImageResponse.swift */; };
 		3F524757284FCE8D0081EBC6 /* FilterInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F524756284FCE8D0081EBC6 /* FilterInfo.swift */; };
-		3F530834289287AB00AE7D2A /* SendSignInCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F530832289287AB00AE7D2A /* SendSignInCodeVC.swift */; };
-		3F530835289287AB00AE7D2A /* SendSignInCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F530833289287AB00AE7D2A /* SendSignInCodeVC.xib */; };
 		3F5ABA9128B4F698005E1A7A /* NewContractVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5ABA8F28B4F698005E1A7A /* NewContractVC.swift */; };
 		3F5ABA9228B4F698005E1A7A /* NewContractVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F5ABA9028B4F698005E1A7A /* NewContractVC.xib */; };
 		3F645ADF2875D86E00720E76 /* SocketIOController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F645ADE2875D86E00720E76 /* SocketIOController.swift */; };
@@ -478,6 +476,10 @@
 		CE5FD6BC290E858300031270 /* AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FD6BB290E858300031270 /* AttendanceViewController.swift */; };
 		CE5FD6C0290E861700031270 /* AttendanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FD6BE290E861700031270 /* AttendanceTableViewCell.swift */; };
 		CE5FD6C1290E861700031270 /* AttendanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5FD6BF290E861700031270 /* AttendanceTableViewCell.xib */; };
+		CE67B4E9292CF63A004E8A2F /* SendSignInCodeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67B4E7292CF63A004E8A2F /* SendSignInCodeVC.swift */; };
+		CE67B4EA292CF63A004E8A2F /* SendSignInCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE67B4E8292CF63A004E8A2F /* SendSignInCodeVC.xib */; };
+		CE67B4EE292CF78A004E8A2F /* PayRoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE67B4EC292CF78A004E8A2F /* PayRoleViewController.swift */; };
+		CE67B4EF292CF78A004E8A2F /* PayRoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE67B4ED292CF78A004E8A2F /* PayRoleViewController.xib */; };
 		CE6ABE39291C05EA00CFEA36 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6ABE37291C05EA00CFEA36 /* ChangePasswordViewController.swift */; };
 		CE6ABE3A291C05EA00CFEA36 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6ABE38291C05EA00CFEA36 /* ChangePasswordViewController.xib */; };
 		CE7BB37B2909786D00BEE4C4 /* CalendarActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB3792909786D00BEE4C4 /* CalendarActivityTableViewCell.swift */; };
@@ -960,8 +962,6 @@
 		3F48C53B285883AF004D33F8 /* Profile_percentage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile_percentage.swift; sourceTree = "<group>"; };
 		3F48C54028589439004D33F8 /* GetImageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetImageResponse.swift; sourceTree = "<group>"; };
 		3F524756284FCE8D0081EBC6 /* FilterInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterInfo.swift; sourceTree = "<group>"; };
-		3F530832289287AB00AE7D2A /* SendSignInCodeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendSignInCodeVC.swift; sourceTree = "<group>"; };
-		3F530833289287AB00AE7D2A /* SendSignInCodeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendSignInCodeVC.xib; sourceTree = "<group>"; };
 		3F5ABA8F28B4F698005E1A7A /* NewContractVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewContractVC.swift; sourceTree = "<group>"; };
 		3F5ABA9028B4F698005E1A7A /* NewContractVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewContractVC.xib; sourceTree = "<group>"; };
 		3F645ADE2875D86E00720E76 /* SocketIOController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIOController.swift; sourceTree = "<group>"; };
@@ -1372,6 +1372,10 @@
 		CE5FD6BB290E858300031270 /* AttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceViewController.swift; sourceTree = "<group>"; };
 		CE5FD6BE290E861700031270 /* AttendanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceTableViewCell.swift; sourceTree = "<group>"; };
 		CE5FD6BF290E861700031270 /* AttendanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceTableViewCell.xib; sourceTree = "<group>"; };
+		CE67B4E7292CF63A004E8A2F /* SendSignInCodeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendSignInCodeVC.swift; sourceTree = "<group>"; };
+		CE67B4E8292CF63A004E8A2F /* SendSignInCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendSignInCodeVC.xib; sourceTree = "<group>"; };
+		CE67B4EC292CF78A004E8A2F /* PayRoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayRoleViewController.swift; sourceTree = "<group>"; };
+		CE67B4ED292CF78A004E8A2F /* PayRoleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayRoleViewController.xib; sourceTree = "<group>"; };
 		CE6ABE37291C05EA00CFEA36 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		CE6ABE38291C05EA00CFEA36 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		CE7BB3792909786D00BEE4C4 /* CalendarActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarActivityTableViewCell.swift; sourceTree = "<group>"; };
@@ -1846,6 +1850,7 @@
 				CE4B419D292A403C00641357 /* LoanVCs */,
 				3F5ABA8E28B4F678005E1A7A /* NewContractVCs */,
 				3F5ABA8D28B4F659005E1A7A /* VactionsVCs */,
+				CE67B4E6292CF63A004E8A2F /* SendCodeVC */,
 			);
 			path = Transactions;
 			sourceTree = "<group>";
@@ -1898,15 +1903,6 @@
 				3FD3F5602858C265007CC5BB /* JopDetailsResponse */,
 			);
 			path = ViewEmpResponse;
-			sourceTree = "<group>";
-		};
-		3F5308312892876400AE7D2A /* SendCodeVC */ = {
-			isa = PBXGroup;
-			children = (
-				3F530832289287AB00AE7D2A /* SendSignInCodeVC.swift */,
-				3F530833289287AB00AE7D2A /* SendSignInCodeVC.xib */,
-			);
-			path = SendCodeVC;
 			sourceTree = "<group>";
 		};
 		3F5ABA8D28B4F659005E1A7A /* VactionsVCs */ = {
@@ -2255,12 +2251,10 @@
 			isa = PBXGroup;
 			children = (
 				CEA3A082291A8B7600F79E3C /* MenuVC */,
-				CEBAAA4629128AFF0066B818 /* AttendanceGroups */,
 				CEE57BCD28F756CA00CA16D8 /* HomeVC */,
 				3FA8EADA28CDEACE0026DE44 /* CustomViews */,
 				3F677EC728AB7FAB000D6239 /* Documents */,
 				3F97CD96289A5FE500D6E8CC /* Tasks */,
-				3F5308312892876400AE7D2A /* SendCodeVC */,
 				3F31ADEB288D36A500E2D8D6 /* Transactions */,
 				3F1F4041287E0EBD00F919F0 /* QRCode */,
 				3FD038DA287437AF00BB13C7 /* HR */,
@@ -2274,6 +2268,8 @@
 				3FFC4D862885B23500233456 /* ProfileVCs */,
 				3FD038DB287437AF00BB13C7 /* AllEmployeesVC */,
 				3FD039B2287437B000BB13C7 /* SettingsPermissionVC */,
+				CEBAAA4629128AFF0066B818 /* AttendanceGroups */,
+				CE67B4EB292CF720004E8A2F /* PayRoleVCs */,
 			);
 			path = HR;
 			sourceTree = "<group>";
@@ -2938,6 +2934,24 @@
 				CEBAAA592912C8270066B818 /* ShiftsTableViewCell.xib */,
 			);
 			path = Attendance;
+			sourceTree = "<group>";
+		};
+		CE67B4E6292CF63A004E8A2F /* SendCodeVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE67B4E7292CF63A004E8A2F /* SendSignInCodeVC.swift */,
+				CE67B4E8292CF63A004E8A2F /* SendSignInCodeVC.xib */,
+			);
+			path = SendCodeVC;
+			sourceTree = "<group>";
+		};
+		CE67B4EB292CF720004E8A2F /* PayRoleVCs */ = {
+			isa = PBXGroup;
+			children = (
+				CE67B4EC292CF78A004E8A2F /* PayRoleViewController.swift */,
+				CE67B4ED292CF78A004E8A2F /* PayRoleViewController.xib */,
+			);
+			path = PayRoleVCs;
 			sourceTree = "<group>";
 		};
 		CE6ABE35291C05BD00CFEA36 /* SettingsVCs */ = {
@@ -3915,7 +3929,6 @@
 				3FD03A4B287437B000BB13C7 /* SettingsUpdateViewController.strings in Resources */,
 				3FD038D52874377000BB13C7 /* LaunchScreen.storyboard in Resources */,
 				FA0324D226FC66A900372EA6 /* Localizable.strings in Resources */,
-				3F530835289287AB00AE7D2A /* SendSignInCodeVC.xib in Resources */,
 				3F07C075286D8FC300C2CDF6 /* InsuranceTVCell.xib in Resources */,
 				3FD03A2B287437B000BB13C7 /* ViewEmpEducationDetailsVC.strings in Resources */,
 				CE54B2D728F5C55300972D6D /* TopCountRequestsTableViewCell.xib in Resources */,
@@ -4061,6 +4074,7 @@
 				3F9040EE286CB295008D85B8 /* PersonDetailsTableViewCell.xib in Resources */,
 				FA530A3F270CCA9D0071CDC8 /* CornTransactionTVCell.xib in Resources */,
 				CE5FD6C1290E861700031270 /* AttendanceTableViewCell.xib in Resources */,
+				CE67B4EA292CF63A004E8A2F /* SendSignInCodeVC.xib in Resources */,
 				3FD03A04287437B000BB13C7 /* ViewEmpModulesVC.xib in Resources */,
 				FA2C575F286CA6B900CE5C59 /* commentRepltTVCell.xib in Resources */,
 				FAB54E9C27EF2EE7003297E1 /* FormVersionTVCell.xib in Resources */,
@@ -4071,6 +4085,7 @@
 				FAF9D43F278DE050002D8AEF /* ProjectRequestCell.xib in Resources */,
 				3F07C08E286D92A900C2CDF6 /* ProfileContactTVCell.xib in Resources */,
 				3FD03A56287437B000BB13C7 /* AddPermissionMentionsVC.strings in Resources */,
+				CE67B4EF292CF78A004E8A2F /* PayRoleViewController.xib in Resources */,
 				3FD03A802874496900BB13C7 /* Transaction.storyboard in Resources */,
 				3F07C066286D8EAD00C2CDF6 /* JobDetailsTVCell.xib in Resources */,
 				CEB1D42928F6D6A4007D2A8A /* ContentCollectionViewCell.xib in Resources */,
@@ -4380,7 +4395,6 @@
 				3FB726C12864BF5500684C94 /* AllModulesResponse.swift in Sources */,
 				CE5E02FA28F8491900007EAC /* DateActivityData.swift in Sources */,
 				CE0FD9E62905A0EE00170382 /* Report.swift in Sources */,
-				3F530834289287AB00AE7D2A /* SendSignInCodeVC.swift in Sources */,
 				CEB1D42D28F6DC0A007D2A8A /* HomeFilterViewController.swift in Sources */,
 				3FD039DE287437B000BB13C7 /* ViewEmpPassportDetailsVC.swift in Sources */,
 				3F677ECA28AB7FCF000D6239 /* DocumentsViewController.swift in Sources */,
@@ -4623,6 +4637,7 @@
 				3F977EFC2887F60F0062FA47 /* EmpInfoResult.swift in Sources */,
 				3FAB09D02896E044004FAA61 /* CommentsViewController.swift in Sources */,
 				3FA52FE628B65A6B00B42B58 /* ContractPageViewController.swift in Sources */,
+				CE67B4EE292CF78A004E8A2F /* PayRoleViewController.swift in Sources */,
 				FA0647A52851DBD30049287B /* AddAttachmentsVC.swift in Sources */,
 				FA0324DF2700747A00372EA6 /* ForgetPasswordVC.swift in Sources */,
 				FA7F941727D782E900E03A34 /* ApprovalTVCell.swift in Sources */,
@@ -4651,6 +4666,7 @@
 				3FC82A4F284CD863005BCB46 /* AllEmployeeRecords.swift in Sources */,
 				CE5FD6C0290E861700031270 /* AttendanceTableViewCell.swift in Sources */,
 				3F1436882848A120008ABC19 /* ViewCustomExtension.swift in Sources */,
+				CE67B4E9292CF63A004E8A2F /* SendSignInCodeVC.swift in Sources */,
 				FA35CE522720BA2700FF6AE4 /* DocumentsVC.swift in Sources */,
 				3F14368F2848A120008ABC19 /* IconTextField.swift in Sources */,
 				3F802E792863738C007D5D8A /* OutgoingAttachmentTableViewCell.swift in Sources */,

@@ -15,6 +15,9 @@ class InboxMailViewController: UIViewController {
     
     private var data = [MailData]()
     
+    private var pageNumber = 1
+    private var totalPages = 1
+
     override func viewDidLoad() {
         super.viewDidLoad()
         initialization()
@@ -23,7 +26,7 @@ class InboxMailViewController: UIViewController {
     
     private func initialization(){
         setUpTableView()
-        getInbox()
+        getInbox(isFromBottom: false)
     }
     
     
@@ -59,19 +62,42 @@ extension InboxMailViewController: UITableViewDelegate,UITableViewDataSource{
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == data.count - 1{
+            if pageNumber < totalPages{
+                pageNumber += 1
+                getInbox(isFromBottom: true)
+            }
+        }
+    }
 }
 
 
 //MARK: - APIHandling
 extension InboxMailViewController{
-    private func getInbox(){
+    private func getInbox(isFromBottom:Bool){
+        if !isFromBottom {
+            pageNumber = 1
+        }
+        
         showLoadingActivity()
-        APIController.shard.startInboxsTimer { data in
+        APIController.shard.startInboxsTimer(pageNumber:String(pageNumber)){ data in
             self.hideLoadingActivity()
             if let status = data.status , status{
                 DispatchQueue.main.async {
                     UserDefaults.standard.set(data.data?.first?.date ?? "", forKey: "LastInboxDate")
-                    self.data = data.data ?? []
+                    if isFromBottom {
+                        self.data.append(contentsOf: data.data ?? [])
+                    }else{
+                        self.data = data.data ?? []
+                    }
+                    let total = Double(data.count_all ?? 1) / 10
+                    if total.truncatingRemainder(dividingBy: 1) == 0 {
+                        self.totalPages = Int(total)
+                    }else{
+                        self.totalPages = Int(total) + 1
+                    }
                     self.tableView.reloadData()
                 }
             }else{

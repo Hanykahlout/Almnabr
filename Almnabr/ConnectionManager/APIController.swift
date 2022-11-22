@@ -28,7 +28,7 @@ class APIController{
     
     let serverURL = "https://erp.almnabr.com/backend"
     private let api_key = "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
-
+    
     
     public static var shard:APIController = {
         let apiController = APIController()
@@ -2914,8 +2914,8 @@ class APIController{
     }
     
     
-    func startInboxsTimer(callback: @escaping (_ data:MailInboxResponse)->Void){
-        let strURL = "\(serverURL)/users/email/mailbox"
+    func startInboxsTimer(pageNumber:String,callback: @escaping (_ data:MailInboxResponse)->Void){
+        let strURL = "\(serverURL)/users/email/mailbox/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"

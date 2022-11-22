@@ -17,6 +17,7 @@ import ObjectMapper
 struct MailInboxResponse : Mappable {
 	var status : Bool?
 	var data : [MailData]?
+    var count_all : Int?
     var error: String?
 	
     init?(map: Map) {
@@ -28,7 +29,7 @@ struct MailInboxResponse : Mappable {
 		status <- map["status"]
 		data <- map["data"]
         error <- map["error"]
-        
+        count_all <- map["count_all"]
 	}
 
 }

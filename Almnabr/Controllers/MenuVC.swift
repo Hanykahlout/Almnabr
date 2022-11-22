@@ -330,10 +330,21 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     _ =  panel?.center(nav)
+                case "19":
+                    let vc:SettingsPermissionVC = AppDelegate.HRSB.instanceVC()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
                     
-                case "69":
+                case "21":
+                    let vc = AllEmployeesVC()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                    
+                case "27":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
-                    let vc:CronTransactionVC = AppDelegate.mainSB.instanceVC()
+                    let vc:ApproveTransactionVC = AppDelegate.mainSB.instanceVC()
                     vc.title =  obj.menu_name
                     vc.MenuObj = obj
                     vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
@@ -341,9 +352,9 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     nav.isNavigationBarHidden = true
                     _ =  panel?.center(nav)
                     
-                case "27":
+                case "69":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
-                    let vc:ApproveTransactionVC = AppDelegate.mainSB.instanceVC()
+                    let vc:CronTransactionVC = AppDelegate.mainSB.instanceVC()
                     vc.title =  obj.menu_name
                     vc.MenuObj = obj
                     vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
@@ -360,7 +371,6 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
                     nav.isNavigationBarHidden = true
                     _ =  panel?.center(nav)
-                    
                 case "94":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
                     let vc:AllTicketVC = AppDelegate.TicketSB.instanceVC()
@@ -369,28 +379,23 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     //obj.menu[indexPath.row - 1].menu_name
                     nav.isNavigationBarHidden = true
                       _ =  panel?.center(nav)
-                    
-                case "19":
-                    let vc:SettingsPermissionVC = AppDelegate.HRSB.instanceVC()
-                    let nav = UINavigationController(rootViewController: vc)
-                    nav.isNavigationBarHidden = true
-                    panel?.center(nav)
-                    
-                case "21":
-                    let vc = AllEmployeesVC()
-                    let nav = UINavigationController(rootViewController: vc)
-                    nav.isNavigationBarHidden = true
-                    panel?.center(nav)
-                case "101":
-                    let vc = DocumentsViewController()
-                    let nav = UINavigationController(rootViewController: vc)
-                    nav.isNavigationBarHidden = true
-                    panel?.center(nav)
                 case "95":
                     let vc:AttendanceViewController = AppDelegate.HRSB.instanceVC()
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     panel?.center(nav)
+                case "96":
+//                    let vc:PayRoleViewController = PayRoleViewController()
+//                    let nav = UINavigationController(rootViewController: vc)
+//                    nav.isNavigationBarHidden = true
+//                    panel?.center(nav)
+                    break
+                case "101":
+                    let vc = DocumentsViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+               
                 default:
                     print(" no menu id ")
                 }

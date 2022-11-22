@@ -49,7 +49,7 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>We need your permission to open the camera so you can choose and add an image to the app</string>
+	<string>We need your permission to open the camera so you can scan the QR code and sign in from the web.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Please allow to sign  in with FaceId</string>
 	<key>NSPhotoLibraryUsageDescription</key>

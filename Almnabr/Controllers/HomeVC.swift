@@ -197,6 +197,11 @@ class HomeVC: UIViewController   {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        let x:Double = 1000.0
+        let y:Double = 10.0
+        
+        print("ASDSAADsa",(x/y).truncatingRemainder(dividingBy: 1))
+        
         // Hide the Navigation Bar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         getProjectWorkingAreas()

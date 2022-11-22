@@ -234,7 +234,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func observeInboxsLocalNotification(){
-        APIController.shard.startInboxsTimer { data in
+        APIController.shard.startInboxsTimer(pageNumber:"1") { data in
             if let status = data.status,status{
                 if let lastInboxDate = UserDefaults.standard.string(forKey: "LastInboxDate"){
                     let dateFormatter = DateFormatter()

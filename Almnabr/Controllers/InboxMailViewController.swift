@@ -17,6 +17,7 @@ class InboxMailViewController: UIViewController {
     
     private var pageNumber = 1
     private var totalPages = 1
+    private var isLastPageAdd = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,8 +66,12 @@ extension InboxMailViewController: UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == data.count - 1{
-            if pageNumber < totalPages{
-                pageNumber += 1
+            if isLastPageAdd{
+                if pageNumber < totalPages{
+                    pageNumber += 1
+                    getInbox(isFromBottom: true)
+                }
+            }else{
                 getInbox(isFromBottom: true)
             }
         }
@@ -84,6 +89,7 @@ extension InboxMailViewController{
         showLoadingActivity()
         APIController.shard.startInboxsTimer(pageNumber:String(pageNumber)){ data in
             self.hideLoadingActivity()
+            
             if let status = data.status , status{
                 DispatchQueue.main.async {
                     UserDefaults.standard.set(data.data?.first?.date ?? "", forKey: "LastInboxDate")
@@ -92,6 +98,7 @@ extension InboxMailViewController{
                     }else{
                         self.data = data.data ?? []
                     }
+                    self.isLastPageAdd = true
                     let total = Double(data.count_all ?? 1) / 10
                     if total.truncatingRemainder(dividingBy: 1) == 0 {
                         self.totalPages = Int(total)
@@ -101,7 +108,10 @@ extension InboxMailViewController{
                     self.tableView.reloadData()
                 }
             }else{
-                SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknown error")
+                self.isLastPageAdd = false
+                if !isFromBottom{
+                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknown error")
+                }
             }
         }
     }

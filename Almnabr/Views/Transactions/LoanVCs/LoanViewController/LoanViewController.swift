@@ -13,6 +13,7 @@ class LoanViewController: UIViewController {
     
     @IBOutlet weak var noPermissionImageView: UIImageView!
     
+    @IBOutlet weak var finalViewLabel: UILabel!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var submitFormView: UIView!
     
@@ -56,12 +57,12 @@ class LoanViewController: UIViewController {
     private var previewFileData:GetImageResponse?
     private var progress:Float = 0 {
         didSet{
-            stepsProgress.progress = self.progress/7
+            stepsProgress.progress = self.progress/8
             changeCurrentStep()
         }
     }
     private var isWaitingThisUser = false
-    private let steps:[Int:String] = [1:"CONFIGURATION",2:"EMPLOYEE",3:"DIRECT_MANAGER",4:"HUMAN_RESOURCE_TEAM",5:"ACCOUNT_TEAM",6:"HUMAN_RESOURCE_MANAGER",7:"completed"]
+    private let steps:[Int:String] = [1:"CONFIGURATION",2:"EMPLOYEE",3:"DIRECT_MANAGER",4:"Executive_Manager",5:"HUMAN_RESOURCE_TEAM",6:"ACCOUNT_TEAM",7:"HUMAN_RESOURCE_MANAGER",8:"completed"]
     private var waitingUsers = ""
     
     
@@ -141,26 +142,29 @@ class LoanViewController: UIViewController {
         case 3:
             selectedStepLabel.text = "Direct Manager"
         case 4:
-            selectedStepLabel.text = "HR Team"
+            selectedStepLabel.text = "Executive Manager"
         case 5:
-            selectedStepLabel.text = "Account Team"
+            selectedStepLabel.text = "HR Team"
         case 6:
-            selectedStepLabel.text = "HR Manager"
+            selectedStepLabel.text = "Account Team"
         case 7:
-            selectedStepLabel.text = "Completed"
+            selectedStepLabel.text = "HR Manager"
+        case 8:
+            selectedStepLabel.text = "last step"
 
         default:
             break
         }
         
-        finalResultView.isHidden = approvalStep != "last" || progress != 7
-        selectedStepNoLabel.text = "step \(Int(progress)) of 7"
+        
+        finalResultView.isHidden = (approvalStep != "last" && approvalStep != "completed") || progress != 8
+        selectedStepNoLabel.text = "step \(Int(progress)) of 8"
         if isWaitingThisUser{
             submitFormView.isHidden = steps[Int(progress)] != approvalStep
         }else{
             submitFormView.isHidden = true
         }
-        mainView.isHidden = !submitFormView.isHidden
+        mainView.isHidden = !submitFormView.isHidden || !finalResultView.isHidden
     }
     
     private func setUpPageViewController(){
@@ -180,6 +184,7 @@ class LoanViewController: UIViewController {
     }
     
     private func setUpApprovalViewExistent(data:Transactions_persons?){
+        waitingUsers.removeAll()
         if let data = data ,let records = data.records , let approvalStep = approvalStep{
             for record in records{
                 if approvalStep == record.transactions_persons_last_step{
@@ -189,7 +194,7 @@ class LoanViewController: UIViewController {
                 if record.user_id == Auth_User.user_id{
                     self.isWaitingThisUser = record.transactions_persons_last_step == approvalStep
                     submitFormView.isHidden = record.transactions_persons_last_step != approvalStep
-                    mainView.isHidden = !submitFormView.isHidden
+                    mainView.isHidden = !submitFormView.isHidden || approvalStep == "completed" || approvalStep == "last"
                 }
             }
         }
@@ -221,7 +226,10 @@ class LoanViewController: UIViewController {
     
     
     @IBAction func infoAction(_ sender: Any) {
-        SCLAlertView().showInfo("Waiting for: \(waitingUsers)", subTitle: "")
+        let alertVC = UIAlertController(title: "Waited Users", message: waitingUsers, preferredStyle: .alert)
+        alertVC.addAction(.init(title: "Cancel", style: .cancel))
+        present(alertVC, animated: true)
+//        SCLAlertView().showInfo("Waiting for: \(waitingUsers)", subTitle: "")
     }
  
     
@@ -236,7 +244,7 @@ class LoanViewController: UIViewController {
     }
     
     @IBAction func forwordAction(_ sender: Any) {
-        if progress < 7{
+        if progress < 8{
             progress += 1
         }
         
@@ -306,21 +314,28 @@ extension LoanViewController{
                     case "DIRECT_MANAGER":
                         self.progress = 3
                         self.lastStepOpenedLabel.text = "Direct Manager"
-                    case "HUMAN_RESOURCE_TEAM":
+                    case "Executive_Manager":
                         self.progress = 4
+                        self.lastStepOpenedLabel.text = "Executive Manager"
+                    case "HUMAN_RESOURCE_TEAM":
+                        self.progress = 5
                         self.lastStepOpenedLabel.text = "Human Resource Team"
                     case "ACCOUNT_TEAM":
-                        self.progress = 5
+                        self.progress = 6
                         self.lastStepOpenedLabel.text = "Account Team"
                     case "HUMAN_RESOURCE_MANAGER":
-                        self.progress = 6
-                        self.lastStepOpenedLabel.text = "Human Resource Manager"
-                    case "completed","last":
                         self.progress = 7
+                        self.lastStepOpenedLabel.text = "Human Resource Manager"
+                    case "last":
+                        self.progress = 8
+                        self.lastStepOpenedLabel.text = "Processing"
+                        self.finalViewLabel.text = "Thank you, we will review your request. wait the result soon."
+                    case "completed":
+                        self.progress = 8
                         self.lastStepOpenedLabel.text = "Completed"
+                        self.finalViewLabel.text = "lang_completed_msg"
                         
                     default:
-                        
                         break
                     }
                     

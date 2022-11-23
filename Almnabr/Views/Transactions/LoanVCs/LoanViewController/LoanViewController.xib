@@ -31,6 +31,7 @@
                 <outlet property="editUsersButton" destination="FLz-Lf-xkd" id="8vd-uw-kcF"/>
                 <outlet property="emptyTextViewLabel" destination="GrW-dR-dUG" id="cDc-Rr-W3q"/>
                 <outlet property="finalResultView" destination="dsv-pa-qHo" id="BEq-l1-OWW"/>
+                <outlet property="finalViewLabel" destination="UZp-JC-VHr" id="Opb-k3-Sad"/>
                 <outlet property="lastStepOpenedLabel" destination="apq-TM-Ia6" id="BRW-K2-lkG"/>
                 <outlet property="mainView" destination="aHF-1P-SVU" id="dcf-ll-ESN"/>
                 <outlet property="noPermissionImageView" destination="hCb-Yu-A22" id="3ch-WZ-ZG0"/>

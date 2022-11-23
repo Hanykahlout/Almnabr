@@ -23,8 +23,8 @@ class APIController{
     //Almnabr
     //com.ERP.ALMNABR 1.0  3
     //socket --- "https://node.almnabr.com/"
-    //server url ---- "https://erp.almnabr.com/backend"
-    //Api key "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
+    //server url ---- "https://nahidh.sa/backend"
+    //Api key "12345"
     
     let serverURL = "https://erp.almnabr.com/backend"
     private let api_key = "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
@@ -2929,7 +2929,7 @@ class APIController{
     
     private func getMailsInbox(strURL:String,headers:HTTPHeaders,callback: @escaping (_ data:MailInboxResponse)->Void){
         print("Timer TEST",inboxsTimer?.timeInterval ?? "----")
-        Alamofire.request(strURL, method: .get , headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(strURL, method: .post , headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 
                 if let parsedMapperString : MailInboxResponse = Mapper<MailInboxResponse>().map(JSONString:str){

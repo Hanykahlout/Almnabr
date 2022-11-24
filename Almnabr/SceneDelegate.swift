@@ -199,11 +199,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
     }
     
+    
     func sceneDidBecomeActive(_ scene: UIScene) {
-        
         UIApplication.shared.applicationIconBadgeNumber = 0
-        
     }
+
     
     func sceneWillResignActive(_ scene: UIScene) {
         
@@ -307,9 +307,10 @@ extension SceneDelegate{
         guard let info = Bundle.main.infoDictionary,
             let currentVersion = info["CFBundleShortVersionString"] as? String,
             let identifier = info["CFBundleIdentifier"] as? String,
-            let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else {
+            let url = URL(string: "https://itunes.apple.com/sa/lookup?bundleId=\(identifier)") else {
             throw VersionError.invalidBundleInfo
         }
+        
         let data = try Data(contentsOf: url)
         guard let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else {
             throw VersionError.invalidResponse

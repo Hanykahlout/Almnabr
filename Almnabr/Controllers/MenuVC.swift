@@ -385,10 +385,10 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     nav.isNavigationBarHidden = true
                     panel?.center(nav)
                 case "96":
-//                    let vc:PayRoleViewController = PayRoleViewController()
-//                    let nav = UINavigationController(rootViewController: vc)
-//                    nav.isNavigationBarHidden = true
-//                    panel?.center(nav)
+                    let vc:PayRoleViewController = PayRoleViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
                     break
                 case "101":
                     let vc = DocumentsViewController()

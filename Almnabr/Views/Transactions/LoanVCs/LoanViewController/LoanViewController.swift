@@ -303,7 +303,7 @@ extension LoanViewController{
                     self.recordsData = data.transactions_records?.records ?? []
                     
                     self.approvalStep = data.transactions_request?.transaction_request_last_step ?? ""
-                    self.getPrviewFile(base64: self.approvalStep == "completed" ? data.transactions_request?.view_link ?? "" : nil)
+                    self.getPrviewFile(base64: self.approvalStep == "completed" ? data.transactions_request?.view_link : nil)
                     switch data.transactions_request?.transaction_request_last_step{
                     case "CONFIGURATION":
                         self.progress = 1

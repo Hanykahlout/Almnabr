@@ -443,6 +443,14 @@
 		CE1AB6CD292BAA0000C4913C /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AB6CC292BAA0000C4913C /* TextFieldWithPadding.swift */; };
 		CE2003B92906C81800B527BB /* CalenderActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2003B82906C81800B527BB /* CalenderActivityView.xib */; };
 		CE2003BB2906CB3D00B527BB /* CalenderActivityUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2003BA2906CB3D00B527BB /* CalenderActivityUIView.swift */; };
+		CE2EDAF3292F9DAF00A22419 /* PayRoleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2EDAF1292F9DAF00A22419 /* PayRoleTableViewCell.swift */; };
+		CE2EDAF4292F9DAF00A22419 /* PayRoleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2EDAF2292F9DAF00A22419 /* PayRoleTableViewCell.xib */; };
+		CE2EDAF7292FA1D600A22419 /* PayRoleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2EDAF5292FA1D600A22419 /* PayRoleResponse.swift */; };
+		CE2EDAF8292FA1D600A22419 /* PayRoleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2EDAF6292FA1D600A22419 /* PayRoleData.swift */; };
+		CE2EDAFB292FA4FF00A22419 /* PayRoleReviewersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2EDAF9292FA4FF00A22419 /* PayRoleReviewersViewController.swift */; };
+		CE2EDAFC292FA4FF00A22419 /* PayRoleReviewersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2EDAFA292FA4FF00A22419 /* PayRoleReviewersViewController.xib */; };
+		CE2EDAFF292FA67400A22419 /* PayRoleReviewersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2EDAFD292FA67400A22419 /* PayRoleReviewersTableViewCell.swift */; };
+		CE2EDB00292FA67400A22419 /* PayRoleReviewersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2EDAFE292FA67400A22419 /* PayRoleReviewersTableViewCell.xib */; };
 		CE3244A228FC279A004DBADB /* ChartBottomData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3244A128FC279A004DBADB /* ChartBottomData.swift */; };
 		CE3244A428FC33FB004DBADB /* ChartLeftData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3244A328FC33FB004DBADB /* ChartLeftData.swift */; };
 		CE3244A628FC350C004DBADB /* ChartRightData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3244A528FC350C004DBADB /* ChartRightData.swift */; };
@@ -570,6 +578,10 @@
 		CEE57BD128F756F700CA16D8 /* SelectTemplete1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE57BCF28F756F700CA16D8 /* SelectTemplete1ViewController.xib */; };
 		CEE57BD428F759FE00CA16D8 /* SelectTemplete2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE57BD228F759FE00CA16D8 /* SelectTemplete2ViewController.swift */; };
 		CEE57BD528F759FE00CA16D8 /* SelectTemplete2ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE57BD328F759FE00CA16D8 /* SelectTemplete2ViewController.xib */; };
+		CEF81871292FA9A200026B33 /* PayRoleReviewersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8186F292FA9A100026B33 /* PayRoleReviewersResponse.swift */; };
+		CEF81872292FA9A200026B33 /* PayRoleReviewersRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF81870292FA9A200026B33 /* PayRoleReviewersRecord.swift */; };
+		CEF8187A292FAC2400026B33 /* AddReviewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF81878292FAC2400026B33 /* AddReviewerViewController.swift */; };
+		CEF8187B292FAC2400026B33 /* AddReviewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF81879292FAC2400026B33 /* AddReviewerViewController.xib */; };
 		CEFE3B882900321000119A55 /* SelectedHomeFilterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE3B872900321000119A55 /* SelectedHomeFilterData.swift */; };
 		CEFE3B8E2900634700119A55 /* UsedUnusedReportRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE3B892900634700119A55 /* UsedUnusedReportRecords.swift */; };
 		CEFE3B8F2900634700119A55 /* UsedUnusedReportTableHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE3B8A2900634700119A55 /* UsedUnusedReportTableHeaders.swift */; };
@@ -1339,6 +1351,14 @@
 		CE1AB6CC292BAA0000C4913C /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
 		CE2003B82906C81800B527BB /* CalenderActivityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalenderActivityView.xib; sourceTree = "<group>"; };
 		CE2003BA2906CB3D00B527BB /* CalenderActivityUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderActivityUIView.swift; sourceTree = "<group>"; };
+		CE2EDAF1292F9DAF00A22419 /* PayRoleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayRoleTableViewCell.swift; sourceTree = "<group>"; };
+		CE2EDAF2292F9DAF00A22419 /* PayRoleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayRoleTableViewCell.xib; sourceTree = "<group>"; };
+		CE2EDAF5292FA1D600A22419 /* PayRoleResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRoleResponse.swift; sourceTree = "<group>"; };
+		CE2EDAF6292FA1D600A22419 /* PayRoleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRoleData.swift; sourceTree = "<group>"; };
+		CE2EDAF9292FA4FF00A22419 /* PayRoleReviewersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayRoleReviewersViewController.swift; sourceTree = "<group>"; };
+		CE2EDAFA292FA4FF00A22419 /* PayRoleReviewersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayRoleReviewersViewController.xib; sourceTree = "<group>"; };
+		CE2EDAFD292FA67400A22419 /* PayRoleReviewersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayRoleReviewersTableViewCell.swift; sourceTree = "<group>"; };
+		CE2EDAFE292FA67400A22419 /* PayRoleReviewersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayRoleReviewersTableViewCell.xib; sourceTree = "<group>"; };
 		CE3244A128FC279A004DBADB /* ChartBottomData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartBottomData.swift; sourceTree = "<group>"; };
 		CE3244A328FC33FB004DBADB /* ChartLeftData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartLeftData.swift; sourceTree = "<group>"; };
 		CE3244A528FC350C004DBADB /* ChartRightData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRightData.swift; sourceTree = "<group>"; };
@@ -1467,6 +1487,10 @@
 		CEE57BCF28F756F700CA16D8 /* SelectTemplete1ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectTemplete1ViewController.xib; sourceTree = "<group>"; };
 		CEE57BD228F759FE00CA16D8 /* SelectTemplete2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTemplete2ViewController.swift; sourceTree = "<group>"; };
 		CEE57BD328F759FE00CA16D8 /* SelectTemplete2ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectTemplete2ViewController.xib; sourceTree = "<group>"; };
+		CEF8186F292FA9A100026B33 /* PayRoleReviewersResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRoleReviewersResponse.swift; sourceTree = "<group>"; };
+		CEF81870292FA9A200026B33 /* PayRoleReviewersRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRoleReviewersRecord.swift; sourceTree = "<group>"; };
+		CEF81878292FAC2400026B33 /* AddReviewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewerViewController.swift; sourceTree = "<group>"; };
+		CEF81879292FAC2400026B33 /* AddReviewerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddReviewerViewController.xib; sourceTree = "<group>"; };
 		CEFE3B872900321000119A55 /* SelectedHomeFilterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedHomeFilterData.swift; sourceTree = "<group>"; };
 		CEFE3B892900634700119A55 /* UsedUnusedReportRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsedUnusedReportRecords.swift; sourceTree = "<group>"; };
 		CEFE3B8A2900634700119A55 /* UsedUnusedReportTableHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsedUnusedReportTableHeaders.swift; sourceTree = "<group>"; };
@@ -1789,6 +1813,7 @@
 		3F14366F28489F50008ABC19 /* HRCell */ = {
 			isa = PBXGroup;
 			children = (
+				CE2EDAEC292F9D7300A22419 /* PayRoleTableViewCell */,
 				3FAF671A284CB8AD00BEF1D6 /* AllEmployeesCells */,
 				3FAF6719284CB89B00BEF1D6 /* SettingsCells */,
 			);
@@ -2832,6 +2857,17 @@
 			path = ViewEmpDocumentsVC;
 			sourceTree = "<group>";
 		};
+		CE2EDAEC292F9D7300A22419 /* PayRoleTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE2EDAF1292F9DAF00A22419 /* PayRoleTableViewCell.swift */,
+				CE2EDAF2292F9DAF00A22419 /* PayRoleTableViewCell.xib */,
+				CE2EDAFD292FA67400A22419 /* PayRoleReviewersTableViewCell.swift */,
+				CE2EDAFE292FA67400A22419 /* PayRoleReviewersTableViewCell.xib */,
+			);
+			path = PayRoleTableViewCell;
+			sourceTree = "<group>";
+		};
 		CE36EDC828D385AB007EC835 /* MailsModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -2950,6 +2986,10 @@
 			children = (
 				CE67B4EC292CF78A004E8A2F /* PayRoleViewController.swift */,
 				CE67B4ED292CF78A004E8A2F /* PayRoleViewController.xib */,
+				CE2EDAF9292FA4FF00A22419 /* PayRoleReviewersViewController.swift */,
+				CE2EDAFA292FA4FF00A22419 /* PayRoleReviewersViewController.xib */,
+				CEF81878292FAC2400026B33 /* AddReviewerViewController.swift */,
+				CEF81879292FAC2400026B33 /* AddReviewerViewController.xib */,
 			);
 			path = PayRoleVCs;
 			sourceTree = "<group>";
@@ -3097,6 +3137,50 @@
 			path = HomeVC;
 			sourceTree = "<group>";
 		};
+		CEF81873292FA9B600026B33 /* HRModels */ = {
+			isa = PBXGroup;
+			children = (
+				CEF81876292FA9E000026B33 /* AllEmp */,
+				CEF81874292FA9C700026B33 /* PayRole */,
+			);
+			path = HRModels;
+			sourceTree = "<group>";
+		};
+		CEF81874292FA9C700026B33 /* PayRole */ = {
+			isa = PBXGroup;
+			children = (
+				CE2EDAF6292FA1D600A22419 /* PayRoleData.swift */,
+				CE2EDAF5292FA1D600A22419 /* PayRoleResponse.swift */,
+				CEF81870292FA9A200026B33 /* PayRoleReviewersRecord.swift */,
+				CEF8186F292FA9A100026B33 /* PayRoleReviewersResponse.swift */,
+			);
+			path = PayRole;
+			sourceTree = "<group>";
+		};
+		CEF81876292FA9E000026B33 /* AllEmp */ = {
+			isa = PBXGroup;
+			children = (
+				3FD3F5612858C2A0007CC5BB /* EditEmpResponse */,
+				3F48C537285883A0004D33F8 /* ViewEmpResponse */,
+				3FC82A47284CD854005BCB46 /* AllEmployeeModels */,
+			);
+			path = AllEmp;
+			sourceTree = "<group>";
+		};
+		CEF81877292FA9FD00026B33 /* GeneralModels */ = {
+			isa = PBXGroup;
+			children = (
+				FA03249826FBA64800372EA6 /* ResponseModel.swift */,
+				FA0324C726FBE2C900372EA6 /* NewSuccessModel.swift */,
+				FA0324C926FBE3EE00372EA6 /* NewUserInfoModel.swift */,
+				FA18095F2704695A00B493A7 /* Model.swift */,
+				FA180963270494AB00B493A7 /* AuthUser.swift */,
+				3F524756284FCE8D0081EBC6 /* FilterInfo.swift */,
+				3F65AC5F285099EA00035471 /* SectionInfo.swift */,
+			);
+			path = GeneralModels;
+			sourceTree = "<group>";
+		};
 		FA03241926FB9BF900372EA6 = {
 			isa = PBXGroup;
 			children = (
@@ -3197,6 +3281,7 @@
 		FA03245B26FB9E0300372EA6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CEF81877292FA9FD00026B33 /* GeneralModels */,
 				CE0D05DC292A6F130058344B /* TransactionsModels */,
 				CEDBE42029115DC3002DFC61 /* AttendanceGroups */,
 				CE5E02EE28F8273D00007EAC /* HomeModels */,
@@ -3204,18 +3289,9 @@
 				3F33D12128CDDA7E006B7744 /* DashboardModels */,
 				3FEB890028ABA1C5009CA353 /* DocumentsModel */,
 				3FF3968828995C2600E1322D /* TicketModels */,
-				3FD3F5612858C2A0007CC5BB /* EditEmpResponse */,
-				3F48C537285883A0004D33F8 /* ViewEmpResponse */,
-				3FC82A47284CD854005BCB46 /* AllEmployeeModels */,
 				3FC82A46284CD847005BCB46 /* PermissionSettingsModels */,
 				3F14366728489EB6008ABC19 /* SearchBranch */,
-				FA03249826FBA64800372EA6 /* ResponseModel.swift */,
-				FA0324C726FBE2C900372EA6 /* NewSuccessModel.swift */,
-				FA0324C926FBE3EE00372EA6 /* NewUserInfoModel.swift */,
-				FA18095F2704695A00B493A7 /* Model.swift */,
-				FA180963270494AB00B493A7 /* AuthUser.swift */,
-				3F524756284FCE8D0081EBC6 /* FilterInfo.swift */,
-				3F65AC5F285099EA00035471 /* SectionInfo.swift */,
+				CEF81873292FA9B600026B33 /* HRModels */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -3908,6 +3984,7 @@
 				3FD03A47287437B000BB13C7 /* WebViewViewController.xib in Resources */,
 				3FD039D4287437B000BB13C7 /* FilterViewController.strings in Resources */,
 				3FD03A53287437B000BB13C7 /* PermissionViewController.strings in Resources */,
+				CE2EDAFC292FA4FF00A22419 /* PayRoleReviewersViewController.xib in Resources */,
 				3FD03A5C28743AE100BB13C7 /* CommentRepltTableViewCell.xib in Resources */,
 				3FD03A57287437B000BB13C7 /* AddPermissionMentionsVC.xib in Resources */,
 				FAAF206427DBDC8F00AD255B /* ByPhaseTVCell.xib in Resources */,
@@ -3956,6 +4033,7 @@
 				FA7F941827D782E900E03A34 /* ApprovalTVCell.xib in Resources */,
 				3F07C0B6286D966400C2CDF6 /* NotificationCell.xib in Resources */,
 				3FD03A7B2874492000BB13C7 /* Main.storyboard in Resources */,
+				CEF8187B292FAC2400026B33 /* AddReviewerViewController.xib in Resources */,
 				3F07C0A2286D93F700C2CDF6 /* ContactTVCell.xib in Resources */,
 				3FD03A11287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.xib in Resources */,
 				3F84039E28B7B00D00657C10 /* SendCodeWaysVC.xib in Resources */,
@@ -3977,6 +4055,7 @@
 				3FD039EC287437B000BB13C7 /* OutgoingHistoryViewController.xib in Resources */,
 				3FD03A42287437B000BB13C7 /* BankDetailsViewController.xib in Resources */,
 				3FD039D5287437B000BB13C7 /* FilterViewController.xib in Resources */,
+				CE2EDAF4292F9DAF00A22419 /* PayRoleTableViewCell.xib in Resources */,
 				FAF7623528300262000DEAFE /* CheckListCell.xib in Resources */,
 				3FD039ED287437B000BB13C7 /* PresonDetailsViewController.xib in Resources */,
 				3FD03A03287437B000BB13C7 /* UsersViewController.xib in Resources */,
@@ -4118,6 +4197,7 @@
 				FA5CB0FF27D028AE0023A372 /* LabelCell.xib in Resources */,
 				3F31ADEF288D370700E2D8D6 /* VactionViewController.xib in Resources */,
 				3FD03A41287437B000BB13C7 /* PassportDetailsViewController.xib in Resources */,
+				CE2EDB00292FA67400A22419 /* PayRoleReviewersTableViewCell.xib in Resources */,
 				3FFC4D8A2885B25F00233456 /* AddVacationViewController.xib in Resources */,
 				FA025FB92785E73600AB38C8 /* View_notification.xib in Resources */,
 				3F9040E4286CB237008D85B8 /* ModulesTableViewCell.xib in Resources */,
@@ -4304,6 +4384,7 @@
 				CE0FD9E92905A0EE00170382 /* No_settings.swift in Sources */,
 				FA8A75A6273DB1C1005A2F29 /* FormVersionCell.swift in Sources */,
 				CEBC600B29262C7F00585EDB /* JobDetailsShowVC.swift in Sources */,
+				CEF8187A292FAC2400026B33 /* AddReviewerViewController.swift in Sources */,
 				3FD039F9287437B000BB13C7 /* ViewEmpNotesVC.swift in Sources */,
 				FA48C312286AF80B006B8130 /* AddPointVC.swift in Sources */,
 				3FD03A4D287437B000BB13C7 /* SettingsUpdateViewController.swift in Sources */,
@@ -4376,6 +4457,7 @@
 				3FD03A45287437B000BB13C7 /* IDDetailsViewController.swift in Sources */,
 				FA9DF8D72815979A0015D492 /* TicketCollectionViewController.swift in Sources */,
 				FAAF206727DCEF9400AD255B /* RelatedFormsTVCell.swift in Sources */,
+				CEF81872292FA9A200026B33 /* PayRoleReviewersRecord.swift in Sources */,
 				CE6ABE39291C05EA00CFEA36 /* ChangePasswordViewController.swift in Sources */,
 				CE5E030528F888D600007EAC /* Wir_data.swift in Sources */,
 				CE85717E2908022300293977 /* SideMenuViewController.swift in Sources */,
@@ -4413,6 +4495,7 @@
 				CED47F68290ADF0500C6F840 /* MonthRatioViewController.swift in Sources */,
 				3F14368D2848A120008ABC19 /*  GraidentButton.swift in Sources */,
 				CE5E030028F84F1300007EAC /* ProjectWorkingAreaRecord.swift in Sources */,
+				CE2EDAF7292FA1D600A22419 /* PayRoleResponse.swift in Sources */,
 				CEDBE42429115DCA002DFC61 /* AttendanceGroupsUsers.swift in Sources */,
 				3FD03A2D287437B000BB13C7 /* ViewEmpEducationDetailsVC.swift in Sources */,
 				3F977EFD2887F60F0062FA47 /* Employee_info.swift in Sources */,
@@ -4459,6 +4542,7 @@
 				CECED94F291033D00000716E /* InboxMailCellTableViewCell.swift in Sources */,
 				FAD333A7271383090093175E /* ProjectCell.swift in Sources */,
 				3F84039928B778E100657C10 /* ContractDataTableViewCell.swift in Sources */,
+				CE2EDAFB292FA4FF00A22419 /* PayRoleReviewersViewController.swift in Sources */,
 				3F14366B28489EB6008ABC19 /* PermissionMentions.swift in Sources */,
 				CEBAC55E28FEAF0000324458 /* ProjectRequestData.swift in Sources */,
 				3FAA84E5288E904D003A437E /* Steps.swift in Sources */,
@@ -4558,6 +4642,7 @@
 				FABDBA9427F476D1003961FC /* PassportDetailsVC.swift in Sources */,
 				FABDBA8627F47624003961FC /* IdDetailsVC.swift in Sources */,
 				3FD03A27287437B000BB13C7 /* AddInsuranceViewController.swift in Sources */,
+				CEF81871292FA9A200026B33 /* PayRoleReviewersResponse.swift in Sources */,
 				3F48C53C285883AF004D33F8 /* EmpViewResponse.swift in Sources */,
 				CE7BB37B2909786D00BEE4C4 /* CalendarActivityTableViewCell.swift in Sources */,
 				FA5AC1162761187100E6C42D /* PersonDetailsVC.swift in Sources */,
@@ -4743,6 +4828,7 @@
 				FAAF206327DBDC8E00AD255B /* ByPhaseTVCell.swift in Sources */,
 				3F1436942848A120008ABC19 /* UIButtonDesignable.swift in Sources */,
 				3FD039E2287437B000BB13C7 /* OutgoingVC.swift in Sources */,
+				CE2EDAFF292FA67400A22419 /* PayRoleReviewersTableViewCell.swift in Sources */,
 				3FD039FC287437B000BB13C7 /* AddNotesViewController.swift in Sources */,
 				3FEAAE3428B622D80093815D /* AdditionalTermsRecords.swift in Sources */,
 				FA6FAFFB2703231600A31D8E /* FontAwesome.swift in Sources */,
@@ -4809,6 +4895,7 @@
 				3FB305DE2868702500CAC16F /* Transactions_barcode_version.swift in Sources */,
 				3F2B2C1128524F5B00C33FAD /* EditBody.swift in Sources */,
 				3F935E55285A232A00D7B779 /* EducationRecord.swift in Sources */,
+				CE2EDAF8292FA1D600A22419 /* PayRoleData.swift in Sources */,
 				CE54B2D128F5BC5400972D6D /* TopCountRequestsViewController.swift in Sources */,
 				3FAA84D7288E904D003A437E /* Transactions_notesVD.swift in Sources */,
 				3FD03A0F287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.swift in Sources */,
@@ -4828,6 +4915,7 @@
 				3FD03A33287437B000BB13C7 /* EditEmployeePageViewController.swift in Sources */,
 				3F33D12628CDDA8B006B7744 /* DashboardResponse.swift in Sources */,
 				FAC32FB62708C91D0046A0F6 /* TransactionTVCell.swift in Sources */,
+				CE2EDAF3292F9DAF00A22419 /* PayRoleTableViewCell.swift in Sources */,
 				FA556379279C8B2D00542310 /* TemplateFilterVC.swift in Sources */,
 				FAAF205F27DB734900AD255B /* ContactTVCell.swift in Sources */,
 				FAA3A09E2809E51500B87DAD /* YPDrawSignatureView.swift in Sources */,

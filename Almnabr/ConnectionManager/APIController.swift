@@ -13,7 +13,7 @@ import AlamofireObjectMapper
 
 
 class APIController{
-        
+    
     //Nahid
     //Almnabr.NAHIDH 1.1   16
     //socket --- https://node.nahidh.sa/
@@ -23,7 +23,7 @@ class APIController{
     //Almnabr
     //com.ERP.ALMNABR 1.0  3
     //socket --- "https://node.almnabr.com/"
-    //server url ---- "https://nahidh.sa/backend"
+    //server url ---- "https://erp.almnabr.com/backend"
     //Api key "12345"
     
     let serverURL = "https://erp.almnabr.com/backend"
@@ -3162,6 +3162,87 @@ class APIController{
     }
     
     
+    func getPayRoleData(pageNumber:String,callback: @escaping (_ data:PayRoleResponse)->Void){
+    
+        let strURL = "\(serverURL)/form/FORM_SAL/salary_history/\(pageNumber)/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        
+        Alamofire.request(strURL, method: .post ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                
+                if let parsedMapperString : PayRoleResponse = Mapper<PayRoleResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
+    
+    func getPayRoleReviewersData(callback: @escaping (_ data:PayRoleReviewersResponse)->Void){
+    
+        let strURL = "\(serverURL)/form/FORM_SAL/get_all_reviewers"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                
+                if let parsedMapperString : PayRoleReviewersResponse = Mapper<PayRoleReviewersResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
+    
+    
+    func addPayRoleReviewers(body:Parameters,callback: @escaping (_ data:UpdateSettingResponse)->Void){
+    
+        let strURL = "\(serverURL)/form/FORM_SAL/store_employees_as_reviewers"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        
+        Alamofire.request(strURL, method: .post,parameters: body ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
+    
+    
+    func deletePayRoleReviewers(userId:String,callback: @escaping (_ data:UpdateSettingResponse)->Void){
+    
+        let strURL = "\(serverURL)/form/FORM_SAL/delete_reviewer/\(userId)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        
+        Alamofire.request(strURL, method: .delete,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
+
+
     func getDateString(with string:String)-> String?{
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .init(identifier: "en")

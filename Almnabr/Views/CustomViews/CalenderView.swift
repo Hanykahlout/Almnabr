@@ -51,7 +51,7 @@ class CalenderView: UIView {
     
     private func setUpCalender(){
         calenderView.delegate = self
-        calenderView.locale = .init(identifier: "en")
+        calenderView.locale = .init(identifier: L102Language.currentAppleLanguage())
         
     }
 

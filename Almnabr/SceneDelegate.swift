@@ -56,19 +56,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         maybeOpenedFromWidget(urlContexts: URLContexts)
     }
     
-    private func maybeOpenedFromWidget(urlContexts: Set<UIOpenURLContext>) {
-        IQKeyboardManager.shared.enable = true
-        if NewSuccessModel.getLoginSuccessToken() != nil {
-            if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "widget-deeplink" }) {
-                GoToHome(isFromWidget: true)
-            } else {
-                CheckActiveTime()
-            }
-        }else{
-            GoToSignIn()
-        }
-    }
     
+    private func maybeOpenedFromWidget(urlContexts: Set<UIOpenURLContext>) {
+        DispatchQueue.global(qos: .background).async {
+            let update = self.isUpdateAvailable()
+            DispatchQueue.main.async {
+                if update {
+                    self.showUpdateAlert()
+                }else{
+                    IQKeyboardManager.shared.enable = true
+                    if NewSuccessModel.getLoginSuccessToken() != nil {
+                        if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "widget-deeplink" }) {
+                            self.GoToHome(isFromWidget: true)
+                        } else {
+                            self.CheckActiveTime()
+                        }
+                    }else{
+                        self.GoToSignIn()
+                    }
+                }
+            }
+        }
+        
+    }
+
+
     
     func GoToHome(isFromWidget:Bool){
        
@@ -107,28 +119,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
         }
         
-        checkUpdate()
+        
 
-    }
-    
-    private func checkUpdate(){
-        DispatchQueue.global().async {
-            do {
-                let update = try self.isUpdateAvailable()
-                DispatchQueue.main.sync {
-                    if update {
-                        self.showUpdateAlert()
-                    }
-                }
-            } catch {
-                print(error)
-            }
-        }
     }
     
     private func showUpdateAlert(){
         let alertVC = UIAlertController(title: "Update", message: "There is an update in the App Store", preferredStyle: .alert)
-        alertVC.addAction(.init(title: "Cancel", style: .default))
+        alertVC.addAction(.init(title: "Cancel", style: .default,handler: { action in
+            exit(-1)
+        }))
         alertVC.addAction(.init(title: "Update Now", style: .default,handler: { action in
             if let url = URL(string: "https://apps.apple.com/us/app/almnabr/id1621889347") {
                 UIApplication.shared.open(url)
@@ -148,7 +147,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = rootNC
         window?.makeKeyAndVisible()
         UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
-        checkUpdate()
     }
     
     func CheckActiveTime(){
@@ -301,24 +299,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
 }
 
+
 // MARK: - Check App Update From App Store
 extension SceneDelegate{
-    func isUpdateAvailable() throws -> Bool {
+    func isUpdateAvailable() -> Bool {
         guard let info = Bundle.main.infoDictionary,
             let currentVersion = info["CFBundleShortVersionString"] as? String,
             let identifier = info["CFBundleIdentifier"] as? String,
             let url = URL(string: "https://itunes.apple.com/sa/lookup?bundleId=\(identifier)") else {
-            throw VersionError.invalidBundleInfo
+            return false
         }
         
-        let data = try Data(contentsOf: url)
-        guard let json = try JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else {
-            throw VersionError.invalidResponse
+        let data = try? Data(contentsOf: url)
+        guard let data = data , let json = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else {
+            return false
         }
         if let result = (json["results"] as? [Any])?.first as? [String: Any], let version = result["version"] as? String {
             return version != currentVersion
         }
-        throw VersionError.invalidResponse
+        return false
     }
 }
 

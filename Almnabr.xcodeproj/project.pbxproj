@@ -545,6 +545,11 @@
 		CEBC601029262F4600585EDB /* JobDetailsShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBC600E29262F4600585EDB /* JobDetailsShowTableViewCell.xib */; };
 		CEBDF43928F9DCFC0094247E /* ProgressPlanedRatioData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDF43728F9DCFC0094247E /* ProgressPlanedRatioData.swift */; };
 		CEBDF43A28F9DCFC0094247E /* ProgressPlanedRatioResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEBDF43828F9DCFC0094247E /* ProgressPlanedRatioResult.swift */; };
+		CEC487BE293371EC00BA0291 /* FinanialDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC487BD293371EC00BA0291 /* FinanialDetailsViewController.swift */; };
+		CEC487C12933770E00BA0291 /* FinanialDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC487BF2933770E00BA0291 /* FinanialDetailsTableViewCell.swift */; };
+		CEC487C22933770E00BA0291 /* FinanialDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC487C02933770E00BA0291 /* FinanialDetailsTableViewCell.xib */; };
+		CEC487C62933791800BA0291 /* FinanialDetailsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC487C42933791700BA0291 /* FinanialDetailsRecord.swift */; };
+		CEC487C72933791800BA0291 /* FinanialDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC487C52933791800BA0291 /* FinanialDetailsResponse.swift */; };
 		CECED93D290FCE850000716E /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED93C290FCE850000716E /* CalenderView.swift */; };
 		CECED93F290FCE9C0000716E /* CalenderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECED93E290FCE9C0000716E /* CalenderView.xib */; };
 		CECED941290FF03D0000716E /* UsersSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CECED940290FF03D0000716E /* UsersSearchView.swift */; };
@@ -1454,6 +1459,11 @@
 		CEBC600E29262F4600585EDB /* JobDetailsShowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailsShowTableViewCell.xib; sourceTree = "<group>"; };
 		CEBDF43728F9DCFC0094247E /* ProgressPlanedRatioData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressPlanedRatioData.swift; sourceTree = "<group>"; };
 		CEBDF43828F9DCFC0094247E /* ProgressPlanedRatioResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressPlanedRatioResult.swift; sourceTree = "<group>"; };
+		CEC487BD293371EC00BA0291 /* FinanialDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanialDetailsViewController.swift; sourceTree = "<group>"; };
+		CEC487BF2933770E00BA0291 /* FinanialDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanialDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		CEC487C02933770E00BA0291 /* FinanialDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FinanialDetailsTableViewCell.xib; sourceTree = "<group>"; };
+		CEC487C42933791700BA0291 /* FinanialDetailsRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanialDetailsRecord.swift; sourceTree = "<group>"; };
+		CEC487C52933791800BA0291 /* FinanialDetailsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanialDetailsResponse.swift; sourceTree = "<group>"; };
 		CECED93C290FCE850000716E /* CalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		CECED93E290FCE9C0000716E /* CalenderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalenderView.xib; sourceTree = "<group>"; };
 		CECED940290FF03D0000716E /* UsersSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersSearchView.swift; sourceTree = "<group>"; };
@@ -3100,6 +3110,15 @@
 			path = Shifts;
 			sourceTree = "<group>";
 		};
+		CEC487C32933790F00BA0291 /* FinanialDetails */ = {
+			isa = PBXGroup;
+			children = (
+				CEC487C42933791700BA0291 /* FinanialDetailsRecord.swift */,
+				CEC487C52933791800BA0291 /* FinanialDetailsResponse.swift */,
+			);
+			path = FinanialDetails;
+			sourceTree = "<group>";
+		};
 		CECED94C291033A60000716E /* MailCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -3140,6 +3159,7 @@
 		CEF81873292FA9B600026B33 /* HRModels */ = {
 			isa = PBXGroup;
 			children = (
+				CEC487C32933790F00BA0291 /* FinanialDetails */,
 				CEF81876292FA9E000026B33 /* AllEmp */,
 				CEF81874292FA9C700026B33 /* PayRole */,
 			);
@@ -3622,6 +3642,7 @@
 				FABDBAA327F47806003961FC /* SignatureVC.swift */,
 				FA4A4C3A2804865D00B9C658 /* AddSignatureVC.swift */,
 				FAA3A09D2809E51500B87DAD /* YPDrawSignatureView.swift */,
+				CEC487BD293371EC00BA0291 /* FinanialDetailsViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -3678,6 +3699,8 @@
 				CE7BB37A2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib */,
 				CED47F5E290AD74900C6F840 /* WeekRatioTableViewCell.swift */,
 				CED47F5F290AD74900C6F840 /* WeekRatioTableViewCell.xib */,
+				CEC487BF2933770E00BA0291 /* FinanialDetailsTableViewCell.swift */,
+				CEC487C02933770E00BA0291 /* FinanialDetailsTableViewCell.xib */,
 			);
 			path = TableCell;
 			sourceTree = "<group>";
@@ -4217,6 +4240,7 @@
 				CE3244AA28FC789F004DBADB /* ProjectRequestsCollectionViewCell.xib in Resources */,
 				3F9040DA286CB182008D85B8 /* AttachmentTableViewCell.xib in Resources */,
 				CEE57BD128F756F700CA16D8 /* SelectTemplete1ViewController.xib in Resources */,
+				CEC487C22933770E00BA0291 /* FinanialDetailsTableViewCell.xib in Resources */,
 				3FD03A14287437B000BB13C7 /* ViewEmpAttachmentsVC.xib in Resources */,
 				3F159CAE28AE9454002824BE /* DocAttachViewController.xib in Resources */,
 				3FD03A6028743CAA00BB13C7 /* GoogleService-Info-nahidh.plist in Resources */,
@@ -4525,6 +4549,7 @@
 				3F1F94E2286C3D6E00E454BF /* L102Language.swift in Sources */,
 				3FD039F4287437B000BB13C7 /* ViewOutgoingPageVC.swift in Sources */,
 				3FD03A07287437B000BB13C7 /* ViewEmpContractDetailsVC.swift in Sources */,
+				CEC487C72933791800BA0291 /* FinanialDetailsResponse.swift in Sources */,
 				CE54B2D628F5C55300972D6D /* TopCountRequestsTableViewCell.swift in Sources */,
 				FA5CB10527D0DF640023A372 /* ProjectDetailVC.swift in Sources */,
 				CE5E02FB28F8491900007EAC /* Log.swift in Sources */,
@@ -4677,6 +4702,7 @@
 				3FF396822897BED800E1322D /* CommentTableViewCell.swift in Sources */,
 				3F397D8B2860CD4400A7DAB4 /* AttachmentTypeResponse.swift in Sources */,
 				3FB1C5362899892700E6EDB1 /* Message.swift in Sources */,
+				CEC487C62933791800BA0291 /* FinanialDetailsRecord.swift in Sources */,
 				3FAA84E3288E904D003A437E /* Transactions_buttonsVD.swift in Sources */,
 				FA5CB0FE27D028AE0023A372 /* LabelCell.swift in Sources */,
 				3F397D812860BE6300A7DAB4 /* AttachmentTableViewCell.swift in Sources */,
@@ -4847,6 +4873,7 @@
 				CECED94829102C3C0000716E /* MailData.swift in Sources */,
 				FABDBA9627F476E6003961FC /* InsuranceDetailsVC.swift in Sources */,
 				CEBAAA5A2912C8270066B818 /* ShiftsTableViewCell.swift in Sources */,
+				CEC487C12933770E00BA0291 /* FinanialDetailsTableViewCell.swift in Sources */,
 				3F0F952E28903483000D6F23 /* TicketRowData.swift in Sources */,
 				3FAD7A232850D3660063B15E /* GroupNameResponse.swift in Sources */,
 				CEFE3B8E2900634700119A55 /* UsedUnusedReportRecords.swift in Sources */,
@@ -4889,6 +4916,7 @@
 				FA44341327623F4500DF6A9B /* HistoryVC.swift in Sources */,
 				CEB1D43428F6E622007D2A8A /* CreateTransactionTableViewCell.swift in Sources */,
 				CEA3A08A291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift in Sources */,
+				CEC487BE293371EC00BA0291 /* FinanialDetailsViewController.swift in Sources */,
 				3FD03A05287437B000BB13C7 /* ViewEmpModulesVC.swift in Sources */,
 				FA5C976C2816B01100A2AA5A /* TaskAttachmentCell.swift in Sources */,
 				3FD039F3287437B000BB13C7 /* ViewOutgoingViewController.swift in Sources */,

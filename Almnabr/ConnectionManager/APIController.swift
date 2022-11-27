@@ -24,7 +24,7 @@ class APIController{
     //com.ERP.ALMNABR 1.0  3
     //socket --- "https://node.almnabr.com/"
     //server url ---- "https://erp.almnabr.com/backend"
-    //Api key "12345"
+    //Api key "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
     
     let serverURL = "https://erp.almnabr.com/backend"
     private let api_key = "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
@@ -3242,6 +3242,25 @@ class APIController{
         
     }
 
+    
+    func getFinanialDetailsData(pageNumber:String,body:Parameters,callback: @escaping (_ data:FinanialDetailsResponse)->Void){
+    
+        let strURL = "\(serverURL)/human_resources/get_employee_finical_history/\(pageNumber)/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : FinanialDetailsResponse = Mapper<FinanialDetailsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
 
     func getDateString(with string:String)-> String?{
         let dateFormatter = DateFormatter()

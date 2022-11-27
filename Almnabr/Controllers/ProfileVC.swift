@@ -26,8 +26,8 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var collection_category: UICollectionView!
     
-    var arr_category :[String] = ["Contract","Job","Communications","Contact","Bank","Education","Passport","Insurance","Vacations","Notes","Attachments","Modules","Signature"]
-    var arr_img:[String] = ["doc.on.doc.fill","bag.fill","link","person.2.fill","iphone.homebutton","text.book.closed.fill","airplane","building.fill","person.crop.rectangle.stack.fill","doc","paperclip","rectangle.stack.person.crop.fill","signature"]
+    var arr_category :[String] = ["Contract","Job","Communications","Contact","Bank","Education","Passport","Insurance","Vacations","Notes","Attachments","Modules","Signature","Finanial Details"]
+    var arr_img:[String] = ["doc.on.doc.fill","bag.fill","link","person.2.fill","iphone.homebutton","text.book.closed.fill","airplane","building.fill","person.crop.rectangle.stack.fill","doc","paperclip","rectangle.stack.person.crop.fill","signature","dollarsign"]
     var profile_obj:ProfileObj?
     
     
@@ -162,7 +162,6 @@ extension ProfileVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
         case "Contact":
             let vc:ContactDetailsVC = AppDelegate.HRSB.instanceVC()
             vc.profile_obj = self.profile_obj
-            
             self.navigationController?.pushViewController(vc, animated: true)
         case "Bank":
             let vc:BankDetailsVC = AppDelegate.HRSB.instanceVC()
@@ -200,7 +199,10 @@ extension ProfileVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSou
             let vc:SignatureVC = AppDelegate.HRSB.instanceVC()
             vc.profile_obj = self.profile_obj
             self.navigationController?.pushViewController(vc, animated: true)
-            
+        case "Finanial Details":
+            let vc:FinanialDetailsViewController = AppDelegate.HRSB.instanceVC()
+            vc.profile_obj = self.profile_obj
+            self.navigationController?.pushViewController(vc, animated: true)
             
         default:
             print("nil")

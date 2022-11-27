@@ -23,8 +23,9 @@ class ViewEmployeePageVC: UIPageViewController {
         let viewEmpDocumentsVC = ViewEmpDocumentsVC()
         let langVacationsVC = ViewEmpLangVacationsVC()
         let modulesVC = ViewEmpModulesVC()
-        let langFinanialDetailsVC = ViewEmpLangFinanialDetailsVC()
-        
+        let langFinanialDetailsVC:FinanialDetailsViewController = AppDelegate.HRSB.instanceVC()
+        langFinanialDetailsVC.isFromHR = true
+        langFinanialDetailsVC.profile_obj = .init(["employee_number":empID])
         containerVCs.append(idDetailsVC)
         containerVCs.append(otherDetailsVC)
         containerVCs.append(contractDetailsVC)

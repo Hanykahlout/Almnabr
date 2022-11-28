@@ -266,7 +266,8 @@ extension NewContractVC {
     
     
     private func setRequestData(data:NewContractDataResponse){
-        previewLabel.text = data.transactions_request?.transaction_request_last_step ?? "" == "completed" ? "View" : "Preview"
+        let lastStep = data.transactions_request?.transaction_request_last_step ?? ""
+        self.previewLabel.text = (lastStep == "completed" || lastStep == "last") ? "View" : "Preview"
         requestNoLabel.text = data.transactions_request?.transaction_request_id ?? "----"
         requestNo2Label.text = data.transactions_request?.tbv_barcodeData ?? "----"
         statusLabel.text = data.transactions_request?.transaction_request_status ?? "----"

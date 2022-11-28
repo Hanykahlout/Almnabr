@@ -2284,6 +2284,42 @@ class APIController{
     
     
     
+    func getOverTimeFormData(transactionId:String,callback:@escaping (_ data:OverTimeFormResponse)->Void){
+        let strURL = "\(serverURL)/form/FORM_OVR1/vr/\(transactionId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : OverTimeFormResponse = Mapper<OverTimeFormResponse>().map(JSONString:str){
+                    if parsedMapperString.error == "Token incorrect!" || parsedMapperString.error == "Signature verification failed"{
+                        self.makeUserLogout()
+                    }else{
+                        callback(parsedMapperString)
+                    }
+                }
+            }
+        }
+    }
+
+    
+    func getBonusFormData(transactionId:String,callback:@escaping (_ data:BonusFormResponse)->Void){
+        let strURL = "\(serverURL)/form/FORM_BNS1/vr/\(transactionId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : BonusFormResponse = Mapper<BonusFormResponse>().map(JSONString:str){
+                    if parsedMapperString.error == "Token incorrect!" || parsedMapperString.error == "Signature verification failed"{
+                        self.makeUserLogout()
+                    }else{
+                        callback(parsedMapperString)
+                    }
+                }
+            }
+        }
+    }
+    
+    
     func getSendCodeWays(callback:@escaping (_ data:SendCodeWaysResponse) -> Void){
         
         let strURL = "\(serverURL)/tc/sender/select"

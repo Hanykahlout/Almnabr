@@ -112,6 +112,10 @@ extension EditLastStepViewController{
                             NotificationCenter.default.post(name: .init("ReloadNewContractData"), object: nil)
                         case "FORM_HRLN1":
                             NotificationCenter.default.post(name: .init("ReloadLoanData"), object: nil)
+                        case "FORM_OVR1":
+                            NotificationCenter.default.post(name: .init("ReloadOvertimeData"), object: nil)
+                        case "FORM_BNS1":
+                            NotificationCenter.default.post(name: .init("ReloadBonusData"), object: nil)
                         default:
                             break
                         }

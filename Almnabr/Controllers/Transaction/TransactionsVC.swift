@@ -554,6 +554,14 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
             let vc = LoanViewController()
             vc.transactionId = obj.transaction_request_id
             self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_OVR1":
+            let vc = OverTimeViewController()
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_BNS1":
+            let vc = BonusViewController()
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }

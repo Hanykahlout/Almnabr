@@ -46,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         maybeOpenedFromWidget(urlContexts: connectionOptions.urlContexts)
         //NewSuccessModel.removeLoginSuccessToken()
-       
+        
         
     }
     
@@ -61,29 +61,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DispatchQueue.global(qos: .background).async {
             let update = self.isUpdateAvailable()
             DispatchQueue.main.async {
-                if update {
-                    self.showUpdateAlert()
-                }else{
-                    IQKeyboardManager.shared.enable = true
-                    if NewSuccessModel.getLoginSuccessToken() != nil {
-                        if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "widget-deeplink" }) {
-                            self.GoToHome(isFromWidget: true)
-                        } else {
-                            self.CheckActiveTime()
-                        }
-                    }else{
-                        self.GoToSignIn()
+//                if !update {
+                IQKeyboardManager.shared.enable = true
+                if NewSuccessModel.getLoginSuccessToken() != nil {
+                    if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "widget-deeplink" }) {
+                        self.GoToHome(isFromWidget: true)
+                    } else {
+                        self.CheckActiveTime()
                     }
+                }else{
+                    self.GoToSignIn()
                 }
+//                }else{
+                    self.showUpdateAlert()
+//                }
             }
         }
         
     }
-
-
+    
+    
     
     func GoToHome(isFromWidget:Bool){
-       
+        
         if isFromWidget{
             
             let qrScannerVC = QRScannerViewController()
@@ -91,7 +91,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let nav = UINavigationController.init(rootViewController: qrScannerVC)
             window?.rootViewController = nav
             UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
-
+            
         }else{
             let vc = AppDelegate.mainSB.instantiateViewController(withIdentifier: "HomeVC")
             
@@ -120,13 +120,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         
-
+        
     }
     
     private func showUpdateAlert(){
         let alertVC = UIAlertController(title: "Update", message: "There is an update in the App Store", preferredStyle: .alert)
         alertVC.addAction(.init(title: "Cancel", style: .default,handler: { action in
-            exit(-1)
+            //            exit(-1)
         }))
         alertVC.addAction(.init(title: "Update Now", style: .default,handler: { action in
             if let url = URL(string: "https://apps.apple.com/us/app/almnabr/id1621889347") {
@@ -201,7 +201,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         UIApplication.shared.applicationIconBadgeNumber = 0
     }
-
+    
     
     func sceneWillResignActive(_ scene: UIScene) {
         
@@ -304,9 +304,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate{
     func isUpdateAvailable() -> Bool {
         guard let info = Bundle.main.infoDictionary,
-            let currentVersion = info["CFBundleShortVersionString"] as? String,
-            let identifier = info["CFBundleIdentifier"] as? String,
-            let url = URL(string: "https://itunes.apple.com/sa/lookup?bundleId=\(identifier)") else {
+              let currentVersion = info["CFBundleShortVersionString"] as? String,
+              let identifier = info["CFBundleIdentifier"] as? String,
+              let url = URL(string: "https://itunes.apple.com/sa/lookup?bundleId=\(identifier)") else {
             return false
         }
         

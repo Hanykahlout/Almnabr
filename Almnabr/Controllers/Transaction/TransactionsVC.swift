@@ -562,6 +562,14 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
             let vc = BonusViewController()
             vc.transactionId = obj.transaction_request_id
             self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_VOL1":
+            let vc = ViolationViewController()
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_DET1":
+            let vc = DeductionViewController()
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }

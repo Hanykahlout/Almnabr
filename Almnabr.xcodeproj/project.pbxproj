@@ -522,6 +522,16 @@
 		CE9FE3172934F45E0008CECA /* BonusFormResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FE3162934F45E0008CECA /* BonusFormResponse.swift */; };
 		CE9FE31A2934F4B40008CECA /* Form_bns1_record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FE3182934F4B40008CECA /* Form_bns1_record.swift */; };
 		CE9FE31B2934F4B40008CECA /* Form_bns1_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FE3192934F4B40008CECA /* Form_bns1_data.swift */; };
+		CEA27DDF2937671A00542F57 /* ViolationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA27DDE2937671A00542F57 /* ViolationResponse.swift */; };
+		CEA27DE12937675100542F57 /* Form_vol1_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA27DE02937675100542F57 /* Form_vol1_data.swift */; };
+		CEA27DE32937675B00542F57 /* Form_vol1_attachments.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA27DE22937675B00542F57 /* Form_vol1_attachments.swift */; };
+		CEA27DE72937686900542F57 /* ViolationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA27DE52937686900542F57 /* ViolationViewController.swift */; };
+		CEA27DE82937686900542F57 /* ViolationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA27DE62937686900542F57 /* ViolationViewController.xib */; };
+		CEA27DEB29376FC700542F57 /* DeductionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA27DEA29376FC700542F57 /* DeductionResponse.swift */; };
+		CEA27DED29376FF700542F57 /* Form_det1_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA27DEC29376FF700542F57 /* Form_det1_data.swift */; };
+		CEA27DF1293770A000542F57 /* DeductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA27DEF293770A000542F57 /* DeductionViewController.swift */; };
+		CEA27DF2293770A000542F57 /* DeductionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA27DF0293770A000542F57 /* DeductionViewController.xib */; };
+		CEA27DF4293776EC00542F57 /* form_det1_data_record.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA27DF3293776EC00542F57 /* form_det1_data_record.swift */; };
 		CEA3A085291A945000F79E3C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3A083291A945000F79E3C /* SettingsViewController.swift */; };
 		CEA3A086291A945000F79E3C /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA3A084291A945000F79E3C /* SettingsViewController.xib */; };
 		CEA3A08A291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA3A088291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift */; };
@@ -1447,6 +1457,16 @@
 		CE9FE3162934F45E0008CECA /* BonusFormResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BonusFormResponse.swift; sourceTree = "<group>"; };
 		CE9FE3182934F4B40008CECA /* Form_bns1_record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_bns1_record.swift; sourceTree = "<group>"; };
 		CE9FE3192934F4B40008CECA /* Form_bns1_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_bns1_data.swift; sourceTree = "<group>"; };
+		CEA27DDE2937671A00542F57 /* ViolationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViolationResponse.swift; sourceTree = "<group>"; };
+		CEA27DE02937675100542F57 /* Form_vol1_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_vol1_data.swift; sourceTree = "<group>"; };
+		CEA27DE22937675B00542F57 /* Form_vol1_attachments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_vol1_attachments.swift; sourceTree = "<group>"; };
+		CEA27DE52937686900542F57 /* ViolationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViolationViewController.swift; sourceTree = "<group>"; };
+		CEA27DE62937686900542F57 /* ViolationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViolationViewController.xib; sourceTree = "<group>"; };
+		CEA27DEA29376FC700542F57 /* DeductionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeductionResponse.swift; sourceTree = "<group>"; };
+		CEA27DEC29376FF700542F57 /* Form_det1_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_det1_data.swift; sourceTree = "<group>"; };
+		CEA27DEF293770A000542F57 /* DeductionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeductionViewController.swift; sourceTree = "<group>"; };
+		CEA27DF0293770A000542F57 /* DeductionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeductionViewController.xib; sourceTree = "<group>"; };
+		CEA27DF3293776EC00542F57 /* form_det1_data_record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = form_det1_data_record.swift; sourceTree = "<group>"; };
 		CEA3A083291A945000F79E3C /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CEA3A084291A945000F79E3C /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		CEA3A088291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuSettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -1908,9 +1928,11 @@
 		3F31ADEB288D36A500E2D8D6 /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				CEA27DEE2937709000542F57 /* DeductionViewController */,
+				CEA27DE42937684200542F57 /* ViolationViewController */,
 				CE9FE3102934EB440008CECA /* BonusViewController */,
 				CE7210602934C06400093265 /* OverTimeViewController */,
-				CE4B419D292A403C00641357 /* LoanVCs */,
+				CEA272B6292B7C180018402D /* LoanViewController */,
 				3F5ABA8E28B4F678005E1A7A /* NewContractVCs */,
 				3F5ABA8D28B4F659005E1A7A /* VactionsVCs */,
 				CE67B4E6292CF63A004E8A2F /* SendCodeVC */,
@@ -2868,6 +2890,8 @@
 		CE0D05DC292A6F130058344B /* TransactionsModels */ = {
 			isa = PBXGroup;
 			children = (
+				CEA27DE929376F1600542F57 /* DeductionModels */,
+				CEA27DDD2937671400542F57 /* ViolationModels */,
 				CE9FE3152934F4540008CECA /* BonusModels */,
 				CE7210652934C7E000093265 /* OvertimeModels */,
 				CE0D05DD292A6F2B0058344B /* LoanModels */,
@@ -2917,14 +2941,6 @@
 				CECED94529102C3B0000716E /* MailInboxResponse.swift */,
 			);
 			path = MailsModels;
-			sourceTree = "<group>";
-		};
-		CE4B419D292A403C00641357 /* LoanVCs */ = {
-			isa = PBXGroup;
-			children = (
-				CEA272B6292B7C180018402D /* LoanViewController */,
-			);
-			path = LoanVCs;
 			sourceTree = "<group>";
 		};
 		CE54B2CF28F5BC3900972D6D /* HomeVC */ = {
@@ -3137,6 +3153,44 @@
 			path = LoanViewController;
 			sourceTree = "<group>";
 		};
+		CEA27DDD2937671400542F57 /* ViolationModels */ = {
+			isa = PBXGroup;
+			children = (
+				CEA27DDE2937671A00542F57 /* ViolationResponse.swift */,
+				CEA27DE02937675100542F57 /* Form_vol1_data.swift */,
+				CEA27DE22937675B00542F57 /* Form_vol1_attachments.swift */,
+			);
+			path = ViolationModels;
+			sourceTree = "<group>";
+		};
+		CEA27DE42937684200542F57 /* ViolationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CEA27DE52937686900542F57 /* ViolationViewController.swift */,
+				CEA27DE62937686900542F57 /* ViolationViewController.xib */,
+			);
+			path = ViolationViewController;
+			sourceTree = "<group>";
+		};
+		CEA27DE929376F1600542F57 /* DeductionModels */ = {
+			isa = PBXGroup;
+			children = (
+				CEA27DEA29376FC700542F57 /* DeductionResponse.swift */,
+				CEA27DEC29376FF700542F57 /* Form_det1_data.swift */,
+				CEA27DF3293776EC00542F57 /* form_det1_data_record.swift */,
+			);
+			path = DeductionModels;
+			sourceTree = "<group>";
+		};
+		CEA27DEE2937709000542F57 /* DeductionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CEA27DEF293770A000542F57 /* DeductionViewController.swift */,
+				CEA27DF0293770A000542F57 /* DeductionViewController.xib */,
+			);
+			path = DeductionViewController;
+			sourceTree = "<group>";
+		};
 		CEA3A082291A8B7600F79E3C /* MenuVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -3298,9 +3352,9 @@
 		FA03242426FB9BFA00372EA6 /* Almnabr */ = {
 			isa = PBXGroup;
 			children = (
-				3F645ADD2875D85100720E76 /* SocketIO */,
 				FA95FD1A275EFFF400DE7854 /* no-permission.gif */,
 				FA1809652705006200B493A7 /* Almnabr.entitlements */,
+				3F645ADD2875D85100720E76 /* SocketIO */,
 				FA0324A126FBC8BE00372EA6 /* ObjectiveC */,
 				FA1D64AC2777743800FA7735 /* Classes */,
 				FA0324CF26FC667500372EA6 /* Localizable */,
@@ -4139,6 +4193,7 @@
 				3FD03A2F287437B000BB13C7 /* AddEmpEduDetailsViewController.xib in Resources */,
 				FA5C97792819602400A2AA5A /* TaskHistoryCell.xib in Resources */,
 				CE8FE7292913E6450022DD51 /* UpdateShiftViewController.xib in Resources */,
+				CEA27DE82937686900542F57 /* ViolationViewController.xib in Resources */,
 				3F677ECB28AB7FCF000D6239 /* DocumentsViewController.xib in Resources */,
 				3FD03A2E287437B000BB13C7 /* ViewEmpEducationDetailsVC.xib in Resources */,
 				3F07C061286D8E3100C2CDF6 /* ContractTVCell.xib in Resources */,
@@ -4322,6 +4377,7 @@
 				3F07C05C286D8D8600C2CDF6 /* TicketTVCell.xib in Resources */,
 				CEBAAA4A29128B5E0066B818 /* UpdateAttendanceStatusViewController.xib in Resources */,
 				3F29C8FC2886FC530011AF97 /* FinanceInfoViewController.xib in Resources */,
+				CEA27DF2293770A000542F57 /* DeductionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4510,6 +4566,7 @@
 				3FD039F5287437B000BB13C7 /* RequestDetailsViewController.swift in Sources */,
 				3F524757284FCE8D0081EBC6 /* FilterInfo.swift in Sources */,
 				3F14366C28489EB6008ABC19 /* Page.swift in Sources */,
+				CEA27DEB29376FC700542F57 /* DeductionResponse.swift in Sources */,
 				3FB305DC2868702500CAC16F /* Form_c2_data.swift in Sources */,
 				FA78EA0B27D267BA0023E48D /* SubProjectTVCell.swift in Sources */,
 				3FB726BD2864BAD500684C94 /* ModulesRecords.swift in Sources */,
@@ -4619,6 +4676,7 @@
 				FA534A662806000D008814A9 /* ProfileContactTVCell.swift in Sources */,
 				FAF7623128300174000DEAFE /* CheckListVC.swift in Sources */,
 				FABDBAA027F477D8003961FC /* ModulesVC.swift in Sources */,
+				CEA27DF4293776EC00542F57 /* form_det1_data_record.swift in Sources */,
 				CE08040B292511F700B45097 /* ProfileCollectionViewCell.swift in Sources */,
 				CEBAAA4F2912B6C40066B818 /* GetShiftsResponse.swift in Sources */,
 				3F1F94E2286C3D6E00E454BF /* L102Language.swift in Sources */,
@@ -4648,6 +4706,7 @@
 				3FAA84E5288E904D003A437E /* Steps.swift in Sources */,
 				3FD03A4E287437B000BB13C7 /* SettingViewController.swift in Sources */,
 				CE0FD9D7290581F800170382 /* CalenderActivityLog.swift in Sources */,
+				CEA27DED29376FF700542F57 /* Form_det1_data.swift in Sources */,
 				CEBAAA502912B6C40066B818 /* ShiftsRecords.swift in Sources */,
 				FA95FD0B275EFE1E00DE7854 /* ContractorTeamApprovalVC.swift in Sources */,
 				3F397D872860C1F000A7DAB4 /* AttachmentRecords.swift in Sources */,
@@ -4681,6 +4740,7 @@
 				CEBC60032926183F00585EDB /* JoiningDetailsTableViewCell.swift in Sources */,
 				CE0FD9DA290581F800170382 /* CalenderActivityValue.swift in Sources */,
 				FAF9D43E278DE050002D8AEF /* ProjectRequestCell.swift in Sources */,
+				CEA27DE72937686900542F57 /* ViolationViewController.swift in Sources */,
 				3F8403A128B7B50E00657C10 /* CodeTypeTableViewCell.swift in Sources */,
 				FA5CB0F927CFBA6E0023A372 /* RequirementsVC.swift in Sources */,
 				CE85718C29081D7200293977 /* TrashMailViewController.swift in Sources */,
@@ -4803,6 +4863,7 @@
 				3FD03A13287437B000BB13C7 /* ViewEmpAttachmentsVC.swift in Sources */,
 				FA7A93D82801BBCD00EF6ECC /* ProfileNotesTVCell.swift in Sources */,
 				FAA3A09B28083D3300B87DAD /* ModuleUserTVCell.swift in Sources */,
+				CEA27DE12937675100542F57 /* Form_vol1_data.swift in Sources */,
 				FA9768BD2735D74B000A3576 /* FormVersionVC.swift in Sources */,
 				3FB305AB2868447200CAC16F /* UserTableViewCell.swift in Sources */,
 				FAD07498274D4AD500B9C7B3 /* NotificationCell.swift in Sources */,
@@ -4828,6 +4889,7 @@
 				3F977EFC2887F60F0062FA47 /* EmpInfoResult.swift in Sources */,
 				3FAB09D02896E044004FAA61 /* CommentsViewController.swift in Sources */,
 				CE9FE31B2934F4B40008CECA /* Form_bns1_data.swift in Sources */,
+				CEA27DF1293770A000542F57 /* DeductionViewController.swift in Sources */,
 				3FA52FE628B65A6B00B42B58 /* ContractPageViewController.swift in Sources */,
 				CE67B4EE292CF78A004E8A2F /* PayRoleViewController.swift in Sources */,
 				FA0647A52851DBD30049287B /* AddAttachmentsVC.swift in Sources */,
@@ -4882,6 +4944,7 @@
 				CED47F57290A959E00C6F840 /* CreateViolationViewController.swift in Sources */,
 				3F9ADB00285F1C9B00D68791 /* InsuranceRecords.swift in Sources */,
 				3F645ADF2875D86E00720E76 /* SocketIOController.swift in Sources */,
+				CEA27DDF2937671A00542F57 /* ViolationResponse.swift in Sources */,
 				3FAA84DA288E904D003A437E /* Form_hrv1_attachments.swift in Sources */,
 				FABDBA9227F476B8003961FC /* EducationDetailsVC.swift in Sources */,
 				3FB1C531289983C200E6EDB1 /* Return_row.swift in Sources */,
@@ -5014,6 +5077,7 @@
 				FA9E7D84270E4620003A1D16 /* GridLayout.swift in Sources */,
 				CECED941290FF03D0000716E /* UsersSearchView.swift in Sources */,
 				3FD03A29287437B000BB13C7 /* ViewLangCalenderVC.swift in Sources */,
+				CEA27DE32937675B00542F57 /* Form_vol1_attachments.swift in Sources */,
 				3F935E4F285A1F8800D7B779 /* EducationDetailsTableViewCell.swift in Sources */,
 				3FF3968D28995C3B00E1322D /* CommentDataResponse.swift in Sources */,
 				CE85717B2908010300293977 /* GmailViewController.swift in Sources */,
@@ -6304,7 +6368,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.5;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6334,7 +6398,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.5;
+				MARKETING_VERSION = 1.0.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -2319,6 +2319,41 @@ class APIController{
         }
     }
     
+    func getViolationFormData(transactionId:String,callback:@escaping (_ data:ViolationResponse)->Void){
+        let strURL = "\(serverURL)/form/FORM_VOL1/vr/\(transactionId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ViolationResponse = Mapper<ViolationResponse>().map(JSONString:str){
+                    if parsedMapperString.error == "Token incorrect!" || parsedMapperString.error == "Signature verification failed"{
+                        self.makeUserLogout()
+                    }else{
+                        callback(parsedMapperString)
+                    }
+                }
+            }
+        }
+    }
+    
+    func getDeductionFormData(transactionId:String,callback:@escaping (_ data:DeductionResponse)->Void){
+        let strURL = "\(serverURL)/form/FORM_DET1/vr/\(transactionId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : DeductionResponse = Mapper<DeductionResponse>().map(JSONString:str){
+                    if parsedMapperString.error == "Token incorrect!" || parsedMapperString.error == "Signature verification failed"{
+                        self.makeUserLogout()
+                    }else{
+                        callback(parsedMapperString)
+                    }
+                }
+            }
+        }
+    }
+
+    
     
     func getSendCodeWays(callback:@escaping (_ data:SendCodeWaysResponse) -> Void){
         

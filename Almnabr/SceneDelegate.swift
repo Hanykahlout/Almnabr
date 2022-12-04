@@ -61,7 +61,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         DispatchQueue.global(qos: .background).async {
             let update = self.isUpdateAvailable()
             DispatchQueue.main.async {
-//                if !update {
+                
                 IQKeyboardManager.shared.enable = true
                 if NewSuccessModel.getLoginSuccessToken() != nil {
                     if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "widget-deeplink" }) {
@@ -72,9 +72,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 }else{
                     self.GoToSignIn()
                 }
-//                }else{
+                
+                if update {
                     self.showUpdateAlert()
-//                }
+                }
             }
         }
         

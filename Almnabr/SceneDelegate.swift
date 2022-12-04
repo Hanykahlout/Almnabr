@@ -307,7 +307,7 @@ extension SceneDelegate{
         guard let info = Bundle.main.infoDictionary,
               let currentVersion = info["CFBundleShortVersionString"] as? String,
               let identifier = info["CFBundleIdentifier"] as? String,
-              let url = URL(string: "https://itunes.apple.com/sa/lookup?bundleId=\(identifier)") else {
+              let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else {
             return false
         }
         

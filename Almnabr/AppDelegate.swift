@@ -76,7 +76,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
             }
         }
         
+        
+        print("ASDCXWWRFG",checkInclusion("ab","eidbaooo"))
         return true
+    }
+    
+    
+    func checkInclusion(_ s1: String, _ s2: String) -> Bool {
+        if s1.count > s2.count { return false }
+        
+        var s1Count = [Int:Int]()
+        var s2Count = [Int:Int]()
+        
+        for i in 0..<26{
+            s1Count[i] = 0
+            s2Count[i] = 0
+        }
+        
+        for i in s1.indices {
+            let s1i = (Int((UnicodeScalar(String(s1[i]))!.value)) - Int((UnicodeScalar("a").value)))
+            let s2i = (Int((UnicodeScalar(String(s2[i]))!.value)) - Int((UnicodeScalar("a").value)))
+            s1Count[s1i]! += 1
+            s2Count[s2i]! += 1
+        }
+        
+        var matches = 0
+        for i in 0..<26{
+            matches += s1Count[i] == s2Count[i] ? 1 : 0
+        }
+        
+        var l = 0
+        for r in s1.count..<s2.count{
+            if matches == 26 { return true }
+            
+            let index = (Int((UnicodeScalar(String(s2[s2.index(s2.startIndex, offsetBy: r)]))!.value)) - Int((UnicodeScalar("a").value)))
+            s2Count[index]! += 1
+            if s1Count[index] == s2Count[index]{
+                matches += 1
+            }else if s1Count[index]! + 1 == s2Count[index]{
+                matches -= 1
+            }
+            
+            let index2 = (Int((UnicodeScalar(String(s2[s2.index(s2.startIndex, offsetBy: l)]))!.value)) - Int((UnicodeScalar("a").value)))
+            s2Count[index2]! -= 1
+            if s1Count[index2]! == s2Count[index2]!{
+                matches += 1
+            }else if s1Count[index2]! - 1 == s2Count[index2]!{
+                matches -= 1
+            }
+            
+            l += 1
+        }
+        return matches == 26
+        
     }
     
     
@@ -314,7 +366,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
 
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-//        print("Firebase registration token: \(fcmToken)")
+        //        print("Firebase registration token: \(fcmToken)")
         
         
         // let dataDict:[String: String] = ["token": fcmToken]

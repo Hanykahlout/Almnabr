@@ -513,6 +513,8 @@
 		CE85718C29081D7200293977 /* TrashMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718B29081D7200293977 /* TrashMailViewController.swift */; };
 		CE85718E29081FF000293977 /* MailPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718D29081FF000293977 /* MailPageViewController.swift */; };
 		CE8571902908239000293977 /* SpamMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718F2908239000293977 /* SpamMailViewController.swift */; };
+		CE864610293CC3D500951CD9 /* AppStoreAppResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86460E293CC3D400951CD9 /* AppStoreAppResponse.swift */; };
+		CE864611293CC3D500951CD9 /* AppStoreAppResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86460F293CC3D500951CD9 /* AppStoreAppResults.swift */; };
 		CE8FE7282913E6450022DD51 /* UpdateShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FE7262913E6450022DD51 /* UpdateShiftViewController.swift */; };
 		CE8FE7292913E6450022DD51 /* UpdateShiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8FE7272913E6450022DD51 /* UpdateShiftViewController.xib */; };
 		CE9FE30E2934DD800008CECA /* OvertimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FE30C2934DD800008CECA /* OvertimeTableViewCell.swift */; };
@@ -1448,6 +1450,8 @@
 		CE85718B29081D7200293977 /* TrashMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashMailViewController.swift; sourceTree = "<group>"; };
 		CE85718D29081FF000293977 /* MailPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailPageViewController.swift; sourceTree = "<group>"; };
 		CE85718F2908239000293977 /* SpamMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamMailViewController.swift; sourceTree = "<group>"; };
+		CE86460E293CC3D400951CD9 /* AppStoreAppResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreAppResponse.swift; sourceTree = "<group>"; };
+		CE86460F293CC3D500951CD9 /* AppStoreAppResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreAppResults.swift; sourceTree = "<group>"; };
 		CE8FE7262913E6450022DD51 /* UpdateShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateShiftViewController.swift; sourceTree = "<group>"; };
 		CE8FE7272913E6450022DD51 /* UpdateShiftViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdateShiftViewController.xib; sourceTree = "<group>"; };
 		CE9FE30C2934DD800008CECA /* OvertimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvertimeTableViewCell.swift; sourceTree = "<group>"; };
@@ -3124,6 +3128,15 @@
 			name = SideMenu;
 			sourceTree = "<group>";
 		};
+		CE86460D293CC3CC00951CD9 /* AppStoreAppModel */ = {
+			isa = PBXGroup;
+			children = (
+				CE86460E293CC3D400951CD9 /* AppStoreAppResponse.swift */,
+				CE86460F293CC3D500951CD9 /* AppStoreAppResults.swift */,
+			);
+			path = AppStoreAppModel;
+			sourceTree = "<group>";
+		};
 		CE9FE3102934EB440008CECA /* BonusViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -3424,6 +3437,7 @@
 		FA03245B26FB9E0300372EA6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CE86460D293CC3CC00951CD9 /* AppStoreAppModel */,
 				CEF81877292FA9FD00026B33 /* GeneralModels */,
 				CE0D05DC292A6F130058344B /* TransactionsModels */,
 				CEDBE42029115DC3002DFC61 /* AttendanceGroups */,
@@ -4652,6 +4666,7 @@
 				CE5E030028F84F1300007EAC /* ProjectWorkingAreaRecord.swift in Sources */,
 				CE2EDAF7292FA1D600A22419 /* PayRoleResponse.swift in Sources */,
 				CEDBE42429115DCA002DFC61 /* AttendanceGroupsUsers.swift in Sources */,
+				CE864610293CC3D500951CD9 /* AppStoreAppResponse.swift in Sources */,
 				3FD03A2D287437B000BB13C7 /* ViewEmpEducationDetailsVC.swift in Sources */,
 				3F977EFD2887F60F0062FA47 /* Employee_info.swift in Sources */,
 				3F14368A2848A120008ABC19 /* UIViewCustomCornerRadius.swift in Sources */,
@@ -5051,6 +5066,7 @@
 				FAAF206B27DCFE0400AD255B /* RelatedFormTVCell.swift in Sources */,
 				FADC2FF928245B5200921011 /* TicketDetailsVC.swift in Sources */,
 				CEFE3B912900634700119A55 /* UsedUnusedReportTotals.swift in Sources */,
+				CE864611293CC3D500951CD9 /* AppStoreAppResults.swift in Sources */,
 				3FEAAE3028B622D80093815D /* FormCT1DataRecord.swift in Sources */,
 				CEDBE42629115DCA002DFC61 /* GetAttendanceGroupsResponse.swift in Sources */,
 				3F33D12828CDDA8B006B7744 /* Extra_data.swift in Sources */,
@@ -6368,7 +6384,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.8;
+				MARKETING_VERSION = 14.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6398,7 +6414,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.8;
+				MARKETING_VERSION = 14.0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

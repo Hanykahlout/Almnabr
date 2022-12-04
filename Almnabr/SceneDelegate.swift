@@ -59,7 +59,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func maybeOpenedFromWidget(urlContexts: Set<UIOpenURLContext>) {
         DispatchQueue.global(qos: .background).async {
-            let update = self.isUpdateAvailable()
+            
             DispatchQueue.main.async {
                 
                 IQKeyboardManager.shared.enable = true
@@ -73,9 +73,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     self.GoToSignIn()
                 }
                 
-                if update {
-                    self.showUpdateAlert()
+                self.isUpdateAvailable { update in
+                    if update {
+                        self.showUpdateAlert()
+                    }
                 }
+               
             }
         }
         
@@ -303,26 +306,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 // MARK: - Check App Update From App Store
 extension SceneDelegate{
-    func isUpdateAvailable() -> Bool {
+    func isUpdateAvailable(thereIsUpdate:@escaping (Bool)->Void){
         guard let info = Bundle.main.infoDictionary,
-              let currentVersion = info["CFBundleShortVersionString"] as? String,
-              let identifier = info["CFBundleIdentifier"] as? String,
-              let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)") else {
-            return false
+              let currentVersion = info["CFBundleShortVersionString"] as? String else {
+            return
         }
         
-        let data = try? Data(contentsOf: url)
-        guard let data = data , let json = try? JSONSerialization.jsonObject(with: data, options: [.allowFragments]) as? [String: Any] else {
-            return false
+        APIController.shard.getCurrentVersion { response in
+            if let version = response.results?.first?.version {
+                thereIsUpdate(version != currentVersion)
+            }
         }
-        if let result = (json["results"] as? [Any])?.first as? [String: Any], let version = result["version"] as? String {
-            return version != currentVersion
-        }
-        return false
     }
 }
-
 
 enum VersionError: Error {
     case invalidResponse, invalidBundleInfo
 }
+    

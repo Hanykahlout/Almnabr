@@ -3333,6 +3333,24 @@ class APIController{
         
     }
 
+    /// Get Current Version of the app from the app store
+    func getCurrentVersion(callback: @escaping (_ data:AppStoreAppResponse)->Void){
+        guard let info = Bundle.main.infoDictionary,
+              let identifier = info["CFBundleIdentifier"] as? String,
+              let url = URL(string: "https://itunes.apple.com/lookup?bundleId=\(identifier)&type=ios") else {
+            return
+        }
+        
+        Alamofire.request(url, method: .get).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AppStoreAppResponse = Mapper<AppStoreAppResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+        
+    }
+    
     func getDateString(with string:String)-> String?{
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .init(identifier: "en")

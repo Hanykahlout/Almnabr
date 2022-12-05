@@ -75,12 +75,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                 // Show the app's signed-in state.
             }
         }
-        
+        print("ASDASD: ",checkSubarraySum([23,2,4,6,7], 6))
 
         return true
     }
     
-    
+    func checkSubarraySum(_ nums: [Int], _ k: Int) -> Bool {
+        var reminder = [Int:Int]()
+        var total = 0
+        
+        for i in 0..<nums.count{
+            total += nums[i]
+            let r = total % k
+            if !reminder.keys.contains(where: {$0 == r}){
+                reminder[r] = i
+            }else if i - reminder[r]! > 1{
+                return true
+            }
+        }
+        return false
+    }
     
     func setupFirebaseMessaging(_ application: UIApplication) {
         

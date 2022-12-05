@@ -3338,7 +3338,7 @@ class APIController{
         guard
 //            let info = Bundle.main.infoDictionary,
 //              let identifier = info["CFBundleIdentifier"] as? String,
-              let url = URL(string: "https://itunes.apple.com/lookup?id=1621889347") else {
+            let url = URL(string: "https://itunes.apple.com/lookup?id=1621889347&type=\(UUID().uuidString)") else {
             return
         }
         

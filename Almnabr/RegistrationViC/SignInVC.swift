@@ -106,9 +106,9 @@ class SignInVC: UIViewController {
     //------------------------------------------------------
     func configGUI() {
         
-        
         txtControlEmailAdress.txtField.placeholder = "txt_username_address".localized()
         txtControlPassword.txtField.placeholder = "txt_password".localized()
+        txtControlPassword.hideShowPassword.isHidden = false
         txtControlPassword.txtField.font = .kufiRegularFont(ofSize: 15)
         txtControlEmailAdress.txtField.font = .kufiRegularFont(ofSize: 15)
         txtControlPassword.txtField.isSecureTextEntry = true

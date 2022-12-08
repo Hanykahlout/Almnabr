@@ -14,9 +14,10 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Transactions_notes : Mappable {
+struct Form_jf_data_additional_terms : Mappable {
 	var status : Bool?
-    var records : [Transactions_notes_record]?
+	var records : Bool?
+
 	init?(map: Map) {
 
 	}
@@ -24,7 +25,7 @@ struct Transactions_notes : Mappable {
 	mutating func mapping(map: Map) {
 
 		status <- map["status"]
-        records <- map["records"]
+		records <- map["records"]
 	}
 
 }

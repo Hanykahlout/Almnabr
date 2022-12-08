@@ -216,6 +216,4 @@ extension SelectTemplete1ViewController{
     
     
     
-    
-    
 }

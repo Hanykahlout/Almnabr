@@ -395,7 +395,12 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     panel?.center(nav)
-               
+                case "22":
+                    let vc = JobApplicationVC()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                    break
                 default:
                     print(" no menu id ")
                 }

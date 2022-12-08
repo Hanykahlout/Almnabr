@@ -14,6 +14,7 @@ class HistoryVC: UIViewController {
     @IBOutlet weak var table: UITableView!
     
     var arr_data:[transactions_recordsObj] = []
+    var jobOfferData:[Transactions_notes_record] = []
     var recordsData:[TransactionsContractRecord]?
     
     
@@ -69,7 +70,13 @@ class HistoryVC: UIViewController {
 extension HistoryVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recordsData == nil ? arr_data.count : recordsData!.count
+        if let recordsData = recordsData{
+            return recordsData.count
+        }else if !arr_data.isEmpty{
+            return arr_data.count
+        }
+        return jobOfferData.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,20 +90,27 @@ extension HistoryVC: UITableViewDelegate , UITableViewDataSource{
         var Notes:String = ""
         var OnDate:String = ""
         
-        
-        if recordsData == nil{
+        if let recordsData = recordsData{
+            let obj = recordsData[indexPath.item]
+            no =  "#".localized() + "  \(indexPath.item + 1)"
+            Name = "Name".localized() + "  \(obj.transactions_records_user_name ?? "" )"
+            Notes = "Notes".localized() + "  \(obj.transactions_records_note ?? "")"
+            OnDate = "On Date".localized() + "  \(obj.transactions_records_datetime ?? "")"
+        }else if !arr_data.isEmpty{
             let obj = arr_data[indexPath.item]
             no =  "#".localized() + "  \(indexPath.item + 1)"
             Name = "Name".localized() + "  \(obj.transactions_records_user_name )"
             Notes = "Notes".localized() + "  \(obj.transactions_records_note)"
             OnDate = "On Date".localized() + "  \(obj.transactions_records_datetime)"
         }else{
-            let obj = recordsData![indexPath.item]
+            let obj = jobOfferData[indexPath.item]
             no =  "#".localized() + "  \(indexPath.item + 1)"
-            Name = "Name".localized() + "  \(obj.transactions_records_user_name ?? "" )"
-            Notes = "Notes".localized() + "  \(obj.transactions_records_note ?? "")"
-            OnDate = "On Date".localized() + "  \(obj.transactions_records_datetime ?? "")"
+            Name = "Name".localized() + "  \(obj.transactions_notes_user_name ?? "" )"
+            Notes = "Notes".localized() + "  \(obj.transactions_notes_text ?? "")"
+            OnDate = "On Date".localized() + "  \(obj.transactions_notes_datetime ?? "")"
         }
+        
+    
         
     
         cell.lbKeylNo.text = no

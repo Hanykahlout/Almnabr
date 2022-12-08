@@ -20,9 +20,11 @@ struct MailData : Mappable {
 	var date : String?
 	var from : MailFrom?
 	var message : String?
+    var messageString : String?
 	var attachments : [AttachmentsMail]?
 
-	init?(map: Map) {
+    
+    init?(map: Map) {
 
 	}
 

@@ -22,26 +22,25 @@ class InboxMailCellTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
     func setData(data:MailData){
+
         headerLabel.text = String(data.from?.name?.prefix(1) ?? "-").uppercased()
         titleLabel.text = data.from?.name ?? "----"
         subtitleLabel.text = data.subject ?? "----"
-        messageLabel.text = (data.message ?? "-----").htmlToString
+        messageLabel.text = data.message ?? "-----"
         dateLabel.text = APIController.shard.getDateString(with: data.date ?? "") ?? "--:-- --"
+        
     }
-    
-   
-    
+
     @IBAction func starAction(_ sender: Any) {
     }
-    
     
     
 }

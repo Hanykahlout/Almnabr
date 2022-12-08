@@ -30,6 +30,7 @@ class MailContentViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
         if let data = data{
+            UserDefaults.standard.set(data.date ?? "", forKey: "LastInboxDate")
             setData(data: data)
         }
     }

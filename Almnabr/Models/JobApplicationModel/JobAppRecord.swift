@@ -14,17 +14,26 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Transactions_notes : Mappable {
-	var status : Bool?
-    var records : [Transactions_notes_record]?
+struct JobAppRecord : Mappable {
+	var employee_number : String?
+	var employee_id_number : String?
+	var name : String?
+	var employee_status : String?
+	var primary_mobile : String?
+	var primary_email : String?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		status <- map["status"]
-        records <- map["records"]
+		employee_number <- map["employee_number"]
+		employee_id_number <- map["employee_id_number"]
+		name <- map["name"]
+		employee_status <- map["employee_status"]
+		primary_mobile <- map["primary_mobile"]
+		primary_email <- map["primary_email"]
 	}
 
 }

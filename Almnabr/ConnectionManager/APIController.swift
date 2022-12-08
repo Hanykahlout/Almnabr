@@ -17,13 +17,13 @@ class APIController{
     //Nahid
     //Almnabr.NAHIDH 1.1   16
     //socket --- https://node.nahidh.sa/
-    //server url ---- "https://nahidh.sa/backend"
+    //server url ---- https://nahidh.sa/backend
     //Api key "12345"
     
     //Almnabr
     //com.ERP.ALMNABR 1.0  3
-    //socket --- "https://node.almnabr.com/"
-    //server url ---- "https://erp.almnabr.com/backend"
+    //socket --- https://node.almnabr.com/
+    //server url ---- https://erp.almnabr.com/backend
     //Api key "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
     
     let serverURL = "https://erp.almnabr.com/backend"
@@ -446,7 +446,7 @@ class APIController{
     }
     
     func sendRequestGetAuth(urlString:String , completion: @escaping (_ response : [String : Any] ) -> Void)
-    {
+    {   
         
         let strURL = "\(serverURL )/\(urlString)"
         let auth = [ "authorization":
@@ -2319,6 +2319,7 @@ class APIController{
         }
     }
     
+    
     func getViolationFormData(transactionId:String,callback:@escaping (_ data:ViolationResponse)->Void){
         let strURL = "\(serverURL)/form/FORM_VOL1/vr/\(transactionId)"
         let headers = [ "authorization":
@@ -2336,6 +2337,7 @@ class APIController{
         }
     }
     
+    
     func getDeductionFormData(transactionId:String,callback:@escaping (_ data:DeductionResponse)->Void){
         let strURL = "\(serverURL)/form/FORM_DET1/vr/\(transactionId)"
         let headers = [ "authorization":
@@ -2352,8 +2354,22 @@ class APIController{
             }
         }
     }
-
-    
+    func getJobOfferFormData(transactionId:String,callback:@escaping (_ data:JobOfferResponse)->Void){
+        let strURL = "\(serverURL)/form/FORM_JF/vr/\(transactionId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")" ]
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : JobOfferResponse = Mapper<JobOfferResponse>().map(JSONString:str){
+                    if parsedMapperString.error == "Token incorrect!" || parsedMapperString.error == "Signature verification failed"{
+                        self.makeUserLogout()
+                    }else{
+                        callback(parsedMapperString)
+                    }
+                }
+            }
+        }
+    }
     
     func getSendCodeWays(callback:@escaping (_ data:SendCodeWaysResponse) -> Void){
         
@@ -2736,7 +2752,6 @@ class APIController{
         Alamofire.request(strURL, method: .post ,parameters: body ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : ProgressPlanedRatioData = Mapper<ProgressPlanedRatioData>().map(JSONString:str){
-                    
                     callback(parsedMapperString)
                 }
             }
@@ -2983,23 +2998,23 @@ class APIController{
             }
         }
     }
+
+
+    func startInboxsTimer(pageNumber:String,callback: @escaping (_ data:  MailInboxResponse)->Void){
+        getMailsInbox(pageNumber:pageNumber,callback: callback)
+        inboxsTimer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true,block: { timer in
+            self.getMailsInbox(pageNumber:pageNumber,callback: callback)
+        })
+    }
     
     
-    func startInboxsTimer(pageNumber:String,callback: @escaping (_ data:MailInboxResponse)->Void){
+    func getMailsInbox(pageNumber:String,callback: @escaping (_ data:  MailInboxResponse)->Void){
         let strURL = "\(serverURL)/users/email/mailbox/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
         
-        inboxsTimer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true, block: { timer in
-            self.getMailsInbox(strURL: strURL, headers: headers, callback: callback)
-        })
-        getMailsInbox(strURL: strURL, headers: headers, callback: callback)
-    }
-    
-    private func getMailsInbox(strURL:String,headers:HTTPHeaders,callback: @escaping (_ data:MailInboxResponse)->Void){
-        print("Timer TEST",inboxsTimer?.timeInterval ?? "----")
         Alamofire.request(strURL, method: .post , headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 
@@ -3351,6 +3366,45 @@ class APIController{
         }
         
     }
+    
+    func getJobAppData(pageNumber:String,body:Parameters,callback: @escaping (_ data:JobAppResponse)->Void){
+        
+        let strURL = "\(serverURL)/human_resources/get_job_applications/\(pageNumber)/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : JobAppResponse = Mapper<JobAppResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    
+    func deleteJobAppRecord(userId:String,callback: @escaping (_ data:UpdateSettingResponse)->Void){
+    
+        let strURL = "\(serverURL)/81f5cc8c046c6d1c66fa3424783873db/MAIN"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        let param = ["key_ids[]":userId]
+        
+        Alamofire.request(strURL, method: .delete,parameters: param,encoding: URLEncoding.httpBody,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
     
     func getDateString(with string:String)-> String?{
         let dateFormatter = DateFormatter()

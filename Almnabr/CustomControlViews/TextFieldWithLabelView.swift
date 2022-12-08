@@ -13,6 +13,7 @@ class TextFieldWithLabelView: UIView {
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var txtField: UITextField!
     @IBOutlet weak var parentView: UIView!
+    @IBOutlet weak var hideShowPassword: UIButton!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,4 +43,11 @@ class TextFieldWithLabelView: UIView {
         parentView.layer.cornerRadius = 7.0
         txtField.setLeftRightPaddingPoints(5, 5)
     }
+    
+    @IBAction func hideShowPassAction(_ sender: Any) {
+        hideShowPassword.isSelected = !hideShowPassword.isSelected
+        txtField.isSecureTextEntry = !hideShowPassword.isSelected
+    }
+    
+    
 }

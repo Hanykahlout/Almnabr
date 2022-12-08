@@ -782,9 +782,7 @@ extension HomeVC{
             "sort_by[platform_code_system]": ""
         ]
         print(body)
-        
-        
-        
+
         showLoadingActivity()
         APIController.shard.getProjectRequestData(body: body, pageNumber: String(pageNumber)) { data in
             self.hideLoadingActivity()

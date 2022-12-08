@@ -14,17 +14,26 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Transactions_notes : Mappable {
-	var status : Bool?
-    var records : [Transactions_notes_record]?
+struct data_allowances_record : Mappable {
+	var other_allowance_id : String?
+	var transaction_key : String?
+	var transaction_request_id : String?
+	var other_allowance_description_en : String?
+	var other_allowance_amount : String?
+	var other_allowance_description_ar : String?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		status <- map["status"]
-        records <- map["records"]
+		other_allowance_id <- map["other_allowance_id"]
+		transaction_key <- map["transaction_key"]
+		transaction_request_id <- map["transaction_request_id"]
+		other_allowance_description_en <- map["other_allowance_description_en"]
+		other_allowance_amount <- map["other_allowance_amount"]
+		other_allowance_description_ar <- map["other_allowance_description_ar"]
 	}
 
 }

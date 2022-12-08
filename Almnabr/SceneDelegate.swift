@@ -208,7 +208,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     func sceneWillResignActive(_ scene: UIScene) {
-        
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
@@ -232,10 +231,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         SocketIOController.shard.disconnect()
         observeInboxsLocalNotification()
-        
+        print("Fuckkkkkkkk 2")
     }
     
     private func observeInboxsLocalNotification(){
+        
         APIController.shard.startInboxsTimer(pageNumber:"1") { data in
             if let status = data.status,status{
                 if let lastInboxDate = UserDefaults.standard.string(forKey: "LastInboxDate"){

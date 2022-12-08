@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     let gcmMessageIDKey = "gcm.message_id"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        
+        print("Fuckkkkkkkk")
         //        UIApplication.shared.statusBarStyle = .darkContent
         L102Localizer.DoTheMagic()
         AppInstance = self

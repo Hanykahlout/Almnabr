@@ -441,6 +441,13 @@
 		CE0FD9E82905A0EE00170382 /* Record_missing.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD9DF2905A0ED00170382 /* Record_missing.swift */; };
 		CE0FD9E92905A0EE00170382 /* No_settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0FD9E02905A0ED00170382 /* No_settings.swift */; };
 		CE1AB6CD292BAA0000C4913C /* TextFieldWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AB6CC292BAA0000C4913C /* TextFieldWithPadding.swift */; };
+		CE1F02C52948960D00CEFDC9 /* ProjectDetilasData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F02C02948960D00CEFDC9 /* ProjectDetilasData.swift */; };
+		CE1F02C62948960D00CEFDC9 /* ProjectDetilasResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F02C12948960D00CEFDC9 /* ProjectDetilasResponse.swift */; };
+		CE1F02C72948960D00CEFDC9 /* ProjectDetilaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F02C22948960D00CEFDC9 /* ProjectDetilaService.swift */; };
+		CE1F02C82948960D00CEFDC9 /* ProjectDetilaUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F02C32948960D00CEFDC9 /* ProjectDetilaUser.swift */; };
+		CE1F02C92948960D00CEFDC9 /* Service_user_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F02C42948960D00CEFDC9 /* Service_user_data.swift */; };
+		CE1F02CE2948A7A300CEFDC9 /* ProjectServicesRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F02CC2948A7A300CEFDC9 /* ProjectServicesRecord.swift */; };
+		CE1F02CF2948A7A300CEFDC9 /* ProjectServicesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F02CD2948A7A300CEFDC9 /* ProjectServicesResponse.swift */; };
 		CE2003B92906C81800B527BB /* CalenderActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2003B82906C81800B527BB /* CalenderActivityView.xib */; };
 		CE2003BB2906CB3D00B527BB /* CalenderActivityUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2003BA2906CB3D00B527BB /* CalenderActivityUIView.swift */; };
 		CE2EDAF3292F9DAF00A22419 /* PayRoleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2EDAF1292F9DAF00A22419 /* PayRoleTableViewCell.swift */; };
@@ -530,6 +537,10 @@
 		CE8571902908239000293977 /* SpamMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718F2908239000293977 /* SpamMailViewController.swift */; };
 		CE864610293CC3D500951CD9 /* AppStoreAppResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86460E293CC3D400951CD9 /* AppStoreAppResponse.swift */; };
 		CE864611293CC3D500951CD9 /* AppStoreAppResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86460F293CC3D500951CD9 /* AppStoreAppResults.swift */; };
+		CE8C082D2949FBA300D444A7 /* QuotationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C082C2949FBA300D444A7 /* QuotationRecord.swift */; };
+		CE8C082F2949FC2C00D444A7 /* QuotationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C082E2949FC2C00D444A7 /* QuotationResponse.swift */; };
+		CE8C0832294A09EB00D444A7 /* QuotationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C0830294A09EB00D444A7 /* QuotationTableViewCell.swift */; };
+		CE8C0833294A09EB00D444A7 /* QuotationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8C0831294A09EB00D444A7 /* QuotationTableViewCell.xib */; };
 		CE8FE7282913E6450022DD51 /* UpdateShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FE7262913E6450022DD51 /* UpdateShiftViewController.swift */; };
 		CE8FE7292913E6450022DD51 /* UpdateShiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8FE7272913E6450022DD51 /* UpdateShiftViewController.xib */; };
 		CE9FE30E2934DD800008CECA /* OvertimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FE30C2934DD800008CECA /* OvertimeTableViewCell.swift */; };
@@ -1394,6 +1405,13 @@
 		CE0FD9DF2905A0ED00170382 /* Record_missing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record_missing.swift; sourceTree = "<group>"; };
 		CE0FD9E02905A0ED00170382 /* No_settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = No_settings.swift; sourceTree = "<group>"; };
 		CE1AB6CC292BAA0000C4913C /* TextFieldWithPadding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithPadding.swift; sourceTree = "<group>"; };
+		CE1F02C02948960D00CEFDC9 /* ProjectDetilasData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetilasData.swift; sourceTree = "<group>"; };
+		CE1F02C12948960D00CEFDC9 /* ProjectDetilasResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetilasResponse.swift; sourceTree = "<group>"; };
+		CE1F02C22948960D00CEFDC9 /* ProjectDetilaService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetilaService.swift; sourceTree = "<group>"; };
+		CE1F02C32948960D00CEFDC9 /* ProjectDetilaUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetilaUser.swift; sourceTree = "<group>"; };
+		CE1F02C42948960D00CEFDC9 /* Service_user_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service_user_data.swift; sourceTree = "<group>"; };
+		CE1F02CC2948A7A300CEFDC9 /* ProjectServicesRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectServicesRecord.swift; sourceTree = "<group>"; };
+		CE1F02CD2948A7A300CEFDC9 /* ProjectServicesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectServicesResponse.swift; sourceTree = "<group>"; };
 		CE2003B82906C81800B527BB /* CalenderActivityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalenderActivityView.xib; sourceTree = "<group>"; };
 		CE2003BA2906CB3D00B527BB /* CalenderActivityUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderActivityUIView.swift; sourceTree = "<group>"; };
 		CE2EDAF1292F9DAF00A22419 /* PayRoleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayRoleTableViewCell.swift; sourceTree = "<group>"; };
@@ -1482,6 +1500,10 @@
 		CE85718F2908239000293977 /* SpamMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamMailViewController.swift; sourceTree = "<group>"; };
 		CE86460E293CC3D400951CD9 /* AppStoreAppResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreAppResponse.swift; sourceTree = "<group>"; };
 		CE86460F293CC3D500951CD9 /* AppStoreAppResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreAppResults.swift; sourceTree = "<group>"; };
+		CE8C082C2949FBA300D444A7 /* QuotationRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotationRecord.swift; sourceTree = "<group>"; };
+		CE8C082E2949FC2C00D444A7 /* QuotationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotationResponse.swift; sourceTree = "<group>"; };
+		CE8C0830294A09EB00D444A7 /* QuotationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotationTableViewCell.swift; sourceTree = "<group>"; };
+		CE8C0831294A09EB00D444A7 /* QuotationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuotationTableViewCell.xib; sourceTree = "<group>"; };
 		CE8FE7262913E6450022DD51 /* UpdateShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateShiftViewController.swift; sourceTree = "<group>"; };
 		CE8FE7272913E6450022DD51 /* UpdateShiftViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdateShiftViewController.xib; sourceTree = "<group>"; };
 		CE9FE30C2934DD800008CECA /* OvertimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvertimeTableViewCell.swift; sourceTree = "<group>"; };
@@ -2957,6 +2979,38 @@
 			path = ViewEmpDocumentsVC;
 			sourceTree = "<group>";
 		};
+		CE1F02BF294895FA00CEFDC9 /* ProjectDetailsModels */ = {
+			isa = PBXGroup;
+			children = (
+				CE1F02CB2948A76F00CEFDC9 /* Projects */,
+				CE1F02CA2948A75D00CEFDC9 /* Quotations */,
+				CE1F02C02948960D00CEFDC9 /* ProjectDetilasData.swift */,
+				CE1F02C22948960D00CEFDC9 /* ProjectDetilaService.swift */,
+				CE1F02C12948960D00CEFDC9 /* ProjectDetilasResponse.swift */,
+				CE1F02C32948960D00CEFDC9 /* ProjectDetilaUser.swift */,
+				CE1F02C42948960D00CEFDC9 /* Service_user_data.swift */,
+			);
+			path = ProjectDetailsModels;
+			sourceTree = "<group>";
+		};
+		CE1F02CA2948A75D00CEFDC9 /* Quotations */ = {
+			isa = PBXGroup;
+			children = (
+				CE8C082E2949FC2C00D444A7 /* QuotationResponse.swift */,
+				CE8C082C2949FBA300D444A7 /* QuotationRecord.swift */,
+			);
+			path = Quotations;
+			sourceTree = "<group>";
+		};
+		CE1F02CB2948A76F00CEFDC9 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				CE1F02CC2948A7A300CEFDC9 /* ProjectServicesRecord.swift */,
+				CE1F02CD2948A7A300CEFDC9 /* ProjectServicesResponse.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
 		CE2EDAEC292F9D7300A22419 /* PayRoleTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -3510,6 +3564,7 @@
 		FA03245B26FB9E0300372EA6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CE1F02BF294895FA00CEFDC9 /* ProjectDetailsModels */,
 				CE5C4B64294257EC00DF67CE /* JobOfferModel */,
 				CE3D956F293F692500D04709 /* JobApplicationModel */,
 				CE86460D293CC3CC00951CD9 /* AppStoreAppModel */,
@@ -3538,7 +3593,7 @@
 				FABDBA8027F2F99B003961FC /* Profile */,
 				FAD0749A274D4C5000B9C7B3 /* Notification */,
 				FA3D32B027343AEE00A5472A /* PresentVC */,
-				FAD333A227135EC80093175E /* Peojects */,
+				FAD333A227135EC80093175E /* Projects */,
 				FAC32FB02708B1480046A0F6 /* Transaction */,
 			);
 			path = Controllers;
@@ -4015,7 +4070,7 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
-		FAD333A227135EC80093175E /* Peojects */ = {
+		FAD333A227135EC80093175E /* Projects */ = {
 			isa = PBXGroup;
 			children = (
 				FAD333A327135EEF0093175E /* AllPrpjectsVC.swift */,
@@ -4032,7 +4087,7 @@
 				FA55637A279CA86800542310 /* SubFilterVC.swift */,
 				FA35CE4A271DCCA600FF6AE4 /* SuperVvsionOperation */,
 			);
-			name = Peojects;
+			name = Projects;
 			sourceTree = "<group>";
 		};
 		FAF7623A28305556000DEAFE /* Task */ = {
@@ -4057,6 +4112,8 @@
 				FAAF0C9227E8A3C00032C4AD /* SimpleSubProjectCell.xib */,
 				FA78EA1127D2B0190023E48D /* ProjectRequestTVCell.swift */,
 				3F07C0B3286D963800C2CDF6 /* ProjectRequestTVCell.xib */,
+				CE8C0830294A09EB00D444A7 /* QuotationTableViewCell.swift */,
+				CE8C0831294A09EB00D444A7 /* QuotationTableViewCell.xib */,
 			);
 			path = ProjectCell;
 			sourceTree = "<group>";
@@ -4230,6 +4287,7 @@
 				3F9040BC286CAFC5008D85B8 /* AddJopDetailsTableViewCell.xib in Resources */,
 				CE3D957C293F6E1700D04709 /* JopAppTableViewCell.xib in Resources */,
 				FAAF206C27DCFE0400AD255B /* RelatedFormTVCell.xib in Resources */,
+				CE8C0833294A09EB00D444A7 /* QuotationTableViewCell.xib in Resources */,
 				3FA2080428AE7D7500845910 /* DocAttachTableViewCell.xib in Resources */,
 				3FD03A1F287437B000BB13C7 /* UpdateInsuranceViewController.strings in Resources */,
 				CE4B41A1292A40CF00641357 /* LoanViewController.xib in Resources */,
@@ -4735,6 +4793,7 @@
 				3F9B665128969679000B6336 /* TicketViewController.swift in Sources */,
 				3F3FEF282864735400F57578 /* CommunicationSubmitResponse.swift in Sources */,
 				FA0324C326FBD5D200372EA6 /* UIViewController.swift in Sources */,
+				CE8C0832294A09EB00D444A7 /* QuotationTableViewCell.swift in Sources */,
 				CE5C4B6B2942582F00DF67CE /* Form_jf_data_additional_terms.swift in Sources */,
 				3FEAAE2E28B622D80093815D /* Form_ct1_data_allowances.swift in Sources */,
 				3F7462A02886BF9300C19474 /* SelectionVactionResult.swift in Sources */,
@@ -4760,6 +4819,7 @@
 				CE7210692934C7F500093265 /* OverTimeFormResponse.swift in Sources */,
 				3FEAAE3628B622D80093815D /* TransactionsContractPersonsRecord.swift in Sources */,
 				CE0D05E7292A72F80058344B /* LoanPageViewController.swift in Sources */,
+				CE1F02CE2948A7A300CEFDC9 /* ProjectServicesRecord.swift in Sources */,
 				CE58A5F628FF065B0078F721 /* TopCountRequestsResponse.swift in Sources */,
 				3F14367528489FF7008ABC19 /* APIController.swift in Sources */,
 				3FB305D82868702500CAC16F /* transactions_personsRecords.swift in Sources */,
@@ -4782,6 +4842,7 @@
 				3F1F94E2286C3D6E00E454BF /* L102Language.swift in Sources */,
 				3FD039F4287437B000BB13C7 /* ViewOutgoingPageVC.swift in Sources */,
 				3FD03A07287437B000BB13C7 /* ViewEmpContractDetailsVC.swift in Sources */,
+				CE1F02C82948960D00CEFDC9 /* ProjectDetilaUser.swift in Sources */,
 				CEC487C72933791800BA0291 /* FinanialDetailsResponse.swift in Sources */,
 				CE54B2D628F5C55300972D6D /* TopCountRequestsTableViewCell.swift in Sources */,
 				FA5CB10527D0DF640023A372 /* ProjectDetailVC.swift in Sources */,
@@ -4930,6 +4991,7 @@
 				3FB305DD2868702500CAC16F /* Transactions_persons.swift in Sources */,
 				3FB305AF28684C6A00CAC16F /* ModuleUersResponse.swift in Sources */,
 				3FEAAE3228B622D80093815D /* TransactionsContractSubmitter.swift in Sources */,
+				CE1F02C52948960D00CEFDC9 /* ProjectDetilasData.swift in Sources */,
 				3F159CB228AEAA00002824BE /* DocAttachsResponse.swift in Sources */,
 				CEB1D42528F6D5E5007D2A8A /* CustomCollectionViewLayout.swift in Sources */,
 				FA3D32B227343B5D00A5472A /* GeneralNumberVC.swift in Sources */,
@@ -4939,6 +5001,7 @@
 				3FB305CF2868702500CAC16F /* TransactionResponse.swift in Sources */,
 				FA95FD07275EFB6F00DE7854 /* TransactionFormPageaVC.swift in Sources */,
 				3F9C9E812859D39900C5322B /* LicencesGetResponse.swift in Sources */,
+				CE1F02CF2948A7A300CEFDC9 /* ProjectServicesResponse.swift in Sources */,
 				3FF396822897BED800E1322D /* CommentTableViewCell.swift in Sources */,
 				3F397D8B2860CD4400A7DAB4 /* AttachmentTypeResponse.swift in Sources */,
 				3FB1C5362899892700E6EDB1 /* Message.swift in Sources */,
@@ -4961,6 +5024,7 @@
 				FA9768B727355AAA000A3576 /* FromTransactionView.swift in Sources */,
 				3FB305CD2868702500CAC16F /* Transactions_date.swift in Sources */,
 				FA025FBB2785E77800AB38C8 /* View_notification.swift in Sources */,
+				CE8C082F2949FC2C00D444A7 /* QuotationResponse.swift in Sources */,
 				FAC48D8E27947E17007F3EDF /* FilterVC.swift in Sources */,
 				FA530A38270CC0B10071CDC8 /* TransactionApproveTVCell.swift in Sources */,
 				3FD03A13287437B000BB13C7 /* ViewEmpAttachmentsVC.swift in Sources */,
@@ -4970,6 +5034,7 @@
 				FA9768BD2735D74B000A3576 /* FormVersionVC.swift in Sources */,
 				3FB305AB2868447200CAC16F /* UserTableViewCell.swift in Sources */,
 				FAD07498274D4AD500B9C7B3 /* NotificationCell.swift in Sources */,
+				CE8C082D2949FBA300D444A7 /* QuotationRecord.swift in Sources */,
 				FA35CE4E271F572500FF6AE4 /* TeamUserVC.swift in Sources */,
 				3F943D70284E5F940046BCCB /* FilterGetResponse3.swift in Sources */,
 				FABDBAA427F47806003961FC /* SignatureVC.swift in Sources */,
@@ -5013,6 +5078,7 @@
 				FAC788D627104448009AC355 /* HeaderView.swift in Sources */,
 				3F84039D28B7B00D00657C10 /* SendCodeWaysVC.swift in Sources */,
 				FA0324CA26FBE3EE00372EA6 /* NewUserInfoModel.swift in Sources */,
+				CE1F02C72948960D00CEFDC9 /* ProjectDetilaService.swift in Sources */,
 				CEA3A085291A945000F79E3C /* SettingsViewController.swift in Sources */,
 				CE5E030628F888D600007EAC /* ProjectRequestsData.swift in Sources */,
 				3F87BCD0284903060031098B /* EditingData.swift in Sources */,
@@ -5043,6 +5109,7 @@
 				CE0D05E2292A6FD50058344B /* LoanFormResponse.swift in Sources */,
 				3FF3968C28995C3B00E1322D /* CommentsResponse.swift in Sources */,
 				CE0FD9E52905A0EE00170382 /* Employee_data.swift in Sources */,
+				CE1F02C92948960D00CEFDC9 /* Service_user_data.swift in Sources */,
 				FA9E7D8D270F39DC003A1D16 /* ApprovalTransactionCell.swift in Sources */,
 				3FAD7A252850F5E20063B15E /* BanksResponse.swift in Sources */,
 				CED47F57290A959E00C6F840 /* CreateViolationViewController.swift in Sources */,
@@ -5075,6 +5142,7 @@
 				CE1AB6CD292BAA0000C4913C /* TextFieldWithPadding.swift in Sources */,
 				3F977EFE2887F60F0062FA47 /* Contract_vacation_info.swift in Sources */,
 				3F8D490E2858F9C500DCBC84 /* Licenses.swift in Sources */,
+				CE1F02C62948960D00CEFDC9 /* ProjectDetilasResponse.swift in Sources */,
 				CE0FD9D9290581F800170382 /* CalenderActivityData.swift in Sources */,
 				3F29C8FB2886FC530011AF97 /* FinanceInfoViewController.swift in Sources */,
 				FA55637B279CA86800542310 /* SubFilterVC.swift in Sources */,
@@ -6476,7 +6544,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.12;
+				MARKETING_VERSION = 14.0.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6506,7 +6574,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.12;
+				MARKETING_VERSION = 14.0.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

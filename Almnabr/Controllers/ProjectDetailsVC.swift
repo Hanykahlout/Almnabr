@@ -14,27 +14,34 @@ class ProjectDetailsVC: UIViewController {
     
     @IBOutlet weak var imgnodata: UIImageView!
     
-    @IBOutlet weak var lblProjectName: UILabel!
-    
-    
-    @IBOutlet weak var lblServices: UILabel!
     @IBOutlet weak var lblQuotations: UILabel!
     @IBOutlet weak var lblProjects: UILabel!
     
-    @IBOutlet weak var projectVieww: UIView!
+    @IBOutlet weak var branchLabel: UILabel!
+    @IBOutlet weak var projectNameEnLabel: UILabel!
+    @IBOutlet weak var projectNameArLabel: UILabel!
+    @IBOutlet weak var customersLabel: UILabel!
+    @IBOutlet weak var projectTypeLabel: UILabel!
+    @IBOutlet weak var projectServicesLabel: UILabel!
+    @IBOutlet weak var writerLabel: UILabel!
+    @IBOutlet weak var projectUsersLabel: UILabel!
+    @IBOutlet weak var projectReviewersLabel: UILabel!
+    @IBOutlet weak var createdDateLabel: UILabel!
+    @IBOutlet weak var onUpdatedLabel: UILabel!
+    @IBOutlet weak var projectLocationLabel: UILabel!
+    
     
     @IBOutlet weak var View_project: UIView!
     @IBOutlet weak var View_Quotation: UIView!
-    
     @IBOutlet weak var SelectedView_project: UIView!
     @IBOutlet weak var SelectedView_Quotation: UIView!
     
+    
     @IBOutlet weak var collectionServieces: UICollectionView!
-    
-    @IBOutlet weak var header: HeaderView!
-    
+
     @IBOutlet weak var tableProjects: UITableView!
     
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     var QuotationSearchKey:String = ""
     var ProjectSearchKey:String = ""
@@ -52,12 +59,11 @@ class ProjectDetailsVC: UIViewController {
     
     var add:Bool = false
     var Object:projectObj?
-    var arr_Projectdata:[projectQuotObj] = []
+    var arr_Projectdata:[ProjectServicesRecord] = []
     
-    var arr_data:[projectQuotObj] = []
+    var arr_data:[QuotationRecord] = []
     
-    var arr_Services:[ModuleObj] = []
-    var arr_Users:[ModuleObj] = []
+    var arr_Services:[ProjectDetilaService] = []
     var arr_ServicesLabel:[String] = []
     var arr_branch:[ModuleObj] = []
     var arr_branchLabel:[String] = []
@@ -66,186 +72,41 @@ class ProjectDetailsVC: UIViewController {
     
     let fontStyle: FontAwesomeStyle = .solid
     let maincolor = "#1A3665".getUIColor()
-
+    private var quotationsPageNumber = 1
+    private var quotationsTotalPages = 1
+    private var projectPageNumber = 1
+    private var projectTotalPages = 1
+    
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configGUI()
         setupCollection()
-        
-        get_Projects_Details()
-        get_Projects_data(showLoading: true, loadOnly: true)
-        get_quotation_data(showLoading: true, loadOnly: true)
-       
-        
-        header.btnAction = menu_select
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Hide the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        addNavigationBarTitle(navigationTitle: "Project Details")
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        clearData()
+        get_Projects_Details()
+        getQuotationsData(isFromBottom: false)
+        getProjectsData(isFromBottom: false)
     }
     
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    // MARK: - Config Navigation
     func configNavigation() {
         _ = self.navigationController?.preferredStatusBarStyle
-        self.view.backgroundColor = "FFFFFF".getUIColor() //F0F4F8
+        self.view.backgroundColor = "FFFFFF".getUIColor()
         navigationController?.navigationBar.barTintColor = .red
-        
         addNavigationBarTitle(navigationTitle: StrTitle)
     }
     
     
-    //MARK: - Config GUI
-    //------------------------------------------------------
     func configGUI() {
-        
-        
-        self.tableProjects.isHidden = false
-        
-        
-        lblProjectName.textColor =  maincolor
-        lblProjectName.font = .kufiBoldFont(ofSize: 15)
-        lblProjectName.text = Object!.projects_profile_name_en ?? "---"
-        
-//        let barnch = "Branch".localized() + " : " + Object!.branch_name ?? "---"
-//        let branchAtr: NSAttributedString = barnch.attributedStringWithColor(["Branch".localized()], color: HelperClassSwift.acolor.getUIColor())
-//        self.lblBranchName.attributedText = branchAtr
-//        lblBranchName.font = .kufiRegularFont(ofSize: 15)
-        
-//        let project_name = "txt_Project_Name_En".localized() + " : " + Object!.projects_profile_name_en ?? "---"
-//        let project_nameAtr: NSAttributedString = project_name.attributedStringWithColor(["txt_Project_Name_En".localized()], color: HelperClassSwift.acolor.getUIColor())
-//        self.lblProjectNameEn.attributedText = project_nameAtr
-//        lblProjectNameEn.font = .kufiRegularFont(ofSize: 15)
-        
-//        let project_nameAr = "txt_Project_Name_Ar".localized() + " : " + Object!.projects_profile_name_en ?? "---"
-//        let project_nameArAtr: NSAttributedString = project_nameAr.attributedStringWithColor(["txt_Project_Name_Ar".localized()], color: HelperClassSwift.acolor.getUIColor())
-//        self.lblProjectNameAr.attributedText = project_nameArAtr
-//        lblProjectNameAr.font = .kufiRegularFont(ofSize: 15)
-//
-//        let customer_name = "Customers".localized() + " : " + Object!.customer_name ?? "---"
-//        let customer_nameAtr: NSAttributedString = customer_name.attributedStringWithColor(["Customers".localized()], color: HelperClassSwift.acolor.getUIColor())
-//        self.lblCustomerName.attributedText = customer_nameAtr
-//        lblCustomerName.font = .kufiRegularFont(ofSize: 15)
-//
-//
-//        let Project_Type = "txt_Project_Type".localized() + " : " + Object!.customer_type_id ?? "---"
-//        let Project_TypeAtr: NSAttributedString = Project_Type.attributedStringWithColor(["txt_Project_Type".localized()], color: HelperClassSwift.acolor.getUIColor())
-//        self.lblcustomer_type.attributedText = Project_TypeAtr
-//        lblcustomer_type.font = .kufiRegularFont(ofSize: 15)
-//
-//
-//        let Writer = "Writer".localized() + " : " + Object!.writer ?? "---"
-//        let WriterAtr: NSAttributedString = Writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
-//        self.lblWriter.attributedText = WriterAtr
-//        lblWriter.font = .kufiRegularFont(ofSize: 15)
-//
-//        let On_date = "On Date".localized() + " : " + Object!.projects_profile_created_datetime ?? "---"
-//        let On_dateAtr: NSAttributedString = On_date.attributedStringWithColor(["On Date".localized()], color: HelperClassSwift.acolor.getUIColor())
-//        self.lblOnDate.attributedText = On_dateAtr
-//        lblOnDate.font = .kufiRegularFont(ofSize: 15)
-//
-//
-//        let updated = "txt_update".localized() + " : " + Object!.projects_profile_updated_datetime ?? "---"
-//        let updatedAtr: NSAttributedString = updated.attributedStringWithColor(["txt_update".localized()], color: HelperClassSwift.acolor.getUIColor())
-//        self.lblOnupdated.attributedText = updatedAtr
-//        lblOnupdated.font = .kufiRegularFont(ofSize: 15)
-//
-//        let location = "txt_location".localized() + " : " + Object!.projects_profile_location ?? "---"
-//        let locationAtr: NSAttributedString = location.attributedStringWithColor(["txt_location".localized()], color: HelperClassSwift.acolor.getUIColor())
-//        self.lblLocation.attributedText = locationAtr
-//        lblLocation.font = .kufiRegularFont(ofSize: 15)
-        
-        
-//        self.lblBranchName.text =  "Branch".localized() + " :"
-//        self.lblBranchName.font =  .kufiBoldFont(ofSize: 14)
-//        self.lblBranchName.textColor =  HelperClassSwift.bcolor.getUIColor()
-//
-//        self.lblProjectNameEn.text =  "txt_Project_Name_En".localized() + " :"
-//        self.lblProjectNameEn.font =  .kufiBoldFont(ofSize: 14)
-//        self.lblProjectNameEn.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-//        self.lblProjectNameAr.text =  "txt_Project_Name_Ar".localized() + " :"
-//        self.lblProjectNameAr.font =  .kufiBoldFont(ofSize: 14)
-//        self.lblProjectNameAr.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-//        self.lblCustomerName.text =  "Customers".localized() + " :"
-//        self.lblCustomerName.font =  .kufiBoldFont(ofSize: 14)
-//        self.lblCustomerName.textColor =  HelperClassSwift.bcolor.getUIColor()
-//
-//        self.lblcustomer_type.text =  "txt_Project_Type".localized() + " :"
-//        self.lblcustomer_type.font =  .kufiBoldFont(ofSize: 14)
-//        self.lblcustomer_type.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-//        self.lblWriter.text =  "Writer".localized() + " :"
-//        self.lblWriter.font =  .kufiBoldFont(ofSize: 14)
-//        self.lblWriter.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-//        self.lblOnDate.text =  "On Date".localized() + " :"
-//        self.lblOnDate.font =  .kufiBoldFont(ofSize: 14)
-//        self.lblOnDate.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-//        self.lblOnupdated.text =  "txt_update".localized() + " :"
-//        self.lblOnupdated.font =  .kufiBoldFont(ofSize: 14)
-//        self.lblOnupdated.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-//        self.lblLocation.text =  "txt_location".localized() + " :"
-//        self.lblLocation.font =  .kufiBoldFont(ofSize: 14)
-//        self.lblLocation.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
-//        lblValBranchName.isHidden = true
-//        lblValProjectNameEn.isHidden = true
-//        lblValProjectNameAr.isHidden = true
-//        lblValCustomerName.isHidden = true
-//        lblValcustomer_type.isHidden = true
-//        lblValWriter.isHidden = true
-//        lblValOnDate.isHidden = true
-//        lblValOnupdated.isHidden = true
-//        lblValLocation.isHidden = true
-        
-//        self.lblValBranchName.text =  Object?.branch_name
-//        self.lblValBranchName.font = .kufiRegularFont(ofSize: 14)
-//        self.lblValBranchName.textColor =  HelperClassSwift.bcolor.getUIColor()
-//
-//        self.lblValProjectNameEn.text =  Object?.projects_profile_name_en
-//        self.lblValProjectNameEn.font = .kufiRegularFont(ofSize: 14)
-//
-//        self.lblValProjectNameAr.text =  Object?.projects_profile_name_ar
-//        self.lblValProjectNameAr.font = .kufiRegularFont(ofSize: 14)
-//
-//        self.lblValCustomerName.text =  Object?.customer_name
-//        self.lblValCustomerName.font = .kufiRegularFont(ofSize: 14)
-//
-//        self.lblValcustomer_type.text =  Object?.customer_type
-//        self.lblValcustomer_type.font = .kufiRegularFont(ofSize: 14)
-//
-//        self.lblValWriter.text =  Object?.writer
-//        self.lblValWriter.font = .kufiRegularFont(ofSize: 14)
-//
-//        self.lblValOnDate.text =  Object?.projects_profile_created_datetime
-//        self.lblValOnDate.font = .kufiRegularFont(ofSize: 14)
-//
-//        self.lblValOnupdated.text =  Object?.projects_profile_updated_datetime
-//        self.lblValOnupdated.font = .kufiRegularFont(ofSize: 14)
-//
-//        self.lblValLocation.text =  Object?.projects_profile_location
-//        self.lblValLocation.font = .kufiRegularFont(ofSize: 14)
-        
-        
-        self.lblServices.text =  "Services".localized()
-        self.lblServices.font = .kufiRegularFont(ofSize: 17)
-        self.lblServices.textColor =  HelperClassSwift.bcolor.getUIColor()
-        
         self.lblQuotations.text =  "txt_Quotations".localized()
         self.lblQuotations.font = .kufiRegularFont(ofSize: 15)
         //self.lblQuotations.textColor =  maincolor
@@ -257,20 +118,8 @@ class ProjectDetailsVC: UIViewController {
         self.SelectedView_project.backgroundColor = maincolor
         self.SelectedView_Quotation.backgroundColor = maincolor
         
-//        self.View_project.setBorderGrayNoCorner()
-//        self.View_Quotation.setBorderGrayNoCorner()
-        
         self.SelectedView_Quotation.isHidden = true
         
-//        self.mainView.setBorderGray()
-//        self.projectView.setBorderGray()
-//        self.projectVieww.setBorderGray()
-      
-        
-       // self.btnAddQuotation.isHidden = true
-      
-      
-       
     }
     
     func is_hide_Qutation(){
@@ -290,197 +139,28 @@ class ProjectDetailsVC: UIViewController {
         
         let nib = UINib(nibName: "SubProjectTVCell", bundle: nil)
         tableProjects.register(nib, forCellReuseIdentifier: "SubProjectTVCell")
+        tableProjects.register(.init(nibName: "QuotationTableViewCell", bundle: nil), forCellReuseIdentifier: "QuotationTableViewCell")
         
     }
     
-    
-    
-    //MARK: - Get Projects Data
-    //------------------------------------------------------
-    
-    
-    func get_Projects_data(showLoading: Bool, loadOnly: Bool){
-        
-        if showLoading {
-            self.showLoadingActivity()
-        }
-        
-        let search:String = ProjectSearchKey.replacingOccurrences(of: " ", with: "%20").trim()
-        
-        APIController.shard.sendRequestGetAuth(urlString: "xZLCctvSvZ9DGb8/\(Object!.projects_profile_id)/\(self.pageNumber)/10?search_key=\(search)" ) { (response) in
-            
-            if self.pageNumber == 1 {
-                self.arr_Projectdata.removeAll()
-            }
-            let status = response["status"] as? Bool
-            if loadOnly {
-                self.tableProjects.reloadData()
-            }
-            
-            
-            let page = response["page"] as? [String:Any]
-            if status == true{
-                if  let records = response["records"] as? NSArray{
-                    for i in records {
-                        let dict = i as? [String:Any]
-                        let obj = projectQuotObj.init(dict!)
-                        self.arr_Projectdata.append(obj)
-                    }
-                    let pageObj = PageObj(page!)
-                    
-                    if records.count == 0 {
-                        self.imgnodata.isHidden = false
-                    }else{
-                        self.imgnodata.isHidden = true
-                    }
-                    if pageObj.total_pages > self.pageNumber {
-                        self.allItemDownloaded = false
-                    }else{
-                        self.allItemDownloaded = true
-                    }
-                    self.tableProjects.reloadData()
-                    self.hideLoadingActivity()
-                }
-                
-            }else{
-                self.hideLoadingActivity()
-                self.imgnodata.isHidden = false
-            }
-//            self.lblQuotationsnodata.isHidden = true
-            
-            
-        }
+    private func clearData(){
+        branchLabel.text = ""
+        projectNameEnLabel.text = ""
+        projectNameArLabel.text = ""
+        customersLabel.text = ""
+        projectTypeLabel.text = ""
+        projectServicesLabel.text = ""
+        writerLabel.text = ""
+        projectUsersLabel.text = ""
+        projectReviewersLabel.text = ""
+        createdDateLabel.text = ""
+        onUpdatedLabel.text = ""
+        projectLocationLabel.text = ""
+        arr_Services.removeAll()
+        collectionServieces.reloadData()
     }
     
     
-    
-    
-    //MARK: - Get quotation data
-    //------------------------------------------------------
-    func get_quotation_data(showLoading: Bool, loadOnly: Bool){
-        
-        if showLoading {
-            self.showLoadingActivity()
-        }
-        
-        let search:String = QuotationSearchKey.replacingOccurrences(of: " ", with: "%20").trim()
-        
-        APIController.shard.sendRequestGetAuth(urlString: "squotest/\(Object!.projects_profile_id)/1/10?search_key=\(search)" ) { (response) in
-            
-            if self.pageNumber == 1 {
-                self.arr_data.removeAll()
-            }
-            let status = response["status"] as? Bool
-            if loadOnly {
-              //  self.tableQuotation.reloadData()
-            }
-            
-            
-            let page = response["page"] as? [String:Any]
-            if status == true{
-                if  let records = response["records"] as? NSArray{
-                    for i in records {
-                        let dict = i as? [String:Any]
-                        let obj = projectQuotObj.init(dict!)
-                        self.arr_data.append(obj)
-                    }
-                    let pageObj = PageObj(page!)
-                    
-                    if pageObj.total_pages > self.pageNumber {
-                        self.allItemDownloaded = false
-                    }else{
-                        self.allItemDownloaded = true
-                    }
-                    
-                    if records.count == 0 {
-                        self.imgnodata.isHidden = false
-                    }else{
-                        self.imgnodata.isHidden = true
-                    }
-                    //self.tableQuotation.reloadData()
-                    self.hideLoadingActivity()
-                }
-                
-            }else{
-                self.imgnodata.isHidden = true
-                self.hideLoadingActivity()
-                //self.lblQuotationsnodata.isHidden = false
-            }
-            
-            self.is_hide_Qutation()
-        }
-    }
-    
-    
-    
-    
-    //MARK: - Get Project Details
-    //------------------------------------------------------
-    
-    
-    
-    func get_Projects_Details(){
-        
-        self.showLoadingActivity()
-        
-        APIController.shard.sendRequestGetAuth(urlString: "TEd1bgyHSC0GPcq/\(Object!.projects_profile_id)") { (response) in
-            
-            
-            let status = response["status"] as? Bool
-            let add = response["add"] as? Bool
-
-            self.add = add ?? false
-            self.tableProjects.reloadData()
-            //self.tableQuotation.reloadData()
-            
-            let service_user_data = response["service_user_data"] as? [String:Any]
-            if status == true{
-                if  let users = service_user_data!["users"] as? NSArray{
-                    for i in users {
-                        let dict = i as? [String:Any]
-                        let obj = ModuleObj.init(dict!)
-                        self.arr_Users.append(obj)
-                        self.CustomerName.append(obj.label  + "\n")
-                    }
-                   // self.lblValCustomerName.text = self.CustomerName
-                }
-                if  let services = service_user_data!["services"] as? NSArray{
-                    
-                    for i in services {
-                        let dict = i as? [String:Any]
-                        let obj = ModuleObj.init(dict!)
-                        self.arr_Services.append(obj)
-                    }
-                 
-                    
-                    self.collectionServieces.reloadData()
-                    self.hideLoadingActivity()
-                }
-                
-            }else{
-                self.hideLoadingActivity()
-               
-            }
-            
-            
-        }
-    
-       // self.lblQuotationsnodata.isHidden = true
-    }
-    
-    
-    
-    func menu_select(){
-        let language =  L102Language.currentAppleLanguage()
-        if language == "ar"{
-            panel?.openRight(animated: true)
-        }else{
-            panel?.openLeft(animated: true)
-        }
-        
-    }
-    
-  
     
     @IBAction func btnProject_Click(_ sender: Any) {
         
@@ -488,38 +168,25 @@ class ProjectDetailsVC: UIViewController {
         self.tableProjects.reloadData()
         self.SelectedView_project.isHidden = false
         self.SelectedView_Quotation.isHidden = true
-        //self.lblProjectTitle.text =  "txt_Projects".localized()
-        //self.btnAddQuotation.isHidden = true
         
-//        self.lblnodata.isHidden = false
-//        self.lblQuotationsnodata.isHidden = true
+        UIView.transition(with: tableProjects, duration: 0.4,
+                          options: .transitionFlipFromTop,
+                          animations: {
+            self.tableProjects.isHidden = false
+        })
         
-            UIView.transition(with: tableProjects, duration: 0.4,
-                              options: .transitionFlipFromTop,
-                              animations: {
-                                self.tableProjects.isHidden = false
-                              })
-            
     }
     
     @IBAction func btnQuotation_Click(_ sender: Any) {
-        //self.tableProjects.isHidden = true
         self.IsPrpjectTable = false
         self.tableProjects.reloadData()
-       // self.btnAddQuotation.isHidden = false
         self.SelectedView_project.isHidden = true
         self.SelectedView_Quotation.isHidden = false
-        //self.lblProjectTitle.text =  "txt_Quotations".localized()
-//        self.lblnodata.isHidden = true
-//        self.lblQuotationsnodata.isHidden = false
-        
-            UIView.transition(with: tableProjects, duration: 0.4,
-                              options: .transitionFlipFromTop,
-                              animations: {
-                                self.tableProjects.isHidden = false
-                              })
-       
-       
+        UIView.transition(with: tableProjects, duration: 0.4,
+                          options: .transitionFlipFromTop,
+                          animations: {
+            self.tableProjects.isHidden = false
+        })
     }
     
     @IBAction func btnAddQuotation_Click(_ sender: Any) {
@@ -531,62 +198,55 @@ class ProjectDetailsVC: UIViewController {
 extension ProjectDetailsVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    
-        if IsPrpjectTable == true{
+        
+        if IsPrpjectTable{
             return arr_Projectdata.count
         }else{
             return arr_data.count
         }
-       
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-       // let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionTVCell", for: indexPath) as! TransactionTVCell
-        
-        if IsPrpjectTable == true{
+        if IsPrpjectTable{
             let Projectell = tableView.dequeueReusableCell(withIdentifier: "SubProjectTVCell", for: indexPath) as! SubProjectTVCell
             
             
-            let obj = arr_Projectdata[indexPath.item]
+            let obj = arr_Projectdata[indexPath.row]
             
-            let Id =  "ID".localized() + ": \(obj.projects_supervision_id)"
-            let Q_No = "Quotation Number".localized() + ": \(obj.projects_quotation_id)"
-            let subject = "Subject".localized() + "  \(obj.quotation_subject)"
-            let Grand_Total = "\(obj.quotation_grand_total)"
-            let Tax_Amount =   "\(obj.quotation_tax_amount)"
-            let net_amount =  "\(obj.quotation_net_amount)"
-            let ApprovedDate = "Approved Date".localized() + ": \(obj.quotation_approved_date)"
-            let writer = "By".localized() + ": \(obj.writer)"
-            let date = "\(obj.quotation_created_date)"
-            
-            
+            let Id =  "ID".localized() + ": \(obj.projects_supervision_id ?? "----")"
+            let Q_No = "Quotation Number".localized() + ": \(obj.projects_quotation_id ?? "----")"
+            let subject = "Subject".localized() + "  \(obj.quotation_subject ?? "----")"
+            let Grand_Total = "\(obj.quotation_grand_total ?? "----")"
+            let Tax_Amount =   "\(obj.quotation_tax_amount ?? "-----")"
+            let net_amount =  "\(obj.quotation_net_amount ?? "----")"
+            let ApprovedDate = "Approved Date".localized() + ": \(obj.quotation_approved_date ?? "----")"
+            let writer = "By".localized() + ": \(obj.writer ?? "----")"
+            let date = "\(obj.quotation_created_date ?? "----")"
             
             Projectell.lblTaxAmount.text = "Tax Amount".localized()
             Projectell.lblNetAmount.text = "Net Amount".localized()
             Projectell.lblGrandTotal.text = "Grand Total".localized()
             
-            if userObj?.is_admin == "1" || self.add == true {
-                Projectell.lblSubject.isHidden = false
-                Projectell.StackAmount.isHidden = false
-                Projectell.lblWriter.isHidden = false
-                Projectell.lblDate.isHidden = false
-                Projectell.lblApprovedDate.isHidden = false
-                Projectell.lblQ_No.isHidden = false
-            }else{
-                
-                Projectell.lblSubject.isHidden = false
-                Projectell.StackAmount.isHidden = true
-                Projectell.StackDate.isHidden = true
-                Projectell.StackWriter.isHidden = true
-                Projectell.height.constant = 90
-                Projectell.lblWriter.isHidden = true
-                Projectell.lblDate.isHidden = true
-                Projectell.lblApprovedDate.isHidden = true
-                Projectell.lblQ_No.isHidden = true
-            }
-            
-            
+//            Projectell.lblSubject.isHidden = false
+//            if userObj?.is_admin == "1" || self.add == true {
+//                Projectell.StackAmount.isHidden = false
+//                Projectell.lblWriter.isHidden = false
+//                Projectell.lblDate.isHidden = false
+//                Projectell.lblApprovedDate.isHidden = false
+//                Projectell.lblQ_No.isHidden = false
+//            }else{
+//                Projectell.StackAmount.isHidden = true
+//                Projectell.StackDate.isHidden = true
+//                Projectell.StackWriter.isHidden = true
+//                Projectell.height.constant = 90
+//                Projectell.lblWriter.isHidden = true
+//                Projectell.lblDate.isHidden = true
+//                Projectell.lblApprovedDate.isHidden = true
+//                Projectell.lblQ_No.isHidden = true
+//            }
+
             let Idattribute: NSAttributedString = Id.attributedStringWithColor(["ID".localized()], color: maincolor)
             Projectell.lblId.attributedText = Idattribute
             
@@ -607,160 +267,53 @@ extension ProjectDetailsVC: UITableViewDelegate , UITableViewDataSource{
             let ApprovedDateAtt: NSAttributedString = ApprovedDate.attributedStringWithColor(["Approved Date".localized()], color: maincolor)
             Projectell.lblApprovedDate.attributedText = ApprovedDateAtt
             
-          
             Projectell.lblDate.text = date
-            
-            Projectell.viewBack.layer.applySketchShadow(
-              color: .black,
-              alpha: 0.6,
-              x: 0,
-              y: 13,
-              blur: 16,
-              spread: 0)
-            Projectell.viewBack.setRounded(20)
-            //Projectell.viewBack.setcorner()
             
             return Projectell
         }
-//        else{
-//            let obj = arr_data[indexPath.item]
-//
-//                     let Description = "Quotation Number".localized() + "  \(obj.projects_quotation_id)"
-//                     let from = "Subject".localized() + "  \(obj.quotation_subject)"
-//                     let to = "Grand Total".localized() + "  \(obj.quotation_grand_total)"
-//                     let type = "Tax Amount".localized() + "  \(obj.quotation_tax_amount)"
-//                     let Module = "Net Amount".localized() + "  \(obj.quotation_net_amount)"
-//
-//                     let Submitter = "Approved Date".localized() + "  \(obj.quotation_approved_date)"
-//                     let writer = "Writer".localized() + "  \(obj.writer)"
-//                     let LastUpdate = "Submitted Date".localized() + "  \(obj.quotation_created_date)"
-//                     let Status = "Status".localized() + "New"
-//
-//
-//                     cell.lblKeyDesc.text = Description
-//                     cell.lblKeyFrom.text = from
-//                     cell.lblKeyTo.text = to
-//                     cell.lblKeyType.text = type
-//                     cell.lblKeyWriter.text = writer
-//                     cell.lblKeyLastUpdate.text = LastUpdate
-//                     cell.lblKeySubmitter.text = Submitter
-//                     cell.lblKeyModule.text = Module
-//                     cell.lblKeyStatus.text = Status
-//
-//
-//                     cell.lblKeyBarCode.isHidden = true
-//                     cell.lbKeylNo.isHidden = true
-//                     cell.lblKeyBarCode.isHidden = true
-//
-//
-//            let Descriptionattributed: NSAttributedString = Description.attributedStringWithColor(["Quotation Number".localized()], color: HelperClassSwift.acolor.getUIColor())
-//                     cell.lblKeyDesc.attributedText = Descriptionattributed
-//
-//            let fromattributed: NSAttributedString = from.attributedStringWithColor(["Subject".localized()], color: HelperClassSwift.acolor.getUIColor())
-//                     cell.lblKeyFrom.attributedText = fromattributed
-//
-//            let Toattributed: NSAttributedString = to.attributedStringWithColor(["Grand Total".localized()], color: HelperClassSwift.acolor.getUIColor())
-//                     cell.lblKeyTo.attributedText = Toattributed
-//
-//
-//
-//            let Typeattributed: NSAttributedString = type.attributedStringWithColor(["Tax Amount".localized()], color: HelperClassSwift.acolor.getUIColor())
-//                     cell.lblKeyType.attributedText = Typeattributed
-//
-//
-//            let Moduleattributed: NSAttributedString = Module.attributedStringWithColor(["Net Amount".localized()], color: HelperClassSwift.acolor.getUIColor())
-//                     cell.lblKeyModule.attributedText = Moduleattributed
-//
-//            let Writerattributed: NSAttributedString = writer.attributedStringWithColor(["Writer".localized()], color: HelperClassSwift.acolor.getUIColor())
-//                     cell.lblKeyWriter.attributedText = Writerattributed
-//
-//
-//
-//            let Submitterattributed: NSAttributedString = Submitter.attributedStringWithColor(["Approved Date".localized()], color: HelperClassSwift.acolor.getUIColor())
-//                     cell.lblKeySubmitter.attributedText = Submitterattributed
-//
-//
-//            let Lastattributed: NSAttributedString = LastUpdate.attributedStringWithColor(["Submitted Date".localized()], color: HelperClassSwift.acolor.getUIColor())
-//                     cell.lblKeyLastUpdate.attributedText = Lastattributed
-//
-//            let Statusattributed: NSAttributedString = Status.attributedStringWithColor(["Status".localized()], color: HelperClassSwift.acolor.getUIColor())
-//                     cell.lblKeyStatus.attributedText = Statusattributed
-//
-//
-//
-//                     cell.viewBack.setcorner()
-//
-//
-//                     return cell
-//
-//        }
-        return UITableViewCell()
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "QuotationTableViewCell") as! QuotationTableViewCell
+        cell.setData(data:arr_data[indexPath.row])
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if IsPrpjectTable == true{
             let obj = arr_Projectdata[indexPath.item]
-            projects_profile_id = obj.projects_profile_id
-            projects_work_area_id = obj.projects_work_area_id
-            projects_supervision_id = obj.projects_supervision_id
+            projects_profile_id = obj.projects_profile_id ?? ""
+            projects_work_area_id = obj.projects_work_area_id ?? ""
+            projects_supervision_id = obj.projects_supervision_id ?? ""
             let vc:SupervisionOperationVC = AppDelegate.mainSB.instanceVC()
-            vc.title =  self.title
+            vc.projects_work_area_id = obj.projects_work_area_id ?? ""
             vc.Object = Object
             vc.StrSubMenue =  self.StrSubMenue
             vc.StrMenue = self.StrMenue
             vc.MenuObj = self.MenuObj
             self.navigationController?.pushViewController(vc, animated: true)
-//            _ =  panel?.center(vc)
-                
-        }else{
-            print("nil")
         }
-       
+        
     }
     
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if tableView.tag == 0 {
-            
-            
-            print(indexPath.row)
-            if IsPrpjectTable == true{
-                if indexPath.row   == arr_data.count - 1  {
-                        updateNextSet()
-                        print("next step")
-                    
+        if IsPrpjectTable {
+            if indexPath.row == arr_Projectdata.count - 1 {
+                if projectPageNumber < projectTotalPages{
+                    projectPageNumber += 1
+                    getProjectsData(isFromBottom: true)
                 }
-            }else{
-                
-                if indexPath.row   == arr_data.count - 1  {
-                    updateNextQutationSet()
-                        print("next step")
-                    
-                }
-                
             }
-           
-      }
-      }
+        }else{
+            if indexPath.row == arr_data.count - 1 {
+                if quotationsPageNumber < quotationsTotalPages{
+                    quotationsPageNumber += 1
+                    getQuotationsData(isFromBottom: true)
+                }
+            }
+        }
+    }
     
-        func updateNextSet(){
-               print("On Completetion")
-            if !allItemDownloaded {
-                pageNumber = pageNumber + 1
-                get_Projects_data(showLoading: false, loadOnly: true)
-            }
-       }
-        
-        func updateNextQutationSet(){
-               print("On Completetion")
-            if !allItemDownloaded {
-                pageNumber = pageNumber + 1
-                get_quotation_data(showLoading: false, loadOnly: true)
-            }
-       }
-
+    
 }
 
 
@@ -793,46 +346,122 @@ extension ProjectDetailsVC: UICollectionViewDataSource ,UICollectionViewDelegate
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-       // cell.view_img.backgroundColor = HelperClassSwift.acolor.getUIColor()
-        
-    }
 }
 
 
 extension ProjectDetailsVC:UISearchBarDelegate {
     
-    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         if IsPrpjectTable == true{
             self.ProjectSearchKey = searchBar.text!
-             get_Projects_data(showLoading: false, loadOnly: false)
         }else{
             self.QuotationSearchKey = searchBar.text!
-            get_quotation_data(showLoading: false, loadOnly: false)
         }
-      
     }
-
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if IsPrpjectTable == true{
             self.ProjectSearchKey = searchBar.text!
-             get_Projects_data(showLoading: false, loadOnly: false)
         }else{
             self.QuotationSearchKey = searchBar.text!
-            get_quotation_data(showLoading: false, loadOnly: false)
         }
         searchBar.resignFirstResponder()
     }
     
+}
+// MARK: - API Copntroller
+extension ProjectDetailsVC{
+    
+    private func get_Projects_Details(){
+        
+        showLoadingActivity()
+        APIController.shard.getProjectDetailsData(projectId: Object!.projects_profile_id) { data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status,status{
+                    
+                    self.branchLabel.text = data.data?.branch_name ?? "----"
+                    self.projectNameEnLabel.text = data.data?.projects_profile_name_en ?? "----"
+                    self.projectNameArLabel.text = data.data?.projects_profile_name_ar ?? "----"
+                    self.customersLabel.text = data.data?.customer_name ?? "----"
+                    self.projectTypeLabel.text = data.data?.customer_type ?? "----"
+                    self.add = data.add ?? false
+                    if let service_user_data = data.service_user_data, let services = service_user_data.services, let users = service_user_data.users{
+                        for index in 0..<services.count{
+                            let service = services[index]
+                            self.arr_Services.append(service)
+                            self.projectServicesLabel.text! += "\(index+1)- \(service.label ?? "--"), "
+                        }
+                        self.collectionServieces.reloadData()
+                        for index in 0..<users.count{
+                            let user = users[index]
+                            self.projectUsersLabel.text! += "\(index+1)- \(user.label ?? "--"), "
+                        }
+                    }
+                    
+                    self.writerLabel.text = data.data?.writer ?? "----"
+                    self.projectReviewersLabel.text = "----"
+                    self.createdDateLabel.text = data.data?.projects_profile_created_datetime ?? "----"
+                    self.onUpdatedLabel.text = data.data?.projects_profile_updated_datetime ?? "----"
+                    self.projectLocationLabel.text = data.data?.projects_profile_location ?? "----"
+                }
+            }
+        }
+    }
+    
+    
+    private func getQuotationsData(isFromBottom:Bool){
+        if !isFromBottom{
+            quotationsPageNumber = 1
+        }
+        showLoadingActivity()
+        APIController.shard.getQuotationsData(projectId: Object!.projects_profile_id, pageNumber: String(quotationsPageNumber), searchKey: QuotationSearchKey) { data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status, status{
+                    if isFromBottom{
+                        self.arr_data.append(contentsOf: data.records ?? [])
+                    }else{
+                        self.arr_data = data.records ?? []
+                    }
+                }else{
+                    if !isFromBottom{
+                        self.arr_data.removeAll()
+                    }
+                }
+                self.imgnodata.isHidden = !self.arr_data.isEmpty
+                self.quotationsTotalPages = data.page?.total_pages ?? 1
+                self.tableViewHeight.constant = self.arr_data.isEmpty ?  200 : CGFloat(self.arr_data.count * 240)
+                
+                self.tableProjects.reloadData()
+            }
+        }
+    }
+    
+    private func getProjectsData(isFromBottom:Bool){
+        if !isFromBottom{
+            projectPageNumber = 1
+        }
+        showLoadingActivity()
+        APIController.shard.getProjectsData(projectId: Object!.projects_profile_id, pageNumber: String(projectPageNumber), searchKey: ProjectSearchKey) { data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status, status{
+                    if isFromBottom{
+                        self.arr_Projectdata.append(contentsOf: data.records ?? [])
+                    }else{
+                        self.arr_Projectdata = data.records ?? []
+                    }
+                }else{
+                    self.arr_Projectdata.removeAll()
+                }
+                self.projectTotalPages = data.page?.total_pages ?? 1
+                self.imgnodata.isHidden = !self.arr_Projectdata.isEmpty
+                self.tableViewHeight.constant = CGFloat(self.arr_Projectdata.count * 240)
+                self.tableProjects.reloadData()
+            }
+        }
+    }
     
 }
 
- 
-
-
-///https://nahidh.sa/backend/MRpWxXzlMesi27d/1/10?branch_id=&search_services=&search_key=
-/////All project
-///

@@ -127,72 +127,6 @@ class HomeVC: UIViewController   {
         initlization()
     }
     
-    func rotate(_ matrix: inout [[Int]]) {
-        let n = matrix.first!.count
-        switch n {
-        case 1: break
-        case 2:
-            for index in 0..<matrix.count {
-                let temp = matrix[index][0]
-                matrix[index][0] = matrix[index][1]
-                matrix[index][1] = temp
-            }
-        default:
-            var firstTemp:[Int] = [Int]()
-            var secondTemp:[Int] = [Int]()
-            var lastTemp: [Int] = [Int]()
-            var counter = n - 3
-            while counter >= 0 {
-                var index1 = counter
-                while index1 < n - counter {
-                    lastTemp.append(matrix[n - 1 - index1][counter])
-                    index1 += 1
-                }
-                
-                firstTemp = matrix[counter]
-                
-                var index2 = counter
-                while index2 < n - counter{
-                    secondTemp.append(matrix[index2][n-1-counter])
-                    index2 += 1
-                }
-                
-                
-                var index3 = counter
-                while index3 < n - counter{
-                    matrix[counter][index3] = lastTemp[index3 - counter]
-                    index3 += 1
-                }
-                lastTemp.removeAll()
-                print(matrix)
-                var index4 = counter
-                while index4 < n - counter{
-                    lastTemp.append(matrix[n-1-counter][index4])
-                    index4 += 1
-                }
-                
-                print("first",firstTemp)
-                print("second",secondTemp)
-                var index5 = counter
-                while index5 < n - counter{
-                    matrix[n-1-counter][index5] = secondTemp[index5-counter]
-                    matrix[index5][n-1-counter] = firstTemp[index5]
-                    
-                    index5 += 1
-                }
-                
-                print(matrix)
-                var index6 = counter
-                while index6 < n - counter{
-                    matrix[index6][counter] = lastTemp[index6-counter]
-                    index6 += 1
-                }
-                print(matrix)
-                counter -= 1
-            }
-            
-        }
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -259,7 +193,55 @@ class HomeVC: UIViewController   {
         }
         
         projectRequestsStackView.isHidden = true
+        observeInboxsLocalNotification()
     }
+    
+    
+    private func observeInboxsLocalNotification(){
+          APIController.shard.startInboxsTimer(pageNumber: "1") { data in
+              let root = AppInstance.window?.rootViewController as? UINavigationController
+              if let status = data.status,status, !(root?.viewControllers.first is GmailViewController) {
+                if let lastInboxDate = UserDefaults.standard.string(forKey: "LastInboxDate"){
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ssa"
+                    dateFormatter.locale = .init(identifier: "en")
+                    let lastDate = dateFormatter.date(from: lastInboxDate)
+                    if let lastDate = lastDate,let data = data.data{
+                        for mail in data{
+                            let mailDate = dateFormatter.date(from: mail.date ?? "")
+                            if let mailDate = mailDate, mailDate > lastDate{
+                                UserDefaults.standard.set(mail.date ?? "", forKey: "LastInboxDate")
+                                self.showLocalInboxNotification(title: mail.from?.name ?? "-----" , body: mail.subject ?? "-----")
+                            }else{
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    private func showLocalInboxNotification(title:String,body:String){
+        let center = UNUserNotificationCenter.current()
+        
+        center.requestAuthorization(options:[.alert,.sound]) { granted, error in
+            if granted {
+                let content = UNMutableNotificationContent()
+                content.title = title
+                content.body = body
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(1), repeats: false)
+                
+                
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                
+                center.add(request)
+            }
+        }
+    }
+    
     
     private func addCalenderView(){
         calenderView.isForAllEmployee = false

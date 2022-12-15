@@ -16,6 +16,7 @@ class InboxMailCellTableViewCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var starButton: UIButton!
+    @IBOutlet weak var addressLabel: UILabel!
     
     
     override func awakeFromNib() {
@@ -30,9 +31,10 @@ class InboxMailCellTableViewCell: UITableViewCell {
     }
     
     func setData(data:MailData){
-
+        
         headerLabel.text = String(data.from?.name?.prefix(1) ?? "-").uppercased()
         titleLabel.text = data.from?.name ?? "----"
+        addressLabel.text = data.from?.address ?? "----"
         subtitleLabel.text = data.subject ?? "----"
         messageLabel.text = data.message ?? "-----"
         dateLabel.text = APIController.shard.getDateString(with: data.date ?? "") ?? "--:-- --"

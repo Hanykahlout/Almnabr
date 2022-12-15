@@ -160,8 +160,6 @@ class NotificationVC: UIViewController {
     }
     
     
-    
-    
     @IBAction func btn_back(_ sender: Any) {
         self.table.removeFromSuperview()
         self.view.removeFromSuperview()
@@ -253,6 +251,48 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
                             if let last = requestArr.last{
                                 let vc = NewContractVC()
                                 vc.transaction_request_id = last
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }else if ios.contains("FORM_HRLN1"){
+                            // New Contract Form
+                            if let last = requestArr.last{
+                                let vc = LoanViewController()
+                                vc.transactionId = last
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }else if ios.contains("FORM_OVR1"){
+                            // New Contract Form
+                            if let last = requestArr.last{
+                                let vc = OverTimeViewController()
+                                vc.transactionId = last
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }else if ios.contains("FORM_BNS1"){
+                            // New Contract Form
+                            if let last = requestArr.last{
+                                let vc = BonusViewController()
+                                vc.transactionId = last
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }else if ios.contains("FORM_VOL1"){
+                            // New Contract Form
+                            if let last = requestArr.last{
+                                let vc = ViolationViewController()
+                                vc.transactionId = last
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }else if ios.contains("FORM_DET1"){
+                            // New Contract Form
+                            if let last = requestArr.last{
+                                let vc = DeductionViewController()
+                                vc.transactionId = last
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                        }else if ios.contains("FORM_JF"){
+                            // New Contract Form
+                            if let last = requestArr.last{
+                                let vc = JobOfferViewController()
+                                vc.transactionId = last
                                 self.navigationController?.pushViewController(vc, animated: true)
                             }
                         }

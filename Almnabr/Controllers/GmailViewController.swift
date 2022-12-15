@@ -8,12 +8,13 @@
 
 import UIKit
 import SideMenu
+import FAPanels
 class GmailViewController: UIViewController {
 
     @IBOutlet weak var mainView: UIViewCustomCornerRadius!
     
     private var pageController:MailPageViewController!
-    
+    var isFromLocalNotification = false
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
@@ -72,10 +73,41 @@ class GmailViewController: UIViewController {
             }
             
             vc.logoutAction = {
-                self.navigationController?.dismiss(animated: true)
+                if !self.isFromLocalNotification {
+                    self.navigationController?.dismiss(animated: true)
+                    
+                }else{
+                    let vc = AppDelegate.mainSB.instantiateViewController(withIdentifier: "HomeVC")
+                    
+                    let nav = UINavigationController.init(rootViewController: vc)
+                    let sideMenu: MenuVC = AppDelegate.mainSB.instanceVC()
+                    let rootController : FAPanelController = AppDelegate.mainSB.instanceVC()
+                    let center : MenuVC = AppDelegate.mainSB.instanceVC()
+                    
+                    _ = rootController.center(nav).right(center).left(sideMenu)
+                    rootController.rightPanelPosition = .front
+                    rootController.leftPanelPosition = .front
+                    
+                    // rootController.configs.rightPanelWidth = (window?.frame.size.width)!
+                    let width = UIScreen.main.bounds.width - 150
+                    
+                    
+                    rootController.configs.leftPanelWidth = width
+                    rootController.configs.rightPanelWidth = width
+                    
+                    rootController.configs.maxAnimDuration = 0.3
+                    rootController.configs.canRightSwipe = true
+                    rootController.configs.canLeftSwipe = true
+                    rootController.configs.changeCenterPanelAnimated = false
+
+                    AppInstance.window?.rootViewController = rootController
+                    UIView.transition(with: AppInstance.window!, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+                }
+                
             }
             
         }
+        
         var presentationStyle = SideMenuPresentationStyle()
         presentationStyle = .menuSlideIn
         presentationStyle.backgroundColor = .clear

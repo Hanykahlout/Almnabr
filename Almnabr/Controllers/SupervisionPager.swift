@@ -23,10 +23,8 @@ class SupervisionPager: UIPageViewController {
        
         self.isPagingEnabled = false
         
-        let page1: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "SupervisionOperationDetailsVC")
-        let page2: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ProjectRequestVC")
-        
-        
+        let page1 = storyboard?.instantiateViewController(withIdentifier: "SupervisionOperationDetailsVC") as! SupervisionOperationDetailsVC
+        let page2 = storyboard?.instantiateViewController(withIdentifier: "ProjectRequestVC") as! ProjectRequestVC
         
         pages.append(page1)
         pages.append(page2)
@@ -47,8 +45,12 @@ class SupervisionPager: UIPageViewController {
     
     private func pager_observer(){
         NotificationCenter.default.addObserver(forName: NSNotification.Name("Change_Supervision"), object: nil, queue: .main) { notifi in
-            guard let index = notifi.object as? Int else { return }
-            self.displayPageForIndex(index: index)
+            guard let obj = notifi.object as? (Int,String) else { return }
+            self.displayPageForIndex(index: obj.0)
+            if obj.0 == 1{
+                let vc = self.pages[1] as! ProjectRequestVC
+                vc.projects_work_area_id = obj.1
+            }
         }
     }
     
@@ -72,7 +74,7 @@ class SupervisionPager: UIPageViewController {
 extension SupervisionPager: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        let currentIndex = pages.index(of: viewController)!
+        let currentIndex = pages.firstIndex(of: viewController)!
         
         // This version will not allow pages to wrap around
         guard currentIndex > 0 else {
@@ -84,7 +86,7 @@ extension SupervisionPager: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        let currentIndex = pages.index(of: viewController)!
+        let currentIndex = pages.firstIndex(of: viewController)!
         
         // This version will not allow pages to wrap around
         guard currentIndex < pages.count - 1 else {

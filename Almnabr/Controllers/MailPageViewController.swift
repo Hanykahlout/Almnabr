@@ -19,8 +19,8 @@ class MailPageViewController: UIPageViewController {
         let drafts = storyboard?.instantiateViewController(withIdentifier: "DraftsMailViewController") as! DraftsMailViewController
         let sent = storyboard?.instantiateViewController(withIdentifier: "SentMailViewController") as! SentMailViewController
         let spam = storyboard?.instantiateViewController(withIdentifier: "SpamMailViewController") as! SpamMailViewController
-        
         let trash = storyboard?.instantiateViewController(withIdentifier: "TrashMailViewController") as! TrashMailViewController
+        
         containerVCs.append(inbox)
         containerVCs.append(starred)
         containerVCs.append(drafts)

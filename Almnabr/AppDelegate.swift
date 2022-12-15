@@ -76,9 +76,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
             }
         }
         print("ASDASD: ",checkSubarraySum([23,2,4,6,7], 6))
-
         return true
     }
+    
+    
     
     func checkSubarraySum(_ nums: [Int], _ k: Int) -> Bool {
         var reminder = [Int:Int]()
@@ -272,6 +273,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                                     vc.transaction_request_id = last
                                     window.rootViewController = UINavigationController(rootViewController: vc)
                                 }
+                            }else if ios.contains("FORM_HRLN1"){
+                                
+                                if let last = requestArr.last{
+                                    let vc = LoanViewController()
+                                    vc.transactionId = last
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
+                            }else if ios.contains("FORM_OVR1"){
+                                
+                                if let last = requestArr.last{
+                                    let vc = OverTimeViewController()
+                                    vc.transactionId = last
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
+                            }else if ios.contains("FORM_BNS1"){
+                                
+                                if let last = requestArr.last{
+                                    let vc = BonusViewController()
+                                    vc.transactionId = last
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
+                            }else if ios.contains("FORM_VOL1"){
+                                
+                                if let last = requestArr.last{
+                                    let vc = ViolationViewController()
+                                    vc.transactionId = last
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
+                            }else if ios.contains("FORM_DET1"){
+                                
+                                if let last = requestArr.last{
+                                    let vc = DeductionViewController()
+                                    vc.transactionId = last
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
+                            }else if ios.contains("FORM_JF"){
+                                
+                                if let last = requestArr.last{
+                                    let vc = JobOfferViewController()
+                                    vc.transactionId = last
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
                             }
                             
                         }else if  ios.contains("task") {
@@ -283,6 +326,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                 }
             }else{
                 let vc:GmailViewController = AppDelegate.mainSB.instanceVC()
+                vc.isFromLocalNotification = true
                 window.rootViewController = UINavigationController(rootViewController: vc)
             }
         }

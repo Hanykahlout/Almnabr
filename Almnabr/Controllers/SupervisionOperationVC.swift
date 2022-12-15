@@ -23,7 +23,6 @@ class SupervisionOperationVC: UIViewController {
     
     @IBOutlet weak var mainView: UIView!
     
-    @IBOutlet weak var header: HeaderView!
     
     var parentPageViewController: MyPageViewController!
     
@@ -32,9 +31,7 @@ class SupervisionOperationVC: UIViewController {
     var StrMenue:String = ""
     var SelectedIndex:Int = 0
     var MenuObj:MenuObj?
-    
-   // let maincolor = "458FB8".getUIColor()
-    
+    var projects_work_area_id = ""
     var index = 0
     var identifiers: NSArray = ["ProjectRequestVC", "SupervisionOperationDetailsVC"]
     
@@ -43,17 +40,20 @@ class SupervisionOperationVC: UIViewController {
    
     var arr_view :[UIViewController] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configGUI()
-        header.btnAction = menu_select
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.addNavigationBarTitle(navigationTitle: "Project")
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        NotificationCenter.default.post(name: .init("send_projects_work_area_id"), object: self.projects_work_area_id)
     }
     
     
@@ -62,6 +62,7 @@ class SupervisionOperationVC: UIViewController {
         // Show the Navigation Bar
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
+    
     
     // MARK: - Config Navigation
     func configNavigation() {
@@ -92,35 +93,8 @@ class SupervisionOperationVC: UIViewController {
         self.viewRequest.backgroundColor = .clear
         self.lblRequest.textColor = maincolor
         self.viewRequest.setBorderWithColor(maincolor)
-        
        
     }
-    
-    
-    
-   
-    
-    
-    func menu_select(){
-        let language =  L102Language.currentAppleLanguage()
-        if language == "ar"{
-            panel?.openRight(animated: true)
-        }else{
-            panel?.openLeft(animated: true)
-        }
-        
-    }
-    
-
-    
-    
-    
-//    @IBAction func btnProjectRequest_Click(_ sender: Any) {
-//        let shared = NotifiRoute()
-//        guard let top_vc = shared.menu_vc() else { return }
-//        let vc: ProjectRequestVC = AppDelegate.mainSB.instanceVC()
-//        top_vc.navigationController?.pushViewController(vc, animated: true)
-//    }
     
     @IBAction func btnProjectRequest_Click(_ sender: Any) {
         
@@ -152,29 +126,11 @@ class SupervisionOperationVC: UIViewController {
         self.change_page()
     }
     
-    
-  
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "Change_Supervision",
-//           let destinationVC = segue.destination as? MyPageViewController {
-//           // parentPageViewController.isPagingEnabled = false
-//            //  destinationVC.numberToDisplay = counter
-//            // destinationVC.displayPageForIndex(index: self.SelectedIndex)
-//            if let controller = self.parentPageViewController {
-//                //    controller.displayPageForIndex(index: self.SelectedIndex)
-//            }
-//        }
-//    }
-    
     private func change_page() {
-        NotificationCenter.default.post(name: NSNotification.Name("Change_Supervision"), object: SelectedIndex)
-        
+        NotificationCenter.default.post(name: NSNotification.Name("Change_Supervision"), object: (SelectedIndex,projects_work_area_id))
     }
     
 }
 
-
-    
 
 

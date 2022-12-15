@@ -22,7 +22,7 @@ class ProjectRequestVC: UIViewController , filterDelegate {
     
     var pageNumber = 1
     var allItemDownloaded = false
-    
+    var projects_work_area_id = ""
     var arr_filter:[FilterObj] = []
     
     
@@ -31,7 +31,7 @@ class ProjectRequestVC: UIViewController , filterDelegate {
         
         configNavigation()
         configGUI()
-        get_Form(showLoading: true, loadOnly: true)
+        
         
     }
     
@@ -39,6 +39,7 @@ class ProjectRequestVC: UIViewController , filterDelegate {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        get_Form(showLoading: true, loadOnly: true)
     }
     
     
@@ -139,7 +140,7 @@ class ProjectRequestVC: UIViewController , filterDelegate {
         
         self.params["projects_supervision_id"] = projects_supervision_id
         
-        APIController.shard.sendRequestPostAuth(urlString: "pr/qtp/1/pages/\(pageNumber)/10", parameters: self.params ) { (response) in
+        APIController.shard.sendRequestPostAuth(urlString: "pr/qtp/\(projects_work_area_id)/pages/\(pageNumber)/10", parameters: self.params ) { (response) in
             self.hideLoadingActivity()
             
             

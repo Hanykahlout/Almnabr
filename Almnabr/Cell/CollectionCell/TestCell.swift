@@ -16,7 +16,7 @@ class TestCell: UICollectionViewCell {
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var view_img: UIView!
     
-    var obj_ModuleObj :  ModuleObj? { didSet{ set_info() }}
+    var obj_ModuleObj :  ProjectDetilaService? { didSet{ set_info() }}
     
     override class func awakeFromNib() {
         super.awakeFromNib()

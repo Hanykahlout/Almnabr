@@ -28,14 +28,14 @@ class InboxMailViewController: UIViewController {
     
     private func initialization(){
         setUpTableView()
+        
         startTimer()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        APIController.shard.inboxsTimer?.invalidate()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getInboxsData()
     }
     
     @objc private func refresh(){
@@ -91,12 +91,43 @@ extension InboxMailViewController{
         isFromBottom = false
         pageNumber = 1
         showLoadingActivity()
-        APIController.shard.startInboxsTimer(pageNumber: String(pageNumber), callback: handleInboxResponse)
+        APIController.shard.startInboxsTimer(pageNumber: String(pageNumber)) { data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status , status, let data = data.data{
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ssa"
+                    dateFormatter.locale = .init(identifier: "en")
+                    var newEmails = [MailData]()
+                    for item in data{
+                        
+                        if let mailDate = dateFormatter.date(from: item.date ?? ""),
+                           let lastMail = self.data.first,
+                           let lastMailDate = dateFormatter.date(from: lastMail.date ?? ""){
+                            
+                            if  mailDate > lastMailDate{
+                                newEmails.append(item)
+                            }else{
+                                break
+                            }
+                        }
+                    }
+                    newEmails.append(contentsOf: self.data)
+                    self.data = newEmails
+                    self.tableView.reloadData()
+                    if self.refreshControl.isRefreshing{
+                        self.refreshControl.endRefreshing()
+                    }
+                }
+            }
+        }
     }
+    
     
     private func getInboxsData(){
         APIController.shard.getMailsInbox(pageNumber:String(pageNumber),callback: handleInboxResponse)
     }
+    
     
     private func handleInboxResponse(_ data:MailInboxResponse){
         DispatchQueue.main.async {
@@ -114,7 +145,7 @@ extension InboxMailViewController{
                 }else{
                     self.totalPages = Int(total) + 1
                 }
-
+                
             }else{
                 if !self.isFromBottom{
                     self.data.removeAll()
@@ -127,7 +158,7 @@ extension InboxMailViewController{
             }
         }
     }
-   
+    
     
 }
 

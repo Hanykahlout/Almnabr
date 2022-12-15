@@ -35,7 +35,7 @@ class APIController{
         return apiController
     }()
     var inboxsTimer: Timer?
-
+    
     private init(){}
     
     
@@ -446,7 +446,7 @@ class APIController{
     }
     
     func sendRequestGetAuth(urlString:String , completion: @escaping (_ response : [String : Any] ) -> Void)
-    {   
+    {
         
         let strURL = "\(serverURL )/\(urlString)"
         let auth = [ "authorization":
@@ -687,7 +687,7 @@ class APIController{
                     }
                 }
             case .failure(_):
-//                completion(result as? [String : Any] ?? [:])
+                //                completion(result as? [String : Any] ?? [:])
                 break
             }
         }
@@ -767,7 +767,7 @@ class APIController{
                     }
                 }
             case .failure(_):
-//                completion(result as? [String : Any] ?? [:])
+                //                completion(result as? [String : Any] ?? [:])
                 break
             }
         }
@@ -2300,7 +2300,7 @@ class APIController{
             }
         }
     }
-
+    
     
     func getBonusFormData(transactionId:String,callback:@escaping (_ data:BonusFormResponse)->Void){
         let strURL = "\(serverURL)/form/FORM_BNS1/vr/\(transactionId)"
@@ -2998,11 +2998,10 @@ class APIController{
             }
         }
     }
-
-
+    
+    
     func startInboxsTimer(pageNumber:String,callback: @escaping (_ data:  MailInboxResponse)->Void){
-        getMailsInbox(pageNumber:pageNumber,callback: callback)
-        inboxsTimer = Timer.scheduledTimer(withTimeInterval: 300, repeats: true,block: { timer in
+        inboxsTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: true,block: { timer in
             self.getMailsInbox(pageNumber:pageNumber,callback: callback)
         })
     }
@@ -3028,6 +3027,7 @@ class APIController{
             }
         }
     }
+    
     
     func getAttendanceGroups(pageNumber:String,callback: @escaping (_ data:GetAttendanceGroupsResponse)->Void){
         let strURL = "\(serverURL)/at/get_groups/\(pageNumber)/10"
@@ -3120,7 +3120,7 @@ class APIController{
     
     
     func getShiftsAttendance(pageNumber:String,
-                                callback: @escaping (_ data:GetShiftsResponse)->Void
+                             callback: @escaping (_ data:GetShiftsResponse)->Void
     ){
         let strURL = "\(serverURL)/at/get_shifts/\(pageNumber)/10"
         
@@ -3153,7 +3153,7 @@ class APIController{
                 }
             }
         }
-
+        
     }
     
     func createShiftGroups(url:String,body:[String:Any],callback: @escaping (_ data:UpdateSettingResponse)->Void){
@@ -3163,7 +3163,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .post, parameters: body ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
@@ -3174,13 +3174,13 @@ class APIController{
     }
     
     func deleteShiftGroups(deleteId:String,callback: @escaping (_ data:UpdateSettingResponse)->Void){
-
+        
         let strURL = "\(serverURL)/at/delete_shifts"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .post, parameters: ["key_ids[]":deleteId] ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
@@ -3191,14 +3191,14 @@ class APIController{
     }
     
     func changePassword(body:[String:Any],callback: @escaping (_ data:UpdateSettingResponse)->Void){
-
+        
         let strURL = "\(serverURL)/cpassword"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
         
-       
+        
         Alamofire.request(strURL, method: .post, parameters: body ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
@@ -3210,14 +3210,14 @@ class APIController{
     
     
     func getJoiningDetails(pageNumber:String,empNum:String,callback: @escaping (_ data:JoiningDetailsResponse)->Void){
-
+        
         let strURL = "\(serverURL)/human_resources/get_employee_joining_history/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
         
-       
+        
         Alamofire.request(strURL, method: .post, parameters: ["employee_number":empNum] ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : JoiningDetailsResponse = Mapper<JoiningDetailsResponse>().map(JSONString:str){
@@ -3228,7 +3228,7 @@ class APIController{
     }
     
     func getJobDetails(pageNumber:String,branch_id:String,empNum:String,searchKey:String,callback: @escaping (_ data:JobDetailsResponse)->Void){
-
+        
         let strURL = "\(serverURL)/positions/\(pageNumber)/10"
         
         let headers = [ "authorization":
@@ -3249,7 +3249,7 @@ class APIController{
     
     
     func getPayRoleData(pageNumber:String,callback: @escaping (_ data:PayRoleResponse)->Void){
-    
+        
         let strURL = "\(serverURL)/form/FORM_SAL/salary_history/\(pageNumber)/10"
         
         let headers = [ "authorization":
@@ -3269,7 +3269,7 @@ class APIController{
     }
     
     func getPayRoleReviewersData(callback: @escaping (_ data:PayRoleReviewersResponse)->Void){
-    
+        
         let strURL = "\(serverURL)/form/FORM_SAL/get_all_reviewers"
         
         let headers = [ "authorization":
@@ -3290,7 +3290,7 @@ class APIController{
     
     
     func addPayRoleReviewers(body:Parameters,callback: @escaping (_ data:UpdateSettingResponse)->Void){
-    
+        
         let strURL = "\(serverURL)/form/FORM_SAL/store_employees_as_reviewers"
         
         let headers = [ "authorization":
@@ -3310,7 +3310,7 @@ class APIController{
     
     
     func deletePayRoleReviewers(userId:String,callback: @escaping (_ data:UpdateSettingResponse)->Void){
-    
+        
         let strURL = "\(serverURL)/form/FORM_SAL/delete_reviewer/\(userId)"
         
         let headers = [ "authorization":
@@ -3327,10 +3327,10 @@ class APIController{
         }
         
     }
-
+    
     
     func getFinanialDetailsData(pageNumber:String,body:Parameters,callback: @escaping (_ data:FinanialDetailsResponse)->Void){
-    
+        
         let strURL = "\(serverURL)/human_resources/get_employee_finical_history/\(pageNumber)/10"
         
         let headers = [ "authorization":
@@ -3347,12 +3347,12 @@ class APIController{
         }
         
     }
-
+    
     /// Get Current Version of the app from the app store
     func getCurrentVersion(callback: @escaping (_ data:AppStoreAppResponse)->Void){
         guard
-//            let info = Bundle.main.infoDictionary,
-//              let identifier = info["CFBundleIdentifier"] as? String,
+            //            let info = Bundle.main.infoDictionary,
+            //              let identifier = info["CFBundleIdentifier"] as? String,
             let url = URL(string: "https://itunes.apple.com/lookup?id=1621889347&type=\(UUID().uuidString)") else {
             return
         }
@@ -3384,10 +3384,10 @@ class APIController{
             }
         }
     }
-
+    
     
     func deleteJobAppRecord(userId:String,callback: @escaping (_ data:UpdateSettingResponse)->Void){
-    
+        
         let strURL = "\(serverURL)/81f5cc8c046c6d1c66fa3424783873db/MAIN"
         
         let headers = [ "authorization":
@@ -3405,7 +3405,58 @@ class APIController{
     }
     
     
+    func getProjectDetailsData(projectId:String,callback: @escaping (_ data:ProjectDetilasResponse)->Void){
+        let strURL = "\(serverURL)/TEd1bgyHSC0GPcq/\(projectId)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ProjectDetilasResponse = Mapper<ProjectDetilasResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
     
+    
+    func getQuotationsData(projectId:String,pageNumber:String,searchKey:String,callback: @escaping (_ data:QuotationResponse)->Void){
+        let strURL = "\(serverURL)/squotest/\(projectId)/\(pageNumber)/10?search_key=\(searchKey)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : QuotationResponse = Mapper<QuotationResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func getProjectsData(projectId:String,pageNumber:String,searchKey:String,callback: @escaping (_ data:ProjectServicesResponse)->Void){
+        let strURL = "\(serverURL)/xZLCctvSvZ9DGb8/\(projectId)/\(pageNumber)/10?search_key=\(searchKey)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ProjectServicesResponse = Mapper<ProjectServicesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    
+    //    ProjectServicesResponse
     func getDateString(with string:String)-> String?{
         let dateFormatter = DateFormatter()
         dateFormatter.locale = .init(identifier: "en")
@@ -3417,7 +3468,6 @@ class APIController{
         }
         return nil
     }
-    
     
     
 }

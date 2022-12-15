@@ -33,12 +33,6 @@ class SubProjectTVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        selectionStyle = .none
-        
-        viewBack.layer.shadowColor = UIColor.black.cgColor
-        viewBack.layer.shadowOpacity = 1
-        viewBack.layer.shadowOffset = .zero
-        viewBack.layer.shadowRadius = 2
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

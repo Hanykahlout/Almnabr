@@ -81,20 +81,7 @@ class DocumentsVC: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Hide the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    // MARK: - Config Navigation
     func configNavigation() {
         _ = self.navigationController?.preferredStatusBarStyle
         self.view.backgroundColor = "FFFFFF".getUIColor() //F0F4F8
@@ -102,15 +89,8 @@ class DocumentsVC: UIViewController {
         
         addNavigationBarTitle(navigationTitle: StrTitle)
     }
+   
     
-//    override func viewDidLayoutSubviews() {
-//        tableHeightConstraint.constant = table.contentSize.height
-//        
-//    }
-    
-    
-    //MARK: - Config GUI
-    //------------------------------------------------------
     func configGUI() {
         
         self.viewsearch.setBorderGrayWidthCorner(1, 20)

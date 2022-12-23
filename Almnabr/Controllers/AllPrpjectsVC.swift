@@ -412,14 +412,6 @@ extension AllPrpjectsVC: UITableViewDelegate , UITableViewDataSource{
         cell.lblDate.text = date
         cell.lblDate.textColor = maincolor
        
-//        cell.viewBack.layer.applySketchShadow(
-//          color: .black,
-//          alpha: 0.6,
-//          x: 0,
-//          y: 13,
-//          blur: 16,
-//          spread: 0)
-        //cell.viewBack.setRounded(20)
         return cell
         
     }

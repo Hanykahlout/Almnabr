@@ -28,29 +28,16 @@ class ProjectRequestVC: UIViewController , filterDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configNavigation()
         configGUI()
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Hide the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
         get_Form(showLoading: true, loadOnly: true)
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
-    
-    
-    // MARK: - Config Navigation
+
     func configNavigation() {
         _ = self.navigationController?.preferredStatusBarStyle
         self.view.backgroundColor = .clear
@@ -275,8 +262,7 @@ extension ProjectRequestVC: UITableViewDelegate , UITableViewDataSource{
         
         let obj = arr_data[indexPath.item]
         
-        guard let top_vc = HeaderView.shared.menu_vc() else { return }
-        //guard didLoadHome else { return }
+        guard HeaderView.shared.menu_vc() != nil else { return }
         
         let vc : TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
         

@@ -14,39 +14,36 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct FormHrv1AttachmentsRecords : Mappable {
-	var file_records_id : String?
-	var module_key : String?
-	var level_keys : String?
-	var file_size : String?
-	var file_extension : String?
-	var file_name_en : String?
-	var file_name_ar : String?
-	var user_id_writer : String?
-	var created_datetime : String?
+struct FormC1File : Mappable {
+	var form_c1_files_id : String?
+	var transaction_key : String?
+	var transaction_request_id : String?
+	var form_c1_file_size : String?
+	var form_c1_file_extension : String?
+	var form_c1_file_attach_title : String?
+	var form_c1_file_attach_with_the_document : String?
+	var form_c1_file_print_official_paper : String?
 	var link : String?
-	var writer_name : String?
-    
-    
-    
-    
+	var attach_with_pdf : String?
+	var official_paper : String?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		file_records_id <- map["file_records_id"]
-		module_key <- map["module_key"]
-		level_keys <- map["level_keys"]
-		file_size <- map["file_size"]
-		file_extension <- map["file_extension"]
-		file_name_en <- map["file_name_en"]
-		file_name_ar <- map["file_name_ar"]
-		user_id_writer <- map["user_id_writer"]
-		created_datetime <- map["created_datetime"]
+		form_c1_files_id <- map["form_c1_files_id"]
+		transaction_key <- map["transaction_key"]
+		transaction_request_id <- map["transaction_request_id"]
+		form_c1_file_size <- map["form_c1_file_size"]
+		form_c1_file_extension <- map["form_c1_file_extension"]
+		form_c1_file_attach_title <- map["form_c1_file_attach_title"]
+		form_c1_file_attach_with_the_document <- map["form_c1_file_attach_with_the_document"]
+		form_c1_file_print_official_paper <- map["form_c1_file_print_official_paper"]
 		link <- map["link"]
-		writer_name <- map["writer_name"]
+		attach_with_pdf <- map["attach_with_pdf"]
+		official_paper <- map["official_paper"]
 	}
 
 }

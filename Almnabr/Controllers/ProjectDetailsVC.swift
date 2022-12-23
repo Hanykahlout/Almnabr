@@ -9,7 +9,7 @@
 import UIKit
 import DPLocalization
 import FontAwesome_swift
-
+import SCLAlertView
 class ProjectDetailsVC: UIViewController {
     
     @IBOutlet weak var imgnodata: UIImageView!
@@ -41,7 +41,6 @@ class ProjectDetailsVC: UIViewController {
 
     @IBOutlet weak var tableProjects: UITableView!
     
-    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     var QuotationSearchKey:String = ""
     var ProjectSearchKey:String = ""
@@ -59,9 +58,8 @@ class ProjectDetailsVC: UIViewController {
     
     var add:Bool = false
     var Object:projectObj?
-    var arr_Projectdata:[ProjectServicesRecord] = []
     
-    var arr_data:[QuotationRecord] = []
+    
     
     var arr_Services:[ProjectDetilaService] = []
     var arr_ServicesLabel:[String] = []
@@ -76,6 +74,15 @@ class ProjectDetailsVC: UIViewController {
     private var quotationsTotalPages = 1
     private var projectPageNumber = 1
     private var projectTotalPages = 1
+    
+    private var projectDesignPageNumber = 1
+    private var projectDesignTotalPages = 1
+    
+    private var isSupervison = true
+    
+    private var arr_data:[QuotationRecord] = []
+    private var arr_Projectdata:[ProjectServicesRecord] = []
+    private var projectDesignData:[ProjectsDesignData] = []
     
     
     override public func viewDidLoad() {
@@ -95,6 +102,7 @@ class ProjectDetailsVC: UIViewController {
         get_Projects_Details()
         getQuotationsData(isFromBottom: false)
         getProjectsData(isFromBottom: false)
+        getProjectsDesignData(isFromBottom: false)
     }
     
     
@@ -161,7 +169,6 @@ class ProjectDetailsVC: UIViewController {
     }
     
     
-    
     @IBAction func btnProject_Click(_ sender: Any) {
         
         self.IsPrpjectTable = true
@@ -177,6 +184,7 @@ class ProjectDetailsVC: UIViewController {
         
     }
     
+    
     @IBAction func btnQuotation_Click(_ sender: Any) {
         self.IsPrpjectTable = false
         self.tableProjects.reloadData()
@@ -188,6 +196,7 @@ class ProjectDetailsVC: UIViewController {
             self.tableProjects.isHidden = false
         })
     }
+
     
     @IBAction func btnAddQuotation_Click(_ sender: Any) {
         
@@ -200,96 +209,55 @@ extension ProjectDetailsVC: UITableViewDelegate , UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if IsPrpjectTable{
-            return arr_Projectdata.count
+            if isSupervison{
+                return arr_Projectdata.count
+            }else{
+                return projectDesignData.count
+            }
         }else{
             return arr_data.count
         }
         
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         if IsPrpjectTable{
-            let Projectell = tableView.dequeueReusableCell(withIdentifier: "SubProjectTVCell", for: indexPath) as! SubProjectTVCell
-            
-            
-            let obj = arr_Projectdata[indexPath.row]
-            
-            let Id =  "ID".localized() + ": \(obj.projects_supervision_id ?? "----")"
-            let Q_No = "Quotation Number".localized() + ": \(obj.projects_quotation_id ?? "----")"
-            let subject = "Subject".localized() + "  \(obj.quotation_subject ?? "----")"
-            let Grand_Total = "\(obj.quotation_grand_total ?? "----")"
-            let Tax_Amount =   "\(obj.quotation_tax_amount ?? "-----")"
-            let net_amount =  "\(obj.quotation_net_amount ?? "----")"
-            let ApprovedDate = "Approved Date".localized() + ": \(obj.quotation_approved_date ?? "----")"
-            let writer = "By".localized() + ": \(obj.writer ?? "----")"
-            let date = "\(obj.quotation_created_date ?? "----")"
-            
-            Projectell.lblTaxAmount.text = "Tax Amount".localized()
-            Projectell.lblNetAmount.text = "Net Amount".localized()
-            Projectell.lblGrandTotal.text = "Grand Total".localized()
-            
-//            Projectell.lblSubject.isHidden = false
-//            if userObj?.is_admin == "1" || self.add == true {
-//                Projectell.StackAmount.isHidden = false
-//                Projectell.lblWriter.isHidden = false
-//                Projectell.lblDate.isHidden = false
-//                Projectell.lblApprovedDate.isHidden = false
-//                Projectell.lblQ_No.isHidden = false
-//            }else{
-//                Projectell.StackAmount.isHidden = true
-//                Projectell.StackDate.isHidden = true
-//                Projectell.StackWriter.isHidden = true
-//                Projectell.height.constant = 90
-//                Projectell.lblWriter.isHidden = true
-//                Projectell.lblDate.isHidden = true
-//                Projectell.lblApprovedDate.isHidden = true
-//                Projectell.lblQ_No.isHidden = true
-//            }
-
-            let Idattribute: NSAttributedString = Id.attributedStringWithColor(["ID".localized()], color: maincolor)
-            Projectell.lblId.attributedText = Idattribute
-            
-            let Q_Noattribute: NSAttributedString = Q_No.attributedStringWithColor(["Quotation Number".localized()], color: maincolor)
-            Projectell.lblQ_No.attributedText = Q_Noattribute
-            
-            let Subjectattribute: NSAttributedString = subject.attributedStringWithColor(["Subject".localized()], color: maincolor)
-            Projectell.lblSubject.attributedText = Subjectattribute
-            
-            
-            Projectell.lblValGrandTotal.text = Grand_Total
-            Projectell.lblValTaxAmount.text = Tax_Amount
-            Projectell.lblValNetAmount.text = net_amount
-            
-            let Writerattribute: NSAttributedString = writer.attributedStringWithColor(["By".localized()], color: maincolor)
-            Projectell.lblWriter.attributedText = Writerattribute
-            
-            let ApprovedDateAtt: NSAttributedString = ApprovedDate.attributedStringWithColor(["Approved Date".localized()], color: maincolor)
-            Projectell.lblApprovedDate.attributedText = ApprovedDateAtt
-            
-            Projectell.lblDate.text = date
-            
-            return Projectell
+            if isSupervison{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SubProjectTVCell", for: indexPath) as! SubProjectTVCell
+                cell.setData(data: arr_Projectdata[indexPath.row])
+                return cell
+            }else{
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SubProjectTVCell", for: indexPath) as! SubProjectTVCell
+                cell.setData(data: projectDesignData[indexPath.row])
+                return cell
+            }
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuotationTableViewCell") as! QuotationTableViewCell
         cell.setData(data:arr_data[indexPath.row])
+        cell.didClickOnFile = {
+            self.showFile(url: self.arr_data[indexPath.row].projects_quotation_pdf_file ?? "")
+        }
         return cell
     }
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if IsPrpjectTable == true{
-            let obj = arr_Projectdata[indexPath.item]
-            projects_profile_id = obj.projects_profile_id ?? ""
-            projects_work_area_id = obj.projects_work_area_id ?? ""
-            projects_supervision_id = obj.projects_supervision_id ?? ""
-            let vc:SupervisionOperationVC = AppDelegate.mainSB.instanceVC()
-            vc.projects_work_area_id = obj.projects_work_area_id ?? ""
-            vc.Object = Object
-            vc.StrSubMenue =  self.StrSubMenue
-            vc.StrMenue = self.StrMenue
-            vc.MenuObj = self.MenuObj
-            self.navigationController?.pushViewController(vc, animated: true)
+            if isSupervison{
+                let obj = arr_Projectdata[indexPath.item]
+                projects_profile_id = obj.projects_profile_id ?? ""
+                projects_work_area_id = obj.projects_work_area_id ?? ""
+                projects_supervision_id = obj.projects_supervision_id ?? ""
+                let vc:SupervisionOperationVC = AppDelegate.mainSB.instanceVC()
+                vc.projects_work_area_id = obj.projects_work_area_id ?? ""
+                vc.Object = Object
+                vc.StrSubMenue =  self.StrSubMenue
+                vc.StrMenue = self.StrMenue
+                vc.MenuObj = self.MenuObj
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
         
     }
@@ -297,10 +265,19 @@ extension ProjectDetailsVC: UITableViewDelegate , UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if IsPrpjectTable {
-            if indexPath.row == arr_Projectdata.count - 1 {
-                if projectPageNumber < projectTotalPages{
-                    projectPageNumber += 1
-                    getProjectsData(isFromBottom: true)
+            if isSupervison{
+                if indexPath.row == arr_Projectdata.count - 1 {
+                    if projectPageNumber < projectTotalPages{
+                        projectPageNumber += 1
+                        getProjectsData(isFromBottom: true)
+                    }
+                }
+            }else{
+                if indexPath.row == projectDesignData.count - 1 {
+                    if projectDesignPageNumber < projectDesignTotalPages{
+                        projectDesignPageNumber += 1
+                        getProjectsDesignData(isFromBottom: true)
+                    }
                 }
             }
         }else{
@@ -336,7 +313,7 @@ extension ProjectDetailsVC: UICollectionViewDataSource ,UICollectionViewDelegate
         
         cell.img.image = UIImage.fontAwesomeIcon(name: .codeBranch, style: self.fontStyle, textColor: .white, size: CGSize(width: 40, height: 40))
         
-        if indexPath.item == 0 {
+        if item.isSelected {
             cell.view_img.backgroundColor = HelperClassSwift.acolor.getUIColor()
         }else{
             cell.view_img.backgroundColor = HelperClassSwift.bcolor.getUIColor()
@@ -344,6 +321,26 @@ extension ProjectDetailsVC: UICollectionViewDataSource ,UICollectionViewDelegate
         
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        for i in 0..<arr_Services.count{
+            arr_Services[i].isSelected = indexPath.row == i
+            if indexPath.row == i{
+                arr_data.removeAll()
+                arr_Projectdata.removeAll()
+                projectDesignData.removeAll()
+                
+                isSupervison = arr_Services[i].projects_services_code == "S"
+                if isSupervison {
+                    getProjectsData(isFromBottom: false)
+                    getQuotationsData(isFromBottom: false)
+                }else{
+                    getProjectsDesignData(isFromBottom: false)
+                }
+             }
+        }
+        collectionServieces.reloadData()
     }
     
 }
@@ -373,7 +370,6 @@ extension ProjectDetailsVC:UISearchBarDelegate {
 extension ProjectDetailsVC{
     
     private func get_Projects_Details(){
-        
         showLoadingActivity()
         APIController.shard.getProjectDetailsData(projectId: Object!.projects_profile_id) { data in
             DispatchQueue.main.async {
@@ -388,7 +384,8 @@ extension ProjectDetailsVC{
                     self.add = data.add ?? false
                     if let service_user_data = data.service_user_data, let services = service_user_data.services, let users = service_user_data.users{
                         for index in 0..<services.count{
-                            let service = services[index]
+                            var service = services[index]
+                            service.isSelected = index == 0
                             self.arr_Services.append(service)
                             self.projectServicesLabel.text! += "\(index+1)- \(service.label ?? "--"), "
                         }
@@ -415,7 +412,7 @@ extension ProjectDetailsVC{
             quotationsPageNumber = 1
         }
         showLoadingActivity()
-        APIController.shard.getQuotationsData(projectId: Object!.projects_profile_id, pageNumber: String(quotationsPageNumber), searchKey: QuotationSearchKey) { data in
+        APIController.shard.getQuotationsSupervisionData(projectId: Object!.projects_profile_id, pageNumber: String(quotationsPageNumber), searchKey: QuotationSearchKey) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status, status{
@@ -431,19 +428,19 @@ extension ProjectDetailsVC{
                 }
                 self.imgnodata.isHidden = !self.arr_data.isEmpty
                 self.quotationsTotalPages = data.page?.total_pages ?? 1
-                self.tableViewHeight.constant = self.arr_data.isEmpty ?  200 : CGFloat(self.arr_data.count * 240)
-                
+                self.imgnodata.isHidden = !self.arr_data.isEmpty
                 self.tableProjects.reloadData()
             }
         }
     }
+    
     
     private func getProjectsData(isFromBottom:Bool){
         if !isFromBottom{
             projectPageNumber = 1
         }
         showLoadingActivity()
-        APIController.shard.getProjectsData(projectId: Object!.projects_profile_id, pageNumber: String(projectPageNumber), searchKey: ProjectSearchKey) { data in
+        APIController.shard.getProjectsSupervisionData(projectId: Object!.projects_profile_id, pageNumber: String(projectPageNumber), searchKey: ProjectSearchKey) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status, status{
@@ -457,8 +454,53 @@ extension ProjectDetailsVC{
                 }
                 self.projectTotalPages = data.page?.total_pages ?? 1
                 self.imgnodata.isHidden = !self.arr_Projectdata.isEmpty
-                self.tableViewHeight.constant = CGFloat(self.arr_Projectdata.count * 240)
                 self.tableProjects.reloadData()
+            }
+        }
+        
+    }
+    
+    
+    private func getProjectsDesignData(isFromBottom:Bool){
+        
+        if !isFromBottom{
+            projectDesignPageNumber = 1
+        }
+        
+        showLoadingActivity()
+        APIController.shard.getProjectsDesignData(projectId: Object!.projects_profile_id, pageNumber: String(projectDesignPageNumber)) { data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status, status{
+                    if isFromBottom{
+                        self.projectDesignData.append(contentsOf: data.data ?? [])
+                    }else{
+                        self.projectDesignData = data.data ?? []
+                    }
+                }else{
+                    self.projectDesignData.removeAll()
+                }
+                self.projectDesignTotalPages = data.page?.total_pages ?? 1
+                self.imgnodata.isHidden = !self.projectDesignData.isEmpty
+                self.tableProjects.reloadData()
+            }
+        }
+        
+    }
+    
+    private func showFile(url:String){
+        showLoadingActivity()
+        APIController.shard.getImage(url: url) { data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status,status{
+                    let vc = WebViewViewController()
+                    vc.data = data
+                    let nav = UINavigationController(rootViewController: vc)
+                    self.navigationController?.present(nav, animated: true)
+                }else{
+                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknown error!!")
+                }
             }
         }
     }

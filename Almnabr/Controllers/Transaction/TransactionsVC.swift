@@ -574,6 +574,16 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
             let vc = JobOfferViewController()
             vc.transactionId = obj.transaction_request_id
             self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_C1":
+            let vc = CFormViewController()
+            vc.isOutging = true
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_C2":
+            let vc = CFormViewController()
+            vc.isOutging = false
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
         default:
             break
         }

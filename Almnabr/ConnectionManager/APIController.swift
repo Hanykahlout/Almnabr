@@ -3422,7 +3422,7 @@ class APIController{
     }
     
     
-    func getQuotationsData(projectId:String,pageNumber:String,searchKey:String,callback: @escaping (_ data:QuotationResponse)->Void){
+    func getQuotationsSupervisionData(projectId:String,pageNumber:String,searchKey:String,callback: @escaping (_ data:QuotationResponse)->Void){
         let strURL = "\(serverURL)/squotest/\(projectId)/\(pageNumber)/10?search_key=\(searchKey)"
         
         let headers = [ "authorization":
@@ -3439,7 +3439,7 @@ class APIController{
     }
     
     
-    func getProjectsData(projectId:String,pageNumber:String,searchKey:String,callback: @escaping (_ data:ProjectServicesResponse)->Void){
+    func getProjectsSupervisionData(projectId:String,pageNumber:String,searchKey:String,callback: @escaping (_ data:ProjectServicesResponse)->Void){
         let strURL = "\(serverURL)/xZLCctvSvZ9DGb8/\(projectId)/\(pageNumber)/10?search_key=\(searchKey)"
         
         let headers = [ "authorization":
@@ -3455,6 +3455,114 @@ class APIController{
         }
     }
 
+    func getProjectsDesignData(projectId:String,pageNumber:String,callback: @escaping (_ data: ProjectsDesignResponse)->Void){
+        let strURL = "\(serverURL)/project_design/get_data_projects_design/\(pageNumber)/10"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        let param = [
+            "projects_profile_id": projectId
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: param,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ProjectsDesignResponse = Mapper<ProjectsDesignResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getCommunicationList(pageNumber:String,searchText:String,moduleKey:String,transactionKey:String,branchKey:String,typeKey:String,callback: @escaping (_ data: CommunicationListResponse )->Void){
+        
+        let strURL = "\(serverURL)/comm/list/\(pageNumber)/10?searchKey=\(searchText)&module_key=\(moduleKey)&transaction_key=\(transactionKey)&branch_id=\(branchKey)&communication_types_id=\(typeKey)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : CommunicationListResponse = Mapper<CommunicationListResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getCommunctionSearchKeys(urlKey:String,callback: @escaping (_ data: SearchBranch )->Void){
+        let strURL = "\(serverURL)/comm/\(urlKey)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+
+    func getC1FormData(transactionId:String,callback: @escaping (_ data:C1FormResponse)->Void){
+        
+        let strURL = "\(serverURL)/form/FORM_C1/vr/\(transactionId)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+
+                if let parsedMapperString : C1FormResponse = Mapper<C1FormResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getC2FormData(transactionId:String,callback: @escaping (_ data:C2FormResponse)->Void){
+        
+        let strURL = "\(serverURL)/form/FORM_C2/vr/\(transactionId)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                    
+                if let parsedMapperString : C2FormResponse = Mapper<C2FormResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func showContentPreview(extraVal:String,callback: @escaping (_ data:GetImageResponse)->Void){
+
+        let strURL = "\(serverURL)/\(extraVal)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                    
+                if let parsedMapperString : GetImageResponse = Mapper<GetImageResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
     
     //    ProjectServicesResponse
     func getDateString(with string:String)-> String?{

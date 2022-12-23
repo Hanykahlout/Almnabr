@@ -21,6 +21,7 @@ class QuotationTableViewCell: UITableViewCell {
     @IBOutlet weak var writerLabel: UILabel!
     @IBOutlet weak var settingsButton: UIButton!
     
+    var didClickOnFile : (() -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -48,6 +49,7 @@ class QuotationTableViewCell: UITableViewCell {
     
     
     @IBAction func settingsAction(_ sender: Any) {
+        didClickOnFile?()
     }
     
     

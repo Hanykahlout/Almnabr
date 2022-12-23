@@ -14,21 +14,10 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct FormHrv1AttachmentsRecords : Mappable {
-	var file_records_id : String?
-	var module_key : String?
-	var level_keys : String?
-	var file_size : String?
-	var file_extension : String?
-	var file_name_en : String?
-	var file_name_ar : String?
-	var user_id_writer : String?
-	var created_datetime : String?
-	var link : String?
-	var writer_name : String?
+struct Form_c1_files : Mappable {
     
-    
-    
+	var status : Bool?
+    var records: [FormC1File]?
     
 	init?(map: Map) {
 
@@ -36,17 +25,9 @@ struct FormHrv1AttachmentsRecords : Mappable {
 
 	mutating func mapping(map: Map) {
 
-		file_records_id <- map["file_records_id"]
-		module_key <- map["module_key"]
-		level_keys <- map["level_keys"]
-		file_size <- map["file_size"]
-		file_extension <- map["file_extension"]
-		file_name_en <- map["file_name_en"]
-		file_name_ar <- map["file_name_ar"]
-		user_id_writer <- map["user_id_writer"]
-		created_datetime <- map["created_datetime"]
-		link <- map["link"]
-		writer_name <- map["writer_name"]
+		status <- map["status"]
+        records <- map["records"]
+        
 	}
 
 }

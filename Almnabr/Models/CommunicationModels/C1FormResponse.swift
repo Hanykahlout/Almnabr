@@ -14,21 +14,22 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct FormHrv1AttachmentsRecords : Mappable {
-	var file_records_id : String?
-	var module_key : String?
-	var level_keys : String?
-	var file_size : String?
-	var file_extension : String?
-	var file_name_en : String?
-	var file_name_ar : String?
-	var user_id_writer : String?
-	var created_datetime : String?
-	var link : String?
-	var writer_name : String?
+struct C1FormResponse : Mappable {
     
-    
-    
+	var status : Bool?
+	var transactions_request : Transactions_request?
+	var transactions_date : Transactions_date?
+	var transactions_notes : Transactions_notes?
+	var transactions_records : Transactions_records?
+	var transactions_submitter : Transactions_submitter?
+	var transactions_barcode_version : Transactions_barcode_version?
+	var transactions_persons : Transactions_persons?
+	var transactions_buttons : Transactions_buttons?
+	var form_c1_data : Form_c1_data?
+	var transactions_extra : Transactions_extra?
+	var form_c1_files : Form_c1_files?
+    var error : String?
+
     
 	init?(map: Map) {
 
@@ -36,17 +37,19 @@ struct FormHrv1AttachmentsRecords : Mappable {
 
 	mutating func mapping(map: Map) {
 
-		file_records_id <- map["file_records_id"]
-		module_key <- map["module_key"]
-		level_keys <- map["level_keys"]
-		file_size <- map["file_size"]
-		file_extension <- map["file_extension"]
-		file_name_en <- map["file_name_en"]
-		file_name_ar <- map["file_name_ar"]
-		user_id_writer <- map["user_id_writer"]
-		created_datetime <- map["created_datetime"]
-		link <- map["link"]
-		writer_name <- map["writer_name"]
+		status <- map["status"]
+		transactions_request <- map["transactions_request"]
+		transactions_date <- map["transactions_date"]
+		transactions_notes <- map["transactions_notes"]
+		transactions_records <- map["transactions_records"]
+		transactions_submitter <- map["transactions_submitter"]
+		transactions_barcode_version <- map["transactions_barcode_version"]
+		transactions_persons <- map["transactions_persons"]
+		transactions_buttons <- map["transactions_buttons"]
+		form_c1_data <- map["form_c1_data"]
+		transactions_extra <- map["transactions_extra"]
+		form_c1_files <- map["form_c1_files"]
+        error <- map["error"]
 	}
 
 }

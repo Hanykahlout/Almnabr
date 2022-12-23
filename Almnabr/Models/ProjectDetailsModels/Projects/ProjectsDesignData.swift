@@ -14,57 +14,72 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct QuotationRecord : Mappable {
-	var projects_quotation_id : String?
-	var transaction_request_id : String?
-	var tbv_count : String?
-	var projects_ps_id : String?
-	var file_records_id : String?
-	var projects_quotation_status : String?
-	var quotation_approval_file_records_id : String?
+struct ProjectsDesignData : Mappable {
+	var project_design_id : String?
+	var projects_work_area_id : String?
+	var projects_design_code : String?
+	var projects_design_status : String?
+	var projects_design_writer : String?
+	var insert_date : String?
+	var user_username : String?
+	var contact_titel : String?
+	var contract_grand_total : String?
+	var contract_vat : String?
+	var contract_net_amount : String?
+	var firstname_english : String?
+	var secondname_english : String?
+	var lastname_english : String?
+	var firstname_arabic : String?
+	var secondname_arabic : String?
+	var lastname_arabic : String?
+	var projects_work_area_code : String?
 	var quotation_subject : String?
 	var quotation_title_english : String?
 	var quotation_title_arabic : String?
-	var quotation_type : String?
 	var quotation_created_date : String?
-	var quotation_approved_date : String?
 	var quotation_grand_total : String?
 	var quotation_tax_amount : String?
 	var quotation_net_amount : String?
-	var quotation_request_user : String?
-	var quotation_rejected_reason : String?
-	var projects_quotation_pdf_file : String?
-	var quotation_approval_receipt : String?
-	var writer : String?
+	var create_project_design : String?
+	var is_can_view : Bool?
+	var is_can_edit : Bool?
+	var is_can_delete : Bool?
 
-    
-    init?(map: Map) {
+	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		projects_quotation_id <- map["projects_quotation_id"]
-		transaction_request_id <- map["transaction_request_id"]
-		tbv_count <- map["tbv_count"]
-		projects_ps_id <- map["projects_ps_id"]
-		file_records_id <- map["file_records_id"]
-		projects_quotation_status <- map["projects_quotation_status"]
-		quotation_approval_file_records_id <- map["quotation_approval_file_records_id"]
+		project_design_id <- map["project_design_id"]
+		projects_work_area_id <- map["projects_work_area_id"]
+		projects_design_code <- map["projects_design_code"]
+		projects_design_status <- map["projects_design_status"]
+		projects_design_writer <- map["projects_design_writer"]
+		insert_date <- map["insert_date"]
+		user_username <- map["user_username"]
+		contact_titel <- map["contact_titel"]
+		contract_grand_total <- map["contract_grand_total"]
+		contract_vat <- map["contract_vat"]
+		contract_net_amount <- map["contract_net_amount"]
+		firstname_english <- map["firstname_english"]
+		secondname_english <- map["secondname_english"]
+		lastname_english <- map["lastname_english"]
+		firstname_arabic <- map["firstname_arabic"]
+		secondname_arabic <- map["secondname_arabic"]
+		lastname_arabic <- map["lastname_arabic"]
+		projects_work_area_code <- map["projects_work_area_code"]
 		quotation_subject <- map["quotation_subject"]
 		quotation_title_english <- map["quotation_title_english"]
 		quotation_title_arabic <- map["quotation_title_arabic"]
-		quotation_type <- map["quotation_type"]
 		quotation_created_date <- map["quotation_created_date"]
-		quotation_approved_date <- map["quotation_approved_date"]
 		quotation_grand_total <- map["quotation_grand_total"]
 		quotation_tax_amount <- map["quotation_tax_amount"]
 		quotation_net_amount <- map["quotation_net_amount"]
-		quotation_request_user <- map["quotation_request_user"]
-		quotation_rejected_reason <- map["quotation_rejected_reason"]
-		projects_quotation_pdf_file <- map["projects_quotation_pdf_file"]
-		quotation_approval_receipt <- map["quotation_approval_receipt"]
-		writer <- map["writer"]
+		create_project_design <- map["create_project_design"]
+		is_can_view <- map["is_can_view"]
+		is_can_edit <- map["is_can_edit"]
+		is_can_delete <- map["is_can_delete"]
 	}
 
 }

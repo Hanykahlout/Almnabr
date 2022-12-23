@@ -163,6 +163,8 @@ class HomeVC: UIViewController   {
     
     
     private func initlization(){
+        TestingIMAP()
+        
         addCalenderView()
         setUpObserver()
         setUpCollectionView()
@@ -194,6 +196,11 @@ class HomeVC: UIViewController   {
         
         projectRequestsStackView.isHidden = true
         observeInboxsLocalNotification()
+    }
+    
+    
+    private func TestingIMAP(){
+        
     }
     
     

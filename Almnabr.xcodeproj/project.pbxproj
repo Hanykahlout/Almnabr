@@ -501,6 +501,16 @@
 		CE5E030628F888D600007EAC /* ProjectRequestsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E030228F888D600007EAC /* ProjectRequestsData.swift */; };
 		CE5E030728F888D600007EAC /* ProjectRequestsSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E030328F888D600007EAC /* ProjectRequestsSetting.swift */; };
 		CE5E030828F888D600007EAC /* ProjectRequestsResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E030428F888D600007EAC /* ProjectRequestsResult.swift */; };
+		CE5E9A1D2950970E00143006 /* ProjectsDesignResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E9A1B2950970E00143006 /* ProjectsDesignResponse.swift */; };
+		CE5E9A1E2950970E00143006 /* ProjectsDesignData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E9A1C2950970E00143006 /* ProjectsDesignData.swift */; };
+		CE5E9A202950DE1800143006 /* ProjectImplementationPhasesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E9A1F2950DE1800143006 /* ProjectImplementationPhasesVC.swift */; };
+		CE5E9A222950DE7100143006 /* ProjectContractorPaymentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E9A212950DE7100143006 /* ProjectContractorPaymentsVC.swift */; };
+		CE5E9A242950DE8700143006 /* TestReportsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E9A232950DE8700143006 /* TestReportsVC.swift */; };
+		CE5E9A262950DED300143006 /* ProjectOwnersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E9A252950DED300143006 /* ProjectOwnersVC.swift */; };
+		CE5E9A282950DF1200143006 /* ProjectRiskManagementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E9A272950DF1200143006 /* ProjectRiskManagementVC.swift */; };
+		CE5E9A2A2950DF3000143006 /* ProjectWafiReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E9A292950DF3000143006 /* ProjectWafiReportVC.swift */; };
+		CE5E9A2C2950DF4600143006 /* ProjectCompletionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E9A2B2950DF4600143006 /* ProjectCompletionVC.swift */; };
+		CE5E9A2E2950DF5C00143006 /* ProjectSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5E9A2D2950DF5C00143006 /* ProjectSettingsVC.swift */; };
 		CE5FD6BC290E858300031270 /* AttendanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FD6BB290E858300031270 /* AttendanceViewController.swift */; };
 		CE5FD6C0290E861700031270 /* AttendanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5FD6BE290E861700031270 /* AttendanceTableViewCell.swift */; };
 		CE5FD6C1290E861700031270 /* AttendanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5FD6BF290E861700031270 /* AttendanceTableViewCell.xib */; };
@@ -518,6 +528,18 @@
 		CE72106A2934C7F500093265 /* Form_ovr1_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210672934C7F400093265 /* Form_ovr1_data.swift */; };
 		CE72106B2934C7F500093265 /* OverTimeDataRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210682934C7F500093265 /* OverTimeDataRecord.swift */; };
 		CE72106D2934C85A00093265 /* Form_ovr1_records.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72106C2934C85A00093265 /* Form_ovr1_records.swift */; };
+		CE7BA2622954D88600ED5FC8 /* C1FormResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA2612954D88600ED5FC8 /* C1FormResponse.swift */; };
+		CE7BA2642954D8C500ED5FC8 /* Form_c1_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA2632954D8C500ED5FC8 /* Form_c1_data.swift */; };
+		CE7BA2662954D8CE00ED5FC8 /* Form_c1_files.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA2652954D8CE00ED5FC8 /* Form_c1_files.swift */; };
+		CE7BA2682954D94500ED5FC8 /* C1FormRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA2672954D94500ED5FC8 /* C1FormRecords.swift */; };
+		CE7BA26A2954DB9900ED5FC8 /* C2FormResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA2692954DB9900ED5FC8 /* C2FormResponse.swift */; };
+		CE7BA26C2954EF5000ED5FC8 /* FormC1File.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA26B2954EF5000ED5FC8 /* FormC1File.swift */; };
+		CE7BA27029561A8900ED5FC8 /* CFormAttachViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA26E29561A8900ED5FC8 /* CFormAttachViewController.swift */; };
+		CE7BA27129561A8900ED5FC8 /* CFormAttachViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BA26F29561A8900ED5FC8 /* CFormAttachViewController.xib */; };
+		CE7BA27429561B9900ED5FC8 /* C1FormAttachTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA27229561B9900ED5FC8 /* C1FormAttachTableViewCell.swift */; };
+		CE7BA27529561B9900ED5FC8 /* C1FormAttachTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BA27329561B9900ED5FC8 /* C1FormAttachTableViewCell.xib */; };
+		CE7BA27829561DC500ED5FC8 /* C2FormAttachTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA27629561DC500ED5FC8 /* C2FormAttachTableViewCell.swift */; };
+		CE7BA27929561DC500ED5FC8 /* C2FormAttachTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BA27729561DC500ED5FC8 /* C2FormAttachTableViewCell.xib */; };
 		CE7BB37B2909786D00BEE4C4 /* CalendarActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BB3792909786D00BEE4C4 /* CalendarActivityTableViewCell.swift */; };
 		CE7BB37C2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7BB37A2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib */; };
 		CE7DE7AD28D8FAEA00DC0CC3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEB0F23428D85BFF006DC4FD /* WidgetKit.framework */; };
@@ -537,6 +559,14 @@
 		CE8571902908239000293977 /* SpamMailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE85718F2908239000293977 /* SpamMailViewController.swift */; };
 		CE864610293CC3D500951CD9 /* AppStoreAppResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86460E293CC3D400951CD9 /* AppStoreAppResponse.swift */; };
 		CE864611293CC3D500951CD9 /* AppStoreAppResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE86460F293CC3D500951CD9 /* AppStoreAppResults.swift */; };
+		CE8BCBE02954755600E79486 /* CommunicationListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BCBDE2954755600E79486 /* CommunicationListsViewController.swift */; };
+		CE8BCBE12954755600E79486 /* CommunicationListsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8BCBDF2954755600E79486 /* CommunicationListsViewController.xib */; };
+		CE8BCBE529547D2D00E79486 /* CommunicationList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BCBE329547D2D00E79486 /* CommunicationList.swift */; };
+		CE8BCBE629547D2D00E79486 /* CommunicationListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BCBE429547D2D00E79486 /* CommunicationListResponse.swift */; };
+		CE8BCBEA295483F200E79486 /* CommuncationListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BCBE8295483F200E79486 /* CommuncationListTableViewCell.swift */; };
+		CE8BCBEB295483F200E79486 /* CommuncationListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8BCBE9295483F200E79486 /* CommuncationListTableViewCell.xib */; };
+		CE8BCBEF2954BAAA00E79486 /* CFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8BCBED2954BAAA00E79486 /* CFormViewController.swift */; };
+		CE8BCBF02954BAAA00E79486 /* CFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8BCBEE2954BAAA00E79486 /* CFormViewController.xib */; };
 		CE8C082D2949FBA300D444A7 /* QuotationRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C082C2949FBA300D444A7 /* QuotationRecord.swift */; };
 		CE8C082F2949FC2C00D444A7 /* QuotationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C082E2949FC2C00D444A7 /* QuotationResponse.swift */; };
 		CE8C0832294A09EB00D444A7 /* QuotationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8C0830294A09EB00D444A7 /* QuotationTableViewCell.swift */; };
@@ -1465,6 +1495,16 @@
 		CE5E030228F888D600007EAC /* ProjectRequestsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRequestsData.swift; sourceTree = "<group>"; };
 		CE5E030328F888D600007EAC /* ProjectRequestsSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRequestsSetting.swift; sourceTree = "<group>"; };
 		CE5E030428F888D600007EAC /* ProjectRequestsResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRequestsResult.swift; sourceTree = "<group>"; };
+		CE5E9A1B2950970E00143006 /* ProjectsDesignResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsDesignResponse.swift; sourceTree = "<group>"; };
+		CE5E9A1C2950970E00143006 /* ProjectsDesignData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsDesignData.swift; sourceTree = "<group>"; };
+		CE5E9A1F2950DE1800143006 /* ProjectImplementationPhasesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectImplementationPhasesVC.swift; sourceTree = "<group>"; };
+		CE5E9A212950DE7100143006 /* ProjectContractorPaymentsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectContractorPaymentsVC.swift; sourceTree = "<group>"; };
+		CE5E9A232950DE8700143006 /* TestReportsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestReportsVC.swift; sourceTree = "<group>"; };
+		CE5E9A252950DED300143006 /* ProjectOwnersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectOwnersVC.swift; sourceTree = "<group>"; };
+		CE5E9A272950DF1200143006 /* ProjectRiskManagementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectRiskManagementVC.swift; sourceTree = "<group>"; };
+		CE5E9A292950DF3000143006 /* ProjectWafiReportVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWafiReportVC.swift; sourceTree = "<group>"; };
+		CE5E9A2B2950DF4600143006 /* ProjectCompletionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCompletionVC.swift; sourceTree = "<group>"; };
+		CE5E9A2D2950DF5C00143006 /* ProjectSettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsVC.swift; sourceTree = "<group>"; };
 		CE5FD6BB290E858300031270 /* AttendanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceViewController.swift; sourceTree = "<group>"; };
 		CE5FD6BE290E861700031270 /* AttendanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceTableViewCell.swift; sourceTree = "<group>"; };
 		CE5FD6BF290E861700031270 /* AttendanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendanceTableViewCell.xib; sourceTree = "<group>"; };
@@ -1482,6 +1522,18 @@
 		CE7210672934C7F400093265 /* Form_ovr1_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_ovr1_data.swift; sourceTree = "<group>"; };
 		CE7210682934C7F500093265 /* OverTimeDataRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverTimeDataRecord.swift; sourceTree = "<group>"; };
 		CE72106C2934C85A00093265 /* Form_ovr1_records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_ovr1_records.swift; sourceTree = "<group>"; };
+		CE7BA2612954D88600ED5FC8 /* C1FormResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C1FormResponse.swift; sourceTree = "<group>"; };
+		CE7BA2632954D8C500ED5FC8 /* Form_c1_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_c1_data.swift; sourceTree = "<group>"; };
+		CE7BA2652954D8CE00ED5FC8 /* Form_c1_files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_c1_files.swift; sourceTree = "<group>"; };
+		CE7BA2672954D94500ED5FC8 /* C1FormRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C1FormRecords.swift; sourceTree = "<group>"; };
+		CE7BA2692954DB9900ED5FC8 /* C2FormResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C2FormResponse.swift; sourceTree = "<group>"; };
+		CE7BA26B2954EF5000ED5FC8 /* FormC1File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormC1File.swift; sourceTree = "<group>"; };
+		CE7BA26E29561A8900ED5FC8 /* CFormAttachViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFormAttachViewController.swift; sourceTree = "<group>"; };
+		CE7BA26F29561A8900ED5FC8 /* CFormAttachViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CFormAttachViewController.xib; sourceTree = "<group>"; };
+		CE7BA27229561B9900ED5FC8 /* C1FormAttachTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C1FormAttachTableViewCell.swift; sourceTree = "<group>"; };
+		CE7BA27329561B9900ED5FC8 /* C1FormAttachTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = C1FormAttachTableViewCell.xib; sourceTree = "<group>"; };
+		CE7BA27629561DC500ED5FC8 /* C2FormAttachTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = C2FormAttachTableViewCell.swift; sourceTree = "<group>"; };
+		CE7BA27729561DC500ED5FC8 /* C2FormAttachTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = C2FormAttachTableViewCell.xib; sourceTree = "<group>"; };
 		CE7BB3792909786D00BEE4C4 /* CalendarActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarActivityTableViewCell.swift; sourceTree = "<group>"; };
 		CE7BB37A2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarActivityTableViewCell.xib; sourceTree = "<group>"; };
 		CE7DE7AC28D8FAEA00DC0CC3 /* LockScreenWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LockScreenWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1500,6 +1552,14 @@
 		CE85718F2908239000293977 /* SpamMailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpamMailViewController.swift; sourceTree = "<group>"; };
 		CE86460E293CC3D400951CD9 /* AppStoreAppResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreAppResponse.swift; sourceTree = "<group>"; };
 		CE86460F293CC3D500951CD9 /* AppStoreAppResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreAppResults.swift; sourceTree = "<group>"; };
+		CE8BCBDE2954755600E79486 /* CommunicationListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunicationListsViewController.swift; sourceTree = "<group>"; };
+		CE8BCBDF2954755600E79486 /* CommunicationListsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommunicationListsViewController.xib; sourceTree = "<group>"; };
+		CE8BCBE329547D2D00E79486 /* CommunicationList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationList.swift; sourceTree = "<group>"; };
+		CE8BCBE429547D2D00E79486 /* CommunicationListResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunicationListResponse.swift; sourceTree = "<group>"; };
+		CE8BCBE8295483F200E79486 /* CommuncationListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommuncationListTableViewCell.swift; sourceTree = "<group>"; };
+		CE8BCBE9295483F200E79486 /* CommuncationListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommuncationListTableViewCell.xib; sourceTree = "<group>"; };
+		CE8BCBED2954BAAA00E79486 /* CFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFormViewController.swift; sourceTree = "<group>"; };
+		CE8BCBEE2954BAAA00E79486 /* CFormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CFormViewController.xib; sourceTree = "<group>"; };
 		CE8C082C2949FBA300D444A7 /* QuotationRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotationRecord.swift; sourceTree = "<group>"; };
 		CE8C082E2949FC2C00D444A7 /* QuotationResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuotationResponse.swift; sourceTree = "<group>"; };
 		CE8C0830294A09EB00D444A7 /* QuotationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotationTableViewCell.swift; sourceTree = "<group>"; };
@@ -1984,6 +2044,7 @@
 		3F31ADEB288D36A500E2D8D6 /* Transactions */ = {
 			isa = PBXGroup;
 			children = (
+				CE8BCBEC2954B37F00E79486 /* CForm */,
 				CE69028C2942223100C977B8 /* JobOfferViewController */,
 				CEA27DEE2937709000542F57 /* DeductionViewController */,
 				CEA27DE42937684200542F57 /* ViolationViewController */,
@@ -3007,6 +3068,8 @@
 			children = (
 				CE1F02CC2948A7A300CEFDC9 /* ProjectServicesRecord.swift */,
 				CE1F02CD2948A7A300CEFDC9 /* ProjectServicesResponse.swift */,
+				CE5E9A1C2950970E00143006 /* ProjectsDesignData.swift */,
+				CE5E9A1B2950970E00143006 /* ProjectsDesignResponse.swift */,
 			);
 			path = Projects;
 			sourceTree = "<group>";
@@ -3220,6 +3283,15 @@
 			path = OvertimeModels;
 			sourceTree = "<group>";
 		};
+		CE7BA26D29561A7300ED5FC8 /* CFormAttachViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CE7BA26E29561A8900ED5FC8 /* CFormAttachViewController.swift */,
+				CE7BA26F29561A8900ED5FC8 /* CFormAttachViewController.xib */,
+			);
+			path = CFormAttachViewController;
+			sourceTree = "<group>";
+		};
 		CE7DE7AF28D8FAEA00DC0CC3 /* LockScreenWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -3262,6 +3334,53 @@
 				CE86460F293CC3D500951CD9 /* AppStoreAppResults.swift */,
 			);
 			path = AppStoreAppModel;
+			sourceTree = "<group>";
+		};
+		CE8BCBDD295474E500E79486 /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				CE8BCBDE2954755600E79486 /* CommunicationListsViewController.swift */,
+				CE8BCBDF2954755600E79486 /* CommunicationListsViewController.xib */,
+			);
+			path = Communication;
+			sourceTree = "<group>";
+		};
+		CE8BCBE229547D1F00E79486 /* CommunicationModels */ = {
+			isa = PBXGroup;
+			children = (
+				CE8BCBE329547D2D00E79486 /* CommunicationList.swift */,
+				CE8BCBE429547D2D00E79486 /* CommunicationListResponse.swift */,
+				CE7BA2612954D88600ED5FC8 /* C1FormResponse.swift */,
+				CE7BA2632954D8C500ED5FC8 /* Form_c1_data.swift */,
+				CE7BA2652954D8CE00ED5FC8 /* Form_c1_files.swift */,
+				CE7BA2672954D94500ED5FC8 /* C1FormRecords.swift */,
+				CE7BA2692954DB9900ED5FC8 /* C2FormResponse.swift */,
+				CE7BA26B2954EF5000ED5FC8 /* FormC1File.swift */,
+			);
+			path = CommunicationModels;
+			sourceTree = "<group>";
+		};
+		CE8BCBE7295483C700E79486 /* CommuncationTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE8BCBE8295483F200E79486 /* CommuncationListTableViewCell.swift */,
+				CE8BCBE9295483F200E79486 /* CommuncationListTableViewCell.xib */,
+				CE7BA27229561B9900ED5FC8 /* C1FormAttachTableViewCell.swift */,
+				CE7BA27329561B9900ED5FC8 /* C1FormAttachTableViewCell.xib */,
+				CE7BA27629561DC500ED5FC8 /* C2FormAttachTableViewCell.swift */,
+				CE7BA27729561DC500ED5FC8 /* C2FormAttachTableViewCell.xib */,
+			);
+			path = CommuncationTableViewCell;
+			sourceTree = "<group>";
+		};
+		CE8BCBEC2954B37F00E79486 /* CForm */ = {
+			isa = PBXGroup;
+			children = (
+				CE7BA26D29561A7300ED5FC8 /* CFormAttachViewController */,
+				CE8BCBED2954BAAA00E79486 /* CFormViewController.swift */,
+				CE8BCBEE2954BAAA00E79486 /* CFormViewController.xib */,
+			);
+			path = CForm;
 			sourceTree = "<group>";
 		};
 		CE9FE3102934EB440008CECA /* BonusViewController */ = {
@@ -3335,6 +3454,7 @@
 			isa = PBXGroup;
 			children = (
 				CE6ABE35291C05BD00CFEA36 /* SettingsVCs */,
+				CE8BCBDD295474E500E79486 /* Communication */,
 			);
 			path = MenuVC;
 			sourceTree = "<group>";
@@ -3564,6 +3684,7 @@
 		FA03245B26FB9E0300372EA6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CE8BCBE229547D1F00E79486 /* CommunicationModels */,
 				CE1F02BF294895FA00CEFDC9 /* ProjectDetailsModels */,
 				CE5C4B64294257EC00DF67CE /* JobOfferModel */,
 				CE3D956F293F692500D04709 /* JobApplicationModel */,
@@ -3699,6 +3820,14 @@
 				FA35CE4D271F572500FF6AE4 /* TeamUserVC.swift */,
 				FA35CE4F27209BE200FF6AE4 /* ContactsVC.swift */,
 				FA35CE512720BA2700FF6AE4 /* DocumentsVC.swift */,
+				CE5E9A1F2950DE1800143006 /* ProjectImplementationPhasesVC.swift */,
+				CE5E9A212950DE7100143006 /* ProjectContractorPaymentsVC.swift */,
+				CE5E9A232950DE8700143006 /* TestReportsVC.swift */,
+				CE5E9A252950DED300143006 /* ProjectOwnersVC.swift */,
+				CE5E9A272950DF1200143006 /* ProjectRiskManagementVC.swift */,
+				CE5E9A292950DF3000143006 /* ProjectWafiReportVC.swift */,
+				CE5E9A2B2950DF4600143006 /* ProjectCompletionVC.swift */,
+				CE5E9A2D2950DF5C00143006 /* ProjectSettingsVC.swift */,
 			);
 			name = SuperVvsionOperation;
 			sourceTree = "<group>";
@@ -3939,6 +4068,7 @@
 		FAC32FB22708C8CB0046A0F6 /* TableCell */ = {
 			isa = PBXGroup;
 			children = (
+				CE8BCBE7295483C700E79486 /* CommuncationTableViewCell */,
 				CEA3A087291A9BB400F79E3C /* MenuSettingsCell */,
 				CECED94C291033A60000716E /* MailCells */,
 				CE5FD6BD290E860B00031270 /* Attendance */,
@@ -4307,6 +4437,7 @@
 				3F07C075286D8FC300C2CDF6 /* InsuranceTVCell.xib in Resources */,
 				3FD03A2B287437B000BB13C7 /* ViewEmpEducationDetailsVC.strings in Resources */,
 				CE54B2D728F5C55300972D6D /* TopCountRequestsTableViewCell.xib in Resources */,
+				CE8BCBF02954BAAA00E79486 /* CFormViewController.xib in Resources */,
 				FA7F941427D77AC100E03A34 /* MyTrannsactionTVCell.xib in Resources */,
 				3FD039D8287437B000BB13C7 /* ViewEmpLangVacationsVC.xib in Resources */,
 				3FD039E7287437B000BB13C7 /* RequestDetailsViewController.strings in Resources */,
@@ -4326,9 +4457,11 @@
 				3FD03A36287437B000BB13C7 /* ContactDetailsViewController.strings in Resources */,
 				CEE57BD528F759FE00CA16D8 /* SelectTemplete2ViewController.xib in Resources */,
 				3FD03A12287437B000BB13C7 /* ViewEmpAttachmentsVC.strings in Resources */,
+				CE8BCBE12954755600E79486 /* CommunicationListsViewController.xib in Resources */,
 				3F76506F2850917D00FB8A97 /* SectionCollectionViewCell.xib in Resources */,
 				CE7BB37C2909786D00BEE4C4 /* CalendarActivityTableViewCell.xib in Resources */,
 				FA7F941827D782E900E03A34 /* ApprovalTVCell.xib in Resources */,
+				CE8BCBEB295483F200E79486 /* CommuncationListTableViewCell.xib in Resources */,
 				3F07C0B6286D966400C2CDF6 /* NotificationCell.xib in Resources */,
 				3FD03A7B2874492000BB13C7 /* Main.storyboard in Resources */,
 				CEF8187B292FAC2400026B33 /* AddReviewerViewController.xib in Resources */,
@@ -4361,6 +4494,7 @@
 				3FD03A03287437B000BB13C7 /* UsersViewController.xib in Resources */,
 				FA658B26274404DA001FC641 /* AttachmentsCell.xib in Resources */,
 				3F5ABA9228B4F698005E1A7A /* NewContractVC.xib in Resources */,
+				CE7BA27929561DC500ED5FC8 /* C2FormAttachTableViewCell.xib in Resources */,
 				3FD03A34287437B000BB13C7 /* IDDetailsViewController.strings in Resources */,
 				FA4975AC2793659600891C9F /* DropDownView.xib in Resources */,
 				3FD039DF287437B000BB13C7 /* ViewEmpPassportDetailsVC.xib in Resources */,
@@ -4436,6 +4570,7 @@
 				3FD039EF287437B000BB13C7 /* OutgoingAttachViewController.xib in Resources */,
 				FA5C977328170FA200A2AA5A /* TaskTVCell.xib in Resources */,
 				3FD03A5F28743CAA00BB13C7 /* GoogleService-Info.plist in Resources */,
+				CE7BA27529561B9900ED5FC8 /* C1FormAttachTableViewCell.xib in Resources */,
 				3F9040D0286CB115008D85B8 /* AddInsuranceTableViewCell.xib in Resources */,
 				3FD039E3287437B000BB13C7 /* ViewEmpCommunicationsVC.xib in Resources */,
 				3F07C0B1286D963800C2CDF6 /* ProjectRequestTVCell.xib in Resources */,
@@ -4472,6 +4607,7 @@
 				3F07C066286D8EAD00C2CDF6 /* JobDetailsTVCell.xib in Resources */,
 				CEB1D42928F6D6A4007D2A8A /* ContentCollectionViewCell.xib in Resources */,
 				3FD03A1B287437B000BB13C7 /* ViewEmpContactDetailsVC.xib in Resources */,
+				CE7BA27129561A8900ED5FC8 /* CFormAttachViewController.xib in Resources */,
 				3F1F4049287E0F5900F919F0 /* QRScannerViewController.xib in Resources */,
 				3FD03A20287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.strings in Resources */,
 				3FF6EDB6284B72450003E6F4 /* UsersCollectionViewCell.xib in Resources */,
@@ -4687,10 +4823,14 @@
 				3FB1C5352899892700E6EDB1 /* DeleteCommentResponse.swift in Sources */,
 				FA9768B227353DDD000A3576 /* CollectionViewCell.swift in Sources */,
 				FA9FB0A0271447EA0037871C /* ProjectDetailsVC.swift in Sources */,
+				CE8BCBE02954755600E79486 /* CommunicationListsViewController.swift in Sources */,
 				CE0FD9E92905A0EE00170382 /* No_settings.swift in Sources */,
 				FA8A75A6273DB1C1005A2F29 /* FormVersionCell.swift in Sources */,
+				CE5E9A262950DED300143006 /* ProjectOwnersVC.swift in Sources */,
 				CEBC600B29262C7F00585EDB /* JobDetailsShowVC.swift in Sources */,
+				CE8BCBEF2954BAAA00E79486 /* CFormViewController.swift in Sources */,
 				CEF8187A292FAC2400026B33 /* AddReviewerViewController.swift in Sources */,
+				CE7BA2682954D94500ED5FC8 /* C1FormRecords.swift in Sources */,
 				3FD039F9287437B000BB13C7 /* ViewEmpNotesVC.swift in Sources */,
 				FA48C312286AF80B006B8130 /* AddPointVC.swift in Sources */,
 				3FD03A4D287437B000BB13C7 /* SettingsUpdateViewController.swift in Sources */,
@@ -4716,6 +4856,7 @@
 				FA78EA1027D284DA0023E48D /* SupervisionOperationDetailsVC.swift in Sources */,
 				FAF9D441278DEB70002D8AEF /* ProjectRequestVC.swift in Sources */,
 				3F9D67B728BB8D1A0035FE59 /* CheckListItemUsers.swift in Sources */,
+				CE5E9A1E2950970E00143006 /* ProjectsDesignData.swift in Sources */,
 				3FD039F5287437B000BB13C7 /* RequestDetailsViewController.swift in Sources */,
 				3F524757284FCE8D0081EBC6 /* FilterInfo.swift in Sources */,
 				3F14366C28489EB6008ABC19 /* Page.swift in Sources */,
@@ -4765,6 +4906,7 @@
 				3F1436962848A120008ABC19 /* UILabelDesignable.swift in Sources */,
 				3FD03A45287437B000BB13C7 /* IDDetailsViewController.swift in Sources */,
 				FA9DF8D72815979A0015D492 /* TicketCollectionViewController.swift in Sources */,
+				CE7BA2642954D8C500ED5FC8 /* Form_c1_data.swift in Sources */,
 				FAAF206727DCEF9400AD255B /* RelatedFormsTVCell.swift in Sources */,
 				CEF81872292FA9A200026B33 /* PayRoleReviewersRecord.swift in Sources */,
 				CE6ABE39291C05EA00CFEA36 /* ChangePasswordViewController.swift in Sources */,
@@ -4831,6 +4973,7 @@
 				FAAF205527DA121000AD255B /* FormTransactionTVCell.swift in Sources */,
 				FAD53143276D190500C8E2AD /* FormVersionsVC.swift in Sources */,
 				3F5ABA9128B4F698005E1A7A /* NewContractVC.swift in Sources */,
+				CE8BCBE529547D2D00E79486 /* CommunicationList.swift in Sources */,
 				3F9D67AE28BB55590035FE59 /* CheckListItemFile.swift in Sources */,
 				3F43359D286393F7002C282C /* SearchUserResponse.swift in Sources */,
 				FA534A662806000D008814A9 /* ProfileContactTVCell.swift in Sources */,
@@ -4868,7 +5011,9 @@
 				3FD03A4E287437B000BB13C7 /* SettingViewController.swift in Sources */,
 				CE0FD9D7290581F800170382 /* CalenderActivityLog.swift in Sources */,
 				CEA27DED29376FF700542F57 /* Form_det1_data.swift in Sources */,
+				CE7BA26C2954EF5000ED5FC8 /* FormC1File.swift in Sources */,
 				CEBAAA502912B6C40066B818 /* ShiftsRecords.swift in Sources */,
+				CE5E9A242950DE8700143006 /* TestReportsVC.swift in Sources */,
 				CE5C4B66294257FE00DF67CE /* JobOfferResponse.swift in Sources */,
 				FA95FD0B275EFE1E00DE7854 /* ContractorTeamApprovalVC.swift in Sources */,
 				3F397D872860C1F000A7DAB4 /* AttachmentRecords.swift in Sources */,
@@ -4882,6 +5027,7 @@
 				FA95FD15275EFE7C00DE7854 /* RecipientVerificationVC.swift in Sources */,
 				3F33D12928CDDA8B006B7744 /* Dash_Employee_info.swift in Sources */,
 				FA5CB10D27D2183F0023A372 /* Shaddow.swift in Sources */,
+				CE7BA2662954D8CE00ED5FC8 /* Form_c1_files.swift in Sources */,
 				3FEB890428ABA1D4009CA353 /* DocumentsResponse.swift in Sources */,
 				3FF04B9B28BFB30B005B82DC /* ContractData.swift in Sources */,
 				3F14368B2848A120008ABC19 /* BottomBorderTextField.swift in Sources */,
@@ -4960,6 +5106,7 @@
 				3FA3386F2858A90E00194AC6 /* JopDetailsTableViewCell.swift in Sources */,
 				FA03242826FB9BFA00372EA6 /* SceneDelegate.swift in Sources */,
 				3FD039F2287437B000BB13C7 /* OngoingViewDetailsViewController.swift in Sources */,
+				CE7BA27429561B9900ED5FC8 /* C1FormAttachTableViewCell.swift in Sources */,
 				3FAA84E2288E904D003A437E /* Transactions_recordsVD.swift in Sources */,
 				3F9ADB01285F1C9B00D68791 /* InsuranceGetResponse.swift in Sources */,
 				CE08040729250F6A00B45097 /* ContractDetailsOptionsVC.swift in Sources */,
@@ -4990,8 +5137,10 @@
 				FA85D020280D74900080A0EA /* AllTicketVC.swift in Sources */,
 				3FB305DD2868702500CAC16F /* Transactions_persons.swift in Sources */,
 				3FB305AF28684C6A00CAC16F /* ModuleUersResponse.swift in Sources */,
+				CE5E9A2E2950DF5C00143006 /* ProjectSettingsVC.swift in Sources */,
 				3FEAAE3228B622D80093815D /* TransactionsContractSubmitter.swift in Sources */,
 				CE1F02C52948960D00CEFDC9 /* ProjectDetilasData.swift in Sources */,
+				CE5E9A2A2950DF3000143006 /* ProjectWafiReportVC.swift in Sources */,
 				3F159CB228AEAA00002824BE /* DocAttachsResponse.swift in Sources */,
 				CEB1D42528F6D5E5007D2A8A /* CustomCollectionViewLayout.swift in Sources */,
 				FA3D32B227343B5D00A5472A /* GeneralNumberVC.swift in Sources */,
@@ -5065,6 +5214,7 @@
 				FA7F941727D782E900E03A34 /* ApprovalTVCell.swift in Sources */,
 				FA7F941327D77AC100E03A34 /* MyTrannsactionTVCell.swift in Sources */,
 				3FD03A18287437B000BB13C7 /* AddEmpContactViewController.swift in Sources */,
+				CE5E9A202950DE1800143006 /* ProjectImplementationPhasesVC.swift in Sources */,
 				CE69028F2942224F00C977B8 /* JobOfferViewController.swift in Sources */,
 				3FD1C5FA284E383100A42DAA /* SelectionInfo.swift in Sources */,
 				CE58A5F328FEE9D20078F721 /* Config.swift in Sources */,
@@ -5109,6 +5259,7 @@
 				CE0D05E2292A6FD50058344B /* LoanFormResponse.swift in Sources */,
 				3FF3968C28995C3B00E1322D /* CommentsResponse.swift in Sources */,
 				CE0FD9E52905A0EE00170382 /* Employee_data.swift in Sources */,
+				CE8BCBEA295483F200E79486 /* CommuncationListTableViewCell.swift in Sources */,
 				CE1F02C92948960D00CEFDC9 /* Service_user_data.swift in Sources */,
 				FA9E7D8D270F39DC003A1D16 /* ApprovalTransactionCell.swift in Sources */,
 				3FAD7A252850F5E20063B15E /* BanksResponse.swift in Sources */,
@@ -5125,6 +5276,7 @@
 				CEBDF43928F9DCFC0094247E /* ProgressPlanedRatioData.swift in Sources */,
 				3FD03A51287437B000BB13C7 /* SettingsAlertViewController.swift in Sources */,
 				3F31ADEE288D370700E2D8D6 /* VactionViewController.swift in Sources */,
+				CE7BA27829561DC500ED5FC8 /* C2FormAttachTableViewCell.swift in Sources */,
 				FAA88ED2282B0D730082432F /* TaskCommentCell.swift in Sources */,
 				FABF3632276AA06F0029810D /* NotesCell.swift in Sources */,
 				CE72106A2934C7F500093265 /* Form_ovr1_data.swift in Sources */,
@@ -5137,6 +5289,7 @@
 				3FD039EB287437B000BB13C7 /* OutgoingHistoryViewController.swift in Sources */,
 				3FAA84DE288E904D003A437E /* TransactionsPersons.swift in Sources */,
 				3FD039F6287437B000BB13C7 /* ViewEmpCommunicationsVC.swift in Sources */,
+				CE8BCBE629547D2D00E79486 /* CommunicationListResponse.swift in Sources */,
 				3FB305D62868702500CAC16F /* Transactions_notes.swift in Sources */,
 				3FA2080328AE7D7500845910 /* DocAttachTableViewCell.swift in Sources */,
 				CE1AB6CD292BAA0000C4913C /* TextFieldWithPadding.swift in Sources */,
@@ -5147,6 +5300,7 @@
 				3F29C8FB2886FC530011AF97 /* FinanceInfoViewController.swift in Sources */,
 				FA55637B279CA86800542310 /* SubFilterVC.swift in Sources */,
 				CE0D05E4292A6FD50058344B /* Form_hrln1_data.swift in Sources */,
+				CE5E9A2C2950DF4600143006 /* ProjectCompletionVC.swift in Sources */,
 				3F1436952848A120008ABC19 /* GraidentView.swift in Sources */,
 				3FF6EDA7284B4DE00003E6F4 /* UpdateSettingResponse.swift in Sources */,
 				CE85718229081CAA00293977 /* InboxMailViewController.swift in Sources */,
@@ -5208,6 +5362,7 @@
 				FA5C977228170FA200A2AA5A /* TaskTVCell.swift in Sources */,
 				3F87BCD2284903060031098B /* MainData.swift in Sources */,
 				FA7A93D427FF05CB00EF6ECC /* VacationFormCell.swift in Sources */,
+				CE7BA26A2954DB9900ED5FC8 /* C2FormResponse.swift in Sources */,
 				FAD333A427135EEF0093175E /* AllPrpjectsVC.swift in Sources */,
 				FA9FB0A627163F0D0037871C /* ServicesCVCell.swift in Sources */,
 				3F7462992886A30F00C19474 /* VactionTypesResponse.swift in Sources */,
@@ -5231,6 +5386,7 @@
 				3F33D12828CDDA8B006B7744 /* Extra_data.swift in Sources */,
 				3FD03A5B28743AE100BB13C7 /* CommentRepltTableViewCell.swift in Sources */,
 				FA78EA1327D2B01A0023E48D /* ProjectRequestTVCell.swift in Sources */,
+				CE7BA2622954D88600ED5FC8 /* C1FormResponse.swift in Sources */,
 				3FD039F1287437B000BB13C7 /* OutgoingAttachViewController.swift in Sources */,
 				FAA3A09828083A6200B87DAD /* ModulesUserVC.swift in Sources */,
 				3FB305D22868702500CAC16F /* transactions_extraRecords.swift in Sources */,
@@ -5252,6 +5408,8 @@
 				FA9E7D84270E4620003A1D16 /* GridLayout.swift in Sources */,
 				CECED941290FF03D0000716E /* UsersSearchView.swift in Sources */,
 				3FD03A29287437B000BB13C7 /* ViewLangCalenderVC.swift in Sources */,
+				CE7BA27029561A8900ED5FC8 /* CFormAttachViewController.swift in Sources */,
+				CE5E9A282950DF1200143006 /* ProjectRiskManagementVC.swift in Sources */,
 				CEA27DE32937675B00542F57 /* Form_vol1_attachments.swift in Sources */,
 				3F935E4F285A1F8800D7B779 /* EducationDetailsTableViewCell.swift in Sources */,
 				3FF3968D28995C3B00E1322D /* CommentDataResponse.swift in Sources */,
@@ -5261,9 +5419,11 @@
 				3FAA84D8288E904D003A437E /* Transactions_personsVD.swift in Sources */,
 				CEFE3B922900634700119A55 /* UsedUnusedReportResponse.swift in Sources */,
 				FAF7623428300262000DEAFE /* CheckListCell.swift in Sources */,
+				CE5E9A222950DE7100143006 /* ProjectContractorPaymentsVC.swift in Sources */,
 				3FAA84E1288E904D003A437E /* FormHrv1AttachmentsRecords.swift in Sources */,
 				3F48C54128589439004D33F8 /* GetImageResponse.swift in Sources */,
 				3F1F94E1286C3D6E00E454BF /* L102Localizer.swift in Sources */,
+				CE5E9A1D2950970E00143006 /* ProjectsDesignResponse.swift in Sources */,
 				3FD03A33287437B000BB13C7 /* EditEmployeePageViewController.swift in Sources */,
 				3F33D12628CDDA8B006B7744 /* DashboardResponse.swift in Sources */,
 				FAC32FB62708C91D0046A0F6 /* TransactionTVCell.swift in Sources */,
@@ -6544,7 +6704,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.13;
+				MARKETING_VERSION = 14.0.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6574,7 +6734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.13;
+				MARKETING_VERSION = 14.0.14;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

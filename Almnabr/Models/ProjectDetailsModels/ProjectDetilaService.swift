@@ -23,7 +23,7 @@ struct ProjectDetilaService : Mappable {
 	var projects_services_name_en : String?
 	var projects_services_name_ar : String?
 	var projects_services_code : String?
-
+    var isSelected = false
 	init?(map: Map) {
 
 	}

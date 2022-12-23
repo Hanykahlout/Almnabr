@@ -14,39 +14,34 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct FormHrv1AttachmentsRecords : Mappable {
-	var file_records_id : String?
-	var module_key : String?
-	var level_keys : String?
-	var file_size : String?
-	var file_extension : String?
-	var file_name_en : String?
-	var file_name_ar : String?
-	var user_id_writer : String?
-	var created_datetime : String?
-	var link : String?
-	var writer_name : String?
-    
-    
-    
-    
+struct C1FormRecords : Mappable {
+	var form_c1_data_id : String?
+	var transaction_key : String?
+	var transaction_request_id : String?
+	var subject : String?
+	var content : String?
+	var attachment : String?
+	var transaction_from : String?
+	var transaction_to : String?
+	var transaction_from_name : String?
+	var transaction_to_name : String?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		file_records_id <- map["file_records_id"]
-		module_key <- map["module_key"]
-		level_keys <- map["level_keys"]
-		file_size <- map["file_size"]
-		file_extension <- map["file_extension"]
-		file_name_en <- map["file_name_en"]
-		file_name_ar <- map["file_name_ar"]
-		user_id_writer <- map["user_id_writer"]
-		created_datetime <- map["created_datetime"]
-		link <- map["link"]
-		writer_name <- map["writer_name"]
+		form_c1_data_id <- map["form_c1_data_id"]
+		transaction_key <- map["transaction_key"]
+		transaction_request_id <- map["transaction_request_id"]
+		subject <- map["subject"]
+		content <- map["content"]
+		attachment <- map["attachment"]
+		transaction_from <- map["transaction_from"]
+		transaction_to <- map["transaction_to"]
+		transaction_from_name <- map["transaction_from_name"]
+		transaction_to_name <- map["transaction_to_name"]
 	}
 
 }

@@ -22,17 +22,31 @@ class MyPageViewController: UIPageViewController {
        
         self.isPagingEnabled = false
         
-        let page1: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "FromTransactionVC")
-        let page2: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "TeamUserVC")
-        
-        let page3: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "ContactsVC")
-        let page4: UIViewController! = storyboard?.instantiateViewController(withIdentifier: "DocumentsVC")
-        
+        let page1 = storyboard!.instantiateViewController(withIdentifier: "FromTransactionVC") as! FromTransactionVC
+        let page2 = storyboard!.instantiateViewController(withIdentifier: "TeamUserVC") as! TeamUserVC
+        let page3 = storyboard!.instantiateViewController(withIdentifier: "ProjectImplementationPhasesVC")
+        let page4 = storyboard!.instantiateViewController(withIdentifier: "ProjectContractorPaymentsVC") as! ProjectContractorPaymentsVC
+        let page5 = storyboard!.instantiateViewController(withIdentifier: "DocumentsVC") as! DocumentsVC
+        let page6 = storyboard!.instantiateViewController(withIdentifier: "TestReportsVC") as! TestReportsVC
+        let page7 = storyboard!.instantiateViewController(withIdentifier: "ContactsVC") as! ContactsVC
+        let page8 = storyboard!.instantiateViewController(withIdentifier: "ProjectOwnersVC") as! ProjectOwnersVC
+        let page9 = storyboard!.instantiateViewController(withIdentifier: "ProjectRiskManagementVC") as! ProjectRiskManagementVC
+        let page10 = storyboard!.instantiateViewController(withIdentifier: "ProjectWafiReportVC") as! ProjectWafiReportVC
+        let page11 = storyboard!.instantiateViewController(withIdentifier: "ProjectCompletionVC") as! ProjectCompletionVC
+        let page12 = storyboard!.instantiateViewController(withIdentifier: "ProjectSettingsVC") as! ProjectSettingsVC
         
         pages.append(page1)
         pages.append(page2)
         pages.append(page3)
         pages.append(page4)
+        pages.append(page5)
+        pages.append(page6)
+        pages.append(page7)
+        pages.append(page8)
+        pages.append(page9)
+        pages.append(page10)
+        pages.append(page11)
+        pages.append(page12)
         
         setViewControllers([page1], direction: .forward, animated: false, completion: nil)
         
@@ -75,7 +89,7 @@ class MyPageViewController: UIPageViewController {
 extension MyPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
-        let currentIndex = pages.index(of: viewController)!
+        let currentIndex = pages.firstIndex(of: viewController)!
         
         // This version will not allow pages to wrap around
         guard currentIndex > 0 else {
@@ -87,7 +101,7 @@ extension MyPageViewController: UIPageViewControllerDataSource {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        let currentIndex = pages.index(of: viewController)!
+        let currentIndex = pages.firstIndex(of: viewController)!
         
         // This version will not allow pages to wrap around
         guard currentIndex < pages.count - 1 else {

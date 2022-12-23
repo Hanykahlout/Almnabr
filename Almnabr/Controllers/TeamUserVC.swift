@@ -63,20 +63,7 @@ class TeamUserVC: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        // Hide the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
-    }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        // Show the Navigation Bar
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    // MARK: - Config Navigation
     func configNavigation() {
         _ = self.navigationController?.preferredStatusBarStyle
         self.view.backgroundColor = "FFFFFF".getUIColor() //F0F4F8
@@ -84,14 +71,7 @@ class TeamUserVC: UIViewController {
         
         addNavigationBarTitle(navigationTitle: StrTitle)
     }
-//    override func viewDidLayoutSubviews() {
-//        tableHeightConstraint.constant = table.contentSize.height
-//        
-//    }
     
-    
-    //MARK: - Config GUI
-    //------------------------------------------------------
     func configGUI() {
         
         
@@ -228,40 +208,6 @@ class TeamUserVC: UIViewController {
         }
         self.present(vc, animated: true, completion: nil)
         
-//        self.imgDropPosition.image = dropUpmage
-//        let dropDown = DropDown()
-//        dropDown.anchorView = view
-//        dropDown.backgroundColor = .white
-//        dropDown.cornerRadius = 2.0
-//
-//
-//        if self.arr_PositionLabel.count == 0 {
-//            dropDown.dataSource = self.arr_NoData
-//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//                self.imgDropPosition.image = dropDownmage
-//            }
-//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//        }else{
-//        dropDown.dataSource = self.arr_PositionLabel
-//        dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//
-//            if item == self.arr_PositionLabel[index] {
-//                self.lblPosition.text =  item
-//                let i =  self.arr_Position[index]
-//                self.StrPosition = i.value
-//                self.btnPosition.isHidden = false
-//                self.imgDropPosition.image = dropDownmage
-//                get_TeamUsers_data(showLoading: true, loadOnly: true)
-//
-//            }
-//
-//        }}
-//
-//        dropDown.direction = .bottom
-//        dropDown.anchorView = viewPosition
-//        dropDown.bottomOffset = CGPoint(x: 0, y: viewPosition.bounds.height)
-//        dropDown.width = viewPosition.bounds.width
-//        dropDown.show()
     }
     
     

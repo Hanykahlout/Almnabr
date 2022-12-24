@@ -315,6 +315,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
                                     vc.transactionId = last
                                     window.rootViewController = UINavigationController(rootViewController: vc)
                                 }
+                            }else if ios.contains("FORM_C2"){
+                                if let last = requestArr.last{
+                                    let vc = CFormViewController()
+                                    vc.isOutging = false
+                                    vc.transactionId = last
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
+                            }else if ios.contains("FORM_C1"){
+                                if let last = requestArr.last{
+                                    let vc = CFormViewController()
+                                    vc.isOutging = true
+                                    vc.transactionId = last
+                                    window.rootViewController = UINavigationController(rootViewController: vc)
+                                }
                             }
                             
                         }else if  ios.contains("task") {

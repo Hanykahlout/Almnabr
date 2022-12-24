@@ -3708,11 +3708,11 @@
 			isa = PBXGroup;
 			children = (
 				FA7BD97F282931CE00EF1020 /* Home */,
+				FAD0749A274D4C5000B9C7B3 /* Notification */,
 				CE857179290800F600293977 /* MailVC */,
 				CE5FD6BA290E856400031270 /* Attendance */,
 				FA85D01E280D746B0080A0EA /* Tasks */,
 				FABDBA8027F2F99B003961FC /* Profile */,
-				FAD0749A274D4C5000B9C7B3 /* Notification */,
 				FA3D32B027343AEE00A5472A /* PresentVC */,
 				FAD333A227135EC80093175E /* Projects */,
 				FAC32FB02708B1480046A0F6 /* Transaction */,
@@ -6704,7 +6704,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.14;
+				MARKETING_VERSION = 14.0.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6734,7 +6734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.14;
+				MARKETING_VERSION = 14.0.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -224,6 +224,7 @@ class JobOfferViewController: UIViewController {
         let vc = SendCodeWaysVC()
         vc.id = transactionId
         vc.approvalStep = approvalStep
+        vc.type = "signature"
         let nav = UINavigationController(rootViewController: vc)
         nav.setNavigationBarHidden(true, animated: false)
         nav.modalPresentationStyle = .overCurrentContext

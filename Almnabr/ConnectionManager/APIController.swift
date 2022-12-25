@@ -3546,18 +3546,59 @@ class APIController{
         }
     }
     
-    func showContentPreview(extraVal:String,callback: @escaping (_ data:GetImageResponse)->Void){
-
-        let strURL = "\(serverURL)/\(extraVal)"
+    func deleteCForm(formType:String,transactionId:String,callback: @escaping (_ data:UpdateSettingResponse)->Void){
+        
+        let strURL = "\(serverURL)/form/\(formType)/dr"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
         
-        Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
+        let param = [
+            "transaction_request_id": transactionId
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: param ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                     
-                if let parsedMapperString : GetImageResponse = Mapper<GetImageResponse>().map(JSONString:str){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    func doVerification(param:[String:Any],callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+        let strURL = "\(serverURL)/tc/sender/complete_action"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: param ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                    
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func approveCForm(formType:String,transactionId:String,user_pass:String,callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+        let strURL = "\(serverURL)/form/\(formType)/cm"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        let param = [
+            "transaction_request_id": transactionId,
+            "user_pass":user_pass
+        ]
+        Alamofire.request(strURL, method: .post,parameters: param ,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                    
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
             }

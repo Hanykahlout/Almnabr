@@ -22,10 +22,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SendCodeWaysVC" customModule="Almnabr" customModuleProvider="target">
             <connections>
                 <outlet property="closeButton" destination="WCt-2h-Vm6" id="f1A-5e-w6X"/>
+                <outlet property="codeFieldStackView" destination="Xxu-Kl-nqk" id="WMS-u7-55L"/>
                 <outlet property="sendCodeButton" destination="RyU-gD-Fpj" id="CSe-e0-4h5"/>
                 <outlet property="tableView" destination="erG-Qg-wUM" id="hsf-9A-IXg"/>
                 <outlet property="tableViewHeight" destination="vGB-Oq-FKw" id="wnf-Rv-CtH"/>
                 <outlet property="transactionDataLabel" destination="OZj-98-vI1" id="C1Z-ds-Xg0"/>
+                <outlet property="verificationButton" destination="cpJ-Zw-B7y" id="5l9-fn-bHc"/>
+                <outlet property="verificationTextField" destination="RQ7-ju-3cR" id="Zzm-yk-hSA"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -65,6 +68,25 @@
                                         <constraint firstAttribute="height" constant="150" id="vGB-Oq-FKw"/>
                                     </constraints>
                                 </tableView>
+                                <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Xxu-Kl-nqk">
+                                    <rect key="frame" x="0.0" y="269.5" width="362" height="50"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your verification code:" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHc-70-r0N">
+                                            <rect key="frame" x="0.0" y="0.0" width="362" height="0.0"/>
+                                            <fontDescription key="fontDescription" name="DroidArabicKufi-Bold" family="Droid Arabic Kufi" pointSize="16"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter the code here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RQ7-ju-3cR">
+                                            <rect key="frame" x="0.0" y="10" width="362" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="E5w-SV-eT2"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qdJ-la-nbD">
                                     <rect key="frame" x="0.0" y="273.5" width="362" height="40"/>
                                     <subviews>
@@ -83,6 +105,23 @@
                                             </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="sendCodeAction:" destination="-1" eventType="touchUpInside" id="vTD-fx-uNB"/>
+                                            </connections>
+                                        </button>
+                                        <button hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cpJ-Zw-B7y">
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="40"/>
+                                            <color key="backgroundColor" name="AppColor"/>
+                                            <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="14"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="Do Verification">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
+                                                    <real key="value" value="6"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="verificationAction:" destination="-1" eventType="touchUpInside" id="A2f-XP-I0j"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCt-2h-Vm6">

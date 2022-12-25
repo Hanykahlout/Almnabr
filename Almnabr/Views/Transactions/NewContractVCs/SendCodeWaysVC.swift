@@ -16,13 +16,19 @@ class SendCodeWaysVC: UIViewController {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var sendCodeButton: UIButton!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var verificationButton: UIButton!
+    @IBOutlet weak var codeFieldStackView: UIStackView!
+    @IBOutlet weak var verificationTextField: UITextField!
+    
     
     private var data = [SearchBranchRecords]()
     private var ways = ["Whatsapp","Email","Mobile"]
     private var selectedItem:SearchBranchRecords?
     var approvalStep:String?
     var id = ""
-    
+    var withVerificationField = false
+    var type = ""
+    var actionAfterVerification : ( ()->Void )?
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
@@ -30,6 +36,7 @@ class SendCodeWaysVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         transactionDataLabel.text = "# \(id) Edit Contract"
         getCodeWays()
     }
@@ -42,6 +49,10 @@ class SendCodeWaysVC: UIViewController {
     
     @IBAction func sendCodeAction(_ sender: Any) {
         sendCodeAction()
+    }
+    
+    @IBAction func verificationAction(_ sender: Any) {
+        doVerification()
     }
     
     
@@ -99,9 +110,9 @@ extension SendCodeWaysVC{
     private func sendCodeAction(){
         let body:[String:Any] = [
             "transaction_request_id": id,
-            "transaction_persons_type": "signature",
+            "transaction_persons_type": type == "do_all" ? "" : type,
             "sender_type": selectedItem?.value ?? "",
-            "do": "do",
+            "do": type == "do_all" ? type : "do",
             "transactions_persons_last_step": approvalStep ?? ""
         ]
         showLoadingActivity()
@@ -110,16 +121,47 @@ extension SendCodeWaysVC{
                 self.hideLoadingActivity()
                 if let status = data.status , status{
                     SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
+                    if self.withVerificationField{
+                        self.codeFieldStackView.isHidden = false
+                        self.verificationButton.isHidden = false
+                        self.sendCodeButton.isHidden = true
+                    }else{
+                        self.navigationController?.dismiss(animated: true)
+                    }
+                    
                 }else{
                     SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
                 }
-                
-                self.navigationController?.dismiss(animated: true)
+            }
+        }
+    }
+    
+    
+    private func doVerification(){
+        let param = [
+            "transaction_request_id": id,
+            "transaction_persons_type": type == "do_all" ? "" : type,
+            "sender_type":selectedItem?.value ?? "",
+            "do": type == "do_all" ? type : "do",
+            "transactions_persons_action_code":verificationTextField.text!,
+            "transactions_persons_last_step": approvalStep ?? ""
+        ]
+        showLoadingActivity()
+        APIController.shard.doVerification(param: param) { data in
+            DispatchQueue.main.async {
+                self.hideLoadingActivity()
+                if let status = data.status,status{
+                    self.actionAfterVerification?()
+                    self.navigationController?.dismiss(animated: true)
+                }else{
+                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
+                }
             }
         }
     }
     
     
 }
+
 
 

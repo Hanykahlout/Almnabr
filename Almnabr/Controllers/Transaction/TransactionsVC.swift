@@ -61,8 +61,8 @@ class TransactionsVC: UIViewController {
     private var SearchAllpending:String = "all_pending_need_action"
     private var StrsearchByAdmin:Int = 0
     private var pageNumber = 1
+    private var totalPages = 1
     private var total:Int = 0
-    private var allItemDownloaded = false
     private var MenuObj:MenuObj?
     private var SubMenuObj:MenuObj?
     private var arr_data:[Tcore] = []
@@ -83,18 +83,21 @@ class TransactionsVC: UIViewController {
     private let kCellheaderReuse : String = "MyTransactionHeaderView"
     private let refreshControl = UIRefreshControl()
     
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         configNavigation()
         configGUI()
-        get_Transaction_data(showLoading: true, loadOnly: true)
+        
         get_module()
         get_forms()
         header.btnAction = self.menu_select
         configGUI()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         searchTextField.addTarget(self, action: #selector(searchAction), for: .editingChanged)
+        
+        
     }
     
     
@@ -107,13 +110,14 @@ class TransactionsVC: UIViewController {
         navigationController?.navigationBar.barTintColor = maincolor
         addNavigationBarTitle(navigationTitle: "My Transactions".localized())
         UINavigationBar.appearance().backgroundColor = maincolor
-
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
+        get_Transaction_data(isFromBottom: false)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
     }
@@ -125,11 +129,6 @@ class TransactionsVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    
-    //        override func viewDidLayoutSubviews() {
-    //            tableHeightConstraint.constant = table.contentSize.height
-    //
-    //        }
     
     //MARK: - Config GUI
     //------------------------------------------------------
@@ -191,125 +190,6 @@ class TransactionsVC: UIViewController {
     
     
     
-    
-    func get_Transaction_data(showLoading: Bool, loadOnly: Bool){
-        
-        if showLoading {
-            self.showLoadingActivity()
-        }
-        let search:String = searchTextField.text!.replacingOccurrences(of: " ", with: "%20").trim()
-        
-        
-        APIController.shard.sendRequestGetAuth(urlString: "/tc/list/\(pageNumber)/10?searchKey=\(search)&searchAdmin=\(StrsearchByAdmin)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)&searchByStatus=\(SearchAllpending)" ) { (response) in
-            
-            if self.pageNumber == 1 {
-                self.arr_data.removeAll()
-            }
-            let status = response["status"] as? Bool
-            let total = response["total"] as? Int
-            if loadOnly {
-                self.table.reloadData()
-            }
-            
-            let page = response["page"] as? [String:Any]
-            let list = response["list"] as? [String:Any]
-            if status == true{
-                self.total = total!
-                
-                if  let records = list!["records"] as? NSArray{
-                    for i in records {
-                        let dict = i as? [String:Any]
-                        let obj = Tcore.init(dict!)
-                        self.arr_data.append(obj)
-                    }
-                    
-                    
-                    let pageObj = PageObj(page!)
-                    if records.count == 0 {
-                        self.imgnodata.isHidden = false
-                    }else{
-                        self.imgnodata.isHidden = true
-                    }
-                    
-                    if pageObj.total_pages > self.pageNumber {
-                        self.allItemDownloaded = false
-                    }else{
-                        self.allItemDownloaded = true
-                    }
-                    self.table.isHidden = false
-                    self.table.reloadData()
-                    
-                }
-                
-            }
-            
-            self.imgnodata.isHidden = !self.arr_data.isEmpty
-            self.hideLoadingActivity()
-            if self.refreshControl.isRefreshing{
-                self.refreshControl.endRefreshing()
-            }
-            
-        }
-                
-    }
-    
-    func get_module(){
-        self.arr_module.removeAll()
-        self.arr_module.append(.init([:]))
-        self.arr_moduleLabel.removeAll()
-        self.arr_moduleLabel.append("Search By Module")
-        
-        self.showLoadingActivity()
-        APIController.shard.sendRequestGetAuth(urlString: "tc/getmodulesmydoclist" ) { (response) in
-            
-            
-            let status = response["status"] as? Bool
-            if status == true{
-                if  let list = response["list"] as? NSArray{
-                    for i in list {
-                        let dict = i as? [String:Any]
-                        let obj = ModuleObj.init(dict!)
-                        self.arr_module.append(obj)
-                        self.arr_moduleLabel.append(obj.label)
-                        
-                    }
-                    self.hideLoadingActivity()
-                }
-            }
-            
-            
-        }
-    }
-    
-    
-    func get_forms(){
-        self.arr_form.removeAll()
-        self.arr_formeLabel.removeAll()
-        self.arr_formeLabel.append("Search By Form")
-        self.arr_form.append(.init([:]))
-        self.showLoadingActivity()
-        APIController.shard.sendRequestGetAuth(urlString: "tc/gettcmydoclist" ) { (response) in
-            
-            
-            let status = response["status"] as? Bool
-            if status == true{
-                if  let list = response["list"] as? NSArray{
-                    for i in list {
-                        let dict = i as? [String:Any]
-                        let obj = ModuleObj.init(dict!)
-                        self.arr_form.append(obj)
-                        // for echitem in obj{
-                        self.arr_formeLabel.append(obj.label)
-                        // }
-                        
-                    }
-                    self.hideLoadingActivity()
-                }
-            }
-        }
-    }
-    
-    
     func menu_select(){
         let language =  L102Language.currentAppleLanguage()
         if language == "ar"{
@@ -321,14 +201,14 @@ class TransactionsVC: UIViewController {
     }
     
     @objc func refresh(){
-        get_Transaction_data(showLoading: true, loadOnly: true)
+        get_Transaction_data(isFromBottom: false)
     }
     
     @objc func searchAction(){
         if !arr_data.isEmpty{
             table.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
         }
-        get_Transaction_data(showLoading: true, loadOnly: true)
+        get_Transaction_data(isFromBottom: false)
     }
     
     
@@ -361,7 +241,7 @@ class TransactionsVC: UIViewController {
                     self.StrsearchByAdmin = 0
                 }
                 self.imgDropAdmin.image = self.dropDownmage
-                self.get_Transaction_data(showLoading: true, loadOnly: true)
+                self.get_Transaction_data(isFromBottom: false)
             }
             
             // self.sig_id = self.arr_sig_id[index].id
@@ -382,14 +262,15 @@ class TransactionsVC: UIViewController {
         vc.definesPresentationContext = true
         vc.delegate = {name , index in
             if name == self.arr_formeLabel[index] {
+                
                 self.lblsearchByForm.text =  name
                 let i = self.arr_form[index].value
                 self.StrsearchByForm = i
                 
                 self.imgDropForm.image = self.dropDownmage
-                self.get_Transaction_data(showLoading: true, loadOnly: true)
+                self.get_Transaction_data(isFromBottom: false)
             }
-
+            
         }
         self.present(vc, animated: true, completion: nil)
         
@@ -406,12 +287,14 @@ class TransactionsVC: UIViewController {
         vc.modalPresentationStyle = .overFullScreen
         vc.definesPresentationContext = true
         vc.delegate = {name , index in
+            
             if name == self.arr_moduleLabel[index] {
+                
                 self.lblsearchByModule.text =  name
                 let i =  self.arr_module[index].value
                 self.StrsearchByModule = i
                 self.imgDropModule.image = self.dropDownmage
-                self.get_Transaction_data(showLoading: true, loadOnly: true)
+                self.get_Transaction_data(isFromBottom: false)
             }
         }
         self.present(vc, animated: true, completion: nil)
@@ -433,7 +316,7 @@ class TransactionsVC: UIViewController {
                 // let i =  self.arr_module[index].value
                 self.SearchAllpending = self.arr_AllPending[index]
                 self.imgDropAllPending.image = self.dropDownmage
-                self.get_Transaction_data(showLoading: true, loadOnly: true)
+                self.get_Transaction_data(isFromBottom: false)
             }
         }
         self.present(vc, animated: true, completion: nil)
@@ -518,20 +401,17 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if tableView.tag == 0 {
-            
-            print(indexPath.section)
-            if indexPath.row   == arr_data.count - 1  {
-                
-                updateNextSet()
-                print("next step")
-                
+        if indexPath.row   == arr_data.count - 1  {
+            if pageNumber < totalPages{
+                pageNumber += 1
+                get_Transaction_data(isFromBottom: true)
             }
         }
+        
     }
     
     
-        
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         
         let obj = self.arr_data[indexPath.item]
@@ -594,14 +474,6 @@ extension TransactionsVC: UITableViewDelegate , UITableViewDataSource{
         return UITableView.automaticDimension
     }
     
-    
-    func updateNextSet(){
-        print("On Completetion")
-        if !allItemDownloaded {
-            pageNumber = pageNumber + 1
-            get_Transaction_data(showLoading: false, loadOnly: false)
-        }
-    }
 }
 
 
@@ -610,12 +482,135 @@ extension TransactionsVC:UISearchBarDelegate {
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.SearchKey = searchBar.text!
-        get_Transaction_data(showLoading: false, loadOnly: false)
+        get_Transaction_data(isFromBottom: false)
     }
     
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+    
+    
+}
+
+// MARK: - API Handling
+extension TransactionsVC{
+    
+    
+    private func get_Transaction_data(isFromBottom:Bool){
+        
+        let search:String = searchTextField.text!.replacingOccurrences(of: " ", with: "%20").trim()
+        if !isFromBottom{
+            pageNumber = 1
+        }
+        self.showLoadingActivity()
+        APIController.shard.sendRequestGetAuth(urlString: "/tc/list/\(pageNumber)/10?searchKey=\(search)&searchAdmin=\(StrsearchByAdmin)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)&searchByStatus=\(SearchAllpending)" ) { (response) in
+            
+            if !isFromBottom {
+                self.arr_data.removeAll()
+            }
+            
+            let status = response["status"] as? Bool
+            let total = response["total"] as? Int
+            
+            
+            let page = response["page"] as? [String:Any]
+            let list = response["list"] as? [String:Any]
+            let pageObj = PageObj(page ?? [:])
+            self.totalPages = pageObj.total_pages
+            if status == true{
+                
+                self.total = total!
+                
+                if  let records = list!["records"] as? NSArray{
+                    
+                    for i in records {
+                        let dict = i as? [String:Any]
+                        let obj = Tcore.init(dict!)
+                        
+                        self.arr_data.append(obj)
+                    }
+                    
+                    
+                    
+                    if records.count == 0 {
+                        self.imgnodata.isHidden = false
+                    }else{
+                        self.imgnodata.isHidden = true
+                    }
+                    
+                    
+                    self.table.isHidden = false
+                    self.table.reloadData()
+                    
+                }
+                
+            }
+            
+            self.imgnodata.isHidden = !self.arr_data.isEmpty
+            self.hideLoadingActivity()
+            if self.refreshControl.isRefreshing{
+                self.refreshControl.endRefreshing()
+            }
+            
+        }
+        
+    }
+    
+    private func get_module(){
+        self.arr_module.removeAll()
+        self.arr_module.append(.init([:]))
+        self.arr_moduleLabel.removeAll()
+        self.arr_moduleLabel.append("Search By Module")
+        
+        self.showLoadingActivity()
+        APIController.shard.sendRequestGetAuth(urlString: "tc/getmodulesmydoclist" ) { (response) in
+            
+            
+            let status = response["status"] as? Bool
+            if status == true{
+                if  let list = response["list"] as? NSArray{
+                    for i in list {
+                        let dict = i as? [String:Any]
+                        let obj = ModuleObj.init(dict!)
+                        self.arr_module.append(obj)
+                        self.arr_moduleLabel.append(obj.label)
+                        
+                    }
+                    self.hideLoadingActivity()
+                }
+            }
+            
+            
+        }
+    }
+    
+    
+    private func get_forms(){
+        self.arr_form.removeAll()
+        self.arr_formeLabel.removeAll()
+        self.arr_formeLabel.append("Search By Form")
+        self.arr_form.append(.init([:]))
+        self.showLoadingActivity()
+        APIController.shard.sendRequestGetAuth(urlString: "tc/gettcmydoclist" ) { (response) in
+            
+            
+            let status = response["status"] as? Bool
+            if status == true{
+                if  let list = response["list"] as? NSArray{
+                    for i in list {
+                        let dict = i as? [String:Any]
+                        let obj = ModuleObj.init(dict!)
+                        self.arr_form.append(obj)
+                        // for echitem in obj{
+                        self.arr_formeLabel.append(obj.label)
+                        // }
+                        
+                    }
+                    self.hideLoadingActivity()
+                }
+            }
+        }
     }
     
     

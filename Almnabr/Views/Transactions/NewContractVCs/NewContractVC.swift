@@ -231,6 +231,7 @@ class NewContractVC: UIViewController {
         let vc = SendCodeWaysVC()
         vc.id = transaction_request_id
         vc.approvalStep = approvalStep
+        vc.type = "signature"
         let nav = UINavigationController(rootViewController: vc)
         nav.setNavigationBarHidden(true, animated: false)
         nav.modalPresentationStyle = .overCurrentContext

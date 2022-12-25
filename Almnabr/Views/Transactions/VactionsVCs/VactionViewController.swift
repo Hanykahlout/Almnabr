@@ -222,6 +222,7 @@ class VactionViewController: UIViewController {
         let vc = SendCodeWaysVC()
         vc.id = transaction_request_id
         vc.approvalStep = self.lastStepOpendLabel.text!
+        vc.type = "signature"
         let nav = UINavigationController(rootViewController: vc)
         nav.setNavigationBarHidden(true, animated: false)
         nav.modalPresentationStyle = .overCurrentContext

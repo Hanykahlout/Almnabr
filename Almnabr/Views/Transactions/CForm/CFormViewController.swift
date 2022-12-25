@@ -8,6 +8,8 @@
 
 import UIKit
 import SCLAlertView
+import DropDown
+
 class CFormViewController: UIViewController {
 
     
@@ -49,6 +51,9 @@ class CFormViewController: UIViewController {
     @IBOutlet weak var markersStackVew: UIStackView!
     @IBOutlet weak var reviewersStackView: UIStackView!
     
+    @IBOutlet weak var actionsArrow: UIImageView!
+    @IBOutlet weak var actionButton: UIButton!
+    
     var isOutging = true
     var transactionId = ""
     private var persons : [TransactionsPersons]?
@@ -56,9 +61,12 @@ class CFormViewController: UIViewController {
     private var c2Attachments = [form_c2_filesRecords]()
     private var historyData = [TransactionsContractRecord]()
     private var extraVal = ""
+    private var actionsDropDown = DropDown()
+    private var link = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        initlization()
         // Do any additional setup after loading the view.
     }
 
@@ -74,8 +82,86 @@ class CFormViewController: UIViewController {
     }
     
     
+    private func initlization(){
+        setUpDropDownLists()
+    }
+    
+    private func setUpDropDownLists(){
+        // Actions Drop Down
+        actionsDropDown.anchorView = actionButton
+        actionsDropDown.bottomOffset = CGPoint(x: 0 , y:(actionsDropDown.anchorView?.plainView.bounds.height)!)
+        actionsDropDown.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.actionsArrow.transform = .init(rotationAngle: 0)
+            switch item{
+            case "Approve":
+                let vc = ApprovalWithPasswordVC()
+                vc.formTitle = "# \(transactionId) \(subjectLabel.text!)"
+                vc.formType = isOutging ? "FORM_C1" : "FORM_C2"
+                vc.transactionId = transactionId
+                vc.actionAfterApprove = {
+                    self.isOutging ? self.getC1FormData() : self.getC2FormData()
+                }
+                let nav = UINavigationController(rootViewController: vc)
+                nav.setNavigationBarHidden(true, animated: true)
+                nav.modalPresentationStyle = .overCurrentContext
+                navigationController?.present(nav, animated: true)
+//            case "Edit":
+//                break
+            case "Signature":
+                goToSendCodeAlertVC(type: "signature")
+            case "Mark":
+                goToSendCodeAlertVC(type: "marks")
+            case "Opinion":
+                break
+            case "Review":
+                goToSendCodeAlertVC(type: "reviewers")
+            case "Do All":
+                goToSendCodeAlertVC(type: "do_all")
+            case "Preview":
+                previewContentFile(path: "form/\(isOutging ? "FORM_C1" : "FORM_C2")/pr/\(transactionId)")
+            case "View":
+                previewContentFile(path: link)
+            case "Delete":
+                deleteFormAction()
+            default:
+                break
+            }
+        }
+        
+        actionsDropDown.cancelAction = { [unowned self] in
+            self.actionsArrow.transform = .init(rotationAngle: 0)
+        }
+        
+    }
+    
+    private func goToSendCodeAlertVC(type:String){
+        let vc = SendCodeWaysVC()
+        vc.id = transactionId
+        vc.withVerificationField = true
+        vc.approvalStep = "last"
+        vc.type = type
+        vc.actionAfterVerification = {
+            self.isOutging ? self.getC1FormData() : self.getC2FormData()
+        }
+        let nav = UINavigationController(rootViewController: vc)
+        nav.setNavigationBarHidden(true, animated: false)
+        nav.modalPresentationStyle = .overCurrentContext
+        navigationController?.present(nav, animated: true)
+    }
+    
+    
+    private func deleteFormAction(){
+        let alert = UIAlertController(title: "Confirmation !!!", message: "Are you sure !?", preferredStyle: .alert)
+        alert.addAction(.init(title: "Yes", style: .default,handler: { action in
+            self.deleteForm()
+        }))
+        alert.addAction(.init(title: "No", style: .default))
+        present(alert, animated: true)
+    }
+    
+    
     @IBAction func contentTextAction(_ sender: Any) {
-        previewContentFile()
+        previewContentFile(path:extraVal)
     }
     
     
@@ -99,6 +185,13 @@ class CFormViewController: UIViewController {
         vc.c2Attachments = self.c2Attachments
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @IBAction func actionsAction(_ sender: Any) {
+        actionsArrow.transform = .init(rotationAngle: .pi)
+        actionsDropDown.show()
+    }
+    
+    
     
 }
 
@@ -164,7 +257,10 @@ extension CFormViewController{
                     self.c1Attachments = data.form_c1_files?.records ?? []
                     self.historyData = data.transactions_records?.records ?? []
                     self.markersStackVew.isHidden = self.markersLabel.text!.isEmpty
-                    
+                    if let buttons = data.transactions_buttons{
+                        self.addFormActions(buttons: buttons)
+                    }
+                    self.link = data.transactions_request?.view_link ?? ""
                 }else{
                     SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
                 }
@@ -219,6 +315,10 @@ extension CFormViewController{
                     self.c2Attachments = data.form_c2_files?.records ?? []
                     self.historyData = data.transactions_records?.records ?? []
                     self.markersStackVew.isHidden = self.markersLabel.text!.isEmpty
+                    if let buttons = data.transactions_buttons{
+                        self.addFormActions(buttons: buttons)
+                    }
+                    self.link = data.transactions_request?.view_link ?? ""
                 }else{
                     SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknow error !!")
                 }
@@ -226,9 +326,54 @@ extension CFormViewController{
         }
     }
     
-    private func previewContentFile(){
+    private func addFormActions(buttons:Transactions_buttons){
+        actionsDropDown.dataSource = []
+        if buttons.approval ?? false{
+            actionsDropDown.dataSource.append("Approve")
+        }
+        
+//        if buttons.edit ?? false{
+//            actionsDropDown.dataSource.append("Edit")
+//        }
+        
+        if buttons.signature ?? false{
+            actionsDropDown.dataSource.append("Signature")
+        }
+        
+        if buttons.marks ?? false{
+            actionsDropDown.dataSource.append("Mark")
+        }
+        
+        if buttons.opinion ?? false{
+            actionsDropDown.dataSource.append("Opinion")
+        }
+        
+        if buttons.reviewers ?? false{
+            actionsDropDown.dataSource.append("Review")
+        }
+        
+        if buttons.doall ?? false{
+            actionsDropDown.dataSource.append("Do All")
+        }
+        
+        if buttons.preview ?? false{
+            actionsDropDown.dataSource.append("Preview")
+        }
+        
+        if buttons.view ?? false{
+            actionsDropDown.dataSource.append("View")
+        }
+        
+        if buttons.delete ?? false{
+            actionsDropDown.dataSource.append("Delete")
+        }
+        
+    }
+
+
+    private func previewContentFile(path:String){
         showLoadingActivity()
-        APIController.shard.showContentPreview(extraVal: extraVal) { data in
+        APIController.shard.getImage(url: path) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
                 if let status = data.status , status{
@@ -241,4 +386,19 @@ extension CFormViewController{
             }
         }
     }
+    
+    
+    private func deleteForm(){
+        APIController.shard.deleteCForm(formType: isOutging ? "FORM_C1" : "FORM_C2", transactionId: transactionId) { data in
+            if let status = data.status,status{
+                SCLAlertView().showSuccess("Success", subTitle: data.msg ?? "")
+                self.navigationController?.popViewController(animated: true)
+            }else{
+                SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknow error !!")
+            }
+                
+        }
+    }
+    
+    
 }

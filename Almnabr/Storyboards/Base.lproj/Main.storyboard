@@ -340,10 +340,31 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cpy-3W-Jtf">
+                                <rect key="frame" x="354" y="802" width="50" height="50"/>
+                                <color key="backgroundColor" name="AppColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="f9q-gG-yPt"/>
+                                    <constraint firstAttribute="height" constant="50" id="lwT-Ry-aZj"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="pencil" catalog="system"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
+                                        <real key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="sendEmailAction:" destination="CqB-kN-0lO" eventType="touchUpInside" id="QEq-Iv-Aw8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jAZ-FE-Chn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="jAZ-FE-Chn" firstAttribute="bottom" secondItem="Cpy-3W-Jtf" secondAttribute="bottom" constant="10" id="76b-PE-mNm"/>
+                            <constraint firstItem="jAZ-FE-Chn" firstAttribute="trailing" secondItem="Cpy-3W-Jtf" secondAttribute="trailing" constant="10" id="Bj7-qk-J85"/>
                             <constraint firstItem="Sch-5n-QEx" firstAttribute="top" secondItem="qJO-Gw-mMh" secondAttribute="top" id="FkN-Zp-09d"/>
                             <constraint firstAttribute="bottom" secondItem="Sch-5n-QEx" secondAttribute="bottom" id="aMR-Sz-awv"/>
                             <constraint firstItem="Sch-5n-QEx" firstAttribute="leading" secondItem="jAZ-FE-Chn" secondAttribute="leading" id="igb-K3-rLr"/>
@@ -16932,6 +16953,7 @@
         <image name="menu-1" width="512" height="512"/>
         <image name="more" width="24" height="24"/>
         <image name="paperclip" catalog="system" width="121" height="128"/>
+        <image name="pencil" catalog="system" width="128" height="113"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle.badge.plus" catalog="system" width="128" height="114"/>
         <image name="person.fill" catalog="system" width="128" height="120"/>

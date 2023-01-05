@@ -11,13 +11,10 @@ import SCLAlertView
 class InboxMailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    
     private var data = [MailData]()
     
     private var pageNumber = 1
     private var totalPages = 1
-    private var isFromBottom = false
     private var refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
@@ -28,21 +25,23 @@ class InboxMailViewController: UIViewController {
     
     private func initialization(){
         setUpTableView()
-        
-        startTimer()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getInboxsData()
+        getInboxsData(isFromBottom: false)
     }
     
     @objc private func refresh(){
-        pageNumber = 1
-        isFromBottom = false
-        self.getInboxsData()
+        self.getInboxsData(isFromBottom: false)
     }
+    
+    @IBAction func sendEmailAction(_ sender: Any) {
+        let vc = SendMailViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
 }
 
@@ -68,7 +67,6 @@ extension InboxMailViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc:MailContentViewController = AppDelegate.mainSB.instanceVC()
         vc.data = data[indexPath.row]
-        
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -77,8 +75,7 @@ extension InboxMailViewController: UITableViewDelegate,UITableViewDataSource{
         if indexPath.row == data.count - 1{
             if pageNumber < totalPages{
                 pageNumber += 1
-                isFromBottom = true
-                getInboxsData()
+                getInboxsData(isFromBottom: true)
             }
         }
     }
@@ -87,78 +84,41 @@ extension InboxMailViewController: UITableViewDelegate,UITableViewDataSource{
 
 //MARK: - APIHandling
 extension InboxMailViewController{
-    private func startTimer(){
-        isFromBottom = false
-        pageNumber = 1
-        showLoadingActivity()
-        APIController.shard.startInboxsTimer(pageNumber: String(pageNumber)) { data in
+    
+    private func getInboxsData(isFromBottom:Bool){
+        if !isFromBottom {
+            pageNumber = 1
+        }
+        APIController.shard.getMailsInbox(pageNumber:String(pageNumber)) { data in
             DispatchQueue.main.async {
                 self.hideLoadingActivity()
-                if let status = data.status , status, let data = data.data{
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ssa"
-                    dateFormatter.locale = .init(identifier: "en")
-                    var newEmails = [MailData]()
-                    for item in data{
-                        
-                        if let mailDate = dateFormatter.date(from: item.date ?? ""),
-                           let lastMail = self.data.first,
-                           let lastMailDate = dateFormatter.date(from: lastMail.date ?? ""){
-                            
-                            if  mailDate > lastMailDate{
-                                newEmails.append(item)
-                            }else{
-                                break
-                            }
-                        }
+                if let status = data.status , status{
+                    if isFromBottom {
+                        self.data.append(contentsOf: data.data ?? [])
+                    }else{
+                        self.data = data.data ?? []
                     }
-                    newEmails.append(contentsOf: self.data)
-                    self.data = newEmails
-                    self.tableView.reloadData()
-                    if self.refreshControl.isRefreshing{
-                        self.refreshControl.endRefreshing()
+                    let total = Double(data.count_all ?? 1) / 10
+                    if total.truncatingRemainder(dividingBy: 1) == 0 {
+                        self.totalPages = Int(total)
+                    }else{
+                        self.totalPages = Int(total) + 1
+                    }
+                    
+                }else{
+                    if !isFromBottom{
+                        self.data.removeAll()
+                        SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknown error")
                     }
                 }
+                
+                if self.refreshControl.isRefreshing{
+                    self.refreshControl.endRefreshing()
+                }
+                self.tableView.reloadData()
             }
         }
     }
-    
-    
-    private func getInboxsData(){
-        APIController.shard.getMailsInbox(pageNumber:String(pageNumber),callback: handleInboxResponse)
-    }
-    
-    
-    private func handleInboxResponse(_ data:MailInboxResponse){
-        DispatchQueue.main.async {
-            self.hideLoadingActivity()
-            if let status = data.status , status{
-                
-                if self.isFromBottom {
-                    self.data.append(contentsOf: data.data ?? [])
-                }else{
-                    self.data = data.data ?? []
-                }
-                let total = Double(data.count_all ?? 1) / 10
-                if total.truncatingRemainder(dividingBy: 1) == 0 {
-                    self.totalPages = Int(total)
-                }else{
-                    self.totalPages = Int(total) + 1
-                }
-                
-            }else{
-                if !self.isFromBottom{
-                    self.data.removeAll()
-                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknown error")
-                }
-            }
-            self.tableView.reloadData()
-            if self.refreshControl.isRefreshing{
-                self.refreshControl.endRefreshing()
-            }
-        }
-    }
-    
     
 }
 

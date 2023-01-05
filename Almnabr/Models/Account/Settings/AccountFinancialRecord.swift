@@ -1,5 +1,5 @@
 /* 
-Copyright (c) 2022 Swift Models Generated from JSON powered by http://www.json4swift.com
+Copyright (c) 2023 Swift Models Generated from JSON powered by http://www.json4swift.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -14,48 +14,40 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Records : Mappable {
-	var branch_name : String?
-	var group_name : String?
-	var mention_id : String?
+struct AccountFinancialRecord : Mappable {
+	var finance_id : String?
+	var unique_finance_id : String?
 	var branch_id : String?
-	var user_id : String?
-	var user_type_id : String?
-	var module_key : String?
-	var permission_key : String?
-	var private_key : String?
-	var private_value : String?
-	var group_key : String?
-	var create_by_user_id : String?
-	var create_date : String?
-	var permitname : String?
-	var creator_name : String?
-	var mention_name : String?
-    
-    
-    
+	var finance_start_date : String?
+	var finance_end_date : String?
+	var finance_status : String?
+	var finance_reopen_status : String?
+	var clone_status : String?
+	var created_date : String?
+	var finance_writer : String?
+	var value : String?
+	var label : String?
+	var writer_name : String?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		branch_name <- map["branch_name"]
-		group_name <- map["group_name"]
-		mention_id <- map["mention_id"]
+		finance_id <- map["finance_id"]
+		unique_finance_id <- map["unique_finance_id"]
 		branch_id <- map["branch_id"]
-		user_id <- map["user_id"]
-		user_type_id <- map["user_type_id"]
-		module_key <- map["module_key"]
-		permission_key <- map["permission_key"]
-		private_key <- map["private_key"]
-		private_value <- map["private_value"]
-		group_key <- map["group_key"]
-		create_by_user_id <- map["create_by_user_id"]
-		create_date <- map["create_date"]
-		permitname <- map["permitname"]
-		creator_name <- map["creator_name"]
-		mention_name <- map["mention_name"]
+		finance_start_date <- map["finance_start_date"]
+		finance_end_date <- map["finance_end_date"]
+		finance_status <- map["finance_status"]
+		finance_reopen_status <- map["finance_reopen_status"]
+		clone_status <- map["clone_status"]
+		created_date <- map["created_date"]
+		finance_writer <- map["finance_writer"]
+		value <- map["value"]
+		label <- map["label"]
+		writer_name <- map["writer_name"]
 	}
 
 }

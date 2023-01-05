@@ -27,7 +27,7 @@ class UsersSearchView: UIView {
     private var dropDown = DropDown()
     var usersResult:((_ result:[SearchBranchRecords])->Void)?
     var selectionType: UserSelectionType = .singleSelection
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         initlization()

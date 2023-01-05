@@ -1,5 +1,5 @@
 /* 
-Copyright (c) 2022 Swift Models Generated from JSON powered by http://www.json4swift.com
+Copyright (c) 2023 Swift Models Generated from JSON powered by http://www.json4swift.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -14,48 +14,32 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Records : Mappable {
-	var branch_name : String?
-	var group_name : String?
-	var mention_id : String?
+struct AccountTaxsRecord : Mappable {
+	var taxt_setup_id : String?
 	var branch_id : String?
-	var user_id : String?
-	var user_type_id : String?
-	var module_key : String?
-	var permission_key : String?
-	var private_key : String?
-	var private_value : String?
-	var group_key : String?
-	var create_by_user_id : String?
-	var create_date : String?
-	var permitname : String?
-	var creator_name : String?
-	var mention_name : String?
-    
-    
-    
+	var item_tax : String?
+	var global_tax : String?
+	var item_discount : String?
+	var global_discount : String?
+	var tax_writer : String?
+	var tax_created_datetime : String?
+	var tax_updated_datetime : String?
+
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		branch_name <- map["branch_name"]
-		group_name <- map["group_name"]
-		mention_id <- map["mention_id"]
+		taxt_setup_id <- map["taxt_setup_id"]
 		branch_id <- map["branch_id"]
-		user_id <- map["user_id"]
-		user_type_id <- map["user_type_id"]
-		module_key <- map["module_key"]
-		permission_key <- map["permission_key"]
-		private_key <- map["private_key"]
-		private_value <- map["private_value"]
-		group_key <- map["group_key"]
-		create_by_user_id <- map["create_by_user_id"]
-		create_date <- map["create_date"]
-		permitname <- map["permitname"]
-		creator_name <- map["creator_name"]
-		mention_name <- map["mention_name"]
+		item_tax <- map["item_tax"]
+		global_tax <- map["global_tax"]
+		item_discount <- map["item_discount"]
+		global_discount <- map["global_discount"]
+		tax_writer <- map["tax_writer"]
+		tax_created_datetime <- map["tax_created_datetime"]
+		tax_updated_datetime <- map["tax_updated_datetime"]
 	}
 
 }

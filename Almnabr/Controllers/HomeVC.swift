@@ -130,11 +130,7 @@ class HomeVC: UIViewController   {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        let x:Double = 1000.0
-        let y:Double = 10.0
-        
-        print("ASDSAADsa",(x/y).truncatingRemainder(dividingBy: 1))
+
         
         // Hide the Navigation Bar
         self.navigationController?.setNavigationBarHidden(true, animated: true)
@@ -163,8 +159,17 @@ class HomeVC: UIViewController   {
     
     
     private func initlization(){
-        TestingIMAP()
-        
+//        var s = "zasdasd"
+        // 65 -> 90 Uppercase
+        // 97 -> 122 Lowercase
+//        let char = String(s[s.index(s.startIndex, offsetBy: 0)])
+//        let ascii = UnicodeScalar(char)!.value
+//        print("ADSFASF",UnicodeScalar(s)!.value)
+//        print("ADSFASF",s[s.index(s.startIndex, offsetBy: 3)])
+//        print("ADSFASF",String(s.reversed()))
+//        s.remove(at: s.index(s.startIndex, offsetBy: 0))
+//        print("ADSFASF",s)
+
         addCalenderView()
         setUpObserver()
         setUpCollectionView()
@@ -195,41 +200,42 @@ class HomeVC: UIViewController   {
         }
         
         projectRequestsStackView.isHidden = true
-        observeInboxsLocalNotification()
-    }
+//        observeInboxsLocalNotification()
+            
+    }   
+    
+   
+               
+           
+       
     
     
-    private func TestingIMAP(){
-        
-    }
-    
-    
-    private func observeInboxsLocalNotification(){
-        APIController.shard.startInboxsTimer(pageNumber: "1") { data in
-            DispatchQueue.main.async {
-                let root = AppInstance.window?.rootViewController as? UINavigationController
-                if let status = data.status,status, !(root?.viewControllers.first is GmailViewController) {
-                    if let lastInboxDate = UserDefaults.standard.string(forKey: "LastInboxDate"){
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ssa"
-                        dateFormatter.locale = .init(identifier: "en")
-                        let lastDate = dateFormatter.date(from: lastInboxDate)
-                        if let lastDate = lastDate,let data = data.data{
-                            for mail in data{
-                                let mailDate = dateFormatter.date(from: mail.date ?? "")
-                                if let mailDate = mailDate, mailDate > lastDate{
-                                    UserDefaults.standard.set(mail.date ?? "", forKey: "LastInboxDate")
-                                    self.showLocalInboxNotification(title: mail.from?.name ?? "-----" , body: mail.subject ?? "-----")
-                                }else{
-                                    break
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    private func observeInboxsLocalNotification(){
+//        APIController.shard.startInboxsTimer(pageNumber: "1") { data in
+//            DispatchQueue.main.async {
+//                let root = AppInstance.window?.rootViewController as? UINavigationController
+//                if let status = data.status,status, !(root?.viewControllers.first is GmailViewController) {
+//                    if let lastInboxDate = UserDefaults.standard.string(forKey: "LastInboxDate"){
+//                        let dateFormatter = DateFormatter()
+//                        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ssa"
+//                        dateFormatter.locale = .init(identifier: "en")
+//                        let lastDate = dateFormatter.date(from: lastInboxDate)
+//                        if let lastDate = lastDate,let data = data.data{
+//                            for mail in data{
+//                                let mailDate = dateFormatter.date(from: mail.date ?? "")
+//                                if let mailDate = mailDate, mailDate > lastDate{
+//                                    UserDefaults.standard.set(mail.date ?? "", forKey: "LastInboxDate")
+//                                    self.showLocalInboxNotification(title: mail.from?.name ?? "-----" , body: mail.subject ?? "-----")
+//                                }else{
+//                                    break
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     
     private func showLocalInboxNotification(title:String,body:String){

@@ -12,6 +12,17 @@ import DropDown
 
 class DocumentsViewController: UIViewController {
     
+
+    
+    @IBOutlet weak var branchCollectionView: UICollectionView!
+    @IBOutlet weak var header: HeaderView!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var branchTypeLabel: UILabel!
+    @IBOutlet weak var branchTypeView: UIView!
+    @IBOutlet weak var docNumberTextField: UITextField!
+    @IBOutlet weak var branchArrow: UIImageView!
+    
     private var data = [DocumentData]()
     private var currentPage = 1
     private var totalPages:Int?
@@ -25,16 +36,6 @@ class DocumentsViewController: UIViewController {
 
     var docNumber = ""
     
-    
-    @IBOutlet weak var branchCollectionView: UICollectionView!
-    @IBOutlet weak var header: HeaderView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchTextField: UITextField!
-    @IBOutlet weak var branchTypeLabel: UILabel!
-    @IBOutlet weak var branchTypeView: UIView!
-    @IBOutlet weak var docNumberTextField: UITextField!
-    @IBOutlet weak var branchArrow: UIImageView!
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

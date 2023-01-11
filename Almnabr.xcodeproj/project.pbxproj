@@ -419,6 +419,16 @@
 		CE08040829250F6A00B45097 /* ContractDetailsOptionsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE08040629250F6A00B45097 /* ContractDetailsOptionsVC.xib */; };
 		CE08040B292511F700B45097 /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE080409292511F700B45097 /* ProfileCollectionViewCell.swift */; };
 		CE08040C292511F700B45097 /* ProfileCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE08040A292511F700B45097 /* ProfileCollectionViewCell.xib */; };
+		CE0A55F4296AB7ED00058517 /* BlockAccountsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A55F2296AB7ED00058517 /* BlockAccountsResponse.swift */; };
+		CE0A55F5296AB7ED00058517 /* BlockAccountsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A55F3296AB7ED00058517 /* BlockAccountsRecord.swift */; };
+		CE0A55F8296AB9E000058517 /* BlockAccountsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A55F6296AB9E000058517 /* BlockAccountsTableViewCell.swift */; };
+		CE0A55F9296AB9E000058517 /* BlockAccountsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0A55F7296AB9E000058517 /* BlockAccountsTableViewCell.xib */; };
+		CE0A55FC296ABF0200058517 /* BranchSelection.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0A55FB296ABF0200058517 /* BranchSelection.xib */; };
+		CE0A55FE296ABF2700058517 /* BranchSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A55FD296ABF2700058517 /* BranchSelection.swift */; };
+		CE0A5601296AD0B000058517 /* CostCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A55FF296AD0B000058517 /* CostCenterViewController.swift */; };
+		CE0A5602296AD0B000058517 /* CostCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0A5600296AD0B000058517 /* CostCenterViewController.xib */; };
+		CE0A5607296AD72B00058517 /* CostCenterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0A5605296AD72B00058517 /* CostCenterTableViewCell.swift */; };
+		CE0A5608296AD72B00058517 /* CostCenterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0A5606296AD72B00058517 /* CostCenterTableViewCell.xib */; };
 		CE0D05E2292A6FD50058344B /* LoanFormResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D05DE292A6FD40058344B /* LoanFormResponse.swift */; };
 		CE0D05E3292A6FD50058344B /* Hrln1_installments.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D05DF292A6FD50058344B /* Hrln1_installments.swift */; };
 		CE0D05E4292A6FD50058344B /* Form_hrln1_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0D05E0292A6FD50058344B /* Form_hrln1_data.swift */; };
@@ -450,6 +460,10 @@
 		CE1F02CF2948A7A300CEFDC9 /* ProjectServicesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1F02CD2948A7A300CEFDC9 /* ProjectServicesResponse.swift */; };
 		CE2003B92906C81800B527BB /* CalenderActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2003B82906C81800B527BB /* CalenderActivityView.xib */; };
 		CE2003BB2906CB3D00B527BB /* CalenderActivityUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2003BA2906CB3D00B527BB /* CalenderActivityUIView.swift */; };
+		CE2C29D8296AD9F300CCB709 /* CostCentersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C29D6296AD9F300CCB709 /* CostCentersResponse.swift */; };
+		CE2C29D9296AD9F300CCB709 /* CostCentersRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C29D7296AD9F300CCB709 /* CostCentersRecord.swift */; };
+		CE2C29DC296AEF8E00CCB709 /* AddCostCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C29DA296AEF8E00CCB709 /* AddCostCenterViewController.swift */; };
+		CE2C29DD296AEF8E00CCB709 /* AddCostCenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2C29DB296AEF8E00CCB709 /* AddCostCenterViewController.xib */; };
 		CE2EDAF3292F9DAF00A22419 /* PayRoleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2EDAF1292F9DAF00A22419 /* PayRoleTableViewCell.swift */; };
 		CE2EDAF4292F9DAF00A22419 /* PayRoleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE2EDAF2292F9DAF00A22419 /* PayRoleTableViewCell.xib */; };
 		CE2EDAF7292FA1D600A22419 /* PayRoleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2EDAF5292FA1D600A22419 /* PayRoleResponse.swift */; };
@@ -1452,6 +1466,16 @@
 		CE08040629250F6A00B45097 /* ContractDetailsOptionsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractDetailsOptionsVC.xib; sourceTree = "<group>"; };
 		CE080409292511F700B45097 /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		CE08040A292511F700B45097 /* ProfileCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileCollectionViewCell.xib; sourceTree = "<group>"; };
+		CE0A55F2296AB7ED00058517 /* BlockAccountsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockAccountsResponse.swift; sourceTree = "<group>"; };
+		CE0A55F3296AB7ED00058517 /* BlockAccountsRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockAccountsRecord.swift; sourceTree = "<group>"; };
+		CE0A55F6296AB9E000058517 /* BlockAccountsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockAccountsTableViewCell.swift; sourceTree = "<group>"; };
+		CE0A55F7296AB9E000058517 /* BlockAccountsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockAccountsTableViewCell.xib; sourceTree = "<group>"; };
+		CE0A55FB296ABF0200058517 /* BranchSelection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BranchSelection.xib; sourceTree = "<group>"; };
+		CE0A55FD296ABF2700058517 /* BranchSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BranchSelection.swift; sourceTree = "<group>"; };
+		CE0A55FF296AD0B000058517 /* CostCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostCenterViewController.swift; sourceTree = "<group>"; };
+		CE0A5600296AD0B000058517 /* CostCenterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CostCenterViewController.xib; sourceTree = "<group>"; };
+		CE0A5605296AD72B00058517 /* CostCenterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostCenterTableViewCell.swift; sourceTree = "<group>"; };
+		CE0A5606296AD72B00058517 /* CostCenterTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CostCenterTableViewCell.xib; sourceTree = "<group>"; };
 		CE0D05DE292A6FD40058344B /* LoanFormResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoanFormResponse.swift; sourceTree = "<group>"; };
 		CE0D05DF292A6FD50058344B /* Hrln1_installments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hrln1_installments.swift; sourceTree = "<group>"; };
 		CE0D05E0292A6FD50058344B /* Form_hrln1_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_hrln1_data.swift; sourceTree = "<group>"; };
@@ -1483,6 +1507,10 @@
 		CE1F02CD2948A7A300CEFDC9 /* ProjectServicesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectServicesResponse.swift; sourceTree = "<group>"; };
 		CE2003B82906C81800B527BB /* CalenderActivityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalenderActivityView.xib; sourceTree = "<group>"; };
 		CE2003BA2906CB3D00B527BB /* CalenderActivityUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderActivityUIView.swift; sourceTree = "<group>"; };
+		CE2C29D6296AD9F300CCB709 /* CostCentersResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostCentersResponse.swift; sourceTree = "<group>"; };
+		CE2C29D7296AD9F300CCB709 /* CostCentersRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostCentersRecord.swift; sourceTree = "<group>"; };
+		CE2C29DA296AEF8E00CCB709 /* AddCostCenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCostCenterViewController.swift; sourceTree = "<group>"; };
+		CE2C29DB296AEF8E00CCB709 /* AddCostCenterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddCostCenterViewController.xib; sourceTree = "<group>"; };
 		CE2EDAF1292F9DAF00A22419 /* PayRoleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayRoleTableViewCell.swift; sourceTree = "<group>"; };
 		CE2EDAF2292F9DAF00A22419 /* PayRoleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PayRoleTableViewCell.xib; sourceTree = "<group>"; };
 		CE2EDAF5292FA1D600A22419 /* PayRoleResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRoleResponse.swift; sourceTree = "<group>"; };
@@ -2368,6 +2396,8 @@
 				CECED93C290FCE850000716E /* CalenderView.swift */,
 				CECED940290FF03D0000716E /* UsersSearchView.swift */,
 				CECED942290FF0780000716E /* UsersSearchView.xib */,
+				CE0A55FB296ABF0200058517 /* BranchSelection.xib */,
+				CE0A55FD296ABF2700058517 /* BranchSelection.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -3087,6 +3117,43 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CE0A55FA296ABDEE00058517 /* CostCenter */ = {
+			isa = PBXGroup;
+			children = (
+				CE0A55FF296AD0B000058517 /* CostCenterViewController.swift */,
+				CE0A5600296AD0B000058517 /* CostCenterViewController.xib */,
+				CE2C29DA296AEF8E00CCB709 /* AddCostCenterViewController.swift */,
+				CE2C29DB296AEF8E00CCB709 /* AddCostCenterViewController.xib */,
+			);
+			path = CostCenter;
+			sourceTree = "<group>";
+		};
+		CE0A5603296AD70700058517 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				CEDD9109296479AE00762DBD /* PermissionMentionsTableViewCell.swift */,
+				CEDD910A296479AE00762DBD /* PermissionMentionsTableViewCell.xib */,
+				CEDCF66029659C5F0055DDB2 /* AccountsSettingsTableViewCell.swift */,
+				CEDCF66129659C5F0055DDB2 /* AccountsSettingsTableViewCell.xib */,
+				CEC882A929670D8D00D0A424 /* InvoiceSettingsTableViewCell.swift */,
+				CEC882AA29670D8D00D0A424 /* InvoiceSettingsTableViewCell.xib */,
+				CEC882AD2967199000D0A424 /* FinancialYearsTableViewCell.swift */,
+				CEC882AE2967199000D0A424 /* FinancialYearsTableViewCell.xib */,
+				CE0A55F6296AB9E000058517 /* BlockAccountsTableViewCell.swift */,
+				CE0A55F7296AB9E000058517 /* BlockAccountsTableViewCell.xib */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		CE0A5604296AD71500058517 /* CostCenter */ = {
+			isa = PBXGroup;
+			children = (
+				CE0A5605296AD72B00058517 /* CostCenterTableViewCell.swift */,
+				CE0A5606296AD72B00058517 /* CostCenterTableViewCell.xib */,
+			);
+			path = CostCenter;
+			sourceTree = "<group>";
+		};
 		CE0D05DC292A6F130058344B /* TransactionsModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -3153,6 +3220,15 @@
 				CE5E9A1B2950970E00143006 /* ProjectsDesignResponse.swift */,
 			);
 			path = Projects;
+			sourceTree = "<group>";
+		};
+		CE2C29D5296AD9EB00CCB709 /* CostCenters */ = {
+			isa = PBXGroup;
+			children = (
+				CE2C29D7296AD9F300CCB709 /* CostCentersRecord.swift */,
+				CE2C29D6296AD9F300CCB709 /* CostCentersResponse.swift */,
+			);
+			path = CostCenters;
 			sourceTree = "<group>";
 		};
 		CE2EDAEC292F9D7300A22419 /* PayRoleTableViewCell */ = {
@@ -3617,6 +3693,7 @@
 		CEDD90D52964456100762DBD /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
+				CE0A55FA296ABDEE00058517 /* CostCenter */,
 				CEDD90D62964456900762DBD /* Setttings */,
 			);
 			path = Accounts;
@@ -3636,6 +3713,7 @@
 		CEDD90DB2964494300762DBD /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				CE2C29D5296AD9EB00CCB709 /* CostCenters */,
 				CEDD90DC2964495000762DBD /* Settings */,
 			);
 			path = Account;
@@ -3656,6 +3734,8 @@
 				CEC882A629670C0B00D0A424 /* InvoiceSettingsRecord.swift */,
 				CEC882B229671ACC00D0A424 /* FinancialYearData.swift */,
 				CEC882B129671ACC00D0A424 /* FinancialYearRecord.swift */,
+				CE0A55F3296AB7ED00058517 /* BlockAccountsRecord.swift */,
+				CE0A55F2296AB7ED00058517 /* BlockAccountsResponse.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -3730,14 +3810,8 @@
 		CEDD91082964796700762DBD /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				CEDD9109296479AE00762DBD /* PermissionMentionsTableViewCell.swift */,
-				CEDD910A296479AE00762DBD /* PermissionMentionsTableViewCell.xib */,
-				CEDCF66029659C5F0055DDB2 /* AccountsSettingsTableViewCell.swift */,
-				CEDCF66129659C5F0055DDB2 /* AccountsSettingsTableViewCell.xib */,
-				CEC882A929670D8D00D0A424 /* InvoiceSettingsTableViewCell.swift */,
-				CEC882AA29670D8D00D0A424 /* InvoiceSettingsTableViewCell.xib */,
-				CEC882AD2967199000D0A424 /* FinancialYearsTableViewCell.swift */,
-				CEC882AE2967199000D0A424 /* FinancialYearsTableViewCell.xib */,
+				CE0A5604296AD71500058517 /* CostCenter */,
+				CE0A5603296AD70700058517 /* Settings */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -4768,6 +4842,7 @@
 				CE0E80A929265A240081CD59 /* OtherDetailsVC.xib in Resources */,
 				FAAF0C9427E8A3C10032C4AD /* SimpleSubProjectCell.xib in Resources */,
 				CECED93F290FCE9C0000716E /* CalenderView.xib in Resources */,
+				CE0A55F9296AB9E000058517 /* BlockAccountsTableViewCell.xib in Resources */,
 				3FD039E5287437B000BB13C7 /* PresonDetailsViewController.strings in Resources */,
 				3F07C052286D8D1C00C2CDF6 /* Settings2TableViewCell.xib in Resources */,
 				3FD03A52287437B000BB13C7 /* SettingViewController.xib in Resources */,
@@ -4777,6 +4852,7 @@
 				3FD03A06287437B000BB13C7 /* ViewEmpContractDetailsVC.strings in Resources */,
 				3FD03A76287448C900BB13C7 /* HR.storyboard in Resources */,
 				FA03242F26FB9BFE00372EA6 /* Assets.xcassets in Resources */,
+				CE2C29DD296AEF8E00CCB709 /* AddCostCenterViewController.xib in Resources */,
 				CE08040C292511F700B45097 /* ProfileCollectionViewCell.xib in Resources */,
 				3F9040E9286CB269008D85B8 /* UserTableViewCell.xib in Resources */,
 				3F07C0AC286D952500C2CDF6 /* SubProjectTVCell.xib in Resources */,
@@ -4788,6 +4864,7 @@
 				3FD03A2A287437B000BB13C7 /* AddEmpEduDetailsViewController.strings in Resources */,
 				FAF7623E28305594000DEAFE /* TaskUsersCVCell.xib in Resources */,
 				3F07C098286D932600C2CDF6 /* FormTransactionTVCell.xib in Resources */,
+				CE0A5608296AD72B00058517 /* CostCenterTableViewCell.xib in Resources */,
 				3F9040CB286CB0B3008D85B8 /* InsuranceDetailsTableViewCell.xib in Resources */,
 				FA9FB0A727163F0D0037871C /* ServicesCVCell.xib in Resources */,
 				CECED943290FF0780000716E /* UsersSearchView.xib in Resources */,
@@ -4841,6 +4918,7 @@
 				CE7BA27129561A8900ED5FC8 /* CFormAttachViewController.xib in Resources */,
 				3F1F4049287E0F5900F919F0 /* QRScannerViewController.xib in Resources */,
 				3FD03A20287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.strings in Resources */,
+				CE0A5602296AD0B000058517 /* CostCenterViewController.xib in Resources */,
 				3FF6EDB6284B72450003E6F4 /* UsersCollectionViewCell.xib in Resources */,
 				3F07C07A286D911A00C2CDF6 /* VacationFormCell.xib in Resources */,
 				3FD039E9287437B000BB13C7 /* OutgoingHistoryViewController.strings in Resources */,
@@ -4889,6 +4967,7 @@
 				3FD03A43287437B000BB13C7 /* IDDetailsViewController.xib in Resources */,
 				CE3E8339292BAF1F009919C1 /* no-permission2.gif in Resources */,
 				CE3244AA28FC789F004DBADB /* ProjectRequestsCollectionViewCell.xib in Resources */,
+				CE0A55FC296ABF0200058517 /* BranchSelection.xib in Resources */,
 				3F9040DA286CB182008D85B8 /* AttachmentTableViewCell.xib in Resources */,
 				CEE57BD128F756F700CA16D8 /* SelectTemplete1ViewController.xib in Resources */,
 				CEC487C22933770E00BA0291 /* FinanialDetailsTableViewCell.xib in Resources */,
@@ -5054,6 +5133,7 @@
 				FA85D024280D94500080A0EA /* TicketTVCell.swift in Sources */,
 				FAAB76DF270B96DB00731505 /* ApproveTransactionVC.swift in Sources */,
 				CE85718A29081D6200293977 /* DraftsMailViewController.swift in Sources */,
+				CE0A5601296AD0B000058517 /* CostCenterViewController.swift in Sources */,
 				3FA8CB6C2848BCE200434CE4 /* SettingsData.swift in Sources */,
 				3FB1C5352899892700E6EDB1 /* DeleteCommentResponse.swift in Sources */,
 				FA9768B227353DDD000A3576 /* CollectionViewCell.swift in Sources */,
@@ -5133,6 +5213,7 @@
 				CEFE3B902900634700119A55 /* UsedUnusedReportData.swift in Sources */,
 				FA5D6D572767AE8A0088B206 /* TechnicalAssistantCell.swift in Sources */,
 				CEBAAA5E2912D2C80066B818 /* AddShiftViewController.swift in Sources */,
+				CE0A55F5296AB7ED00058517 /* BlockAccountsRecord.swift in Sources */,
 				3FAA84E8288EA04C003A437E /* EditLastStepViewController.swift in Sources */,
 				FA7A93C927FC689400EF6ECC /* EducationTVCell.swift in Sources */,
 				CEFE3B882900321000119A55 /* SelectedHomeFilterData.swift in Sources */,
@@ -5253,6 +5334,7 @@
 				CEBAC55E28FEAF0000324458 /* ProjectRequestData.swift in Sources */,
 				3FAA84E5288E904D003A437E /* Steps.swift in Sources */,
 				3FD03A4E287437B000BB13C7 /* SettingViewController.swift in Sources */,
+				CE2C29D9296AD9F300CCB709 /* CostCentersRecord.swift in Sources */,
 				CE0FD9D7290581F800170382 /* CalenderActivityLog.swift in Sources */,
 				CEA27DED29376FF700542F57 /* Form_det1_data.swift in Sources */,
 				CE7BA26C2954EF5000ED5FC8 /* FormC1File.swift in Sources */,
@@ -5281,6 +5363,7 @@
 				FABDBA8E27F4768B003961FC /* ContactDetailsVC.swift in Sources */,
 				3FB305D52868702500CAC16F /* Transactions_records.swift in Sources */,
 				3FD03A44287437B000BB13C7 /* EducationDetailsViewController.swift in Sources */,
+				CE0A55FE296ABF2700058517 /* BranchSelection.swift in Sources */,
 				FAF76238283051A5000DEAFE /* SubTaskTVCell.swift in Sources */,
 				FA9768C1273691BE000A3576 /* MyPageViewController.swift in Sources */,
 				CE5E02F128F8274800007EAC /* GetTemplateResponse.swift in Sources */,
@@ -5343,6 +5426,7 @@
 				FA7A93CF27FD87B000EF6ECC /* Model.swift in Sources */,
 				FAA88ECF282AD1F20082432F /* TaskDetailVC.swift in Sources */,
 				3F14366A28489EB6008ABC19 /* Records.swift in Sources */,
+				CE0A55F8296AB9E000058517 /* BlockAccountsTableViewCell.swift in Sources */,
 				FA9E7D91270F409D003A1D16 /* CronTransactionCell.swift in Sources */,
 				CE9FE3172934F45E0008CECA /* BonusFormResponse.swift in Sources */,
 				FA35CE4C271DCCF400FF6AE4 /* FromTransactionVC.swift in Sources */,
@@ -5376,6 +5460,7 @@
 				3F74629A2886A30F00C19474 /* VactionTypesRecords.swift in Sources */,
 				3FB1C530289983C200E6EDB1 /* AddTicketCommentResponse.swift in Sources */,
 				3FD039EA287437B000BB13C7 /* PresonDetailsViewController.swift in Sources */,
+				CE0A55F4296AB7ED00058517 /* BlockAccountsResponse.swift in Sources */,
 				CED47F53290A890400C6F840 /* ViolationsResponse.swift in Sources */,
 				3FD03A1E287437B000BB13C7 /* ViewEmployeeDetailsVC.swift in Sources */,
 				FA5C977528195F2500A2AA5A /* TaskHistoryVC.swift in Sources */,
@@ -5517,6 +5602,7 @@
 				3F645ADF2875D86E00720E76 /* SocketIOController.swift in Sources */,
 				CEA27DDF2937671A00542F57 /* ViolationResponse.swift in Sources */,
 				3FAA84DA288E904D003A437E /* Form_hrv1_attachments.swift in Sources */,
+				CE2C29D8296AD9F300CCB709 /* CostCentersResponse.swift in Sources */,
 				CEC882A42966FAA500D0A424 /* AccountTaxsRecord.swift in Sources */,
 				FABDBA9227F476B8003961FC /* EducationDetailsVC.swift in Sources */,
 				3FB1C531289983C200E6EDB1 /* Return_row.swift in Sources */,
@@ -5599,6 +5685,7 @@
 				3F14367328489F50008ABC19 /* SettingsTableViewCell.swift in Sources */,
 				CEDD90E229644FFE00762DBD /* AccountSettingsPageViewController.swift in Sources */,
 				3F9ADAFB285F143600D68791 /* InsuranceDetailsTableViewCell.swift in Sources */,
+				CE2C29DC296AEF8E00CCB709 /* AddCostCenterViewController.swift in Sources */,
 				3F1436932848A120008ABC19 /* UIImageViewDesignable.swift in Sources */,
 				CECED94829102C3C0000716E /* MailData.swift in Sources */,
 				FABDBA9627F476E6003961FC /* InsuranceDetailsVC.swift in Sources */,
@@ -5660,6 +5747,7 @@
 				3F2B2C1128524F5B00C33FAD /* EditBody.swift in Sources */,
 				3F935E55285A232A00D7B779 /* EducationRecord.swift in Sources */,
 				CE2EDAF8292FA1D600A22419 /* PayRoleData.swift in Sources */,
+				CE0A5607296AD72B00058517 /* CostCenterTableViewCell.swift in Sources */,
 				CE54B2D128F5BC5400972D6D /* TopCountRequestsViewController.swift in Sources */,
 				3FAA84D7288E904D003A437E /* Transactions_notesVD.swift in Sources */,
 				3FD03A0F287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.swift in Sources */,
@@ -6964,7 +7052,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.17;
+				MARKETING_VERSION = 14.0.18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -6994,7 +7082,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 14.0.17;
+				MARKETING_VERSION = 14.0.18;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ERP.ALMNABR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

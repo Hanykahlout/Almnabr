@@ -147,7 +147,6 @@ extension ViewEmployeeDetailsVC: UICollectionViewDelegate , UICollectionViewData
         let oldIndex = selectedIndex
         selectedIndex = indexPath.row
         pageController.changeVC(index: L102Language.currentAppleLanguage() == "en" ? selectedIndex : (data.count - 1) - selectedIndex , direction: oldIndex < selectedIndex ? .forward : .reverse)
-        
     }
     
     

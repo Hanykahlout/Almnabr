@@ -26,8 +26,8 @@ class APIController{
     //server url ---- https://erp.almnabr.com/backend
     //Api key "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
     
-    let serverURL = "https://nahidh.sa/backend"
-    private let api_key = "12345"
+    let serverURL = "https://erp.almnabr.com/backend"
+    private let api_key = "PCGYdyKBJFya8LMaFP6baRrraRpSFc"
     
     
     public static var shard:APIController = {
@@ -3909,6 +3909,89 @@ class APIController{
         Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    
+    func deleteCostCenters(branch_id:String,record_id:String,callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+        let strURL = "\(serverURL)/ccdelete/\(branch_id)/\(record_id)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .delete,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func updateCostCenters(param:[String:Any],record_id:String,callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+        let strURL = "\(serverURL)/ccupdate/\(record_id)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+
+        Alamofire.request(strURL, method: .put,parameters: param,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getAccountMasters(branch_id:String,finance_id:String,callback:@escaping (_ data:AccountMastersResponse) -> Void){
+        let strURL = "\(serverURL)/amlist/1?finance_id=\(finance_id)"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AccountMastersResponse = Mapper<AccountMastersResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getCurrencies(branch_id:String,callback:@escaping (_ data:SearchBranch) -> Void){
+        let strURL = "\(serverURL)/currencies"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+
+        Alamofire.request(strURL, method: .post,parameters: ["branch_id":branch_id],headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func getAccountTypes(branch_id:String,callback:@escaping (_ data:AccountTypesResponse) -> Void){
+        let strURL = "\(serverURL)/actypes"
+        
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+
+        Alamofire.request(strURL, method: .post,parameters: ["branch_id":branch_id],headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AccountTypesResponse = Mapper<AccountTypesResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
             }

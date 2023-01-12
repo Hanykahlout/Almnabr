@@ -14,46 +14,48 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct CostCentersRecord : Mappable {
-	var branch_name : String?
-	var cost_center_id : String?
+struct AccountTypesRecord : Mappable {
+	var account_setting_id : String?
 	var branch_id : String?
-	var cost_center_parent : String?
-	var cost_center_code : String?
-	var cost_center_name_en : String?
-	var cost_center_name_ar : String?
-	var cost_center_sub : String?
-	var cost_center_writer : String?
-	var cost_center_created_datetime : String?
-	var cost_center_updated_datetime : String?
-	var writer_name : String?
-	var id : String?
-	var name : String?
-    var children : [CostCentersRecord]?
-    
+	var setting_type_code : String?
+	var setting_parent : String?
+	var setting_title_english : String?
+	var setting_title_arabic : String?
+	var setting_key_code : String?
+	var setting_tax_value : String?
+	var setting_accounts_config : String?
+	var setting_status : String?
+	var settings_default : String?
+	var setting_writer : String?
+	var setting_created_datetime : String?
+	var setting_updated_datetime : String?
+	var cost_center_required : String?
+	var label : String?
+	var value : String?
+
 	init?(map: Map) {
 
 	}
-    
-    
+
 	mutating func mapping(map: Map) {
 
-		branch_name <- map["branch_name"]
-		cost_center_id <- map["cost_center_id"]
+		account_setting_id <- map["account_setting_id"]
 		branch_id <- map["branch_id"]
-		cost_center_parent <- map["cost_center_parent"]
-		cost_center_code <- map["cost_center_code"]
-		cost_center_name_en <- map["cost_center_name_en"]
-		cost_center_name_ar <- map["cost_center_name_ar"]
-		cost_center_sub <- map["cost_center_sub"]
-		cost_center_writer <- map["cost_center_writer"]
-		cost_center_created_datetime <- map["cost_center_created_datetime"]
-		cost_center_updated_datetime <- map["cost_center_updated_datetime"]
-		writer_name <- map["writer_name"]
-		id <- map["id"]
-		name <- map["name"]
-        children <- map["children"]
-        
+		setting_type_code <- map["setting_type_code"]
+		setting_parent <- map["setting_parent"]
+		setting_title_english <- map["setting_title_english"]
+		setting_title_arabic <- map["setting_title_arabic"]
+		setting_key_code <- map["setting_key_code"]
+		setting_tax_value <- map["setting_tax_value"]
+		setting_accounts_config <- map["setting_accounts_config"]
+		setting_status <- map["setting_status"]
+		settings_default <- map["settings_default"]
+		setting_writer <- map["setting_writer"]
+		setting_created_datetime <- map["setting_created_datetime"]
+		setting_updated_datetime <- map["setting_updated_datetime"]
+		cost_center_required <- map["cost_center_required"]
+		label <- map["label"]
+		value <- map["value"]
 	}
 
 }

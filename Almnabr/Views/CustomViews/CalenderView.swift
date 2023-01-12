@@ -315,8 +315,26 @@ extension CalenderView:FSCalendarDelegate,FSCalendarDelegateAppearance{
         if formatedDate(date: date) == formatedDate(date: Date()){
             return maincolor
         }
-        if ifThereActivities(on:date).isThereAnyData {
-            return .yellow
+        
+        let data = ifThereActivities(on:date)
+        if  data.isThereAnyData{
+            if !isForAllEmployee{
+                if !(data.data?.no_settings?.isEmpty ?? true){
+                    return UIColor(hexString: "#A6D5FA")
+                }else if !(data.data?.full_time?.isEmpty ?? true){
+                    return UIColor(hexString: "#A6FAB8")
+                }else if !(data.data?.absent?.isEmpty ?? true){
+                    return UIColor(hexString: "#F5E5C6")
+                }else if !(data.data?.record_missing?.isEmpty ?? true){
+                    return UIColor(hexString: "#E6E4FB")
+                }else if !(data.data?.ok?.isEmpty ?? true){
+                    return UIColor(hexString: "#DEEDCB")
+                }else if !(data.data?.not_ok?.isEmpty ?? true){
+                    return UIColor(hexString: "#FAC8C9")
+                }
+                return .clear
+            }
+            return .systemGreen
         }
         return .clear
     }

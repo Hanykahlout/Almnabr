@@ -9,7 +9,7 @@
 import UIKit
 
 class CostCenterTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var branchLabel: UILabel!
     @IBOutlet weak var costCenterCodeLabel: UILabel!
@@ -19,7 +19,22 @@ class CostCenterTableViewCell: UITableViewCell {
     @IBOutlet weak var createdDateLabel: UILabel!
     @IBOutlet weak var writerLabel: UILabel!
     
+    
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var deletButton: UIButton!
+    
+    @IBOutlet weak var branchesButton: UIButton!
+    
+    
+    var addCostCenterAction: (()->Void)?
+    var deleteCostCenterAction: (()->Void)?
+    var editCostCenterAction: (()->Void)?
+    var branchesButtonAction: (()->Void)?
+    
+    
     func setData(data:CostCentersRecord){
+        branchesButton.isHidden = data.children?.isEmpty ?? true
         nameLabel.text = data.name ?? "----"
         branchLabel.text = data.branch_name ?? "----"
         costCenterCodeLabel.text = data.cost_center_code ?? "----"
@@ -31,4 +46,27 @@ class CostCenterTableViewCell: UITableViewCell {
     }
     
     
+    @IBAction func addCostCenter(_ sender: Any) {
+        addCostCenterAction?()
+    }
+    
+    
+    @IBAction func deleteCostAction(_ sender: Any) {
+        deleteCostCenterAction?()
+    }
+    
+    
+    @IBAction func editCostAction(_ sender: Any) {
+        editCostCenterAction?()
+    }
+    
+    
+    @IBAction func branchesAction(_ sender: Any){
+        branchesButtonAction?()
+    }
+    
+    
 }
+
+
+

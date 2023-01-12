@@ -64,7 +64,7 @@ class BranchSelection: UIView {
                 self.optionsTextrField.text = objc.title ?? ""
                 if withFinancialYearSelection{
                     financialYearView.isHidden = false
-                    getAccountFinancialOptions()
+                    getAccountFinancialOptions(branch_id: objc.id ?? "")
                 }
             }
         }
@@ -125,8 +125,8 @@ extension BranchSelection{
     }
     
     
-    private func getAccountFinancialOptions(){
-        APIController.shard.getAccountFinancialOptions(branch_id: AccountSettingsViewController.branch_id) { data in
+    private func getAccountFinancialOptions(branch_id:String){
+        APIController.shard.getAccountFinancialOptions(branch_id: branch_id) { data in
             DispatchQueue.main.async{
                 if let status = data.status,status{
                     let records = data.records ?? []

@@ -7,9 +7,9 @@
 //
 
 import UIKit
-
+import SCLAlertView
 class CostCenterViewController: UIViewController {
-
+    
     @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var headerView: HeaderView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -18,10 +18,12 @@ class CostCenterViewController: UIViewController {
     
     private var branchSelectionView: BranchSelection!
     private var selectedBranchId = ""
-    private var data = [CostCentersRecord]()
+    var data = [CostCentersRecord]()
     private var temp = [CostCentersRecord]()
     private let refreshControl = UIRefreshControl()
     private var observer:NSObjectProtocol?
+    var isChild = false
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,16 +47,31 @@ class CostCenterViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getCostCentersData()
+        navigationController?.navigationBar.tintColor = maincolor
+        if !isChild{
+            getCostCentersData()
+            headerView.isHidden = false
+            navigationController?.setNavigationBarHidden(true, animated: true)
+        }else{
+            headerView.isHidden = true
+            navigationController?.setNavigationBarHidden(false, animated: true)
+            
+            searchTextField.isHidden = true
+            branchSelectionView.isHidden = true
+        }
         observer = NotificationCenter.default.addObserver(forName: .init("ReloadCostCenters"), object: nil, queue: .main) { notify in
-            self.getCostCentersData()
+            guard let object = (notify.object) as? (CostCentersRecord,Int) else {return}
+            self.data[object.1] = object.0
+            self.tableView.reloadRows(at: [IndexPath.init(row: object.1, section: 0)], with: .automatic)
         }
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(observer!)
+            NotificationCenter.default.removeObserver(observer!)
     }
+    
     
     private func handleHeaderView(){
         
@@ -85,15 +102,6 @@ class CostCenterViewController: UIViewController {
         getCostCentersData()
     }
     
-    @IBAction func addAction(_ sender: Any) {
-        let vc = AddCostCenterViewController()
-        vc.branch_id = selectedBranchId
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .overCurrentContext
-        nav.isNavigationBarHidden = true
-        navigationController?.present(nav, animated: true)
-    }
-    
     
 }
 
@@ -111,11 +119,51 @@ extension CostCenterViewController:UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CostCenterTableViewCell", for: indexPath) as! CostCenterTableViewCell
-        cell.setData(data: data[indexPath.row])
+        let data = data[indexPath.row]
+        cell.setData(data: data)
+        let isSupportSub = data.cost_center_sub ?? "" == "1"
+        cell.addButton.isHidden = !isSupportSub
+        cell.deletButton.isHidden = isSupportSub
+        
+        cell.addCostCenterAction = { [weak self] in
+            self?.goToAddCostCenterVC(data:data,isAdd: true,index: indexPath.row)
+        }
+        
+        cell.editCostCenterAction = { [weak self] in
+            self?.goToAddCostCenterVC(data:data,isAdd: false,index: indexPath.row)
+        }
+        
+        cell.deleteCostCenterAction = {[weak self] in
+            let alertVC = UIAlertController(title:"Confirmation !!!".localized() , message: "Are you sure !?".localized(), preferredStyle: .alert)
+            alertVC.addAction(.init(title: "Yes", style: .default,handler: { [weak self] action in
+                self?.deleteCostCentersData(record_id: data.cost_center_id ?? "")
+            }))
+            alertVC.addAction(.init(title: "No", style: .default))
+            self?.present(alertVC, animated: true)
+        }
+        
+        cell.branchesButtonAction = { [weak self] in
+            let vc = CostCenterViewController()
+            vc.isChild = true
+            vc.data = data.children ?? []
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
         return cell
     }
     
+    private func goToAddCostCenterVC(data:CostCentersRecord,isAdd:Bool,index:Int){
+        let vc = AddCostCenterViewController()
+        vc.data = data
+        vc.isAdd = isAdd
+        vc.index = index
+        let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .overCurrentContext
+        nav.isNavigationBarHidden = true
+        navigationController?.present(nav, animated: true)
+    }
 }
+
+
 // MARK: - API Handling
 extension CostCenterViewController{
     private func getCostCentersData(){
@@ -133,6 +181,21 @@ extension CostCenterViewController{
                 self.tableView.reloadData()
                 if self.refreshControl.isRefreshing{
                     self.refreshControl.endRefreshing()
+                }
+            }
+        }
+    }
+    
+    private func deleteCostCentersData(record_id:String){
+        showLoadingActivity()
+        APIController.shard.deleteCostCenters(branch_id: selectedBranchId,record_id:record_id) { [weak self ] data in
+            DispatchQueue.main.async {
+                self?.hideLoadingActivity()
+                if let status = data.status,status{
+                    SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
+                    self?.getCostCentersData()
+                }else{
+                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknow error!!")
                 }
             }
         }

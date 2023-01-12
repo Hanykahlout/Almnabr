@@ -114,9 +114,8 @@ class VactionViewController: UIViewController {
         super.viewWillAppear(animated)
         addNavigationBarTitle(navigationTitle: "Vaction Form".localized())
         navigationController?.setNavigationBarHidden(false, animated: true)
-        
-    }
     
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)

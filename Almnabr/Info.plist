@@ -26,15 +26,22 @@
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array/>
-		</dict>
-	</array>
+
+    <key>GIDClientID</key>
+    <string>802945329626-3co9soa67il2kjedpgker7l8frp40tuu.apps.googleusercontent.com</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.802945329626-3co9soa67il2kjedpgker7l8frp40tuu</string>
+        </array>
+      </dict>
+    </array>
+    
+    <key>GIDServerClientID</key>
+    <string>802945329626-tghk65hrks92a7erc704kpaqo7uf02le.apps.googleusercontent.com</string>
+    
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>

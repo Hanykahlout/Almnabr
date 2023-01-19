@@ -3961,24 +3961,13 @@
                                                                             <constraint firstAttribute="width" constant="10" id="PCV-uc-vGg"/>
                                                                         </constraints>
                                                                     </imageView>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xtv-49-Ugz">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="182" height="40"/>
-                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <connections>
-                                                                            <action selector="btnSearchForm_Click:" destination="DnD-Gx-uZA" eventType="touchUpInside" id="da2-wO-yzf"/>
-                                                                        </connections>
-                                                                    </button>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="xtv-49-Ugz" firstAttribute="leading" secondItem="1mw-ny-Zdd" secondAttribute="leading" id="1es-ji-EyH"/>
                                                                     <constraint firstItem="4yT-Cs-cct" firstAttribute="leading" secondItem="1mw-ny-Zdd" secondAttribute="leading" constant="10" id="5KK-5S-SlB"/>
                                                                     <constraint firstItem="4yT-Cs-cct" firstAttribute="centerY" secondItem="1mw-ny-Zdd" secondAttribute="centerY" id="CGa-qk-rLV"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="xtv-49-Ugz" secondAttribute="trailing" id="I3O-2I-O8V"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="xtv-49-Ugz" secondAttribute="bottom" id="QOF-Nr-32a"/>
                                                                     <constraint firstAttribute="trailing" secondItem="fEd-H2-Py8" secondAttribute="trailing" constant="10" id="aJ2-NU-AQi"/>
                                                                     <constraint firstItem="fEd-H2-Py8" firstAttribute="centerY" secondItem="1mw-ny-Zdd" secondAttribute="centerY" id="fYk-kG-BeT"/>
-                                                                    <constraint firstItem="xtv-49-Ugz" firstAttribute="top" secondItem="1mw-ny-Zdd" secondAttribute="top" id="gty-CM-XTv"/>
                                                                 </constraints>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -4142,7 +4131,7 @@
                         <outlet property="table" destination="Tkg-Xk-8C0" id="FyT-aD-ciE"/>
                         <outlet property="tableHeightConstraint" destination="4Ih-H5-IIA" id="BkU-dD-4Nw"/>
                         <outlet property="viewsearchAdmin" destination="H1H-xv-OVY" id="neh-MH-a55"/>
-                        <outlet property="viewsearchByForm" destination="xtv-49-Ugz" id="CIi-G1-8zU"/>
+                        <outlet property="viewsearchByForm" destination="1mw-ny-Zdd" id="0JQ-co-F3h"/>
                         <outlet property="viewsearchByModule" destination="0Ge-y7-MQV" id="j52-h6-YCI"/>
                     </connections>
                 </viewController>

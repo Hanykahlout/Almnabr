@@ -57,6 +57,7 @@ class ApproveTransactionVC: UIViewController {
     var cellWidths: [CGFloat] = [1200]
     var arr_NoData:[String] = ["No items found".localized()]
     
+    
     let fontStyle: FontAwesomeStyle = .solid
     
     let dropUpmage =  UIImage.fontAwesomeIcon(name: .chevronUp , style: .solid, textColor:  .gray, size: CGSize(width: 40, height: 40))
@@ -66,6 +67,8 @@ class ApproveTransactionVC: UIViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        viewsearchByForm.isUserInteractionEnabled = true
+        viewsearchByForm.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(btnSearchForm_Click)))
         configGUI()
         get_Transaction_data(showLoading: true, loadOnly: true)
         get_module()
@@ -115,10 +118,6 @@ class ApproveTransactionVC: UIViewController {
         //"txt_searchByForm".localized()
         self.lblsearchByForm.font = .kufiRegularFont(ofSize: 15)
         
-        // for first puplish
-        self.viewsearchByForm.isUserInteractionEnabled = false
-        self.StrsearchByForm = "FORM_WIR"
-        
         
         
         self.viewsearchAdmin.setBorderGrayWidthCorner(1, 20)
@@ -145,10 +144,6 @@ class ApproveTransactionVC: UIViewController {
         
     }
     
-    
-    
-    
-    
     func get_Transaction_data(showLoading: Bool, loadOnly: Bool){
         
         if showLoading {
@@ -156,18 +151,18 @@ class ApproveTransactionVC: UIViewController {
         }
         
         let search:String = SearchKey.replacingOccurrences(of: " ", with: "%20").trim()
-        
+
         // &searchByModule=&searchByForm=&searchByTypeOfApproval=
         APIController.shard.sendRequestGetAuth(urlString: "tc/myapprovaldoclist/1/10?searchKey=\(search)&searchByTypeOfApproval=\(searchByTypeOfApproval)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)" ) { (response) in
             
             if self.pageNumber == 1 {
                 self.arr_data.removeAll()
             }
+            
             let status = response["status"] as? Bool
             if loadOnly {
                 self.table.reloadData()
             }
-            
             
             let page = response["page"] as? [String:Any]
             let list = response["list"] as? [String:Any]
@@ -236,8 +231,7 @@ class ApproveTransactionVC: UIViewController {
         
         self.showLoadingActivity()
         APIController.shard.sendRequestGetAuth(urlString: "tc/gettcmydoclist" ) { (response) in
-            
-            
+
             let status = response["status"] as? Bool
             if status == true{
                 if  let list = response["list"] as? NSArray{
@@ -289,7 +283,7 @@ class ApproveTransactionVC: UIViewController {
                 
                 if item == self.arr_Admin[index] {
                     self.lblsearchAdmin.text =  item
-                    self.searchByTypeOfApproval = item
+                    self.searchByTypeOfApproval = index == 0 ? "" : item
                     self.imgDropAdmin.image = dropDownmage
                     get_Transaction_data(showLoading: true, loadOnly: true)
                 }
@@ -302,9 +296,7 @@ class ApproveTransactionVC: UIViewController {
         dropDown.show()
     }
     
-    
-    
-    @IBAction func btnSearchForm_Click(_ sender: Any) {
+    @objc private func btnSearchForm_Click(){
         
         self.imgDropForm.image = dropUpmage
         let vc :PickerVC = AppDelegate.mainSB.instanceVC()
@@ -321,38 +313,8 @@ class ApproveTransactionVC: UIViewController {
                 self.get_Transaction_data(showLoading: true, loadOnly: true)
             }
         }
-        self.present(vc, animated: true, completion: nil)
-        
-//        let dropDown = DropDown()
-//        dropDown.anchorView = view
-//        dropDown.backgroundColor = .white
-//        dropDown.cornerRadius = 2.0
-//
-//        if self.arr_formeLabel.count == 0 {
-//            dropDown.dataSource = self.arr_NoData
-//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//            self.imgDropForm.image = dropDownmage
-//        }else{
-//            dropDown.dataSource = self.arr_formeLabel
-//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//
-//                if item == self.arr_formeLabel[index] {
-//                    self.lblsearchByForm.text =  item
-//                    let i =  self.arr_form[index].value
-//                    self.StrsearchByForm = i
-//                    self.imgDropForm.image = dropDownmage
-//                    get_Transaction_data(showLoading: true, loadOnly: true)
-//                }
-//            }
-//        }
-//        dropDown.direction = .bottom
-//        dropDown.anchorView = viewsearchByForm
-//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByForm.bounds.height)
-//        dropDown.width = viewsearchByForm.bounds.width
-//        dropDown.show()
+        present(vc, animated: true, completion: nil)
     }
-    
-    
     
     @IBAction func btnSearchModule_Click(_ sender: Any) {
         
@@ -372,36 +334,6 @@ class ApproveTransactionVC: UIViewController {
             }
         }
         self.present(vc, animated: true, completion: nil)
-        
-        
-//        self.imgDropModule.image = dropUpmage
-//        let dropDown = DropDown()
-//        dropDown.anchorView = view
-//        dropDown.backgroundColor = .white
-//        dropDown.cornerRadius = 2.0
-//
-//        if self.arr_moduleLabel.count == 0 {
-//            dropDown.dataSource = self.arr_NoData
-//            dropDown.textColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-//            self.imgDropModule.image = dropDownmage
-//        }else{
-//            dropDown.dataSource = self.arr_moduleLabel
-//            dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
-//
-//                if item == self.arr_moduleLabel[index] {
-//                    self.lblsearchByModule.text =  item
-//                    let i =  self.arr_module[index].value
-//                    self.StrsearchByModule = i
-//                    self.imgDropModule.image = dropDownmage
-//                    get_Transaction_data(showLoading: true, loadOnly: true)
-//                }
-//            }
-//        }
-//        dropDown.direction = .bottom
-//        dropDown.anchorView = viewsearchByModule
-//        dropDown.bottomOffset = CGPoint(x: 0, y: viewsearchByModule.bounds.height)
-//        dropDown.width = viewsearchByModule.bounds.width
-//        dropDown.show()
     }
     
     
@@ -424,10 +356,7 @@ extension ApproveTransactionVC: UITableViewDelegate , UITableViewDataSource{
         let obj = arr_data[indexPath.item]
         
         let maincolor = "#1A3665".getUIColor()
-        
-      
-        
-        
+
         let Id =   "\(obj.transaction_request_id)"
         let Desc = "\(obj.transaction_request_description)"
         let from = "From".localized() + ":  \(obj.transaction_from_name)"
@@ -466,9 +395,61 @@ extension ApproveTransactionVC: UITableViewDelegate , UITableViewDataSource{
         return cell
         
     }
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let obj = arr_data[indexPath.item]
+        switch obj.transaction_key{
+        case "FORM_HRV1":
+            let vc = VactionViewController()
+            vc.transaction_request_id = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_WIR":
+            let vc : TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
+            vc.Object = obj
+            //vc.filePath = obj.url
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_CT1":
+            let vc = NewContractVC()
+            vc.transaction_request_id = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_HRLN1":
+            let vc = LoanViewController()
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_OVR1":
+            let vc = OverTimeViewController()
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_BNS1":
+            let vc = BonusViewController()
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_VOL1":
+            let vc = ViolationViewController()
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_DET1":
+            let vc = DeductionViewController()
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_JF":
+            let vc = JobOfferViewController()
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_C1":
+            let vc = CFormViewController()
+            vc.isOutging = true
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        case "FORM_C2":
+            let vc = CFormViewController()
+            vc.isOutging = false
+            vc.transactionId = obj.transaction_request_id
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
+    }
     
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

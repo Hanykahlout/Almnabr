@@ -273,6 +273,6 @@ class LanguageVC: UIViewController {
 
 extension UIImageView {
     func no_permission() {
-        self.image = .init(named: "no-permission")
+        self.image = .init(named: "no-permission2")
     }
 }

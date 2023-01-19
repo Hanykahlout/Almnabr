@@ -15,6 +15,7 @@ class GmailViewController: UIViewController {
     
     private var pageController:MailPageViewController!
     var isFromLocalNotification = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initlization()
@@ -43,6 +44,8 @@ class GmailViewController: UIViewController {
         mainView.topAnchor.constraint(equalTo: pageController.view.topAnchor, constant: 0).isActive = true
         mainView.bottomAnchor.constraint(equalTo: pageController.view.bottomAnchor, constant: 0).isActive = true
     }
+    
+    
     
     
     @IBAction func sideMenuAction(_ sender: Any) {

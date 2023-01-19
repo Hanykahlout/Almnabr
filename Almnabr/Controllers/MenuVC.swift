@@ -206,12 +206,18 @@ class MenuVC: UIViewController {
     }
     
     @IBAction func gmailAction(_ sender: Any) {
-        let vc = storyboard?.instantiateViewController(withIdentifier: "GmailViewController") as! GmailViewController
+        var vc:UIViewController!
+//        if let _ = UserDefaults.standard.string(forKey: "gmail_user_id"){
+             vc = storyboard?.instantiateViewController(withIdentifier: "GmailViewController") as! GmailViewController
+//        }else{
+//             vc = MailLoginViewController()
+//        }
         let nav = UINavigationController(rootViewController: vc)
         nav.isNavigationBarHidden = true
         nav.modalPresentationStyle = .fullScreen
         let navCenter =  panel?.center as? UINavigationController
         navCenter?.present(nav, animated: true, completion: nil)
+        
     }
     
 }

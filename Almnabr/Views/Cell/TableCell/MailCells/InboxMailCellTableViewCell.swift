@@ -40,6 +40,21 @@ class InboxMailCellTableViewCell: UITableViewCell {
         dateLabel.text = APIController.shard.getDateString(with: data.date ?? "") ?? "--:-- --"
         
     }
+    
+    func setData(data:MessageInfo){
+        let from = data.payload?.headers?.first(where: {$0.name == "From"})?.value ?? ""
+        let subject = data.payload?.headers?.first(where: {$0.name == "Subject"})?.value ?? ""
+        
+        headerLabel.text = from.prefix(1).uppercased()
+        titleLabel.text = from
+//        addressLabel.text = data.from?.address ?? "----"
+        subtitleLabel.text = subject
+        messageLabel.text = data.snippet ?? "------"
+        dateLabel.text = APIController.shard.getDateString(with: data.internalDate ?? "") ?? "--:-- --"
+        
+    }
+    
+    
 
     @IBAction func starAction(_ sender: Any) {
     }

@@ -3452,7 +3452,7 @@ class APIController{
             }
         }
     }
-
+    
     func getProjectsDesignData(projectId:String,pageNumber:String,callback: @escaping (_ data: ProjectsDesignResponse)->Void){
         let strURL = "\(serverURL)/project_design/get_data_projects_design/\(pageNumber)/10"
         
@@ -3481,7 +3481,7 @@ class APIController{
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
         
-         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : CommunicationListResponse = Mapper<CommunicationListResponse>().map(JSONString:str){
                     callback(parsedMapperString)
@@ -3497,7 +3497,7 @@ class APIController{
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
         
-         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
                     callback(parsedMapperString)
@@ -3506,7 +3506,7 @@ class APIController{
         }
     }
     
-
+    
     func getC1FormData(transactionId:String,callback: @escaping (_ data:C1FormResponse)->Void){
         
         let strURL = "\(serverURL)/form/FORM_C1/vr/\(transactionId)"
@@ -3517,7 +3517,7 @@ class APIController{
         
         Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-
+                
                 if let parsedMapperString : C1FormResponse = Mapper<C1FormResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
@@ -3536,7 +3536,7 @@ class APIController{
         
         Alamofire.request(strURL, method: .get ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    
+                
                 if let parsedMapperString : C2FormResponse = Mapper<C2FormResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
@@ -3558,14 +3558,14 @@ class APIController{
         
         Alamofire.request(strURL, method: .post,parameters: param ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    
+                
                 if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
             }
         }
     }
-
+    
     func doVerification(param:[String:Any],callback:@escaping (_ data:UpdateSettingResponse) -> Void){
         let strURL = "\(serverURL)/tc/sender/complete_action"
         
@@ -3575,7 +3575,7 @@ class APIController{
         
         Alamofire.request(strURL, method: .post,parameters: param ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    
+                
                 if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
@@ -3595,41 +3595,41 @@ class APIController{
         ]
         Alamofire.request(strURL, method: .post,parameters: param ,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    
+                
                 if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
             }
         }
     }
-
+    
     func getAccountSettingsOptions(callback:@escaping (_ data:AccountSettingsOptions) -> Void){
         let strURL = "\(serverURL)/ab/accounts_view"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    
+                
                 if let parsedMapperString : AccountSettingsOptions = Mapper<AccountSettingsOptions>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
             }
         }
     }
-
+    
     func getAccountFinancialOptions(branch_id:String,callback:@escaping (_ data:AccountFinancialOptions) -> Void){
         let strURL = "\(serverURL)/financial/\(branch_id)"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    
+                
                 if let parsedMapperString : AccountFinancialOptions = Mapper<AccountFinancialOptions>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
@@ -3643,10 +3643,10 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    
+                
                 if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
@@ -3660,17 +3660,17 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    
+                
                 if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
             }
         }
     }
-
+    
     
     func getPermissionMentions(
         pageNumber:String,
@@ -3678,8 +3678,8 @@ class APIController{
         group_key:String,
         user_id:String,
         callback:@escaping (_ data:PermissionMentions) -> Void
-        ){
-            
+    ){
+        
         let strURL = "\(serverURL)/acpermission_mentions/\(pageNumber)/10"
         
         let headers = [ "authorization":
@@ -3689,7 +3689,7 @@ class APIController{
             "search[branch_id]":branch_id,
             "search[group_key]":group_key,
             "search[user_id]":user_id
-       ]
+        ]
         Alamofire.request(strURL, method: .post,parameters: param,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : PermissionMentions = Mapper<PermissionMentions>().map(JSONString:str){
@@ -3698,26 +3698,26 @@ class APIController{
             }
         }
     }
-
+    
     func getAccountSettings(
         pageNumber:String,
         branch_id:String,
         search_key:String,
         search_type:String,
         callback:@escaping (_ data:AccountSettingsData) -> Void
-        ){
-
+    ){
+        
         let strURL = "\(serverURL)/ls/\(branch_id)/\(pageNumber)/10"
         
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-            
+        
         let param:[String:Any] = [
             "search_key":search_key,
             "search_type":search_type
-       ]
-                
+        ]
+        
         Alamofire.request(strURL, method: .post,parameters: param,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : AccountSettingsData = Mapper<AccountSettingsData>().map(JSONString:str){
@@ -3734,10 +3734,10 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-       
+        
         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    
+                
                 if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
@@ -3776,9 +3776,9 @@ class APIController{
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
         
-       Alamofire.request(strURL, method: .post,headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(strURL, method: .post,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    print("ERERER",str)
+                print("ERERER",str)
                 if let parsedMapperString : AccountTaxs = Mapper<AccountTaxs>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
@@ -3788,11 +3788,11 @@ class APIController{
     
     
     func updateAccountTaxSettings(branch_id:String,
-                            item_tax:String,
-                            global_tax:String,
-                            item_discount:String,
-                            global_discount:String,
-                            callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+                                  item_tax:String,
+                                  global_tax:String,
+                                  item_discount:String,
+                                  global_discount:String,
+                                  callback:@escaping (_ data:UpdateSettingResponse) -> Void){
         let strURL = "\(serverURL)/ts"
         
         let headers = [ "authorization":
@@ -3806,9 +3806,9 @@ class APIController{
             "global_discount":global_discount
         ]
         
-       Alamofire.request(strURL, method: .post,parameters: param,headers: headers).validate().responseJSON { (response) in
+        Alamofire.request(strURL, method: .post,parameters: param,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-                    print("ERERER",str)
+                print("ERERER",str)
                 if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
                     callback(parsedMapperString)
                 }
@@ -3842,7 +3842,7 @@ class APIController{
     }
     
     func getFinancialYearData(branch_id:String,
-                                callback:@escaping (_ data:FinancialYearData) -> Void){
+                              callback:@escaping (_ data:FinancialYearData) -> Void){
         let strURL = "\(serverURL)/financial/\(branch_id)"
         
         let headers = [ "authorization":
@@ -3863,7 +3863,7 @@ class APIController{
     func getBlockAccountsData(branch_id:String,
                               finance_id:String,
                               pageNumber:String,
-                                callback:@escaping (_ data:BlockAccountsResponse) -> Void){
+                              callback:@escaping (_ data:BlockAccountsResponse) -> Void){
         let strURL = "\(serverURL)/acc/getblocksystems/\(pageNumber)/10?branch_id=\(branch_id)&finance_id=\(finance_id)"
         
         let headers = [ "authorization":
@@ -3881,7 +3881,7 @@ class APIController{
     
     
     func getCostCentersData(branch_id:String,
-                                callback:@escaping (_ data:CostCentersResponse) -> Void){
+                            callback:@escaping (_ data:CostCentersResponse) -> Void){
         let strURL = "\(serverURL)/cclist/\(branch_id)"
         
         let headers = [ "authorization":
@@ -3899,7 +3899,7 @@ class APIController{
     
     
     func addCostCenters(body:[String:Any],
-                                callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+                        callback:@escaping (_ data:UpdateSettingResponse) -> Void){
         let strURL = "\(serverURL)/cccreate"
         
         let headers = [ "authorization":
@@ -3914,7 +3914,7 @@ class APIController{
             }
         }
     }
-
+    
     
     func deleteCostCenters(branch_id:String,record_id:String,callback:@escaping (_ data:UpdateSettingResponse) -> Void){
         let strURL = "\(serverURL)/ccdelete/\(branch_id)/\(record_id)"
@@ -3939,7 +3939,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-
+        
         Alamofire.request(strURL, method: .put,parameters: param,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
@@ -3955,7 +3955,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-
+        
         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : AccountMastersResponse = Mapper<AccountMastersResponse>().map(JSONString:str){
@@ -3971,7 +3971,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-
+        
         Alamofire.request(strURL, method: .post,parameters: ["branch_id":branch_id],headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
@@ -3988,7 +3988,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-
+        
         Alamofire.request(strURL, method: .post,parameters: ["branch_id":branch_id],headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : AccountTypesResponse = Mapper<AccountTypesResponse>().map(JSONString:str){
@@ -3999,4 +3999,51 @@ class APIController{
     }
     
 }
+
+
+
+// MARK: - Gmail API
+extension APIController{
+
+//    func getInboxs(callback:@escaping (_ data:MessagesResponse) -> Void){
+//
+//        let strURL = "https://gmail.googleapis.com/gmail/v1/users/\(UserDefaults.standard.string(forKey: "gmail_user_id") ?? "")/messages"
+//
+//        let header = [
+//            "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "gmail_accessToken") ?? "")"
+//        ]
+//
+//        Alamofire.request(strURL, method: .get,headers: header).validate().responseJSON { (response) in
+//            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+//                print("ASDASD",str)
+//                if let parsedMapperString : MessagesResponse = Mapper<MessagesResponse>().map(JSONString:str){
+//                    callback(parsedMapperString)
+//                }
+//            }
+//        }
+//    }
+//
+//    func getSpacificInboxs(with id:String,callback:@escaping (_ data:MessageInfo) -> Void){
+//
+//        let strURL = "https://gmail.googleapis.com/gmail/v1/users/\(UserDefaults.standard.string(forKey: "gmail_user_id") ?? "")/messages/\(id)"
+//
+//        let header = [
+//            "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "gmail_accessToken") ?? "")"
+//        ]
+//
+//        Alamofire.request(strURL, method: .get,headers: header).validate().responseJSON { (response) in
+//            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+//                print("ASDASD",str)
+//                if let parsedMapperString : MessageInfo = Mapper<MessageInfo>().map(JSONString:str){
+//                    callback(parsedMapperString)
+//                }
+//            }
+//        }
+//    }
+    
+    
+    
+}
+
+
 

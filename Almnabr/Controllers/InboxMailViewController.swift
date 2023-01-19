@@ -8,11 +8,13 @@
 
 import UIKit
 import SCLAlertView
+import NIOIMAP
+import NIOPosix
 class InboxMailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     private var data = [MailData]()
-    
+    private var messages = [MessageInfo]()
     private var pageNumber = 1
     private var totalPages = 1
     private var refreshControl = UIRefreshControl()
@@ -20,8 +22,8 @@ class InboxMailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialization()
-        // Do any additional setup after loading the view.
     }
+    
     
     private func initialization(){
         setUpTableView()
@@ -30,11 +32,14 @@ class InboxMailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getInboxsData(isFromBottom: false)
+        
+        
+        //        getGmailInboxs()
+        //        getInboxsData(isFromBottom: false)
     }
     
     @objc private func refresh(){
-        self.getInboxsData(isFromBottom: false)
+        //        self.getInboxsData(isFromBottom: false)
     }
     
     @IBAction func sendEmailAction(_ sender: Any) {
@@ -55,11 +60,13 @@ extension InboxMailViewController: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //        return messages.count
         return data.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "InboxMailCellTableViewCell", for: indexPath) as! InboxMailCellTableViewCell
+        //        cell.setData(data:messages[indexPath.row])
         cell.setData(data:data[indexPath.row])
         return cell
     }
@@ -118,8 +125,10 @@ extension InboxMailViewController{
                 self.tableView.reloadData()
             }
         }
+        
     }
     
 }
+
 
 

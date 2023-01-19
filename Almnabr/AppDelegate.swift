@@ -16,7 +16,7 @@ import FirebaseCore
 import Firebase
 import UserNotifications
 import AVFAudio
-import GoogleSignIn
+//import GoogleSignIn
 var AppInstance: AppDelegate!
 
 @main
@@ -31,8 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     let gcmMessageIDKey = "gcm.message_id"
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        print("Fuckkkkkkkk")
-        //        UIApplication.shared.statusBarStyle = .darkContent
+        
         L102Localizer.DoTheMagic()
         AppInstance = self
         IQKeyboardManager.shared.enable = true
@@ -40,10 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         FirebaseApp.configure()
         get_theme()
         
-        //UIApplication.shared.applicationIconBadgeNumber = 0
-        //hideLoader()
-        
-        //Here we will hide back button title and change arrow to white color
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .highlighted)
         UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -1000.0, vertical: 0.0), for: .default)
@@ -51,51 +46,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         UINavigationBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().tintColor = .white
-        
-        // let notificationContent = UNMutableNotificationContent()
-        // notificationContent.sound = UNNotificationSound(named: "notification3.wav")
-        //notificationContent.sound = .default
-        //UNNotificationSound(named: "notification3.wav")
-        //  notification.sound = UNNotificationSound(named: "notification3.wav")
+  
         application.registerForRemoteNotifications()
         
         
         Messaging.messaging().delegate = self
         
         let token = Messaging.messaging().fcmToken
-        print("FCM token: \(token ?? "")")
         
         setupFirebaseMessaging(application)
         
-        //        registerForPushNotifications()
-        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-            if error != nil || user == nil {
-                // Show the app's signed-out state.
-            } else {
-                // Show the app's signed-in state.
-            }
-        }
-        print("ASDASD: ",checkSubarraySum([23,2,4,6,7], 6))
+        // Gmail Sign in
+//        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+//            if error != nil || user == nil {
+//                // Show the app's signed-out state.
+//            } else {
+//                // Show the app's signed-in state.
+//            }
+//        }
+//
+      
+        
         return true
     }
-    
-    
-    
-    func checkSubarraySum(_ nums: [Int], _ k: Int) -> Bool {
-        var reminder = [Int:Int]()
-        var total = 0
-        
-        for i in 0..<nums.count{
-            total += nums[i]
-            let r = total % k
-            if !reminder.keys.contains(where: {$0 == r}){
-                reminder[r] = i
-            }else if i - reminder[r]! > 1{
-                return true
-            }
-        }
-        return false
-    }
+
     
     func setupFirebaseMessaging(_ application: UIApplication) {
         
@@ -115,9 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         
         application.registerForRemoteNotifications()
     }
-    
-    
-    
+
     
     func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -128,8 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         DispatchQueue.main.async {
             UIApplication.shared.registerForRemoteNotifications()
         }
-        
-        
+
     }
     
     
@@ -160,26 +131,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         }
     }
     
-    func application(
-        _ app: UIApplication,
-        open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]
-    ) -> Bool {
-        var handled: Bool
-        
-        handled = GIDSignIn.sharedInstance.handle(url)
-        if handled {
-            return true
-        }
-        
-        // Handle other custom URL types.
-        
-        // If not handled by this app, return false.
-        return false
-    }
     
     
-    
-    // MARK: UISceneSession Lifecycle
+    // MARK: - UISceneSession Lifecycle
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         
@@ -380,6 +334,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
     func applicationWillTerminate(_ application: UIApplication) {
         application.applicationIconBadgeNumber = 0
     }
+    
+  
+    
+}
+// MARK: - Gmail Sign in
+extension AppDelegate{
+    
+//    func application(
+//      _ app: UIApplication,
+//      open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]
+//    ) -> Bool {
+//      var handled: Bool
+//
+//      handled = GIDSignIn.sharedInstance.handle(url)
+//      if handled {
+//        return true
+//      }
+//
+//      // Handle other custom URL types.
+//
+//      // If not handled by this app, return false.
+//      return false
+//    }
     
 }
 

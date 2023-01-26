@@ -570,6 +570,8 @@
 		CE69E6B12976F073008B77C0 /* MailMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69E6AF2976F073008B77C0 /* MailMessages.swift */; };
 		CE6ABE39291C05EA00CFEA36 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6ABE37291C05EA00CFEA36 /* ChangePasswordViewController.swift */; };
 		CE6ABE3A291C05EA00CFEA36 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6ABE38291C05EA00CFEA36 /* ChangePasswordViewController.xib */; };
+		CE6D6EC62981AD1400640EA5 /* AccountManagerEditRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D6EC42981AD1400640EA5 /* AccountManagerEditRecord.swift */; };
+		CE6D6EC72981AD1400640EA5 /* AccountManagerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D6EC52981AD1400640EA5 /* AccountManagerData.swift */; };
 		CE7210632934C08000093265 /* OverTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210612934C08000093265 /* OverTimeViewController.swift */; };
 		CE7210642934C08000093265 /* OverTimeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7210622934C08000093265 /* OverTimeViewController.xib */; };
 		CE7210692934C7F500093265 /* OverTimeFormResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210662934C7F400093265 /* OverTimeFormResponse.swift */; };
@@ -1638,6 +1640,8 @@
 		CE69E6AF2976F073008B77C0 /* MailMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailMessages.swift; sourceTree = "<group>"; };
 		CE6ABE37291C05EA00CFEA36 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		CE6ABE38291C05EA00CFEA36 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
+		CE6D6EC42981AD1400640EA5 /* AccountManagerEditRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagerEditRecord.swift; sourceTree = "<group>"; };
+		CE6D6EC52981AD1400640EA5 /* AccountManagerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountManagerData.swift; sourceTree = "<group>"; };
 		CE7210612934C08000093265 /* OverTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverTimeViewController.swift; sourceTree = "<group>"; };
 		CE7210622934C08000093265 /* OverTimeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OverTimeViewController.xib; sourceTree = "<group>"; };
 		CE7210662934C7F400093265 /* OverTimeFormResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverTimeFormResponse.swift; sourceTree = "<group>"; };
@@ -3936,6 +3940,8 @@
 				CEE3C2C129703BFE00D1B84D /* AccountMastersResponse.swift */,
 				CEE3C2CE297070A200D1B84D /* AccountTypesRecord.swift */,
 				CEE3C2CF297070A200D1B84D /* AccountTypesResponse.swift */,
+				CE6D6EC52981AD1400640EA5 /* AccountManagerData.swift */,
+				CE6D6EC42981AD1400640EA5 /* AccountManagerEditRecord.swift */,
 			);
 			path = AccountMasters;
 			sourceTree = "<group>";
@@ -5245,6 +5251,7 @@
 				3FB1C5352899892700E6EDB1 /* DeleteCommentResponse.swift in Sources */,
 				FA9768B227353DDD000A3576 /* CollectionViewCell.swift in Sources */,
 				FA9FB0A0271447EA0037871C /* ProjectDetailsVC.swift in Sources */,
+				CE6D6EC72981AD1400640EA5 /* AccountManagerData.swift in Sources */,
 				CE8BCBE02954755600E79486 /* CommunicationListsViewController.swift in Sources */,
 				CEDD90F6296450DF00762DBD /* InvoiceSettingsViewController.swift in Sources */,
 				CE0FD9E92905A0EE00170382 /* No_settings.swift in Sources */,
@@ -5728,6 +5735,7 @@
 				CEBDF43928F9DCFC0094247E /* ProgressPlanedRatioData.swift in Sources */,
 				3FD03A51287437B000BB13C7 /* SettingsAlertViewController.swift in Sources */,
 				3F31ADEE288D370700E2D8D6 /* VactionViewController.swift in Sources */,
+				CE6D6EC62981AD1400640EA5 /* AccountManagerEditRecord.swift in Sources */,
 				CE7BA27829561DC500ED5FC8 /* C2FormAttachTableViewCell.swift in Sources */,
 				FAA88ED2282B0D730082432F /* TaskCommentCell.swift in Sources */,
 				CEDCF66F2965EC0F0055DDB2 /* SendMailViewController.swift in Sources */,
@@ -7174,7 +7182,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.0.0;
+				MARKETING_VERSION = 15.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -7311,7 +7319,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.0.0;
+				MARKETING_VERSION = 15.0.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

@@ -33,6 +33,9 @@ struct AccountTypesRecord : Mappable {
 	var label : String?
 	var value : String?
 
+    
+    
+    
 	init?(map: Map) {
 
 	}

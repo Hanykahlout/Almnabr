@@ -22,6 +22,7 @@ class AccountMastersTableViewCell: UITableViewCell {
     @IBOutlet weak var VATNumberLabel: UILabel!
     @IBOutlet weak var writerLabel: UILabel!
     @IBOutlet weak var createdDateLabel: UILabel!
+    @IBOutlet weak var deleteButton: UIButton!
     
     @IBOutlet weak var branchesButton: UIButton!
     
@@ -45,6 +46,7 @@ class AccountMastersTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
     func setData(data:AccountMastersRecord){
         nameLabel.text = data.name ?? "----"
         self.branchesButton.isHidden = data.children?.isEmpty ?? true
@@ -60,7 +62,9 @@ class AccountMastersTableViewCell: UITableViewCell {
         VATNumberLabel.text = "----"
         writerLabel.text = data.writer_name ?? "----"
         createdDateLabel.text = data.account_masters_created_datetime ?? "----"
+        deleteButton.isHidden = data.account_masters_support == "1"
     }
+    
     
     @IBAction func branchesAction(_ sender: Any) {
         branchesButtonAction?()

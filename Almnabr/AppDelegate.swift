@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         UINavigationBar.appearance().tintColor = .white
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().tintColor = .white
-  
+        
         application.registerForRemoteNotifications()
         
         
@@ -57,19 +57,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         setupFirebaseMessaging(application)
         
         // Gmail Sign in
-//        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
-//            if error != nil || user == nil {
-//                // Show the app's signed-out state.
-//            } else {
-//                // Show the app's signed-in state.
-//            }
-//        }
-//
-      
+        //        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+        //            if error != nil || user == nil {
+        //                // Show the app's signed-out state.
+        //            } else {
+        //                // Show the app's signed-in state.
+        //            }
+        //        }
+        //
+        
         
         return true
     }
-
+    
     
     func setupFirebaseMessaging(_ application: UIApplication) {
         
@@ -89,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         
         application.registerForRemoteNotifications()
     }
-
+    
     
     func getNotificationSettings() {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         DispatchQueue.main.async {
             UIApplication.shared.registerForRemoteNotifications()
         }
-
+        
     }
     
     
@@ -335,31 +335,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         application.applicationIconBadgeNumber = 0
     }
     
-  
+    
     
 }
-// MARK: - Gmail Sign in
-extension AppDelegate{
-    
-//    func application(
-//      _ app: UIApplication,
-//      open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]
-//    ) -> Bool {
-//      var handled: Bool
-//
-//      handled = GIDSignIn.sharedInstance.handle(url)
-//      if handled {
-//        return true
-//      }
-//
-//      // Handle other custom URL types.
-//
-//      // If not handled by this app, return false.
-//      return false
-//    }
-    
-}
-
 
 
 extension AppDelegate : MessagingDelegate {

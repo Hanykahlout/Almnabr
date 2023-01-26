@@ -1,5 +1,5 @@
 /* 
-Copyright (c) 2022 Swift Models Generated from JSON powered by http://www.json4swift.com
+Copyright (c) 2023 Swift Models Generated from JSON powered by http://www.json4swift.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -14,27 +14,20 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct SearchBranchRecords : Mappable {
-	var value : String?
-	var label : String?
-    var key : String?
-    var flag : String?
-    var isSelected = false
-    
+struct AccountManagerData : Mappable {
+	var status : Bool?
+	var status_code : Int?
+	var records : AccountManagerEditRecord?
+
 	init?(map: Map) {
 
 	}
-    
-    init(value:String){
-        self.value = value
-    }
 
 	mutating func mapping(map: Map) {
 
-		value <- map["value"]
-        key <- map["key"]
-		label <- map["label"]
-        flag <- map["flag"]
+		status <- map["status"]
+		status_code <- map["status_code"]
+		records <- map["records"]
 	}
 
 }

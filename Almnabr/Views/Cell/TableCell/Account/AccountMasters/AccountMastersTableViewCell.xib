@@ -408,6 +408,7 @@
                 <outlet property="costCenterSupportLabel" destination="QGj-6g-for" id="fKP-Kp-fHb"/>
                 <outlet property="createdDateLabel" destination="XX5-6b-RbU" id="VKg-Tk-bgz"/>
                 <outlet property="currenciesLabel" destination="YLL-nz-S4Y" id="hZc-B0-q2c"/>
+                <outlet property="deleteButton" destination="dCQ-Bb-Sn3" id="d03-vy-VbZ"/>
                 <outlet property="nameLabel" destination="4lw-Em-EUe" id="eOY-GO-6t3"/>
                 <outlet property="parentAccountTypeLabel" destination="OKK-6C-9JS" id="ehz-02-g8z"/>
                 <outlet property="supportSubAccountLabel" destination="Ybh-HR-uyn" id="n38-u0-Xte"/>

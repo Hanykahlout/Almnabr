@@ -3998,52 +3998,87 @@ class APIController{
         }
     }
     
+    
+    func getBalanceSheetGroups(branch_id:String,account_type:String,callback:@escaping (_ data:SearchBranch) -> Void){
+        let strURL = "\(serverURL)/bsheets"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        let param:Parameters = ["branch_id":branch_id,"account_type":account_type]
+        
+        Alamofire.request(strURL, method: .post,parameters: param,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func addAccountMaster(url:String,body:[String:Any],callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+        let strURL = "\(serverURL)\(url)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func searchForCostCenter(branch_id:String,search_text:String,callback:@escaping (_ data:SearchBranch) -> Void){
+        let strURL = "\(serverURL)/cctransactions"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        let body = ["branch_id": branch_id,
+                    "search_text": search_text
+                    ]
+        
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getAccountManagerEditData(branch_id:String,accountMasterId:String,callback:@escaping (_ data:AccountManagerData) -> Void){
+        let strURL = "\(serverURL)/amview/\(branch_id)/\(accountMasterId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AccountManagerData = Mapper<AccountManagerData>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func deleteAccountMaster(branch_id:String,accountMasterId:String,callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+        let strURL = "\(serverURL)/amdelete/\(branch_id)/\(accountMasterId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+
+        Alamofire.request(strURL, method: .delete,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
 }
-
-
-
-// MARK: - Gmail API
-extension APIController{
-
-//    func getInboxs(callback:@escaping (_ data:MessagesResponse) -> Void){
-//
-//        let strURL = "https://gmail.googleapis.com/gmail/v1/users/\(UserDefaults.standard.string(forKey: "gmail_user_id") ?? "")/messages"
-//
-//        let header = [
-//            "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "gmail_accessToken") ?? "")"
-//        ]
-//
-//        Alamofire.request(strURL, method: .get,headers: header).validate().responseJSON { (response) in
-//            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-//                print("ASDASD",str)
-//                if let parsedMapperString : MessagesResponse = Mapper<MessagesResponse>().map(JSONString:str){
-//                    callback(parsedMapperString)
-//                }
-//            }
-//        }
-//    }
-//
-//    func getSpacificInboxs(with id:String,callback:@escaping (_ data:MessageInfo) -> Void){
-//
-//        let strURL = "https://gmail.googleapis.com/gmail/v1/users/\(UserDefaults.standard.string(forKey: "gmail_user_id") ?? "")/messages/\(id)"
-//
-//        let header = [
-//            "Authorization": "Bearer \(UserDefaults.standard.string(forKey: "gmail_accessToken") ?? "")"
-//        ]
-//
-//        Alamofire.request(strURL, method: .get,headers: header).validate().responseJSON { (response) in
-//            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
-//                print("ASDASD",str)
-//                if let parsedMapperString : MessageInfo = Mapper<MessageInfo>().map(JSONString:str){
-//                    callback(parsedMapperString)
-//                }
-//            }
-//        }
-//    }
-    
-    
-    
-}
-
-
-

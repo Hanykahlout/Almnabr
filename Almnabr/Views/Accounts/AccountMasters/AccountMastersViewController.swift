@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SCLAlertView
 class AccountMastersViewController: UIViewController {
     
     @IBOutlet weak var headerView: HeaderView!
@@ -19,11 +19,17 @@ class AccountMastersViewController: UIViewController {
     
     
     @IBOutlet weak var mainStackView: UIStackView!
+    
+    
+    private var refreshControl = UIRefreshControl()
     private var branchSelector:BranchSelection!
-    private var data = [AccountMastersRecord]()
+    var data = [AccountMastersRecord]()
     private var temp = [AccountMastersRecord]()
     private var branch_id = ""
+    private var selectedFinancialId = ""
+    private var observer:NSObjectProtocol?
     var isChild = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialization()
@@ -31,13 +37,33 @@ class AccountMastersViewController: UIViewController {
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        headerView.isHidden = isChild
+        branchSelector.isHidden = isChild
+        searchTextField.isHidden = isChild
+        navigationController?.setNavigationBarHidden(!isChild, animated: true)
+    }
+    
+    
     private func initialization(){
+        navigationController?.navigationBar.tintColor = maincolor
         setUpTableView()
         handleHeaderView()
         addBrachSelector()
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         searchTextField.addTarget(self, action: #selector(searchAction), for: .editingChanged)
+        observer = NotificationCenter.default.addObserver(forName: .init("ReloadAccountManagerData"), object: nil, queue: .main) { [weak self] notify in
+            guard let data = notify.object as? (AccountMastersRecord,Int) else { return }
+            self?.data[data.1] = data.0
+            self?.tableView.reloadRows(at: [IndexPath(row: data.1, section: 0)], with: .automatic)
+        }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(observer!)
+    }
     
     private func handleHeaderView(){
         headerView.btnAction = {
@@ -59,6 +85,7 @@ class AccountMastersViewController: UIViewController {
         }
         
         branchSelector.financialYearSelectionAction = { [weak self] selectedYear in
+            self?.selectedFinancialId = selectedYear
             self?.getAccountMasters(branch_id: self?.branch_id ?? "", finance_id: selectedYear)
             self?.mainStackView.isHidden = false
         }
@@ -66,7 +93,7 @@ class AccountMastersViewController: UIViewController {
         bracnhSelectorStackView.addArrangedSubview(branchSelector)
     }
     
-
+    
     @objc private func searchAction(){
         if searchTextField.text! == ""{
             data = temp
@@ -80,12 +107,17 @@ class AccountMastersViewController: UIViewController {
         tableView.reloadData()
     }
     
+    
+    @objc private func refresh(){
+        getAccountMasters(branch_id: branch_id, finance_id: selectedFinancialId)
+    }
 }
 // MARK: - Table View Delegate and DataSource
 extension AccountMastersViewController:UITableViewDelegate,UITableViewDataSource{
     private func setUpTableView(){
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.refreshControl = refreshControl
         tableView.register(.init(nibName: "AccountMastersTableViewCell", bundle: nil), forCellReuseIdentifier: "AccountMastersTableViewCell")
     }
     
@@ -100,11 +132,36 @@ extension AccountMastersViewController:UITableViewDelegate,UITableViewDataSource
         cell.addButtonAction = { [weak self] in
             let vc = AddAccountMastersViewController()
             vc.data = object
+            vc.index = indexPath.row
+            vc.isEdit = false
             let nav = UINavigationController(rootViewController: vc)
             nav.setNavigationBarHidden(true, animated: true)
             nav.modalPresentationStyle = .overCurrentContext
             self?.navigationController?.present(nav, animated: true)
         }
+        
+        cell.editButtonAction = { [weak self] in
+            let vc = AddAccountMastersViewController()
+            vc.data = object
+            vc.index = indexPath.row
+            vc.isEdit = true
+            let nav = UINavigationController(rootViewController: vc)
+            nav.setNavigationBarHidden(true, animated: true)
+            nav.modalPresentationStyle = .overCurrentContext
+            self?.navigationController?.present(nav, animated: true)
+        }
+        
+        cell.deleteButtonAction = { [weak self] in
+            self?.deleteAccoutMaster(indexPath: indexPath, accountMasterId: object.account_masters_id ?? "")
+        }
+        
+        cell.branchesButtonAction = { [weak self] in
+            let vc = AccountMastersViewController()
+            vc.data = object.children ?? []
+            vc.isChild = true
+            self?.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         return cell
     }
     
@@ -126,6 +183,27 @@ extension AccountMastersViewController{
                 }
                 self?.emptyDataImageView.isHidden = !(self?.data.isEmpty ?? true)
                 self?.tableView.reloadData()
+                    
+                if self?.refreshControl.isRefreshing ?? false{
+                    self?.refreshControl.endRefreshing()
+                }
+            }
+        }
+    }
+    
+    
+    private func deleteAccoutMaster(indexPath:IndexPath,accountMasterId:String){
+        showLoadingActivity()
+        APIController.shard.deleteAccountMaster(branch_id: branch_id, accountMasterId: accountMasterId) { data in
+            DispatchQueue.main.async { [weak self] in
+                self?.hideLoadingActivity()
+                if data.status ?? false{
+                    SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
+                    self?.data.remove(at: indexPath.row)
+                    self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                }else{
+                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
+                }
             }
         }
     }

@@ -27,6 +27,8 @@ class BranchSelection: UIView {
     private var financialYears = [AccountFinancialRecord]()
     
     var withFinancialYearSelection = true
+    var selecetdfinancialYear: String?
+    var selecetdBranchId: String?
     var branchSelectionAction : ((_ selectedBranch:String)->Void)?
     var financialYearSelectionAction : ((_ selectedYear:String)->Void)?
     
@@ -105,7 +107,7 @@ class BranchSelection: UIView {
         }
         
     }
-
+    
 }
 
 
@@ -118,6 +120,17 @@ extension BranchSelection{
                 self.options = apiOptions
                 self.optionsDropDown.dataSource.append("Choose Option")
                 self.optionsDropDown.dataSource.append(contentsOf: apiOptions.map{$0.title ?? ""})
+                
+                if let selecetdBranchId = self.selecetdBranchId{
+                    let selectedIndex = (self.options.firstIndex(where: {$0.id == selecetdBranchId}) ?? 0)
+//                    self.optionsDropDown.selectRow(at: selectedIndex + 1 )
+                    self.branchSelectionAction?(selecetdBranchId)
+                    self.optionsTextrField.text = self.options[selectedIndex].title ?? ""
+                    if self.withFinancialYearSelection{
+                        self.financialYearView.isHidden = false
+                        self.getAccountFinancialOptions(branch_id: self.options[selectedIndex].id ?? "")
+                    }
+                }
             }else{
                 SCLAlertView().showError("error".localized(), subTitle: data.error ?? "There is an unknow error!!")
             }
@@ -133,10 +146,22 @@ extension BranchSelection{
                     self.financialYears = records
                     self.financialYearDropDown.dataSource = ["Financial Year"]
                     self.financialYearDropDown.dataSource.append(contentsOf: self.financialYears.map{$0.label ?? ""})
+                    
+                    if let selecetdfinancialYear = self.selecetdfinancialYear {
+                        let selectedIndex = (self.financialYears.firstIndex(where: {$0.value == selecetdfinancialYear}) ?? 0)
+                        let objc = self.financialYears[selectedIndex]
+                        self.financialYearSelectionAction?(objc.value ?? "")
+                        self.financialYearTextField.text = objc.label ?? ""
+                    }
                 }
             }
         }
     }
     
     
+    
 }
+
+
+
+

@@ -4038,7 +4038,7 @@ class APIController{
         
         let body = ["branch_id": branch_id,
                     "search_text": search_text
-                    ]
+        ]
         
         Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
@@ -4054,7 +4054,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-
+        
         
         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
@@ -4071,7 +4071,7 @@ class APIController{
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-
+        
         Alamofire.request(strURL, method: .delete,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
@@ -4080,5 +4080,148 @@ class APIController{
             }
         }
     }
+    
+    func getOpeningBalanceData(branch_id:String,finance_id:String,search_key:String,callback:@escaping (_ data:OpeningBalanceData) -> Void){
+        let strURL = "\(serverURL)/accounts/get_accounts_for_opening/\(branch_id)/\(finance_id)?search_key=\(search_key)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : OpeningBalanceData = Mapper<OpeningBalanceData>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+        
+    func getReceipts(branch_id:String,finance_id:String,search_key:String,pageNumber:String,callback:@escaping (_ data:ReceiptsResponse) -> Void){
+        
+        let strURL = "\(serverURL)/listreceipts/\(branch_id)/\(pageNumber)/10"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        let body = [
+            "search_key": search_key,
+            "finance_id": finance_id
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ReceiptsResponse = Mapper<ReceiptsResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func searchForCardAccount(branch_id:String,finance_id:String,search_text:String,callback:@escaping (_ data:SearchBranch) -> Void){
+        
+        let strURL = "\(serverURL)/sam/accounts_add"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        let body = [
+            "search_text": search_text,
+            "finance_id": finance_id,
+            "branch_id": branch_id
+        ]
+ 
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func searchForCardCost(branch_id:String,search_text:String,callback:@escaping (_ data:SearchBranch) -> Void){
+        
+        let strURL = "\(serverURL)/cctransactions"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        let body = [
+            "search_text": search_text,
+            "branch_id": branch_id
+        ]
+ 
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func createReceipt(body:[String:Any],callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+       
+        let strURL = "\(serverURL)/reccreate"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    
+    
+    func createReceipt(fileUrl:URL?,body:[String:Any],callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+         let strURL = "\(serverURL)/reccreate"
+         let headers = [ "authorization":
+                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+         ]
+    
+        Alamofire.upload(multipartFormData: { multipartFormData in
+            if let fileUrl = fileUrl{
+                do {
+                    let file = try Data(contentsOf: fileUrl)
+                    multipartFormData.append( file as Data, withName: "payment_receipt_attachment", fileName: "\(Date.init().timeIntervalSince1970).\(fileUrl.pathExtension)", mimeType: "text/\(fileUrl.pathExtension)")
+                    
+                } catch {
+                    debugPrint("Couldn't get Data from URL: \(error)")
+                }
+            }
+            
+            for (key, value) in body {
+                if let temp = value as? String {
+                    multipartFormData.append(temp.data(using: .utf8)!, withName: key)
+                }
+            }
+            
+        },
+                         to: URL(string: strURL)!, method: .post , headers: headers) { (result:SessionManager.MultipartFormDataEncodingResult) in
+            switch result{
+            case .success(request: let upload, streamingFromDisk: _, streamFileURL: _):
+                upload.responseJSON { (response:DataResponse<Any>) in
+                    if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                        if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                            callback(parsedMapperString)
+                        }
+                    }
+                }
+            case .failure(let error):
+                print("Error:",error.localizedDescription)
+                break
+                
+            }
+        }
+    }
+    
     
 }

@@ -78,6 +78,7 @@ class AddAccountMastersViewController: UIViewController {
     var data: AccountMastersRecord?
     var index = -1
     var isEdit = false
+    var dismissAction:(()->Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -464,25 +465,25 @@ extension AddAccountMastersViewController{
         }
         
         
-        data?.account_masters_parent = addAsRootTextField.text! == "Yes" ? "1" : "0"
-        data?.account_masters_name_en = titleEnTextField.text!
-        data?.account_masters_name_ar = titleArTextField.text!
-        data?.account_masters_currency_id = selectedCurrencie?.value ?? ""
-        data?.account_masters_type = selectedAccountType?.value ?? ""
-        data?.account_masters_balance_sheet_id = selectedBalanceSheetGroup?.value ?? ""
-        data?.account_masters_support = supportSubAccountTextField.text! == "Yes" ? "1" : "0"
-        data?.cost_center_support = costCenterSupportTextField.text! == "Yes" ? "1" : "0"
-        data?.hold_account_from_transaction = holdAccountSelectionButton.isSelected ? "1" : "0"
-        data?.set_profit_loss_account = profitLossAccountSelectionButton.isSelected ? "1" : "0"
-        data?.account_vat_number = VATNumberTextField.text!
+//        data?.account_masters_parent = addAsRootTextField.text! == "Yes" ? "1" : "0"
+//        data?.account_masters_name_en = titleEnTextField.text!
+//        data?.account_masters_name_ar = titleArTextField.text!
+//        data?.account_masters_currency_id = selectedCurrencie?.value ?? ""
+//        data?.account_masters_type = selectedAccountType?.value ?? ""
+//        data?.account_masters_balance_sheet_id = selectedBalanceSheetGroup?.value ?? ""
+//        data?.account_masters_support = supportSubAccountTextField.text! == "Yes" ? "1" : "0"
+//        data?.cost_center_support = costCenterSupportTextField.text! == "Yes" ? "1" : "0"
+//        data?.hold_account_from_transaction = holdAccountSelectionButton.isSelected ? "1" : "0"
+//        data?.set_profit_loss_account = profitLossAccountSelectionButton.isSelected ? "1" : "0"
+//        data?.account_vat_number = VATNumberTextField.text!
         
         
         let url = isEdit ? "/amupdate/\(data?.account_masters_id ?? "")" : "/amcreate"
         APIController.shard.addAccountMaster(url:url,body: body) { [weak self] data in
             if let status = data.status,status{
                 SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
-                NotificationCenter.default.post(name: .init("ReloadAccountManagerData"), object: (self?.data,self?.index))
-                self?.navigationController?.dismiss(animated: true)
+                NotificationCenter.default.post(name: .init("ReloadAccountManagerData"), object: nil)
+                self?.dismissAction?()
             }else{
                 SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
             }

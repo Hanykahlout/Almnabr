@@ -118,10 +118,12 @@ class AddAttachmentViewController: UIViewController {
         self.present(documentPickerController, animated: true, completion: nil)
     }
     
+    
     @objc private func attachmentTypeAction(){
         attachTypeArrow.transform = .init(rotationAngle: .pi)
         attachTypeDropDown.show()
     }
+    
     
     @objc private func visiblityViewAction(){
         visiblityArrow.transform = .init(rotationAngle: .pi)

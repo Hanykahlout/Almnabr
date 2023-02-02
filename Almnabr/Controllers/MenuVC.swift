@@ -373,7 +373,16 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     panel?.center(nav)
-                    break
+                case "42":
+                    let vc = CreateReceiptViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                case "43":
+                    let vc = AllReceiptsViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
                 case "69":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
                     let vc:CronTransactionVC = AppDelegate.mainSB.instanceVC()
@@ -417,6 +426,12 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     panel?.center(nav)
+                case "103":
+                    let vc = OpeningBalanceViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                    break
                 case "22":
                     let vc = JobApplicationVC()
                     let nav = UINavigationController(rootViewController: vc)

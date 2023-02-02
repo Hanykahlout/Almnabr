@@ -8,6 +8,8 @@
 
 import UIKit
 import SCLAlertView
+import FAPanels
+
 class AccountMastersViewController: UIViewController {
     
     @IBOutlet weak var headerView: HeaderView!
@@ -16,8 +18,7 @@ class AccountMastersViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyDataImageView: UIImageView!
-    
-    
+
     @IBOutlet weak var mainStackView: UIStackView!
     
     
@@ -43,10 +44,16 @@ class AccountMastersViewController: UIViewController {
         branchSelector.isHidden = isChild
         searchTextField.isHidden = isChild
         navigationController?.setNavigationBarHidden(!isChild, animated: true)
+        if !isChild{
+            getAccountMasters(branch_id: branch_id, finance_id: selectedFinancialId)
+            branchSelector.selecetdfinancialYear = selectedFinancialId == "" ? nil : selectedFinancialId
+            branchSelector.selecetdBranchId = branch_id == "" ? nil : branch_id
+        }
     }
     
     
     private func initialization(){
+        
         navigationController?.navigationBar.tintColor = maincolor
         setUpTableView()
         handleHeaderView()
@@ -54,16 +61,17 @@ class AccountMastersViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
         searchTextField.addTarget(self, action: #selector(searchAction), for: .editingChanged)
         observer = NotificationCenter.default.addObserver(forName: .init("ReloadAccountManagerData"), object: nil, queue: .main) { [weak self] notify in
-            guard let data = notify.object as? (AccountMastersRecord,Int) else { return }
-            self?.data[data.1] = data.0
-            self?.tableView.reloadRows(at: [IndexPath(row: data.1, section: 0)], with: .automatic)
+            self?.getAccountMasters(branch_id: self?.branch_id ?? "", finance_id: self?.selectedFinancialId ?? "")
         }
     }
+    
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(observer!)
     }
+    
     
     private func handleHeaderView(){
         headerView.btnAction = {
@@ -75,7 +83,6 @@ class AccountMastersViewController: UIViewController {
             }
         }
     }
-    
     
     private func addBrachSelector(){
         branchSelector = BranchSelection()
@@ -111,13 +118,17 @@ class AccountMastersViewController: UIViewController {
     @objc private func refresh(){
         getAccountMasters(branch_id: branch_id, finance_id: selectedFinancialId)
     }
+    
+    
 }
 // MARK: - Table View Delegate and DataSource
 extension AccountMastersViewController:UITableViewDelegate,UITableViewDataSource{
     private func setUpTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.refreshControl = refreshControl
+        if !isChild{
+            tableView.refreshControl = refreshControl
+        }
         tableView.register(.init(nibName: "AccountMastersTableViewCell", bundle: nil), forCellReuseIdentifier: "AccountMastersTableViewCell")
     }
     
@@ -129,10 +140,14 @@ extension AccountMastersViewController:UITableViewDelegate,UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "AccountMastersTableViewCell", for: indexPath) as! AccountMastersTableViewCell
         let object = data[indexPath.row]
         cell.setData(data: object)
+        
         cell.addButtonAction = { [weak self] in
             let vc = AddAccountMastersViewController()
             vc.data = object
             vc.index = indexPath.row
+            vc.dismissAction = { [weak self] in
+                self?.backToParent()
+            }
             vc.isEdit = false
             let nav = UINavigationController(rootViewController: vc)
             nav.setNavigationBarHidden(true, animated: true)
@@ -140,10 +155,14 @@ extension AccountMastersViewController:UITableViewDelegate,UITableViewDataSource
             self?.navigationController?.present(nav, animated: true)
         }
         
+        
         cell.editButtonAction = { [weak self] in
             let vc = AddAccountMastersViewController()
             vc.data = object
             vc.index = indexPath.row
+            vc.dismissAction = { [weak self] in
+                self?.backToParent()
+            }
             vc.isEdit = true
             let nav = UINavigationController(rootViewController: vc)
             nav.setNavigationBarHidden(true, animated: true)
@@ -158,11 +177,22 @@ extension AccountMastersViewController:UITableViewDelegate,UITableViewDataSource
         cell.branchesButtonAction = { [weak self] in
             let vc = AccountMastersViewController()
             vc.data = object.children ?? []
+            vc.branch_id = self?.branch_id ?? ""
+            vc.selectedFinancialId = self?.selectedFinancialId ?? ""
             vc.isChild = true
             self?.navigationController?.pushViewController(vc, animated: true)
         }
-        
         return cell
+    }
+    
+    private func backToParent(){
+        let vc = AccountMastersViewController()
+        vc.branch_id = self.branch_id
+        vc.selectedFinancialId = self.selectedFinancialId
+        vc.isChild = false
+        let nav = UINavigationController(rootViewController: vc)
+        nav.isNavigationBarHidden = true
+        panel?.center(nav)
     }
     
 }
@@ -183,7 +213,7 @@ extension AccountMastersViewController{
                 }
                 self?.emptyDataImageView.isHidden = !(self?.data.isEmpty ?? true)
                 self?.tableView.reloadData()
-                    
+                
                 if self?.refreshControl.isRefreshing ?? false{
                     self?.refreshControl.endRefreshing()
                 }

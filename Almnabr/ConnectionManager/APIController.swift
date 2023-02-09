@@ -4096,10 +4096,10 @@ class APIController{
         }
     }
     
+    
+    func getReceipts(url:String,finance_id:String,search_key:String,callback:@escaping (_ data:ReceiptsResponse) -> Void){
         
-    func getReceipts(branch_id:String,finance_id:String,search_key:String,pageNumber:String,callback:@escaping (_ data:ReceiptsResponse) -> Void){
-        
-        let strURL = "\(serverURL)/listreceipts/\(branch_id)/\(pageNumber)/10"
+        let strURL = "\(serverURL)\(url)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -4130,7 +4130,7 @@ class APIController{
             "finance_id": finance_id,
             "branch_id": branch_id
         ]
- 
+        
         Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
@@ -4151,7 +4151,7 @@ class APIController{
             "search_text": search_text,
             "branch_id": branch_id
         ]
- 
+        
         Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
                 if let parsedMapperString : SearchBranch = Mapper<SearchBranch>().map(JSONString:str){
@@ -4163,7 +4163,7 @@ class APIController{
     
     
     func createReceipt(body:[String:Any],callback:@escaping (_ data:UpdateSettingResponse) -> Void){
-       
+        
         let strURL = "\(serverURL)/reccreate"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
@@ -4181,12 +4181,12 @@ class APIController{
     
     
     
-    func createReceipt(fileUrl:URL?,body:[String:Any],callback:@escaping (_ data:UpdateSettingResponse) -> Void){
-         let strURL = "\(serverURL)/reccreate"
-         let headers = [ "authorization":
-                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
-         ]
-    
+    func createReceipt(requestUrl:String,fileUrl:URL?,body:[String:Any],callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+        let strURL = "\(serverURL)\(requestUrl)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
         Alamofire.upload(multipartFormData: { multipartFormData in
             if let fileUrl = fileUrl{
                 do {
@@ -4219,6 +4219,57 @@ class APIController{
                 print("Error:",error.localizedDescription)
                 break
                 
+            }
+        }
+    }
+    
+    func viewReceipt(url:String,callback:@escaping (_ data:ViewReceiptData) -> Void){
+        
+        let strURL = "\(serverURL)\(url)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ViewReceiptData = Mapper<ViewReceiptData>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    
+    func editReceipt(url:String,callback:@escaping (_ data:ViewReceiptData) -> Void){
+        
+        let strURL = "\(serverURL)\(url)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                
+                if let parsedMapperString : ViewReceiptData = Mapper<ViewReceiptData>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func exportReceiptPDF(url:String,callback:@escaping (_ data:GetImageResponse) -> Void){
+        
+        let strURL = "\(serverURL)\(url)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                
+                if let parsedMapperString : GetImageResponse = Mapper<GetImageResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
             }
         }
     }

@@ -28,8 +28,6 @@ class HomeVC: UIViewController   {
     @IBOutlet weak var projectRequestsStackView: UIStackView!
     @IBOutlet weak var mainStackView: UIStackView!
     
-    
-    
     @IBOutlet weak var header: HeaderView!
     
     @IBOutlet weak var lbl_allCopyRes: UILabel!

@@ -17,10 +17,13 @@ class CreateReceiptViewController: UIViewController {
     
     @IBOutlet weak var headerView: HeaderView!
     @IBOutlet weak var branchSelectorStackView: UIStackView!
+    @IBOutlet weak var receiptDateLabel: UILabel!
     @IBOutlet weak var receiptDateTextField: UITextField!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var emptyDescriptionLabel: UILabel!
+    @IBOutlet weak var receiptFromLabel: UILabel!
     @IBOutlet weak var receiptFromTextField: UITextField!
+    @IBOutlet weak var receiptModeLabel: UILabel!
     
     @IBOutlet weak var cashButton: UIButton!
     @IBOutlet weak var cashStackView: UIStackView!
@@ -46,6 +49,7 @@ class CreateReceiptViewController: UIViewController {
     
     @IBOutlet weak var bankNameTextField: UITextField!
     
+    @IBOutlet weak var receiptAmountLabel: UILabel!
     @IBOutlet weak var receiptAmountTextField: UITextField!
     
     @IBOutlet weak var emptyNoteLabel: UILabel!
@@ -66,19 +70,40 @@ class CreateReceiptViewController: UIViewController {
     private var depitAccountSelected:SearchBranchRecords?
     private var creditAccounts = [SearchBranchRecords]()
     private var creditAccountSelected:SearchBranchRecords?
-    private var branch_id = ""
+    var branch_id = ""
+    var payment_receipt_id = ""
     private var finance_id = ""
     private var receiptMode = ""
     private var isReceiptDate = false
     private var selectedFileUrl:URL?
     private var debitCardCosts: AddCardCost?
     private var creditCardCosts: AddCardCost?
-    
+    var isEdit = false
+    var isPayment = false
     override func viewDidLoad() {
         super.viewDidLoad()
         initialization()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if isEdit{
+            getEditData()
+        }
+        
+        if isPayment{
+            receiptDateTextField.placeholder = "Payment Date"
+            receiptDateLabel.text = "Payment Date: *"
+            
+            receiptFromLabel.text = "Payment To: *"
+            receiptFromTextField.placeholder = "Payment To"
+            
+            receiptModeLabel.text = "Payment Mode: *"
+            
+            receiptAmountLabel.text = "Payment Amount: *"
+            receiptAmountTextField.placeholder = "Payment Amount"
+        }
+    }
     
     private func initialization(){
         documentPickerController = UIDocumentPickerViewController(
@@ -89,7 +114,9 @@ class CreateReceiptViewController: UIViewController {
         handleHeaderView()
         setUpGesture()
         setUpFastisController()
-        setUpBranchSelector()
+        if !isEdit{
+            setUpBranchSelector()
+        }
         debitAccountTextField.addTarget(self, action: #selector(searchForCardAccount(_:)), for: .editingChanged)
         creditAccountTextField.addTarget(self, action: #selector(searchForCardAccount(_:)), for: .editingChanged)
         setUpDropDownLists()
@@ -232,7 +259,8 @@ class CreateReceiptViewController: UIViewController {
             self?.branch_id = branch_id
             self?.debitCardCosts?.branch_id = branch_id
             self?.creditCardCosts?.branch_id = branch_id
-            self?.mainStackView.isHidden = false
+            self?.mainStackView.isHidden = branch_id == ""
+            
         }
         branchSelector?.financialYearSelectionAction = { [weak self] finance_id in
             self?.finance_id = finance_id
@@ -300,16 +328,6 @@ class CreateReceiptViewController: UIViewController {
     
     @IBAction func selectFileAction(_ sender: Any) {
         self.present(documentPickerController, animated: true, completion: nil)
-    }
-    
-    
-    @IBAction func debitCostAction(_ sender: Any) {
-        
-    }
-    
-    
-    @IBAction func creditCostAction(_ sender: Any) {
-        
     }
     
     
@@ -394,11 +412,7 @@ extension CreateReceiptViewController{
             "payment_receipt_document_date":documentDateTextField.text!,
             "payment_receipt_bank_name":bankNameTextField.text!,
             "payment_receipt_notes":notesTextView.text!,
-            "payment_receipt_description":descriptionTextView.text!,
-            "payment_receipt_debit_cost_id[0][cid]":"",
-            "payment_receipt_debit_cost_id[0][amount]":"",
-            "payment_receipt_credit_cost_id[0][cid]":"",
-            "payment_receipt_credit_cost_id[0][amount]":""
+            "payment_receipt_description":descriptionTextView.text!
         ]
         
         let debitCosts = debitCardCosts?.getSelectedCardCosts() ?? []
@@ -413,12 +427,15 @@ extension CreateReceiptViewController{
             body["payment_receipt_credit_cost_id[\(index)][amount]"] = creditCosts[index].amount
         }
         showLoadingActivity()
-        APIController.shard.createReceipt(fileUrl:selectedFileUrl,body: body) { data in
+        let url = "/\(isPayment ? "pay": "rec")\(isEdit ? "update": "create")/\(payment_receipt_id)"
+        
+        APIController.shard.createReceipt(requestUrl: url ,fileUrl:selectedFileUrl,body: body) { data in
             DispatchQueue.main.async{ [weak self] in
                 self?.hideLoadingActivity()
                 if data.status ?? false{
                     SCLAlertView().showSuccess("Success".localized(), subTitle: data.msg ?? "")
                     let vc = AllReceiptsViewController()
+                    vc.isPayment = self?.isPayment ?? false
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     self?.panel?.center(nav)
@@ -427,11 +444,60 @@ extension CreateReceiptViewController{
                 }
             }
         }
-        
     }
     
     
+    private func getEditData(){
+        let url = "/\(isPayment ? "editpayment" : "editreceipt")/\(branch_id)/\(payment_receipt_id)"
+        showLoadingActivity()
+        APIController.shard.editReceipt(url:url) { data in
+            DispatchQueue.main.async { [weak self] in
+                self?.hideLoadingActivity()
+                if data.status ?? false{
+                    self?.setUpBranchSelector()
+                    self?.branchSelector?.selecetdBranchId = self?.branch_id ?? ""
+                    self?.branchSelector?.selecetdfinancialYear = data.financial_year?.finance_id ?? ""
+                    self?.receiptDateTextField.text = data.records?.transaction_date ?? ""
+                    self?.descriptionTextView.text = data.records?.payment_receipt_description ?? ""
+                    self?.emptyDescriptionLabel.isHidden = !(self?.descriptionTextView.text.isEmpty ?? false)
+                    self?.receiptFromTextField.text = data.records?.payment_receipt_to_from ?? ""
+                    let receiptMode = data.records?.payment_receipt_mode ?? ""
+                    self?.receiptMode = receiptMode
+                    self?.cashButton.isSelected = receiptMode == "cash"
+                    self?.chequeButton.isSelected = receiptMode == "cheque"
+                    self?.depositeButton.isSelected = receiptMode == "deposite"
+                    self?.transferButton.isSelected = receiptMode == "etransfer"
+                    self?.addtionalFieldsStackView.isHidden = self?.cashButton.isSelected ?? false
+                    self?.depitAccountSelected = .init(value: data.records?.payment_receipt_debit_account_id ?? "")
+                    self?.creditAccountSelected = .init(value: data.records?.payment_receipt_credit_account_id ?? "")
+                    self?.debitAccountTextField.placeholder = data.records?.debit_account ?? ""
+                    self?.creditAccountTextField.placeholder = data.records?.credit_account ?? ""
+                    self?.documentNoTextField.text = data.records?.payment_receipt_document_number ?? ""
+                    self?.documentDateTextField.text = data.records?.payment_receipt_document_date ?? ""
+                    self?.bankNameTextField.text = data.records?.payment_receipt_bank_name ?? ""
+                    self?.receiptAmountTextField.text = data.records?.payment_receipt_amount ?? ""
+                    self?.notesTextView.text = data.records?.payment_receipt_notes ?? ""
+                    self?.emptyNoteLabel.isHidden = !(self?.notesTextView.text.isEmpty ?? false )
+                    
+                    var debitCosts = [(card:SearchBranchRecords?,amount:String)]()
+                    for debitCost in data.records?.debit_costs ?? []{
+                        debitCosts.append((card: .init(label:debitCost.label ?? "",value:debitCost.value ?? ""), amount: debitCost.amount ?? ""))
+                    }
+                    self?.debitCardCosts?.addCardCost(cost: debitCosts)
+                    
+                    var creditCosts = [(card:SearchBranchRecords?,amount:String)]()
+                    for creditCost in data.records?.credit_costs ?? []{
+                        creditCosts.append((card: .init(label:creditCost.label ?? "",value:creditCost.value ?? ""), amount: creditCost.amount ?? ""))
+                    }
+                    self?.creditCardCosts?.addCardCost(cost: creditCosts)
+                }else{
+                    SCLAlertView().showError("error".localized(), subTitle: data.error ?? "")
+                }
+            }
+        }
+    }
     
 }
+
 
 

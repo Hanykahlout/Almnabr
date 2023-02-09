@@ -28,6 +28,11 @@ struct SearchBranchRecords : Mappable {
     init(value:String){
         self.value = value
     }
+    
+    init(label:String,value:String){
+        self.label = label
+        self.value = value
+    }
 
 	mutating func mapping(map: Map) {
 

@@ -252,9 +252,13 @@
                 <outlet property="moreButton" destination="seA-nY-Iuw" id="kUR-6H-AL8"/>
                 <outlet property="onDateLabel" destination="qHj-cY-lus" id="8xN-x7-jlG"/>
                 <outlet property="receiptAmountLabel" destination="uwe-dt-7yu" id="Ti1-q9-ISO"/>
+                <outlet property="receiptAmountTitleLabel" destination="DXg-hR-ab6" id="Iwt-8C-EOn"/>
                 <outlet property="receiptDateLabel" destination="ZAu-mo-4Ua" id="NqW-x2-hh3"/>
+                <outlet property="receiptDateTitleLabel" destination="x3y-NU-3R5" id="54c-BO-2Sr"/>
                 <outlet property="receiptFromLabel" destination="JOf-9K-Gx8" id="QuB-Xf-oKW"/>
+                <outlet property="receiptFromTitleLabel" destination="Aa5-Vg-8UJ" id="CI3-eW-fJj"/>
                 <outlet property="receiptNoLabel" destination="YAs-BA-vXw" id="ldp-HB-cHk"/>
+                <outlet property="receiptNoTitleLabel" destination="lHP-0S-xFR" id="4xY-s9-Jci"/>
                 <outlet property="requestNumberLabel" destination="nTT-5V-rcA" id="u25-rh-x33"/>
                 <outlet property="writerLabel" destination="6b7-jZ-TOb" id="Msr-ho-Qx2"/>
             </connections>

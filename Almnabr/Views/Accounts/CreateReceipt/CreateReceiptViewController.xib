@@ -39,9 +39,13 @@
                 <outlet property="headerView" destination="T4h-Vx-wRC" id="h0m-gp-Azh"/>
                 <outlet property="mainStackView" destination="1PE-Jg-gXs" id="FRQ-En-vc4"/>
                 <outlet property="notesTextView" destination="b2R-yt-Lbm" id="wYJ-Gc-5dG"/>
+                <outlet property="receiptAmountLabel" destination="SF5-E2-tu5" id="GXI-y3-g4G"/>
                 <outlet property="receiptAmountTextField" destination="GeL-OC-x55" id="rIX-FS-3Ji"/>
+                <outlet property="receiptDateLabel" destination="Azh-9S-g8d" id="oV1-0Q-bkk"/>
                 <outlet property="receiptDateTextField" destination="FKy-aN-7Sg" id="fop-oW-1y7"/>
+                <outlet property="receiptFromLabel" destination="svJ-VO-zYl" id="Yi9-Qv-Gjq"/>
                 <outlet property="receiptFromTextField" destination="YKR-a0-RYX" id="VUl-6W-DwL"/>
+                <outlet property="receiptModeLabel" destination="H9q-Ie-xuy" id="Ejp-NC-0xq"/>
                 <outlet property="selectFileButton" destination="gKa-5h-9z8" id="wQY-Ij-qP2"/>
                 <outlet property="transferButton" destination="x8w-D9-t1E" id="oRZ-3o-S8Z"/>
                 <outlet property="transferStackView" destination="LgN-fG-r7T" id="rPM-eo-EDC"/>
@@ -758,48 +762,6 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="pM4-VP-7Zu">
-                                            <rect key="frame" x="0.0" y="1184" width="373" height="45"/>
-                                            <subviews>
-                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BY8-VM-bxg">
-                                                    <rect key="frame" x="0.0" y="0.0" width="182.66666666666666" height="45"/>
-                                                    <color key="backgroundColor" name="AppColor"/>
-                                                    <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="16"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Debit Cost">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
-                                                            <real key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="debitCostAction:" destination="-1" eventType="touchUpInside" id="voM-Xa-JSn"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAB-4N-Je1">
-                                                    <rect key="frame" x="190.66666666666663" y="0.0" width="182.33333333333337" height="45"/>
-                                                    <color key="backgroundColor" name="AppColor"/>
-                                                    <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="16"/>
-                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" title="Credit Cost">
-                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </state>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
-                                                            <real key="value" value="10"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                    <connections>
-                                                        <action selector="creditCostAction:" destination="-1" eventType="touchUpInside" id="qdY-cQ-Ra8"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="45" id="eqb-ub-uJu"/>
-                                            </constraints>
-                                        </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcZ-aw-1Rv">
                                             <rect key="frame" x="0.0" y="1188" width="373" height="100"/>
                                             <subviews>

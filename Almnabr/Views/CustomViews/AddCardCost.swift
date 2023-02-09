@@ -73,6 +73,16 @@ class AddCardCost: UIView {
         return cardCosts
     }
     
+    func addCardCost(cost:[(card:SearchBranchRecords?,amount:String)]){
+        cardCosts.append(contentsOf: cost)
+        collectionView.isHidden = cardCosts.isEmpty
+        collectionView.reloadData()
+        amountTextField.text = ""
+        selectedDebitCost = nil
+        debitCostTextField.placeholder = isDebit ? "Debit Cost" : "Credit Cost"
+        debitCostTextField.text = ""
+    }
+    
     
     @objc private func searchInDebitCost(){
         searchForCardCost()

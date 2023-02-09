@@ -105,8 +105,8 @@ class BranchSelection: UIView {
             self.financialYearArrow.transform = .init(rotationAngle: .pi)
             self.financialYearDropDown.show()
         }
-        
     }
+    
     
 }
 

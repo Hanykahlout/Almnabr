@@ -76,7 +76,7 @@ struct ViewReceiptRecord : Mappable {
 	var writer_name : String?
     var debit_costs : [CardCostData]?
     var credit_costs : [CardCostData]?
-    
+
     
 	init?(map: Map) {
 

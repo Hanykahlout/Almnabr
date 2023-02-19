@@ -14,40 +14,24 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 import Foundation
 import ObjectMapper
 
-struct Financial_year : Mappable {
-	var finance_id : String?
-	var unique_finance_id : String?
-	var branch_id : String?
-	var finance_start_date : String?
-	var finance_end_date : String?
-	var finance_status : String?
-	var finance_reopen_status : String?
-	var clone_status : String?
-	var created_date : String?
-	var finance_writer : String?
-	var value : String?
-	var label : String?
-	var writer_name : String?
-
+struct ViewJournalVoucher : Mappable {
+	var status : Bool?
+	var records : ViewJournalVouchersRecord?
+	var financial_year : FinancialYearRecord?
+	var transactions : [ReceiptTransaction]?
+	var permits : Permits?
+    var error: String?
 	init?(map: Map) {
 
 	}
 
 	mutating func mapping(map: Map) {
 
-		finance_id <- map["finance_id"]
-		unique_finance_id <- map["unique_finance_id"]
-		branch_id <- map["branch_id"]
-		finance_start_date <- map["finance_start_date"]
-		finance_end_date <- map["finance_end_date"]
-		finance_status <- map["finance_status"]
-		finance_reopen_status <- map["finance_reopen_status"]
-		clone_status <- map["clone_status"]
-		created_date <- map["created_date"]
-		finance_writer <- map["finance_writer"]
-		value <- map["value"]
-		label <- map["label"]
-		writer_name <- map["writer_name"]
+		status <- map["status"]
+		records <- map["records"]
+		financial_year <- map["financial_year"]
+		transactions <- map["transactions"]
+		permits <- map["permits"]
 	}
 
 }

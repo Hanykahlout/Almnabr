@@ -4,10 +4,16 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="DroidKufi-Regular.ttf">
+            <string>DroidArabicKufi</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountMastersViewController" customModule="Almnabr" customModuleProvider="target">
             <connections>
@@ -63,7 +69,7 @@
                     </connections>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Bba-TR-CKE">
-                    <rect key="frame" x="16" y="100" width="361" height="698"/>
+                    <rect key="frame" x="16" y="140.33333333333331" width="361" height="657.66666666666674"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="2Az-nV-1zQ">
                             <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
@@ -72,7 +78,7 @@
                             </constraints>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Dxf-WE-wWA">
-                            <rect key="frame" x="0.0" y="50" width="361" height="648"/>
+                            <rect key="frame" x="0.0" y="50" width="361" height="607.66666666666663"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vUe-nX-m8k">
                                     <rect key="frame" x="0.0" y="0.0" width="361" height="45"/>
@@ -83,10 +89,10 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yvc-aG-sBj">
-                                    <rect key="frame" x="0.0" y="55" width="361" height="593"/>
+                                    <rect key="frame" x="0.0" y="55" width="361" height="552.66666666666663"/>
                                     <subviews>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="YS9-vj-Z9n">
-                                            <rect key="frame" x="0.0" y="0.0" width="361" height="593"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="361" height="552.66666666666663"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableView>
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_empty" translatesAutoresizingMaskIntoConstraints="NO" id="gL3-VZ-Iz0">
@@ -108,14 +114,35 @@
                         </stackView>
                     </subviews>
                 </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9SK-rg-OaX">
+                    <rect key="frame" x="10" y="90" width="373" height="40.333333333333343"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Masters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80V-fh-tgC">
+                            <rect key="frame" x="0.0" y="0.0" width="373" height="34.333333333333336"/>
+                            <fontDescription key="fontDescription" name="DroidArabicKufi" family="Droid Arabic Kufi" pointSize="18"/>
+                            <color key="textColor" name="AppColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JMv-aW-dlw">
+                            <rect key="frame" x="0.0" y="39.333333333333343" width="373" height="1"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="esb-hN-hdc"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.90608113999999995" green="0.91750472780000003" blue="0.92941385509999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="pwq-B2-3qZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0B7-24-v8Z"/>
-                <constraint firstItem="Bba-TR-CKE" firstAttribute="top" secondItem="pwq-B2-3qZ" secondAttribute="bottom" constant="20" id="1iQ-HG-cW9"/>
                 <constraint firstItem="pwq-B2-3qZ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="6aW-dw-sgM"/>
+                <constraint firstItem="Bba-TR-CKE" firstAttribute="top" secondItem="9SK-rg-OaX" secondAttribute="bottom" constant="10" id="Evp-bc-CKV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Bba-TR-CKE" secondAttribute="bottom" constant="20" id="Xf0-fX-H0c"/>
+                <constraint firstItem="9SK-rg-OaX" firstAttribute="top" secondItem="pwq-B2-3qZ" secondAttribute="bottom" constant="10" id="b2e-79-Bek"/>
+                <constraint firstItem="9SK-rg-OaX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="ck4-jP-S4A"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9SK-rg-OaX" secondAttribute="trailing" constant="10" id="f3x-LC-HRC"/>
                 <constraint firstItem="Bba-TR-CKE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="gdm-It-cMs"/>
                 <constraint firstItem="pwq-B2-3qZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="j36-aR-yEI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Bba-TR-CKE" secondAttribute="trailing" constant="16" id="xzW-KQ-bxW"/>
@@ -126,5 +153,8 @@
     <resources>
         <image name="icon_empty" width="512" height="256"/>
         <image name="menu" width="512" height="512"/>
+        <namedColor name="AppColor">
+            <color red="0.10196078431372549" green="0.21176470588235294" blue="0.396078431372549" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>

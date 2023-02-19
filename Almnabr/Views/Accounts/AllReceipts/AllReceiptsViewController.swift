@@ -12,6 +12,7 @@ import SCLAlertView
 
 class AllReceiptsViewController: UIViewController {
 
+    @IBOutlet weak var headerTitleLabel: UILabel!
     @IBOutlet weak var headerView: HeaderView!
     @IBOutlet weak var branchSelectorStackView: UIStackView!
     @IBOutlet weak var searchTextField: UITextField!
@@ -37,6 +38,7 @@ class AllReceiptsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getAllReceipts(isFromBottom: false)
+        headerTitleLabel.text = isPayment ? "All Payment" : "All Receipts"
     }
 
     
@@ -198,7 +200,7 @@ extension AllReceiptsViewController{
     
     private func export(url:String){
         showLoadingActivity()
-        APIController.shard.exportReceiptPDF(url:url) { data in
+        APIController.shard.exportFile(url:url) { data in
             DispatchQueue.main.async { [weak self] in
                 self?.hideLoadingActivity()
                 if data.status ?? false{

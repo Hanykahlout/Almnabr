@@ -14,6 +14,7 @@ import FAPanels
 
 class CreateReceiptViewController: UIViewController {
     
+    @IBOutlet weak var headerTitleLabel: UILabel!
     
     @IBOutlet weak var headerView: HeaderView!
     @IBOutlet weak var branchSelectorStackView: UIStackView!
@@ -80,13 +81,17 @@ class CreateReceiptViewController: UIViewController {
     private var creditCardCosts: AddCardCost?
     var isEdit = false
     var isPayment = false
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialization()
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        headerTitleLabel.text = "\(isEdit ? "Update" : "Create") \(isPayment ? "Payment" : "Receipt")"
         if isEdit{
             getEditData()
         }
@@ -104,6 +109,7 @@ class CreateReceiptViewController: UIViewController {
             receiptAmountTextField.placeholder = "Payment Amount"
         }
     }
+    
     
     private func initialization(){
         documentPickerController = UIDocumentPickerViewController(
@@ -215,8 +221,6 @@ class CreateReceiptViewController: UIViewController {
             self?.debitAccountTextField.text = ""
         }
         
-        
-        
         // creditAccountsDropDown
         creditAccountsDropDown.anchorView = creditAccountTextField
         creditAccountsDropDown.bottomOffset = CGPoint(x: 0, y:(creditAccountsDropDown.anchorView?.plainView.bounds.height)!)
@@ -232,7 +236,7 @@ class CreateReceiptViewController: UIViewController {
             self?.creditAccountArrow.transform = .init(rotationAngle: .pi)
             self?.creditAccountTextField.text = ""
         }
-        
+
     }
     
     
@@ -361,7 +365,6 @@ extension CreateReceiptViewController:UIDocumentPickerDelegate{
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         dismiss(animated: true, completion: nil)
     }
-    
 }
 
 // MARK: - API Handling

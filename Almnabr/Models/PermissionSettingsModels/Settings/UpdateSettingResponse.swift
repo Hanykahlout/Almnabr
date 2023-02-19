@@ -20,7 +20,7 @@ struct UpdateSettingResponse : Mappable {
 	var msg : String?
     var error:String?
     var attachments: Attachments?
-
+    
     
 	init?(map: Map) {
 

@@ -17,7 +17,7 @@ class APIController{
     //Nahid
     //Almnabr.NAHIDH 1.1   16
     //socket --- https://node.nahidh.sa/
-    //server url ---- https://nahidh.sa/backend
+    //server url ---- https://dev.nahidh.sa/backend
     //Api key "12345"
     
     //Almnabr
@@ -4257,7 +4257,7 @@ class APIController{
         }
     }
     
-    func exportReceiptPDF(url:String,callback:@escaping (_ data:GetImageResponse) -> Void){
+    func exportFile(url:String,callback:@escaping (_ data:GetImageResponse) -> Void){
         
         let strURL = "\(serverURL)\(url)"
         let headers = [ "authorization":
@@ -4274,5 +4274,94 @@ class APIController{
         }
     }
     
+    func createJournalVoucher(journal_voucher_id:String,isEdit:Bool,body:[String:Any],callback:@escaping (_ data:UpdateSettingResponse) -> Void){
+        
+        let strURL = "\(serverURL)/\(isEdit ? "updatejournal/\(journal_voucher_id)": "createjournal")"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")",
+                        "Accept": "application/json"
+        ]
+        
+        Alamofire.request(strURL, method: isEdit ? .put : .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                
+                if let parsedMapperString : UpdateSettingResponse = Mapper<UpdateSettingResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    func getAllJournalVoucher(branchId:String,finance_id:String,searchKey:String,pageNumber:String,callback:@escaping (_ data:AllJournalVoucher) -> Void){
+        
+        let strURL = "\(serverURL)/listjournal/\(branchId)/\(pageNumber)/10"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        let body:[String:Any] = [
+            "search_key":searchKey,
+            "finance_id":finance_id
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                
+                if let parsedMapperString : AllJournalVoucher = Mapper<AllJournalVoucher>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    func viewJournalVoucherData(journalVoucherId:String,branchId:String,finance_id:String,callback:@escaping (_ data:ViewJournalVoucher) -> Void){
+        
+        let strURL = "\(serverURL)/viewjournal/\(branchId)/\(journalVoucherId)?finance_id=\(finance_id)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                
+                if let parsedMapperString : ViewJournalVoucher = Mapper<ViewJournalVoucher>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    
+    func getReceiptCostCenters(transactionId:String,receiptId:String,transactionHistoryId:String,callback:@escaping (_ data:ReceiptCostCenterResponse) -> Void){
+        
+        let strURL = "\(serverURL)/acc/get_cost_center_transactions/\(transactionId)/\(receiptId)/\(transactionHistoryId)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : ReceiptCostCenterResponse = Mapper<ReceiptCostCenterResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getEditJournalVoucherData(journal_voucher_id:String,branch_id:String,callback:@escaping (_ data:AllJournalVoucher) -> Void){
+        let strURL = "\(serverURL)/editjournal/\(branch_id)/\(journal_voucher_id)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AllJournalVoucher = Mapper<AllJournalVoucher>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
     
 }

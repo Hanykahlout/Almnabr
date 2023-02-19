@@ -68,7 +68,7 @@ class AddCardCost: UIView {
         
     }
     
-    
+
     func getSelectedCardCosts() -> [(card:SearchBranchRecords?,amount:String)]{
         return cardCosts
     }

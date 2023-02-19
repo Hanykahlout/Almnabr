@@ -395,6 +395,17 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     panel?.center(nav)
+                    
+                case "46":
+                    let vc = CreateJournalVoucherVC()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                case "47":
+                    let vc = AllJournalVouchersViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
                 case "69":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
                     let vc:CronTransactionVC = AppDelegate.mainSB.instanceVC()
@@ -404,7 +415,7 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     _ =  panel?.center(nav)
-                    
+                
                 case "73":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
                     let vc:AllPrpjectsVC = AppDelegate.mainSB.instanceVC()

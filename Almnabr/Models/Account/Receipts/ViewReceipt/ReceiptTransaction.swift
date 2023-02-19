@@ -15,6 +15,7 @@ import Foundation
 import ObjectMapper
 
 struct ReceiptTransaction : Mappable {
+    
 	var transaction_history_id : String?
 	var unique_reference_number : String?
 	var branch_id : String?
@@ -42,6 +43,8 @@ struct ReceiptTransaction : Mappable {
 	var cost_center_count : String?
 	var costs : [String]?
 
+    
+    
 	init?(map: Map) {
 
 	}

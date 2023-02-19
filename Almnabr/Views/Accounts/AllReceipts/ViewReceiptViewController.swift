@@ -88,6 +88,14 @@ extension ViewReceiptViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ViewReceiptTableViewCell", for: indexPath) as! ViewReceiptTableViewCell
         cell.setData(data: transactionsData[indexPath.row])
+        cell.costCenterButtonAction = { [weak self] transactionId,receiptId,transactionHistoryId in
+            let vc = ReceiptCostCentersViewController()
+            vc.transactionId = transactionId
+            vc.receiptId = receiptId
+            vc.transactionHistoryId = transactionHistoryId
+            let nav = UINavigationController(rootViewController: vc)
+            self?.navigationController?.present(nav, animated: true)
+        }
         return cell
     }
 }

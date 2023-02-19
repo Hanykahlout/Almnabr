@@ -15,23 +15,25 @@ import Foundation
 import ObjectMapper
 
 struct ReceiptsResponse : Mappable {
-	var status : Bool?
-	var records : [ReceiptRecord]?
-	var paging : Page?
-	var financial_year : FinancialYearRecord?
-	var permits : Permits?
+    var status : Bool?
+    var records : [ReceiptRecord]?
+    var paging : Page?
+    var financial_year : FinancialYearRecord?
+    var permits : Permits?
 
-	init?(map: Map) {
+    init?(map: Map) {
 
-	}
+    }
 
-	mutating func mapping(map: Map) {
+    mutating func mapping(map: Map) {
 
-		status <- map["status"]
-		records <- map["records"]
-		paging <- map["paging"]
-		financial_year <- map["financial_year"]
-		permits <- map["permits"]
-	}
+        status <- map["status"]
+        records <- map["records"]
+        paging <- map["paging"]
+        financial_year <- map["financial_year"]
+        permits <- map["permits"]
+    }
 
 }
+
+

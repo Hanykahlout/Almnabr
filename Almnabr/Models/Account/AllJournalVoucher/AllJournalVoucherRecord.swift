@@ -51,6 +51,14 @@ struct AllJournalVoucherRecord : Mappable {
 	var writer_name : String?
     var journal_records:[ReceiptTransaction]?
     
+    
+    
+    
+    
+    
+    
+    
+    
 	init?(map: Map) {
 
 	}

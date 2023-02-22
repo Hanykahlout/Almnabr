@@ -61,10 +61,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="393" height="758"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cv1-jF-uuc">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="1097"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="1150"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="d4c-W7-Nj1">
-                                            <rect key="frame" x="10" y="20" width="373" height="1057"/>
+                                            <rect key="frame" x="10" y="20" width="373" height="1110"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Wd3-sW-qfC">
                                                     <rect key="frame" x="0.0" y="0.0" width="373" height="58.333333333333336"/>
@@ -483,14 +483,34 @@
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3x2-R0-ky6">
+                                                    <rect key="frame" x="0.0" y="518.33333333333337" width="373" height="45"/>
+                                                    <color key="backgroundColor" name="AppColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="KRe-lO-ACe"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="DroidArabicKufi-Bold" family="Droid Arabic Kufi" pointSize="16"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="History">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="corner_radius">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="historyAction:" destination="-1" eventType="touchUpInside" id="Nbc-Yw-wD2"/>
+                                                    </connections>
+                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transactions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koE-0D-hu5">
-                                                    <rect key="frame" x="0.0" y="518.33333333333337" width="373" height="30.666666666666629"/>
+                                                    <rect key="frame" x="0.0" y="571.33333333333337" width="373" height="30.666666666666629"/>
                                                     <fontDescription key="fontDescription" name="DroidArabicKufi-Bold" family="Droid Arabic Kufi" pointSize="16"/>
                                                     <color key="textColor" name="AppColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Tux-49-huM">
-                                                    <rect key="frame" x="0.0" y="557" width="373" height="500"/>
+                                                    <rect key="frame" x="0.0" y="610" width="373" height="500"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="500" id="0me-Hs-A4i"/>

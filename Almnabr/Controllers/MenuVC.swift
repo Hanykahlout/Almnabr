@@ -330,9 +330,7 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
             if arr_data[indexPath.section].menu.count > 0 {
                 switch obj.menu[indexPath.row - 1].menu_id {
                 case "13":
-                                        
                     let vc: TransactionsVC = AppDelegate.mainSB.instanceVC()
-
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     _ =  panel?.center(nav)
@@ -403,6 +401,13 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     panel?.center(nav)
                 case "47":
                     let vc = AllJournalVouchersViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                case "51":
+                    SCLAlertView().showInfo("Sorry", subTitle: "You can create selling invoice from web")
+                case "52":
+                    let vc = AllSellingInvoiceViewController()
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     panel?.center(nav)

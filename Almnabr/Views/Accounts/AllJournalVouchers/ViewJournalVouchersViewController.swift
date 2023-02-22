@@ -50,6 +50,13 @@ class ViewJournalVouchersViewController: UIViewController {
         exportPDF()
     }
     
+    @IBAction func historyAction(_ sender: Any) {
+        let vc = AccountHistoryViewController()
+        vc.id = journalVoucherId
+        vc.account_operation = "JOURNAL_VOUCHERS"
+        let nav = UINavigationController(rootViewController: vc)
+        navigationController?.present(nav, animated: true)
+    }
 }
 
 // MARK: - TableView Delegate And DataSource

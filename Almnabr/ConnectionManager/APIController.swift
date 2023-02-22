@@ -4238,7 +4238,7 @@ class APIController{
             }
         }
     }
-
+    
     
     func editReceipt(url:String,callback:@escaping (_ data:ViewReceiptData) -> Void){
         
@@ -4291,7 +4291,7 @@ class APIController{
             }
         }
     }
-
+    
     func getAllJournalVoucher(branchId:String,finance_id:String,searchKey:String,pageNumber:String,callback:@escaping (_ data:AllJournalVoucher) -> Void){
         
         let strURL = "\(serverURL)/listjournal/\(branchId)/\(pageNumber)/10"
@@ -4313,14 +4313,14 @@ class APIController{
             }
         }
     }
-
+    
     func viewJournalVoucherData(journalVoucherId:String,branchId:String,finance_id:String,callback:@escaping (_ data:ViewJournalVoucher) -> Void){
         
         let strURL = "\(serverURL)/viewjournal/\(branchId)/\(journalVoucherId)?finance_id=\(finance_id)"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
-
+        
         
         Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
             if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
@@ -4363,5 +4363,42 @@ class APIController{
             }
         }
     }
+    
+    func getSellingInvoices(pageNumber:String,search_key:String,finance_id:String,branch_id:String,callback:@escaping (_ data:SellingInvoicesResponse) -> Void){
+        let strURL = "\(serverURL)/listsinvoice/\(branch_id)/\(pageNumber)/10"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+        
+        let body = [
+            "search_key":search_key,
+            "finance_id":finance_id
+        ]
+        
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : SellingInvoicesResponse = Mapper<SellingInvoicesResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
+    func getAccountHistory(body:[String:Any],pageNumber:String,callback:@escaping (_ data:AccountHistoryResponse) -> Void){
+        let strURL = "\(serverURL)/get_accounts_history_log/\(pageNumber)/10"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+    
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : AccountHistoryResponse = Mapper<AccountHistoryResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+
+    
     
 }

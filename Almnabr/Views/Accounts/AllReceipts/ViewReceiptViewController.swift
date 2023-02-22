@@ -71,6 +71,13 @@ class ViewReceiptViewController: UIViewController {
         
     }
 
+    @IBAction func historyAction(_ sender: Any) {
+        let vc = AccountHistoryViewController()
+        vc.id = payment_receipt_id
+        vc.account_operation = isPayment ? "PAYMENT" : "RECEIPT"
+        let nav = UINavigationController(rootViewController: vc)
+        navigationController?.present(nav, animated: true)
+    }
 }
 
 

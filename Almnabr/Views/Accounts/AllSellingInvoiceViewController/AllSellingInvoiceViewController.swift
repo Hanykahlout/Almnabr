@@ -1,29 +1,33 @@
 //
-//  AllJournalVouchersViewController.swift
+//  AllSellingInvoiceViewController.swift
 //  Almnabr
 //
-//  Created by Hany Alkahlout on 19/02/2023.
+//  Created by Hany Alkahlout on 22/02/2023.
 //  Copyright © 2023 Samar Akkila. All rights reserved.
 //
 
 import UIKit
 import SCLAlertView
-class AllJournalVouchersViewController: UIViewController {
- 
-    @IBOutlet weak var mainStackView: UIStackView!
+
+class AllSellingInvoiceViewController: UIViewController {
+    
     @IBOutlet weak var headerView: HeaderView!
     @IBOutlet weak var branchSelectorStackView: UIStackView!
+    @IBOutlet weak var mainStackView: UIStackView!
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var emptyDataImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var emptyDataImageView: UIImageView!
     
-    private var pageNumber = 1
-    private var totalPages = 1
-    private var data = [AllJournalVoucherRecord]()
+    
+    
     private var branchSelector:BranchSelection?
     private var branch_id = ""
     private var finance_id = ""
+    private var pageNumber = 1
+    private var totalPages = 1
+    private var data = [SellingInvoiceRecord]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +37,20 @@ class AllJournalVouchersViewController: UIViewController {
         searchTextField.addTarget(self, action: #selector(searchAction), for: .editingChanged)
     }
     
+    private func setUpBranchSelector(){
+        branchSelector = BranchSelection()
+        branchSelector!.withFinancialYearSelection = true
+        branchSelector!.branchSelectionAction = { [weak self] branch_id in
+            self?.branch_id = branch_id
+            self?.mainStackView.isHidden = branch_id == ""
+            self?.getSellingInvoices(isFromBottom: false)
+        }
+        branchSelector?.financialYearSelectionAction = { [weak self] finance_id in
+            self?.finance_id = finance_id
+            self?.getSellingInvoices(isFromBottom: false)
+        }
+        branchSelectorStackView.addArrangedSubview(branchSelector!)
+    }
     
     
     private func handleHeaderView(){
@@ -46,32 +64,16 @@ class AllJournalVouchersViewController: UIViewController {
         }
     }
     
-    private func setUpBranchSelector(){
-        branchSelector = BranchSelection()
-        branchSelector!.withFinancialYearSelection = true
-        branchSelector!.branchSelectionAction = { [weak self] branch_id in
-            self?.branch_id = branch_id
-            self?.mainStackView.isHidden = branch_id == ""
-            self?.getAllJournalVoucher(isFromBottom: false)
-        }
-        branchSelector?.financialYearSelectionAction = { [weak self] finance_id in
-            self?.finance_id = finance_id
-            self?.getAllJournalVoucher(isFromBottom: false)
-        }
-        branchSelectorStackView.addArrangedSubview(branchSelector!)
-    }
-    
-    
     @objc private func searchAction(){
-        getAllJournalVoucher(isFromBottom: false)
+        getSellingInvoices(isFromBottom: false)
     }
 }
 
-extension AllJournalVouchersViewController:UITableViewDelegate,UITableViewDataSource{
+extension AllSellingInvoiceViewController:UITableViewDelegate,UITableViewDataSource{
     private func setUpTableView(){
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(.init(nibName: "AllJournalVouchersTableViewCell", bundle: nil), forCellReuseIdentifier: "AllJournalVouchersTableViewCell")
+        tableView.register(.init(nibName: "SellingInvoiceTableViewCell", bundle: nil), forCellReuseIdentifier: "SellingInvoiceTableViewCell")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,7 +81,7 @@ extension AllJournalVouchersViewController:UITableViewDelegate,UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AllJournalVouchersTableViewCell", for: indexPath) as! AllJournalVouchersTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SellingInvoiceTableViewCell", for: indexPath) as! SellingInvoiceTableViewCell
         cell.delegate = self
         cell.setData(data:data[indexPath.row])
         return cell
@@ -89,64 +91,46 @@ extension AllJournalVouchersViewController:UITableViewDelegate,UITableViewDataSo
         if indexPath.row == data.count - 1 {
             if pageNumber < totalPages{
                 pageNumber += 1
-                getAllJournalVoucher(isFromBottom: true)
+                getSellingInvoices(isFromBottom: true)
             }
         }
     }
 }
 
-extension AllJournalVouchersViewController:AllJournalVouchersCellDelegate{
-    func viewReceipt(journal_voucher_id: String) {
-        let vc = ViewJournalVouchersViewController()
-        vc.journalVoucherId = journal_voucher_id
-        vc.branchId = branch_id
-        vc.finance_id = finance_id
+extension AllSellingInvoiceViewController:SellingInvoiceCellDelegate{
+    func viewReceipt(invoice_id: String) {
+        let vc = ViewSellingInvoiceViewController()
+        vc.invoice_id = invoice_id
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func editReceipt(journal_voucher_id: String) {
-        let vc = CreateJournalVoucherVC()
-        vc.isEdit = true
-        vc.branch_id = branch_id
-        vc.journal_voucher_id = journal_voucher_id
-        let nav = UINavigationController(rootViewController: vc)
-        nav.isNavigationBarHidden = true
-        panel?.center(nav)
+    func exportPDFReceipt(invoice_id: String) {
+        export(url: "/accounts/exportdata/PDF/SINV/\(invoice_id)/\(branch_id)")
     }
     
-    func deleteReceipt(journal_voucher_id: String) {
-        
+    func exportExcelReceipt(invoice_id: String) {
+        export(url: "/accounts/exportdata/EXL/SINV/\(invoice_id)/\(branch_id)")
     }
     
-    func exportPDFReceipt(journal_voucher_id: String) {
-        exportFile(url: "/accounts/exportdata/PDF/JRN/\(journal_voucher_id)/\(branch_id)")
+    func exportPDFToEmailReceipt(invoice_id: String) {
+        export(url: "/accounts/exportdata/EPDF/SINV/\(invoice_id)/\(branch_id)")
     }
     
-    func exportExcelReceipt(journal_voucher_id: String) {
-        exportFile(url: "/accounts/exportdata/EXL/JRN/\(journal_voucher_id)/\(branch_id)")
-    }
-    
-    func exportPDFToEmailReceipt(journal_voucher_id: String) {
-        exportFile(url: "/accounts/exportdata/EPDF/JRN/\(journal_voucher_id)/\(branch_id)")
-    }
-    
-    func exportExcelToEmailReceipt(journal_voucher_id: String) {
-        exportFile(url: "/accounts/exportdata/EEXL/JRN/\(journal_voucher_id)/\(branch_id)")
+    func exportExcelToEmailReceipt(invoice_id: String) {
+        export(url: "/accounts/exportdata/EEXL/SINV/\(invoice_id)/\(branch_id)")
     }
     
     
 }
 
-
-// MARK: - APIController
-extension AllJournalVouchersViewController{
-    private func getAllJournalVoucher(isFromBottom:Bool){
+extension AllSellingInvoiceViewController{
+    private func getSellingInvoices(isFromBottom:Bool){
         if !isFromBottom{
             pageNumber = 1
         }
         showLoadingActivity()
-        APIController.shard.getAllJournalVoucher(branchId: branch_id, finance_id: finance_id, searchKey: searchTextField.text!, pageNumber: String(pageNumber)) { data in
-            DispatchQueue.main.async { [ weak self ] in
+        APIController.shard.getSellingInvoices(pageNumber: String(pageNumber), search_key: searchTextField.text!, finance_id: finance_id, branch_id: branch_id) { data in
+            DispatchQueue.main.async { [weak self] in
                 self?.hideLoadingActivity()
                 if data.status ?? false{
                     if isFromBottom{
@@ -166,12 +150,12 @@ extension AllJournalVouchersViewController{
         }
     }
     
-    private func exportFile(url:String){
+    private func export(url:String){
         showLoadingActivity()
-        APIController.shard.exportFile(url: url) { data in
+        APIController.shard.exportFile(url:url) { data in
             DispatchQueue.main.async { [weak self] in
                 self?.hideLoadingActivity()
-                if data.status ?? false {
+                if data.status ?? false{
                     let vc = WebViewViewController()
                     vc.data = data
                     let nav = UINavigationController(rootViewController: vc)

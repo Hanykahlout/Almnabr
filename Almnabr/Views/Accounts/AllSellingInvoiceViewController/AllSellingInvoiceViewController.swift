@@ -11,6 +11,7 @@ import SCLAlertView
 
 class AllSellingInvoiceViewController: UIViewController {
     
+    @IBOutlet weak var headerTitleLabel: UILabel!
     @IBOutlet weak var headerView: HeaderView!
     @IBOutlet weak var branchSelectorStackView: UIStackView!
     @IBOutlet weak var mainStackView: UIStackView!
@@ -18,7 +19,7 @@ class AllSellingInvoiceViewController: UIViewController {
     @IBOutlet weak var emptyDataImageView: UIImageView!
     @IBOutlet weak var tableView: UITableView!
     
-    
+    var isPurchase = false
     
     
     private var branchSelector:BranchSelection?
@@ -37,6 +38,10 @@ class AllSellingInvoiceViewController: UIViewController {
         searchTextField.addTarget(self, action: #selector(searchAction), for: .editingChanged)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        headerTitleLabel.text = isPurchase ? "Purchase Invoices" : "Selling Invoices"
+    }
     private func setUpBranchSelector(){
         branchSelector = BranchSelection()
         branchSelector!.withFinancialYearSelection = true
@@ -105,19 +110,19 @@ extension AllSellingInvoiceViewController:SellingInvoiceCellDelegate{
     }
     
     func exportPDFReceipt(invoice_id: String) {
-        export(url: "/accounts/exportdata/PDF/SINV/\(invoice_id)/\(branch_id)")
+        export(url: "/accounts/exportdata/PDF/\(isPurchase ? "PINV" : "SINV")/\(invoice_id)/\(branch_id)")
     }
     
     func exportExcelReceipt(invoice_id: String) {
-        export(url: "/accounts/exportdata/EXL/SINV/\(invoice_id)/\(branch_id)")
+        export(url: "/accounts/exportdata/EXL/\(isPurchase ? "PINV" : "SINV")/\(invoice_id)/\(branch_id)")
     }
     
     func exportPDFToEmailReceipt(invoice_id: String) {
-        export(url: "/accounts/exportdata/EPDF/SINV/\(invoice_id)/\(branch_id)")
+        export(url: "/accounts/exportdata/EPDF/\(isPurchase ? "PINV" : "SINV")/\(invoice_id)/\(branch_id)")
     }
     
     func exportExcelToEmailReceipt(invoice_id: String) {
-        export(url: "/accounts/exportdata/EEXL/SINV/\(invoice_id)/\(branch_id)")
+        export(url: "/accounts/exportdata/EEXL/\(isPurchase ? "PINV" : "SINV")/\(invoice_id)/\(branch_id)")
     }
     
     
@@ -129,7 +134,7 @@ extension AllSellingInvoiceViewController{
             pageNumber = 1
         }
         showLoadingActivity()
-        APIController.shard.getSellingInvoices(pageNumber: String(pageNumber), search_key: searchTextField.text!, finance_id: finance_id, branch_id: branch_id) { data in
+        APIController.shard.getSellingInvoices(isPurchase:isPurchase,pageNumber: String(pageNumber), search_key: searchTextField.text!, finance_id: finance_id, branch_id: branch_id) { data in
             DispatchQueue.main.async { [weak self] in
                 self?.hideLoadingActivity()
                 if data.status ?? false{

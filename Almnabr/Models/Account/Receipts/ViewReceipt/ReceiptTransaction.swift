@@ -44,7 +44,6 @@ struct ReceiptTransaction : Mappable {
 	var costs : [String]?
 
     
-    
 	init?(map: Map) {
 
 	}

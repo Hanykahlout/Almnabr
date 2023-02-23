@@ -536,6 +536,8 @@
 		CE58DAA42987F6D0003FFF44 /* OpeningBalanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58DAA22987F6D0003FFF44 /* OpeningBalanceData.swift */; };
 		CE58DAA52987F6D0003FFF44 /* OpeningBalanceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE58DAA32987F6D0003FFF44 /* OpeningBalanceRecord.swift */; };
 		CE59C7B529771B7A00D96AC5 /* NIOIMAP in Frameworks */ = {isa = PBXBuildFile; productRef = CE59C7B429771B7A00D96AC5 /* NIOIMAP */; };
+		CE5BBA4329A76F8D00F92FB9 /* TransactionViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5BBA4129A76F8D00F92FB9 /* TransactionViewerViewController.swift */; };
+		CE5BBA4429A76F8D00F92FB9 /* TransactionViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE5BBA4229A76F8D00F92FB9 /* TransactionViewerViewController.xib */; };
 		CE5C4B66294257FE00DF67CE /* JobOfferResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C4B65294257FE00DF67CE /* JobOfferResponse.swift */; };
 		CE5C4B6A2942582F00DF67CE /* Form_jf_data_allowances.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C4B672942582E00DF67CE /* Form_jf_data_allowances.swift */; };
 		CE5C4B6B2942582F00DF67CE /* Form_jf_data_additional_terms.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5C4B682942582E00DF67CE /* Form_jf_data_additional_terms.swift */; };
@@ -592,6 +594,10 @@
 		CE69E6B12976F073008B77C0 /* MailMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69E6AF2976F073008B77C0 /* MailMessages.swift */; };
 		CE6ABE39291C05EA00CFEA36 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6ABE37291C05EA00CFEA36 /* ChangePasswordViewController.swift */; };
 		CE6ABE3A291C05EA00CFEA36 /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6ABE38291C05EA00CFEA36 /* ChangePasswordViewController.xib */; };
+		CE6AD21829A795FA00917CA1 /* TransactionViewerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AD21629A795FA00917CA1 /* TransactionViewerTableViewCell.swift */; };
+		CE6AD21929A795FA00917CA1 /* TransactionViewerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6AD21729A795FA00917CA1 /* TransactionViewerTableViewCell.xib */; };
+		CE6AD21D29A7996900917CA1 /* TransactionViewerRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AD21B29A7996900917CA1 /* TransactionViewerRecord.swift */; };
+		CE6AD21E29A7996900917CA1 /* TransactionViewerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6AD21C29A7996900917CA1 /* TransactionViewerResponse.swift */; };
 		CE6B25FC299E4BA90021B201 /* AddJournalVoucherDataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B25FA299E4BA90021B201 /* AddJournalVoucherDataVC.swift */; };
 		CE6B25FD299E4BA90021B201 /* AddJournalVoucherDataVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6B25FB299E4BA90021B201 /* AddJournalVoucherDataVC.xib */; };
 		CE6B2600299E67C60021B201 /* SubmitCostCenteAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6B25FE299E67C60021B201 /* SubmitCostCenteAlertVC.swift */; };
@@ -1673,6 +1679,8 @@
 		CE58DA9E2987F386003FFF44 /* OpeningBalanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpeningBalanceTableViewCell.xib; sourceTree = "<group>"; };
 		CE58DAA22987F6D0003FFF44 /* OpeningBalanceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningBalanceData.swift; sourceTree = "<group>"; };
 		CE58DAA32987F6D0003FFF44 /* OpeningBalanceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpeningBalanceRecord.swift; sourceTree = "<group>"; };
+		CE5BBA4129A76F8D00F92FB9 /* TransactionViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewerViewController.swift; sourceTree = "<group>"; };
+		CE5BBA4229A76F8D00F92FB9 /* TransactionViewerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionViewerViewController.xib; sourceTree = "<group>"; };
 		CE5C4B65294257FE00DF67CE /* JobOfferResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobOfferResponse.swift; sourceTree = "<group>"; };
 		CE5C4B672942582E00DF67CE /* Form_jf_data_allowances.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_jf_data_allowances.swift; sourceTree = "<group>"; };
 		CE5C4B682942582E00DF67CE /* Form_jf_data_additional_terms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_jf_data_additional_terms.swift; sourceTree = "<group>"; };
@@ -1729,6 +1737,10 @@
 		CE69E6AF2976F073008B77C0 /* MailMessages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MailMessages.swift; sourceTree = "<group>"; };
 		CE6ABE37291C05EA00CFEA36 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		CE6ABE38291C05EA00CFEA36 /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
+		CE6AD21629A795FA00917CA1 /* TransactionViewerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewerTableViewCell.swift; sourceTree = "<group>"; };
+		CE6AD21729A795FA00917CA1 /* TransactionViewerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionViewerTableViewCell.xib; sourceTree = "<group>"; };
+		CE6AD21B29A7996900917CA1 /* TransactionViewerRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionViewerRecord.swift; sourceTree = "<group>"; };
+		CE6AD21C29A7996900917CA1 /* TransactionViewerResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionViewerResponse.swift; sourceTree = "<group>"; };
 		CE6B25FA299E4BA90021B201 /* AddJournalVoucherDataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJournalVoucherDataVC.swift; sourceTree = "<group>"; };
 		CE6B25FB299E4BA90021B201 /* AddJournalVoucherDataVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddJournalVoucherDataVC.xib; sourceTree = "<group>"; };
 		CE6B25FE299E67C60021B201 /* SubmitCostCenteAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitCostCenteAlertVC.swift; sourceTree = "<group>"; };
@@ -3583,6 +3595,15 @@
 			path = OpeningBalance;
 			sourceTree = "<group>";
 		};
+		CE5BBA4029A76F7700F92FB9 /* TransactionViewer */ = {
+			isa = PBXGroup;
+			children = (
+				CE5BBA4129A76F8D00F92FB9 /* TransactionViewerViewController.swift */,
+				CE5BBA4229A76F8D00F92FB9 /* TransactionViewerViewController.xib */,
+			);
+			path = TransactionViewer;
+			sourceTree = "<group>";
+		};
 		CE5C4B64294257EC00DF67CE /* JobOfferModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -3752,6 +3773,24 @@
 				CE6ABE38291C05EA00CFEA36 /* ChangePasswordViewController.xib */,
 			);
 			path = ChangePasswordVC;
+			sourceTree = "<group>";
+		};
+		CE6AD21529A795DF00917CA1 /* TransactionViewer */ = {
+			isa = PBXGroup;
+			children = (
+				CE6AD21629A795FA00917CA1 /* TransactionViewerTableViewCell.swift */,
+				CE6AD21729A795FA00917CA1 /* TransactionViewerTableViewCell.xib */,
+			);
+			path = TransactionViewer;
+			sourceTree = "<group>";
+		};
+		CE6AD21A29A7995E00917CA1 /* TransactionViewers */ = {
+			isa = PBXGroup;
+			children = (
+				CE6AD21B29A7996900917CA1 /* TransactionViewerRecord.swift */,
+				CE6AD21C29A7996900917CA1 /* TransactionViewerResponse.swift */,
+			);
+			path = TransactionViewers;
 			sourceTree = "<group>";
 		};
 		CE7210602934C06400093265 /* OverTimeViewController */ = {
@@ -4126,7 +4165,6 @@
 		CEDD90D52964456100762DBD /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
-				CEC54A2F29A62FC4002015DB /* AccountHistoryViewController */,
 				CEDD90D62964456900762DBD /* Setttings */,
 				CE0A55FA296ABDEE00058517 /* CostCenter */,
 				CEE3C2BB29701D1400D1B84D /* AccountMasters */,
@@ -4136,6 +4174,8 @@
 				CE1D63D7299920A300AEEC3B /* CreateJournalVoucher */,
 				CEB3ED1329A249EF00B70AB0 /* AllJournalVouchers */,
 				CEC54A2029A62557002015DB /* AllSellingInvoiceViewController */,
+				CEC54A2F29A62FC4002015DB /* AccountHistoryViewController */,
+				CE5BBA4029A76F7700F92FB9 /* TransactionViewer */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -4154,6 +4194,7 @@
 		CEDD90DB2964494300762DBD /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				CE6AD21A29A7995E00917CA1 /* TransactionViewers */,
 				CEC54A3929A633DC002015DB /* AccountHistory */,
 				CEC54A2A29A62951002015DB /* SellingInvoices */,
 				CEB3ED1829A24E6C00B70AB0 /* AllJournalVoucher */,
@@ -4258,6 +4299,7 @@
 		CEDD91082964796700762DBD /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				CE6AD21529A795DF00917CA1 /* TransactionViewer */,
 				CEC54A3429A6319C002015DB /* AccountHistory */,
 				CEC54A2529A626F6002015DB /* SellingInvoices */,
 				CEB3ED1D29A2524400B70AB0 /* AllJournalVouchers */,
@@ -5223,6 +5265,7 @@
 				3FD03A10287437B000BB13C7 /* ViewEmpLangFinanialDetailsVC.strings in Resources */,
 				FAA9C4CD27B32B52003C051E /* notification3.wav in Resources */,
 				FA1B281727AADC470066061F /* TechnicalAssitantCVCell.xib in Resources */,
+				CE5BBA4429A76F8D00F92FB9 /* TransactionViewerViewController.xib in Resources */,
 				3F9040F3286CB45F008D85B8 /* ViewAttachTableViewCell.xib in Resources */,
 				3FD03A4A287437B000BB13C7 /* SettingViewController.strings in Resources */,
 				CEDD90F7296450DF00762DBD /* InvoiceSettingsViewController.xib in Resources */,
@@ -5334,6 +5377,7 @@
 				FA03242F26FB9BFE00372EA6 /* Assets.xcassets in Resources */,
 				CE2C29DD296AEF8E00CCB709 /* AddCostCenterViewController.xib in Resources */,
 				CE08040C292511F700B45097 /* ProfileCollectionViewCell.xib in Resources */,
+				CE6AD21929A795FA00917CA1 /* TransactionViewerTableViewCell.xib in Resources */,
 				3F9040E9286CB269008D85B8 /* UserTableViewCell.xib in Resources */,
 				3F07C0AC286D952500C2CDF6 /* SubProjectTVCell.xib in Resources */,
 				FA8A75A7273DB1C1005A2F29 /* FormVersionCell.xib in Resources */,
@@ -5668,6 +5712,7 @@
 				3FA52FE328B65A3900B42B58 /* ContractDataVC.swift in Sources */,
 				CE3244A628FC350C004DBADB /* ChartRightData.swift in Sources */,
 				3F97CD99289A600400D6E8CC /* EditTicketCommentVC.swift in Sources */,
+				CE6AD21D29A7996900917CA1 /* TransactionViewerRecord.swift in Sources */,
 				CE497092298AA7AA00CB1709 /* AllReceiptsViewController.swift in Sources */,
 				CE603A3B2958C3DA0037C39E /* ApprovalWithPasswordVC.swift in Sources */,
 				FA1D64AF2777749D00FA7735 /* NotifiRoute.swift in Sources */,
@@ -5717,6 +5762,7 @@
 				3F397D862860C1F000A7DAB4 /* AttachmentsGetREsponse.swift in Sources */,
 				3F9C9E842859E62E00C5322B /* ContactDetailsTableViewCell.swift in Sources */,
 				3FB305D02868702500CAC16F /* Transactions_extra.swift in Sources */,
+				CE6AD21E29A7996900917CA1 /* TransactionViewerResponse.swift in Sources */,
 				CEFE3B902900634700119A55 /* UsedUnusedReportData.swift in Sources */,
 				FA5D6D572767AE8A0088B206 /* TechnicalAssistantCell.swift in Sources */,
 				CEE3C2C829703E7100D1B84D /* AccountMastersTableViewCell.swift in Sources */,
@@ -6064,6 +6110,7 @@
 				FA10D1AC275BCA2600F3716B /* TransactionFormDetailsVC.swift in Sources */,
 				FA4975B027936BFC00891C9F /* SortVC.swift in Sources */,
 				3FEAAE3328B622D80093815D /* Form_ct1_data.swift in Sources */,
+				CE5BBA4329A76F8D00F92FB9 /* TransactionViewerViewController.swift in Sources */,
 				CE0D05E5292A6FD50058344B /* LoanRecord.swift in Sources */,
 				3F159CAD28AE9454002824BE /* DocAttachViewController.swift in Sources */,
 				CE8571902908239000293977 /* SpamMailViewController.swift in Sources */,
@@ -6252,6 +6299,7 @@
 				3F1436912848A120008ABC19 /* RoundedTextField.swift in Sources */,
 				CE5E030728F888D600007EAC /* ProjectRequestsSetting.swift in Sources */,
 				FA180964270494AB00B493A7 /* AuthUser.swift in Sources */,
+				CE6AD21829A795FA00917CA1 /* TransactionViewerTableViewCell.swift in Sources */,
 				CE0FD9D8290581F800170382 /* CalenderActivityResponse.swift in Sources */,
 				CEDCF6672965A0820055DDB2 /* AccountFinancialRecord.swift in Sources */,
 				3F1436892848A120008ABC19 /* UIViewCustomCornerRadiusWithGraidentView.swift in Sources */,
@@ -7610,7 +7658,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.0.5;
+				MARKETING_VERSION = 15.0.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -7747,7 +7795,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.0.5;
+				MARKETING_VERSION = 15.0.6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

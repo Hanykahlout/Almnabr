@@ -4364,8 +4364,8 @@ class APIController{
         }
     }
     
-    func getSellingInvoices(pageNumber:String,search_key:String,finance_id:String,branch_id:String,callback:@escaping (_ data:SellingInvoicesResponse) -> Void){
-        let strURL = "\(serverURL)/listsinvoice/\(branch_id)/\(pageNumber)/10"
+    func getSellingInvoices(isPurchase:Bool,pageNumber:String,search_key:String,finance_id:String,branch_id:String,callback:@escaping (_ data:SellingInvoicesResponse) -> Void){
+        let strURL = "\(serverURL)/\(isPurchase ? "listpinvoice" : "listsinvoice")/\(branch_id)/\(pageNumber)/10"
         let headers = [ "authorization":
                             "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
         ]
@@ -4399,6 +4399,21 @@ class APIController{
         }
     }
 
+    func getTransactionViewerData(branch_id:String,numberFilter:String,search_key:String,finance_id:String,callback:@escaping (_ data:TransactionViewerResponse) -> Void){
+        let strURL = "\(serverURL)/tviewer/\(branch_id)/\(numberFilter)?search_key=\(search_key)&finance_id=\(finance_id)"
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+    
+        Alamofire.request(strURL, method: .get,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : TransactionViewerResponse = Mapper<TransactionViewerResponse>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+        
     
     
 }

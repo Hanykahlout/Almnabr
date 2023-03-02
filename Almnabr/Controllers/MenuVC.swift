@@ -422,6 +422,35 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     panel?.center(nav)
+                case "60":
+                    let vc = StatementAccountsViewController()
+                    vc.type = .account
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                case "61":
+                    let vc = StatementAccountsViewController()
+                    vc.type = .cost
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                case "62":
+                    let vc = TrialBalanceViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                case "63":
+                    let vc = TrialBalanceViewController()
+                    vc.isCostSummary = true
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                case "64":
+                    let vc = StatementAccountsViewController()
+                    vc.type = .ledger
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
                 case "69":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
                     let vc:CronTransactionVC = AppDelegate.mainSB.instanceVC()
@@ -441,6 +470,11 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     vc.StrSubMenue =  obj.menu[indexPath.row - 1].menu_name
                     nav.isNavigationBarHidden = true
                     _ =  panel?.center(nav)
+                case "90":
+                    let vc = AccountsTrialViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
                 case "94":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
                     let vc:AllTicketVC = AppDelegate.TicketSB.instanceVC()

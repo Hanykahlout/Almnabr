@@ -48,7 +48,7 @@ class ViewReceiptViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
-        // Do any additional setup after loading the view.
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,6 +103,19 @@ extension ViewReceiptViewController:UITableViewDelegate,UITableViewDataSource{
             let nav = UINavigationController(rootViewController: vc)
             self?.navigationController?.present(nav, animated: true)
         }
+        
+        cell.transactionButtonAction = { [weak self] in
+            let vc = StatementAccountsViewController()
+            vc.branch_id = self?.branch_id ?? ""
+            vc.finance_id = self?.finance_id ?? ""
+            vc.selectedAccountFrom = .init(label: self?.transactionsData[indexPath.row].account_name ?? "", value: self?.transactionsData[indexPath.row].account_masters_id ?? "")
+            vc.selectedAccountTo = .init(label: self?.transactionsData[indexPath.row].account_name ?? "", value: self?.transactionsData[indexPath.row].account_masters_id ?? "")
+            vc.isShowingDirectly = true
+            let nav = UINavigationController(rootViewController: vc)
+            nav.isNavigationBarHidden = true
+            self?.panel?.center(nav)
+        }
+        
         return cell
     }
 }

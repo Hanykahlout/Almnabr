@@ -655,6 +655,20 @@
 		CE8C0833294A09EB00D444A7 /* QuotationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8C0831294A09EB00D444A7 /* QuotationTableViewCell.xib */; };
 		CE8FE7282913E6450022DD51 /* UpdateShiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8FE7262913E6450022DD51 /* UpdateShiftViewController.swift */; };
 		CE8FE7292913E6450022DD51 /* UpdateShiftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8FE7272913E6450022DD51 /* UpdateShiftViewController.xib */; };
+		CE9B977729B0A01200AB46DB /* AccountsTrialResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B977529B0A01100AB46DB /* AccountsTrialResultViewController.swift */; };
+		CE9B977829B0A01200AB46DB /* AccountsTrialResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9B977629B0A01100AB46DB /* AccountsTrialResultViewController.xib */; };
+		CE9B977C29B0A15C00AB46DB /* AccountsTrialResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B977A29B0A15C00AB46DB /* AccountsTrialResultTableViewCell.swift */; };
+		CE9B977D29B0A15C00AB46DB /* AccountsTrialResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9B977B29B0A15C00AB46DB /* AccountsTrialResultTableViewCell.xib */; };
+		CE9B978629B0B28D00AB46DB /* TrialBalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9B978429B0B28D00AB46DB /* TrialBalanceViewController.swift */; };
+		CE9B978729B0B28D00AB46DB /* TrialBalanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9B978529B0B28D00AB46DB /* TrialBalanceViewController.xib */; };
+		CE9FA24629AB6FD1003A37A3 /* StatementAccountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FA24429AB6FD1003A37A3 /* StatementAccountsViewController.swift */; };
+		CE9FA24729AB6FD1003A37A3 /* StatementAccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9FA24529AB6FD1003A37A3 /* StatementAccountsViewController.xib */; };
+		CE9FA24A29AB9BA4003A37A3 /* StatementAccountsResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FA24829AB9BA4003A37A3 /* StatementAccountsResultViewController.swift */; };
+		CE9FA24B29AB9BA4003A37A3 /* StatementAccountsResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9FA24929AB9BA4003A37A3 /* StatementAccountsResultViewController.xib */; };
+		CE9FA24F29AB9D42003A37A3 /* StatementAccountsResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FA24D29AB9D41003A37A3 /* StatementAccountsResultTableViewCell.swift */; };
+		CE9FA25029AB9D42003A37A3 /* StatementAccountsResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9FA24E29AB9D41003A37A3 /* StatementAccountsResultTableViewCell.xib */; };
+		CE9FA25429ABA1E5003A37A3 /* StatementAccountsRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FA25229ABA1E5003A37A3 /* StatementAccountsRecord.swift */; };
+		CE9FA25529ABA1E5003A37A3 /* StatementAccountsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FA25329ABA1E5003A37A3 /* StatementAccountsData.swift */; };
 		CE9FE30E2934DD800008CECA /* OvertimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FE30C2934DD800008CECA /* OvertimeTableViewCell.swift */; };
 		CE9FE30F2934DD800008CECA /* OvertimeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE9FE30D2934DD800008CECA /* OvertimeTableViewCell.xib */; };
 		CE9FE3132934EB8C0008CECA /* BonusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9FE3112934EB8C0008CECA /* BonusViewController.swift */; };
@@ -834,6 +848,11 @@
 		CEF81872292FA9A200026B33 /* PayRoleReviewersRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF81870292FA9A200026B33 /* PayRoleReviewersRecord.swift */; };
 		CEF8187A292FAC2400026B33 /* AddReviewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF81878292FAC2400026B33 /* AddReviewerViewController.swift */; };
 		CEF8187B292FAC2400026B33 /* AddReviewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF81879292FAC2400026B33 /* AddReviewerViewController.xib */; };
+		CEFD00B629ACF65300A95A1D /* AccountsTrialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD00B429ACF65300A95A1D /* AccountsTrialViewController.swift */; };
+		CEFD00B729ACF65300A95A1D /* AccountsTrialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD00B529ACF65300A95A1D /* AccountsTrialViewController.xib */; };
+		CEFD00B929ACFFF300A95A1D /* GeneralLedgerRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD00B829ACFFF200A95A1D /* GeneralLedgerRecord.swift */; };
+		CEFD00BD29AD051600A95A1D /* GeneralLedgerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD00BB29AD051600A95A1D /* GeneralLedgerTableViewCell.swift */; };
+		CEFD00BE29AD051600A95A1D /* GeneralLedgerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEFD00BC29AD051600A95A1D /* GeneralLedgerTableViewCell.xib */; };
 		CEFE3B882900321000119A55 /* SelectedHomeFilterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE3B872900321000119A55 /* SelectedHomeFilterData.swift */; };
 		CEFE3B8E2900634700119A55 /* UsedUnusedReportRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE3B892900634700119A55 /* UsedUnusedReportRecords.swift */; };
 		CEFE3B8F2900634700119A55 /* UsedUnusedReportTableHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFE3B8A2900634700119A55 /* UsedUnusedReportTableHeaders.swift */; };
@@ -1797,6 +1816,20 @@
 		CE8C0831294A09EB00D444A7 /* QuotationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuotationTableViewCell.xib; sourceTree = "<group>"; };
 		CE8FE7262913E6450022DD51 /* UpdateShiftViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateShiftViewController.swift; sourceTree = "<group>"; };
 		CE8FE7272913E6450022DD51 /* UpdateShiftViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UpdateShiftViewController.xib; sourceTree = "<group>"; };
+		CE9B977529B0A01100AB46DB /* AccountsTrialResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTrialResultViewController.swift; sourceTree = "<group>"; };
+		CE9B977629B0A01100AB46DB /* AccountsTrialResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsTrialResultViewController.xib; sourceTree = "<group>"; };
+		CE9B977A29B0A15C00AB46DB /* AccountsTrialResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTrialResultTableViewCell.swift; sourceTree = "<group>"; };
+		CE9B977B29B0A15C00AB46DB /* AccountsTrialResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsTrialResultTableViewCell.xib; sourceTree = "<group>"; };
+		CE9B978429B0B28D00AB46DB /* TrialBalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrialBalanceViewController.swift; sourceTree = "<group>"; };
+		CE9B978529B0B28D00AB46DB /* TrialBalanceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrialBalanceViewController.xib; sourceTree = "<group>"; };
+		CE9FA24429AB6FD1003A37A3 /* StatementAccountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementAccountsViewController.swift; sourceTree = "<group>"; };
+		CE9FA24529AB6FD1003A37A3 /* StatementAccountsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatementAccountsViewController.xib; sourceTree = "<group>"; };
+		CE9FA24829AB9BA4003A37A3 /* StatementAccountsResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementAccountsResultViewController.swift; sourceTree = "<group>"; };
+		CE9FA24929AB9BA4003A37A3 /* StatementAccountsResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatementAccountsResultViewController.xib; sourceTree = "<group>"; };
+		CE9FA24D29AB9D41003A37A3 /* StatementAccountsResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatementAccountsResultTableViewCell.swift; sourceTree = "<group>"; };
+		CE9FA24E29AB9D41003A37A3 /* StatementAccountsResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatementAccountsResultTableViewCell.xib; sourceTree = "<group>"; };
+		CE9FA25229ABA1E5003A37A3 /* StatementAccountsRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementAccountsRecord.swift; sourceTree = "<group>"; };
+		CE9FA25329ABA1E5003A37A3 /* StatementAccountsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatementAccountsData.swift; sourceTree = "<group>"; };
 		CE9FE30C2934DD800008CECA /* OvertimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvertimeTableViewCell.swift; sourceTree = "<group>"; };
 		CE9FE30D2934DD800008CECA /* OvertimeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OvertimeTableViewCell.xib; sourceTree = "<group>"; };
 		CE9FE3112934EB8C0008CECA /* BonusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BonusViewController.swift; sourceTree = "<group>"; };
@@ -1978,6 +2011,11 @@
 		CEF81870292FA9A200026B33 /* PayRoleReviewersRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRoleReviewersRecord.swift; sourceTree = "<group>"; };
 		CEF81878292FAC2400026B33 /* AddReviewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewerViewController.swift; sourceTree = "<group>"; };
 		CEF81879292FAC2400026B33 /* AddReviewerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddReviewerViewController.xib; sourceTree = "<group>"; };
+		CEFD00B429ACF65300A95A1D /* AccountsTrialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsTrialViewController.swift; sourceTree = "<group>"; };
+		CEFD00B529ACF65300A95A1D /* AccountsTrialViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountsTrialViewController.xib; sourceTree = "<group>"; };
+		CEFD00B829ACFFF200A95A1D /* GeneralLedgerRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralLedgerRecord.swift; sourceTree = "<group>"; };
+		CEFD00BB29AD051600A95A1D /* GeneralLedgerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralLedgerTableViewCell.swift; sourceTree = "<group>"; };
+		CEFD00BC29AD051600A95A1D /* GeneralLedgerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GeneralLedgerTableViewCell.xib; sourceTree = "<group>"; };
 		CEFE3B872900321000119A55 /* SelectedHomeFilterData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedHomeFilterData.swift; sourceTree = "<group>"; };
 		CEFE3B892900634700119A55 /* UsedUnusedReportRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsedUnusedReportRecords.swift; sourceTree = "<group>"; };
 		CEFE3B8A2900634700119A55 /* UsedUnusedReportTableHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsedUnusedReportTableHeaders.swift; sourceTree = "<group>"; };
@@ -3915,6 +3953,54 @@
 			path = CForm;
 			sourceTree = "<group>";
 		};
+		CE9B977929B0A14100AB46DB /* AccountsTrialResult */ = {
+			isa = PBXGroup;
+			children = (
+				CE9B977A29B0A15C00AB46DB /* AccountsTrialResultTableViewCell.swift */,
+				CE9B977B29B0A15C00AB46DB /* AccountsTrialResultTableViewCell.xib */,
+			);
+			path = AccountsTrialResult;
+			sourceTree = "<group>";
+		};
+		CE9B978329B0B25900AB46DB /* TrialBalanceViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CE9B978429B0B28D00AB46DB /* TrialBalanceViewController.swift */,
+				CE9B978529B0B28D00AB46DB /* TrialBalanceViewController.xib */,
+			);
+			path = TrialBalanceViewController;
+			sourceTree = "<group>";
+		};
+		CE9FA24329AB6FB7003A37A3 /* StatementAccountsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CE9FA24429AB6FD1003A37A3 /* StatementAccountsViewController.swift */,
+				CE9FA24529AB6FD1003A37A3 /* StatementAccountsViewController.xib */,
+				CE9FA24829AB9BA4003A37A3 /* StatementAccountsResultViewController.swift */,
+				CE9FA24929AB9BA4003A37A3 /* StatementAccountsResultViewController.xib */,
+			);
+			path = StatementAccountsViewController;
+			sourceTree = "<group>";
+		};
+		CE9FA24C29AB9D2D003A37A3 /* StatementAccounts */ = {
+			isa = PBXGroup;
+			children = (
+				CE9FA24D29AB9D41003A37A3 /* StatementAccountsResultTableViewCell.swift */,
+				CE9FA24E29AB9D41003A37A3 /* StatementAccountsResultTableViewCell.xib */,
+			);
+			path = StatementAccounts;
+			sourceTree = "<group>";
+		};
+		CE9FA25129ABA1D9003A37A3 /* StatementAccounts */ = {
+			isa = PBXGroup;
+			children = (
+				CE9FA25329ABA1E5003A37A3 /* StatementAccountsData.swift */,
+				CE9FA25229ABA1E5003A37A3 /* StatementAccountsRecord.swift */,
+				CEFD00B829ACFFF200A95A1D /* GeneralLedgerRecord.swift */,
+			);
+			path = StatementAccounts;
+			sourceTree = "<group>";
+		};
 		CE9FE3102934EB440008CECA /* BonusViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -4176,6 +4262,9 @@
 				CEC54A2029A62557002015DB /* AllSellingInvoiceViewController */,
 				CEC54A2F29A62FC4002015DB /* AccountHistoryViewController */,
 				CE5BBA4029A76F7700F92FB9 /* TransactionViewer */,
+				CE9FA24329AB6FB7003A37A3 /* StatementAccountsViewController */,
+				CEFD00B329ACF62F00A95A1D /* AccountsTrialViewController */,
+				CE9B978329B0B25900AB46DB /* TrialBalanceViewController */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -4191,9 +4280,10 @@
 			path = Setttings;
 			sourceTree = "<group>";
 		};
-		CEDD90DB2964494300762DBD /* Account */ = {
+		CEDD90DB2964494300762DBD /* Accounts */ = {
 			isa = PBXGroup;
 			children = (
+				CE9FA25129ABA1D9003A37A3 /* StatementAccounts */,
 				CE6AD21A29A7995E00917CA1 /* TransactionViewers */,
 				CEC54A3929A633DC002015DB /* AccountHistory */,
 				CEC54A2A29A62951002015DB /* SellingInvoices */,
@@ -4205,7 +4295,7 @@
 				CE2C29D5296AD9EB00CCB709 /* CostCenters */,
 				CEDD90DC2964495000762DBD /* Settings */,
 			);
-			path = Account;
+			path = Accounts;
 			sourceTree = "<group>";
 		};
 		CEDD90DC2964495000762DBD /* Settings */ = {
@@ -4299,6 +4389,9 @@
 		CEDD91082964796700762DBD /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				CE9B977929B0A14100AB46DB /* AccountsTrialResult */,
+				CEFD00BA29AD04F500A95A1D /* GeneralLedgerTableViewCell */,
+				CE9FA24C29AB9D2D003A37A3 /* StatementAccounts */,
 				CE6AD21529A795DF00917CA1 /* TransactionViewer */,
 				CEC54A3429A6319C002015DB /* AccountHistory */,
 				CEC54A2529A626F6002015DB /* SellingInvoices */,
@@ -4418,6 +4511,26 @@
 			path = GeneralModels;
 			sourceTree = "<group>";
 		};
+		CEFD00B329ACF62F00A95A1D /* AccountsTrialViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CEFD00B429ACF65300A95A1D /* AccountsTrialViewController.swift */,
+				CEFD00B529ACF65300A95A1D /* AccountsTrialViewController.xib */,
+				CE9B977529B0A01100AB46DB /* AccountsTrialResultViewController.swift */,
+				CE9B977629B0A01100AB46DB /* AccountsTrialResultViewController.xib */,
+			);
+			path = AccountsTrialViewController;
+			sourceTree = "<group>";
+		};
+		CEFD00BA29AD04F500A95A1D /* GeneralLedgerTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CEFD00BB29AD051600A95A1D /* GeneralLedgerTableViewCell.swift */,
+				CEFD00BC29AD051600A95A1D /* GeneralLedgerTableViewCell.xib */,
+			);
+			path = GeneralLedgerTableViewCell;
+			sourceTree = "<group>";
+		};
 		FA03241926FB9BF900372EA6 = {
 			isa = PBXGroup;
 			children = (
@@ -4512,7 +4625,7 @@
 		FA03245B26FB9E0300372EA6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CEDD90DB2964494300762DBD /* Account */,
+				CEDD90DB2964494300762DBD /* Accounts */,
 				CE8BCBE229547D1F00E79486 /* CommunicationModels */,
 				CE1F02BF294895FA00CEFDC9 /* ProjectDetailsModels */,
 				CE5C4B64294257EC00DF67CE /* JobOfferModel */,
@@ -5216,6 +5329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FD03A47287437B000BB13C7 /* WebViewViewController.xib in Resources */,
+				CE9FA24B29AB9BA4003A37A3 /* StatementAccountsResultViewController.xib in Resources */,
 				3FD039D4287437B000BB13C7 /* FilterViewController.strings in Resources */,
 				3FD03A53287437B000BB13C7 /* PermissionViewController.strings in Resources */,
 				CE2EDAFC292FA4FF00A22419 /* PayRoleReviewersViewController.xib in Resources */,
@@ -5305,6 +5419,7 @@
 				3F07C0C0286D971D00C2CDF6 /* NotesCell.xib in Resources */,
 				CED47F5D290AD51700C6F840 /* WeekRatioViewController.xib in Resources */,
 				3FD039EC287437B000BB13C7 /* OutgoingHistoryViewController.xib in Resources */,
+				CE9FA24729AB6FD1003A37A3 /* StatementAccountsViewController.xib in Resources */,
 				CEDD91012964511300762DBD /* BlockAccountsViewController.xib in Resources */,
 				CEDCF6702965EC0F0055DDB2 /* SendMailViewController.xib in Resources */,
 				3FD03A42287437B000BB13C7 /* BankDetailsViewController.xib in Resources */,
@@ -5362,6 +5477,7 @@
 				CEC54A2929A6270E002015DB /* SellingInvoiceTableViewCell.xib in Resources */,
 				CE0A55F9296AB9E000058517 /* BlockAccountsTableViewCell.xib in Resources */,
 				3FD039E5287437B000BB13C7 /* PresonDetailsViewController.strings in Resources */,
+				CE9FA25029AB9D42003A37A3 /* StatementAccountsResultTableViewCell.xib in Resources */,
 				3F07C052286D8D1C00C2CDF6 /* Settings2TableViewCell.xib in Resources */,
 				CED93B66298BD7A20047AE0A /* AddCardCostCollectionViewCell.xib in Resources */,
 				3FD03A52287437B000BB13C7 /* SettingViewController.xib in Resources */,
@@ -5390,6 +5506,7 @@
 				3FD03A2A287437B000BB13C7 /* AddEmpEduDetailsViewController.strings in Resources */,
 				FAF7623E28305594000DEAFE /* TaskUsersCVCell.xib in Resources */,
 				3F07C098286D932600C2CDF6 /* FormTransactionTVCell.xib in Resources */,
+				CE9B978729B0B28D00AB46DB /* TrialBalanceViewController.xib in Resources */,
 				CE0A5608296AD72B00058517 /* CostCenterTableViewCell.xib in Resources */,
 				3F9040CB286CB0B3008D85B8 /* InsuranceDetailsTableViewCell.xib in Resources */,
 				FA9FB0A727163F0D0037871C /* ServicesCVCell.xib in Resources */,
@@ -5412,6 +5529,7 @@
 				3FD03A39287437B000BB13C7 /* EducationDetailsViewController.strings in Resources */,
 				3F07C09D286D935700C2CDF6 /* TeamUserTVCell.xib in Resources */,
 				FA9E7D8E270F39DC003A1D16 /* ApprovalTransactionCell.xib in Resources */,
+				CE9B977829B0A01200AB46DB /* AccountsTrialResultViewController.xib in Resources */,
 				3FD03A0D287437B000BB13C7 /* AddJopDetailsViewController.xib in Resources */,
 				FAC32FAD2707662C0046A0F6 /* DroidKufi-Bold.ttf in Resources */,
 				3FD03A712874485800BB13C7 /* Ticket.storyboard in Resources */,
@@ -5469,11 +5587,13 @@
 				FAD333A8271383090093175E /* ProjectCell.xib in Resources */,
 				3FD039DB287437B000BB13C7 /* ViewEmpBankDetailsVC.xib in Resources */,
 				3FD039F7287437B000BB13C7 /* ViewEmpNotesVC.strings in Resources */,
+				CEFD00B729ACF65300A95A1D /* AccountsTrialViewController.xib in Resources */,
 				3FD03A23287437B000BB13C7 /* ViewEmpInsuranceDetailsVC.xib in Resources */,
 				3FD03A0E287437B000BB13C7 /* ViewEmpJobDetailsVC.xib in Resources */,
 				FACFBA40273AD235007C248C /* GeneralNoCell.xib in Resources */,
 				3F677ED028AB9147000D6239 /* DocumentsTableViewCell.xib in Resources */,
 				CE9FE30F2934DD800008CECA /* OvertimeTableViewCell.xib in Resources */,
+				CE9B977D29B0A15C00AB46DB /* AccountsTrialResultTableViewCell.xib in Resources */,
 				3FD039FE287437B000BB13C7 /* ViewEmpIDDetailsVC.xib in Resources */,
 				3F9040C1286CB01D008D85B8 /* ContactDetailsTableViewCell.xib in Resources */,
 				3F9040B7286CAF85008D85B8 /* JopDetailsTableViewCell.xib in Resources */,
@@ -5500,6 +5620,7 @@
 				CEDD90FC296450F500762DBD /* FinancialYearsViewController.xib in Resources */,
 				CEC54A3829A631B2002015DB /* AccountHistoryTableViewCell.xib in Resources */,
 				CE375FBE297582560099A965 /* MyTransactionHeaderView.xib in Resources */,
+				CEFD00BE29AD051600A95A1D /* GeneralLedgerTableViewCell.xib in Resources */,
 				3FD039FD287437B000BB13C7 /* ViewEmpIDDetailsVC.strings in Resources */,
 				3FD03A08287437B000BB13C7 /* ViewEmpContractDetailsVC.xib in Resources */,
 				3F9040B2286CAEEB008D85B8 /* EmployeeTableViewCell.xib in Resources */,
@@ -5684,6 +5805,7 @@
 				CE6D6EC72981AD1400640EA5 /* AccountManagerData.swift in Sources */,
 				CE8BCBE02954755600E79486 /* CommunicationListsViewController.swift in Sources */,
 				CEDD90F6296450DF00762DBD /* InvoiceSettingsViewController.swift in Sources */,
+				CE9FA24F29AB9D42003A37A3 /* StatementAccountsResultTableViewCell.swift in Sources */,
 				CE0FD9E92905A0EE00170382 /* No_settings.swift in Sources */,
 				CE1D63DA299920BC00AEEC3B /* CreateJournalVoucherVC.swift in Sources */,
 				FA8A75A6273DB1C1005A2F29 /* FormVersionCell.swift in Sources */,
@@ -5783,6 +5905,7 @@
 				CEC54A3C29A633E9002015DB /* AccountHistoryRecord.swift in Sources */,
 				3F33D12728CDDA8B006B7744 /* Employee_tasks.swift in Sources */,
 				3F48C53F285883AF004D33F8 /* Profile_percentage.swift in Sources */,
+				CE9B978629B0B28D00AB46DB /* TrialBalanceViewController.swift in Sources */,
 				3F1436962848A120008ABC19 /* UILabelDesignable.swift in Sources */,
 				3FD03A45287437B000BB13C7 /* IDDetailsViewController.swift in Sources */,
 				FA9DF8D72815979A0015D492 /* TicketCollectionViewController.swift in Sources */,
@@ -5899,6 +6022,7 @@
 				CEBAC55E28FEAF0000324458 /* ProjectRequestData.swift in Sources */,
 				3FAA84E5288E904D003A437E /* Steps.swift in Sources */,
 				3FD03A4E287437B000BB13C7 /* SettingViewController.swift in Sources */,
+				CE9FA25529ABA1E5003A37A3 /* StatementAccountsData.swift in Sources */,
 				CE2C29D9296AD9F300CCB709 /* CostCentersRecord.swift in Sources */,
 				CE0FD9D7290581F800170382 /* CalenderActivityLog.swift in Sources */,
 				CEA27DED29376FF700542F57 /* Form_det1_data.swift in Sources */,
@@ -5981,6 +6105,7 @@
 				CE375FB6297582560099A965 /* MyTransactionHeaderView.swift in Sources */,
 				3F29C8FF2886FDD80011AF97 /* FinanceInfoTableViewCell.swift in Sources */,
 				CEEE89FF298FA1AE00F19105 /* ViewReceiptViewController.swift in Sources */,
+				CEFD00BD29AD051600A95A1D /* GeneralLedgerTableViewCell.swift in Sources */,
 				3FB305D92868702500CAC16F /* Transactions_request.swift in Sources */,
 				3FA8CB6D2848BCE200434CE4 /* SettingsDataRecords.swift in Sources */,
 				CE5E02F528F828CB00007EAC /* GetGroupTypesRecord.swift in Sources */,
@@ -5988,6 +6113,7 @@
 				3FD03A58287437B000BB13C7 /* AddPermissionMentionsVC.swift in Sources */,
 				3FB305DA2868702500CAC16F /* Transactions_submitter.swift in Sources */,
 				CE85718429081D2C00293977 /* StarredMailViewController.swift in Sources */,
+				CE9FA25429ABA1E5003A37A3 /* StatementAccountsRecord.swift in Sources */,
 				FA78EA0E27D283790023E48D /* SupervisionPager.swift in Sources */,
 				3FD03A55287437B000BB13C7 /* PermissionViewController.swift in Sources */,
 				FA95FD17275EFE9100DE7854 /* SpecialApprovalVC.swift in Sources */,
@@ -6040,7 +6166,9 @@
 				3FB1C530289983C200E6EDB1 /* AddTicketCommentResponse.swift in Sources */,
 				3FD039EA287437B000BB13C7 /* PresonDetailsViewController.swift in Sources */,
 				CE0A55F4296AB7ED00058517 /* BlockAccountsResponse.swift in Sources */,
+				CE9FA24A29AB9BA4003A37A3 /* StatementAccountsResultViewController.swift in Sources */,
 				CED47F53290A890400C6F840 /* ViolationsResponse.swift in Sources */,
+				CEFD00B929ACFFF300A95A1D /* GeneralLedgerRecord.swift in Sources */,
 				3FD03A1E287437B000BB13C7 /* ViewEmployeeDetailsVC.swift in Sources */,
 				FA5C977528195F2500A2AA5A /* TaskHistoryVC.swift in Sources */,
 				FA9768BF2735D764000A3576 /* RelatedFormsVC.swift in Sources */,
@@ -6316,6 +6444,7 @@
 				FACFBA3F273AD235007C248C /* GeneralNoCell.swift in Sources */,
 				3FEAAE3C28B622D80093815D /* TransactionsContractButtons.swift in Sources */,
 				FAC32FBB270AE8A80046A0F6 /* SubMenuTVCell.swift in Sources */,
+				CE9B977729B0A01200AB46DB /* AccountsTrialResultViewController.swift in Sources */,
 				CED47F54290A890400C6F840 /* ViolationRecords.swift in Sources */,
 				FABDBA9027F476A2003961FC /* BankDetailsVC.swift in Sources */,
 				3FEAAE3828B622D80093815D /* Form_ct1_data_additional_terms.swift in Sources */,
@@ -6341,6 +6470,7 @@
 				FA44341327623F4500DF6A9B /* HistoryVC.swift in Sources */,
 				CEB1D43428F6E622007D2A8A /* CreateTransactionTableViewCell.swift in Sources */,
 				CEA3A08A291A9BDC00F79E3C /* MenuSettingsTableViewCell.swift in Sources */,
+				CE9B977C29B0A15C00AB46DB /* AccountsTrialResultTableViewCell.swift in Sources */,
 				CEC487BE293371EC00BA0291 /* FinanialDetailsViewController.swift in Sources */,
 				3FD03A05287437B000BB13C7 /* ViewEmpModulesVC.swift in Sources */,
 				FA5C976C2816B01100A2AA5A /* TaskAttachmentCell.swift in Sources */,
@@ -6377,8 +6507,10 @@
 				CE5E9A1D2950970E00143006 /* ProjectsDesignResponse.swift in Sources */,
 				3FD03A33287437B000BB13C7 /* EditEmployeePageViewController.swift in Sources */,
 				3F33D12628CDDA8B006B7744 /* DashboardResponse.swift in Sources */,
+				CE9FA24629AB6FD1003A37A3 /* StatementAccountsViewController.swift in Sources */,
 				FAC32FB62708C91D0046A0F6 /* TransactionTVCell.swift in Sources */,
 				CE2EDAF3292F9DAF00A22419 /* PayRoleTableViewCell.swift in Sources */,
+				CEFD00B629ACF65300A95A1D /* AccountsTrialViewController.swift in Sources */,
 				FA556379279C8B2D00542310 /* TemplateFilterVC.swift in Sources */,
 				FAAF205F27DB734900AD255B /* ContactTVCell.swift in Sources */,
 				CE58DA9A2987EF54003FFF44 /* OpeningBalanceViewController.swift in Sources */,
@@ -7658,7 +7790,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.0.6;
+				MARKETING_VERSION = 15.0.7;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -7795,7 +7927,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.0.6;
+				MARKETING_VERSION = 15.0.7;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

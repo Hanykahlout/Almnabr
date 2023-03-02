@@ -67,8 +67,7 @@ class TransactionViewerViewController: UIViewController {
         }
         branchSelector?.financialYearSelectionAction = { [weak self] finance_id in
             self?.finance_id = finance_id
-            self?.mainStackView.isHidden = self?.branch_id == ""
-            self?.numberFilterArrow.isHidden = self?.branch_id == ""
+            
             self?.getTransactionViewerData()
         }
         branchSelectorStackView.addArrangedSubview(branchSelector!)
@@ -155,7 +154,8 @@ extension TransactionViewerViewController{
                     self?.writerLabel.text = data.records?.writer_name ?? "----"
                     self?.totalPages = data.paging?.total_pages ?? 1
                     self?.setUpPickerView()
-                    
+                    self?.mainStackView.isHidden = self?.branch_id == ""
+                    self?.numberFilterArrow.isHidden = self?.branch_id == ""
                 }else{
                     self?.data.removeAll()
                 }
@@ -165,3 +165,5 @@ extension TransactionViewerViewController{
         }
     }
 }
+
+

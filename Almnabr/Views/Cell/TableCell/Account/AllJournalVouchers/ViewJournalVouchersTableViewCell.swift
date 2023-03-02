@@ -21,6 +21,7 @@ class ViewJournalVouchersTableViewCell: UITableViewCell {
     var costCenterButtonAction: ((_ transactionId:String,
                                   _ receiptId:String,
                                   _ transactionHistoryId:String)->Void)?
+    var transactionButtonAction: (()->Void)?
     private var data:ReceiptTransaction?
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,6 +56,7 @@ class ViewJournalVouchersTableViewCell: UITableViewCell {
     }
     
     @IBAction func transactionAction(_ sender: Any) {
+        transactionButtonAction?()
     }
     
     

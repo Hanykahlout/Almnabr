@@ -82,6 +82,19 @@ extension ViewJournalVouchersViewController:UITableViewDelegate,UITableViewDataS
             let nav = UINavigationController(rootViewController: vc)
             self?.navigationController?.present(nav, animated: true)
         }
+
+        cell.transactionButtonAction = { [weak self] in
+            let vc = StatementAccountsViewController()
+            vc.branch_id = self?.branchId ?? ""
+            vc.finance_id = self?.finance_id ?? ""
+            vc.selectedAccountFrom = .init(label: self?.transactionData[indexPath.row].account_name ?? "", value: self?.transactionData[indexPath.row].account_masters_id ?? "")
+            vc.selectedAccountTo = .init(label: self?.transactionData[indexPath.row].account_name ?? "", value: self?.transactionData[indexPath.row].account_masters_id ?? "")
+            vc.isShowingDirectly = true
+            let nav = UINavigationController(rootViewController: vc)
+            nav.isNavigationBarHidden = true
+            self?.panel?.center(nav)
+        }
+        
         return cell
     }
 }

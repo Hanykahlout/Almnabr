@@ -138,7 +138,7 @@ extension AddCardCost:UICollectionViewDelegate,UICollectionViewDataSource{
 // MARK: - API Handling
 extension AddCardCost{
     private func searchForCardCost(){
-        APIController.shard.searchForCardCost(branch_id: branch_id, search_text: debitCostTextField.text!) { data in
+        APIController.shard.searchForCostCenter(branch_id: branch_id, search_text: debitCostTextField.text!) { data in
             DispatchQueue.main.async { [weak self] in
                 if data.status ?? false{
                     self?.debitCosts = data.records ?? []

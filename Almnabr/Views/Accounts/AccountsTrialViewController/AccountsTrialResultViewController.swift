@@ -12,7 +12,7 @@ class AccountsTrialResultViewController: UIViewController {
     
     @IBOutlet weak var emptyDataLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    
+    var transactionButtonAction:((_ data:GeneralLedgerRecord)->Void)?
     private var data = [GeneralLedgerRecord]()
     var url = ""
     var body:[String:Any] = [:]
@@ -63,16 +63,7 @@ extension AccountsTrialResultViewController:UITableViewDelegate,UITableViewDataS
         let cell = tableView.dequeueReusableCell(withIdentifier: "AccountsTrialResultTableViewCell",for: indexPath) as! AccountsTrialResultTableViewCell
         cell.setData(data:data[indexPath.row])
         cell.transactionButtonAction = { [weak self] in
-            let vc = StatementAccountsViewController()
-            vc.branch_id = self?.branch_id ?? ""
-            vc.finance_id = self?.finance_id ?? ""
-            vc.selectedAccountFrom = .init(label: self?.data[indexPath.row].account_name ?? "", value: self?.data[indexPath.row].account_cost_id ?? "")
-            vc.selectedAccountTo = .init(label: self?.data[indexPath.row].account_name ?? "", value: self?.data[indexPath.row].account_cost_id ?? "")
-            vc.isShowingDirectly = true
-            let nav = UINavigationController(rootViewController: vc)
-            nav.isNavigationBarHidden = true
-            nav.modalPresentationStyle = .fullScreen
-            self?.navigationController?.present(nav, animated: false)
+            self?.transactionButtonAction?(self!.data[indexPath.row])
         }
         return cell
     }

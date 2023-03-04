@@ -1,32 +1,33 @@
 //
-//  TrialBalanceViewController.swift
+//  BalanceSheetsViewController.swift
 //  Almnabr
 //
-//  Created by Hany Alkahlout on 02/03/2023.
+//  Created by Hany Alkahlout on 04/03/2023.
 //  Copyright © 2023 Samar Akkila. All rights reserved.
 //
 
 import UIKit
-import DropDown
 import Fastis
-class TrialBalanceViewController: UIViewController {
-    
+import DropDown
+import FAPanels
+class BalanceSheetsViewController: UIViewController {
     
     @IBOutlet weak var headerTitleLabel: UILabel!
     @IBOutlet weak var headerView: HeaderView!
-    @IBOutlet weak var branchSelectorStaclView: UIStackView!
     @IBOutlet weak var mainStackView: UIStackView!
-    @IBOutlet weak var generalTrialBalanceStackView: UIStackView!
-    @IBOutlet weak var generalTrialBalanceButton: UIButton!
-    @IBOutlet weak var accountTrailBalanceStackView: UIStackView!
-    @IBOutlet weak var accountTrailBalanceButton: UIButton!
+    @IBOutlet weak var branchSelectorStackView: UIStackView!
+    @IBOutlet weak var basedGeneralLedgerStackView: UIStackView!
+    @IBOutlet weak var basedGeneralLedgerButtin: UIButton!
+    @IBOutlet weak var basedAccountsStackView: UIStackView!
+    @IBOutlet weak var basedAccountsButton: UIButton!
     @IBOutlet weak var accountCodeLevelStackView: UIStackView!
     @IBOutlet weak var accountCodeLevelButton: UIButton!
+    @IBOutlet weak var previousYearSwitch: UISwitch!
     @IBOutlet weak var periodFromTextField: UITextField!
     @IBOutlet weak var periodToTextField: UITextField!
+    @IBOutlet weak var accountCodeLevelView: UIView!
     @IBOutlet weak var accountCodeLevelTextField: UITextField!
     @IBOutlet weak var accountCodeLevelArrow: UIImageView!
-    @IBOutlet weak var accountCodeLevelView: UIView!
     
     
     private var fastisController = FastisController(mode: .single)
@@ -36,7 +37,7 @@ class TrialBalanceViewController: UIViewController {
     var branch_id = ""
     var finance_id = ""
     var branchSelector:BranchSelection?
-    var isCostSummary = false
+    var isBalanceSheets = true
     
     
     override func viewDidLoad() {
@@ -61,13 +62,14 @@ class TrialBalanceViewController: UIViewController {
             self.accountCodeLevelArrow.transform = .init(rotationAngle: .pi)
             self.levelsDropDown.show()
         }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        headerTitleLabel.text = isCostSummary ? "Cost Summary" : "Trial Balance"
+        headerTitleLabel.text = isBalanceSheets ? "Balance Sheets" : "Profit & Loss Statements"
+        
     }
+    
     
     private func setUpDropDownList(){
     //  levelsDropDown
@@ -113,27 +115,27 @@ class TrialBalanceViewController: UIViewController {
             self?.finance_id = finance_id
             self?.mainStackView.isHidden = self?.branch_id == ""
         }
-        branchSelectorStaclView.addArrangedSubview(branchSelector!)
+        branchSelectorStackView.addArrangedSubview(branchSelector!)
     }
     
     private func setUpRaduoButtons(){
-        generalTrialBalanceStackView.addTapGesture {
-            self.accountTrailBalanceButton.isSelected = false
+        basedGeneralLedgerStackView.addTapGesture {
+            self.basedGeneralLedgerButtin.isSelected = true
+            self.basedAccountsButton.isSelected = false
             self.accountCodeLevelButton.isSelected = false
-            self.generalTrialBalanceButton.isSelected = true
             self.accountCodeLevelView.isHidden = !self.accountCodeLevelButton.isSelected
         }
         
-        accountTrailBalanceStackView.addTapGesture {
-            self.accountTrailBalanceButton.isSelected = true
+        basedAccountsStackView.addTapGesture {
+            self.basedGeneralLedgerButtin.isSelected = false
+            self.basedAccountsButton.isSelected = true
             self.accountCodeLevelButton.isSelected = false
-            self.generalTrialBalanceButton.isSelected = false
             self.accountCodeLevelView.isHidden = !self.accountCodeLevelButton.isSelected
         }
         accountCodeLevelStackView.addTapGesture {
-            self.accountTrailBalanceButton.isSelected = false
+            self.basedGeneralLedgerButtin.isSelected = false
+            self.basedAccountsButton.isSelected = false
             self.accountCodeLevelButton.isSelected = true
-            self.generalTrialBalanceButton.isSelected = false
             self.accountCodeLevelView.isHidden = !self.accountCodeLevelButton.isSelected
         }
     }
@@ -151,54 +153,64 @@ class TrialBalanceViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func accountTrailBalanceButtonAction(_ sender: Any) {
-        accountTrailBalanceButton.isSelected = true
-        accountCodeLevelButton.isSelected = false
-        generalTrialBalanceButton.isSelected = false
-        
-        accountCodeLevelView.isHidden = !accountCodeLevelButton.isSelected
+    private func transactionButtonAction(_ data:AssetsRecord){
+        navigationController?.dismiss(animated: true)
+        let vc = StatementAccountsViewController()
+        vc.branch_id = branch_id
+        vc.finance_id = finance_id
+        vc.selectedAccountFrom = .init(label: data.account_name ?? "", value: data.account_cost_id ?? "")
+        vc.selectedAccountTo = .init(label: data.account_name ?? "", value: data.account_cost_id ?? "")
+        vc.isShowingDirectly = true
+        let nav = UINavigationController(rootViewController: vc)
+        nav.isNavigationBarHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        panel?.center(nav)
     }
     
     
-    @IBAction func generalTrialBalanceButtonAction(_ sender: Any) {
-        accountTrailBalanceButton.isSelected = false
-        accountCodeLevelButton.isSelected = false
-        generalTrialBalanceButton.isSelected = true
-        
-        
-        
-        accountCodeLevelView.isHidden = !accountCodeLevelButton.isSelected
+    @IBAction func basedGeneralLedgerAction(_ sender: Any) {
+        self.basedGeneralLedgerButtin.isSelected = true
+        self.basedAccountsButton.isSelected = false
+        self.accountCodeLevelButton.isSelected = false
+        self.accountCodeLevelView.isHidden = !self.accountCodeLevelButton.isSelected
     }
     
     
-    @IBAction func accountCodeLevelButtonAction(_ sender: Any) {
-        accountTrailBalanceButton.isSelected = false
-        accountCodeLevelButton.isSelected = true
-        generalTrialBalanceButton.isSelected = false
-        accountCodeLevelView.isHidden = !accountCodeLevelButton.isSelected
+    @IBAction func basedAccountsAction(_ sender: Any) {
+        self.basedGeneralLedgerButtin.isSelected = false
+        self.basedAccountsButton.isSelected = true
+        self.accountCodeLevelButton.isSelected = false
+        self.accountCodeLevelView.isHidden = !self.accountCodeLevelButton.isSelected
     }
     
+    
+    @IBAction func accountCodeLevelAction(_ sender: Any) {
+        self.basedGeneralLedgerButtin.isSelected = false
+        self.basedAccountsButton.isSelected = false
+        self.accountCodeLevelButton.isSelected = true
+        self.accountCodeLevelView.isHidden = !self.accountCodeLevelButton.isSelected
+    }
     
     @IBAction func submitAction(_ sender: Any) {
-        let vc = AccountsTrialResultViewController()
-        vc.url = isCostSummary ? "cost_summary" : "trial_balance"
+        let vc = BalanceSheetsResultViewController()
+        vc.transactionButtonAction = transactionButtonAction
+        vc.branch_id = branch_id
+        vc.finance_id = finance_id
+        vc.url = isBalanceSheets ? "balance_sheets" : "profit_loss"
+        vc.isBalanceSheets = isBalanceSheets
+        vc.isComparePreviousYear = previousYearSwitch.isOn
         vc.body = [
             "branch_id": branch_id,
             "finance_id": finance_id,
-            "report_type": accountCodeLevelButton.isSelected ? "ALEVEL" : generalTrialBalanceButton.isSelected ? "GTRAIL" : "ATRAIL",
+            "report_type": basedGeneralLedgerButtin.isSelected ? "GLEDGER" : basedAccountsButton.isSelected ? "ALEDGER" : "ALEVEL",
             "account_level": accountCodeLevelButton.isSelected ? selectedLevel : "" ,
+            "compare_previous_year": previousYearSwitch.isOn ? "1" : "0",
             "period_from": periodFromTextField.text!,
             "period_to": periodToTextField.text!
         ]
         let nav = UINavigationController(rootViewController: vc)
+        nav.modalPresentationStyle = .fullScreen
         navigationController?.present(nav, animated: true)
     }
     
-    
 }
-
-
-
-
-

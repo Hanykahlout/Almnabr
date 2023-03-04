@@ -451,6 +451,18 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     let nav = UINavigationController(rootViewController: vc)
                     nav.isNavigationBarHidden = true
                     panel?.center(nav)
+                
+                case "65":
+                    let vc = BalanceSheetsViewController()
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
+                case "66":
+                    let vc = BalanceSheetsViewController()
+                    vc.isBalanceSheets = false
+                    let nav = UINavigationController(rootViewController: vc)
+                    nav.isNavigationBarHidden = true
+                    panel?.center(nav)
                 case "69":
                     cell.lbl_title.textColor = HelperClassSwift.bcolor.getUIColor()
                     let vc:CronTransactionVC = AppDelegate.mainSB.instanceVC()

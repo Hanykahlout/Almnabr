@@ -9,6 +9,7 @@
 import UIKit
 import Fastis
 import DropDown
+import FAPanels
 class AccountsTrialViewController: UIViewController {
 
     @IBOutlet weak var headerView: HeaderView!
@@ -131,6 +132,20 @@ class AccountsTrialViewController: UIViewController {
         }
     }
     
+    private func transationAction(_ data:GeneralLedgerRecord){
+        navigationController?.dismiss(animated: true)
+        let vc = StatementAccountsViewController()
+        vc.branch_id = branch_id
+        vc.finance_id = finance_id
+        vc.selectedAccountFrom = .init(label: data.account_name ?? "", value: data.account_cost_id ?? "")
+        vc.selectedAccountTo = .init(label: data.account_name ?? "", value: data.account_cost_id ?? "")
+        vc.isShowingDirectly = true
+        let nav = UINavigationController(rootViewController: vc)
+        nav.isNavigationBarHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        panel?.center(nav)
+    }
+    
     
     @IBAction func accountTrailBalanceButtonAction(_ sender: Any) {
         accountTrailBalanceButton.isSelected = !accountTrailBalanceButton.isSelected
@@ -148,6 +163,7 @@ class AccountsTrialViewController: UIViewController {
     
     @IBAction func submitAction(_ sender: Any) {
         let vc = AccountsTrialResultViewController()
+        vc.transactionButtonAction = transationAction
         vc.branch_id = branch_id
         vc.finance_id = finance_id
         vc.url = "account_trial"

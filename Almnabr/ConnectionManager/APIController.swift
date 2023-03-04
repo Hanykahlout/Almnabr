@@ -4481,5 +4481,23 @@ class APIController{
             }
         }
     }
+    
+    
+    func getBalanceSheetsData(url:String,body:[String:Any],callback:@escaping (_ data:BalanceSheetsData?) -> Void){
+        let strURL = "\(serverURL)/\(url)"
+
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                if let parsedMapperString : BalanceSheetsData = Mapper<BalanceSheetsData>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
+    
 }
 

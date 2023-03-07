@@ -855,6 +855,12 @@
 		CEEE8A07298FAFE200F19105 /* ReceiptTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE8A06298FAFE200F19105 /* ReceiptTransaction.swift */; };
 		CEEE8A0E298FB1E200F19105 /* ViewReceiptTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEE8A0C298FB1E200F19105 /* ViewReceiptTableViewCell.swift */; };
 		CEEE8A0F298FB1E200F19105 /* ViewReceiptTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEEE8A0D298FB1E200F19105 /* ViewReceiptTableViewCell.xib */; };
+		CEF2724929B7377500C6AA91 /* TransactionListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2724729B7377500C6AA91 /* TransactionListingViewController.swift */; };
+		CEF2724A29B7377500C6AA91 /* TransactionListingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF2724829B7377500C6AA91 /* TransactionListingViewController.xib */; };
+		CEF2724D29B74C2C00C6AA91 /* TransactionListingResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2724B29B74C2C00C6AA91 /* TransactionListingResultViewController.swift */; };
+		CEF2724E29B74C2C00C6AA91 /* TransactionListingResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF2724C29B74C2C00C6AA91 /* TransactionListingResultViewController.xib */; };
+		CEF2725229B74D4400C6AA91 /* TransactionListingResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF2725029B74D4400C6AA91 /* TransactionListingResultTableViewCell.swift */; };
+		CEF2725329B74D4400C6AA91 /* TransactionListingResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF2725129B74D4400C6AA91 /* TransactionListingResultTableViewCell.xib */; };
 		CEF81871292FA9A200026B33 /* PayRoleReviewersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF8186F292FA9A100026B33 /* PayRoleReviewersResponse.swift */; };
 		CEF81872292FA9A200026B33 /* PayRoleReviewersRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF81870292FA9A200026B33 /* PayRoleReviewersRecord.swift */; };
 		CEF8187A292FAC2400026B33 /* AddReviewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF81878292FAC2400026B33 /* AddReviewerViewController.swift */; };
@@ -2029,6 +2035,12 @@
 		CEEE8A06298FAFE200F19105 /* ReceiptTransaction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReceiptTransaction.swift; sourceTree = "<group>"; };
 		CEEE8A0C298FB1E200F19105 /* ViewReceiptTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewReceiptTableViewCell.swift; sourceTree = "<group>"; };
 		CEEE8A0D298FB1E200F19105 /* ViewReceiptTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewReceiptTableViewCell.xib; sourceTree = "<group>"; };
+		CEF2724729B7377500C6AA91 /* TransactionListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListingViewController.swift; sourceTree = "<group>"; };
+		CEF2724829B7377500C6AA91 /* TransactionListingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionListingViewController.xib; sourceTree = "<group>"; };
+		CEF2724B29B74C2C00C6AA91 /* TransactionListingResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListingResultViewController.swift; sourceTree = "<group>"; };
+		CEF2724C29B74C2C00C6AA91 /* TransactionListingResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionListingResultViewController.xib; sourceTree = "<group>"; };
+		CEF2725029B74D4400C6AA91 /* TransactionListingResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionListingResultTableViewCell.swift; sourceTree = "<group>"; };
+		CEF2725129B74D4400C6AA91 /* TransactionListingResultTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionListingResultTableViewCell.xib; sourceTree = "<group>"; };
 		CEF8186F292FA9A100026B33 /* PayRoleReviewersResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRoleReviewersResponse.swift; sourceTree = "<group>"; };
 		CEF81870292FA9A200026B33 /* PayRoleReviewersRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayRoleReviewersRecord.swift; sourceTree = "<group>"; };
 		CEF81878292FAC2400026B33 /* AddReviewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReviewerViewController.swift; sourceTree = "<group>"; };
@@ -4311,6 +4323,7 @@
 				CEFD00B329ACF62F00A95A1D /* AccountsTrialViewController */,
 				CE9B978329B0B25900AB46DB /* TrialBalanceViewController */,
 				CE6AAE3229B38B4400D9F152 /* BalanceSheetsViewController */,
+				CEF2724629B736AB00C6AA91 /* TransactionListing */,
 			);
 			path = Accounts;
 			sourceTree = "<group>";
@@ -4436,6 +4449,7 @@
 		CEDD91082964796700762DBD /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				CEF2724F29B74D2300C6AA91 /* TransactionListingResult */,
 				CE9B977929B0A14100AB46DB /* AccountsTrialResult */,
 				CEFD00BA29AD04F500A95A1D /* GeneralLedgerTableViewCell */,
 				CE9FA24C29AB9D2D003A37A3 /* StatementAccounts */,
@@ -4511,6 +4525,26 @@
 				CEEE8A06298FAFE200F19105 /* ReceiptTransaction.swift */,
 			);
 			path = ViewReceipt;
+			sourceTree = "<group>";
+		};
+		CEF2724629B736AB00C6AA91 /* TransactionListing */ = {
+			isa = PBXGroup;
+			children = (
+				CEF2724729B7377500C6AA91 /* TransactionListingViewController.swift */,
+				CEF2724829B7377500C6AA91 /* TransactionListingViewController.xib */,
+				CEF2724B29B74C2C00C6AA91 /* TransactionListingResultViewController.swift */,
+				CEF2724C29B74C2C00C6AA91 /* TransactionListingResultViewController.xib */,
+			);
+			path = TransactionListing;
+			sourceTree = "<group>";
+		};
+		CEF2724F29B74D2300C6AA91 /* TransactionListingResult */ = {
+			isa = PBXGroup;
+			children = (
+				CEF2725029B74D4400C6AA91 /* TransactionListingResultTableViewCell.swift */,
+				CEF2725129B74D4400C6AA91 /* TransactionListingResultTableViewCell.xib */,
+			);
+			path = TransactionListingResult;
 			sourceTree = "<group>";
 		};
 		CEF81873292FA9B600026B33 /* HRModels */ = {
@@ -5416,6 +5450,7 @@
 				CE6AAE4329B3B4E000D9F152 /* StatementsCollectionViewCell.xib in Resources */,
 				CE54B2D728F5C55300972D6D /* TopCountRequestsTableViewCell.xib in Resources */,
 				CE8BCBF02954BAAA00E79486 /* CFormViewController.xib in Resources */,
+				CEF2725329B74D4400C6AA91 /* TransactionListingResultTableViewCell.xib in Resources */,
 				FA7F941427D77AC100E03A34 /* MyTrannsactionTVCell.xib in Resources */,
 				3FD039D8287437B000BB13C7 /* ViewEmpLangVacationsVC.xib in Resources */,
 				3FD039E7287437B000BB13C7 /* RequestDetailsViewController.strings in Resources */,
@@ -5436,6 +5471,7 @@
 				3FD03A35287437B000BB13C7 /* BankDetailsViewController.strings in Resources */,
 				3FD03A36287437B000BB13C7 /* ContactDetailsViewController.strings in Resources */,
 				CE375FC7297582560099A965 /* UsersSearchView.xib in Resources */,
+				CEF2724A29B7377500C6AA91 /* TransactionListingViewController.xib in Resources */,
 				CEDD910C296479AE00762DBD /* PermissionMentionsTableViewCell.xib in Resources */,
 				CEE57BD528F759FE00CA16D8 /* SelectTemplete2ViewController.xib in Resources */,
 				3FD03A12287437B000BB13C7 /* ViewEmpAttachmentsVC.strings in Resources */,
@@ -5689,6 +5725,7 @@
 				3FD03A14287437B000BB13C7 /* ViewEmpAttachmentsVC.xib in Resources */,
 				3F159CAE28AE9454002824BE /* DocAttachViewController.xib in Resources */,
 				3FD03A6028743CAA00BB13C7 /* GoogleService-Info-nahidh.plist in Resources */,
+				CEF2724E29B74C2C00C6AA91 /* TransactionListingResultViewController.xib in Resources */,
 				CEBAAA5B2912C8270066B818 /* ShiftsTableViewCell.xib in Resources */,
 				3F07C05C286D8D8600C2CDF6 /* TicketTVCell.xib in Resources */,
 				CEBAAA4A29128B5E0066B818 /* UpdateAttendanceStatusViewController.xib in Resources */,
@@ -6045,6 +6082,7 @@
 				CE375FB1297582560099A965 /* FromTransactionView.swift in Sources */,
 				FA534A662806000D008814A9 /* ProfileContactTVCell.swift in Sources */,
 				CE69E6B12976F073008B77C0 /* MailMessages.swift in Sources */,
+				CEF2724929B7377500C6AA91 /* TransactionListingViewController.swift in Sources */,
 				CEEE8A03298FAF4F00F19105 /* ViewReceiptData.swift in Sources */,
 				FAF7623128300174000DEAFE /* CheckListVC.swift in Sources */,
 				CEC3C5C3299EBDB9005435AF /* JournalVoucherData.swift in Sources */,
@@ -6427,6 +6465,7 @@
 				CEE3C2D0297070A200D1B84D /* AccountTypesRecord.swift in Sources */,
 				CE69E6A92976EE3A008B77C0 /* MailPayload.swift in Sources */,
 				CE69E6A72976EE3A008B77C0 /* MailBody.swift in Sources */,
+				CEF2724D29B74C2C00C6AA91 /* TransactionListingResultViewController.swift in Sources */,
 				CE6B25FC299E4BA90021B201 /* AddJournalVoucherDataVC.swift in Sources */,
 				3F9D67B328BB6F2F0035FE59 /* ListItemHistoryData.swift in Sources */,
 				FA95FD11275EFE5900DE7854 /* ManagerApprovalVC.swift in Sources */,
@@ -6450,6 +6489,7 @@
 				CE8FE7282913E6450022DD51 /* UpdateShiftViewController.swift in Sources */,
 				3FAAB63E28609025007B9150 /* NoteTableViewCell.swift in Sources */,
 				FAAF206327DBDC8E00AD255B /* ByPhaseTVCell.swift in Sources */,
+				CEF2725229B74D4400C6AA91 /* TransactionListingResultTableViewCell.swift in Sources */,
 				3F1436942848A120008ABC19 /* UIButtonDesignable.swift in Sources */,
 				3FD039E2287437B000BB13C7 /* OutgoingVC.swift in Sources */,
 				CE2EDAFF292FA67400A22419 /* PayRoleReviewersTableViewCell.swift in Sources */,
@@ -7850,7 +7890,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.0.8;
+				MARKETING_VERSION = 15.0.9;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -7987,7 +8027,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 15.0.8;
+				MARKETING_VERSION = 15.0.9;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

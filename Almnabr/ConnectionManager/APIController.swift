@@ -4499,5 +4499,22 @@ class APIController{
         }
     }
     
+    
+    func getTransactionList(body:[String:Any],callback:@escaping (_ data:TransactionListData?) -> Void){
+        let strURL = "\(serverURL)/transactionlistings"
+
+        let headers = [ "authorization":
+                            "\(NewSuccessModel.getLoginSuccessToken() ?? "nil")"
+        ]
+
+        Alamofire.request(strURL, method: .post,parameters: body,headers: headers).validate().responseJSON { (response) in
+            if let data  = response.data,let str : String = String(data: data, encoding: .utf8){
+                
+                if let parsedMapperString : TransactionListData = Mapper<TransactionListData>().map(JSONString:str){
+                    callback(parsedMapperString)
+                }
+            }
+        }
+    }
 }
 

@@ -43,6 +43,10 @@ struct ReceiptTransaction : Mappable {
 	var cost_center_count : String?
 	var costs : [String]?
 
+    var reference_number:String?
+    var account_code:String?
+    var transaction_allow:String?
+    var account_cost_id:String?
     
 	init?(map: Map) {
 
@@ -76,6 +80,11 @@ struct ReceiptTransaction : Mappable {
 		cost_name <- map["cost_name"]
 		cost_center_count <- map["cost_center_count"]
 		costs <- map["costs"]
+        reference_number <- map["reference_number"]
+        account_code <- map["account_code"]
+        transaction_allow <- map["transaction_allow"]
+        account_cost_id <- map["account_cost_id"]
+        
 	}
 
 }

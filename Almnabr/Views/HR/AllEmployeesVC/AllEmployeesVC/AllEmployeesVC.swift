@@ -14,7 +14,7 @@ class AllEmployeesVC: UIViewController {
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var header: HeaderView!
-    
+
     private var data = [AllEmployeeRecords]()
     private var pageNumber = 1
     private var totalPages:Int?
@@ -46,7 +46,7 @@ class AllEmployeesVC: UIViewController {
         }
     }
     
-    
+
     private func setUpView(){
         filterView.isUserInteractionEnabled = true
         filterView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(filterAction)))
@@ -62,8 +62,8 @@ class AllEmployeesVC: UIViewController {
             }
         }
     }
-    
-    
+
+
     @objc private func filterAction(){
         let vc = FilterViewController()
         vc.filterInfo = self.filterInfo
@@ -83,18 +83,18 @@ extension AllEmployeesVC:UITableViewDelegate,UITableViewDataSource{
         tableView.dataSource = self
         tableView.register(.init(nibName: "EmployeeTableViewCell", bundle: nil), forCellReuseIdentifier: "EmployeeTableViewCell")
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EmployeeTableViewCell", for: indexPath) as! EmployeeTableViewCell
         cell.delegate = self
         cell.setData(data: data[indexPath.row],indexPath: indexPath)
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == data.count - 1 {
             if let totalPages = totalPages{
@@ -118,26 +118,26 @@ extension AllEmployeesVC:EmployeeTableViewCellDelegate{
         vc.empImageString = empImage
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+
     func goToEdiVC(empID:String,empImage:String) {
         let vc:EditEmployeeDetailsVC = AppDelegate.HRSB.instanceVC()
         vc.empImageString = empImage
         vc.empId = empID
         navigationController?.pushViewController(vc, animated: true)
     }
-    
+
     func deleteAction(id: String, indexPath: IndexPath) {
         self.deleteEmployee(id: id, indexPath: indexPath)
     }
-    
-    
+
+
 }
 
 
 // MARK: - Handling API Requests
 
 extension AllEmployeesVC{
-    
+
     private func getALLEmployees(isNewPage:Bool){
         showLoadingActivity()
         if !isNewPage{
@@ -162,8 +162,8 @@ extension AllEmployeesVC{
             }
         }
     }
-    
-    
+
+
     private func deleteEmployee(id:String,indexPath:IndexPath){
         APIController.shard.deleteEmployee(id: id) { data in
             DispatchQueue.main.async {
@@ -174,7 +174,7 @@ extension AllEmployeesVC{
                         self.tableView.reloadData()
                     }))
                     self.present(alertVC, animated: true)
-                    
+
                 }else{
                     let alertVC = UIAlertController(title: "error".localized(), message: data.error, preferredStyle: .alert)
                     alertVC.addAction(.init(title: "Cancel".localized(), style: .cancel))
@@ -183,7 +183,7 @@ extension AllEmployeesVC{
             }
         }
     }
-    
-    
+
+
 }
- 
+

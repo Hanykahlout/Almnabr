@@ -32,6 +32,23 @@ struct TransactionViewerResponse : Mappable {
 		paging <- map["paging"]
 		financial_year <- map["financial_year"]
 		transactions <- map["transactions"]
+        transactions <- map["transactions"]
 	}
 
+}
+
+struct TransactionListData: Mappable{
+    var status : Bool?
+    var transactions : [ReceiptTransaction]?
+    
+    init?(map: Map) {
+
+    }
+
+    mutating func mapping(map: Map) {
+
+        status <- map["status"]
+        transactions <- map["records"]
+
+    }
 }

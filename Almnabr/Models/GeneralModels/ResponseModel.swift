@@ -55,6 +55,13 @@ class UserDataModel: Mappable {
     var user_type_name_en: String?
     var token: String?
     
+
+    
+    
+    
+    
+    
+    
    
     required init?(map: Map){
         

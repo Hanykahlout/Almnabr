@@ -23,7 +23,7 @@ class NotificationVC: UIViewController {
     
     var pageNumber = 1
     var allItemDownloaded = false
-    
+    var notificationData:[AnyHashable:Any]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +50,9 @@ class NotificationVC: UIViewController {
         super.viewWillAppear(animated)
         // Hide the Navigation Bar
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        if let notificationData = notificationData{
+            chechNotificationData(data: notificationData)
+        }
     }
     
     
@@ -208,12 +211,13 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let obj = arr_data[indexPath.item]
-        
-        if let ios = obj.extra_data["ios"] as? String {
+        chechNotificationData(data:arr_data[indexPath.item].extra_data)
+    }
+    
+    private func chechNotificationData(data:[AnyHashable:Any]){
+        if let ios = data["ios"] as? String {
             if ios != "" {
-                if let typeUrl = obj.extra_data["urlType"] as? String,typeUrl == "pdf"{
+                if let typeUrl = data["urlType"] as? String,typeUrl == "pdf"{
                     showLoadingActivity()
                     APIController.shard.getImage(url: ios) { data in
                         DispatchQueue.main.async {
@@ -311,11 +315,8 @@ extension NotificationVC: UITableViewDelegate , UITableViewDataSource{
                     }
                 }
             }
-            
         }
-        
     }
-    
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if tableView.tag == 0 {

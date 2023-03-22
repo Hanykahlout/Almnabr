@@ -621,6 +621,8 @@
 		CE72106A2934C7F500093265 /* Form_ovr1_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210672934C7F400093265 /* Form_ovr1_data.swift */; };
 		CE72106B2934C7F500093265 /* OverTimeDataRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7210682934C7F500093265 /* OverTimeDataRecord.swift */; };
 		CE72106D2934C85A00093265 /* Form_ovr1_records.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE72106C2934C85A00093265 /* Form_ovr1_records.swift */; };
+		CE7A8F4B29CB51A5006A79E2 /* AppUpdateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7A8F4929CB51A5006A79E2 /* AppUpdateVC.swift */; };
+		CE7A8F4C29CB51A5006A79E2 /* AppUpdateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7A8F4A29CB51A5006A79E2 /* AppUpdateVC.xib */; };
 		CE7BA2622954D88600ED5FC8 /* C1FormResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA2612954D88600ED5FC8 /* C1FormResponse.swift */; };
 		CE7BA2642954D8C500ED5FC8 /* Form_c1_data.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA2632954D8C500ED5FC8 /* Form_c1_data.swift */; };
 		CE7BA2662954D8CE00ED5FC8 /* Form_c1_files.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7BA2652954D8CE00ED5FC8 /* Form_c1_files.swift */; };
@@ -1800,6 +1802,8 @@
 		CE7210672934C7F400093265 /* Form_ovr1_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_ovr1_data.swift; sourceTree = "<group>"; };
 		CE7210682934C7F500093265 /* OverTimeDataRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverTimeDataRecord.swift; sourceTree = "<group>"; };
 		CE72106C2934C85A00093265 /* Form_ovr1_records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_ovr1_records.swift; sourceTree = "<group>"; };
+		CE7A8F4929CB51A5006A79E2 /* AppUpdateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUpdateVC.swift; sourceTree = "<group>"; };
+		CE7A8F4A29CB51A5006A79E2 /* AppUpdateVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppUpdateVC.xib; sourceTree = "<group>"; };
 		CE7BA2612954D88600ED5FC8 /* C1FormResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = C1FormResponse.swift; sourceTree = "<group>"; };
 		CE7BA2632954D8C500ED5FC8 /* Form_c1_data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_c1_data.swift; sourceTree = "<group>"; };
 		CE7BA2652954D8CE00ED5FC8 /* Form_c1_files.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form_c1_files.swift; sourceTree = "<group>"; };
@@ -2789,6 +2793,7 @@
 		3FD038CF2874377000BB13C7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CE7A8F4829CB5176006A79E2 /* NewUpdateVC */,
 				CEDCF66C2965EBE70055DDB2 /* Email */,
 				CEDD90D52964456100762DBD /* Accounts */,
 				CEA3A082291A8B7600F79E3C /* MenuVC */,
@@ -3514,6 +3519,7 @@
 				CE375F96297582560099A965 /* FromTransactionView.swift */,
 				CE375F97297582560099A965 /* DropDownView.swift */,
 				CE375F98297582560099A965 /* ServicesView.swift */,
+				CE375FA5297582560099A965 /* HeaderView.swift */,
 				CE375F99297582560099A965 /* HeaderView.xib */,
 				CE375F9A297582560099A965 /* ViewLanguage.swift */,
 				CE375F9B297582560099A965 /* MyTransactionHeaderView.swift */,
@@ -3523,7 +3529,6 @@
 				CE375F9F297582560099A965 /* CustomHeaderView.xib */,
 				CE375FA0297582560099A965 /* UsersSearchView.swift */,
 				CE375FA4297582560099A965 /* MyTransactionHeaderView.xib */,
-				CE375FA5297582560099A965 /* HeaderView.swift */,
 				CE375FA6297582560099A965 /* DropDownView.xib */,
 				CE375FA7297582560099A965 /* ViewLanguage.xib */,
 				CE375FA8297582560099A965 /* CalenderActivityView.xib */,
@@ -3906,6 +3911,15 @@
 				CE72106C2934C85A00093265 /* Form_ovr1_records.swift */,
 			);
 			path = OvertimeModels;
+			sourceTree = "<group>";
+		};
+		CE7A8F4829CB5176006A79E2 /* NewUpdateVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE7A8F4929CB51A5006A79E2 /* AppUpdateVC.swift */,
+				CE7A8F4A29CB51A5006A79E2 /* AppUpdateVC.xib */,
+			);
+			path = NewUpdateVC;
 			sourceTree = "<group>";
 		};
 		CE7BA26D29561A7300ED5FC8 /* CFormAttachViewController */ = {
@@ -5522,6 +5536,7 @@
 				3FD03A34287437B000BB13C7 /* IDDetailsViewController.strings in Resources */,
 				3FD039DF287437B000BB13C7 /* ViewEmpPassportDetailsVC.xib in Resources */,
 				CEA3A086291A945000F79E3C /* SettingsViewController.xib in Resources */,
+				CE7A8F4C29CB51A5006A79E2 /* AppUpdateVC.xib in Resources */,
 				3F07C070286D8F9300C2CDF6 /* EducationTVCell.xib in Resources */,
 				3FC9E91528914BBC000B2644 /* .gitignore in Resources */,
 				3FD03A25287437B000BB13C7 /* UpdateInsuranceViewController.xib in Resources */,
@@ -6447,6 +6462,7 @@
 				CE8BCBE629547D2D00E79486 /* CommunicationListResponse.swift in Sources */,
 				CEB3ED2B29A260A000B70AB0 /* ViewJournalVouchersTableViewCell.swift in Sources */,
 				3FB305D62868702500CAC16F /* Transactions_notes.swift in Sources */,
+				CE7A8F4B29CB51A5006A79E2 /* AppUpdateVC.swift in Sources */,
 				3FA2080328AE7D7500845910 /* DocAttachTableViewCell.swift in Sources */,
 				CE1AB6CD292BAA0000C4913C /* TextFieldWithPadding.swift in Sources */,
 				3F977EFE2887F60F0062FA47 /* Contract_vacation_info.swift in Sources */,

@@ -535,8 +535,11 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
                     panel?.center(nav)
                     break
                 case "107":
+                    SCLAlertView().showInfo("Sorry", subTitle: "You can create invoice reversal from web")
                     break
-                
+                case "109":
+                    SCLAlertView().showInfo("Sorry", subTitle: "You can create invoice note from web")
+                    break
                 default:
                     print(" no menu id ")
                 }
@@ -544,13 +547,10 @@ extension MenuVC : UITableViewDataSource  , UITableViewDelegate{
             }else{
                 print("dashboard")
             }
-
         }
     }
     
 }
-
-
 
 
 extension String {

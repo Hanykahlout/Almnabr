@@ -58,30 +58,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     
     private func maybeOpenedFromWidget(urlContexts: Set<UIOpenURLContext>) {
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.main.async {
             
-            DispatchQueue.main.async {
-                
-                IQKeyboardManager.shared.enable = true
-                if NewSuccessModel.getLoginSuccessToken() != nil {
-                    if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "widget-deeplink" }) {
-                        self.GoToHome(isFromWidget: true)
-                    } else {
-                        self.CheckActiveTime()
-                    }
-                }else{
-                    self.GoToSignIn()
+            IQKeyboardManager.shared.enable = true
+            if NewSuccessModel.getLoginSuccessToken() != nil {
+                if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "widget-deeplink" }) {
+                    self.GoToHome(isFromWidget: true)
+                } else {
+                    self.CheckActiveTime()
                 }
-                
-                self.isUpdateAvailable { update in
-                    if update {
-                        self.showUpdateAlert()
-                    }
+            }else{
+                self.GoToSignIn()
+            }
+            
+            self.isUpdateAvailable { update in
+                if update {
+                    self.showUpdateAlert()
                 }
-               
             }
         }
-        
     }
     
     
@@ -128,17 +123,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     private func showUpdateAlert(){
-        let alertVC = UIAlertController(title: "Update", message: "There is an update in the App Store", preferredStyle: .alert)
-        alertVC.addAction(.init(title: "Cancel", style: .default,handler: { action in
-            //            exit(-1)
-        }))
-        alertVC.addAction(.init(title: "Update Now", style: .default,handler: { action in
+        let vc = AppUpdateVC()
+        vc.updateButtonAction = {
             if let url = URL(string: "https://apps.apple.com/us/app/almnabr/id1621889347") {
-                UIApplication.shared.open(url)
+                    UIApplication.shared.open(url)
             }
-        }))
+        }
         
-        window?.rootViewController?.present(alertVC, animated: true)
+        if let panel = window?.rootViewController as? FAPanelController,let rootNav = panel.center as?  UINavigationController{
+            rootNav.pushViewController(vc, animated: true)
+        }else if let rootNav = window?.rootViewController as? UINavigationController{
+            rootNav.pushViewController(vc, animated: true)
+        }
     }
     
     
@@ -150,7 +146,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let rootNC = UINavigationController(rootViewController: vc)
         window?.rootViewController = rootNC
         window?.makeKeyAndVisible()
-        UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
+//        UIView.transition(with: window!, duration: 0.5, options: .transitionCrossDissolve, animations: nil, completion: nil)
     }
     
     func CheckActiveTime(){
@@ -245,10 +241,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let elapsed = Calendar.current.dateComponents([.hour], from: lastOpened, to: Date())
         print(elapsed)
         HelperClassSwift.IsLoadTheme = false
-        
-        //        if Int(elapsed) > 1 {
-        //            // show alert
-        //        }
+    
     }
     
     

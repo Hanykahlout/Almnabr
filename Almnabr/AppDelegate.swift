@@ -145,7 +145,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
         
     }
     
-    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
@@ -190,114 +189,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate , UNUserNotificationCenter
             print("Message ID: \(messageID)")
         }
         
-        if let window = window{
-            if let ios = userInfo["ios"] as? String {
-                if ios != "" {
-                    if let typeUrl = userInfo["urlType"] as? String,typeUrl == "pdf"{
-                        APIController.shard.getImage(url: ios) { data in
-                            DispatchQueue.main.async {
-                                if let status = data.status,status{
-                                    let vc = WebViewViewController()
-                                    vc.data = data
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }
-                        }
-                    }else{
-                        if ios.contains("transactions") {
-                            let requestArr = ios.components(separatedBy: "/")
-                            if ios.contains("FORM_HRV1"){
-                                // Vaction Form
-                                if let last = requestArr.last {
-                                    let vc = VactionViewController()
-                                    vc.transaction_request_id = last
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }else if ios.contains("FORM_WIR"){
-                                // WIR Form
-                                let splitString = ios.components(separatedBy: "ios/transactions")
-                                let vc: TransactionFormDetailsVC = AppDelegate.TransactionSB.instanceVC()
-                                vc.str_url = "\(splitString[1])"
-                                vc.IsFromNotification = true
-                                window.rootViewController = UINavigationController(rootViewController: vc)
-                            }else if ios.contains("FORM_CT1"){
-                                // New Contract Form
-                                if let last = requestArr.last{
-                                    let vc = NewContractVC()
-                                    vc.transaction_request_id = last
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }else if ios.contains("FORM_HRLN1"){
-                                
-                                if let last = requestArr.last{
-                                    let vc = LoanViewController()
-                                    vc.transactionId = last
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }else if ios.contains("FORM_OVR1"){
-                                
-                                if let last = requestArr.last{
-                                    let vc = OverTimeViewController()
-                                    vc.transactionId = last
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }else if ios.contains("FORM_BNS1"){
-                                
-                                if let last = requestArr.last{
-                                    let vc = BonusViewController()
-                                    vc.transactionId = last
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }else if ios.contains("FORM_VOL1"){
-                                
-                                if let last = requestArr.last{
-                                    let vc = ViolationViewController()
-                                    vc.transactionId = last
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }else if ios.contains("FORM_DET1"){
-                                
-                                if let last = requestArr.last{
-                                    let vc = DeductionViewController()
-                                    vc.transactionId = last
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }else if ios.contains("FORM_JF"){
-                                
-                                if let last = requestArr.last{
-                                    let vc = JobOfferViewController()
-                                    vc.transactionId = last
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }else if ios.contains("FORM_C2"){
-                                if let last = requestArr.last{
-                                    let vc = CFormViewController()
-                                    vc.isOutging = false
-                                    vc.transactionId = last
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }else if ios.contains("FORM_C1"){
-                                if let last = requestArr.last{
-                                    let vc = CFormViewController()
-                                    vc.isOutging = true
-                                    vc.transactionId = last
-                                    window.rootViewController = UINavigationController(rootViewController: vc)
-                                }
-                            }
-                            
-                        }else if  ios.contains("task") {
-                            let vc:TaskDetailVC = AppDelegate.TicketSB.instanceVC()
-                            vc.task_id =  String(ios.split(separator: "/").last ?? "")
-                            window.rootViewController = UINavigationController(rootViewController: vc)
-                        }
-                    }
-                }
-            }else{
-                let vc:GmailViewController = AppDelegate.mainSB.instanceVC()
-                vc.isFromLocalNotification = true
-                window.rootViewController = UINavigationController(rootViewController: vc)
-            }
-        }
+        
+        let vc = AppDelegate.mainSB.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+        vc.notificationData = userInfo
+        window?.rootViewController = UINavigationController(rootViewController: vc)
         
         completionHandler()
     }

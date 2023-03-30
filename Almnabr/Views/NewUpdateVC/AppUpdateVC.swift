@@ -21,4 +21,10 @@ class AppUpdateVC: UIViewController {
         updateButtonAction?()
     }
     
+    @IBAction func cancelAction(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
+
+

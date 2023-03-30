@@ -504,7 +504,8 @@ extension TransactionsVC{
             pageNumber = 1
         }
         self.showLoadingActivity()
-        APIController.shard.sendRequestGetAuth(urlString: "/tc/list/\(pageNumber)/10?searchKey=\(search)&searchAdmin=\(StrsearchByAdmin)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)&searchByStatus=\(SearchAllpending)" ) { (response) in
+//        /tc/list/1/10?searchKey=&searchAdmin=0&searchByForm=&searchByModule=&searchByStatus=all_pending_need_action
+        APIController.shard.sendRequestGetAuth(urlString: "tc/list/\(pageNumber)/10?searchKey=\(search)&searchAdmin=\(StrsearchByAdmin)&searchByModule=\(StrsearchByModule)&searchByForm=\(StrsearchByForm)&searchByStatus=\(SearchAllpending)" ) { (response) in
             
             if !isFromBottom {
                 self.arr_data.removeAll()
